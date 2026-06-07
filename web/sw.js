@@ -1,7 +1,8 @@
-const CACHE_NAME = "worldcupmagik-v2";
+const CACHE_NAME = "worldcupmagik-v3";
 const STATIC_ASSETS = [
   "./",
   "./index.html",
+  "./how-to-use.html",
   "./styles.css",
   "./app.js",
   "./manifest.webmanifest",

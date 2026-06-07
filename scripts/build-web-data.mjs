@@ -13,6 +13,7 @@ const now = new Date();
 const riskBuckets = Array.from({ length: 21 }, (_, index) => index * 5);
 const dayBuckets = Array.from({ length: 15 }, (_, index) => index);
 const automaticRunMinutesUtc = [5, 8, 11, 14, 17, 20, 23].map((hour) => (hour * 60) + 23);
+const maxDaysAhead = Math.max(...dayBuckets);
 
 await mkdir(outputDir, { recursive: true });
 
@@ -40,7 +41,37 @@ const teamStats = buildTeamStatsWithIntelligence({
 });
 const profiles = {};
 const pickOfTheDay = {};
+const riskProfiles = {};
+const legCandidatesByRisk = {};
 const mostLikelyPolicy = buildMostLikelyPolicy(engineState.policy);
+const maxRangeFixtures = selectFixturesForWindow(liveFixtures, maxDaysAhead, now);
+const mostLikelyRangeLegCandidates = buildLegCandidates({
+  fixtures: maxRangeFixtures,
+  oddsSnapshots: liveOddsSnapshots,
+  newsArticles: liveNewsArticles,
+  teamStats,
+  policy: mostLikelyPolicy,
+  now,
+  outcomeLearning
+});
+
+for (const risk of riskBuckets) {
+  const policy = buildRiskPolicy(engineState.policy, risk);
+  const legCandidates = buildLegCandidates({
+    fixtures: maxRangeFixtures,
+    oddsSnapshots: liveOddsSnapshots,
+    newsArticles: liveNewsArticles,
+    teamStats,
+    policy,
+    now,
+    outcomeLearning
+  });
+
+  riskProfiles[risk] = policy.riskProfile;
+  legCandidatesByRisk[risk] = legCandidates
+    .filter((leg) => !leg.hardBlocks?.length)
+    .map(summarizeLegCandidate);
+}
 
 for (const daysAhead of dayBuckets) {
   const scanFixtures = selectFixturesForWindow(liveFixtures, daysAhead, now);
@@ -121,6 +152,13 @@ const payload = {
   },
   riskBuckets,
   dayBuckets,
+  dateRange: summarizeDateRange(maxRangeFixtures, now),
+  fixtures: maxRangeFixtures.map(summarizeFixture),
+  riskProfiles,
+  legCandidatesByRisk,
+  mostLikelyLegCandidates: mostLikelyRangeLegCandidates
+    .filter((leg) => !leg.hardBlocks?.length)
+    .map(summarizeLegCandidate),
   dashboard: summarizeDashboard(dashboard),
   markets: summarizeMarkets(liveOddsSnapshots, engineState.policy),
   pickOfTheDay,
@@ -141,6 +179,32 @@ function profileKey(daysAhead, risk) {
 
 function pickOfDayKey(daysAhead) {
   return `d${daysAhead}`;
+}
+
+function summarizeDateRange(fixtures, now) {
+  const today = isoDate(now);
+  const fixtureDates = fixtures
+    .map((fixture) => isoDate(fixture.date))
+    .sort();
+  const maxFixtureDate = fixtureDates.at(-1) || today;
+
+  return {
+    min: today,
+    max: maxFixtureDate,
+    defaultFrom: today,
+    defaultTo: maxFixtureDate
+  };
+}
+
+function summarizeFixture(fixture) {
+  return {
+    id: fixture.id,
+    date: fixture.date,
+    dateKey: isoDate(fixture.date),
+    homeTeam: fixture.homeTeam,
+    awayTeam: fixture.awayTeam,
+    stage: fixture.stage
+  };
 }
 
 function isPublicFixture(fixture) {
@@ -212,6 +276,41 @@ function summarizeLeg(leg) {
   };
 }
 
+function summarizeLegCandidate(leg) {
+  return {
+    id: leg.id,
+    fixtureId: leg.fixtureId,
+    fixtureDate: leg.fixtureDate,
+    fixtureDateKey: isoDate(leg.fixtureDate),
+    homeTeam: leg.homeTeam,
+    awayTeam: leg.awayTeam,
+    market: leg.market,
+    outcome: leg.outcome,
+    playerName: leg.playerName,
+    playerTeam: leg.playerTeam,
+    selectionLabel: leg.selectionLabel,
+    bookmaker: leg.bookmaker,
+    decimalOdds: leg.decimalOdds,
+    likelyProbability: leg.likelyProbability,
+    modelProbability: leg.modelProbability,
+    impliedProbability: leg.impliedProbability,
+    marketImpliedProbability: leg.marketImpliedProbability,
+    edge: leg.edge,
+    confidence: leg.confidence,
+    score: leg.score,
+    riskTag: leg.riskTag,
+    components: {
+      intelligenceConfidence: leg.components?.intelligenceConfidence,
+      oddsMovement: leg.components?.oddsMovement,
+      oddsShortening: leg.components?.oddsShortening,
+      oddsDrifting: leg.components?.oddsDrifting,
+      marketAverageOdds: leg.components?.marketAverageOdds,
+      oddsFreshness: leg.components?.oddsFreshness
+    },
+    thesis: leg.thesis
+  };
+}
+
 function summarizeMarkets(oddsSnapshots, policy) {
   const counts = {};
 
@@ -233,4 +332,8 @@ function summarizeDashboard(dashboard) {
     stats: dashboard.stats,
     appDefaults: dashboard.appDefaults
   };
+}
+
+function isoDate(value) {
+  return new Date(value).toISOString().slice(0, 10);
 }

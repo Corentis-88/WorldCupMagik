@@ -16,7 +16,10 @@
           <h1>World Cup Magik V1</h1>
           <span id="scanStamp">Loading latest scan...</span>
         </div>
-        <button id="reloadButton" type="button">Refresh Central Scan</button>
+        <div class="hero-actions">
+          <a class="help-link" href="./how-to-use.html">How to Use</a>
+          <button id="reloadButton" type="button">Refresh Central Scan</button>
+        </div>
       </header>
 
       <div id="gatheringNotice" class="gathering-notice" hidden>Data Gathering: Come back in 5</div>
@@ -28,12 +31,16 @@
           <input id="stakeInput" type="number" min="1" value="10" />
         </label>
         <label>
-          <span>Risk <strong id="riskValue">65</strong></span>
-          <input id="riskInput" type="range" min="0" max="100" step="5" value="65" />
+          <span>Date from</span>
+          <input id="dateFromInput" type="date" />
         </label>
         <label>
-          <span>Days ahead <strong id="daysValue">14</strong></span>
-          <input id="daysInput" type="range" min="0" max="14" step="1" value="14" />
+          <span>Date to</span>
+          <input id="dateToInput" type="date" />
+        </label>
+        <label>
+          <span>Risk <strong id="riskValue">65</strong></span>
+          <input id="riskInput" type="range" min="0" max="100" step="5" value="65" />
         </label>
       </section>
 
@@ -42,7 +49,7 @@
           <span>How to use</span>
           <strong>World Cup Magik workflow</strong>
         </div>
-        <p id="engineNotes">1. Input total stake 2. Choose Days Ahead 3. Adjust risk slider above 4. Click Refresh Central Scan 5. We add our secret sauce and some luck, we don't just go by the bookies! 5. Enjoy!</p>
+        <p id="engineNotes">1. Input total stake 2. Choose Date From 3. Choose Date To 4. Adjust risk slider 5. Click Refresh Central Scan 6. We add our secret sauce and some luck, we don't just go by the bookies! Enjoy!</p>
       </section>
 
       <section class="summary">
@@ -54,8 +61,8 @@
 
       <section>
         <div class="section-title">
-          <h2>Betslip Ideas</h2>
-          <p>Fixed slip: Single, Double, Trixie, 3-leg, 4-leg, 5-leg, 6-leg, and 8-leg accumulator.</p>
+          <h2>Top Picks</h2>
+          <p>Uses your date range and risk slider: Single, Double, Trixie, 3-leg, 4-leg, 5-leg, 6-leg, and 8-leg accumulator.</p>
           <p id="marketLine">Markets: loading latest central database...</p>
         </div>
         <div id="betslipList" class="betslip"></div>
