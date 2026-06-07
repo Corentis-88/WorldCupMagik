@@ -472,7 +472,7 @@ export function selectBetslip({ recommendations, stake, risk }) {
   const selected = STANDARD_BET_TYPES
     .map((category) => ({ category, combo: pickCategoryCombo(recommendations, category, risk) }))
     .filter((item) => item.combo);
-  const stakePerBet = round(totalStake / Math.max(1, selected.length || STANDARD_BET_TYPES.length), 2);
+  const stakePerBet = round(totalStake, 2);
 
   return selected.map(({ category, combo }, index) => {
     const potentialReturn = calculatePotentialReturn(combo, stakePerBet);
@@ -492,6 +492,7 @@ export function selectBetslip({ recommendations, stake, risk }) {
     combinedProbability: combo.combinedProbability,
     expectedValue: combo.expectedValue,
     averageConfidence: combo.averageConfidence,
+    displayRating: combo.displayRating,
     riskLegCount: combo.riskLegCount,
     legs: combo.legs,
     thesis: combo.thesis

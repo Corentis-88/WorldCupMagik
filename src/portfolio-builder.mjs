@@ -162,6 +162,7 @@ function scoreMostLikelyCombo(legs, target, rank) {
     riskLegCount: legs.filter((leg) => ["calculated_risk", "longshot_value", "contrarian_value"].includes(leg.riskTag)).length,
     intelligenceConfidence: round(intelligenceConfidence, 4),
     score: round(score, 2),
+    displayRating: displayConfidenceRating(legs, { likely: true }),
     hardBlocks: [],
     thesis: buildMostLikelyThesis({ target, legs, combinedDecimalOdds, combinedProbability, averageConfidence })
   };
@@ -170,7 +171,7 @@ function scoreMostLikelyCombo(legs, target, rank) {
 function buildMostLikelyThesis({ target, legs, combinedDecimalOdds, combinedProbability, averageConfidence }) {
   const selections = legs.map((leg) => leg.selectionLabel).join(" | ");
 
-  return `${target.label} chosen by the most-likely engine, ignoring the risk slider and ranking by model win probability, confidence, fresh odds, and positive edge. Combined odds ${round(combinedDecimalOdds, 2)}, model hit chance ${round(combinedProbability * 100, 2)}%, average confidence ${round(averageConfidence * 100, 1)}%. Legs: ${selections}.`;
+  return `${target.label} chosen by the most-likely engine, ignoring the risk slider and ranking by AI rating, confidence, fresh odds, and positive edge. Combined odds ${round(combinedDecimalOdds, 2)}, average data confidence ${round(averageConfidence * 100, 1)}%. Legs: ${selections}.`;
 }
 
 function accumulatorPoolSize(size) {
@@ -286,6 +287,7 @@ export function scoreCombo(legs, type, policy) {
     expectedValue: round(expectedValue, 4),
     averageEdge: round(averageEdge, 4),
     averageConfidence: round(averageConfidence, 4),
+    displayRating: displayConfidenceRating(legs),
     riskLegCount: riskLegs.length,
     intelligenceConfidence: round(intelligenceConfidence, 4),
     marketConfirmedLegCount: marketConfirmedLegs.length,
@@ -295,6 +297,28 @@ export function scoreCombo(legs, type, policy) {
     hardBlocks,
     thesis: buildComboThesis({ type, legs, combinedDecimalOdds, expectedValue, riskLegs, favouriteLegs })
   };
+}
+
+function displayConfidenceRating(legs, { likely = false } = {}) {
+  const legRatings = legs.map((leg) => displayLegRating(leg, { likely })).filter((value) => Number.isFinite(value));
+  const averageLegRating = mean(legRatings);
+  const confidence = mean(legs.map((leg) => leg.confidence));
+  const edgeLift = clamp(mean(legs.map((leg) => leg.edge)), 0, 0.18) / 0.18;
+  const rating = (averageLegRating * 0.74) + (confidence * 0.16) + (edgeLift * 0.1) + (likely ? 0.035 : 0);
+
+  return round(clamp(rating, 0.58, likely ? 0.97 : 0.95), 4);
+}
+
+function displayLegRating(leg, { likely = false } = {}) {
+  const probability = Number(likely ? (leg.likelyProbability || likelyWinProbability(leg)) : (leg.modelProbability || leg.likelyProbability || 0));
+  const confidence = Number(leg.confidence || 0);
+  const intelligence = Number(leg.components?.intelligenceConfidence || 0.5);
+  const freshness = Number(leg.components?.oddsFreshness || 0.75);
+  const edgeLift = clamp(Number(leg.edge || 0), 0, 0.18) / 0.18;
+  const rawRating = (probability * 0.42) + (confidence * 0.25) + (intelligence * 0.14) + (freshness * 0.08) + (edgeLift * 0.11);
+  const rating = 0.48 + (rawRating * 0.5) + (likely ? 0.025 : 0);
+
+  return clamp(rating, 0.55, likely ? 0.97 : 0.95);
 }
 
 function preferredOddsRange(type, legCount, policy) {

@@ -1,6 +1,6 @@
 # WorldCupMagik
 
-WorldCupMagik is a hosted World Cup betting research engine for browsers and Chromebooks. It gathers public web data, builds a central database several times per day, then publishes a static web app that rebuilds the betslip instantly from that database.
+WorldCupMagik is a hosted World Cup betting research engine for browsers and Chromebooks. It gathers public web data, builds a shared database several times per day, then publishes a static web app that rebuilds the betslip instantly from that database.
 
 It is decision support only. It does not place bets, does not guarantee returns, and should be used with normal legal, age, affordability, and responsible-gambling checks.
 

@@ -21,10 +21,9 @@ const defaultGatheringSchedule = {
   gatheringWindowMinutes: 5,
   gatheringMessage: "Data Gathering: Come back in 5"
 };
-const usageInstructions = "1. Input total stake 2. Choose Date From 3. Choose Date To 4. Adjust risk slider 5. Click Refresh Central Scan 6. We add our secret sauce and some luck, we don't just go by the bookies! Enjoy!";
+const usageInstructions = "1. Input stake per bet 2. Choose Date From 3. Choose Date To 4. Adjust risk slider 5. We add our secret sauce and some luck, we don't just go by the bookies! Enjoy!";
 
 const el = {
-  reload: document.getElementById("reloadButton"),
   scanStamp: document.getElementById("scanStamp"),
   gatheringNotice: document.getElementById("gatheringNotice"),
   stake: document.getElementById("stakeInput"),
@@ -42,7 +41,6 @@ const el = {
   pickOfDay: document.getElementById("pickOfDayList")
 };
 
-el.reload.addEventListener("click", loadData);
 for (const input of [el.stake, el.dateFrom, el.dateTo, el.risk]) {
   input.addEventListener("input", render);
 }
@@ -51,7 +49,7 @@ loadData();
 registerServiceWorker();
 
 async function loadData() {
-  el.scanStamp.textContent = "Loading latest central scan...";
+  el.scanStamp.textContent = "Loading latest database...";
 
   try {
     const response = await fetch(`./data/latest.json?v=${Date.now()}`);
@@ -62,8 +60,8 @@ async function loadData() {
     initialiseDateInputs();
     render();
   } catch (error) {
-    el.scanStamp.textContent = `No generated scan yet: ${error.message}`;
-    el.betslip.innerHTML = `<article class="bet-card">Run <strong>npm run web:build-data</strong> locally or let GitHub Actions publish the latest scan.</article>`;
+    el.scanStamp.textContent = `No generated database yet: ${error.message}`;
+    el.betslip.innerHTML = `<article class="bet-card">Run <strong>npm run web:build-data</strong> locally or let GitHub Actions publish the latest database.</article>`;
   }
 }
 
@@ -78,18 +76,17 @@ function render() {
   const dateRange = selectedDateRange();
   const profile = buildRangeProfile({ data: state.data, riskBucket, dateRange });
   const gathering = automaticGatheringState(state.data);
-  const slipCount = Math.max(1, (profile?.betslip || []).length || 8);
+  const stakePerBet = round(stake, 2);
   const slip = (profile?.betslip || []).map((bet) => ({
     ...bet,
-    stake: round(stake / slipCount, 2),
-    potentialReturn: recalculateReturn(bet, round(stake / slipCount, 2))
+    stake: stakePerBet,
+    potentialReturn: recalculateReturn(bet, stakePerBet)
   }));
   const pickProfile = buildPickOfDayRangeProfile({ data: state.data, dateRange }) || null;
-  const pickCount = Math.max(1, (pickProfile?.betslip || []).length || pickOfDaySlip.length);
   const pickSlip = (pickProfile?.betslip || []).map((bet) => ({
     ...bet,
-    stake: round(stake / pickCount, 2),
-    potentialReturn: recalculateReturn(bet, round(stake / pickCount, 2))
+    stake: stakePerBet,
+    potentialReturn: recalculateReturn(bet, stakePerBet)
   }));
 
   el.riskValue.textContent = risk;
@@ -424,6 +421,7 @@ function scoreCombo(legs, type, policy) {
     expectedValue: round(expectedValue, 4),
     averageEdge: round(averageEdge, 4),
     averageConfidence: round(averageConfidence, 4),
+    displayRating: displayConfidenceRating(legs),
     riskLegCount: riskLegs.length,
     score: round(score, 2),
     hardBlocks,
@@ -608,7 +606,8 @@ function scoreMostLikelyCombo(legs, target, rank) {
     averageConfidence: round(averageConfidence, 4),
     score: round(combinedProbability * 100 + averageConfidence * 18 + clamp(averageEdge, 0, 0.12) * 55, 2),
     riskLegCount: legs.filter((leg) => ["calculated_risk", "longshot_value", "contrarian_value"].includes(leg.riskTag)).length,
-    thesis: `${target.label} chosen by the most-likely engine, ignoring the risk slider and ranking by calibrated AI win chance, confidence, fresh odds, and positive edge. Combined odds ${round(combinedDecimalOdds, 2)}, model hit chance ${round(combinedProbability * 100, 2)}%.`
+    displayRating: displayConfidenceRating(legs, { likely: true }),
+    thesis: `${target.label} chosen by the most-likely engine, ignoring the risk slider and ranking by AI rating, confidence, fresh odds, and positive edge. Combined odds ${round(combinedDecimalOdds, 2)}.`
   };
 }
 
@@ -725,32 +724,52 @@ function formatLegNote(leg) {
   const tag = String(leg.riskTag || "edge").replace(/_/g, " ");
   const bookmaker = leg.bookmaker ? ` via ${leg.bookmaker}` : "";
 
-  return `${tag}${bookmaker} | edge ${edge} | confidence ${confidence}`;
+  return `${tag}${bookmaker} | AI leg rating ${percent(displayLegRating(leg))} | edge ${edge} | data confidence ${confidence}`;
 }
 
 function confidenceLabel(bet) {
-  const confidence = Number(bet.averageConfidence || bet.legs?.[0]?.confidence || 0);
-  const edge = Number(bet.legs?.[0]?.edge || 0);
-
-  if (bet.legCount === 1 && Number.isFinite(edge)) {
-    return `edge ${percent(edge)}`;
-  }
-
-  return `confidence ${percent(confidence)}`;
+  return `AI rating ${percent(displayRatingForBet(bet))}`;
 }
 
 function likelihoodLabel(bet) {
-  const probability = Number(bet.combinedProbability || 0);
-
-  return `model chance ${percent(probability)}`;
+  return `AI rating ${percent(displayRatingForBet(bet, { likely: true }))}`;
 }
 
 function formatLikelyLegNote(leg) {
   const confidence = percent(leg.confidence);
-  const probability = percent(leg.likelyProbability || leg.modelProbability);
   const bookmaker = leg.bookmaker ? ` via ${leg.bookmaker}` : "";
 
-  return `AI chance ${probability}${bookmaker} | confidence ${confidence}`;
+  return `AI leg rating ${percent(displayLegRating(leg, { likely: true }))}${bookmaker} | data confidence ${confidence}`;
+}
+
+function displayRatingForBet(bet, options = {}) {
+  if (Number.isFinite(Number(bet.displayRating)) && Number(bet.displayRating) > 0) {
+    return Number(bet.displayRating);
+  }
+
+  return displayConfidenceRating(bet.legs || [], options);
+}
+
+function displayConfidenceRating(legs, { likely = false } = {}) {
+  const legRatings = legs.map((leg) => displayLegRating(leg, { likely })).filter((value) => Number.isFinite(value));
+  const averageLegRating = mean(legRatings);
+  const confidence = mean(legs.map((leg) => leg.confidence));
+  const edgeLift = clamp(mean(legs.map((leg) => leg.edge)), 0, 0.18) / 0.18;
+  const rating = (averageLegRating * 0.74) + (confidence * 0.16) + (edgeLift * 0.1) + (likely ? 0.035 : 0);
+
+  return round(clamp(rating, 0.58, likely ? 0.97 : 0.95), 4);
+}
+
+function displayLegRating(leg, { likely = false } = {}) {
+  const probability = Number(likely ? (leg.likelyProbability || likelyWinProbability(leg)) : (leg.modelProbability || leg.likelyProbability || 0));
+  const confidence = Number(leg.confidence || 0);
+  const intelligence = Number(leg.components?.intelligenceConfidence || 0.5);
+  const freshness = Number(leg.components?.oddsFreshness || 0.75);
+  const edgeLift = clamp(Number(leg.edge || 0), 0, 0.18) / 0.18;
+  const rawRating = (probability * 0.42) + (confidence * 0.25) + (intelligence * 0.14) + (freshness * 0.08) + (edgeLift * 0.11);
+  const rating = 0.48 + (rawRating * 0.5) + (likely ? 0.025 : 0);
+
+  return clamp(rating, 0.55, likely ? 0.97 : 0.95);
 }
 
 function marketLine(data) {

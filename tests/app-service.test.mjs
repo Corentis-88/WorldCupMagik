@@ -50,7 +50,7 @@ test("betslip selection returns the fixed category set it can support", () => {
 
   assert.equal(betslip.length, 5);
   assert.deepEqual(betslip.map((bet) => bet.label), ["Single", "Double", "Trixie", "3-leg accumulator", "4-leg accumulator"]);
-  assert.equal(betslip[0].stake, 8);
+  assert.equal(betslip[0].stake, 40);
   assert.ok(betslip[0].potentialReturn > 10);
 });
 

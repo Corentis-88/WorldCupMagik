@@ -133,8 +133,8 @@ const payload = {
     riskProfileGranularity: "risk values 0-100 in 5 point steps",
     daysAheadGranularity: "every day from 0 to 14",
     notes: [
-      "The hosted edition uses the central public-web scanner, news classifier, odds movement logic, intelligence memory, risk policy, and portfolio builder.",
-      "The web Scan button reloads this published database and rebuilds the slip locally; heavy public-web gathering is handled by scheduled server-side runs."
+      "The hosted edition uses the scheduled public-web scanner, news classifier, odds movement logic, intelligence memory, risk policy, and portfolio builder.",
+      "The web app loads the published database and rebuilds the slip locally; heavy public-web gathering is handled by scheduled server-side runs."
     ]
   },
   collection: {
@@ -255,6 +255,7 @@ function summarizeBet(bet) {
     potentialReturn: bet.potentialReturn,
     expectedValue: bet.expectedValue,
     averageConfidence: bet.averageConfidence,
+    displayRating: bet.displayRating,
     riskLegCount: bet.riskLegCount,
     thesis: bet.thesis,
     legs: bet.legs.map(summarizeLeg)

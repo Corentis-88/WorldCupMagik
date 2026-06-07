@@ -74,7 +74,6 @@ input {
   color: rgba(255, 255, 255, 0.82);
 }
 
-.hero button,
 .help-link,
 .controls label,
 .summary div,
@@ -83,13 +82,6 @@ input {
   border-radius: 8px;
   background: var(--panel);
   box-shadow: 0 10px 28px rgba(23, 34, 29, 0.1);
-}
-
-.hero button {
-  min-width: 136px;
-  min-height: 46px;
-  color: var(--ink);
-  cursor: pointer;
 }
 
 .help-link {
@@ -358,7 +350,6 @@ input {
   }
 
   .hero-actions,
-  .hero button,
   .help-link {
     width: 100%;
   }
