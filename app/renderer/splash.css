@@ -1,0 +1,63 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #092f25;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+.splash-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #092f25;
+}
+
+.splash-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.loading-strip {
+  position: absolute;
+  left: 38px;
+  right: 38px;
+  bottom: 24px;
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.loading-strip span {
+  display: block;
+  width: 45%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #f5cb38, #ffffff, #0f7a4f);
+  animation: loading 1.05s ease-in-out infinite;
+}
+
+@keyframes loading {
+  from {
+    transform: translateX(-110%);
+  }
+
+  to {
+    transform: translateX(245%);
+  }
+}

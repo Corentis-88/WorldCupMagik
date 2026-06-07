@@ -1,0 +1,56 @@
+{
+  "timezone": "Europe/London",
+  "snapshotStartDate": "2026-06-04",
+  "dailySnapshotTimeLocal": "09:00",
+  "region": "GB",
+  "markets": [
+    "match_winner",
+    "draw_no_bet",
+    "both_teams_to_score",
+    "over_2_5_goals",
+    "under_2_5_goals"
+  ],
+  "riskProfile": {
+    "mode": "calculated",
+    "minLegEdge": 0.02,
+    "minLegConfidence": 0.54,
+    "maxFavoriteImpliedProbability": 0.72,
+    "minDecimalOddsForRiskLeg": 2.05,
+    "minRiskLegsForTrixie": 1,
+    "maxSelectionsPerFixture": 1,
+    "maxLegs": 5,
+    "maxCombinedOdds": 45,
+    "preferredCombinedOdds": {
+      "double": {
+        "min": 2.7,
+        "max": 9
+      },
+      "trixie": {
+        "min": 5,
+        "max": 24
+      },
+      "accumulator": {
+        "min": 7,
+        "max": 45
+      }
+    }
+  },
+  "appDefaults": {
+    "stake": 10,
+    "betCount": 5,
+    "risk": 48,
+    "daysAhead": 2
+  },
+  "sourceRequirements": {
+    "maxOddsAgeHours": 30,
+    "maxNewsAgeDays": 10,
+    "minIndependentNewsSources": 1,
+    "minStatsCompleteness": 0.55
+  },
+  "bookmakerOfferPolicy": {
+    "region": "GB",
+    "minTermsClarity": 0.45,
+    "excludeExpired": true,
+    "requireResponsibleGamblingTools": true
+  }
+}

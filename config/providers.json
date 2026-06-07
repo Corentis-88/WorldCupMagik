@@ -1,0 +1,29 @@
+{
+  "odds": {
+    "mode": "mock",
+    "apiKeyEnv": "ODDS_API_KEY",
+    "baseUrl": "https://api.the-odds-api.com/v4",
+    "sportKey": "soccer_fifa_world_cup",
+    "regions": [
+      "uk"
+    ],
+    "markets": [
+      "h2h",
+      "totals",
+      "btts"
+    ],
+    "oddsFormat": "decimal"
+  },
+  "news": {
+    "mode": "self-gather",
+    "sourcesFile": "config/news-sources.json",
+    "maxArticlesPerSource": 12,
+    "maxArticleFetches": 24,
+    "requestTimeoutMs": 9000,
+    "userAgent": "WorldCupMagic/0.1 research bot; public sources only"
+  },
+  "stats": {
+    "mode": "mock",
+    "filePath": "data/team-stats.json"
+  }
+}

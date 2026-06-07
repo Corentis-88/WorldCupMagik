@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.env
+.env.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.tsbuildinfo
+electron-stdout.log
+electron-stderr.log
+web/data/latest.json
+data/*.lock
+data/**/*.lock

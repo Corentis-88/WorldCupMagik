@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Super Chris's World Cup Betting Engine</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="left-rail" aria-label="World Cup flags and scan state">
+        <div class="mini-logo">
+          <span>World</span>
+          <strong>Cup</strong>
+          <span>Today</span>
+        </div>
+        <div class="flag-stack">
+          <div class="flag-card flag-england"><span>ENG</span></div>
+          <div class="flag-card flag-brazil"><span>BRA</span></div>
+          <div class="flag-card flag-france"><span>FRA</span></div>
+          <div class="flag-card flag-argentina"><span>ARG</span></div>
+        </div>
+        <button class="rail-button" id="openDataButton" type="button" title="Open local scan database">Data</button>
+      </aside>
+
+      <main class="main-stage">
+        <header class="hero-header">
+          <div>
+            <p class="eyebrow">World Cup fun lab</p>
+            <h1>Super Chris's World Cup<br />Betting Engine</h1>
+          </div>
+          <div class="date-board">
+            <span id="todayDate">Today</span>
+            <strong id="todayGames">0 games watched</strong>
+            <span id="latestScan">No scan yet</span>
+          </div>
+          <div class="odds-board">
+            <span>Odds</span>
+            <strong id="oddsCount">0</strong>
+            <span>average snapshots</span>
+          </div>
+        </header>
+
+        <section class="control-band" aria-label="Scan controls">
+          <label class="field-card">
+            <span>Total stake</span>
+            <div class="money-input">
+              <span>£</span>
+              <input id="stakeInput" type="number" min="1" step="1" value="10" />
+            </div>
+          </label>
+
+          <label class="field-card">
+            <span>Bets in slip</span>
+            <input id="betCountInput" type="number" min="1" max="12" step="1" value="5" />
+          </label>
+
+          <div class="slider-card">
+            <div class="slider-label">
+              <span>Days ahead</span>
+              <strong id="daysValue">2</strong>
+            </div>
+            <input id="daysAheadInput" type="range" min="0" max="14" value="2" />
+            <div class="scale-row">
+              <span>Today</span>
+              <span>Two weeks</span>
+            </div>
+          </div>
+
+          <button id="scanButton" class="scan-button" type="button">
+            <span>Scan</span>
+            <small>news + odds</small>
+          </button>
+        </section>
+
+        <section class="risk-section" aria-label="Risk profile">
+          <div class="risk-copy">
+            <span>Risk slider</span>
+            <strong id="riskLabel">Calculated Risk</strong>
+            <p id="riskDescription">Adds price value and tactical mismatches without going full chaos mode.</p>
+          </div>
+          <div class="risk-control">
+            <input id="riskInput" type="range" min="0" max="100" value="48" />
+            <div class="risk-ticks">
+              <span>Low</span>
+              <span>Balanced</span>
+              <span>Value</span>
+              <span>High</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="status-grid" aria-label="Scan summary">
+          <div class="metric">
+            <span>News found</span>
+            <strong id="newsCount">0</strong>
+          </div>
+          <div class="metric">
+            <span>Memory teams</span>
+            <strong id="teamCount">0</strong>
+          </div>
+          <div class="metric">
+            <span>Edges / learning</span>
+            <strong id="edgeCount">0</strong>
+          </div>
+          <div class="metric">
+            <span>Best offer</span>
+            <strong id="bestOffer">Checking</strong>
+          </div>
+        </section>
+
+        <section class="betslip-section" aria-label="Recommended betslip">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Betslip</p>
+              <h2>Give Chris 10% of winnings</h2>
+            </div>
+            <div class="winnings-box">
+              <span>Potential return</span>
+              <strong id="potentialReturn">£0.00</strong>
+            </div>
+          </div>
+          <div id="betslipList" class="betslip-list">
+            <div class="empty-state">Press Scan to build a betslip for the selected window.</div>
+          </div>
+        </section>
+      </main>
+
+      <aside class="right-panel">
+        <div class="hero-art">
+          <img src="../assets/world-cup-hero.png" alt="Football tournament artwork" />
+          <div class="hero-art-label">
+            <span>2026</span>
+            <strong>World Cup</strong>
+          </div>
+        </div>
+        <div class="right-card">
+          <span>How it thinks</span>
+          <p>It blends odds movement, team stats, public news signals, and your risk profile before choosing the slip.</p>
+        </div>
+        <div class="right-card">
+          <span>Background scans</span>
+          <p>Runs around 08:00, 14:00, and 20:00 while the app is open or sitting in the tray.</p>
+        </div>
+      </aside>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="./renderer.js"></script>
+  </body>
+</html>
