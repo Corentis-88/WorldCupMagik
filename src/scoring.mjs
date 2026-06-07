@@ -2,19 +2,20 @@ import { clamp, daysBetween, decimalToImpliedProbability, hoursBetween, latestBy
 import { buildOddsMovementSummaries, outcomeLearningAdjustment } from "./intelligence-memory.mjs";
 import { buildHeatImpact } from "./heat-model.mjs";
 
-export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, teamStats, policy, now = new Date(), outcomeLearning = null, heatSnapshots = [], squadDepthRecords = [] }) {
-  const statsByTeam = new Map(teamStats.map((team) => [team.team, team]));
+export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, teamStats, policy, now = new Date(), outcomeLearning = null, heatSnapshots = [], squadDepthRecords = [], playerStats = [] }) {
+  const statsByTeam = new Map(teamStats.map((team) => [normalizeName(team.team), team]));
   const latestOdds = bestLatestOddsByOutcome(oddsSnapshots);
   const latestOddsRecords = [...latestOdds.values()];
   const oddsMovement = buildOddsMovementSummaries(oddsSnapshots);
   const newsByTeam = buildNewsByTeam(newsArticles, policy, now);
   const heatByFixture = latestHeatByFixture(heatSnapshots);
   const squadDepthByTeam = latestSquadDepthByTeam(squadDepthRecords);
+  const playerStatsByKey = latestPlayerStatsByKey(playerStats);
   const candidates = [];
 
   for (const fixture of fixtures) {
-    const homeStats = statsByTeam.get(fixture.homeTeam);
-    const awayStats = statsByTeam.get(fixture.awayTeam);
+    const homeStats = statsByTeam.get(normalizeName(fixture.homeTeam));
+    const awayStats = statsByTeam.get(normalizeName(fixture.awayTeam));
 
     if (!homeStats || !awayStats) {
       continue;
@@ -25,6 +26,7 @@ export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, team
       homeStats,
       awayStats,
       newsByTeam,
+      marketSnapshot: fixtureMarketSnapshot({ fixture, latestOdds }),
       heatRecord: heatByFixture.get(fixture.id),
       homeSquadDepth: squadDepthByTeam.get(normalizeName(fixture.homeTeam)),
       awaySquadDepth: squadDepthByTeam.get(normalizeName(fixture.awayTeam))
@@ -64,7 +66,7 @@ export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, team
 
     if ((policy.markets || []).includes("anytime_scorer")) {
       for (const odds of latestOddsRecords.filter((record) => record.fixtureId === fixture.id && record.market === "anytime_scorer")) {
-        const modelProbability = estimateAnytimeScorerProbability({ fixture, odds, homeStats, awayStats, model });
+        const modelProbability = estimateAnytimeScorerProbability({ fixture, odds, homeStats, awayStats, model, playerStatsByKey });
         const movement = oddsMovement.get(outcomeKey(fixture.id, "anytime_scorer", odds.outcome));
 
         candidates.push(scoreLeg({
@@ -88,22 +90,30 @@ export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, team
     .map((candidate, index) => ({ ...candidate, rank: index + 1 }));
 }
 
-function estimateAnytimeScorerProbability({ fixture, odds, homeStats, awayStats, model }) {
+function estimateAnytimeScorerProbability({ fixture, odds, homeStats, awayStats, model, playerStatsByKey }) {
   const implied = decimalToImpliedProbability(odds.decimalOdds);
   const playerTeam = inferPlayerTeam(odds, fixture);
+  const playerName = odds.playerName || odds.outcome;
+  const playerRecord = playerStatsByKey.get(playerStatKey(playerTeam, playerName));
   const expectedGoals = Number(model.components.expectedGoals || 2.5);
   const homeAttack = (Number(homeStats.xgFor || 1.3) + Number(awayStats.xgAgainst || 1.2)) / 2;
   const awayAttack = (Number(awayStats.xgFor || 1.3) + Number(homeStats.xgAgainst || 1.2)) / 2;
   const teamAttack = playerTeam === fixture.homeTeam ? homeAttack : playerTeam === fixture.awayTeam ? awayAttack : mean([homeAttack, awayAttack]);
   const teamGoalLikelihood = clamp(0.32 + teamAttack * 0.18 + expectedGoals * 0.045, 0.28, 0.84);
   const roleLikelihood = clamp(0.2 + implied * 0.78, 0.16, 0.62);
+  const scorerSampleRate = playerRecord
+    ? Number(playerRecord.goals || 0) / Math.max(1, Number(playerRecord.matchesSampled || 0))
+    : 0;
+  const scorerLift = playerRecord
+    ? clamp(scorerSampleRate * Number(playerRecord.scorerConfidence || 0.35) * 0.16, 0, 0.075)
+    : 0;
   const newsLift = playerTeam === fixture.homeTeam
     ? Number(model.components.homeNewsImpact || 0) * 0.035
     : playerTeam === fixture.awayTeam
       ? Number(model.components.awayNewsImpact || 0) * 0.035
       : 0;
 
-  return round(clamp(teamGoalLikelihood * roleLikelihood + newsLift, 0.04, 0.58), 4);
+  return round(clamp(teamGoalLikelihood * roleLikelihood + scorerLift + newsLift, 0.04, 0.58), 4);
 }
 
 function inferPlayerTeam(odds, fixture) {
@@ -152,7 +162,77 @@ function latestSquadDepthByTeam(squadDepthRecords) {
   );
 }
 
-export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, heatRecord = null, homeSquadDepth = null, awaySquadDepth = null }) {
+function latestPlayerStatsByKey(playerStats) {
+  return latestBy(
+    playerStats.filter((record) => record?.team && record?.playerName),
+    (record) => playerStatKey(record.team, record.playerName),
+    "updatedAt"
+  );
+}
+
+function fixtureMarketSnapshot({ fixture, latestOdds }) {
+  const matchWinner = normalizeMatchWinnerMarket({
+    home: latestOdds.get(outcomeKey(fixture.id, "match_winner", fixture.homeTeam)),
+    draw: latestOdds.get(outcomeKey(fixture.id, "match_winner", "Draw")),
+    away: latestOdds.get(outcomeKey(fixture.id, "match_winner", fixture.awayTeam))
+  });
+  const btts = normalizeTwoOutcomeMarket({
+    yes: latestOdds.get(outcomeKey(fixture.id, "both_teams_to_score", "Yes")),
+    no: latestOdds.get(outcomeKey(fixture.id, "both_teams_to_score", "No")),
+    yesKey: "yes",
+    noKey: "no"
+  });
+  const over25 = normalizeTwoOutcomeMarket({
+    yes: latestOdds.get(outcomeKey(fixture.id, "over_2_5_goals", "Over")),
+    no: latestOdds.get(outcomeKey(fixture.id, "under_2_5_goals", "Under")),
+    yesKey: "over",
+    noKey: "under"
+  });
+
+  return {
+    matchWinner,
+    btts,
+    over25
+  };
+}
+
+function normalizeMatchWinnerMarket({ home, draw, away }) {
+  if (!home || !draw || !away) {
+    return null;
+  }
+
+  const rawHome = decimalToImpliedProbability(home.decimalOdds);
+  const rawDraw = decimalToImpliedProbability(draw.decimalOdds);
+  const rawAway = decimalToImpliedProbability(away.decimalOdds);
+  const total = rawHome + rawDraw + rawAway || 1;
+
+  return {
+    homeWin: round(rawHome / total, 4),
+    draw: round(rawDraw / total, 4),
+    awayWin: round(rawAway / total, 4),
+    confidence: round(clamp(mean([home.sourceReliability, draw.sourceReliability, away.sourceReliability].map((value) => value ?? 0.72)), 0.4, 0.82), 4),
+    bookmakerCount: new Set([home.bookmaker, draw.bookmaker, away.bookmaker].filter(Boolean)).size
+  };
+}
+
+function normalizeTwoOutcomeMarket({ yes, no, yesKey, noKey }) {
+  if (!yes || !no) {
+    return null;
+  }
+
+  const rawYes = decimalToImpliedProbability(yes.decimalOdds);
+  const rawNo = decimalToImpliedProbability(no.decimalOdds);
+  const total = rawYes + rawNo || 1;
+
+  return {
+    [yesKey]: round(rawYes / total, 4),
+    [noKey]: round(rawNo / total, 4),
+    confidence: round(clamp(mean([yes.sourceReliability ?? 0.72, no.sourceReliability ?? 0.72]), 0.4, 0.82), 4),
+    bookmakerCount: new Set([yes.bookmaker, no.bookmaker].filter(Boolean)).size
+  };
+}
+
+export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, marketSnapshot = null, heatRecord = null, homeSquadDepth = null, awaySquadDepth = null }) {
   const homeNews = newsByTeam.get(fixture.homeTeam) || neutralNews();
   const awayNews = newsByTeam.get(fixture.awayTeam) || neutralNews();
   const heat = buildHeatImpact({ fixture, heatRecord, homeSquadDepth, awaySquadDepth });
@@ -163,17 +243,29 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, heatRe
   const newsEdge = (homeNews.netImpact - awayNews.netImpact) * 95;
   const memoryEdge = (Number(homeStats.learnedEdge || 0) - Number(awayStats.learnedEdge || 0)) * 88;
   const marketMemoryEdge = (Number(homeStats.memoryOddsPressure || 0) - Number(awayStats.memoryOddsPressure || 0)) * 35;
+  const marketResultEdge = marketSnapshot?.matchWinner
+    ? (Number(marketSnapshot.matchWinner.homeWin || 0.37) - Number(marketSnapshot.matchWinner.awayWin || 0.37)) * 135 * Number(marketSnapshot.matchWinner.confidence || 0.5)
+    : 0;
   const heatEdge = Number(heat.resultEdgeAdjustment || 0);
-  const totalEdge = ratingEdge + formEdge + xgEdge + styleEdge + newsEdge + memoryEdge + marketMemoryEdge + heatEdge;
-  const drawProbability = clamp(0.265 - Math.abs(totalEdge) / 2500 + defensiveDrawLift(homeStats, awayStats) + Number(heat.drawLift || 0), 0.17, 0.33);
+  const totalEdge = ratingEdge + formEdge + xgEdge + styleEdge + newsEdge + memoryEdge + marketMemoryEdge + marketResultEdge + heatEdge;
+  const rawDrawProbability = clamp(0.265 - Math.abs(totalEdge) / 2500 + defensiveDrawLift(homeStats, awayStats) + Number(heat.drawLift || 0), 0.17, 0.33);
+  const drawProbability = marketSnapshot?.matchWinner
+    ? blendProbability(rawDrawProbability, marketSnapshot.matchWinner.draw, 0.24 * Number(marketSnapshot.matchWinner.confidence || 0.5))
+    : rawDrawProbability;
   const homeShare = logistic(totalEdge / 210);
   const homeWin = clamp((1 - drawProbability) * homeShare, 0.05, 0.82);
   const awayWin = clamp((1 - drawProbability) * (1 - homeShare), 0.05, 0.82);
   const normalizedTotal = homeWin + awayWin + drawProbability;
   const goalShape = goalShapeForFixture(homeStats, awayStats, homeNews, awayNews, heat);
   const expectedGoals = goalShape.expectedGoals;
-  const over25 = poissonOver25(expectedGoals);
-  const bttsYes = poissonBothTeamsToScore(goalShape.homeExpectedGoals, goalShape.awayExpectedGoals, heat);
+  const rawOver25 = poissonOver25(expectedGoals);
+  const rawBttsYes = poissonBothTeamsToScore(goalShape.homeExpectedGoals, goalShape.awayExpectedGoals, heat);
+  const over25 = marketSnapshot?.over25
+    ? blendProbability(rawOver25, marketSnapshot.over25.over, 0.24 * Number(marketSnapshot.over25.confidence || 0.5))
+    : rawOver25;
+  const bttsYes = marketSnapshot?.btts
+    ? blendProbability(rawBttsYes, marketSnapshot.btts.yes, 0.26 * Number(marketSnapshot.btts.confidence || 0.5))
+    : rawBttsYes;
 
   return {
     fixtureId: fixture.id,
@@ -187,12 +279,29 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, heatRe
       newsEdge: round(newsEdge, 2),
       memoryEdge: round(memoryEdge, 2),
       marketMemoryEdge: round(marketMemoryEdge, 2),
+      marketResultEdge: round(marketResultEdge, 2),
+      marketConfidence: round(Number(marketSnapshot?.matchWinner?.confidence || 0), 4),
+      marketHomeWinProbability: nullableComponent(marketSnapshot?.matchWinner?.homeWin),
+      marketDrawProbability: nullableComponent(marketSnapshot?.matchWinner?.draw),
+      marketAwayWinProbability: nullableComponent(marketSnapshot?.matchWinner?.awayWin),
+      marketBttsYesProbability: nullableComponent(marketSnapshot?.btts?.yes),
+      marketOver25Probability: nullableComponent(marketSnapshot?.over25?.over),
       heatEdge: round(heatEdge, 2),
       expectedGoals: round(expectedGoals, 2),
       homeExpectedGoals: round(goalShape.homeExpectedGoals, 2),
       awayExpectedGoals: round(goalShape.awayExpectedGoals, 2),
       bttsShapeProbability: round(bttsYes, 4),
       over25ShapeProbability: round(over25, 4),
+      rawBttsShapeProbability: round(rawBttsYes, 4),
+      rawOver25ShapeProbability: round(rawOver25, 4),
+      homeLongMatchCount: Number(homeStats.longForm?.matchCount || homeStats.sourceMatchCount || 0),
+      awayLongMatchCount: Number(awayStats.longForm?.matchCount || awayStats.sourceMatchCount || 0),
+      homeBttsRate: nullableComponent(homeStats.marketAngles?.bttsRate || homeStats.longForm?.bttsRate),
+      awayBttsRate: nullableComponent(awayStats.marketAngles?.bttsRate || awayStats.longForm?.bttsRate),
+      homeOver25Rate: nullableComponent(homeStats.marketAngles?.over25Rate || homeStats.longForm?.over25Rate),
+      awayOver25Rate: nullableComponent(awayStats.marketAngles?.over25Rate || awayStats.longForm?.over25Rate),
+      homeCleanSheetRate: nullableComponent(homeStats.marketAngles?.cleanSheetRate || homeStats.longForm?.cleanSheetRate),
+      awayCleanSheetRate: nullableComponent(awayStats.marketAngles?.cleanSheetRate || awayStats.longForm?.cleanSheetRate),
       homeNewsImpact: round(homeNews.netImpact, 3),
       awayNewsImpact: round(awayNews.netImpact, 3),
       heatStress: round(Number(heat.heatStress || 0), 4),
@@ -507,6 +616,7 @@ function buildLegThesis({ fixture, market, outcome, edge, odds, movement, model,
   const notes = [
     `${selectionLabel({ fixture, market, outcome })} is priced at ${odds.decimalOdds} with model edge ${round(edge * 100, 2)}%.`,
     `Fixture model: expected goals ${model.components.expectedGoals} (${model.components.homeExpectedGoals}-${model.components.awayExpectedGoals}), rating edge ${model.components.ratingEdge}, style edge ${model.components.styleEdge}, memory edge ${model.components.memoryEdge}.`,
+    `Odds intelligence: market result edge ${model.components.marketResultEdge}, consensus probability ${model.components.marketHomeWinProbability ?? model.components.marketAwayWinProbability ?? "n/a"} where available.`,
     `News impact is ${model.components.homeNewsImpact} for ${fixture.homeTeam} and ${model.components.awayNewsImpact} for ${fixture.awayTeam}.`,
     heatText,
     `Market focus: ${marketFocus.reasons.join("; ") || "general value check"}.`,
@@ -560,6 +670,8 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
   }
 
   if (market === "both_teams_to_score" && outcome === "Yes") {
+    const bttsHistory = mean([Number(model.components.homeBttsRate || 0.48), Number(model.components.awayBttsRate || 0.48)]);
+
     if (expectedGoals >= 2.55 && lowerTeamExpectedGoals >= 0.9) {
       score += 6;
       reasons.push(`BTTS shape is balanced at ${homeExpectedGoals.toFixed(2)}-${awayExpectedGoals.toFixed(2)} expected goals`);
@@ -570,15 +682,36 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
       score -= 7;
       reasons.push(`BTTS total-goals base is low at ${expectedGoals} expected goals`);
     }
+
+    if (bttsHistory >= 0.56) {
+      score += 3;
+      reasons.push(`20-match BTTS history is lively at ${round(bttsHistory * 100, 1)}%`);
+    } else if (bttsHistory <= 0.36) {
+      score -= 4;
+      reasons.push(`20-match BTTS history is low at ${round(bttsHistory * 100, 1)}%`);
+    }
   }
 
   if (market === "under_2_5_goals" || (market === "both_teams_to_score" && outcome === "No")) {
+    const overHistory = mean([Number(model.components.homeOver25Rate || 0.48), Number(model.components.awayOver25Rate || 0.48)]);
+    const cleanSheetHistory = mean([Number(model.components.homeCleanSheetRate || 0.28), Number(model.components.awayCleanSheetRate || 0.28)]);
+
     if (expectedGoals <= 2.34) {
       score += 5;
       reasons.push(`goal model expects a tighter game at ${expectedGoals} expected goals`);
     } else if (expectedGoals > 2.75) {
       score -= 8;
       reasons.push(`goal model is too open for this angle at ${expectedGoals} expected goals`);
+    }
+
+    if (market === "under_2_5_goals" && overHistory <= 0.42) {
+      score += 3;
+      reasons.push(`20-match over-2.5 history is modest at ${round(overHistory * 100, 1)}%`);
+    }
+
+    if (market === "both_teams_to_score" && outcome === "No" && cleanSheetHistory >= 0.36) {
+      score += 3;
+      reasons.push(`20-match clean-sheet signal is useful at ${round(cleanSheetHistory * 100, 1)}%`);
     }
   }
 
@@ -662,4 +795,16 @@ function teamTextMatches(left, right) {
   const a = normalizeName(left);
   const b = normalizeName(right);
   return Boolean(a && b && (a === b || a.includes(b) || b.includes(a)));
+}
+
+function playerStatKey(team, playerName) {
+  return `${normalizeName(team)}|${normalizeName(playerName)}`;
+}
+
+function blendProbability(modelProbability, marketProbability, weight) {
+  if (!Number.isFinite(Number(marketProbability))) {
+    return modelProbability;
+  }
+
+  return round(clamp(Number(modelProbability || 0) * (1 - weight) + Number(marketProbability || 0) * weight, 0.03, 0.92), 4);
 }

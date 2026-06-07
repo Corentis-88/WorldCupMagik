@@ -1,5 +1,5 @@
 import { appendJsonRecords, readJson, upsertJsonRecords, writeJson } from "./db.mjs";
-import { clamp, decimalToImpliedProbability, makeId, mean, round } from "./utils.mjs";
+import { clamp, decimalToImpliedProbability, makeId, mean, normalizeName, round } from "./utils.mjs";
 
 export async function loadIntelligenceState() {
   const [matchHistory, teamIntelligence, observations] = await Promise.all([
@@ -88,6 +88,7 @@ export function buildTeamStatsWithIntelligence({ baseStats, matchHistory = [], t
     const formShotsAgainst = form.matchCount ? form.shotsAgainst : Number(team.shotsAgainst || 10);
     const memoryScore = Number(memory.learnedEdge || 0);
     const memoryConfidence = Number(memory.dataConfidence || 0);
+    const longForm = form.longForm || form;
 
     return {
       ...team,
@@ -100,10 +101,11 @@ export function buildTeamStatsWithIntelligence({ baseStats, matchHistory = [], t
       rating: round(Number(team.rating || 1700) + form.formMomentum * 22 + memoryScore * 24, 1),
       statsCompleteness: round(clamp(mean([
         team.statsCompleteness || 0.5,
-        form.matchCount ? 0.72 + Math.min(0.18, form.matchCount * 0.03) : 0.4,
+        form.matchCount ? 0.62 + Math.min(0.28, form.matchCount * 0.014) : 0.4,
         memoryConfidence || 0.42
       ]), 0, 1), 3),
       formMemory: form,
+      longForm,
       learnedEdge: round(memoryScore, 4),
       intelligenceConfidence: round(memoryConfidence, 4),
       memoryNewsImpact: round(Number(memory.news?.impact || 0), 4),
@@ -114,12 +116,13 @@ export function buildTeamStatsWithIntelligence({ baseStats, matchHistory = [], t
   });
 }
 
-export function buildScanIntelligence({ fixtures, oddsRecords, allOddsSnapshots, newsArticles, teamStats, matchHistory, previousTeamIntelligence = [], now = new Date() }) {
+export function buildScanIntelligence({ fixtures, oddsRecords, allOddsSnapshots, newsArticles, teamStats, matchHistory, playerStats = [], previousTeamIntelligence = [], now = new Date() }) {
   const teams = [...new Set(fixtures.flatMap((fixture) => [fixture.homeTeam, fixture.awayTeam]))];
   const previousByTeam = new Map(previousTeamIntelligence.map((item) => [item.team, item]));
   const newsByTeam = aggregateNewsByTeam(newsArticles, teams, now);
   const movementByOutcome = buildOddsMovementSummaries(allOddsSnapshots.length ? allOddsSnapshots : oddsRecords);
   const statsByTeam = new Map(teamStats.map((team) => [team.team, team]));
+  const scorerByTeam = aggregateScorerIntelligence(playerStats);
   const observations = [];
   const teamIntelligence = [];
 
@@ -127,14 +130,16 @@ export function buildScanIntelligence({ fixtures, oddsRecords, allOddsSnapshots,
     const form = deriveTeamForm(matchHistory, team, now);
     const news = newsByTeam.get(team) || neutralNews();
     const market = marketPressureForTeam({ team, fixtures, movementByOutcome });
+    const scorer = scorerByTeam.get(normalizeName(team)) || neutralScorerIntelligence();
     const previous = previousByTeam.get(team);
     const previousEdge = Number(previous?.learnedEdge || 0);
     const stats = statsByTeam.get(team) || {};
     const learnedEdge = clamp(
       previousEdge * 0.48
-      + form.formMomentum * 0.2
+      + form.formMomentum * 0.18
       + news.impact * 0.28
-      + market.pressure * 0.18
+      + market.pressure * 0.24
+      + scorer.threat * 0.08
       + (Number(stats.learnedEdge || 0) * 0.12),
       -0.65,
       0.65
@@ -143,10 +148,11 @@ export function buildScanIntelligence({ fixtures, oddsRecords, allOddsSnapshots,
       form.confidence,
       news.confidence,
       market.confidence,
+      scorer.confidence,
       Number(stats.statsCompleteness || 0.5),
       previous?.dataConfidence || 0.42
     ]), 0, 1);
-    const reasons = buildReasons({ form, news, market, learnedEdge });
+    const reasons = buildReasons({ form, news, market, scorer, learnedEdge });
     const item = {
       team,
       updatedAt: now.toISOString(),
@@ -155,6 +161,7 @@ export function buildScanIntelligence({ fixtures, oddsRecords, allOddsSnapshots,
       form,
       news,
       market,
+      scorer,
       reasons
     };
 
@@ -168,6 +175,7 @@ export function buildScanIntelligence({ fixtures, oddsRecords, allOddsSnapshots,
       articleCount: news.articleCount,
       oddsPressure: market.pressure,
       formMomentum: form.formMomentum,
+      scorerThreat: scorer.threat,
       reasons
     });
   }
@@ -192,10 +200,11 @@ export async function persistScanIntelligence(intelligence) {
   await appendJsonRecords(["data", "market-movement-observations.json"], intelligence.marketMovements, 10000);
 }
 
-export function deriveTeamForm(matchHistory, team, now = new Date(), limit = 6) {
+export function deriveTeamForm(matchHistory, team, now = new Date(), limit = 20) {
+  const teamKey = normalizeName(team);
   const matches = matchHistory
     .filter((match) => new Date(match.date) < now)
-    .filter((match) => match.homeTeam === team || match.awayTeam === team)
+    .filter((match) => normalizeName(match.homeTeam) === teamKey || normalizeName(match.awayTeam) === teamKey)
     .sort((left, right) => new Date(right.date) - new Date(left.date))
     .slice(0, limit);
 
@@ -209,14 +218,22 @@ export function deriveTeamForm(matchHistory, team, now = new Date(), limit = 6) 
       xgAgainst: 1.2,
       shotsFor: 10,
       shotsAgainst: 10,
+      shotsOnTargetFor: 3.5,
+      shotsOnTargetAgainst: 3.5,
       possession: 50,
       formMomentum: 0,
-      confidence: 0.35
+      confidence: 0.35,
+      marketAngles: {
+        cleanSheetRate: 0.28,
+        failedToScoreRate: 0.24,
+        bttsRate: 0.48,
+        over25Rate: 0.48
+      }
     };
   }
 
   const rows = matches.map((match) => {
-    const isHome = match.homeTeam === team;
+    const isHome = normalizeName(match.homeTeam) === teamKey;
     const goalsFor = Number(isHome ? match.homeGoals : match.awayGoals);
     const goalsAgainst = Number(isHome ? match.awayGoals : match.homeGoals);
     const points = goalsFor > goalsAgainst ? 3 : goalsFor === goalsAgainst ? 1 : 0;
@@ -229,28 +246,83 @@ export function deriveTeamForm(matchHistory, team, now = new Date(), limit = 6) 
       xgAgainst: Number(isHome ? match.awayXg : match.homeXg),
       shotsFor: Number(isHome ? match.homeShots : match.awayShots),
       shotsAgainst: Number(isHome ? match.awayShots : match.homeShots),
+      shotsOnTargetFor: Number(isHome ? match.homeShotsOnTarget : match.awayShotsOnTarget),
+      shotsOnTargetAgainst: Number(isHome ? match.awayShotsOnTarget : match.homeShotsOnTarget),
       possession: Number(isHome ? match.homePossession : match.awayPossession)
     };
   });
-  const latestThree = rows.slice(0, 3);
-  const priorThree = rows.slice(3, 6);
-  const latestPpg = mean(latestThree.map((row) => row.points));
-  const priorPpg = priorThree.length ? mean(priorThree.map((row) => row.points)) : 1.4;
-  const xgDelta = mean(latestThree.map((row) => row.xgFor - row.xgAgainst));
-  const formMomentum = clamp(((latestPpg - priorPpg) / 3) + xgDelta * 0.12, -0.55, 0.55);
+  const latestSix = rows.slice(0, 6);
+  const priorSample = rows.slice(6, 20);
+  const latestPpg = mean(latestSix.map((row) => row.points));
+  const priorPpg = priorSample.length ? mean(priorSample.map((row) => row.points)) : mean(rows.map((row) => row.points));
+  const latestXgDelta = mean(latestSix.map((row) => row.xgFor - row.xgAgainst));
+  const priorXgDelta = priorSample.length ? mean(priorSample.map((row) => row.xgFor - row.xgAgainst)) : 0;
+  const formMomentum = clamp(((latestPpg - priorPpg) / 3) + (latestXgDelta - priorXgDelta) * 0.1, -0.55, 0.55);
+  const longForm = summarizeFormRows(rows);
+  const shortForm = summarizeFormRows(latestSix);
 
   return {
     matchCount: rows.length,
-    pointsPerGame: round(mean(rows.map((row) => row.points)), 3),
-    goalsFor: round(mean(rows.map((row) => row.goalsFor)), 3),
-    goalsAgainst: round(mean(rows.map((row) => row.goalsAgainst)), 3),
-    xgFor: round(mean(rows.map((row) => row.xgFor)), 3),
-    xgAgainst: round(mean(rows.map((row) => row.xgAgainst)), 3),
-    shotsFor: round(mean(rows.map((row) => row.shotsFor)), 2),
-    shotsAgainst: round(mean(rows.map((row) => row.shotsAgainst)), 2),
-    possession: round(mean(rows.map((row) => row.possession)), 1),
+    pointsPerGame: longForm.pointsPerGame,
+    goalsFor: longForm.goalsFor,
+    goalsAgainst: longForm.goalsAgainst,
+    xgFor: longForm.xgFor,
+    xgAgainst: longForm.xgAgainst,
+    shotsFor: longForm.shotsFor,
+    shotsAgainst: longForm.shotsAgainst,
+    shotsOnTargetFor: longForm.shotsOnTargetFor,
+    shotsOnTargetAgainst: longForm.shotsOnTargetAgainst,
+    possession: longForm.possession,
     formMomentum: round(formMomentum, 4),
-    confidence: round(clamp(0.42 + rows.length * 0.08, 0, 0.86), 3)
+    confidence: round(clamp(0.4 + rows.length * 0.025, 0, 0.9), 3),
+    shortForm: {
+      ...shortForm,
+      matchCount: latestSix.length
+    },
+    longForm,
+    marketAngles: {
+      cleanSheetRate: longForm.cleanSheetRate,
+      failedToScoreRate: longForm.failedToScoreRate,
+      bttsRate: longForm.bttsRate,
+      over25Rate: longForm.over25Rate,
+      scoringGameRate: longForm.scoringGameRate,
+      concedeGameRate: longForm.concedeGameRate
+    }
+  };
+}
+
+function summarizeFormRows(rows) {
+  const safeRows = rows.length ? rows : [{
+    points: 1.4,
+    goalsFor: 1.2,
+    goalsAgainst: 1.1,
+    xgFor: 1.35,
+    xgAgainst: 1.2,
+    shotsFor: 10,
+    shotsAgainst: 10,
+    shotsOnTargetFor: 3.5,
+    shotsOnTargetAgainst: 3.5,
+    possession: 50
+  }];
+
+  return {
+    matchCount: rows.length,
+    pointsPerGame: round(mean(safeRows.map((row) => row.points)), 3),
+    goalsFor: round(mean(safeRows.map((row) => row.goalsFor)), 3),
+    goalsAgainst: round(mean(safeRows.map((row) => row.goalsAgainst)), 3),
+    xgFor: round(mean(safeRows.map((row) => row.xgFor)), 3),
+    xgAgainst: round(mean(safeRows.map((row) => row.xgAgainst)), 3),
+    shotsFor: round(mean(safeRows.map((row) => row.shotsFor)), 2),
+    shotsAgainst: round(mean(safeRows.map((row) => row.shotsAgainst)), 2),
+    shotsOnTargetFor: round(mean(safeRows.map((row) => row.shotsOnTargetFor)), 2),
+    shotsOnTargetAgainst: round(mean(safeRows.map((row) => row.shotsOnTargetAgainst)), 2),
+    possession: round(mean(safeRows.map((row) => row.possession)), 1),
+    cleanSheetRate: round(safeRows.filter((row) => row.goalsAgainst === 0).length / safeRows.length, 3),
+    failedToScoreRate: round(safeRows.filter((row) => row.goalsFor === 0).length / safeRows.length, 3),
+    bttsRate: round(safeRows.filter((row) => row.goalsFor > 0 && row.goalsAgainst > 0).length / safeRows.length, 3),
+    over25Rate: round(safeRows.filter((row) => row.goalsFor + row.goalsAgainst > 2.5).length / safeRows.length, 3),
+    scoringGameRate: round(safeRows.filter((row) => row.goalsFor > 0).length / safeRows.length, 3),
+    concedeGameRate: round(safeRows.filter((row) => row.goalsAgainst > 0).length / safeRows.length, 3)
   };
 }
 
@@ -389,13 +461,18 @@ function marketPressureForTeam({ team, fixtures, movementByOutcome }) {
   }
 
   const movement = mean(movements.map((item) => Number(item.movement || 0)));
-  const pressure = clamp(-movement * 4.5, -0.45, 0.45);
+  const consensusOdds = mean(movements.map((item) => item.averageDecimalOdds));
+  const consensusImpliedProbability = decimalToImpliedProbability(consensusOdds);
+  const movementPressure = clamp(-movement * 4.5, -0.45, 0.45);
+  const consensusPressure = clamp((consensusImpliedProbability - 0.38) * 0.75, -0.22, 0.34);
+  const pressure = clamp(movementPressure * 0.7 + consensusPressure * 0.3, -0.45, 0.45);
   const bookmakerCount = Math.max(...movements.map((item) => Number(item.bookmakerCount || 0)));
 
   return {
     pressure: round(pressure, 4),
     confidence: round(clamp(0.34 + bookmakerCount * 0.08 + movements.length * 0.06, 0, 0.9), 4),
-    consensusOdds: round(mean(movements.map((item) => item.averageDecimalOdds)), 3),
+    consensusOdds: round(consensusOdds, 3),
+    consensusImpliedProbability: round(consensusImpliedProbability, 4),
     movement: round(movement, 4),
     bookmakerCount
   };
@@ -439,11 +516,53 @@ function topNewsSignals(articles) {
   return signals.slice(0, 4);
 }
 
-function buildReasons({ form, news, market, learnedEdge }) {
+function aggregateScorerIntelligence(playerStats = []) {
+  const byTeam = new Map();
+
+  for (const record of playerStats) {
+    const teamKey = normalizeName(record.team);
+    const bucket = byTeam.get(teamKey) || [];
+    bucket.push(record);
+    byTeam.set(teamKey, bucket);
+  }
+
+  const result = new Map();
+
+  for (const [teamKey, records] of byTeam.entries()) {
+    const sorted = [...records].sort((left, right) => Number(right.goals || 0) - Number(left.goals || 0));
+    const top = sorted.slice(0, 5);
+    const topGoals = top.reduce((total, item) => total + Number(item.goals || 0), 0);
+    const sample = top.reduce((total, item) => total + Number(item.matchesSampled || 0), 0);
+    const threat = clamp((topGoals / Math.max(5, sample)) * 0.45, 0, 0.28);
+    result.set(teamKey, {
+      trackedPlayers: records.length,
+      topScorers: top.map((item) => ({
+        playerName: item.playerName,
+        goals: Number(item.goals || 0),
+        matchesSampled: Number(item.matchesSampled || 0)
+      })),
+      threat: round(threat, 4),
+      confidence: round(clamp(0.28 + records.length * 0.025 + sample * 0.012, 0.28, 0.78), 4)
+    });
+  }
+
+  return result;
+}
+
+function neutralScorerIntelligence() {
+  return {
+    trackedPlayers: 0,
+    topScorers: [],
+    threat: 0,
+    confidence: 0.28
+  };
+}
+
+function buildReasons({ form, news, market, scorer, learnedEdge }) {
   const reasons = [];
 
   if (form.matchCount) {
-    reasons.push(`recent form ${form.pointsPerGame} PPG, xG ${form.xgFor}-${form.xgAgainst}`);
+    reasons.push(`20-match form ${form.pointsPerGame} PPG, xG ${form.xgFor}-${form.xgAgainst}`);
   }
 
   if (Math.abs(form.formMomentum) >= 0.08) {
@@ -455,7 +574,11 @@ function buildReasons({ form, news, market, learnedEdge }) {
   }
 
   if (market.bookmakerCount) {
-    reasons.push(`market movement ${round(market.movement * 100, 2)}% across ${market.bookmakerCount} bookie(s)`);
+    reasons.push(`market intelligence ${round(market.movement * 100, 2)}% movement, consensus ${market.consensusOdds || "n/a"} across ${market.bookmakerCount} bookie(s)`);
+  }
+
+  if (scorer.trackedPlayers) {
+    reasons.push(`${scorer.trackedPlayers} scorer record(s), top scorer signal ${scorer.threat}`);
   }
 
   if (Math.abs(learnedEdge) >= 0.08) {

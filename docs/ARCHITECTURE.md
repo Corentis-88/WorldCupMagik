@@ -5,7 +5,7 @@ WorldCupMagic is split into five lanes:
 1. Collection
    - Odds snapshots.
    - News articles and extracted signals.
-   - Team, fixture, and player statistics.
+   - Team 20-match history, fixture, and player-scorer statistics.
    - Venue weather and heat snapshots.
    - Squad-depth records from public squad/team pages plus conservative priors.
    - Bookmaker offers and terms.
@@ -17,8 +17,8 @@ WorldCupMagic is split into five lanes:
 
 3. Leg Scoring
    - Model probability.
-   - Implied probability from best available odds.
-   - Edge, confidence, odds movement, news impact, style matchup, and heat impact.
+   - Implied probability and capped consensus probability from best available odds.
+   - Edge, confidence, odds movement, 20-match form, scorer signals, news impact, style matchup, and heat impact.
    - Heat impact combines venue weather, team climate familiarity, historical World Cup climate memory, and squad depth.
    - Favourite-crowding penalty so the system does not simply parlay obvious favourites.
 

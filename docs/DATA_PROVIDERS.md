@@ -37,11 +37,19 @@ It downloads public RSS, Atom, and HTML pages, extracts article links/snippets, 
 - morale;
 - rotation risk.
 
-## Stats And Form
+## Stats, Form, And Scorers
 
-`src/providers/stats-provider.mjs` gathers recent national-team result rows from public pages, especially national-team results pages with completed match tables. It derives last-three-match form from completed matches only.
+`src/providers/stats-provider.mjs` gathers recent national-team result rows from public pages, especially national-team results pages with completed match tables. It derives team form from completed matches only.
 
-When raw advanced stats are not available on a public row, the provider uses conservative estimates for xG, shots, and possession and lowers `statsCompleteness`. That lets the scoring model use the signal without pretending it is perfect.
+The target window is now 20 completed matches per team. The provider stores:
+
+- long-form 20-match points, goals, estimated xG, shots, shots on target, possession, BTTS rate, over-2.5 rate, clean-sheet rate, and failed-to-score rate;
+- short-form six-match momentum separately, so the engine sees current form without letting three unusual results dominate;
+- public scorer rows when a source exposes them, written into `data/player-stats.json`.
+
+When raw advanced stats are not available on a public row, the provider uses conservative score-derived estimates for xG, shots, shots on target, and possession, marks those fields as derived, and lowers/limits `statsCompleteness`. It does not label derived fields as captured event data.
+
+The betting model uses odds as market intelligence, not as an enemy signal. Match-winner, BTTS, and totals probabilities are blended with bookmaker consensus at a capped weight, while news, squad depth, heat, long-form team history, and odds movement can still move the model away from a plain favourite pick.
 
 ## Venue Weather And Heat
 

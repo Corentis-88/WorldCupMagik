@@ -33,6 +33,7 @@ const liveOddsSnapshots = engineState.oddsSnapshots.filter(isPublicOddsRecord);
 const liveNewsArticles = engineState.newsArticles.filter(isPublicNewsArticle);
 const liveHeatSnapshots = engineState.heatSnapshots.filter(isPublicHeatRecord);
 const liveSquadDepthRecords = engineState.squadDepthRecords.filter(isSquadDepthRecord);
+const livePlayerStats = engineState.playerStats.filter(isPublicPlayerStat);
 const liveMatchHistory = intelligenceState.matchHistory.filter(isPublicMatchRecord);
 const baseTeamStats = engineState.teamStats.filter(isPublicTeamStat);
 const teamStats = buildTeamStatsWithIntelligence({
@@ -56,7 +57,8 @@ const mostLikelyRangeLegCandidates = buildLegCandidates({
   now,
   outcomeLearning,
   heatSnapshots: liveHeatSnapshots,
-  squadDepthRecords: liveSquadDepthRecords
+  squadDepthRecords: liveSquadDepthRecords,
+  playerStats: livePlayerStats
 });
 
 for (const risk of riskBuckets) {
@@ -70,7 +72,8 @@ for (const risk of riskBuckets) {
     now,
     outcomeLearning,
     heatSnapshots: liveHeatSnapshots,
-    squadDepthRecords: liveSquadDepthRecords
+    squadDepthRecords: liveSquadDepthRecords,
+    playerStats: livePlayerStats
   });
 
   riskProfiles[risk] = policy.riskProfile;
@@ -90,7 +93,8 @@ for (const daysAhead of dayBuckets) {
     now,
     outcomeLearning,
     heatSnapshots: liveHeatSnapshots,
-    squadDepthRecords: liveSquadDepthRecords
+    squadDepthRecords: liveSquadDepthRecords,
+    playerStats: livePlayerStats
   });
   const mostLikelyPicks = buildMostLikelyPicks(mostLikelyLegCandidates, mostLikelyPolicy, {
     fixtureCount: scanFixtures.length
@@ -117,7 +121,8 @@ for (const daysAhead of dayBuckets) {
       now,
       outcomeLearning,
       heatSnapshots: liveHeatSnapshots,
-      squadDepthRecords: liveSquadDepthRecords
+      squadDepthRecords: liveSquadDepthRecords,
+      playerStats: livePlayerStats
     });
     const recommendations = buildBetRecommendations(legCandidates, policy);
     const betslip = selectBetslip({ recommendations, stake: 10, risk });
@@ -175,6 +180,7 @@ const payload = {
   markets: summarizeMarkets(liveOddsSnapshots, engineState.policy),
   heat: summarizeHeat(liveHeatSnapshots),
   squadDepth: summarizeSquadDepth(liveSquadDepthRecords),
+  playerStats: summarizePlayerStats(livePlayerStats),
   pickOfTheDay,
   intelligence: {
     teamCount: intelligenceState.teamIntelligence.length,
@@ -251,6 +257,10 @@ function isPublicTeamStat(team) {
 
 function isPublicMatchRecord(match) {
   return match?.sourceType === "public-web" || match?.provider === "public-web";
+}
+
+function isPublicPlayerStat(record) {
+  return record?.sourceType === "public-web" || record?.provider === "public-web";
 }
 
 function summarizePolicy(policy) {
@@ -344,7 +354,14 @@ function summarizeLegCandidate(leg) {
       squadDepthConfidence: leg.components?.squadDepthConfidence,
       homeHistoricalHeatMemory: leg.components?.homeHistoricalHeatMemory,
       awayHistoricalHeatMemory: leg.components?.awayHistoricalHeatMemory,
-      combinedHeatDifferential: leg.components?.combinedHeatDifferential
+      combinedHeatDifferential: leg.components?.combinedHeatDifferential,
+      marketResultEdge: leg.components?.marketResultEdge,
+      homeLongMatchCount: leg.components?.homeLongMatchCount,
+      awayLongMatchCount: leg.components?.awayLongMatchCount,
+      homeBttsRate: leg.components?.homeBttsRate,
+      awayBttsRate: leg.components?.awayBttsRate,
+      homeOver25Rate: leg.components?.homeOver25Rate,
+      awayOver25Rate: leg.components?.awayOver25Rate
     },
     thesis: leg.thesis
   };
@@ -408,6 +425,32 @@ function summarizeSquadDepth(squadDepthRecords) {
     recordCount: squadDepthRecords.length,
     publicEnhancedCount: squadDepthRecords.filter((record) => record.sourceType === "curated-plus-public" || record.sourceType === "public-web").length,
     teams
+  };
+}
+
+function summarizePlayerStats(playerStats) {
+  const byTeam = {};
+
+  for (const record of playerStats) {
+    const bucket = byTeam[record.team] || [];
+    bucket.push({
+      playerName: record.playerName,
+      goals: record.goals || 0,
+      matchesSampled: record.matchesSampled || 0,
+      scorerConfidence: record.scorerConfidence || 0
+    });
+    byTeam[record.team] = bucket;
+  }
+
+  for (const team of Object.keys(byTeam)) {
+    byTeam[team] = byTeam[team]
+      .sort((left, right) => Number(right.goals || 0) - Number(left.goals || 0))
+      .slice(0, 8);
+  }
+
+  return {
+    recordCount: playerStats.length,
+    teams: byTeam
   };
 }
 

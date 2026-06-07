@@ -9,7 +9,7 @@ It is decision support only. It does not place bets, does not guarantee returns,
 - Gathers public World Cup fixtures from configurable HTML pages.
 - Gathers public odds from bookmaker/comparison pages without odds APIs.
 - Gathers public football news from RSS/Atom/HTML pages without news APIs.
-- Gathers recent national-team results from public pages and derives last-three-match form.
+- Gathers up to 20 recent national-team results per team, stores long-form/short-form trends, and records public scorer rows when available.
 - Stores source health for every scan so blocked or empty sources are visible.
 - Scores Single, Double, Trixie, 3-leg accumulator, 4-leg accumulator, 5-leg accumulator, 6-leg accumulator, and 8-leg accumulator categories.
 - Uses risk-slider policy to trade confidence, edge, price, bookmaker coverage, and calculated-risk appetite.
@@ -29,13 +29,13 @@ Each run writes `web/data/latest.json` with:
 
 - collection duration;
 - source-health summary;
-- fixture, odds, news, team-form, and intelligence counts;
+- fixture, odds, news, team-form, player-scorer, and intelligence counts;
 - pre-scored profiles for days-ahead values `0` to `14`;
 - pre-scored profiles for risk values `0` to `100` in `5` point steps.
 
 Scheduled and manual production runs also commit the refreshed `data/` history and `web/data` output back to `main`. That is how odds movement, source health, market memory, and team intelligence compound across the tournament instead of resetting on every deployment.
 
-The web app's `Scan Now` button reloads the newest published database and recalculates stake/return locally. The expensive public-web gathering happens in the scheduled server-side run, not in each visitor's browser.
+The web app loads the newest published database and recalculates stake/return locally. The expensive public-web gathering happens in the scheduled server-side run, not in each visitor's browser.
 
 ## Commands
 

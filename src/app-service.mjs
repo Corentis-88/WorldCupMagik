@@ -43,6 +43,7 @@ export async function getDashboardState({ now = new Date() } = {}) {
       scorerOddsCount: state.oddsSnapshots.filter(isPublicOddsRecord).filter(isScorerOddsRecord).length,
       heatSnapshotCount: state.heatSnapshots.filter(isPublicHeatRecord).length,
       squadDepthCount: state.squadDepthRecords.filter(isSquadDepthRecord).length,
+      playerStatsCount: state.playerStats.filter(isPublicPlayerStat).length,
       newsArticleCount: state.newsArticles.filter(isPublicNewsArticle).length,
       teamStatsCount: state.teamStats.filter(isPublicTeamStat).length,
       teamIntelligenceCount: latestScan?.intelligence?.teamCount || 0,
@@ -108,7 +109,11 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
   const baseTeamStats = statsResult.records;
 
   if (statsResult.matchHistory?.length) {
-    await writeJson(["data", "team-match-history.json"], statsResult.matchHistory);
+    await upsertJsonRecords(["data", "team-match-history.json"], statsResult.matchHistory, matchHistoryKey, 12000);
+  }
+
+  if (statsResult.playerStats?.length) {
+    await persistPlayerStats(statsResult);
   }
 
   if (baseTeamStats.length) {
@@ -192,6 +197,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
   const allOddsSnapshots = latestState.oddsSnapshots.filter(isPublicOddsRecord);
   const allHeatSnapshots = latestState.heatSnapshots.filter(isPublicHeatRecord);
   const allSquadDepthRecords = latestState.squadDepthRecords.filter(isSquadDepthRecord);
+  const allPlayerStats = latestState.playerStats.filter(isPublicPlayerStat);
   const intelligence = buildScanIntelligence({
     fixtures: scanFixtures,
     oddsRecords,
@@ -199,6 +205,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
     newsArticles: allNewsArticles,
     teamStats: preScanTeamStats,
     matchHistory: liveMatchHistory,
+    playerStats: allPlayerStats,
     previousTeamIntelligence: intelligenceState.teamIntelligence,
     now
   });
@@ -218,7 +225,8 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
     now,
     outcomeLearning,
     heatSnapshots: allHeatSnapshots,
-    squadDepthRecords: allSquadDepthRecords
+    squadDepthRecords: allSquadDepthRecords,
+    playerStats: allPlayerStats
   });
   const recommendations = buildBetRecommendations(legCandidates, policy);
   const offerRanking = rankBookmakerOffers(latestState.bookmakerOffers, policy, now);
@@ -235,6 +243,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
     allHeatSnapshots,
     squadDepthRecords,
     allSquadDepthRecords,
+    playerStats: allPlayerStats,
     newsArticles,
     teamStats,
     sourceDiagnostics
@@ -256,6 +265,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
       scorerOddsRecords: oddsRecords.filter(isScorerOddsRecord).length,
       heatRecords: heatRecords.length,
       squadDepthRecords: squadDepthRecords.length,
+      playerStats: allPlayerStats.length,
       newsArticles: newsArticles.length,
       teamStats: teamStats.length,
       matchHistoryRecords: statsResult.matchHistory?.length || 0,
@@ -293,7 +303,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
   return scan;
 }
 
-function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, heatRecords = [], allHeatSnapshots = [], squadDepthRecords = [], allSquadDepthRecords = [], newsArticles, teamStats, sourceDiagnostics }) {
+function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, heatRecords = [], allHeatSnapshots = [], squadDepthRecords = [], allSquadDepthRecords = [], playerStats = [], newsArticles, teamStats, sourceDiagnostics }) {
   const sourceErrors = sourceDiagnostics.filter((item) => item.status === "error").length;
   const sourceEmpty = sourceDiagnostics.filter((item) => item.status === "empty").length;
   const sourceOk = sourceDiagnostics.filter((item) => item.status === "ok").length;
@@ -333,6 +343,7 @@ function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, 
     scorerOddsHistoryRecords: allOddsSnapshots.filter(isScorerOddsRecord).length,
     heatHistoryRecords: allHeatSnapshots.length,
     squadDepthHistoryRecords: allSquadDepthRecords.length,
+    playerStatsRecords: playerStats.length,
     newsArticleCount: newsArticles.length,
     teamStatsCount: teamStats.length,
     teamsWithRecentMatches,
@@ -684,6 +695,20 @@ function isPublicTeamStat(team) {
 
 function isPublicMatchRecord(match) {
   return match?.sourceType === "public-web" || match?.provider === "public-web";
+}
+
+function isPublicPlayerStat(record) {
+  return record?.sourceType === "public-web" || record?.provider === "public-web";
+}
+
+async function persistPlayerStats(statsResult) {
+  const scannedTeams = new Set((statsResult.records || []).map((record) => normalizeName(record.team)).filter(Boolean));
+  const existing = (await readJson(["data", "player-stats.json"], [])).filter((record) => !scannedTeams.has(normalizeName(record.team)));
+  await writeJson(["data", "player-stats.json"], [...statsResult.playerStats, ...existing].slice(0, 6000));
+}
+
+function matchHistoryKey(match) {
+  return `${match.date}|${normalizeName(match.homeTeam)}|${normalizeName(match.awayTeam)}|${match.homeGoals}-${match.awayGoals}`;
 }
 
 function startOfDay(value) {

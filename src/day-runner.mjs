@@ -2,7 +2,7 @@ import { appendJsonRecords, loadEngineState, readJson, upsertJsonRecords, writeJ
 import { fetchNewsArticles } from "./providers/news-provider.mjs";
 import { fetchOddsSnapshot } from "./providers/odds-provider.mjs";
 import { fetchSquadDepth } from "./providers/squad-provider.mjs";
-import { fetchTeamStats } from "./providers/stats-provider.mjs";
+import { fetchTeamStatsWithDiagnostics } from "./providers/stats-provider.mjs";
 import { fetchHeatSnapshots } from "./providers/weather-provider.mjs";
 import { buildBetRecommendations } from "./portfolio-builder.mjs";
 import { rankBookmakerOffers } from "./offer-engine.mjs";
@@ -33,7 +33,12 @@ export async function runDailyCycle({ now = new Date(), forceSnapshot = false } 
 export async function runSnapshotCycle({ state, now = new Date(), forceSnapshot = false } = {}) {
   const engineState = state || await loadEngineState();
   const shouldCollectOdds = forceSnapshot || shouldTakeSnapshot(engineState.policy, now);
-  const teamStats = await fetchTeamStats({ providerConfig: engineState.providers.stats });
+  const statsResult = await fetchTeamStatsWithDiagnostics({
+    providerConfig: engineState.providers.stats,
+    fixtures: engineState.fixtures,
+    now
+  });
+  const teamStats = statsResult.records;
   const newsArticles = await fetchNewsArticles({
     fixtures: engineState.fixtures,
     providerConfig: engineState.providers.news,
@@ -75,11 +80,20 @@ export async function runSnapshotCycle({ state, now = new Date(), forceSnapshot 
   }
 
   if (teamStats.length) {
+    await writeJson(["data", "team-stats.json"], teamStats);
     await writeJson(["data", "team-stats-latest.json"], {
       createdAt: now.toISOString(),
       providerMode: engineState.providers.stats?.mode || "self-gather",
       teams: teamStats
     });
+  }
+
+  if (statsResult.matchHistory?.length) {
+    await upsertJsonRecords(["data", "team-match-history.json"], statsResult.matchHistory, matchHistoryKey, 12000);
+  }
+
+  if (statsResult.playerStats?.length) {
+    await persistPlayerStats(statsResult);
   }
 
   const run = buildRunRecord("snapshot", now, {
@@ -88,7 +102,9 @@ export async function runSnapshotCycle({ state, now = new Date(), forceSnapshot 
     newsRecordsCollected: newsArticles.length,
     heatRecordsCollected: heatRecords.length,
     squadDepthRecordsCollected: squadDepthRecords.length,
-    teamStatsCount: teamStats.length
+    teamStatsCount: teamStats.length,
+    matchHistoryRecordsCollected: statsResult.matchHistory?.length || 0,
+    playerStatsCollected: statsResult.playerStats?.length || 0
   });
 
   await appendJsonRecords(["data", "snapshot-runs.json"], [run], 1000);
@@ -203,6 +219,18 @@ function printSnapshotSummary(run) {
   console.log(`News records collected: ${run.newsRecordsCollected}`);
   console.log(`Squad depth records collected: ${run.squadDepthRecordsCollected || 0}`);
   console.log(`Team stat records available: ${run.teamStatsCount}`);
+  console.log(`20-match history records collected: ${run.matchHistoryRecordsCollected || 0}`);
+  console.log(`Player scorer records collected: ${run.playerStatsCollected || 0}`);
+}
+
+function matchHistoryKey(match) {
+  return `${match.date}|${normalizeName(match.homeTeam)}|${normalizeName(match.awayTeam)}|${match.homeGoals}-${match.awayGoals}`;
+}
+
+async function persistPlayerStats(statsResult) {
+  const scannedTeams = new Set((statsResult.records || []).map((record) => normalizeName(record.team)).filter(Boolean));
+  const existing = (await readJson(["data", "player-stats.json"], [])).filter((record) => !scannedTeams.has(normalizeName(record.team)));
+  await writeJson(["data", "player-stats.json"], [...statsResult.playerStats, ...existing].slice(0, 6000));
 }
 
 function printAnalysisSummary({ run, recommendations, offerRanking }) {

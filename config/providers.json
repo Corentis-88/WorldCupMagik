@@ -21,8 +21,12 @@
   },
   "stats": {
     "mode": "self-gather",
-    "targetRecentMatches": 3,
-    "maxRecentMatches": 6,
+    "targetRecentMatches": 20,
+    "maxRecentMatches": 20,
+    "formWindows": {
+      "short": 6,
+      "long": 20
+    },
     "requestTimeoutMs": 14000,
     "userAgent": "WorldCupMagik/1.0 public-web gatherer; no stats APIs",
     "teamAliases": {
