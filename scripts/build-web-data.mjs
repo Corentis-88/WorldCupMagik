@@ -32,6 +32,7 @@ const liveFixtures = engineState.fixtures.filter(isPublicFixture);
 const liveOddsSnapshots = engineState.oddsSnapshots.filter(isPublicOddsRecord);
 const liveNewsArticles = engineState.newsArticles.filter(isPublicNewsArticle);
 const liveHeatSnapshots = engineState.heatSnapshots.filter(isPublicHeatRecord);
+const liveSquadDepthRecords = engineState.squadDepthRecords.filter(isSquadDepthRecord);
 const liveMatchHistory = intelligenceState.matchHistory.filter(isPublicMatchRecord);
 const baseTeamStats = engineState.teamStats.filter(isPublicTeamStat);
 const teamStats = buildTeamStatsWithIntelligence({
@@ -54,7 +55,8 @@ const mostLikelyRangeLegCandidates = buildLegCandidates({
   policy: mostLikelyPolicy,
   now,
   outcomeLearning,
-  heatSnapshots: liveHeatSnapshots
+  heatSnapshots: liveHeatSnapshots,
+  squadDepthRecords: liveSquadDepthRecords
 });
 
 for (const risk of riskBuckets) {
@@ -67,7 +69,8 @@ for (const risk of riskBuckets) {
     policy,
     now,
     outcomeLearning,
-    heatSnapshots: liveHeatSnapshots
+    heatSnapshots: liveHeatSnapshots,
+    squadDepthRecords: liveSquadDepthRecords
   });
 
   riskProfiles[risk] = policy.riskProfile;
@@ -86,7 +89,8 @@ for (const daysAhead of dayBuckets) {
     policy: mostLikelyPolicy,
     now,
     outcomeLearning,
-    heatSnapshots: liveHeatSnapshots
+    heatSnapshots: liveHeatSnapshots,
+    squadDepthRecords: liveSquadDepthRecords
   });
   const mostLikelyPicks = buildMostLikelyPicks(mostLikelyLegCandidates, mostLikelyPolicy, {
     fixtureCount: scanFixtures.length
@@ -112,7 +116,8 @@ for (const daysAhead of dayBuckets) {
       policy,
       now,
       outcomeLearning,
-      heatSnapshots: liveHeatSnapshots
+      heatSnapshots: liveHeatSnapshots,
+      squadDepthRecords: liveSquadDepthRecords
     });
     const recommendations = buildBetRecommendations(legCandidates, policy);
     const betslip = selectBetslip({ recommendations, stake: 10, risk });
@@ -169,6 +174,7 @@ const payload = {
   dashboard: summarizeDashboard(dashboard),
   markets: summarizeMarkets(liveOddsSnapshots, engineState.policy),
   heat: summarizeHeat(liveHeatSnapshots),
+  squadDepth: summarizeSquadDepth(liveSquadDepthRecords),
   pickOfTheDay,
   intelligence: {
     teamCount: intelligenceState.teamIntelligence.length,
@@ -227,6 +233,12 @@ function isPublicOddsRecord(record) {
 
 function isPublicHeatRecord(record) {
   return record?.provider === "public-web" || record?.sourceType === "public-web";
+}
+
+function isSquadDepthRecord(record) {
+  return record?.provider === "public-web"
+    || record?.provider === "curated-profile"
+    || ["public-web", "curated-profile", "curated-plus-public"].includes(record?.sourceType);
 }
 
 function isPublicNewsArticle(article) {
@@ -323,9 +335,16 @@ function summarizeLegCandidate(leg) {
       oddsFreshness: leg.components?.oddsFreshness,
       heatStress: leg.components?.heatStress,
       heatConfidence: leg.components?.heatConfidence,
+      heatClimateBand: leg.components?.heatClimateBand,
       heatExpectedGoalsAdjustment: leg.components?.heatExpectedGoalsAdjustment,
       heatEdge: leg.components?.heatEdge,
-      heatLocation: leg.components?.heatLocation
+      heatLocation: leg.components?.heatLocation,
+      homeSquadDepth: leg.components?.homeSquadDepth,
+      awaySquadDepth: leg.components?.awaySquadDepth,
+      squadDepthConfidence: leg.components?.squadDepthConfidence,
+      homeHistoricalHeatMemory: leg.components?.homeHistoricalHeatMemory,
+      awayHistoricalHeatMemory: leg.components?.awayHistoricalHeatMemory,
+      combinedHeatDifferential: leg.components?.combinedHeatDifferential
     },
     thesis: leg.thesis
   };
@@ -366,6 +385,29 @@ function summarizeHeat(heatSnapshots) {
   return {
     recordCount: heatSnapshots.length,
     locations
+  };
+}
+
+function summarizeSquadDepth(squadDepthRecords) {
+  const teams = {};
+
+  for (const record of squadDepthRecords) {
+    teams[record.team] = {
+      depthScore: record.depthScore,
+      confidence: record.confidence,
+      sourceType: record.sourceType,
+      source: record.source,
+      playerCount: record.playerCount || 0,
+      eliteClubMentions: record.eliteClubMentions || 0,
+      topLeagueMentions: record.topLeagueMentions || 0,
+      clubDiversity: record.clubDiversity || 0
+    };
+  }
+
+  return {
+    recordCount: squadDepthRecords.length,
+    publicEnhancedCount: squadDepthRecords.filter((record) => record.sourceType === "curated-plus-public" || record.sourceType === "public-web").length,
+    teams
   };
 }
 

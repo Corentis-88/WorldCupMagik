@@ -40,5 +40,14 @@
     "sourcesFile": "config/weather-sources.json",
     "requestTimeoutMs": 14000,
     "userAgent": "WorldCupMagik/1.0 public-web heat gatherer; no weather APIs"
+  },
+  "squadDepth": {
+    "mode": "self-gather",
+    "sourcesFile": "config/squad-sources.json",
+    "baselineFile": "config/squad-depth-profiles.json",
+    "maxTeamPages": 48,
+    "teamPageConcurrency": 4,
+    "requestTimeoutMs": 9000,
+    "userAgent": "WorldCupMagik/1.0 public-web squad gatherer; no squad APIs"
   }
 }

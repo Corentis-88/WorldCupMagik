@@ -1,72 +1,67 @@
-import { clamp, normalizeName, round } from "./utils.mjs";
+import climateProfiles from "../config/team-climate-profiles.json" with { type: "json" };
+import climateHistory from "../config/world-cup-climate-history.json" with { type: "json" };
+import { clamp, mean, normalizeName, round } from "./utils.mjs";
 
-const DEFAULT_ADAPTATION = 0.48;
+const DEFAULT_PROFILE = climateProfiles.default || {
+  confederation: "UNKNOWN",
+  hotDry: 0.48,
+  hotHumid: 0.48,
+  temperate: 0.52,
+  altitude: 0.46,
+  confidence: 0.34
+};
 
-const TEAM_HEAT_ADAPTATION = new Map(Object.entries({
-  Algeria: 0.68,
-  Argentina: 0.54,
-  Australia: 0.62,
-  Austria: 0.36,
-  Belgium: 0.36,
-  "Bosnia and Herzegovina": 0.38,
-  Brazil: 0.7,
-  Canada: 0.34,
-  "Cape Verde": 0.72,
-  Colombia: 0.66,
-  Croatia: 0.44,
-  "Curacao": 0.76,
-  Czechia: 0.36,
-  "Czech Republic": 0.36,
-  "DR Congo": 0.72,
-  Ecuador: 0.66,
-  Egypt: 0.7,
-  England: 0.34,
-  France: 0.44,
-  Germany: 0.38,
-  Ghana: 0.74,
-  Haiti: 0.76,
-  Iran: 0.62,
-  Iraq: 0.74,
-  "Ivory Coast": 0.76,
-  Japan: 0.56,
-  Jordan: 0.72,
-  Mexico: 0.62,
-  Morocco: 0.66,
-  Netherlands: 0.34,
-  "New Zealand": 0.42,
-  Norway: 0.26,
-  Panama: 0.76,
-  Paraguay: 0.68,
-  Portugal: 0.54,
-  Qatar: 0.78,
-  "Saudi Arabia": 0.8,
-  Scotland: 0.3,
-  Senegal: 0.76,
-  "South Africa": 0.56,
-  "South Korea": 0.52,
-  Spain: 0.58,
-  Sweden: 0.28,
-  Switzerland: 0.34,
-  Tunisia: 0.7,
-  Turkey: 0.56,
-  Turkiye: 0.56,
-  USA: 0.52,
-  "United States": 0.52,
-  Uruguay: 0.58,
-  Uzbekistan: 0.56
-}).map(([team, value]) => [normalizeName(team), value]));
+const CLIMATE_PROFILE_BY_TEAM = normalizedObject(climateProfiles.teams || {});
+const TEAM_MEMORY_BY_TEAM = normalizedObject(climateHistory.teamMemory || {});
+const CONFEDERATION_MEMORY = climateHistory.confederationMemory || {};
 
-export function teamHeatAdaptation(team) {
-  return TEAM_HEAT_ADAPTATION.get(normalizeName(team)) ?? DEFAULT_ADAPTATION;
+export function teamClimateProfile(team) {
+  return CLIMATE_PROFILE_BY_TEAM.get(normalizeName(team)) || DEFAULT_PROFILE;
 }
 
-export function buildHeatImpact({ fixture, heatRecord = null } = {}) {
+export function teamHeatAdaptation(team, climateBand = "hotMixed") {
+  return climateAdaptationSignal(team, climateBand).value;
+}
+
+export function climateBandForWeather(heatRecord = {}) {
+  const heatIndex = Number(heatRecord.heatIndexC ?? heatRecord.temperatureC);
+  const humidity = Number(heatRecord.humidityPct);
+  const place = normalizeName([heatRecord.location, heatRecord.venue].filter(Boolean).join(" "));
+
+  if (/mexico city|guadalajara|estadio azteca|akron stadium/.test(place) && Number.isFinite(heatIndex) && heatIndex >= 24) {
+    return "altitude";
+  }
+
+  if (!Number.isFinite(heatIndex) || heatIndex < 26) {
+    return "temperate";
+  }
+
+  if (Number.isFinite(humidity) && humidity >= 66) {
+    return "hotHumid";
+  }
+
+  if (Number.isFinite(humidity) && humidity <= 48) {
+    return "hotDry";
+  }
+
+  return "hotMixed";
+}
+
+export function historicalClimateMemory(team, climateBand = "hotMixed") {
+  return climateMemorySignal(team, climateBand).value;
+}
+
+export function buildHeatImpact({ fixture, heatRecord = null, homeSquadDepth = null, awaySquadDepth = null } = {}) {
   if (!fixture || !heatRecord) {
     return neutralHeatImpact();
   }
 
   const confidence = clamp(Number(heatRecord.confidence || 0), 0, 1);
   const heatStress = clamp(Number(heatRecord.heatStress ?? heatStressFromWeather(heatRecord)), 0, 1);
+  const climateBand = climateBandForWeather({
+    ...heatRecord,
+    venue: heatRecord.venue || fixture.venue
+  });
 
   if (confidence <= 0 || heatStress <= 0) {
     return {
@@ -78,18 +73,36 @@ export function buildHeatImpact({ fixture, heatRecord = null } = {}) {
       heatIndexC: nullableNumber(heatRecord.heatIndexC),
       humidityPct: nullableNumber(heatRecord.humidityPct),
       confidence,
+      climateBand,
       notes: heatRecord.notes || "Weather found, but heat stress was neutral."
     };
   }
 
-  const homeAdaptation = teamHeatAdaptation(fixture.homeTeam);
-  const awayAdaptation = teamHeatAdaptation(fixture.awayTeam);
-  const adaptationDifferential = clamp(homeAdaptation - awayAdaptation, -0.65, 0.65);
+  const homeClimate = climateAdaptationSignal(fixture.homeTeam, climateBand);
+  const awayClimate = climateAdaptationSignal(fixture.awayTeam, climateBand);
+  const homeMemory = climateMemorySignal(fixture.homeTeam, climateBand);
+  const awayMemory = climateMemorySignal(fixture.awayTeam, climateBand);
+  const homeDepth = squadDepthSignal(homeSquadDepth);
+  const awayDepth = squadDepthSignal(awaySquadDepth);
+  const climateConfidence = mean([homeClimate.confidence, awayClimate.confidence, confidence]);
+  const historyConfidence = mean([homeMemory.confidence, awayMemory.confidence]);
+  const squadDepthConfidence = mean([homeDepth.confidence, awayDepth.confidence]);
+  const adaptationDifferential = clamp((homeClimate.value - awayClimate.value) * clamp(climateConfidence, 0.35, 0.82), -0.65, 0.65);
+  const historyDifferential = clamp((homeMemory.value - awayMemory.value) * clamp(historyConfidence, 0.2, 0.72), -0.12, 0.12);
+  const squadDepthDifferential = clamp((homeDepth.depthScore - awayDepth.depthScore) * clamp(squadDepthConfidence, 0.2, 0.84), -0.45, 0.45);
+  const combinedHeatDifferential = clamp(
+    adaptationDifferential
+      + historyDifferential * 0.75
+      + squadDepthDifferential * 0.22,
+    -0.75,
+    0.75
+  );
   const weightedStress = heatStress * confidence;
-  const resultEdgeAdjustment = clamp(adaptationDifferential * weightedStress * 46, -28, 28);
-  const expectedGoalsAdjustment = clamp(-0.15 * weightedStress, -0.15, 0);
-  const goalShareAdjustment = clamp(adaptationDifferential * weightedStress * 0.08, -0.055, 0.055);
-  const bttsAdjustment = clamp(-0.025 * weightedStress, -0.025, 0);
+  const resultEdgeAdjustment = clamp(combinedHeatDifferential * weightedStress * 46, -28, 28);
+  const depthCushion = clamp((mean([homeDepth.depthScore, awayDepth.depthScore]) - 0.5) * 0.06 * clamp(squadDepthConfidence, 0.2, 0.84), -0.015, 0.018);
+  const expectedGoalsAdjustment = clamp((-0.15 + depthCushion) * weightedStress, -0.15, 0);
+  const goalShareAdjustment = clamp(combinedHeatDifferential * weightedStress * 0.08, -0.055, 0.055);
+  const bttsAdjustment = clamp((-0.025 + depthCushion * 0.12) * weightedStress, -0.025, 0);
   const drawLift = clamp(0.012 * weightedStress, 0, 0.012);
 
   return {
@@ -101,15 +114,36 @@ export function buildHeatImpact({ fixture, heatRecord = null } = {}) {
     humidityPct: nullableNumber(heatRecord.humidityPct),
     heatStress: round(heatStress, 4),
     confidence: round(confidence, 4),
-    homeHeatAdaptation: round(homeAdaptation, 4),
-    awayHeatAdaptation: round(awayAdaptation, 4),
+    climateBand,
+    homeHeatAdaptation: round(homeClimate.value, 4),
+    awayHeatAdaptation: round(awayClimate.value, 4),
+    homeClimateAdaptation: round(homeClimate.value, 4),
+    awayClimateAdaptation: round(awayClimate.value, 4),
+    climateProfileConfidence: round(climateConfidence, 4),
+    homeHistoricalHeatMemory: round(homeMemory.value, 4),
+    awayHistoricalHeatMemory: round(awayMemory.value, 4),
+    historicalHeatConfidence: round(historyConfidence, 4),
+    homeSquadDepth: round(homeDepth.depthScore, 4),
+    awaySquadDepth: round(awayDepth.depthScore, 4),
+    squadDepthConfidence: round(squadDepthConfidence, 4),
     adaptationDifferential: round(adaptationDifferential, 4),
+    historyDifferential: round(historyDifferential, 4),
+    squadDepthDifferential: round(squadDepthDifferential, 4),
+    combinedHeatDifferential: round(combinedHeatDifferential, 4),
     resultEdgeAdjustment: round(resultEdgeAdjustment, 2),
     expectedGoalsAdjustment: round(expectedGoalsAdjustment, 3),
     goalShareAdjustment: round(goalShareAdjustment, 3),
     bttsAdjustment: round(bttsAdjustment, 4),
     drawLift: round(drawLift, 4),
-    notes: heatRecord.notes || heatImpactNote({ heatStress, confidence, adaptationDifferential })
+    notes: heatRecord.notes || heatImpactNote({
+      heatStress,
+      confidence,
+      climateBand,
+      combinedHeatDifferential,
+      adaptationDifferential,
+      historyDifferential,
+      squadDepthDifferential
+    })
   };
 }
 
@@ -123,9 +157,22 @@ export function neutralHeatImpact() {
     humidityPct: null,
     heatStress: 0,
     confidence: 0,
+    climateBand: "",
     homeHeatAdaptation: null,
     awayHeatAdaptation: null,
+    homeClimateAdaptation: null,
+    awayClimateAdaptation: null,
+    climateProfileConfidence: 0,
+    homeHistoricalHeatMemory: 0,
+    awayHistoricalHeatMemory: 0,
+    historicalHeatConfidence: 0,
+    homeSquadDepth: null,
+    awaySquadDepth: null,
+    squadDepthConfidence: 0,
     adaptationDifferential: 0,
+    historyDifferential: 0,
+    squadDepthDifferential: 0,
+    combinedHeatDifferential: 0,
     resultEdgeAdjustment: 0,
     expectedGoalsAdjustment: 0,
     goalShareAdjustment: 0,
@@ -179,20 +226,81 @@ export function calculatedHeatIndexC(temperatureC, humidityPct) {
   return round((heatIndexF - 32) * 5 / 9, 2);
 }
 
-function heatImpactNote({ heatStress, confidence, adaptationDifferential }) {
+function climateAdaptationSignal(team, climateBand) {
+  const profile = teamClimateProfile(team);
+  const value = climateValue(profile, climateBand);
+
+  return {
+    value: clamp(Number(value ?? DEFAULT_PROFILE.hotDry), 0.2, 0.9),
+    confidence: clamp(Number(profile.confidence ?? DEFAULT_PROFILE.confidence), 0.2, 0.8),
+    confederation: profile.confederation || DEFAULT_PROFILE.confederation
+  };
+}
+
+function climateMemorySignal(team, climateBand) {
+  const profile = teamClimateProfile(team);
+  const teamMemory = TEAM_MEMORY_BY_TEAM.get(normalizeName(team));
+  const confederationMemory = CONFEDERATION_MEMORY[profile.confederation] || {};
+  const teamValue = climateValue(teamMemory, climateBand);
+  const confederationValue = climateValue(confederationMemory, climateBand);
+
+  if (Number.isFinite(Number(teamValue))) {
+    return {
+      value: clamp(Number(teamValue), -0.08, 0.08),
+      confidence: clamp(Number(teamMemory.confidence || 0.45), 0.2, 0.75)
+    };
+  }
+
+  return {
+    value: clamp(Number(confederationValue || 0), -0.05, 0.05),
+    confidence: clamp(Number(confederationMemory.confidence || 0.28), 0.18, 0.6)
+  };
+}
+
+function climateValue(record, climateBand) {
+  if (!record) {
+    return null;
+  }
+
+  if (climateBand === "hotMixed") {
+    return mean([record.hotDry, record.hotHumid]);
+  }
+
+  return record[climateBand];
+}
+
+function squadDepthSignal(record) {
+  if (!record) {
+    return {
+      depthScore: 0.5,
+      confidence: 0.24
+    };
+  }
+
+  return {
+    depthScore: clamp(Number(record.depthScore ?? record.score ?? 0.5), 0.25, 0.94),
+    confidence: clamp(Number(record.confidence || 0.3), 0.2, 0.84)
+  };
+}
+
+function heatImpactNote({ heatStress, confidence, climateBand, combinedHeatDifferential, adaptationDifferential, historyDifferential, squadDepthDifferential }) {
   if (heatStress < 0.25) {
     return "Venue weather is not hot enough to move the model materially.";
   }
 
-  const direction = adaptationDifferential > 0.06
+  const direction = combinedHeatDifferential > 0.06
     ? "home side"
-    : adaptationDifferential < -0.06
+    : combinedHeatDifferential < -0.06
       ? "away side"
       : "neither side";
 
-  return `Heat stress ${round(heatStress * 100, 1)}% with ${round(confidence * 100, 1)}% weather confidence; adaptation edge favours ${direction}.`;
+  return `Heat stress ${round(heatStress * 100, 1)}% (${climateBand}) with ${round(confidence * 100, 1)}% weather confidence; climate/history/depth edge favours ${direction}. Components: climate ${round(adaptationDifferential, 3)}, history ${round(historyDifferential, 3)}, depth ${round(squadDepthDifferential, 3)}.`;
 }
 
 function nullableNumber(value) {
   return Number.isFinite(Number(value)) ? Number(value) : null;
+}
+
+function normalizedObject(value) {
+  return new Map(Object.entries(value || {}).map(([key, item]) => [normalizeName(key), item]));
 }

@@ -2,13 +2,14 @@ import { clamp, daysBetween, decimalToImpliedProbability, hoursBetween, latestBy
 import { buildOddsMovementSummaries, outcomeLearningAdjustment } from "./intelligence-memory.mjs";
 import { buildHeatImpact } from "./heat-model.mjs";
 
-export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, teamStats, policy, now = new Date(), outcomeLearning = null, heatSnapshots = [] }) {
+export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, teamStats, policy, now = new Date(), outcomeLearning = null, heatSnapshots = [], squadDepthRecords = [] }) {
   const statsByTeam = new Map(teamStats.map((team) => [team.team, team]));
   const latestOdds = bestLatestOddsByOutcome(oddsSnapshots);
   const latestOddsRecords = [...latestOdds.values()];
   const oddsMovement = buildOddsMovementSummaries(oddsSnapshots);
   const newsByTeam = buildNewsByTeam(newsArticles, policy, now);
   const heatByFixture = latestHeatByFixture(heatSnapshots);
+  const squadDepthByTeam = latestSquadDepthByTeam(squadDepthRecords);
   const candidates = [];
 
   for (const fixture of fixtures) {
@@ -19,7 +20,15 @@ export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, team
       continue;
     }
 
-    const model = fixtureModel({ fixture, homeStats, awayStats, newsByTeam, heatRecord: heatByFixture.get(fixture.id) });
+    const model = fixtureModel({
+      fixture,
+      homeStats,
+      awayStats,
+      newsByTeam,
+      heatRecord: heatByFixture.get(fixture.id),
+      homeSquadDepth: squadDepthByTeam.get(normalizeName(fixture.homeTeam)),
+      awaySquadDepth: squadDepthByTeam.get(normalizeName(fixture.awayTeam))
+    });
 
     for (const market of policy.markets || []) {
       const probabilities = model.marketProbabilities[market];
@@ -135,10 +144,18 @@ function latestHeatByFixture(heatSnapshots) {
   );
 }
 
-export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, heatRecord = null }) {
+function latestSquadDepthByTeam(squadDepthRecords) {
+  return latestBy(
+    squadDepthRecords.filter((record) => record?.team),
+    (record) => normalizeName(record.team),
+    "capturedAt"
+  );
+}
+
+export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, heatRecord = null, homeSquadDepth = null, awaySquadDepth = null }) {
   const homeNews = newsByTeam.get(fixture.homeTeam) || neutralNews();
   const awayNews = newsByTeam.get(fixture.awayTeam) || neutralNews();
-  const heat = buildHeatImpact({ fixture, heatRecord });
+  const heat = buildHeatImpact({ fixture, heatRecord, homeSquadDepth, awaySquadDepth });
   const ratingEdge = Number(homeStats.rating || 1700) - Number(awayStats.rating || 1700);
   const formEdge = (Number(homeStats.recentPointsPerGame || 1.4) - Number(awayStats.recentPointsPerGame || 1.4)) * 42;
   const xgEdge = ((Number(homeStats.xgFor || 1.3) - Number(awayStats.xgAgainst || 1.2)) - (Number(awayStats.xgFor || 1.3) - Number(homeStats.xgAgainst || 1.2))) * 48;
@@ -180,10 +197,21 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, heatRe
       awayNewsImpact: round(awayNews.netImpact, 3),
       heatStress: round(Number(heat.heatStress || 0), 4),
       heatConfidence: round(Number(heat.confidence || 0), 4),
+      heatClimateBand: heat.climateBand || "",
       heatExpectedGoalsAdjustment: round(Number(heat.expectedGoalsAdjustment || 0), 3),
       heatBttsAdjustment: round(Number(heat.bttsAdjustment || 0), 4),
       heatLocation: heat.location || "",
       heatNotes: heat.notes || "",
+      homeClimateAdaptation: nullableComponent(heat.homeClimateAdaptation),
+      awayClimateAdaptation: nullableComponent(heat.awayClimateAdaptation),
+      homeHistoricalHeatMemory: round(Number(heat.homeHistoricalHeatMemory || 0), 4),
+      awayHistoricalHeatMemory: round(Number(heat.awayHistoricalHeatMemory || 0), 4),
+      homeSquadDepth: nullableComponent(heat.homeSquadDepth),
+      awaySquadDepth: nullableComponent(heat.awaySquadDepth),
+      squadDepthConfidence: round(Number(heat.squadDepthConfidence || 0), 4),
+      heatHistoryDifferential: round(Number(heat.historyDifferential || 0), 4),
+      heatSquadDepthDifferential: round(Number(heat.squadDepthDifferential || 0), 4),
+      combinedHeatDifferential: round(Number(heat.combinedHeatDifferential || 0), 4),
       homeLearnedEdge: round(Number(homeStats.learnedEdge || 0), 4),
       awayLearnedEdge: round(Number(awayStats.learnedEdge || 0), 4),
       intelligenceConfidence: round(mean([
@@ -474,7 +502,7 @@ function buildLegThesis({ fixture, market, outcome, edge, odds, movement, model,
     ? `Market average moved from ${movement.previousAverageDecimalOdds} to ${movement.averageDecimalOdds}; best price is ${round(Number(movement.bestOverAverage || 0) * 100, 2)}% over average.`
     : `No prior market movement yet; this scan becomes part of the local memory.`;
   const heatText = Number(model.components.heatConfidence || 0) > 0.18
-    ? `Heat layer: ${model.components.heatLocation || "venue"} stress ${round(Number(model.components.heatStress || 0) * 100, 1)}%, xG adjustment ${model.components.heatExpectedGoalsAdjustment}, result edge ${model.components.heatEdge}.`
+    ? `Heat layer: ${model.components.heatLocation || "venue"} ${model.components.heatClimateBand || "weather"} stress ${round(Number(model.components.heatStress || 0) * 100, 1)}%, xG adjustment ${model.components.heatExpectedGoalsAdjustment}, result edge ${model.components.heatEdge}; climate/history/depth differential ${model.components.combinedHeatDifferential}.`
     : "";
   const notes = [
     `${selectionLabel({ fixture, market, outcome })} is priced at ${odds.decimalOdds} with model edge ${round(edge * 100, 2)}%.`,
@@ -620,6 +648,14 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
 function riskAppetite(policy) {
   const maxCombinedOdds = Number(policy.riskProfile?.maxCombinedOdds || 45);
   return clamp((maxCombinedOdds - 22) / 58, 0, 1);
+}
+
+function nullableComponent(value) {
+  if (value == null || value === "") {
+    return null;
+  }
+
+  return Number.isFinite(Number(value)) ? round(Number(value), 4) : null;
 }
 
 function teamTextMatches(left, right) {

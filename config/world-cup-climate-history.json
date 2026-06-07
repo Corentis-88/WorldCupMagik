@@ -1,0 +1,86 @@
+{
+  "modelVersion": "2026-world-cup-climate-memory-v1",
+  "tournaments": [
+    {
+      "year": 1994,
+      "host": "United States",
+      "climateBands": ["hotDry", "hotHumid"],
+      "memoryNote": "Summer matches across the United States created a mixed dry-heat and humid-heat World Cup reference."
+    },
+    {
+      "year": 2002,
+      "host": "Japan and South Korea",
+      "climateBands": ["hotHumid", "temperate"],
+      "memoryNote": "East Asian summer humidity and travel rhythm are treated as a mild humid-heat reference."
+    },
+    {
+      "year": 2006,
+      "host": "Germany",
+      "climateBands": ["temperate"],
+      "memoryNote": "Mostly temperate European summer conditions."
+    },
+    {
+      "year": 2010,
+      "host": "South Africa",
+      "climateBands": ["temperate", "altitude"],
+      "memoryNote": "Moderate winter conditions with altitude and travel effects in several venues."
+    },
+    {
+      "year": 2014,
+      "host": "Brazil",
+      "climateBands": ["hotHumid", "hotDry"],
+      "memoryNote": "Brazil 2014 is the strongest recent humid-heat World Cup reference."
+    },
+    {
+      "year": 2018,
+      "host": "Russia",
+      "climateBands": ["temperate"],
+      "memoryNote": "Mostly temperate summer conditions across a large travel footprint."
+    },
+    {
+      "year": 2022,
+      "host": "Qatar",
+      "climateBands": ["hotDry"],
+      "memoryNote": "Hot-region World Cup context is used cautiously because the tournament was moved to cooler months and stadium cooling reduced heat exposure."
+    }
+  ],
+  "confederationMemory": {
+    "AFC": { "hotDry": 0.025, "hotHumid": 0.012, "temperate": -0.004, "altitude": 0.004, "confidence": 0.42 },
+    "CAF": { "hotDry": 0.024, "hotHumid": 0.028, "temperate": -0.006, "altitude": 0.006, "confidence": 0.44 },
+    "CONCACAF": { "hotDry": 0.018, "hotHumid": 0.024, "temperate": 0.002, "altitude": 0.014, "confidence": 0.42 },
+    "CONMEBOL": { "hotDry": 0.02, "hotHumid": 0.028, "temperate": 0.012, "altitude": 0.018, "confidence": 0.5 },
+    "OFC": { "hotDry": -0.004, "hotHumid": 0.004, "temperate": 0.004, "altitude": -0.004, "confidence": 0.28 },
+    "UEFA": { "hotDry": -0.014, "hotHumid": -0.018, "temperate": 0.02, "altitude": -0.004, "confidence": 0.5 }
+  },
+  "teamMemory": {
+    "Argentina": { "hotDry": 0.026, "hotHumid": 0.024, "temperate": 0.024, "altitude": 0.014, "confidence": 0.64 },
+    "Australia": { "hotDry": 0.018, "hotHumid": 0.012, "temperate": 0.008, "altitude": 0, "confidence": 0.44 },
+    "Brazil": { "hotDry": 0.024, "hotHumid": 0.052, "temperate": 0.022, "altitude": 0.01, "confidence": 0.72 },
+    "Canada": { "hotDry": -0.01, "hotHumid": -0.006, "temperate": 0.006, "altitude": 0.006, "confidence": 0.36 },
+    "Colombia": { "hotDry": 0.02, "hotHumid": 0.034, "temperate": 0.012, "altitude": 0.034, "confidence": 0.58 },
+    "Croatia": { "hotDry": 0, "hotHumid": -0.004, "temperate": 0.028, "altitude": 0.004, "confidence": 0.58 },
+    "Ecuador": { "hotDry": 0.014, "hotHumid": 0.022, "temperate": 0.004, "altitude": 0.04, "confidence": 0.54 },
+    "England": { "hotDry": -0.018, "hotHumid": -0.02, "temperate": 0.018, "altitude": -0.006, "confidence": 0.62 },
+    "France": { "hotDry": 0.002, "hotHumid": 0.006, "temperate": 0.03, "altitude": 0.002, "confidence": 0.68 },
+    "Germany": { "hotDry": -0.004, "hotHumid": -0.008, "temperate": 0.028, "altitude": 0, "confidence": 0.66 },
+    "Ghana": { "hotDry": 0.018, "hotHumid": 0.034, "temperate": -0.004, "altitude": 0.006, "confidence": 0.52 },
+    "Iran": { "hotDry": 0.028, "hotHumid": 0.002, "temperate": 0.004, "altitude": 0.018, "confidence": 0.5 },
+    "Japan": { "hotDry": -0.004, "hotHumid": 0.022, "temperate": 0.02, "altitude": -0.004, "confidence": 0.56 },
+    "Mexico": { "hotDry": 0.032, "hotHumid": 0.026, "temperate": 0.012, "altitude": 0.046, "confidence": 0.68 },
+    "Morocco": { "hotDry": 0.03, "hotHumid": 0.012, "temperate": 0.014, "altitude": 0.01, "confidence": 0.6 },
+    "Netherlands": { "hotDry": -0.012, "hotHumid": -0.014, "temperate": 0.028, "altitude": -0.006, "confidence": 0.64 },
+    "Norway": { "hotDry": -0.026, "hotHumid": -0.03, "temperate": 0.012, "altitude": -0.012, "confidence": 0.42 },
+    "Portugal": { "hotDry": 0.014, "hotHumid": 0, "temperate": 0.02, "altitude": 0, "confidence": 0.58 },
+    "Qatar": { "hotDry": 0.036, "hotHumid": 0.006, "temperate": -0.006, "altitude": -0.004, "confidence": 0.42 },
+    "Saudi Arabia": { "hotDry": 0.038, "hotHumid": 0.004, "temperate": -0.006, "altitude": 0, "confidence": 0.48 },
+    "Senegal": { "hotDry": 0.018, "hotHumid": 0.036, "temperate": 0.002, "altitude": 0.004, "confidence": 0.56 },
+    "South Africa": { "hotDry": 0.012, "hotHumid": 0.004, "temperate": 0.01, "altitude": 0.028, "confidence": 0.48 },
+    "South Korea": { "hotDry": -0.002, "hotHumid": 0.02, "temperate": 0.014, "altitude": -0.004, "confidence": 0.54 },
+    "Spain": { "hotDry": 0.026, "hotHumid": 0.002, "temperate": 0.024, "altitude": 0.004, "confidence": 0.66 },
+    "Sweden": { "hotDry": -0.024, "hotHumid": -0.026, "temperate": 0.016, "altitude": -0.01, "confidence": 0.48 },
+    "Switzerland": { "hotDry": -0.012, "hotHumid": -0.014, "temperate": 0.022, "altitude": 0.016, "confidence": 0.54 },
+    "Tunisia": { "hotDry": 0.034, "hotHumid": 0.006, "temperate": 0, "altitude": 0.002, "confidence": 0.48 },
+    "USA": { "hotDry": 0.018, "hotHumid": 0.018, "temperate": 0.014, "altitude": 0.018, "confidence": 0.58 },
+    "Uruguay": { "hotDry": 0.018, "hotHumid": 0.018, "temperate": 0.014, "altitude": 0.004, "confidence": 0.52 }
+  }
+}

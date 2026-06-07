@@ -693,7 +693,7 @@ function scoreMostLikelyCombo(legs, target, rank) {
   const reusedSignalCount = legs.filter((leg) => leg.reusedSignal).length;
   const shortWindowFallback = uniqueFixtureCount < legs.length || reusedSignalCount > 0;
   const heatLegs = legs.filter((leg) => Number(leg.components?.heatConfidence || 0) > 0.18 && Number(leg.components?.heatStress || 0) > 0.2);
-  const heatText = heatLegs.length ? ` Heat layer active on ${heatLegs.length} leg(s) as a capped weather nudge.` : "";
+  const heatText = heatLegs.length ? ` Heat layer active on ${heatLegs.length} leg(s) as a capped weather, climate-history, and squad-depth nudge.` : "";
 
   return {
     id: `most_likely_${target.category}_${legs.map((leg) => leg.id).join("_").slice(0, 48)}`,
@@ -748,7 +748,7 @@ function buildComboThesis({ type, legs, combinedDecimalOdds, expectedValue, risk
   const favouriteText = favouriteLegs.length ? `${favouriteLegs.length} high-implied-probability favourite leg(s).` : "No high-implied-probability favourite crowding.";
   const heatLegs = legs.filter((leg) => Number(leg.components?.heatConfidence || 0) > 0.18 && Number(leg.components?.heatStress || 0) > 0.2);
   const heatText = heatLegs.length
-    ? `Heat layer active on ${heatLegs.length} leg(s), capped as a small xG/result adjustment.`
+    ? `Heat layer active on ${heatLegs.length} leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth.`
     : "Heat layer neutral or low impact on this slip.";
 
   return `${type} at combined odds ${round(combinedDecimalOdds, 2)} with expected value ${round(expectedValue * 100, 2)}%. ${riskText} ${favouriteText} ${heatText} Legs: ${selections}.`;

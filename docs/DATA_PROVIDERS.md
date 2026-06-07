@@ -51,6 +51,22 @@ It gathers public host-city forecast pages and extracts forecast summary windows
 
 Heat is deliberately capped as a small model edge: it can nudge result probability and expected goals, but it cannot dominate odds, team quality, form, news, or market movement.
 
+The heat layer also reads:
+
+- `config/team-climate-profiles.json` for dry-heat, humid-heat, temperate, and altitude familiarity by team;
+- `config/world-cup-climate-history.json` for stable historical World Cup climate memory by team and confederation;
+- `data/squad-depth.json` for the latest squad-depth records.
+
+Those signals are combined only when a venue weather record exists. Squad depth can slightly cushion the expected-goals drag in heat, but it cannot turn heat into a goal boost.
+
+## Squad Depth
+
+`src/providers/squad-provider.mjs` reads `config/squad-sources.json` and `config/squad-depth-profiles.json`.
+
+It fetches public squad/team pages, especially national-team pages, and looks for public player, club, top-league, and elite-club signals. It blends those public signals with conservative depth priors and writes one record per team to `data/squad-depth.json`.
+
+If a public squad page is missing, empty, or too thin, the scanner records that in source health and uses the conservative prior. It does not invent players, clubs, or squad lists.
+
 ## Source Health
 
 Every scan writes:

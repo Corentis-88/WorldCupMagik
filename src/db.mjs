@@ -80,7 +80,7 @@ export async function upsertJsonRecords(pathParts, records, keyFn, maxRecords = 
 }
 
 export async function loadEngineState() {
-  const [policy, providers, fixtures, oddsSnapshots, newsArticles, teamStats, bookmakerOffers, heatSnapshots] = await Promise.all([
+  const [policy, providers, fixtures, oddsSnapshots, newsArticles, teamStats, bookmakerOffers, heatSnapshots, squadDepthRecords] = await Promise.all([
     readJson(["config", "engine-policy.json"]),
     readJson(["config", "providers.json"]),
     readJson(["data", "fixtures.json"], []),
@@ -88,7 +88,8 @@ export async function loadEngineState() {
     readJson(["data", "news-articles.json"], []),
     readJson(["data", "team-stats.json"], []),
     readJson(["data", "bookmaker-offers.json"], []),
-    readJson(["data", "heat-snapshots.json"], [])
+    readJson(["data", "heat-snapshots.json"], []),
+    readJson(["data", "squad-depth.json"], [])
   ]);
 
   return {
@@ -99,7 +100,8 @@ export async function loadEngineState() {
     newsArticles,
     teamStats,
     bookmakerOffers,
-    heatSnapshots
+    heatSnapshots,
+    squadDepthRecords
   };
 }
 

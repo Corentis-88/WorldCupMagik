@@ -217,9 +217,16 @@ function scoreMostLikelyCombo(legs, target, rank) {
         oddsFreshness: leg.components?.oddsFreshness,
         heatStress: leg.components?.heatStress,
         heatConfidence: leg.components?.heatConfidence,
+        heatClimateBand: leg.components?.heatClimateBand,
         heatExpectedGoalsAdjustment: leg.components?.heatExpectedGoalsAdjustment,
         heatEdge: leg.components?.heatEdge,
-        heatLocation: leg.components?.heatLocation
+        heatLocation: leg.components?.heatLocation,
+        homeSquadDepth: leg.components?.homeSquadDepth,
+        awaySquadDepth: leg.components?.awaySquadDepth,
+        squadDepthConfidence: leg.components?.squadDepthConfidence,
+        homeHistoricalHeatMemory: leg.components?.homeHistoricalHeatMemory,
+        awayHistoricalHeatMemory: leg.components?.awayHistoricalHeatMemory,
+        combinedHeatDifferential: leg.components?.combinedHeatDifferential
       },
       shortWindowFallback: Boolean(leg.shortWindowFallback),
       reusedSignal: Boolean(leg.reusedSignal),
@@ -248,7 +255,7 @@ function buildMostLikelyThesis({ target, legs, combinedDecimalOdds, averageConfi
     ? ` Short-window fallback used ${uniqueFixtureCount} fixture(s) and ${legs.length} signal(s) so Picks of the Day stay populated. ${reusedSignalCount ? `${reusedSignalCount} strongest signal(s) were repeated.` : "Some same-game signals were included."}`
     : "";
   const heatLegs = legs.filter((leg) => Number(leg.components?.heatConfidence || 0) > 0.18 && Number(leg.components?.heatStress || 0) > 0.2);
-  const heatText = heatLegs.length ? ` Heat layer active on ${heatLegs.length} leg(s) as a capped weather nudge.` : "";
+  const heatText = heatLegs.length ? ` Heat layer active on ${heatLegs.length} leg(s) as a capped weather, climate-history, and squad-depth nudge.` : "";
 
   return `${target.label} chosen by the most-likely engine, ignoring the risk slider and ranking by AI rating, confidence, fresh odds, and positive edge. Combined odds ${round(combinedDecimalOdds, 2)}, average data confidence ${round(averageConfidence * 100, 1)}%.${heatText}${fallbackText} Legs: ${selections}.`;
 }
@@ -360,9 +367,16 @@ export function scoreCombo(legs, type, policy) {
         marketAverageOdds: leg.components?.marketAverageOdds,
         heatStress: leg.components?.heatStress,
         heatConfidence: leg.components?.heatConfidence,
+        heatClimateBand: leg.components?.heatClimateBand,
         heatExpectedGoalsAdjustment: leg.components?.heatExpectedGoalsAdjustment,
         heatEdge: leg.components?.heatEdge,
-        heatLocation: leg.components?.heatLocation
+        heatLocation: leg.components?.heatLocation,
+        homeSquadDepth: leg.components?.homeSquadDepth,
+        awaySquadDepth: leg.components?.awaySquadDepth,
+        squadDepthConfidence: leg.components?.squadDepthConfidence,
+        homeHistoricalHeatMemory: leg.components?.homeHistoricalHeatMemory,
+        awayHistoricalHeatMemory: leg.components?.awayHistoricalHeatMemory,
+        combinedHeatDifferential: leg.components?.combinedHeatDifferential
       },
       thesis: leg.thesis
     })),
@@ -435,7 +449,7 @@ function buildComboThesis({ type, legs, combinedDecimalOdds, expectedValue, risk
   const favouriteText = favouriteLegs.length ? `${favouriteLegs.length} high-implied-probability favourite leg(s).` : "No high-implied-probability favourite crowding.";
   const heatLegs = legs.filter((leg) => Number(leg.components?.heatConfidence || 0) > 0.18 && Number(leg.components?.heatStress || 0) > 0.2);
   const heatText = heatLegs.length
-    ? `Heat layer active on ${heatLegs.length} leg(s), capped as a small xG/result adjustment.`
+    ? `Heat layer active on ${heatLegs.length} leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth.`
     : "Heat layer neutral or low impact on this slip.";
 
   return `${type} at combined odds ${round(combinedDecimalOdds, 2)} with expected value ${round(expectedValue * 100, 2)}%. ${riskText} ${favouriteText} ${heatText} Legs: ${selections}.`;

@@ -1,13 +1,14 @@
 import { appendJsonRecords, loadEngineState, readJson, upsertJsonRecords, writeJson, writeText } from "./db.mjs";
 import { fetchNewsArticles } from "./providers/news-provider.mjs";
 import { fetchOddsSnapshot } from "./providers/odds-provider.mjs";
+import { fetchSquadDepth } from "./providers/squad-provider.mjs";
 import { fetchTeamStats } from "./providers/stats-provider.mjs";
 import { fetchHeatSnapshots } from "./providers/weather-provider.mjs";
 import { buildBetRecommendations } from "./portfolio-builder.mjs";
 import { rankBookmakerOffers } from "./offer-engine.mjs";
 import { buildDailyReport } from "./reporting.mjs";
 import { buildLegCandidates } from "./scoring.mjs";
-import { isoDate, makeId } from "./utils.mjs";
+import { isoDate, makeId, normalizeName } from "./utils.mjs";
 
 export async function runDailyCycle({ now = new Date(), forceSnapshot = false } = {}) {
   const state = await loadEngineState();
@@ -43,6 +44,11 @@ export async function runSnapshotCycle({ state, now = new Date(), forceSnapshot 
     providerConfig: engineState.providers.weather,
     now
   });
+  const squadDepthRecords = await fetchSquadDepth({
+    fixtures: engineState.fixtures,
+    providerConfig: engineState.providers.squadDepth,
+    now
+  });
   const oddsRecords = shouldCollectOdds
     ? await fetchOddsSnapshot({
       fixtures: engineState.fixtures,
@@ -64,6 +70,10 @@ export async function runSnapshotCycle({ state, now = new Date(), forceSnapshot 
     await appendJsonRecords(["data", "heat-snapshots.json"], heatRecords, 20000);
   }
 
+  if (squadDepthRecords.length) {
+    await upsertJsonRecords(["data", "squad-depth.json"], squadDepthRecords, (record) => normalizeName(record.team), 2000);
+  }
+
   if (teamStats.length) {
     await writeJson(["data", "team-stats-latest.json"], {
       createdAt: now.toISOString(),
@@ -77,6 +87,7 @@ export async function runSnapshotCycle({ state, now = new Date(), forceSnapshot 
     oddsRecordsCollected: oddsRecords.length,
     newsRecordsCollected: newsArticles.length,
     heatRecordsCollected: heatRecords.length,
+    squadDepthRecordsCollected: squadDepthRecords.length,
     teamStatsCount: teamStats.length
   });
 
@@ -94,7 +105,8 @@ export async function runAnalysisCycle({ state, now = new Date() } = {}) {
     teamStats: engineState.teamStats,
     policy: engineState.policy,
     now,
-    heatSnapshots: engineState.heatSnapshots
+    heatSnapshots: engineState.heatSnapshots,
+    squadDepthRecords: engineState.squadDepthRecords
   });
   const recommendations = buildBetRecommendations(legCandidates, engineState.policy);
   const offerRanking = rankBookmakerOffers(engineState.bookmakerOffers, engineState.policy, now);
@@ -164,6 +176,7 @@ export async function showStatus() {
   console.log(`Odds snapshots: ${state.oddsSnapshots.length}`);
   console.log(`News articles: ${state.newsArticles.length}`);
   console.log(`Teams with stats: ${state.teamStats.length}`);
+  console.log(`Squad depth records: ${state.squadDepthRecords.length}`);
   console.log(`Latest eligible legs: ${recommendations?.eligibleLegCount ?? "not analysed yet"}`);
   console.log(`Offer candidates passing policy: ${offers.length}`);
   console.log(`Snapshot start date: ${state.policy.snapshotStartDate}`);
@@ -188,6 +201,7 @@ function printSnapshotSummary(run) {
   console.log(`Snapshot allowed: ${run.snapshotAllowed ? "yes" : "no, before configured start date"}`);
   console.log(`Odds records collected: ${run.oddsRecordsCollected}`);
   console.log(`News records collected: ${run.newsRecordsCollected}`);
+  console.log(`Squad depth records collected: ${run.squadDepthRecordsCollected || 0}`);
   console.log(`Team stat records available: ${run.teamStatsCount}`);
 }
 
