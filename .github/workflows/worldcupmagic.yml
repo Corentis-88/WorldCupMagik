@@ -47,6 +47,7 @@ jobs:
   github-pages:
     name: Build Chromebook Web Edition
     runs-on: ubuntu-latest
+    if: github.ref_type != 'tag'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
