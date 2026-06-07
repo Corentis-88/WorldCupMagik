@@ -31,6 +31,7 @@ const [engineState, intelligenceState, outcomeLearning, dashboard] = await Promi
 const liveFixtures = engineState.fixtures.filter(isPublicFixture);
 const liveOddsSnapshots = engineState.oddsSnapshots.filter(isPublicOddsRecord);
 const liveNewsArticles = engineState.newsArticles.filter(isPublicNewsArticle);
+const liveHeatSnapshots = engineState.heatSnapshots.filter(isPublicHeatRecord);
 const liveMatchHistory = intelligenceState.matchHistory.filter(isPublicMatchRecord);
 const baseTeamStats = engineState.teamStats.filter(isPublicTeamStat);
 const teamStats = buildTeamStatsWithIntelligence({
@@ -52,7 +53,8 @@ const mostLikelyRangeLegCandidates = buildLegCandidates({
   teamStats,
   policy: mostLikelyPolicy,
   now,
-  outcomeLearning
+  outcomeLearning,
+  heatSnapshots: liveHeatSnapshots
 });
 
 for (const risk of riskBuckets) {
@@ -64,7 +66,8 @@ for (const risk of riskBuckets) {
     teamStats,
     policy,
     now,
-    outcomeLearning
+    outcomeLearning,
+    heatSnapshots: liveHeatSnapshots
   });
 
   riskProfiles[risk] = policy.riskProfile;
@@ -82,7 +85,8 @@ for (const daysAhead of dayBuckets) {
     teamStats,
     policy: mostLikelyPolicy,
     now,
-    outcomeLearning
+    outcomeLearning,
+    heatSnapshots: liveHeatSnapshots
   });
   const mostLikelyPicks = buildMostLikelyPicks(mostLikelyLegCandidates, mostLikelyPolicy, {
     fixtureCount: scanFixtures.length
@@ -107,7 +111,8 @@ for (const daysAhead of dayBuckets) {
       teamStats,
       policy,
       now,
-      outcomeLearning
+      outcomeLearning,
+      heatSnapshots: liveHeatSnapshots
     });
     const recommendations = buildBetRecommendations(legCandidates, policy);
     const betslip = selectBetslip({ recommendations, stake: 10, risk });
@@ -163,6 +168,7 @@ const payload = {
     .map(summarizeLegCandidate),
   dashboard: summarizeDashboard(dashboard),
   markets: summarizeMarkets(liveOddsSnapshots, engineState.policy),
+  heat: summarizeHeat(liveHeatSnapshots),
   pickOfTheDay,
   intelligence: {
     teamCount: intelligenceState.teamIntelligence.length,
@@ -205,7 +211,9 @@ function summarizeFixture(fixture) {
     dateKey: isoDate(fixture.date),
     homeTeam: fixture.homeTeam,
     awayTeam: fixture.awayTeam,
-    stage: fixture.stage
+    stage: fixture.stage,
+    venue: fixture.venue || "",
+    source: fixture.source || ""
   };
 }
 
@@ -214,6 +222,10 @@ function isPublicFixture(fixture) {
 }
 
 function isPublicOddsRecord(record) {
+  return record?.provider === "public-web" || record?.sourceType === "public-web";
+}
+
+function isPublicHeatRecord(record) {
   return record?.provider === "public-web" || record?.sourceType === "public-web";
 }
 
@@ -308,7 +320,12 @@ function summarizeLegCandidate(leg) {
       oddsShortening: leg.components?.oddsShortening,
       oddsDrifting: leg.components?.oddsDrifting,
       marketAverageOdds: leg.components?.marketAverageOdds,
-      oddsFreshness: leg.components?.oddsFreshness
+      oddsFreshness: leg.components?.oddsFreshness,
+      heatStress: leg.components?.heatStress,
+      heatConfidence: leg.components?.heatConfidence,
+      heatExpectedGoalsAdjustment: leg.components?.heatExpectedGoalsAdjustment,
+      heatEdge: leg.components?.heatEdge,
+      heatLocation: leg.components?.heatLocation
     },
     thesis: leg.thesis
   };
@@ -325,6 +342,30 @@ function summarizeMarkets(oddsSnapshots, policy) {
     configured: policy.markets || [],
     observed: counts,
     anytimeScorerRecords: counts.anytime_scorer || 0
+  };
+}
+
+function summarizeHeat(heatSnapshots) {
+  const locations = {};
+
+  for (const record of heatSnapshots) {
+    const key = record.location || "Unknown";
+    const bucket = locations[key] || {
+      records: 0,
+      maxHeatStress: 0,
+      maxHeatIndexC: null
+    };
+    bucket.records += 1;
+    bucket.maxHeatStress = Math.max(bucket.maxHeatStress, Number(record.heatStress || 0));
+    bucket.maxHeatIndexC = bucket.maxHeatIndexC == null
+      ? record.heatIndexC
+      : Math.max(Number(bucket.maxHeatIndexC || 0), Number(record.heatIndexC || 0));
+    locations[key] = bucket;
+  }
+
+  return {
+    recordCount: heatSnapshots.length,
+    locations
   };
 }
 

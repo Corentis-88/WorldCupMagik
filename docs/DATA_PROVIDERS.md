@@ -43,6 +43,14 @@ It downloads public RSS, Atom, and HTML pages, extracts article links/snippets, 
 
 When raw advanced stats are not available on a public row, the provider uses conservative estimates for xG, shots, and possession and lowers `statsCompleteness`. That lets the scoring model use the signal without pretending it is perfect.
 
+## Venue Weather And Heat
+
+`src/providers/weather-provider.mjs` reads `config/weather-sources.json`.
+
+It gathers public host-city forecast pages and extracts forecast summary windows for the selected fixture dates. The scoring engine uses venue, local kickoff hour, humidity estimate, heat index, roof factor, and conservative team heat-adaptation priors.
+
+Heat is deliberately capped as a small model edge: it can nudge result probability and expected goals, but it cannot dominate odds, team quality, form, news, or market movement.
+
 ## Source Health
 
 Every scan writes:

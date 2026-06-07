@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { buildRiskPolicy } from "../src/app-service.mjs";
 import { buildBetRecommendations } from "../src/portfolio-builder.mjs";
-import { buildLegCandidates } from "../src/scoring.mjs";
+import { buildLegCandidates, fixtureModel } from "../src/scoring.mjs";
 import basePolicy from "../config/engine-policy.json" with { type: "json" };
 
 const fixtures = [
@@ -54,6 +54,68 @@ test("builds fixed-category combinations without same-fixture legs", () => {
     assert.equal(fixtureIds.size, combo.legs.length);
     assert.equal(combo.hardBlocks.length, 0);
   }
+});
+
+test("BTTS model requires balanced scoring threat, not just high total goals", () => {
+  const now = new Date("2026-06-07T09:00:00.000Z");
+  const oneSidedFixture = fixture("ger-cur", "Germany", "Curacao", "2026-06-14T19:00:00.000Z");
+  const policy = buildRiskPolicy(basePolicy, 55);
+  const oddsRecords = [
+    odds(oneSidedFixture, "both_teams_to_score", "Yes", 2.05, now),
+    odds(oneSidedFixture, "both_teams_to_score", "No", 1.8, now),
+    odds(oneSidedFixture, "over_2_5_goals", "Over", 1.8, now),
+    odds(oneSidedFixture, "match_winner", "Germany", 1.45, now),
+    odds(oneSidedFixture, "match_winner", "Draw", 5.2, now),
+    odds(oneSidedFixture, "match_winner", "Curacao", 10, now)
+  ];
+  const teamStats = [
+    stats("Germany", 1830, 2.2, 2.55, 0.62, 62),
+    stats("Curacao", 1480, 0.8, 0.42, 1.75, 42)
+  ];
+  const legs = buildLegCandidates({
+    fixtures: [oneSidedFixture],
+    oddsSnapshots: oddsRecords,
+    newsArticles: [],
+    teamStats,
+    policy,
+    now
+  });
+  const bttsYes = legs.find((leg) => leg.market === "both_teams_to_score" && leg.outcome === "Yes");
+  const over25 = legs.find((leg) => leg.market === "over_2_5_goals");
+
+  assert.ok(bttsYes);
+  assert.ok(over25);
+  assert.ok(bttsYes.modelProbability < 0.46, `BTTS was too high: ${bttsYes.modelProbability}`);
+  assert.ok(over25.modelProbability > bttsYes.modelProbability, "one-sided goal shape should favour totals over BTTS");
+  assert.ok(bttsYes.components.marketFocusReasons.some((reason) => /one-sided/.test(reason)));
+});
+
+test("heat layer is capped as a small result and goals adjustment", () => {
+  const fixtureRecord = fixture("ksa-nor", "Saudi Arabia", "Norway", "2026-06-18T20:00:00.000Z");
+  const model = fixtureModel({
+    fixture: fixtureRecord,
+    homeStats: stats("Saudi Arabia", 1660, 1.4, 1.25, 1.2, 49),
+    awayStats: stats("Norway", 1720, 1.6, 1.45, 1.05, 54),
+    newsByTeam: new Map(),
+    heatRecord: {
+      fixtureId: fixtureRecord.id,
+      capturedAt: "2026-06-07T09:00:00.000Z",
+      provider: "public-web",
+      sourceType: "public-web",
+      source: "Test heat source",
+      location: "Houston",
+      temperatureC: 35,
+      humidityPct: 76,
+      heatIndexC: 49,
+      heatStress: 1,
+      confidence: 0.72
+    }
+  });
+
+  assert.ok(Math.abs(model.components.heatEdge) <= 28);
+  assert.ok(model.components.heatExpectedGoalsAdjustment >= -0.15);
+  assert.ok(model.components.expectedGoals < 2.75);
+  assert.ok(model.components.heatStress <= 1);
 });
 
 function fixture(id, homeTeam, awayTeam, date) {

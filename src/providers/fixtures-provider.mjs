@@ -2,6 +2,7 @@ import { readJson } from "../db.mjs";
 import { makeId, normalizeName } from "../utils.mjs";
 import {
   cleanTeamName,
+  decodeEntities,
   escapeRegExp,
   extractJsonLd,
   fetchPublicText,
@@ -9,6 +10,7 @@ import {
   parseClock,
   parseDate,
   sourceDiagnostic,
+  stripTags,
   teamNameMatches,
   uniqueBy
 } from "./public-source.mjs";
@@ -32,8 +34,9 @@ export async function fetchFixturesWithDiagnostics({ providerConfig, now = new D
   for (const source of sources.filter((item) => item.enabled !== false)) {
     try {
       const html = await fetchPublicText(source.url, providerConfig);
-      const jsonLdFixtures = extractJsonLdFixtures({ html, source, now });
-      const extracted = jsonLdFixtures.length ? jsonLdFixtures : extractTextFixtures({ html, source, now });
+      const rowFixtures = extractMatchRowFixtures({ html, source, now });
+      const jsonLdFixtures = rowFixtures.length ? [] : extractJsonLdFixtures({ html, source, now });
+      const extracted = rowFixtures.length ? rowFixtures : jsonLdFixtures.length ? jsonLdFixtures : extractTextFixtures({ html, source, now });
 
       records.push(...extracted);
       diagnostics.push(sourceDiagnostic({
@@ -188,13 +191,100 @@ function extractTextFixtures({ html, source, now }) {
   return records.filter(Boolean);
 }
 
+function extractMatchRowFixtures({ html, source, now }) {
+  const rows = [...String(html || "").matchAll(/<a\b[^>]*class=["'][^"']*\bmatch-row\b[^"']*["'][\s\S]*?<\/a>/gi)];
+  const records = [];
+
+  for (const row of rows) {
+    const block = row[0];
+    const date = extractMatchRowDate(block);
+    const teams = extractMatchRowTeams(block);
+    const homeTeam = teams[0];
+    const awayTeam = teams[1];
+    const stage = cleanStage(extractClassText(block, "cell-stage")) || inferStage(block);
+    const venue = cleanVenue(extractClassText(block, "venue-cell"));
+
+    if (!date || !homeTeam || !awayTeam) {
+      continue;
+    }
+
+    records.push(toFixture({
+      homeTeam,
+      awayTeam,
+      date,
+      source,
+      now,
+      stage,
+      venue
+    }));
+  }
+
+  return records.filter(Boolean);
+}
+
+function extractMatchRowTeams(block) {
+  const teamNames = [...String(block || "").matchAll(/<span\b[^>]*class=["'][^"']*\bteam-name\b[^"']*["'][^>]*>([\s\S]*?)<\/span>/gi)]
+    .map((match) => cleanTeamName(decodeEntities(stripTags(match[1]))))
+    .filter(Boolean);
+
+  if (teamNames.length >= 2) {
+    return teamNames.slice(0, 2);
+  }
+
+  const team1 = String(block || "").match(/\bdata-team1=["']([^"']+)["']/i);
+  const team2 = String(block || "").match(/\bdata-team2=["']([^"']+)["']/i);
+
+  return [
+    titleCaseTeam(team1 ? decodeEntities(team1[1]) : ""),
+    titleCaseTeam(team2 ? decodeEntities(team2[1]) : "")
+  ].filter(Boolean);
+}
+
+function titleCaseTeam(value) {
+  return cleanTeamName(String(value || "")
+    .split(/\s+/)
+    .map((part) => part ? `${part[0].toUpperCase()}${part.slice(1)}` : "")
+    .join(" "));
+}
+
+function extractMatchRowDate(block) {
+  const time = String(block || "").match(/<time\b[^>]*datetime=["']([^"']+)["']/i);
+  const value = time ? decodeEntities(time[1]) : "";
+  const date = value ? new Date(value) : null;
+
+  return date && !Number.isNaN(date.getTime()) ? date : null;
+}
+
+function extractClassText(block, className) {
+  const pattern = new RegExp(`<span\\b[^>]*class=["'][^"']*\\b${escapeRegExp(className)}\\b[^"']*["'][^>]*>([\\s\\S]*?)<\\/span>`, "i");
+  const match = String(block || "").match(pattern);
+
+  if (!match) {
+    return "";
+  }
+
+  return decodeEntities(stripTags(match[1])).replace(/\s+/g, " ").trim();
+}
+
+function cleanVenue(value) {
+  return decodeEntities(String(value || ""))
+    .replace(/\s+/g, " ")
+    .replace(/\s+,/g, ",")
+    .trim();
+}
+
+function cleanStage(value) {
+  const text = decodeEntities(String(value || "")).replace(/\s+/g, " ").trim();
+  return text || "";
+}
+
 function teamVersusRegex() {
   return new RegExp(`\\b([A-Z][A-Za-zÀ-ÖØ-öø-ÿ.' -]{2,42}?)\\s+(?:v|vs\\.?|versus)\\s+([A-Z][A-Za-zÀ-ÖØ-öø-ÿ.' -]{2,42}?)\\b`);
 }
 
 function toFixture({ homeTeam, awayTeam, date, source, now, stage = "group", venue = "" }) {
-  const home = cleanTeamName(homeTeam);
-  const away = cleanTeamName(awayTeam);
+  const home = canonicalTeamName(cleanTeamName(homeTeam));
+  const away = canonicalTeamName(cleanTeamName(awayTeam));
 
   if (!isUsableTeam(home) || !isUsableTeam(away)) {
     return null;
@@ -216,6 +306,21 @@ function toFixture({ homeTeam, awayTeam, date, source, now, stage = "group", ven
     sourceType: "public-web",
     sourceReliability: Number(source.reliability || 0.65)
   };
+}
+
+function canonicalTeamName(value) {
+  const text = cleanTeamName(value);
+  const aliases = new Map(Object.entries({
+    "bosnia herzegovina": "Bosnia and Herzegovina",
+    "bosnia and herzegovina": "Bosnia and Herzegovina",
+    "czech republic": "Czechia",
+    "korea republic": "South Korea",
+    "united states": "USA",
+    "turkey": "Turkiye",
+    "turkiye": "Turkiye"
+  }));
+
+  return aliases.get(normalizeName(text)) || text;
 }
 
 function isUsableTeam(value) {

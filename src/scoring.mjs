@@ -1,12 +1,14 @@
 import { clamp, daysBetween, decimalToImpliedProbability, hoursBetween, latestBy, logistic, makeId, mean, normalizeName, round } from "./utils.mjs";
 import { buildOddsMovementSummaries, outcomeLearningAdjustment } from "./intelligence-memory.mjs";
+import { buildHeatImpact } from "./heat-model.mjs";
 
-export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, teamStats, policy, now = new Date(), outcomeLearning = null }) {
+export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, teamStats, policy, now = new Date(), outcomeLearning = null, heatSnapshots = [] }) {
   const statsByTeam = new Map(teamStats.map((team) => [team.team, team]));
   const latestOdds = bestLatestOddsByOutcome(oddsSnapshots);
   const latestOddsRecords = [...latestOdds.values()];
   const oddsMovement = buildOddsMovementSummaries(oddsSnapshots);
   const newsByTeam = buildNewsByTeam(newsArticles, policy, now);
+  const heatByFixture = latestHeatByFixture(heatSnapshots);
   const candidates = [];
 
   for (const fixture of fixtures) {
@@ -17,7 +19,7 @@ export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, team
       continue;
     }
 
-    const model = fixtureModel({ fixture, homeStats, awayStats, newsByTeam });
+    const model = fixtureModel({ fixture, homeStats, awayStats, newsByTeam, heatRecord: heatByFixture.get(fixture.id) });
 
     for (const market of policy.markets || []) {
       const probabilities = model.marketProbabilities[market];
@@ -125,9 +127,18 @@ export function bestLatestOddsByOutcome(oddsSnapshots) {
   return best;
 }
 
-export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam }) {
+function latestHeatByFixture(heatSnapshots) {
+  return latestBy(
+    heatSnapshots.filter((record) => record?.fixtureId),
+    (record) => record.fixtureId,
+    "capturedAt"
+  );
+}
+
+export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, heatRecord = null }) {
   const homeNews = newsByTeam.get(fixture.homeTeam) || neutralNews();
   const awayNews = newsByTeam.get(fixture.awayTeam) || neutralNews();
+  const heat = buildHeatImpact({ fixture, heatRecord });
   const ratingEdge = Number(homeStats.rating || 1700) - Number(awayStats.rating || 1700);
   const formEdge = (Number(homeStats.recentPointsPerGame || 1.4) - Number(awayStats.recentPointsPerGame || 1.4)) * 42;
   const xgEdge = ((Number(homeStats.xgFor || 1.3) - Number(awayStats.xgAgainst || 1.2)) - (Number(awayStats.xgFor || 1.3) - Number(homeStats.xgAgainst || 1.2))) * 48;
@@ -135,15 +146,17 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam }) {
   const newsEdge = (homeNews.netImpact - awayNews.netImpact) * 95;
   const memoryEdge = (Number(homeStats.learnedEdge || 0) - Number(awayStats.learnedEdge || 0)) * 88;
   const marketMemoryEdge = (Number(homeStats.memoryOddsPressure || 0) - Number(awayStats.memoryOddsPressure || 0)) * 35;
-  const totalEdge = ratingEdge + formEdge + xgEdge + styleEdge + newsEdge + memoryEdge + marketMemoryEdge;
-  const drawProbability = clamp(0.265 - Math.abs(totalEdge) / 2500 + defensiveDrawLift(homeStats, awayStats), 0.17, 0.32);
+  const heatEdge = Number(heat.resultEdgeAdjustment || 0);
+  const totalEdge = ratingEdge + formEdge + xgEdge + styleEdge + newsEdge + memoryEdge + marketMemoryEdge + heatEdge;
+  const drawProbability = clamp(0.265 - Math.abs(totalEdge) / 2500 + defensiveDrawLift(homeStats, awayStats) + Number(heat.drawLift || 0), 0.17, 0.33);
   const homeShare = logistic(totalEdge / 210);
   const homeWin = clamp((1 - drawProbability) * homeShare, 0.05, 0.82);
   const awayWin = clamp((1 - drawProbability) * (1 - homeShare), 0.05, 0.82);
   const normalizedTotal = homeWin + awayWin + drawProbability;
-  const expectedGoals = expectedGoalsForFixture(homeStats, awayStats, homeNews, awayNews);
-  const over25 = clamp(logistic((expectedGoals - 2.55) * 1.2), 0.28, 0.72);
-  const bttsYes = clamp(0.34 + expectedGoals * 0.12 + Math.min(Number(homeStats.xgFor || 1.4), Number(awayStats.xgFor || 1.4)) * 0.09 - defensiveQuality(homeStats, awayStats) * 0.07, 0.28, 0.72);
+  const goalShape = goalShapeForFixture(homeStats, awayStats, homeNews, awayNews, heat);
+  const expectedGoals = goalShape.expectedGoals;
+  const over25 = poissonOver25(expectedGoals);
+  const bttsYes = poissonBothTeamsToScore(goalShape.homeExpectedGoals, goalShape.awayExpectedGoals, heat);
 
   return {
     fixtureId: fixture.id,
@@ -157,9 +170,20 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam }) {
       newsEdge: round(newsEdge, 2),
       memoryEdge: round(memoryEdge, 2),
       marketMemoryEdge: round(marketMemoryEdge, 2),
+      heatEdge: round(heatEdge, 2),
       expectedGoals: round(expectedGoals, 2),
+      homeExpectedGoals: round(goalShape.homeExpectedGoals, 2),
+      awayExpectedGoals: round(goalShape.awayExpectedGoals, 2),
+      bttsShapeProbability: round(bttsYes, 4),
+      over25ShapeProbability: round(over25, 4),
       homeNewsImpact: round(homeNews.netImpact, 3),
       awayNewsImpact: round(awayNews.netImpact, 3),
+      heatStress: round(Number(heat.heatStress || 0), 4),
+      heatConfidence: round(Number(heat.confidence || 0), 4),
+      heatExpectedGoalsAdjustment: round(Number(heat.expectedGoalsAdjustment || 0), 3),
+      heatBttsAdjustment: round(Number(heat.bttsAdjustment || 0), 4),
+      heatLocation: heat.location || "",
+      heatNotes: heat.notes || "",
       homeLearnedEdge: round(Number(homeStats.learnedEdge || 0), 4),
       awayLearnedEdge: round(Number(awayStats.learnedEdge || 0), 4),
       intelligenceConfidence: round(mean([
@@ -387,16 +411,38 @@ function defensiveDrawLift(homeStats, awayStats) {
   return clamp(defensiveStrength * 0.025, -0.025, 0.04);
 }
 
-function expectedGoalsForFixture(homeStats, awayStats, homeNews, awayNews) {
+function goalShapeForFixture(homeStats, awayStats, homeNews, awayNews, heat) {
   const homeAttack = (Number(homeStats.xgFor || 1.35) + Number(awayStats.xgAgainst || 1.2)) / 2;
   const awayAttack = (Number(awayStats.xgFor || 1.35) + Number(homeStats.xgAgainst || 1.2)) / 2;
-  const tacticalLift = (homeNews.netImpact + awayNews.netImpact) * 0.12;
-  const injuryDrag = Number(homeStats.injuryBurden || 0) * 0.08 + Number(awayStats.injuryBurden || 0) * 0.08;
-  return clamp(homeAttack + awayAttack + tacticalLift - injuryDrag, 1.45, 3.8);
+  const homeNewsLift = Number(homeNews.netImpact || 0) * 0.08;
+  const awayNewsLift = Number(awayNews.netImpact || 0) * 0.08;
+  const homeInjuryDrag = Number(homeStats.injuryBurden || 0) * 0.08;
+  const awayInjuryDrag = Number(awayStats.injuryBurden || 0) * 0.08;
+  const heatGoalDrag = Number(heat.expectedGoalsAdjustment || 0) / 2;
+  const heatShareShift = Number(heat.goalShareAdjustment || 0);
+  const homeExpectedGoals = clamp(homeAttack + homeNewsLift - homeInjuryDrag + heatGoalDrag + heatShareShift, 0.28, 2.95);
+  const awayExpectedGoals = clamp(awayAttack + awayNewsLift - awayInjuryDrag + heatGoalDrag - heatShareShift, 0.28, 2.95);
+
+  return {
+    homeExpectedGoals,
+    awayExpectedGoals,
+    expectedGoals: clamp(homeExpectedGoals + awayExpectedGoals, 1.25, 4.1)
+  };
 }
 
-function defensiveQuality(homeStats, awayStats) {
-  return clamp((2.4 - (Number(homeStats.xgAgainst || 1.2) + Number(awayStats.xgAgainst || 1.2))) / 1.4, -0.5, 1);
+function poissonOver25(expectedGoals) {
+  const lambda = clamp(Number(expectedGoals || 2.4), 0.8, 4.2);
+  const underOrEqualTwo = Math.exp(-lambda) * (1 + lambda + (lambda ** 2) / 2);
+  return round(clamp(1 - underOrEqualTwo, 0.18, 0.82), 4);
+}
+
+function poissonBothTeamsToScore(homeExpectedGoals, awayExpectedGoals, heat) {
+  const homeScores = 1 - Math.exp(-clamp(Number(homeExpectedGoals || 1.1), 0.05, 3.2));
+  const awayScores = 1 - Math.exp(-clamp(Number(awayExpectedGoals || 1.1), 0.05, 3.2));
+  const balancePenalty = clamp((Math.abs(homeExpectedGoals - awayExpectedGoals) - 0.75) * 0.035, 0, 0.045);
+  const heatAdjustment = Number(heat.bttsAdjustment || 0);
+
+  return round(clamp(homeScores * awayScores - balancePenalty + heatAdjustment, 0.16, 0.68), 4);
 }
 
 function classifyRiskTag({ decimalOdds, impliedProbability, edge, modelProbability, movement, contrarianValue }) {
@@ -427,15 +473,19 @@ function buildLegThesis({ fixture, market, outcome, edge, odds, movement, model,
   const movementText = movement?.previousAverageDecimalOdds
     ? `Market average moved from ${movement.previousAverageDecimalOdds} to ${movement.averageDecimalOdds}; best price is ${round(Number(movement.bestOverAverage || 0) * 100, 2)}% over average.`
     : `No prior market movement yet; this scan becomes part of the local memory.`;
+  const heatText = Number(model.components.heatConfidence || 0) > 0.18
+    ? `Heat layer: ${model.components.heatLocation || "venue"} stress ${round(Number(model.components.heatStress || 0) * 100, 1)}%, xG adjustment ${model.components.heatExpectedGoalsAdjustment}, result edge ${model.components.heatEdge}.`
+    : "";
   const notes = [
     `${selectionLabel({ fixture, market, outcome })} is priced at ${odds.decimalOdds} with model edge ${round(edge * 100, 2)}%.`,
-    `Fixture model: expected goals ${model.components.expectedGoals}, rating edge ${model.components.ratingEdge}, style edge ${model.components.styleEdge}, memory edge ${model.components.memoryEdge}.`,
+    `Fixture model: expected goals ${model.components.expectedGoals} (${model.components.homeExpectedGoals}-${model.components.awayExpectedGoals}), rating edge ${model.components.ratingEdge}, style edge ${model.components.styleEdge}, memory edge ${model.components.memoryEdge}.`,
     `News impact is ${model.components.homeNewsImpact} for ${fixture.homeTeam} and ${model.components.awayNewsImpact} for ${fixture.awayTeam}.`,
+    heatText,
     `Market focus: ${marketFocus.reasons.join("; ") || "general value check"}.`,
     learning.reasons.length ? `Outcome learning: ${learning.reasons.join("; ")}.` : "Outcome learning: waiting for enough settled bets before adjusting.",
     movementText,
     `Confidence ${round(confidence * 100, 1)}% after odds freshness and data completeness checks.`
-  ];
+  ].filter(Boolean);
 
   return notes.join(" ");
 }
@@ -459,20 +509,38 @@ function outcomeKey(fixtureId, market, outcome) {
 
 function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, odds, policy }) {
   const expectedGoals = Number(model.components.expectedGoals || 2.5);
+  const homeExpectedGoals = Number(model.components.homeExpectedGoals || expectedGoals / 2);
+  const awayExpectedGoals = Number(model.components.awayExpectedGoals || expectedGoals / 2);
+  const lowerTeamExpectedGoals = Math.min(homeExpectedGoals, awayExpectedGoals);
   const styleEdge = Math.abs(Number(model.components.styleEdge || 0));
   const memoryEdge = Math.abs(Number(model.components.memoryEdge || 0));
   const dataCompleteness = Number(model.components.dataCompleteness || 0);
+  const heatStress = Number(model.components.heatStress || 0);
+  const heatConfidence = Number(model.components.heatConfidence || 0);
   const appetite = riskAppetite(policy);
   const reasons = [];
   let score = 0;
 
-  if (market === "over_2_5_goals" || (market === "both_teams_to_score" && outcome === "Yes")) {
+  if (market === "over_2_5_goals") {
     if (expectedGoals >= 2.68) {
       score += 5;
       reasons.push(`goal model likes the game at ${expectedGoals} expected goals`);
     } else if (expectedGoals < 2.28) {
       score -= 8;
       reasons.push(`goal model is low at ${expectedGoals} expected goals`);
+    }
+  }
+
+  if (market === "both_teams_to_score" && outcome === "Yes") {
+    if (expectedGoals >= 2.55 && lowerTeamExpectedGoals >= 0.9) {
+      score += 6;
+      reasons.push(`BTTS shape is balanced at ${homeExpectedGoals.toFixed(2)}-${awayExpectedGoals.toFixed(2)} expected goals`);
+    } else if (lowerTeamExpectedGoals < 0.72) {
+      score -= 9;
+      reasons.push(`BTTS shape is one-sided at ${homeExpectedGoals.toFixed(2)}-${awayExpectedGoals.toFixed(2)} expected goals`);
+    } else if (expectedGoals < 2.25) {
+      score -= 7;
+      reasons.push(`BTTS total-goals base is low at ${expectedGoals} expected goals`);
     }
   }
 
@@ -490,6 +558,11 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
     if (styleEdge >= 18 || memoryEdge >= 10) {
       score += 4;
       reasons.push("team/result market backed by style or memory edge");
+    }
+
+    if (heatStress >= 0.45 && heatConfidence >= 0.35 && Math.abs(Number(model.components.heatEdge || 0)) >= 4) {
+      score += 2;
+      reasons.push("heat layer gives a small adaptation edge");
     }
 
     if (Number(odds.decimalOdds) < 1.55 && appetite > 0.45) {

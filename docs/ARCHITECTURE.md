@@ -6,6 +6,7 @@ WorldCupMagic is split into five lanes:
    - Odds snapshots.
    - News articles and extracted signals.
    - Team, fixture, and player statistics.
+   - Venue weather and heat snapshots.
    - Bookmaker offers and terms.
 
 2. Evidence Quality
@@ -16,7 +17,7 @@ WorldCupMagic is split into five lanes:
 3. Leg Scoring
    - Model probability.
    - Implied probability from best available odds.
-   - Edge, confidence, odds movement, news impact, and style matchup.
+   - Edge, confidence, odds movement, news impact, style matchup, and heat impact.
    - Favourite-crowding penalty so the system does not simply parlay obvious favourites.
 
 4. Bet Construction
@@ -48,4 +49,3 @@ The engine needs to be explainable. Betting decisions become dangerous when a mo
 - No guarantee of profit.
 - No advice to evade regional betting restrictions.
 - No scraping behind paywalls or violating bookmaker terms.
-

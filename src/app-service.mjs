@@ -6,6 +6,7 @@ import { fetchFixturesWithDiagnostics } from "./providers/fixtures-provider.mjs"
 import { fetchNewsArticlesWithDiagnostics } from "./providers/news-provider.mjs";
 import { fetchOddsSnapshotWithDiagnostics } from "./providers/odds-provider.mjs";
 import { fetchTeamStatsWithDiagnostics } from "./providers/stats-provider.mjs";
+import { fetchHeatSnapshotsWithDiagnostics } from "./providers/weather-provider.mjs";
 import { buildLegCandidates } from "./scoring.mjs";
 import { isoDate, makeId, round } from "./utils.mjs";
 
@@ -39,6 +40,7 @@ export async function getDashboardState({ now = new Date() } = {}) {
       fixtureCount: liveFixtures.length,
       oddsSnapshotCount: state.oddsSnapshots.filter(isPublicOddsRecord).length,
       scorerOddsCount: state.oddsSnapshots.filter(isPublicOddsRecord).filter(isScorerOddsRecord).length,
+      heatSnapshotCount: state.heatSnapshots.filter(isPublicHeatRecord).length,
       newsArticleCount: state.newsArticles.filter(isPublicNewsArticle).length,
       teamStatsCount: state.teamStats.filter(isPublicTeamStat).length,
       teamIntelligenceCount: latestScan?.intelligence?.teamCount || 0,
@@ -131,12 +133,24 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
   });
   sourceDiagnostics.push(...oddsResult.diagnostics);
   const oddsRecords = oddsResult.records;
+  const heatResult = await fetchHeatSnapshotsWithDiagnostics({
+    fixtures: scanFixtures,
+    providerConfig: engineState.providers.weather,
+    now
+  });
+  sourceDiagnostics.push(...heatResult.diagnostics);
+  const heatRecords = heatResult.records;
 
   if (oddsRecords.length) {
     const existingOdds = (await readJson(["data", "odds-snapshots.json"], [])).filter(isPublicOddsRecord);
     await writeJson(["data", "odds-snapshots.json"], [...oddsRecords, ...existingOdds].slice(0, 50000));
     const existingDailyOdds = (await readJson(["data", "snapshots", `odds-${isoDate(now)}.json`], [])).filter(isPublicOddsRecord);
     await writeJson(["data", "snapshots", `odds-${isoDate(now)}.json`], [...oddsRecords, ...existingDailyOdds].slice(0, 50000));
+  }
+
+  if (heatRecords.length) {
+    const existingHeat = (await readJson(["data", "heat-snapshots.json"], [])).filter(isPublicHeatRecord);
+    await writeJson(["data", "heat-snapshots.json"], [...heatRecords, ...existingHeat].slice(0, 20000));
   }
 
   if (newsArticles.length) {
@@ -163,6 +177,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
   const latestState = await loadEngineState();
   const allNewsArticles = latestState.newsArticles.filter(isPublicNewsArticle);
   const allOddsSnapshots = latestState.oddsSnapshots.filter(isPublicOddsRecord);
+  const allHeatSnapshots = latestState.heatSnapshots.filter(isPublicHeatRecord);
   const intelligence = buildScanIntelligence({
     fixtures: scanFixtures,
     oddsRecords,
@@ -187,7 +202,8 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
     teamStats,
     policy,
     now,
-    outcomeLearning
+    outcomeLearning,
+    heatSnapshots: allHeatSnapshots
   });
   const recommendations = buildBetRecommendations(legCandidates, policy);
   const offerRanking = rankBookmakerOffers(latestState.bookmakerOffers, policy, now);
@@ -200,6 +216,8 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
     scanFixtures,
     oddsRecords,
     allOddsSnapshots,
+    heatRecords,
+    allHeatSnapshots,
     newsArticles,
     teamStats,
     sourceDiagnostics
@@ -219,6 +237,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
       fixtures: fixtureResult.records.length,
       oddsRecords: oddsRecords.length,
       scorerOddsRecords: oddsRecords.filter(isScorerOddsRecord).length,
+      heatRecords: heatRecords.length,
       newsArticles: newsArticles.length,
       teamStats: teamStats.length,
       matchHistoryRecords: statsResult.matchHistory?.length || 0,
@@ -256,7 +275,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
   return scan;
 }
 
-function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, newsArticles, teamStats, sourceDiagnostics }) {
+function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, heatRecords = [], allHeatSnapshots = [], newsArticles, teamStats, sourceDiagnostics }) {
   const sourceErrors = sourceDiagnostics.filter((item) => item.status === "error").length;
   const sourceEmpty = sourceDiagnostics.filter((item) => item.status === "empty").length;
   const sourceOk = sourceDiagnostics.filter((item) => item.status === "ok").length;
@@ -267,6 +286,9 @@ function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, 
     : 0;
   const fixtureNewsCoverage = scanFixtures.length
     ? new Set(newsArticles.flatMap((article) => article.teamTags || [])).size / Math.max(1, new Set(scanFixtures.flatMap((fixture) => [fixture.homeTeam, fixture.awayTeam])).size)
+    : 0;
+  const fixtureHeatCoverage = scanFixtures.length
+    ? new Set(allHeatSnapshots.filter((record) => selectedFixtureIds.has(record.fixtureId)).map((record) => record.fixtureId)).size / scanFixtures.length
     : 0;
   const readiness = scanFixtures.length
     && oddsRecords.length
@@ -282,12 +304,15 @@ function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, 
     fixtureCount: scanFixtures.length,
     freshOddsRecords: oddsRecords.length,
     freshScorerOddsRecords: oddsRecords.filter(isScorerOddsRecord).length,
+    freshHeatRecords: heatRecords.length,
     oddsHistoryRecords: allOddsSnapshots.length,
     scorerOddsHistoryRecords: allOddsSnapshots.filter(isScorerOddsRecord).length,
+    heatHistoryRecords: allHeatSnapshots.length,
     newsArticleCount: newsArticles.length,
     teamStatsCount: teamStats.length,
     teamsWithRecentMatches,
     fixtureOddsCoverage: round(fixtureOddsCoverage, 3),
+    fixtureHeatCoverage: round(fixtureHeatCoverage, 3),
     fixtureNewsCoverage: round(fixtureNewsCoverage, 3),
     message: readiness === "ready"
       ? "Real public-web data was gathered and scored. Source misses are recorded instead of filled with made-up data."
@@ -606,6 +631,10 @@ function isPublicFixture(fixture) {
 }
 
 function isPublicOddsRecord(record) {
+  return record?.provider === "public-web" || record?.sourceType === "public-web";
+}
+
+function isPublicHeatRecord(record) {
   return record?.provider === "public-web" || record?.sourceType === "public-web";
 }
 

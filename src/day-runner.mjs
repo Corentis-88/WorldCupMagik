@@ -2,6 +2,7 @@ import { appendJsonRecords, loadEngineState, readJson, upsertJsonRecords, writeJ
 import { fetchNewsArticles } from "./providers/news-provider.mjs";
 import { fetchOddsSnapshot } from "./providers/odds-provider.mjs";
 import { fetchTeamStats } from "./providers/stats-provider.mjs";
+import { fetchHeatSnapshots } from "./providers/weather-provider.mjs";
 import { buildBetRecommendations } from "./portfolio-builder.mjs";
 import { rankBookmakerOffers } from "./offer-engine.mjs";
 import { buildDailyReport } from "./reporting.mjs";
@@ -37,6 +38,11 @@ export async function runSnapshotCycle({ state, now = new Date(), forceSnapshot 
     providerConfig: engineState.providers.news,
     now
   });
+  const heatRecords = await fetchHeatSnapshots({
+    fixtures: engineState.fixtures,
+    providerConfig: engineState.providers.weather,
+    now
+  });
   const oddsRecords = shouldCollectOdds
     ? await fetchOddsSnapshot({
       fixtures: engineState.fixtures,
@@ -54,6 +60,10 @@ export async function runSnapshotCycle({ state, now = new Date(), forceSnapshot 
     await upsertJsonRecords(["data", "news-articles.json"], newsArticles, (article) => article.id, 10000);
   }
 
+  if (heatRecords.length) {
+    await appendJsonRecords(["data", "heat-snapshots.json"], heatRecords, 20000);
+  }
+
   if (teamStats.length) {
     await writeJson(["data", "team-stats-latest.json"], {
       createdAt: now.toISOString(),
@@ -66,6 +76,7 @@ export async function runSnapshotCycle({ state, now = new Date(), forceSnapshot 
     snapshotAllowed: shouldCollectOdds,
     oddsRecordsCollected: oddsRecords.length,
     newsRecordsCollected: newsArticles.length,
+    heatRecordsCollected: heatRecords.length,
     teamStatsCount: teamStats.length
   });
 
@@ -82,7 +93,8 @@ export async function runAnalysisCycle({ state, now = new Date() } = {}) {
     newsArticles: engineState.newsArticles,
     teamStats: engineState.teamStats,
     policy: engineState.policy,
-    now
+    now,
+    heatSnapshots: engineState.heatSnapshots
   });
   const recommendations = buildBetRecommendations(legCandidates, engineState.policy);
   const offerRanking = rankBookmakerOffers(engineState.bookmakerOffers, engineState.policy, now);

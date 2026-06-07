@@ -692,6 +692,8 @@ function scoreMostLikelyCombo(legs, target, rank) {
   const uniqueFixtureCount = new Set(legs.map((leg) => leg.fixtureId)).size;
   const reusedSignalCount = legs.filter((leg) => leg.reusedSignal).length;
   const shortWindowFallback = uniqueFixtureCount < legs.length || reusedSignalCount > 0;
+  const heatLegs = legs.filter((leg) => Number(leg.components?.heatConfidence || 0) > 0.18 && Number(leg.components?.heatStress || 0) > 0.2);
+  const heatText = heatLegs.length ? ` Heat layer active on ${heatLegs.length} leg(s) as a capped weather nudge.` : "";
 
   return {
     id: `most_likely_${target.category}_${legs.map((leg) => leg.id).join("_").slice(0, 48)}`,
@@ -712,7 +714,7 @@ function scoreMostLikelyCombo(legs, target, rank) {
     shortWindowFallback,
     uniqueFixtureCount,
     reusedSignalCount,
-    thesis: `${target.label} chosen by the most-likely engine, ignoring the risk slider and ranking by AI rating, confidence, fresh odds, and positive edge. Combined odds ${round(combinedDecimalOdds, 2)}.${shortWindowFallback ? ` Short-window fallback used ${uniqueFixtureCount} fixture(s) and ${legs.length} signal(s) so this Picks of the Day card stays populated.` : ""}`
+    thesis: `${target.label} chosen by the most-likely engine, ignoring the risk slider and ranking by AI rating, confidence, fresh odds, and positive edge. Combined odds ${round(combinedDecimalOdds, 2)}.${heatText}${shortWindowFallback ? ` Short-window fallback used ${uniqueFixtureCount} fixture(s) and ${legs.length} signal(s) so this Picks of the Day card stays populated.` : ""}`
   };
 }
 
@@ -744,8 +746,12 @@ function buildComboThesis({ type, legs, combinedDecimalOdds, expectedValue, risk
     ? `${riskLegs.length} calculated-risk/value leg(s) stop this from being a favourite-only ${type}.`
     : "No calculated-risk leg; this should only survive if the edge is exceptional.";
   const favouriteText = favouriteLegs.length ? `${favouriteLegs.length} high-implied-probability favourite leg(s).` : "No high-implied-probability favourite crowding.";
+  const heatLegs = legs.filter((leg) => Number(leg.components?.heatConfidence || 0) > 0.18 && Number(leg.components?.heatStress || 0) > 0.2);
+  const heatText = heatLegs.length
+    ? `Heat layer active on ${heatLegs.length} leg(s), capped as a small xG/result adjustment.`
+    : "Heat layer neutral or low impact on this slip.";
 
-  return `${type} at combined odds ${round(combinedDecimalOdds, 2)} with expected value ${round(expectedValue * 100, 2)}%. ${riskText} ${favouriteText} Legs: ${selections}.`;
+  return `${type} at combined odds ${round(combinedDecimalOdds, 2)} with expected value ${round(expectedValue * 100, 2)}%. ${riskText} ${favouriteText} ${heatText} Legs: ${selections}.`;
 }
 
 function nearest(values, value) {
