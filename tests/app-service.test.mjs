@@ -96,9 +96,27 @@ test("most likely picks ignore risk score and choose highest model probability l
     }
   });
 
-  assert.deepEqual(picks.map((pick) => pick.category), ["trixie", "accumulator_4", "accumulator_8"]);
-  assert.deepEqual(picks[0].legs.map((leg) => leg.fixtureId), ["p1", "p2", "p3"]);
-  assert.ok(!picks[2].legs.some((leg) => leg.fixtureId === "flashy-longshot"));
+  assert.deepEqual(picks.map((pick) => pick.category), ["single", "double", "trixie", "accumulator_4", "accumulator_8"]);
+  assert.deepEqual(picks.find((pick) => pick.category === "trixie").legs.map((leg) => leg.fixtureId), ["p1", "p2", "p3"]);
+  assert.ok(!picks.find((pick) => pick.category === "accumulator_8").legs.some((leg) => leg.fixtureId === "flashy-longshot"));
+});
+
+test("most likely picks only show categories the fixture window can support", () => {
+  const legs = [
+    likelyLeg("p1", "safe one", 0.74, 71, 1.45),
+    likelyLeg("p1", "same match backup", 0.71, 70, 1.52),
+    likelyLeg("p2", "safe two", 0.69, 69, 1.58)
+  ];
+  const picks = buildMostLikelyPicks(legs, {
+    riskProfile: {
+      minLegEdge: 0,
+      minLegConfidence: 0.5
+    }
+  }, { fixtureCount: 3 });
+
+  assert.deepEqual(picks.map((pick) => pick.category), ["single", "double", "trixie"]);
+  assert.equal(picks.find((pick) => pick.category === "trixie").legs.length, 3);
+  assert.equal(picks.find((pick) => pick.category === "trixie").shortWindowFallback, true);
 });
 
 function combo(type, odds, score, legCount) {

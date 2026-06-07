@@ -1,6 +1,8 @@
 import { clamp, combinations, mean, product, round } from "./utils.mjs";
 
 const MOST_LIKELY_TARGETS = [
+  { category: "single", label: "Single", type: "single", legCount: 1 },
+  { category: "double", label: "Double", type: "double", legCount: 2 },
   { category: "trixie", label: "Trixie", type: "trixie", legCount: 3 },
   { category: "accumulator_4", label: "4-leg accumulator", type: "accumulator", legCount: 4 },
   { category: "accumulator_8", label: "8-leg accumulator", type: "accumulator", legCount: 8 }
@@ -26,7 +28,7 @@ export function buildBetRecommendations(legs, policy) {
   };
 }
 
-export function buildMostLikelyPicks(legs, policy) {
+export function buildMostLikelyPicks(legs, policy, { fixtureCount = null } = {}) {
   const riskProfile = policy.riskProfile || {};
   const eligibleLegs = legs
     .filter((leg) => !leg.hardBlocks?.length)
@@ -35,12 +37,23 @@ export function buildMostLikelyPicks(legs, policy) {
     .filter((leg) => Number(leg.modelProbability) > 0)
     .sort((left, right) => likelyLegScore(right) - likelyLegScore(left));
   const bestPerFixture = bestLikelyLegPerFixture(eligibleLegs);
+  const availableFixtureCount = Number.isFinite(Number(fixtureCount)) && Number(fixtureCount) > 0
+    ? Number(fixtureCount)
+    : bestPerFixture.length;
 
   return MOST_LIKELY_TARGETS
     .map((target, index) => {
-      const selectedLegs = bestPerFixture.slice(0, target.legCount);
+      if (availableFixtureCount < target.legCount) {
+        return null;
+      }
 
-      if (selectedLegs.length < target.legCount) {
+      const selectedLegs = selectMostLikelyLegsForTarget({
+        fixtureSeparatedLegs: bestPerFixture,
+        eligibleLegs,
+        legCount: target.legCount
+      });
+
+      if (!selectedLegs.length) {
         return null;
       }
 
@@ -74,6 +87,54 @@ function bestLikelyLegPerFixture(legs) {
   }
 
   return [...byFixture.values()].sort((left, right) => likelyLegScore(right) - likelyLegScore(left));
+}
+
+function selectMostLikelyLegsForTarget({ fixtureSeparatedLegs, eligibleLegs, legCount }) {
+  const selected = [];
+  const selectedIds = new Set();
+
+  for (const leg of fixtureSeparatedLegs) {
+    if (selected.length >= legCount) {
+      break;
+    }
+
+    selected.push(leg);
+    selectedIds.add(leg.id);
+  }
+
+  for (const leg of eligibleLegs) {
+    if (selected.length >= legCount) {
+      break;
+    }
+
+    if (!selectedIds.has(leg.id)) {
+      selected.push({
+        ...leg,
+        shortWindowFallback: selected.some((item) => item.fixtureId === leg.fixtureId)
+      });
+      selectedIds.add(leg.id);
+    }
+  }
+
+  if (!selected.length) {
+    return [];
+  }
+
+  const fillPool = [...selected];
+  let repeatIndex = 1;
+
+  while (selected.length < legCount) {
+    const leg = fillPool[(repeatIndex - 1) % fillPool.length];
+    selected.push({
+      ...leg,
+      id: `${leg.id}_short_window_repeat_${repeatIndex}`,
+      shortWindowFallback: true,
+      reusedSignal: true
+    });
+    repeatIndex += 1;
+  }
+
+  return selected;
 }
 
 function likelyLegScore(leg) {
@@ -113,6 +174,9 @@ function scoreMostLikelyCombo(legs, target, rank) {
   const averageEdge = mean(legs.map((leg) => leg.edge));
   const averageConfidence = mean(legs.map((leg) => leg.confidence));
   const intelligenceConfidence = mean(legs.map((leg) => leg.components?.intelligenceConfidence || 0.45));
+  const uniqueFixtureCount = new Set(legs.map((leg) => leg.fixtureId)).size;
+  const reusedSignalCount = legs.filter((leg) => leg.reusedSignal).length;
+  const shortWindowFallback = uniqueFixtureCount < legs.length || reusedSignalCount > 0;
   const score = clamp(
     combinedProbability * 100
     + averageConfidence * 18
@@ -152,6 +216,8 @@ function scoreMostLikelyCombo(legs, target, rank) {
         marketAverageOdds: leg.components?.marketAverageOdds,
         oddsFreshness: leg.components?.oddsFreshness
       },
+      shortWindowFallback: Boolean(leg.shortWindowFallback),
+      reusedSignal: Boolean(leg.reusedSignal),
       thesis: leg.thesis
     })),
     combinedDecimalOdds: round(combinedDecimalOdds, 2),
@@ -163,15 +229,21 @@ function scoreMostLikelyCombo(legs, target, rank) {
     intelligenceConfidence: round(intelligenceConfidence, 4),
     score: round(score, 2),
     displayRating: displayConfidenceRating(legs, { likely: true }),
+    shortWindowFallback,
+    uniqueFixtureCount,
+    reusedSignalCount,
     hardBlocks: [],
-    thesis: buildMostLikelyThesis({ target, legs, combinedDecimalOdds, combinedProbability, averageConfidence })
+    thesis: buildMostLikelyThesis({ target, legs, combinedDecimalOdds, averageConfidence, shortWindowFallback, uniqueFixtureCount, reusedSignalCount })
   };
 }
 
-function buildMostLikelyThesis({ target, legs, combinedDecimalOdds, combinedProbability, averageConfidence }) {
+function buildMostLikelyThesis({ target, legs, combinedDecimalOdds, averageConfidence, shortWindowFallback, uniqueFixtureCount, reusedSignalCount }) {
   const selections = legs.map((leg) => leg.selectionLabel).join(" | ");
+  const fallbackText = shortWindowFallback
+    ? ` Short-window fallback used ${uniqueFixtureCount} fixture(s) and ${legs.length} signal(s) so Picks of the Day stay populated. ${reusedSignalCount ? `${reusedSignalCount} strongest signal(s) were repeated.` : "Some same-game signals were included."}`
+    : "";
 
-  return `${target.label} chosen by the most-likely engine, ignoring the risk slider and ranking by AI rating, confidence, fresh odds, and positive edge. Combined odds ${round(combinedDecimalOdds, 2)}, average data confidence ${round(averageConfidence * 100, 1)}%. Legs: ${selections}.`;
+  return `${target.label} chosen by the most-likely engine, ignoring the risk slider and ranking by AI rating, confidence, fresh odds, and positive edge. Combined odds ${round(combinedDecimalOdds, 2)}, average data confidence ${round(averageConfidence * 100, 1)}%.${fallbackText} Legs: ${selections}.`;
 }
 
 function accumulatorPoolSize(size) {

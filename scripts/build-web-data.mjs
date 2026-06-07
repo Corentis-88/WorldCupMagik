@@ -84,7 +84,9 @@ for (const daysAhead of dayBuckets) {
     now,
     outcomeLearning
   });
-  const mostLikelyPicks = buildMostLikelyPicks(mostLikelyLegCandidates, mostLikelyPolicy);
+  const mostLikelyPicks = buildMostLikelyPicks(mostLikelyLegCandidates, mostLikelyPolicy, {
+    fixtureCount: scanFixtures.length
+  });
 
   pickOfTheDay[pickOfDayKey(daysAhead)] = {
     daysAhead,

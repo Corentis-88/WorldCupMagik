@@ -12,6 +12,8 @@ const standardSlip = [
   ["accumulator_8", "8-leg accumulator"]
 ];
 const pickOfDaySlip = [
+  ["single", "Single"],
+  ["double", "Double"],
   ["trixie", "Trixie"],
   ["accumulator_4", "4-leg accumulator"],
   ["accumulator_8", "8-leg accumulator"]
@@ -183,7 +185,7 @@ function buildPickOfDayRangeProfile({ data, dateRange }) {
     dataQuality: data.collection?.dataQuality,
     fixtureCount: fixtures.length,
     eligibleLegCount: candidates.length,
-    betslip: buildMostLikelyPicks(candidates)
+    betslip: buildMostLikelyPicks(candidates, { fixtureCount: fixtures.length })
   };
 }
 
@@ -235,14 +237,17 @@ function renderPickOfDay(slip, profile) {
   }
 
   if (!slip.length) {
-    el.pickOfDay.innerHTML = pickOfDaySlip.map(([, label]) => unavailableCard(label, profile, "No most-likely pick passed the current database checks yet.")).join("");
+    const supported = supportedPickOfDaySlip(profile);
+    el.pickOfDay.innerHTML = supported.length
+      ? supported.map(([, label]) => unavailableCard(label, profile, "No most-likely pick passed the current database checks yet.")).join("")
+      : unavailableCard("Picks of the Day", profile, "No matches exist in this selected date range yet.");
     return;
   }
 
   const present = new Set(slip.map(categoryForBet));
-  const missingCards = pickOfDaySlip
+  const missingCards = supportedPickOfDaySlip(profile)
     .filter(([key]) => !present.has(key))
-    .map(([, label]) => unavailableCard(label, profile, "Not enough separate fixtures passed the most-likely checks for this card yet."));
+    .map(([, label]) => unavailableCard(label, profile, "Not enough real data passed the most-likely checks for this supported card yet."));
 
   el.pickOfDay.innerHTML = slip.map((bet) => `
     <article class="bet-card pick-card">
@@ -280,6 +285,26 @@ function unavailableCard(label, profile, prefix = "No real-data pick passed this
       <p class="why">${escapeHtml(prefix)} ${escapeHtml(message)}</p>
     </article>
   `;
+}
+
+function supportedPickOfDaySlip(profile) {
+  const fixtureCount = Number(profile?.fixtureCount || 0);
+
+  return pickOfDaySlip.filter(([key]) => fixtureCount >= legCountForPickCategory(key));
+}
+
+function legCountForPickCategory(key) {
+  if (key === "single") {
+    return 1;
+  }
+  if (key === "double") {
+    return 2;
+  }
+  if (key === "trixie") {
+    return 3;
+  }
+
+  return Number(String(key).replace("accumulator_", "")) || 1;
 }
 
 function categoryForBet(bet) {
@@ -529,21 +554,47 @@ function bestCombo(combos) {
   })[0] || null;
 }
 
-function buildMostLikelyPicks(legs) {
+function buildMostLikelyPicks(legs, { fixtureCount = null } = {}) {
   const bestPerFixture = bestLikelyLegPerFixture(legs);
+  const availableFixtureCount = Number.isFinite(Number(fixtureCount)) && Number(fixtureCount) > 0
+    ? Number(fixtureCount)
+    : bestPerFixture.length;
 
   return pickOfDaySlip
     .map(([category, label], index) => {
-      const legCount = category === "trixie" ? 3 : Number(category.replace("accumulator_", ""));
-      const selectedLegs = bestPerFixture.slice(0, legCount);
+      const legCount = legCountForPickCategory(category);
 
-      if (selectedLegs.length < legCount) {
+      if (availableFixtureCount < legCount) {
         return null;
       }
 
-      return scoreMostLikelyCombo(selectedLegs, { category, label, type: category === "trixie" ? "trixie" : "accumulator", legCount }, index + 1);
+      const selectedLegs = selectMostLikelyLegsForTarget({
+        fixtureSeparatedLegs: bestPerFixture,
+        eligibleLegs: legs,
+        legCount
+      });
+
+      if (!selectedLegs.length) {
+        return null;
+      }
+
+      return scoreMostLikelyCombo(selectedLegs, { category, label, type: pickTypeForCategory(category), legCount }, index + 1);
     })
     .filter(Boolean);
+}
+
+function pickTypeForCategory(category) {
+  if (category === "single") {
+    return "single";
+  }
+  if (category === "double") {
+    return "double";
+  }
+  if (category === "trixie") {
+    return "trixie";
+  }
+
+  return "accumulator";
 }
 
 function bestLikelyLegPerFixture(legs) {
@@ -558,6 +609,54 @@ function bestLikelyLegPerFixture(legs) {
   }
 
   return [...byFixture.values()].sort((left, right) => likelyLegScore(right) - likelyLegScore(left));
+}
+
+function selectMostLikelyLegsForTarget({ fixtureSeparatedLegs, eligibleLegs, legCount }) {
+  const selected = [];
+  const selectedIds = new Set();
+
+  for (const leg of fixtureSeparatedLegs) {
+    if (selected.length >= legCount) {
+      break;
+    }
+
+    selected.push(leg);
+    selectedIds.add(leg.id);
+  }
+
+  for (const leg of eligibleLegs) {
+    if (selected.length >= legCount) {
+      break;
+    }
+
+    if (!selectedIds.has(leg.id)) {
+      selected.push({
+        ...leg,
+        shortWindowFallback: selected.some((item) => item.fixtureId === leg.fixtureId)
+      });
+      selectedIds.add(leg.id);
+    }
+  }
+
+  if (!selected.length) {
+    return [];
+  }
+
+  const fillPool = [...selected];
+  let repeatIndex = 1;
+
+  while (selected.length < legCount) {
+    const leg = fillPool[(repeatIndex - 1) % fillPool.length];
+    selected.push({
+      ...leg,
+      id: `${leg.id}_short_window_repeat_${repeatIndex}`,
+      shortWindowFallback: true,
+      reusedSignal: true
+    });
+    repeatIndex += 1;
+  }
+
+  return selected;
 }
 
 function likelyLegScore(leg) {
@@ -590,6 +689,9 @@ function scoreMostLikelyCombo(legs, target, rank) {
   const expectedValue = combinedProbability * combinedDecimalOdds - 1;
   const averageEdge = mean(legs.map((leg) => leg.edge));
   const averageConfidence = mean(legs.map((leg) => leg.confidence));
+  const uniqueFixtureCount = new Set(legs.map((leg) => leg.fixtureId)).size;
+  const reusedSignalCount = legs.filter((leg) => leg.reusedSignal).length;
+  const shortWindowFallback = uniqueFixtureCount < legs.length || reusedSignalCount > 0;
 
   return {
     id: `most_likely_${target.category}_${legs.map((leg) => leg.id).join("_").slice(0, 48)}`,
@@ -607,7 +709,10 @@ function scoreMostLikelyCombo(legs, target, rank) {
     score: round(combinedProbability * 100 + averageConfidence * 18 + clamp(averageEdge, 0, 0.12) * 55, 2),
     riskLegCount: legs.filter((leg) => ["calculated_risk", "longshot_value", "contrarian_value"].includes(leg.riskTag)).length,
     displayRating: displayConfidenceRating(legs, { likely: true }),
-    thesis: `${target.label} chosen by the most-likely engine, ignoring the risk slider and ranking by AI rating, confidence, fresh odds, and positive edge. Combined odds ${round(combinedDecimalOdds, 2)}.`
+    shortWindowFallback,
+    uniqueFixtureCount,
+    reusedSignalCount,
+    thesis: `${target.label} chosen by the most-likely engine, ignoring the risk slider and ranking by AI rating, confidence, fresh odds, and positive edge. Combined odds ${round(combinedDecimalOdds, 2)}.${shortWindowFallback ? ` Short-window fallback used ${uniqueFixtureCount} fixture(s) and ${legs.length} signal(s) so this Picks of the Day card stays populated.` : ""}`
   };
 }
 
