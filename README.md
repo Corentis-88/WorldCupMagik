@@ -1,99 +1,75 @@
-# WorldCupMagic
+# WorldCupMagik
 
-WorldCupMagic is a World Cup betting research engine. It collects odds snapshots, news signals, team and player context, then ranks doubles, Trixies, and accumulators with transparent logic.
+WorldCupMagik is a hosted World Cup betting research engine for browsers and Chromebooks. It gathers public web data, builds a central database several times per day, then publishes a static web app that rebuilds the betslip instantly from that database.
 
-It is decision support only. It does not place bets, it does not guarantee returns, and bookmaker selection must be checked against the user's legal jurisdiction, age, affordability, and responsible gambling controls.
+It is decision support only. It does not place bets, does not guarantee returns, and should be used with normal legal, age, affordability, and responsible-gambling checks.
 
 ## What It Does
 
-- Saves daily odds snapshots from the configured start date.
-- Scores team, fixture, news, and odds movement signals.
-- Builds doubles, Trixies, and accumulators without blindly stacking bookmaker favourites.
-- Ranks bookmaker offers using value, terms, jurisdiction, expiry, and market coverage.
-- Writes auditable JSON outputs and a Markdown daily report.
+- Gathers public World Cup fixtures from configurable HTML pages.
+- Gathers public odds from bookmaker/comparison pages without odds APIs.
+- Gathers public football news from RSS/Atom/HTML pages without news APIs.
+- Gathers recent national-team results from public pages and derives last-three-match form.
+- Stores source health for every scan so blocked or empty sources are visible.
+- Scores Single, Double, Trixie, 3-leg accumulator, 4-leg accumulator, 5-leg accumulator, 6-leg accumulator, and 8-leg accumulator categories.
+- Uses risk-slider policy to trade confidence, edge, price, bookmaker coverage, and calculated-risk appetite.
 
-## Quick Start
+## Hosted Web Edition
+
+The production app lives in `web/` and is deployed by `.github/workflows/worldcupmagic.yml`.
+
+The scheduled job currently runs at:
+
+```text
+05:23, 08:23, 11:23, 14:23, 17:23, 20:23, and 23:23 UTC
+```
+
+Each run writes `web/data/latest.json` with:
+
+- collection duration;
+- source-health summary;
+- fixture, odds, news, team-form, and intelligence counts;
+- pre-scored profiles for days-ahead values `0` to `14`;
+- pre-scored profiles for risk values `0` to `100` in `5` point steps.
+
+Scheduled and manual production runs also commit the refreshed `data/` history and `web/data` output back to `main`. That is how odds movement, source health, market memory, and team intelligence compound across the tournament instead of resetting on every deployment.
+
+The web app's `Scan Now` button reloads the newest published database and recalculates stake/return locally. The expensive public-web gathering happens in the scheduled server-side run, not in each visitor's browser.
+
+## Commands
 
 ```powershell
 cd C:\CodexWorkspace\WorldCupMagik
 npm install
 npm test
-npm run app
-npm run daily
+npm run web:build-data
 ```
 
-The first version uses mock providers so the engine can be tested immediately.
-
-## Commands
+Useful scripts:
 
 ```powershell
-npm run app         # open the Windows desktop app in development
-npm run dist:win    # build a Windows NSIS setup program
-npm run web:build-data # build Chromebook/GitHub Pages data
-npm run daily       # full collection and recommendation cycle
-npm run snapshot    # collect odds/news/stats only
-npm run analyse     # build bets from existing data
-npm run offers      # rank configured bookmaker offers
-npm run status      # show latest engine state
-npm test            # run unit tests
+npm run web:build-data # gather public data and build web/data/latest.json
+npm run daily          # CLI collection + analysis cycle
+npm run snapshot       # collect odds/news/stats only
+npm run analyse        # build bets from existing public data
+npm run offers         # rank configured bookmaker offers
+npm run status         # show latest engine state
+npm test               # run unit tests
 ```
 
-## Windows App
+## No API Rule
 
-The Electron app includes:
+WorldCupMagik does not use odds APIs, news APIs, or stats APIs. Provider config lives in:
 
-- a `Scan` button;
-- total stake input;
-- number of betslip recommendations input;
-- risk slider;
-- days-ahead slider;
-- local scan history;
-- system tray menu with `Open`, `Scan now`, and `Quit`;
-- automatic background scans at roughly `08:00`, `14:00`, and `20:00` local time while the app is running.
+- `config/fixture-sources.json`
+- `config/odds-sources.json`
+- `config/news-sources.json`
+- `config/providers.json`
 
-Installed app data is written to the user's Windows app-data directory, not the installation directory.
+If a public source blocks the scanner or returns no useful rows, the scan records that in `data/source-health-latest.json` and does not fill the gap with made-up data.
 
-## Daily Odds Snapshots
+## Hosting Choice
 
-`config/engine-policy.json` sets `snapshotStartDate` to `2026-06-04`, so odds history is configured to build from that date onward.
+For now GitHub Pages plus GitHub Actions is the best free fit because the scanner needs a real Node runner for public-web gathering. Cloudflare Workers/Pages and Netlify are possible later, but free edge/serverless limits are usually tighter for long collection jobs. The built dataset records `collection.durationSeconds`, so we can judge whether the schedule is too aggressive after real runs.
 
-On Windows, create a scheduled task with:
-
-```powershell
-.\scripts\install-windows-schedule.ps1
-```
-
-The desktop app also performs three low-impact scans per day while it is open or in the tray.
-
-## Chromebook / Web Edition
-
-Chromebooks cannot run the Windows setup program directly. For them, use the GitHub Pages edition in `web/`.
-
-- GitHub Actions runs the same scanner, news classifier, odds movement logic, intelligence memory, risk policy, and portfolio builder used by the Windows app.
-- The generated static dataset is published with the web app as `web/data/latest.json`.
-- Chromebook users open the GitHub Pages URL, move the sliders, and build a betslip from the latest central scan.
-- The hosted scanner prebuilds every days-ahead value from `0` to `14` and every risk value from `0` to `100` in `5` point steps, so the risk slider is backed by real scored profiles rather than a tiny mock set.
-- The web edition can be installed as a PWA-style shortcut and caches the latest app shell.
-- The web edition cannot use a Windows tray or private local background service; that remains a Windows app feature. Its intelligence comes from the shared GitHub scan instead of a personal local scan.
-
-The workflow in `.github/workflows/worldcupmagic.yml` also builds the Windows setup program. On `v*` release tags it attaches the installer to the GitHub Release, and on scheduled runs it updates the GitHub Pages dataset for Chromebook users.
-
-## Real Data Providers
-
-Edit `config/providers.json`:
-
-- Odds: switch from `mock` to `the-odds-api` and set `ODDS_API_KEY`.
-- News: keep `self-gather`; it fetches configured public RSS/Atom/HTML sources directly and classifies the content locally. It does not use news APIs.
-- Stats: switch from `mock` to a football stats provider once API credentials and endpoints are chosen.
-
-See `docs/DATA_PROVIDERS.md`.
-
-`FutureTrade` remains completely separate. WorldCupMagic has its own package, scripts, config, data, and tests under `WorldCupMagic/` and does not import or modify FutureTrade files.
-
-## Outputs
-
-- `data/odds-snapshots.json`
-- `data/news-articles.json`
-- `data/recommendations-latest.json`
-- `data/bookmaker-offer-ranking-latest.json`
-- `data/daily-report-latest.md`
+`FutureTrade` remains completely separate. WorldCupMagik has its own package, scripts, config, data, and tests under `C:\CodexWorkspace\WorldCupMagik`.

@@ -1,4 +1,4 @@
-const CACHE_NAME = "worldcupmagik-v1";
+const CACHE_NAME = "worldcupmagik-v2";
 const STATIC_ASSETS = [
   "./",
   "./index.html",
@@ -26,6 +26,11 @@ self.addEventListener("fetch", (event) => {
 
   if (url.pathname.endsWith("/data/latest.json")) {
     event.respondWith(networkFirst(event.request, "./data/latest.json"));
+    return;
+  }
+
+  if (url.pathname.endsWith("/") || /\.(html|js|css|webmanifest)$/i.test(url.pathname)) {
+    event.respondWith(networkFirst(event.request));
     return;
   }
 

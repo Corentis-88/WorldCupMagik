@@ -57,7 +57,7 @@ export async function runSnapshotCycle({ state, now = new Date(), forceSnapshot 
   if (teamStats.length) {
     await writeJson(["data", "team-stats-latest.json"], {
       createdAt: now.toISOString(),
-      providerMode: engineState.providers.stats?.mode || "mock",
+      providerMode: engineState.providers.stats?.mode || "self-gather",
       teams: teamStats
     });
   }

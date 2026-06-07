@@ -2,18 +2,25 @@ const state = {
   data: null,
   profile: null
 };
+const standardSlip = [
+  ["single", "Single"],
+  ["double", "Double"],
+  ["trixie", "Trixie"],
+  ["accumulator_3", "3-leg accumulator"],
+  ["accumulator_4", "4-leg accumulator"],
+  ["accumulator_5", "5-leg accumulator"],
+  ["accumulator_6", "6-leg accumulator"],
+  ["accumulator_8", "8-leg accumulator"]
+];
 
 const el = {
   reload: document.getElementById("reloadButton"),
   scanStamp: document.getElementById("scanStamp"),
   stake: document.getElementById("stakeInput"),
-  betCount: document.getElementById("betCountInput"),
   risk: document.getElementById("riskInput"),
   riskValue: document.getElementById("riskValue"),
   days: document.getElementById("daysInput"),
   daysValue: document.getElementById("daysValue"),
-  riskLabel: document.getElementById("riskLabel"),
-  riskDescription: document.getElementById("riskDescription"),
   engineNotes: document.getElementById("engineNotes"),
   fixtureCount: document.getElementById("fixtureCount"),
   edgeCount: document.getElementById("edgeCount"),
@@ -23,7 +30,7 @@ const el = {
 };
 
 el.reload.addEventListener("click", loadData);
-for (const input of [el.stake, el.betCount, el.risk, el.days]) {
+for (const input of [el.stake, el.risk, el.days]) {
   input.addEventListener("input", render);
 }
 
@@ -54,43 +61,46 @@ function render() {
   const risk = Number(el.risk.value);
   const daysAhead = Number(el.days.value);
   const stake = Number(el.stake.value || 10);
-  const betCount = Math.max(1, Math.min(12, Number(el.betCount.value || 5)));
   const riskBucket = nearest(state.data.riskBuckets, risk);
   const dayBucket = nearest(state.data.dayBuckets, daysAhead);
   const profile = state.data.profiles[`d${dayBucket}_r${riskBucket}`] || Object.values(state.data.profiles)[0];
-  const slip = (profile?.betslip || []).slice(0, betCount).map((bet) => ({
+  const slipCount = Math.max(1, (profile?.betslip || []).length || 8);
+  const slip = (profile?.betslip || []).map((bet) => ({
     ...bet,
-    stake: round(stake / betCount, 2),
-    potentialReturn: round((stake / betCount) * Number(bet.combinedDecimalOdds || 0), 2)
+    stake: round(stake / slipCount, 2),
+    potentialReturn: recalculateReturn(bet, round(stake / slipCount, 2))
   }));
 
   el.riskValue.textContent = risk;
   el.daysValue.textContent = daysAhead;
-  el.scanStamp.textContent = `Latest scan: ${new Date(state.data.generatedAt).toLocaleString()}`;
-  el.riskLabel.textContent = profile?.riskProfile?.label || "Shared Engine";
-  el.riskDescription.textContent = profile?.riskProfile?.description || "Using the shared scanner profile.";
+  el.scanStamp.textContent = `Latest database: ${new Date(state.data.generatedAt).toLocaleString()} | build time ${state.data.collection?.totalBuildDurationSeconds || state.data.collection?.durationSeconds || "?"}s`;
   el.engineNotes.textContent = buildEngineNote(profile, state.data);
   el.fixtureCount.textContent = `${profile?.fixtureCount || 0} games`;
   el.edgeCount.textContent = `${profile?.eligibleLegCount || 0}`;
   el.memoryCount.textContent = `${state.data.intelligence?.teamCount || 0}`;
   el.returnTotal.textContent = money(slip.reduce((total, bet) => total + Number(bet.potentialReturn || 0), 0));
-  renderSlip(slip);
+  renderSlip(slip, profile);
 }
 
-function renderSlip(slip) {
+function renderSlip(slip, profile) {
   if (!slip.length) {
-    el.betslip.innerHTML = `<article class="bet-card">No betslip passed this risk/day window. Nudge the slider or wait for the next scan.</article>`;
+    el.betslip.innerHTML = standardSlip.map(([, label]) => unavailableCard(label, profile)).join("");
     return;
   }
+
+  const present = new Set(slip.map(categoryForBet));
+  const missingCards = standardSlip
+    .filter(([key]) => !present.has(key))
+    .map(([, label]) => unavailableCard(label, profile));
 
   el.betslip.innerHTML = slip.map((bet) => `
     <article class="bet-card">
       <header>
-        <span class="tag">${escapeHtml(bet.type)}</span>
+        <span class="tag">${escapeHtml(bet.label || bet.type)}</span>
         <span class="score">${Number(bet.score || 0).toFixed(1)} score</span>
       </header>
       <ul class="legs">
-        ${bet.legs.slice(0, 5).map((leg) => `
+        ${bet.legs.map((leg) => `
           <li>
             ${escapeHtml(leg.selectionLabel)} <strong>@ ${Number(leg.decimalOdds || 0).toFixed(2)}</strong>
             <span class="leg-note">${escapeHtml(formatLegNote(leg))}</span>
@@ -104,7 +114,42 @@ function renderSlip(slip) {
         <div><span>Return</span><strong>${money(bet.potentialReturn)}</strong></div>
       </div>
     </article>
-  `).join("");
+  `).concat(missingCards).join("");
+}
+
+function unavailableCard(label, profile) {
+  const message = profile?.dataQuality?.message || state.data?.collection?.dataQuality?.message || "The database is still collecting public-web source data.";
+
+  return `
+    <article class="bet-card unavailable">
+      <header>
+        <span class="tag">${escapeHtml(label)}</span>
+        <span class="score">waiting</span>
+      </header>
+      <p class="why">No real-data pick passed this risk/day profile yet. ${escapeHtml(message)}</p>
+    </article>
+  `;
+}
+
+function categoryForBet(bet) {
+  if (bet.category) {
+    return bet.category;
+  }
+
+  if (bet.type === "single") {
+    return "single";
+  }
+  if (bet.type === "double") {
+    return "double";
+  }
+  if (bet.type === "trixie") {
+    return "trixie";
+  }
+  if (bet.type === "accumulator") {
+    return `accumulator_${bet.legCount}`;
+  }
+
+  return bet.type;
 }
 
 function nearest(values, value) {
@@ -126,9 +171,10 @@ function buildEngineNote(profile, data) {
   const confidence = percent(markers.minLegConfidence);
   const intelligence = percent(markers.minIntelligenceConfidence);
   const learningCount = Number(data.intelligence?.outcomeLearningCount || 0);
-  const shared = data.engine?.sharedCore ? "same Windows scoring core" : "published scoring core";
+  const quality = data.collection?.dataQuality;
+  const sourceText = quality ? `${quality.sourceOk} sources ok, ${quality.sourceEmpty} empty, ${quality.sourceErrors} errors` : "source health pending";
 
-  return `Using the ${shared}: minimum edge ${edge}, leg confidence ${confidence}, intelligence confidence ${intelligence}, and ${learningCount} settled outcome learning records.`;
+  return `Risk ${profile?.riskProfile?.label || "profile"}: minimum edge ${edge}, leg confidence ${confidence}, intelligence confidence ${intelligence}, ${learningCount} settled outcome learning records, ${sourceText}.`;
 }
 
 function formatLegNote(leg) {
@@ -142,6 +188,16 @@ function formatLegNote(leg) {
 
 function percent(value) {
   return `${Math.round(Number(value || 0) * 1000) / 10}%`;
+}
+
+function recalculateReturn(bet, stake) {
+  if (bet.type !== "trixie" || !Array.isArray(bet.legs) || bet.legs.length !== 3) {
+    return round(stake * Number(bet.combinedDecimalOdds || 0), 2);
+  }
+
+  const odds = bet.legs.map((leg) => Number(leg.decimalOdds || 1));
+  const unit = stake / 4;
+  return round(unit * ((odds[0] * odds[1]) + (odds[0] * odds[2]) + (odds[1] * odds[2]) + (odds[0] * odds[1] * odds[2])), 2);
 }
 
 function registerServiceWorker() {

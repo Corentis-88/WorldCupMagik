@@ -1,29 +1,38 @@
 {
+  "fixtures": {
+    "mode": "self-gather",
+    "sourcesFile": "config/fixture-sources.json",
+    "requestTimeoutMs": 14000,
+    "userAgent": "WorldCupMagik/1.0 public-web gatherer; no APIs"
+  },
   "odds": {
-    "mode": "mock",
-    "apiKeyEnv": "ODDS_API_KEY",
-    "baseUrl": "https://api.the-odds-api.com/v4",
-    "sportKey": "soccer_fifa_world_cup",
-    "regions": [
-      "uk"
-    ],
-    "markets": [
-      "h2h",
-      "totals",
-      "btts"
-    ],
-    "oddsFormat": "decimal"
+    "mode": "self-gather",
+    "sourcesFile": "config/odds-sources.json",
+    "requestTimeoutMs": 14000,
+    "userAgent": "WorldCupMagik/1.0 public-web gatherer; no APIs"
   },
   "news": {
     "mode": "self-gather",
     "sourcesFile": "config/news-sources.json",
-    "maxArticlesPerSource": 12,
-    "maxArticleFetches": 24,
-    "requestTimeoutMs": 9000,
-    "userAgent": "WorldCupMagic/0.1 research bot; public sources only"
+    "maxArticlesPerSource": 18,
+    "maxArticleFetches": 36,
+    "requestTimeoutMs": 11000,
+    "userAgent": "WorldCupMagik/1.0 public-web gatherer; no news APIs"
   },
   "stats": {
-    "mode": "mock",
-    "filePath": "data/team-stats.json"
+    "mode": "self-gather",
+    "targetRecentMatches": 3,
+    "maxRecentMatches": 6,
+    "requestTimeoutMs": 14000,
+    "userAgent": "WorldCupMagik/1.0 public-web gatherer; no stats APIs",
+    "teamAliases": {
+      "USA": "United States men's",
+      "United States": "United States men's",
+      "Czechia": "Czech Republic",
+      "Turkiye": "Turkey",
+      "Türkiye": "Turkey",
+      "Congo DR": "DR Congo",
+      "Bosnia": "Bosnia and Herzegovina"
+    }
   }
 }

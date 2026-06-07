@@ -1,77 +1,53 @@
 # Data Providers
 
-The project starts with mock providers. That keeps the scoring engine testable before API contracts are chosen.
+WorldCupMagik uses public web gathering only. It does not use odds APIs, news APIs, stats APIs, private feeds, paywall bypassing, or logged-in scraping.
+
+## Fixtures
+
+`src/providers/fixtures-provider.mjs` reads `config/fixture-sources.json`.
+
+It fetches configured public fixture pages, extracts JSON-LD sports events when available, then falls back to team-v-team text patterns. Records are written with `sourceType: "public-web"`.
 
 ## Odds
 
-`src/providers/odds-provider.mjs` supports:
+`src/providers/odds-provider.mjs` reads `config/odds-sources.json`.
 
-- `mock`: generated demo odds.
-- `the-odds-api`: generic adapter for The Odds API style responses.
+The primary shape is public match pages with JSON-LD `SportsEvent.offers`, such as:
 
-Required config:
+- match winner;
+- draw;
+- over/under 2.5 goals;
+- both teams to score.
 
-```json
-{
-  "odds": {
-    "mode": "the-odds-api",
-    "apiKeyEnv": "ODDS_API_KEY",
-    "sportKey": "soccer_fifa_world_cup",
-    "regions": ["uk"],
-    "markets": ["h2h", "totals", "btts"],
-    "oddsFormat": "decimal"
-  }
-}
-```
-
-Check the provider's current sports key before going live, because sports keys and tournament coverage can change.
+When a fixture provides a public match URL, the scanner fetches that match page directly and stores every supported bookmaker price it can parse. No missing odds are invented.
 
 ## News
 
-`src/providers/news-provider.mjs` supports:
+`src/providers/news-provider.mjs` reads `config/news-sources.json`.
 
-- `mock`: generated demo article signals.
-- `self-gather`: direct fetching from configured public RSS, Atom, and HTML source pages.
+It downloads public RSS, Atom, and HTML pages, extracts article links/snippets, follows a bounded number of public article URLs, and classifies local text for:
 
-WorldCupMagic does not use news APIs. The self-gatherer reads `config/news-sources.json`, downloads public source pages, extracts links/titles/snippets, optionally follows a limited number of article links, and classifies the text locally.
-
-Rules:
-
-- no paywall bypass;
-- no logged-in scraping;
-- no private or restricted sources;
-- source URLs stay user-configurable;
-- failed sources are skipped and reported by the run output.
-
-## Stats
-
-`src/providers/stats-provider.mjs` currently supports:
-
-- `mock`: local team stats in `data/team-stats.json`.
-- `file`: local JSON stats supplied by the user or another collector.
-
-For live tournament use, add a provider for Opta, StatsBomb, API-Football, Sportradar, or another licensed football data source. The important fields are:
-
-- recent form;
-- expected goals for and against;
-- shots for and against;
-- set-piece strength;
-- transition threat;
-- pressing intensity;
-- goalkeeper form;
 - injuries and suspensions;
-- likely rotation;
-- player availability.
+- lineup clarity;
+- tactical fit;
+- morale;
+- rotation risk.
 
-## Bookmaker Offers
+## Stats And Form
 
-The offer ranking reads `data/bookmaker-offers.json`. Use live verified offer data before opening an account. The engine scores offer quality, but account creation still needs manual checks:
+`src/providers/stats-provider.mjs` gathers recent national-team result rows from public pages, especially national-team results pages with completed match tables. It derives last-three-match form from completed matches only.
 
-- regional legality;
-- age eligibility;
-- affordability;
-- wagering requirements;
-- minimum odds;
-- expiry;
-- withdrawal restrictions;
-- responsible gambling tools.
+When raw advanced stats are not available on a public row, the provider uses conservative estimates for xG, shots, and possession and lowers `statsCompleteness`. That lets the scoring model use the signal without pretending it is perfect.
+
+## Source Health
+
+Every scan writes:
+
+- `data/source-health-latest.json`
+- `data/source-health.json`
+
+Each source records `ok`, `empty`, or `error`, plus record count and reason. This is the guardrail that stops the engine from silently skipping data or filling gaps with fake records.
+
+## Adding Sources
+
+Add new public URLs in the config files first. The providers are deliberately generic, so most improvements should be source-list and alias changes rather than code changes.

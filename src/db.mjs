@@ -16,12 +16,12 @@ export function projectPath(...parts) {
 export async function readJson(pathParts, fallback) {
   try {
     const content = await withRetries(() => readFile(projectPath(...pathParts), "utf8"));
-    return JSON.parse(content);
+    return JSON.parse(stripBom(content));
   } catch (error) {
     if (writableDataDir && pathParts[0] === "data" && error?.code === "ENOENT") {
       try {
         const seedContent = await withRetries(() => readFile(join(rootDir, ...pathParts), "utf8"));
-        return JSON.parse(seedContent);
+        return JSON.parse(stripBom(seedContent));
       } catch (seedError) {
         if (arguments.length > 1 && seedError?.code === "ENOENT") {
           return fallback;
@@ -103,7 +103,7 @@ export async function loadEngineState() {
 
 async function readJsonUnlocked(targetPath) {
   const content = await withRetries(() => readFile(targetPath, "utf8"));
-  return JSON.parse(content);
+  return JSON.parse(stripBom(content));
 }
 
 async function writeJsonUnlocked(targetPath, value) {
@@ -185,6 +185,10 @@ async function withRetries(operation, attempts = 5) {
 
 function isTransientFileError(error) {
   return ["EBUSY", "EMFILE", "ENFILE", "EPERM", "EACCES"].includes(error?.code);
+}
+
+function stripBom(value) {
+  return String(value || "").replace(/^\uFEFF/, "");
 }
 
 function wait(ms) {

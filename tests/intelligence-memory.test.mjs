@@ -8,8 +8,17 @@ import {
   deriveTeamForm,
   outcomeLearningAdjustment
 } from "../src/intelligence-memory.mjs";
-import baseStats from "../data/team-stats.json" with { type: "json" };
-import matchHistory from "../data/team-match-history.json" with { type: "json" };
+
+const baseStats = [
+  teamStats("Japan", 1710),
+  teamStats("Canada", 1660)
+];
+const matchHistory = [
+  match("2026-03-31T19:00:00.000Z", "Japan", "Canada", 2, 1),
+  match("2026-03-27T19:00:00.000Z", "Japan", "Uruguay", 1, 1),
+  match("2025-11-15T19:00:00.000Z", "Canada", "Mexico", 0, 1),
+  match("2025-11-12T19:00:00.000Z", "Canada", "Panama", 3, 1)
+];
 
 test("derives recent team form from local match history", () => {
   const form = deriveTeamForm(matchHistory, "Japan", new Date("2026-06-06T10:00:00.000Z"));
@@ -43,7 +52,7 @@ test("scan intelligence feeds learned edge back into team stats", () => {
   const newsArticles = [{
     id: "news-1",
     publishedAt: now.toISOString(),
-    source: "Demo",
+    source: "Public sample",
     sourceReliability: 0.8,
     teamTags: ["Japan"],
     sentiment: 0.35,
@@ -104,5 +113,42 @@ function odds(capturedAt, decimalOdds, bookmaker) {
     market: "match_winner",
     outcome: "Japan",
     decimalOdds
+  };
+}
+
+function teamStats(team, rating) {
+  return {
+    team,
+    provider: "public-web",
+    rating,
+    recentPointsPerGame: 1.6,
+    xgFor: 1.35,
+    xgAgainst: 1.1,
+    shotsFor: 11,
+    shotsAgainst: 9,
+    possession: 53,
+    highPressIndex: 54,
+    setPieceThreat: 52,
+    transitionThreat: 55,
+    keeperForm: 53,
+    statsCompleteness: 0.72
+  };
+}
+
+function match(date, homeTeam, awayTeam, homeGoals, awayGoals) {
+  return {
+    id: `${date}-${homeTeam}-${awayTeam}`,
+    date,
+    homeTeam,
+    awayTeam,
+    homeGoals,
+    awayGoals,
+    homeXg: homeGoals + 0.4,
+    awayXg: awayGoals + 0.35,
+    homeShots: 10 + homeGoals,
+    awayShots: 9 + awayGoals,
+    homePossession: 53,
+    awayPossession: 47,
+    sourceType: "public-web"
   };
 }

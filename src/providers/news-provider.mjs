@@ -1,20 +1,21 @@
 import { readJson } from "../db.mjs";
 import { assessNewsSource } from "../source-quality.mjs";
 import { makeId, normalizeName } from "../utils.mjs";
-import { buildMockNews } from "./mock-data.mjs";
+import { sourceDiagnostic } from "./public-source.mjs";
 
 export async function fetchNewsArticles({ fixtures, providerConfig, now = new Date() }) {
-  const mode = providerConfig?.mode || "self-gather";
+  const result = await fetchNewsArticlesWithDiagnostics({ fixtures, providerConfig, now });
+  return result.records;
+}
 
-  if (mode === "mock") {
-    return buildMockNews(fixtures, now).map(enrichArticleQuality);
-  }
+export async function fetchNewsArticlesWithDiagnostics({ fixtures, providerConfig, now = new Date() }) {
+  const mode = providerConfig?.mode || "self-gather";
 
   if (mode === "self-gather") {
     return fetchSelfGatheredArticles({ fixtures, providerConfig, now });
   }
 
-  throw new Error(`Unsupported news provider mode: ${mode}. WorldCupMagic does not use news APIs.`);
+  throw new Error(`Unsupported news provider mode: ${mode}. WorldCupMagik news uses public RSS/HTML pages only.`);
 }
 
 async function fetchSelfGatheredArticles({ fixtures, providerConfig, now }) {
@@ -22,7 +23,7 @@ async function fetchSelfGatheredArticles({ fixtures, providerConfig, now }) {
   const sources = await readJson(sourcesFile.split(/[\\/]/), []);
   const teams = [...new Set(fixtures.flatMap((fixture) => [fixture.homeTeam, fixture.awayTeam]))];
   const sourceItems = [];
-  const failures = [];
+  const diagnostics = [];
 
   for (const source of sources) {
     try {
@@ -30,12 +31,22 @@ async function fetchSelfGatheredArticles({ fixtures, providerConfig, now }) {
       const extracted = extractSourceItems({ source, text, teams, now })
         .slice(0, Number(providerConfig.maxArticlesPerSource || 12));
       sourceItems.push(...extracted);
+      diagnostics.push(sourceDiagnostic({
+        kind: "news",
+        source,
+        status: extracted.length ? "ok" : "empty",
+        records: extracted.length,
+        reason: extracted.length ? "" : "Fetched public source but found no team/tournament news links for the selected fixture window.",
+        now
+      }));
     } catch (error) {
-      failures.push({
-        source: source.name,
-        url: source.url,
-        reason: error instanceof Error ? error.message : String(error)
-      });
+      diagnostics.push(sourceDiagnostic({
+        kind: "news",
+        source,
+        status: "error",
+        reason: error instanceof Error ? error.message : String(error),
+        now
+      }));
     }
   }
 
@@ -58,29 +69,10 @@ async function fetchSelfGatheredArticles({ fixtures, providerConfig, now }) {
 
   const deduped = dedupeArticles(enriched.map(enrichArticleQuality));
 
-  if (failures.length) {
-    deduped.push({
-      id: makeId("news_source_failures", [now.toISOString(), JSON.stringify(failures)]),
-      createdAt: now.toISOString(),
-      publishedAt: now.toISOString(),
-      provider: "self-gather",
-      source: "WorldCupMagic source monitor",
-      url: "https://localhost/worldcupmagic/source-monitor",
-      title: "Source gather failures",
-      description: failures.map((failure) => `${failure.source}: ${failure.reason}`).join("; "),
-      teamTags: [],
-      playerTags: [],
-      sentiment: 0,
-      signals: neutralSignals(),
-      sourceReliability: 0.3,
-      sourceQuality: "source_monitor",
-      sourceQualityReason: "One or more configured public sources could not be fetched.",
-      acceptedSource: true,
-      meta: { failures }
-    });
-  }
-
-  return deduped;
+  return {
+    records: deduped,
+    diagnostics
+  };
 }
 
 function extractSourceItems({ source, text, teams, now }) {
@@ -279,7 +271,7 @@ function tagTeams(text, teams) {
 function extractPlayerTags(text) {
   const matches = [...String(text || "").matchAll(/\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+){1,2})\b/g)]
     .map((match) => match[1])
-    .filter((value) => !/World Cup|FIFA|BBC Sport|The Guardian|Demo Sports|Football RSS/.test(value));
+    .filter((value) => !/World Cup|FIFA|BBC Sport|The Guardian|Football RSS/.test(value));
   return [...new Set(matches)].slice(0, 12);
 }
 

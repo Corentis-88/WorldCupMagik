@@ -7,25 +7,54 @@ export function buildBetRecommendations(legs, policy) {
     .filter((leg) => Number(leg.edge) >= Number(riskProfile.minLegEdge || 0))
     .filter((leg) => Number(leg.confidence) >= Number(riskProfile.minLegConfidence || 0))
     .sort((left, right) => right.score - left.score);
+  const accumulatorsByLegCount = buildAccumulatorRecommendationsByLegCount(eligibleLegs, policy);
 
   return {
     createdAt: new Date().toISOString(),
     eligibleLegCount: eligibleLegs.length,
+    singles: rankCombos(eligibleLegs.map((leg) => [leg]), "single", policy).slice(0, 12),
     doubles: rankCombos(combinations(eligibleLegs, 2), "double", policy).slice(0, 8),
     trixies: rankCombos(combinations(eligibleLegs, 3), "trixie", policy).slice(0, 8),
-    accumulators: buildAccumulatorRecommendations(eligibleLegs, policy).slice(0, 8)
+    accumulatorsByLegCount,
+    accumulators: Object.values(accumulatorsByLegCount).flat().sort((left, right) => right.score - left.score).slice(0, 16)
   };
 }
 
-function buildAccumulatorRecommendations(eligibleLegs, policy) {
-  const maxLegs = Math.min(Number(policy.riskProfile?.maxLegs || 5), 5);
-  const combos = [];
+function buildAccumulatorRecommendationsByLegCount(eligibleLegs, policy) {
+  const maxLegs = Math.min(Number(policy.riskProfile?.maxLegs || 8), 8);
+  const requestedLegCounts = [3, 4, 5, 6, 8].filter((legCount) => legCount <= maxLegs);
+  const byLegCount = {};
 
-  for (let size = 3; size <= maxLegs; size += 1) {
-    combos.push(...combinations(eligibleLegs, size, 15000));
+  for (const size of requestedLegCounts) {
+    const candidatePool = eligibleLegs.slice(0, accumulatorPoolSize(size));
+    byLegCount[size] = rankCombos(combinations(candidatePool, size, accumulatorCombinationLimit(size)), "accumulator", policy).slice(0, 8);
   }
 
-  return rankCombos(combos, "accumulator", policy);
+  return byLegCount;
+}
+
+function accumulatorPoolSize(size) {
+  if (size >= 8) {
+    return 26;
+  }
+
+  if (size >= 6) {
+    return 28;
+  }
+
+  return 32;
+}
+
+function accumulatorCombinationLimit(size) {
+  if (size >= 8) {
+    return 30000;
+  }
+
+  if (size >= 6) {
+    return 25000;
+  }
+
+  return 20000;
 }
 
 function rankCombos(combos, type, policy) {
@@ -48,7 +77,7 @@ export function scoreCombo(legs, type, policy) {
   const marketConfirmedLegs = legs.filter((leg) => leg.riskTag === "market_confirmed_edge");
   const contrarianLegs = legs.filter((leg) => leg.riskTag === "contrarian_value");
   const favouriteLegs = legs.filter((leg) => Number(leg.impliedProbability) >= Number(policy.riskProfile?.maxFavoriteImpliedProbability || 0.72));
-  const preferred = policy.riskProfile?.preferredCombinedOdds?.[type] || { min: 1, max: policy.riskProfile?.maxCombinedOdds || 50 };
+  const preferred = preferredOddsRange(type, legs.length, policy);
 
   if (fixtureIds.size !== legs.length) {
     hardBlocks.push("same_fixture_correlation");
@@ -124,6 +153,18 @@ export function scoreCombo(legs, type, policy) {
     hardBlocks,
     thesis: buildComboThesis({ type, legs, combinedDecimalOdds, expectedValue, riskLegs, favouriteLegs })
   };
+}
+
+function preferredOddsRange(type, legCount, policy) {
+  const riskProfile = policy.riskProfile || {};
+
+  if (type === "accumulator") {
+    return riskProfile.preferredCombinedOdds?.accumulatorByLegCount?.[legCount]
+      || riskProfile.preferredCombinedOdds?.accumulator
+      || { min: 1, max: riskProfile.maxCombinedOdds || 50 };
+  }
+
+  return riskProfile.preferredCombinedOdds?.[type] || { min: 1, max: riskProfile.maxCombinedOdds || 50 };
 }
 
 function oddsFitScore(value, min, max) {
