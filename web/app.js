@@ -12,10 +12,16 @@ const standardSlip = [
   ["accumulator_6", "6-leg accumulator"],
   ["accumulator_8", "8-leg accumulator"]
 ];
+const defaultGatheringSchedule = {
+  automaticRunMinutesUtc: [323, 503, 683, 863, 1043, 1223, 1403],
+  gatheringWindowMinutes: 5,
+  gatheringMessage: "Data Gathering: Come back in 5"
+};
 
 const el = {
   reload: document.getElementById("reloadButton"),
   scanStamp: document.getElementById("scanStamp"),
+  gatheringNotice: document.getElementById("gatheringNotice"),
   stake: document.getElementById("stakeInput"),
   risk: document.getElementById("riskInput"),
   riskValue: document.getElementById("riskValue"),
@@ -64,6 +70,7 @@ function render() {
   const riskBucket = nearest(state.data.riskBuckets, risk);
   const dayBucket = nearest(state.data.dayBuckets, daysAhead);
   const profile = state.data.profiles[`d${dayBucket}_r${riskBucket}`] || Object.values(state.data.profiles)[0];
+  const gathering = automaticGatheringState(state.data);
   const slipCount = Math.max(1, (profile?.betslip || []).length || 8);
   const slip = (profile?.betslip || []).map((bet) => ({
     ...bet,
@@ -73,7 +80,9 @@ function render() {
 
   el.riskValue.textContent = risk;
   el.daysValue.textContent = daysAhead;
-  el.scanStamp.textContent = `Latest database: ${new Date(state.data.generatedAt).toLocaleString()} | build time ${state.data.collection?.totalBuildDurationSeconds || state.data.collection?.durationSeconds || "?"}s`;
+  el.scanStamp.textContent = gathering.active ? gathering.message : `Latest database: ${new Date(state.data.generatedAt).toLocaleString()} | build time ${state.data.collection?.totalBuildDurationSeconds || state.data.collection?.durationSeconds || "?"}s`;
+  el.gatheringNotice.hidden = !gathering.active;
+  el.gatheringNotice.textContent = gathering.message;
   el.engineNotes.textContent = buildEngineNote(profile, state.data);
   el.fixtureCount.textContent = `${profile?.fixtureCount || 0} games`;
   el.edgeCount.textContent = `${profile?.eligibleLegCount || 0}`;
@@ -154,6 +163,27 @@ function categoryForBet(bet) {
 
 function nearest(values, value) {
   return values.reduce((winner, item) => Math.abs(item - value) < Math.abs(winner - value) ? item : winner, values[0]);
+}
+
+function automaticGatheringState(data, now = new Date()) {
+  const schedule = data?.collection?.schedule || defaultGatheringSchedule;
+  const runMinutes = Array.isArray(schedule.automaticRunMinutesUtc) && schedule.automaticRunMinutesUtc.length
+    ? schedule.automaticRunMinutesUtc
+    : defaultGatheringSchedule.automaticRunMinutesUtc;
+  const windowMinutes = Number(schedule.gatheringWindowMinutes || defaultGatheringSchedule.gatheringWindowMinutes);
+  const message = schedule.gatheringMessage || defaultGatheringSchedule.gatheringMessage;
+  const currentMinute = (now.getUTCHours() * 60) + now.getUTCMinutes() + (now.getUTCSeconds() / 60);
+  const active = runMinutes.some((startMinute) => {
+    const endMinute = startMinute + windowMinutes;
+
+    if (endMinute < 1440) {
+      return currentMinute >= startMinute && currentMinute < endMinute;
+    }
+
+    return currentMinute >= startMinute || currentMinute < (endMinute - 1440);
+  });
+
+  return { active, message };
 }
 
 function money(value) {

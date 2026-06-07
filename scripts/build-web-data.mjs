@@ -12,6 +12,7 @@ const outputDir = join(rootDir, "web", "data");
 const now = new Date();
 const riskBuckets = Array.from({ length: 21 }, (_, index) => index * 5);
 const dayBuckets = Array.from({ length: 15 }, (_, index) => index);
+const automaticRunMinutesUtc = [5, 8, 11, 14, 17, 20, 23].map((hour) => (hour * 60) + 23);
 
 await mkdir(outputDir, { recursive: true });
 
@@ -88,6 +89,11 @@ const payload = {
     durationSeconds: Math.round(collectionDurationMs / 100) / 10,
     totalBuildDurationMs: totalDurationMs,
     totalBuildDurationSeconds: Math.round(totalDurationMs / 100) / 10,
+    schedule: {
+      automaticRunMinutesUtc,
+      gatheringWindowMinutes: 5,
+      gatheringMessage: "Data Gathering: Come back in 5"
+    },
     sourceHealth: centralScan.sourceHealth,
     dataQuality: centralScan.dataQuality
   },

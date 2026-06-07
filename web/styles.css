@@ -83,6 +83,17 @@ input {
   cursor: pointer;
 }
 
+.gathering-notice {
+  margin-top: 14px;
+  padding: 13px 16px;
+  border: 1px solid rgba(214, 76, 57, 0.32);
+  border-radius: 8px;
+  background: #fff1ec;
+  color: #8d2d1f;
+  font-size: 18px;
+  font-weight: 900;
+}
+
 .controls,
 .summary {
   display: grid;
