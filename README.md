@@ -13,6 +13,7 @@ It is decision support only. It does not place bets, does not guarantee returns,
 - Stores source health for every scan so blocked or empty sources are visible.
 - Scores Single, Double, Trixie, 3-leg accumulator, 4-leg accumulator, 5-leg accumulator, 6-leg accumulator, and 8-leg accumulator categories.
 - Uses risk-slider policy to trade confidence, edge, price, bookmaker coverage, and calculated-risk appetite.
+- Supports match winner, draw no bet, both teams to score, over/under 2.5 goals, and anytime scorer when public scorer prices are available.
 
 ## Hosted Web Edition
 

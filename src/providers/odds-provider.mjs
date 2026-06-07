@@ -190,6 +190,8 @@ function extractJsonLdOdds({ html, fixtures, source, now }) {
         capturedAt,
         market: mapped.market,
         outcome: mapped.outcome,
+        playerName: mapped.playerName,
+        playerTeam: mapped.playerTeam,
         decimalOdds: price
       }));
     }
@@ -213,9 +215,14 @@ function matchFixtureFromJsonLd(fixtures, item) {
 
 function mapJsonLdOffer(offer, fixture, event) {
   const name = String(offer.name || "");
+  const scorer = parseAnytimeScorerOffer(name);
   const prefix = normalizeName(name.split(/[—-]/)[0]);
   const homeNames = [fixture.homeTeam, event.homeTeam?.alternateName, event.homeTeam?.name].filter(Boolean).map(normalizeName);
   const awayNames = [fixture.awayTeam, event.awayTeam?.alternateName, event.awayTeam?.name].filter(Boolean).map(normalizeName);
+
+  if (scorer) {
+    return { market: "anytime_scorer", outcome: scorer.playerName, playerName: scorer.playerName };
+  }
 
   if (prefix === "draw") {
     return { market: "match_winner", outcome: "Draw" };
@@ -338,6 +345,13 @@ function extractFixtureOdds({ block, fixture, source, now }) {
     outcome: "No",
     labelPattern: /(?:btts|both teams to score)[\s\S]{0,80}\bno\b/i
   }));
+  records.push(...extractAnytimeScorerOdds({
+    block,
+    fixture,
+    source,
+    bookmaker,
+    capturedAt
+  }));
 
   return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}`);
 }
@@ -417,6 +431,87 @@ function extractMarketPairOdds({ block, fixture, source, bookmaker, capturedAt, 
   })];
 }
 
+function extractAnytimeScorerOdds({ block, fixture, source, bookmaker, capturedAt }) {
+  const section = scorerSection(block);
+
+  if (!section) {
+    return [];
+  }
+
+  const records = [];
+  const pattern = /\b([A-Z][A-Za-zÀ-ÿ' .-]{2,45})\s+(\d{1,2}\.\d{2}|\d{1,3}\s*\/\s*\d{1,3})\b/g;
+
+  for (const match of section.matchAll(pattern)) {
+    const playerName = cleanScorerName(match[1]);
+    const decimalOdds = toDecimalOdds(match[2]);
+
+    if (!playerName || !decimalOdds || !looksLikeScorerName(playerName, fixture)) {
+      continue;
+    }
+
+    records.push(toOddsRecord({
+      fixture,
+      source,
+      bookmaker,
+      capturedAt,
+      market: "anytime_scorer",
+      outcome: playerName,
+      decimalOdds,
+      playerName
+    }));
+  }
+
+  return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}`);
+}
+
+function scorerSection(block) {
+  const match = String(block || "").match(/(?:anytime\s+(?:goal)?scorer|anytime\s+to\s+score|to\s+score\s+anytime)[\s\S]{0,2200}?(?=(?:full\s+time\s+result|over\/under|both\s+teams|correct\s+score|odds\s+last|$))/i);
+  return match?.[0] || "";
+}
+
+function parseAnytimeScorerOffer(name) {
+  const text = String(name || "").replace(/\s+/g, " ").trim();
+
+  if (!/(?:anytime\s+(?:goal)?scorer|anytime\s+to\s+score|to\s+score\s+anytime|\bto\s+score\b)/i.test(text)) {
+    return null;
+  }
+
+  if (/(?:both\s+teams|team\s+to\s+score|correct\s+score|scorecast|first\s+goal|top\s+(?:team\s+)?goalscorer|golden\s+boot)/i.test(text)) {
+    return null;
+  }
+
+  const [candidate] = text.split(/\s+(?:anytime\s+(?:goal)?scorer|anytime\s+to\s+score|to\s+score\s+anytime|to\s+score)\b|[—-]| at /i);
+  const playerName = cleanScorerName(candidate);
+
+  return playerName && looksLikeScorerName(playerName) ? { playerName } : null;
+}
+
+function cleanScorerName(value) {
+  return String(value || "")
+    .replace(/\b(?:World Cup|FIFA|Odds|Price|Bet|Boost|Selection|Player|Anytime|Goalscorer|Scorer)\b/gi, " ")
+    .replace(/^[^A-Za-zÀ-ÿ]+|[^A-Za-zÀ-ÿ]+$/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function looksLikeScorerName(value, fixture = null) {
+  const normalized = normalizeName(value);
+
+  if (!normalized || normalized.split(/\s+/).length > 5) {
+    return false;
+  }
+
+  if (/^(yes|no|draw|over|under|home|away|selection|odds|price)$/.test(normalized)) {
+    return false;
+  }
+
+  if (fixture && (teamNameMatches(value, fixture.homeTeam) || teamNameMatches(value, fixture.awayTeam))) {
+    return false;
+  }
+
+  return /[a-z]/.test(normalized) && normalized.length >= 4;
+}
+
 function firstPriceNearAliases(block, aliases) {
   for (const alias of aliases) {
     const pattern = new RegExp(`${escapeRegExp(alias)}[\\s\\S]{0,90}?((?:\\d{1,2}\\.\\d{2})|(?:\\d{1,3}\\s*\\/\\s*\\d{1,3}))`, "i");
@@ -450,7 +545,7 @@ function containsBothTeams(block, fixture) {
   return teamNameMatches(block, fixture.homeTeam) && teamNameMatches(block, fixture.awayTeam);
 }
 
-function toOddsRecord({ fixture, source, bookmaker, capturedAt, market, outcome, decimalOdds }) {
+function toOddsRecord({ fixture, source, bookmaker, capturedAt, market, outcome, decimalOdds, playerName, playerTeam }) {
   return {
     id: makeId("odds", [capturedAt, bookmaker, fixture.id, market, outcome, decimalOdds]),
     capturedAt,
@@ -464,6 +559,8 @@ function toOddsRecord({ fixture, source, bookmaker, capturedAt, market, outcome,
     awayTeam: fixture.awayTeam,
     market,
     outcome,
+    playerName,
+    playerTeam,
     decimalOdds: Number(decimalOdds)
   };
 }

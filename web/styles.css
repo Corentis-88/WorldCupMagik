@@ -94,6 +94,13 @@ input {
   font-weight: 900;
 }
 
+.disclaimer {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 750;
+}
+
 .controls,
 .summary {
   display: grid;
@@ -130,7 +137,7 @@ input {
 }
 
 .engine-status strong {
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .engine-status p {

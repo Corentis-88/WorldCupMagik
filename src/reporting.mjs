@@ -6,7 +6,7 @@ export function buildDailyReport({ recommendations, offerRanking, legCandidates,
   lines.push(`Region: ${policy.region || policy.bookmakerOfferPolicy?.region || "unknown"}`);
   lines.push(`Snapshot start date: ${policy.snapshotStartDate}`);
   lines.push("");
-  lines.push("This report is betting research only. It does not place bets or guarantee returns.");
+  lines.push("Remember its a mugs game. Anything can happen in football #mcnultysblueandwhitearmy");
   lines.push("");
   lines.push("## Source State");
   lines.push("");

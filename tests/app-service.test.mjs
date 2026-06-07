@@ -53,6 +53,29 @@ test("betslip selection returns the fixed category set it can support", () => {
   assert.ok(betslip[0].potentialReturn > 10);
 });
 
+test("single selection shifts from steady to riskier value as risk rises", () => {
+  const steady = combo("single", 1.53, 84, 1);
+  steady.averageEdge = 0.044;
+  steady.expectedValue = 0.07;
+  steady.legs[0].edge = 0.044;
+  steady.legs[0].confidence = 0.81;
+  steady.legs[0].riskTag = "steady_edge";
+  steady.legs[0].selectionLabel = "Mexico vs South Africa: Mexico to win";
+
+  const spicy = combo("single", 2.13, 86, 1);
+  spicy.averageEdge = 0.226;
+  spicy.expectedValue = 0.45;
+  spicy.legs[0].edge = 0.226;
+  spicy.legs[0].confidence = 0.81;
+  spicy.legs[0].riskTag = "calculated_risk";
+  spicy.legs[0].selectionLabel = "Mexico vs South Africa: Both teams to score: Yes";
+
+  const recommendations = { singles: [steady, spicy], doubles: [], trixies: [], accumulatorsByLegCount: {}, accumulators: [] };
+
+  assert.equal(selectBetslip({ recommendations, stake: 10, risk: 5 })[0].legs[0].selectionLabel, "Mexico vs South Africa: Mexico to win");
+  assert.equal(selectBetslip({ recommendations, stake: 10, risk: 90 })[0].legs[0].selectionLabel, "Mexico vs South Africa: Both teams to score: Yes");
+});
+
 function combo(type, odds, score, legCount) {
   return {
     id: `${type}_${odds}`,

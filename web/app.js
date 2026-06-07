@@ -17,6 +17,7 @@ const defaultGatheringSchedule = {
   gatheringWindowMinutes: 5,
   gatheringMessage: "Data Gathering: Come back in 5"
 };
+const usageInstructions = "1. Input total stake 2. Choose Days Ahead 3. Adjust risk slider above 4. Click Refresh Central Scan 5. We add our secret sauce and some luck, we don't just go by the bookies! 5. Enjoy!";
 
 const el = {
   reload: document.getElementById("reloadButton"),
@@ -32,6 +33,7 @@ const el = {
   edgeCount: document.getElementById("edgeCount"),
   memoryCount: document.getElementById("memoryCount"),
   returnTotal: document.getElementById("returnTotal"),
+  marketLine: document.getElementById("marketLine"),
   betslip: document.getElementById("betslipList")
 };
 
@@ -44,7 +46,7 @@ loadData();
 registerServiceWorker();
 
 async function loadData() {
-  el.scanStamp.textContent = "Loading latest GitHub scan...";
+  el.scanStamp.textContent = "Loading latest central scan...";
 
   try {
     const response = await fetch(`./data/latest.json?v=${Date.now()}`);
@@ -83,11 +85,14 @@ function render() {
   el.scanStamp.textContent = gathering.active ? gathering.message : `Latest database: ${new Date(state.data.generatedAt).toLocaleString()} | build time ${state.data.collection?.totalBuildDurationSeconds || state.data.collection?.durationSeconds || "?"}s`;
   el.gatheringNotice.hidden = !gathering.active;
   el.gatheringNotice.textContent = gathering.message;
-  el.engineNotes.textContent = buildEngineNote(profile, state.data);
+  el.engineNotes.textContent = usageInstructions;
   el.fixtureCount.textContent = `${profile?.fixtureCount || 0} games`;
   el.edgeCount.textContent = `${profile?.eligibleLegCount || 0}`;
   el.memoryCount.textContent = `${state.data.intelligence?.teamCount || 0}`;
   el.returnTotal.textContent = money(slip.reduce((total, bet) => total + Number(bet.potentialReturn || 0), 0));
+  if (el.marketLine) {
+    el.marketLine.textContent = marketLine(state.data);
+  }
   renderSlip(slip, profile);
 }
 
@@ -106,7 +111,7 @@ function renderSlip(slip, profile) {
     <article class="bet-card">
       <header>
         <span class="tag">${escapeHtml(bet.label || bet.type)}</span>
-        <span class="score">${Number(bet.score || 0).toFixed(1)} score</span>
+        <span class="score">${escapeHtml(confidenceLabel(bet))}</span>
       </header>
       <ul class="legs">
         ${bet.legs.map((leg) => `
@@ -195,18 +200,6 @@ function round(value, digits = 2) {
   return Math.round(Number(value || 0) * factor) / factor;
 }
 
-function buildEngineNote(profile, data) {
-  const markers = profile?.policyMarkers || {};
-  const edge = percent(markers.minLegEdge);
-  const confidence = percent(markers.minLegConfidence);
-  const intelligence = percent(markers.minIntelligenceConfidence);
-  const learningCount = Number(data.intelligence?.outcomeLearningCount || 0);
-  const quality = data.collection?.dataQuality;
-  const sourceText = quality ? `${quality.sourceOk} sources ok, ${quality.sourceEmpty} empty, ${quality.sourceErrors} errors` : "source health pending";
-
-  return `Risk ${profile?.riskProfile?.label || "profile"}: minimum edge ${edge}, leg confidence ${confidence}, intelligence confidence ${intelligence}, ${learningCount} settled outcome learning records, ${sourceText}.`;
-}
-
 function formatLegNote(leg) {
   const edge = percent(leg.edge);
   const confidence = percent(leg.confidence);
@@ -214,6 +207,35 @@ function formatLegNote(leg) {
   const bookmaker = leg.bookmaker ? ` via ${leg.bookmaker}` : "";
 
   return `${tag}${bookmaker} | edge ${edge} | confidence ${confidence}`;
+}
+
+function confidenceLabel(bet) {
+  const confidence = Number(bet.averageConfidence || bet.legs?.[0]?.confidence || 0);
+  const edge = Number(bet.legs?.[0]?.edge || 0);
+
+  if (bet.legCount === 1 && Number.isFinite(edge)) {
+    return `edge ${percent(edge)}`;
+  }
+
+  return `confidence ${percent(confidence)}`;
+}
+
+function marketLine(data) {
+  const labels = {
+    match_winner: "Match winner",
+    draw_no_bet: "Draw no bet",
+    anytime_scorer: "Anytime scorer",
+    both_teams_to_score: "Both teams to score",
+    over_2_5_goals: "Over 2.5 goals",
+    under_2_5_goals: "Under 2.5 goals"
+  };
+  const configured = data?.markets?.configured || [];
+  const observed = data?.markets?.observed || {};
+  const active = configured.map((market) => labels[market] || market).join(", ");
+  const scorerCount = Number(observed.anytime_scorer || 0);
+  const scorerText = scorerCount ? ` Anytime scorer prices found: ${scorerCount}.` : " Anytime scorer is switched on, but current public sources have not exposed scorer prices yet.";
+
+  return `Markets: ${active}.${scorerText}`;
 }
 
 function percent(value) {

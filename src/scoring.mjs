@@ -1,9 +1,10 @@
-import { clamp, daysBetween, decimalToImpliedProbability, hoursBetween, latestBy, logistic, makeId, mean, round } from "./utils.mjs";
+import { clamp, daysBetween, decimalToImpliedProbability, hoursBetween, latestBy, logistic, makeId, mean, normalizeName, round } from "./utils.mjs";
 import { buildOddsMovementSummaries, outcomeLearningAdjustment } from "./intelligence-memory.mjs";
 
 export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, teamStats, policy, now = new Date(), outcomeLearning = null }) {
   const statsByTeam = new Map(teamStats.map((team) => [team.team, team]));
   const latestOdds = bestLatestOddsByOutcome(oddsSnapshots);
+  const latestOddsRecords = [...latestOdds.values()];
   const oddsMovement = buildOddsMovementSummaries(oddsSnapshots);
   const newsByTeam = buildNewsByTeam(newsArticles, policy, now);
   const candidates = [];
@@ -49,11 +50,63 @@ export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, team
         candidates.push(candidate);
       }
     }
+
+    if ((policy.markets || []).includes("anytime_scorer")) {
+      for (const odds of latestOddsRecords.filter((record) => record.fixtureId === fixture.id && record.market === "anytime_scorer")) {
+        const modelProbability = estimateAnytimeScorerProbability({ fixture, odds, homeStats, awayStats, model });
+        const movement = oddsMovement.get(outcomeKey(fixture.id, "anytime_scorer", odds.outcome));
+
+        candidates.push(scoreLeg({
+          fixture,
+          market: "anytime_scorer",
+          outcome: odds.outcome,
+          modelProbability,
+          odds,
+          movement,
+          model,
+          policy,
+          now,
+          outcomeLearning
+        }));
+      }
+    }
   }
 
   return candidates
     .sort((left, right) => right.score - left.score)
     .map((candidate, index) => ({ ...candidate, rank: index + 1 }));
+}
+
+function estimateAnytimeScorerProbability({ fixture, odds, homeStats, awayStats, model }) {
+  const implied = decimalToImpliedProbability(odds.decimalOdds);
+  const playerTeam = inferPlayerTeam(odds, fixture);
+  const expectedGoals = Number(model.components.expectedGoals || 2.5);
+  const homeAttack = (Number(homeStats.xgFor || 1.3) + Number(awayStats.xgAgainst || 1.2)) / 2;
+  const awayAttack = (Number(awayStats.xgFor || 1.3) + Number(homeStats.xgAgainst || 1.2)) / 2;
+  const teamAttack = playerTeam === fixture.homeTeam ? homeAttack : playerTeam === fixture.awayTeam ? awayAttack : mean([homeAttack, awayAttack]);
+  const teamGoalLikelihood = clamp(0.32 + teamAttack * 0.18 + expectedGoals * 0.045, 0.28, 0.84);
+  const roleLikelihood = clamp(0.2 + implied * 0.78, 0.16, 0.62);
+  const newsLift = playerTeam === fixture.homeTeam
+    ? Number(model.components.homeNewsImpact || 0) * 0.035
+    : playerTeam === fixture.awayTeam
+      ? Number(model.components.awayNewsImpact || 0) * 0.035
+      : 0;
+
+  return round(clamp(teamGoalLikelihood * roleLikelihood + newsLift, 0.04, 0.58), 4);
+}
+
+function inferPlayerTeam(odds, fixture) {
+  const explicit = odds.playerTeam || "";
+
+  if (teamTextMatches(explicit, fixture.homeTeam)) {
+    return fixture.homeTeam;
+  }
+
+  if (teamTextMatches(explicit, fixture.awayTeam)) {
+    return fixture.awayTeam;
+  }
+
+  return "";
 }
 
 export function bestLatestOddsByOutcome(oddsSnapshots) {
@@ -225,6 +278,8 @@ function scoreLeg({ fixture, market, outcome, modelProbability, odds, movement, 
     awayTeam: fixture.awayTeam,
     market,
     outcome,
+    playerName: odds.playerName,
+    playerTeam: odds.playerTeam,
     selectionLabel: selectionLabel({ fixture, market, outcome }),
     bookmaker: odds.bookmaker,
     decimalOdds: Number(odds.decimalOdds),
@@ -389,6 +444,7 @@ function selectionLabel({ fixture, market, outcome }) {
   const marketLabels = {
     match_winner: `${outcome} to win`,
     draw_no_bet: `${outcome} draw no bet`,
+    anytime_scorer: `${outcome} anytime scorer`,
     both_teams_to_score: `Both teams to score: ${outcome}`,
     over_2_5_goals: `${outcome} 2.5 goals`,
     under_2_5_goals: `${outcome} 2.5 goals`
@@ -452,6 +508,26 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
     }
   }
 
+  if (market === "anytime_scorer") {
+    if (expectedGoals >= 2.65) {
+      score += 4;
+      reasons.push(`goals environment is live at ${expectedGoals} expected goals`);
+    } else if (expectedGoals <= 2.15) {
+      score -= 5;
+      reasons.push(`goals environment is thin at ${expectedGoals} expected goals`);
+    }
+
+    if (Number(odds.decimalOdds) < 1.75 && appetite > 0.45) {
+      score -= 5;
+      reasons.push("anytime scorer price is too short for this risk setting");
+    }
+
+    if (Number(odds.decimalOdds) >= 3 && appetite >= 0.45 && modelProbability >= 0.2) {
+      score += 3;
+      reasons.push("scorer price gives the betslip a higher-upside angle");
+    }
+  }
+
   if (edge > 0.055 && dataCompleteness >= 0.62) {
     score += 4;
     reasons.push("edge is strong enough to justify focus");
@@ -471,4 +547,10 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
 function riskAppetite(policy) {
   const maxCombinedOdds = Number(policy.riskProfile?.maxCombinedOdds || 45);
   return clamp((maxCombinedOdds - 22) / 58, 0, 1);
+}
+
+function teamTextMatches(left, right) {
+  const a = normalizeName(left);
+  const b = normalizeName(right);
+  return Boolean(a && b && (a === b || a.includes(b) || b.includes(a)));
 }

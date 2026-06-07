@@ -16,10 +16,14 @@ The primary shape is public match pages with JSON-LD `SportsEvent.offers`, such 
 
 - match winner;
 - draw;
+- draw no bet;
 - over/under 2.5 goals;
 - both teams to score.
+- anytime scorer, when public player-scorer prices are exposed.
 
 When a fixture provides a public match URL, the scanner fetches that match page directly and stores every supported bookmaker price it can parse. No missing odds are invented.
+
+The current OnlyOdds World Cup match pages expose match result, over/under 2.5, and both-teams-to-score prices. They do not yet expose anytime-scorer prices for the opening fixture, so scorer legs will stay absent until a configured public source provides real player odds.
 
 ## News
 

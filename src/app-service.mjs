@@ -38,6 +38,7 @@ export async function getDashboardState({ now = new Date() } = {}) {
     stats: {
       fixtureCount: liveFixtures.length,
       oddsSnapshotCount: state.oddsSnapshots.filter(isPublicOddsRecord).length,
+      scorerOddsCount: state.oddsSnapshots.filter(isPublicOddsRecord).filter(isScorerOddsRecord).length,
       newsArticleCount: state.newsArticles.filter(isPublicNewsArticle).length,
       teamStatsCount: state.teamStats.filter(isPublicTeamStat).length,
       teamIntelligenceCount: latestScan?.intelligence?.teamCount || 0,
@@ -217,6 +218,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
     collected: {
       fixtures: fixtureResult.records.length,
       oddsRecords: oddsRecords.length,
+      scorerOddsRecords: oddsRecords.filter(isScorerOddsRecord).length,
       newsArticles: newsArticles.length,
       teamStats: teamStats.length,
       matchHistoryRecords: statsResult.matchHistory?.length || 0,
@@ -279,7 +281,9 @@ function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, 
     sourceErrors,
     fixtureCount: scanFixtures.length,
     freshOddsRecords: oddsRecords.length,
+    freshScorerOddsRecords: oddsRecords.filter(isScorerOddsRecord).length,
     oddsHistoryRecords: allOddsSnapshots.length,
+    scorerOddsHistoryRecords: allOddsSnapshots.filter(isScorerOddsRecord).length,
     newsArticleCount: newsArticles.length,
     teamStatsCount: teamStats.length,
     teamsWithRecentMatches,
@@ -342,7 +346,7 @@ export function buildRiskPolicy(basePolicy, riskValue) {
     riskProfile: {
       ...(basePolicy.riskProfile || {}),
       mode: describeRisk(risk).key,
-      minLegEdge: round(0.058 - appetite * 0.052, 4),
+      minLegEdge: round(0.03 - appetite * 0.03, 4),
       minLegConfidence: round(0.72 - appetite * 0.34, 4),
       minIntelligenceConfidence: round(0.64 - appetite * 0.3, 4),
       maxFavoriteImpliedProbability: round(0.82 - appetite * 0.22, 4),
@@ -396,7 +400,7 @@ export function describeRisk(riskValue) {
     return {
       key: "calculated",
       label: "Calculated Risk",
-      description: "Adds price value and tactical mismatches without going full chaos mode."
+      description: "Uses public odds, team form, news, and value signals without just following favourites."
     };
   }
 
@@ -432,7 +436,7 @@ export function selectNextFixtures(fixtures, count, now = new Date()) {
 export function selectBetslip({ recommendations, stake, risk }) {
   const totalStake = clampNumber(stake, 1, 100000);
   const selected = STANDARD_BET_TYPES
-    .map((category) => ({ category, combo: pickCategoryCombo(recommendations, category) }))
+    .map((category) => ({ category, combo: pickCategoryCombo(recommendations, category, risk) }))
     .filter((item) => item.combo);
   const stakePerBet = round(totalStake / Math.max(1, selected.length || STANDARD_BET_TYPES.length), 2);
 
@@ -469,13 +473,13 @@ function sanitizeSettings(settings) {
   };
 }
 
-function pickCategoryCombo(recommendations, category) {
+function pickCategoryCombo(recommendations, category, risk = 50) {
   if (!recommendations) {
     return null;
   }
 
   if (category.type === "single") {
-    return bestCombo(recommendations.singles || []);
+    return bestSingleForRisk(recommendations.singles || [], risk);
   }
 
   if (category.type === "double") {
@@ -489,6 +493,57 @@ function pickCategoryCombo(recommendations, category) {
   const byLegCount = recommendations.accumulatorsByLegCount?.[category.legCount] || [];
   const fallback = (recommendations.accumulators || []).filter((combo) => Number(combo.legCount) === category.legCount);
   return bestCombo(byLegCount.length ? byLegCount : fallback);
+}
+
+function bestSingleForRisk(combos, risk) {
+  const appetite = clampNumber(risk, 0, 100) / 100;
+  const targetOdds = 1.48 + appetite * 2.35;
+  const targetRisk = appetite * 3;
+
+  return [...combos].sort((left, right) => {
+    return singleRiskFit(right, targetOdds, targetRisk, appetite) - singleRiskFit(left, targetOdds, targetRisk, appetite);
+  })[0] || null;
+}
+
+function singleRiskFit(combo, targetOdds, targetRisk, appetite) {
+  const leg = combo.legs?.[0] || {};
+  const odds = Number(combo.combinedDecimalOdds || leg.decimalOdds || 1);
+  const confidence = Number(combo.averageConfidence || leg.confidence || 0);
+  const edge = Number(combo.averageEdge || leg.edge || 0);
+  const expectedValue = Number(combo.expectedValue || 0);
+  const oddsFit = Math.max(0, 1 - Math.abs(Math.log(Math.max(1.01, odds) / targetOdds)) / 0.78);
+  const tagFit = Math.max(0, 1 - Math.abs(riskTagLevel(leg.riskTag) - targetRisk) / 3);
+  const lowRiskStability = appetite < 0.38 && ["steady_edge", "value_favourite", "market_confirmed_edge"].includes(leg.riskTag) ? 9 : 0;
+  const highRiskPrice = appetite > 0.55 && ["calculated_risk", "longshot_value", "contrarian_value"].includes(leg.riskTag) ? 6 : 0;
+
+  return (Number(combo.score || 0) * 0.1)
+    + oddsFit * 42
+    + tagFit * 14
+    + confidence * (30 - appetite * 8)
+    + edge * (18 + appetite * 40)
+    + Math.min(12, Math.max(-6, expectedValue * 8)) * appetite
+    + lowRiskStability
+    + highRiskPrice;
+}
+
+function riskTagLevel(tag) {
+  if (tag === "value_favourite" || tag === "market_confirmed_edge") {
+    return 0.6;
+  }
+
+  if (tag === "calculated_risk") {
+    return 1.8;
+  }
+
+  if (tag === "longshot_value") {
+    return 2.6;
+  }
+
+  if (tag === "contrarian_value") {
+    return 3;
+  }
+
+  return 0;
 }
 
 function bestCombo(combos) {
@@ -517,6 +572,10 @@ function isPublicFixture(fixture) {
 
 function isPublicOddsRecord(record) {
   return record?.provider === "public-web" || record?.sourceType === "public-web";
+}
+
+function isScorerOddsRecord(record) {
+  return record?.market === "anytime_scorer";
 }
 
 function isPublicNewsArticle(article) {

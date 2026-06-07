@@ -26,6 +26,7 @@ test("scores positive-edge legs with calculated risk tags", () => {
   const eligible = legs.filter((leg) => !leg.hardBlocks.length);
 
   assert.ok(legs.length > 0);
+  assert.ok(legs.some((leg) => leg.market === "anytime_scorer"));
   assert.ok(eligible.length > 0);
   assert.ok(eligible.some((leg) => ["calculated_risk", "longshot_value", "contrarian_value"].includes(leg.riskTag)));
 });
@@ -88,7 +89,8 @@ function sampleOdds(items, now) {
       odds(item, "over_2_5_goals", "Over", 2.05, now),
       odds(item, "under_2_5_goals", "Under", 1.9, now),
       odds(item, "both_teams_to_score", "Yes", 2.12, now),
-      odds(item, "both_teams_to_score", "No", 1.82, now)
+      odds(item, "both_teams_to_score", "No", 1.82, now),
+      odds(item, "anytime_scorer", `${item.homeTeam} striker`, 4.5, now)
     );
   }
 

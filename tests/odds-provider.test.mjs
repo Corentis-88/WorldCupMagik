@@ -20,7 +20,8 @@ test("public-web odds parser maps match winner, totals, and BTTS offers", async 
           { "@type": "Offer", "name": "Over 2.5 — Mexico v South Africa at Coral", "price": "1.91", "offeredBy": { "name": "Coral" } },
           { "@type": "Offer", "name": "Under 2.5 — Mexico v South Africa at Coral", "price": "1.80", "offeredBy": { "name": "Coral" } },
           { "@type": "Offer", "name": "Yes — Mexico v South Africa at Coral", "price": "2.10", "offeredBy": { "name": "Coral" } },
-          { "@type": "Offer", "name": "No — Mexico v South Africa at Coral", "price": "1.67", "offeredBy": { "name": "Coral" } }
+          { "@type": "Offer", "name": "No — Mexico v South Africa at Coral", "price": "1.67", "offeredBy": { "name": "Coral" } },
+          { "@type": "Offer", "name": "Raul Jimenez anytime scorer - Mexico v South Africa at Coral", "price": "2.75", "offeredBy": { "name": "Coral" } }
         ]
       }
     </script>
@@ -50,6 +51,7 @@ test("public-web odds parser maps match winner, totals, and BTTS offers", async 
     });
 
     assert.deepEqual(records.map((record) => `${record.market}:${record.outcome}`).sort(), [
+      "anytime_scorer:Raul Jimenez",
       "both_teams_to_score:No",
       "both_teams_to_score:Yes",
       "match_winner:Draw",
@@ -58,6 +60,7 @@ test("public-web odds parser maps match winner, totals, and BTTS offers", async 
       "over_2_5_goals:Over",
       "under_2_5_goals:Under"
     ]);
+    assert.equal(records.find((record) => record.market === "anytime_scorer")?.playerName, "Raul Jimenez");
   } finally {
     globalThis.fetch = originalFetch;
   }

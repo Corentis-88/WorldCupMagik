@@ -100,6 +100,7 @@ const payload = {
   riskBuckets,
   dayBuckets,
   dashboard: summarizeDashboard(dashboard),
+  markets: summarizeMarkets(liveOddsSnapshots, engineState.policy),
   intelligence: {
     teamCount: intelligenceState.teamIntelligence.length,
     outcomeLearningCount: outcomeLearning.outcomeCount,
@@ -170,12 +171,28 @@ function summarizeBet(bet) {
 
 function summarizeLeg(leg) {
   return {
+    market: leg.market,
     selectionLabel: leg.selectionLabel,
+    playerName: leg.playerName,
     bookmaker: leg.bookmaker,
     decimalOdds: leg.decimalOdds,
     edge: leg.edge,
     confidence: leg.confidence,
     riskTag: leg.riskTag
+  };
+}
+
+function summarizeMarkets(oddsSnapshots, policy) {
+  const counts = {};
+
+  for (const record of oddsSnapshots) {
+    counts[record.market] = (counts[record.market] || 0) + 1;
+  }
+
+  return {
+    configured: policy.markets || [],
+    observed: counts,
+    anytimeScorerRecords: counts.anytime_scorer || 0
   };
 }
 

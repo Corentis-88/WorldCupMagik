@@ -121,6 +121,8 @@ export function scoreCombo(legs, type, policy) {
     legs: legs.map((leg) => ({
       id: leg.id,
       fixtureId: leg.fixtureId,
+      market: leg.market,
+      playerName: leg.playerName,
       selectionLabel: leg.selectionLabel,
       bookmaker: leg.bookmaker,
       decimalOdds: leg.decimalOdds,
