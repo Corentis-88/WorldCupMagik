@@ -15,7 +15,7 @@
     "offers": "node src/cli.mjs offers",
     "status": "node src/cli.mjs status",
     "web:build-data": "node scripts/build-web-data.mjs",
-    "dist:win": "electron-builder --win nsis",
+    "dist:win": "electron-builder --win nsis --publish never",
     "test": "node --test tests/**/*.test.mjs"
   },
   "devDependencies": {

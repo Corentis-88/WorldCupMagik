@@ -1,5 +1,8 @@
 name: WorldCupMagic
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 on:
   push:
     branches:
@@ -58,6 +61,8 @@ jobs:
       - run: npm test
       - run: npm run web:build-data
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: web
