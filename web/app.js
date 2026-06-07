@@ -12,6 +12,11 @@ const standardSlip = [
   ["accumulator_6", "6-leg accumulator"],
   ["accumulator_8", "8-leg accumulator"]
 ];
+const pickOfDaySlip = [
+  ["trixie", "Trixie"],
+  ["accumulator_4", "4-leg accumulator"],
+  ["accumulator_8", "8-leg accumulator"]
+];
 const defaultGatheringSchedule = {
   automaticRunMinutesUtc: [323, 503, 683, 863, 1043, 1223, 1403],
   gatheringWindowMinutes: 5,
@@ -34,7 +39,8 @@ const el = {
   memoryCount: document.getElementById("memoryCount"),
   returnTotal: document.getElementById("returnTotal"),
   marketLine: document.getElementById("marketLine"),
-  betslip: document.getElementById("betslipList")
+  betslip: document.getElementById("betslipList"),
+  pickOfDay: document.getElementById("pickOfDayList")
 };
 
 el.reload.addEventListener("click", loadData);
@@ -79,6 +85,13 @@ function render() {
     stake: round(stake / slipCount, 2),
     potentialReturn: recalculateReturn(bet, round(stake / slipCount, 2))
   }));
+  const pickProfile = state.data.pickOfTheDay?.[`d${dayBucket}`] || null;
+  const pickCount = Math.max(1, (pickProfile?.betslip || []).length || pickOfDaySlip.length);
+  const pickSlip = (pickProfile?.betslip || []).map((bet) => ({
+    ...bet,
+    stake: round(stake / pickCount, 2),
+    potentialReturn: recalculateReturn(bet, round(stake / pickCount, 2))
+  }));
 
   el.riskValue.textContent = risk;
   el.daysValue.textContent = daysAhead;
@@ -94,6 +107,7 @@ function render() {
     el.marketLine.textContent = marketLine(state.data);
   }
   renderSlip(slip, profile);
+  renderPickOfDay(pickSlip, pickProfile || profile);
 }
 
 function renderSlip(slip, profile) {
@@ -131,7 +145,46 @@ function renderSlip(slip, profile) {
   `).concat(missingCards).join("");
 }
 
-function unavailableCard(label, profile) {
+function renderPickOfDay(slip, profile) {
+  if (!el.pickOfDay) {
+    return;
+  }
+
+  if (!slip.length) {
+    el.pickOfDay.innerHTML = pickOfDaySlip.map(([, label]) => unavailableCard(label, profile, "No most-likely pick passed the current database checks yet.")).join("");
+    return;
+  }
+
+  const present = new Set(slip.map(categoryForBet));
+  const missingCards = pickOfDaySlip
+    .filter(([key]) => !present.has(key))
+    .map(([, label]) => unavailableCard(label, profile, "Not enough separate fixtures passed the most-likely checks for this card yet."));
+
+  el.pickOfDay.innerHTML = slip.map((bet) => `
+    <article class="bet-card pick-card">
+      <header>
+        <span class="tag pick-tag">${escapeHtml(bet.label || bet.type)}</span>
+        <span class="score">${escapeHtml(likelihoodLabel(bet))}</span>
+      </header>
+      <ul class="legs">
+        ${bet.legs.map((leg) => `
+          <li>
+            ${escapeHtml(leg.selectionLabel)} <strong>@ ${Number(leg.decimalOdds || 0).toFixed(2)}</strong>
+            <span class="leg-note">${escapeHtml(formatLikelyLegNote(leg))}</span>
+          </li>
+        `).join("")}
+      </ul>
+      <p class="why">${escapeHtml(bet.thesis || "The most-likely engine ranked this by model probability, confidence, fresh odds, and positive edge.")}</p>
+      <div class="bet-meta">
+        <div><span>Odds</span><strong>${Number(bet.combinedDecimalOdds || 0).toFixed(2)}</strong></div>
+        <div><span>Stake</span><strong>${money(bet.stake)}</strong></div>
+        <div><span>Return</span><strong>${money(bet.potentialReturn)}</strong></div>
+      </div>
+    </article>
+  `).concat(missingCards).join("");
+}
+
+function unavailableCard(label, profile, prefix = "No real-data pick passed this risk/day profile yet.") {
   const message = profile?.dataQuality?.message || state.data?.collection?.dataQuality?.message || "The database is still collecting public-web source data.";
 
   return `
@@ -140,7 +193,7 @@ function unavailableCard(label, profile) {
         <span class="tag">${escapeHtml(label)}</span>
         <span class="score">waiting</span>
       </header>
-      <p class="why">No real-data pick passed this risk/day profile yet. ${escapeHtml(message)}</p>
+      <p class="why">${escapeHtml(prefix)} ${escapeHtml(message)}</p>
     </article>
   `;
 }
@@ -218,6 +271,20 @@ function confidenceLabel(bet) {
   }
 
   return `confidence ${percent(confidence)}`;
+}
+
+function likelihoodLabel(bet) {
+  const probability = Number(bet.combinedProbability || 0);
+
+  return `model chance ${percent(probability)}`;
+}
+
+function formatLikelyLegNote(leg) {
+  const confidence = percent(leg.confidence);
+  const probability = percent(leg.likelyProbability || leg.modelProbability);
+  const bookmaker = leg.bookmaker ? ` via ${leg.bookmaker}` : "";
+
+  return `AI chance ${probability}${bookmaker} | confidence ${confidence}`;
 }
 
 function marketLine(data) {

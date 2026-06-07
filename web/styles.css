@@ -185,6 +185,12 @@ input {
   margin-top: 24px;
 }
 
+.pick-section {
+  margin-top: 26px;
+  padding-top: 8px;
+  border-top: 2px solid rgba(214, 169, 52, 0.34);
+}
+
 .section-title h2 {
   margin: 0;
   font-size: 32px;
@@ -213,6 +219,11 @@ input {
   border-style: dashed;
 }
 
+.pick-card {
+  border-color: rgba(214, 169, 52, 0.42);
+  background: linear-gradient(180deg, #fffaf1, #f8f3df);
+}
+
 .bet-card header {
   display: flex;
   justify-content: space-between;
@@ -227,6 +238,11 @@ input {
   font-size: 11px;
   font-weight: 900;
   text-transform: uppercase;
+}
+
+.pick-tag {
+  color: var(--ink);
+  background: var(--gold);
 }
 
 .score {

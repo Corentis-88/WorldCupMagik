@@ -1,5 +1,11 @@
 import { clamp, combinations, mean, product, round } from "./utils.mjs";
 
+const MOST_LIKELY_TARGETS = [
+  { category: "trixie", label: "Trixie", type: "trixie", legCount: 3 },
+  { category: "accumulator_4", label: "4-leg accumulator", type: "accumulator", legCount: 4 },
+  { category: "accumulator_8", label: "8-leg accumulator", type: "accumulator", legCount: 8 }
+];
+
 export function buildBetRecommendations(legs, policy) {
   const riskProfile = policy.riskProfile || {};
   const eligibleLegs = legs
@@ -20,6 +26,29 @@ export function buildBetRecommendations(legs, policy) {
   };
 }
 
+export function buildMostLikelyPicks(legs, policy) {
+  const riskProfile = policy.riskProfile || {};
+  const eligibleLegs = legs
+    .filter((leg) => !leg.hardBlocks?.length)
+    .filter((leg) => Number(leg.edge) >= Number(riskProfile.minLegEdge ?? 0))
+    .filter((leg) => Number(leg.confidence) >= Number(riskProfile.minLegConfidence ?? 0))
+    .filter((leg) => Number(leg.modelProbability) > 0)
+    .sort((left, right) => likelyLegScore(right) - likelyLegScore(left));
+  const bestPerFixture = bestLikelyLegPerFixture(eligibleLegs);
+
+  return MOST_LIKELY_TARGETS
+    .map((target, index) => {
+      const selectedLegs = bestPerFixture.slice(0, target.legCount);
+
+      if (selectedLegs.length < target.legCount) {
+        return null;
+      }
+
+      return scoreMostLikelyCombo(selectedLegs, target, index + 1);
+    })
+    .filter(Boolean);
+}
+
 function buildAccumulatorRecommendationsByLegCount(eligibleLegs, policy) {
   const maxLegs = Math.min(Number(policy.riskProfile?.maxLegs || 8), 8);
   const requestedLegCounts = [3, 4, 5, 6, 8].filter((legCount) => legCount <= maxLegs);
@@ -31,6 +60,117 @@ function buildAccumulatorRecommendationsByLegCount(eligibleLegs, policy) {
   }
 
   return byLegCount;
+}
+
+function bestLikelyLegPerFixture(legs) {
+  const byFixture = new Map();
+
+  for (const leg of legs) {
+    const existing = byFixture.get(leg.fixtureId);
+
+    if (!existing || likelyLegScore(leg) > likelyLegScore(existing)) {
+      byFixture.set(leg.fixtureId, leg);
+    }
+  }
+
+  return [...byFixture.values()].sort((left, right) => likelyLegScore(right) - likelyLegScore(left));
+}
+
+function likelyLegScore(leg) {
+  const probability = likelyWinProbability(leg);
+  const confidence = Number(leg.confidence || 0);
+  const edge = Number(leg.edge || 0);
+  const intelligence = Number(leg.components?.intelligenceConfidence || 0.45);
+  const freshness = Number(leg.components?.oddsFreshness || 0.75);
+
+  return probability * 64
+    + confidence * 22
+    + intelligence * 7
+    + freshness * 4
+    + clamp(edge, 0, 0.12) * 35;
+}
+
+function likelyWinProbability(leg) {
+  const model = Number(leg.modelProbability || 0);
+  const market = Number(leg.marketImpliedProbability || leg.impliedProbability || 0);
+  const confidence = Number(leg.confidence || 0);
+  const edge = Number(leg.edge || 0);
+
+  if (!market) {
+    return clamp(model, 0.03, 0.92);
+  }
+
+  const modelLiftCap = 0.16 + confidence * 0.05 + clamp(edge, 0, 0.12) * 0.5;
+  const marketSaneModel = Math.min(model, market + modelLiftCap);
+
+  return clamp((marketSaneModel * 0.82) + (model * 0.12) + (confidence * 0.06), 0.03, 0.92);
+}
+
+function scoreMostLikelyCombo(legs, target, rank) {
+  const combinedDecimalOdds = product(legs.map((leg) => leg.decimalOdds));
+  const combinedProbability = product(legs.map(likelyWinProbability));
+  const expectedValue = combinedProbability * combinedDecimalOdds - 1;
+  const averageEdge = mean(legs.map((leg) => leg.edge));
+  const averageConfidence = mean(legs.map((leg) => leg.confidence));
+  const intelligenceConfidence = mean(legs.map((leg) => leg.components?.intelligenceConfidence || 0.45));
+  const score = clamp(
+    combinedProbability * 100
+    + averageConfidence * 18
+    + intelligenceConfidence * 8
+    + clamp(averageEdge, 0, 0.12) * 55,
+    0,
+    100
+  );
+
+  return {
+    id: `most_likely_${target.category}_${legs.map((leg) => leg.id).join("_").slice(0, 48)}`,
+    rank,
+    category: target.category,
+    label: target.label,
+    type: target.type,
+    legCount: target.legCount,
+    legs: legs.map((leg) => ({
+      id: leg.id,
+      fixtureId: leg.fixtureId,
+      market: leg.market,
+      playerName: leg.playerName,
+      selectionLabel: leg.selectionLabel,
+      bookmaker: leg.bookmaker,
+      decimalOdds: leg.decimalOdds,
+      likelyProbability: round(likelyWinProbability(leg), 4),
+      modelProbability: leg.modelProbability,
+      impliedProbability: leg.impliedProbability,
+      edge: leg.edge,
+      confidence: leg.confidence,
+      riskTag: leg.riskTag,
+      marketImpliedProbability: leg.marketImpliedProbability,
+      components: {
+        intelligenceConfidence: leg.components?.intelligenceConfidence,
+        oddsMovement: leg.components?.oddsMovement,
+        oddsShortening: leg.components?.oddsShortening,
+        oddsDrifting: leg.components?.oddsDrifting,
+        marketAverageOdds: leg.components?.marketAverageOdds,
+        oddsFreshness: leg.components?.oddsFreshness
+      },
+      thesis: leg.thesis
+    })),
+    combinedDecimalOdds: round(combinedDecimalOdds, 2),
+    combinedProbability: round(combinedProbability, 4),
+    expectedValue: round(expectedValue, 4),
+    averageEdge: round(averageEdge, 4),
+    averageConfidence: round(averageConfidence, 4),
+    riskLegCount: legs.filter((leg) => ["calculated_risk", "longshot_value", "contrarian_value"].includes(leg.riskTag)).length,
+    intelligenceConfidence: round(intelligenceConfidence, 4),
+    score: round(score, 2),
+    hardBlocks: [],
+    thesis: buildMostLikelyThesis({ target, legs, combinedDecimalOdds, combinedProbability, averageConfidence })
+  };
+}
+
+function buildMostLikelyThesis({ target, legs, combinedDecimalOdds, combinedProbability, averageConfidence }) {
+  const selections = legs.map((leg) => leg.selectionLabel).join(" | ");
+
+  return `${target.label} chosen by the most-likely engine, ignoring the risk slider and ranking by model win probability, confidence, fresh odds, and positive edge. Combined odds ${round(combinedDecimalOdds, 2)}, model hit chance ${round(combinedProbability * 100, 2)}%, average confidence ${round(averageConfidence * 100, 1)}%. Legs: ${selections}.`;
 }
 
 function accumulatorPoolSize(size) {

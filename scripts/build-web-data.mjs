@@ -1,10 +1,10 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { getDashboardState, scanForBets, buildRiskPolicy, describeRisk, selectBetslip, selectFixturesForWindow } from "../src/app-service.mjs";
+import { getDashboardState, scanForBets, buildMostLikelyPolicy, buildRiskPolicy, describeRisk, selectBetslip, selectFixturesForWindow } from "../src/app-service.mjs";
 import { loadEngineState } from "../src/db.mjs";
 import { buildTeamStatsWithIntelligence, loadIntelligenceState, loadOutcomeLearning } from "../src/intelligence-memory.mjs";
-import { buildBetRecommendations } from "../src/portfolio-builder.mjs";
+import { buildBetRecommendations, buildMostLikelyPicks } from "../src/portfolio-builder.mjs";
 import { buildLegCandidates } from "../src/scoring.mjs";
 
 const rootDir = dirname(dirname(fileURLToPath(import.meta.url)));
@@ -39,9 +39,31 @@ const teamStats = buildTeamStatsWithIntelligence({
   now
 });
 const profiles = {};
+const pickOfTheDay = {};
+const mostLikelyPolicy = buildMostLikelyPolicy(engineState.policy);
 
 for (const daysAhead of dayBuckets) {
   const scanFixtures = selectFixturesForWindow(liveFixtures, daysAhead, now);
+  const mostLikelyLegCandidates = buildLegCandidates({
+    fixtures: scanFixtures,
+    oddsSnapshots: liveOddsSnapshots,
+    newsArticles: liveNewsArticles,
+    teamStats,
+    policy: mostLikelyPolicy,
+    now,
+    outcomeLearning
+  });
+  const mostLikelyPicks = buildMostLikelyPicks(mostLikelyLegCandidates, mostLikelyPolicy);
+
+  pickOfTheDay[pickOfDayKey(daysAhead)] = {
+    daysAhead,
+    mode: "most_likely",
+    policyMarkers: summarizePolicy(mostLikelyPolicy),
+    dataQuality: centralScan.dataQuality,
+    fixtureCount: scanFixtures.length,
+    eligibleLegCount: mostLikelyLegCandidates.filter((leg) => !leg.hardBlocks?.length).length,
+    betslip: mostLikelyPicks.map(summarizeBet)
+  };
 
   for (const risk of riskBuckets) {
     const policy = buildRiskPolicy(engineState.policy, risk);
@@ -101,6 +123,7 @@ const payload = {
   dayBuckets,
   dashboard: summarizeDashboard(dashboard),
   markets: summarizeMarkets(liveOddsSnapshots, engineState.policy),
+  pickOfTheDay,
   intelligence: {
     teamCount: intelligenceState.teamIntelligence.length,
     outcomeLearningCount: outcomeLearning.outcomeCount,
@@ -114,6 +137,10 @@ console.log(`Wrote ${join(outputDir, "latest.json")}`);
 
 function profileKey(daysAhead, risk) {
   return `d${daysAhead}_r${risk}`;
+}
+
+function pickOfDayKey(daysAhead) {
+  return `d${daysAhead}`;
 }
 
 function isPublicFixture(fixture) {
@@ -159,6 +186,7 @@ function summarizeBet(bet) {
     score: bet.score,
     legCount: bet.legCount,
     combinedDecimalOdds: bet.combinedDecimalOdds,
+    combinedProbability: bet.combinedProbability,
     stake: bet.stake,
     potentialReturn: bet.potentialReturn,
     expectedValue: bet.expectedValue,
@@ -176,6 +204,8 @@ function summarizeLeg(leg) {
     playerName: leg.playerName,
     bookmaker: leg.bookmaker,
     decimalOdds: leg.decimalOdds,
+    likelyProbability: leg.likelyProbability,
+    modelProbability: leg.modelProbability,
     edge: leg.edge,
     confidence: leg.confidence,
     riskTag: leg.riskTag

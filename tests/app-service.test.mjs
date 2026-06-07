@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { buildRiskPolicy, selectBetslip, selectFixturesForWindow } from "../src/app-service.mjs";
+import { buildMostLikelyPicks } from "../src/portfolio-builder.mjs";
 import policy from "../config/engine-policy.json" with { type: "json" };
 
 const fixtures = [
@@ -76,6 +77,30 @@ test("single selection shifts from steady to riskier value as risk rises", () =>
   assert.equal(selectBetslip({ recommendations, stake: 10, risk: 90 })[0].legs[0].selectionLabel, "Mexico vs South Africa: Both teams to score: Yes");
 });
 
+test("most likely picks ignore risk score and choose highest model probability legs", () => {
+  const legs = [
+    likelyLeg("flashy-longshot", "flashy", 0.28, 99, 5.5),
+    likelyLeg("p1", "safe one", 0.74, 71, 1.45),
+    likelyLeg("p2", "safe two", 0.71, 70, 1.52),
+    likelyLeg("p3", "safe three", 0.68, 69, 1.58),
+    likelyLeg("p4", "safe four", 0.66, 68, 1.62),
+    likelyLeg("p5", "safe five", 0.64, 67, 1.66),
+    likelyLeg("p6", "safe six", 0.62, 66, 1.7),
+    likelyLeg("p7", "safe seven", 0.6, 65, 1.74),
+    likelyLeg("p8", "safe eight", 0.58, 64, 1.8)
+  ];
+  const picks = buildMostLikelyPicks(legs, {
+    riskProfile: {
+      minLegEdge: 0,
+      minLegConfidence: 0.5
+    }
+  });
+
+  assert.deepEqual(picks.map((pick) => pick.category), ["trixie", "accumulator_4", "accumulator_8"]);
+  assert.deepEqual(picks[0].legs.map((leg) => leg.fixtureId), ["p1", "p2", "p3"]);
+  assert.ok(!picks[2].legs.some((leg) => leg.fixtureId === "flashy-longshot"));
+});
+
 function combo(type, odds, score, legCount) {
   return {
     id: `${type}_${odds}`,
@@ -93,5 +118,28 @@ function combo(type, odds, score, legCount) {
       decimalOdds: 1.8 + index * 0.15
     })),
     thesis: "Public fixture combo"
+  };
+}
+
+function likelyLeg(fixtureId, label, modelProbability, score, decimalOdds) {
+  return {
+    id: `leg-${fixtureId}`,
+    fixtureId,
+    market: "match_winner",
+    selectionLabel: label,
+    bookmaker: "Public Test Book",
+    decimalOdds,
+    modelProbability,
+    impliedProbability: 1 / decimalOdds,
+    edge: Math.max(0.01, modelProbability - (1 / decimalOdds)),
+    confidence: 0.76,
+    score,
+    riskTag: score > 90 ? "longshot_value" : "steady_edge",
+    hardBlocks: [],
+    components: {
+      intelligenceConfidence: 0.72,
+      oddsFreshness: 1
+    },
+    thesis: `${label} thesis`
   };
 }

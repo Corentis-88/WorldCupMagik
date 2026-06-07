@@ -377,6 +377,40 @@ export function buildRiskPolicy(basePolicy, riskValue) {
   };
 }
 
+export function buildMostLikelyPolicy(basePolicy) {
+  return {
+    ...basePolicy,
+    riskProfile: {
+      ...(basePolicy.riskProfile || {}),
+      mode: "most_likely",
+      minLegEdge: 0,
+      minLegConfidence: 0.52,
+      minIntelligenceConfidence: 0.38,
+      maxFavoriteImpliedProbability: 0.94,
+      minDecimalOddsForRiskLeg: 1.01,
+      minBookmakerCount: 1,
+      marketConfirmationWeight: 0.22,
+      valueHuntingWeight: 0.12,
+      contrarianWeight: 0.04,
+      minRiskLegsForTrixie: 0,
+      maxLegs: 8,
+      maxCombinedOdds: 1000,
+      preferredCombinedOdds: {
+        double: { min: 1, max: 1000 },
+        trixie: { min: 1, max: 1000 },
+        accumulator: { min: 1, max: 1000 },
+        accumulatorByLegCount: {
+          3: { min: 1, max: 1000 },
+          4: { min: 1, max: 1000 },
+          5: { min: 1, max: 1000 },
+          6: { min: 1, max: 1000 },
+          8: { min: 1, max: 1000 }
+        }
+      }
+    }
+  };
+}
+
 export function describeRisk(riskValue) {
   const risk = clampNumber(riskValue, 0, 100);
 
