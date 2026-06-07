@@ -1,6 +1,6 @@
 {
-  "id": "app_scan_f9660008",
-  "createdAt": "2026-06-07T10:03:15.936Z",
+  "id": "app_scan_51c17204",
+  "createdAt": "2026-06-07T12:55:28.427Z",
   "scheduled": true,
   "settings": {
     "stake": 10,
@@ -23,7 +23,7 @@
     "scorerOddsRecords": 0,
     "newsArticles": 36,
     "teamStats": 48,
-    "matchHistoryRecords": 194,
+    "matchHistoryRecords": 195,
     "intelligenceObservations": 48,
     "sourceDiagnostics": 115
   },
@@ -35,13 +35,13 @@
     "fixtureCount": 38,
     "freshOddsRecords": 1148,
     "freshScorerOddsRecords": 0,
-    "oddsHistoryRecords": 4592,
+    "oddsHistoryRecords": 5740,
     "scorerOddsHistoryRecords": 0,
     "newsArticleCount": 36,
     "teamStatsCount": 48,
-    "teamsWithRecentMatches": 40,
+    "teamsWithRecentMatches": 41,
     "fixtureOddsCoverage": 0.974,
-    "fixtureNewsCoverage": 0.604,
+    "fixtureNewsCoverage": 0.5,
     "message": "Real public-web data was gathered and scored. Source misses are recorded instead of filled with made-up data."
   },
   "sourceHealth": {
@@ -56,7 +56,7 @@
         "ok": 36,
         "empty": 11,
         "error": 26,
-        "records": 2125
+        "records": 2133
       },
       "news": {
         "ok": 2,
@@ -73,8 +73,8 @@
     },
     "failures": [
       {
-        "id": "source_69e8b223",
-        "createdAt": "2026-06-07T10:03:15.936Z",
+        "id": "source_a1468c1f",
+        "createdAt": "2026-06-07T12:55:28.427Z",
         "kind": "stats",
         "source": "Czechia public results 1",
         "url": "https://en.wikipedia.org/wiki/Czech_Republic_national_football_team_results_(2020%E2%80%93present)",
@@ -83,8 +83,8 @@
         "reason": "Fetched public team page but found no completed result rows for Czechia."
       },
       {
-        "id": "source_d9dbabb1",
-        "createdAt": "2026-06-07T10:03:15.936Z",
+        "id": "source_113985ad",
+        "createdAt": "2026-06-07T12:55:28.427Z",
         "kind": "stats",
         "source": "Czechia public results 2",
         "url": "https://en.wikipedia.org/wiki/Czech_Republic_national_soccer_team_results_(2020%E2%80%93present)",
@@ -93,8 +93,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_3ffcbad2",
-        "createdAt": "2026-06-07T10:03:15.936Z",
+        "id": "source_775a94ce",
+        "createdAt": "2026-06-07T12:55:28.427Z",
         "kind": "stats",
         "source": "Czechia public results 3",
         "url": "https://en.wikipedia.org/wiki/Czech_Republic_men%27s_national_soccer_team_results_(2020%E2%80%93present)",
@@ -103,8 +103,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_8bfcf0ad",
-        "createdAt": "2026-06-07T10:03:15.936Z",
+        "id": "source_c35acaa9",
+        "createdAt": "2026-06-07T12:55:28.427Z",
         "kind": "stats",
         "source": "USA public results 1",
         "url": "https://en.wikipedia.org/wiki/United_States_men's_national_football_team_results_(2020%E2%80%93present)",
@@ -113,8 +113,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_69db6b37",
-        "createdAt": "2026-06-07T10:03:15.936Z",
+        "id": "source_a1394533",
+        "createdAt": "2026-06-07T12:55:28.427Z",
         "kind": "stats",
         "source": "USA public results 2",
         "url": "https://en.wikipedia.org/wiki/United_States_men's_national_soccer_team_results_(2020%E2%80%93present)",
@@ -123,8 +123,8 @@
         "reason": "Fetched public team page but found no completed result rows for USA."
       },
       {
-        "id": "source_a497c14f",
-        "createdAt": "2026-06-07T10:03:15.936Z",
+        "id": "source_dbf59b4b",
+        "createdAt": "2026-06-07T12:55:28.427Z",
         "kind": "stats",
         "source": "USA public results 3",
         "url": "https://en.wikipedia.org/wiki/United_States_men's_men%27s_national_soccer_team_results_(2020%E2%80%93present)",
@@ -133,8 +133,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_50f777ed",
-        "createdAt": "2026-06-07T10:03:15.936Z",
+        "id": "source_885551e9",
+        "createdAt": "2026-06-07T12:55:28.427Z",
         "kind": "stats",
         "source": "Paraguay public results 1",
         "url": "https://en.wikipedia.org/wiki/Paraguay_national_football_team_results_(2020%E2%80%93present)",
@@ -143,8 +143,8 @@
         "reason": "Fetched public team page but found no completed result rows for Paraguay."
       },
       {
-        "id": "source_458d363e",
-        "createdAt": "2026-06-07T10:03:15.936Z",
+        "id": "source_7ceb103a",
+        "createdAt": "2026-06-07T12:55:28.427Z",
         "kind": "stats",
         "source": "Paraguay public results 2",
         "url": "https://en.wikipedia.org/wiki/Paraguay_national_soccer_team_results_(2020%E2%80%93present)",
@@ -153,8 +153,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_5a1ad1f",
-        "createdAt": "2026-06-07T10:03:15.936Z",
+        "id": "source_3cff871b",
+        "createdAt": "2026-06-07T12:55:28.427Z",
         "kind": "stats",
         "source": "Paraguay public results 3",
         "url": "https://en.wikipedia.org/wiki/Paraguay_men%27s_national_soccer_team_results_(2020%E2%80%93present)",
@@ -163,8 +163,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_58d1d50b",
-        "createdAt": "2026-06-07T10:03:15.936Z",
+        "id": "source_902faf07",
+        "createdAt": "2026-06-07T12:55:28.427Z",
         "kind": "stats",
         "source": "Australia public results 1",
         "url": "https://en.wikipedia.org/wiki/Australia_national_football_team_results_(2020%E2%80%93present)",
@@ -173,8 +173,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_d0bb8e9b",
-        "createdAt": "2026-06-07T10:03:15.936Z",
+        "id": "source_8196897",
+        "createdAt": "2026-06-07T12:55:28.427Z",
         "kind": "stats",
         "source": "Türkiye public results 1",
         "url": "https://en.wikipedia.org/wiki/Turkey_national_football_team_results_(2020%E2%80%93present)",
@@ -183,8 +183,8 @@
         "reason": "Fetched public team page but found no completed result rows for Türkiye."
       },
       {
-        "id": "source_6bd84ee2",
-        "createdAt": "2026-06-07T10:03:15.936Z",
+        "id": "source_a33628de",
+        "createdAt": "2026-06-07T12:55:28.427Z",
         "kind": "stats",
         "source": "Türkiye public results 2",
         "url": "https://en.wikipedia.org/wiki/Turkey_national_soccer_team_results_(2020%E2%80%93present)",
@@ -193,8 +193,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_6b596e03",
-        "createdAt": "2026-06-07T10:03:15.936Z",
+        "id": "source_a2b747ff",
+        "createdAt": "2026-06-07T12:55:28.427Z",
         "kind": "stats",
         "source": "Türkiye public results 3",
         "url": "https://en.wikipedia.org/wiki/Turkey_men%27s_national_soccer_team_results_(2020%E2%80%93present)",
@@ -203,8 +203,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_5b01fd47",
-        "createdAt": "2026-06-07T10:03:15.936Z",
+        "id": "source_925fd743",
+        "createdAt": "2026-06-07T12:55:28.427Z",
         "kind": "stats",
         "source": "Brazil public results 1",
         "url": "https://en.wikipedia.org/wiki/Brazil_national_football_team_results_(2020%E2%80%93present)",
@@ -213,8 +213,8 @@
         "reason": "Fetched public team page but found no completed result rows for Brazil."
       },
       {
-        "id": "source_d16feff2",
-        "createdAt": "2026-06-07T10:03:15.936Z",
+        "id": "source_8cdc9ee",
+        "createdAt": "2026-06-07T12:55:28.427Z",
         "kind": "stats",
         "source": "Brazil public results 2",
         "url": "https://en.wikipedia.org/wiki/Brazil_national_soccer_team_results_(2020%E2%80%93present)",
@@ -223,8 +223,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_9806ff13",
-        "createdAt": "2026-06-07T10:03:15.936Z",
+        "id": "source_cf64d90f",
+        "createdAt": "2026-06-07T12:55:28.427Z",
         "kind": "stats",
         "source": "Brazil public results 3",
         "url": "https://en.wikipedia.org/wiki/Brazil_men%27s_national_soccer_team_results_(2020%E2%80%93present)",
@@ -233,8 +233,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_3d4bec6b",
-        "createdAt": "2026-06-07T10:03:15.936Z",
+        "id": "source_74a9c667",
+        "createdAt": "2026-06-07T12:55:28.427Z",
         "kind": "stats",
         "source": "Haiti public results 1",
         "url": "https://en.wikipedia.org/wiki/Haiti_national_football_team_results_(2020%E2%80%93present)",
@@ -243,8 +243,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_848ec88e",
-        "createdAt": "2026-06-07T10:03:15.936Z",
+        "id": "source_bbeca28a",
+        "createdAt": "2026-06-07T12:55:28.427Z",
         "kind": "stats",
         "source": "Haiti public results 2",
         "url": "https://en.wikipedia.org/wiki/Haiti_national_soccer_team_results_(2020%E2%80%93present)",
@@ -253,8 +253,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_47affb0d",
-        "createdAt": "2026-06-07T10:03:15.936Z",
+        "id": "source_7f0dd509",
+        "createdAt": "2026-06-07T12:55:28.427Z",
         "kind": "stats",
         "source": "Haiti public results 3",
         "url": "https://en.wikipedia.org/wiki/Haiti_men%27s_national_soccer_team_results_(2020%E2%80%93present)",
@@ -263,8 +263,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_d5930cd3",
-        "createdAt": "2026-06-07T10:03:15.936Z",
+        "id": "source_cf0e6cf",
+        "createdAt": "2026-06-07T12:55:28.427Z",
         "kind": "stats",
         "source": "Scotland public results 1",
         "url": "https://en.wikipedia.org/wiki/Scotland_national_football_team_results_(2020%E2%80%93present)",
@@ -281,8 +281,8 @@
     "topTeams": [
       {
         "team": "Qatar",
-        "learnedEdge": -0.4778,
-        "confidence": 0.8353,
+        "learnedEdge": -0.4805,
+        "confidence": 0.8358,
         "reasons": [
           "recent form 2.333 PPG, xG 1.27-0.79",
           "recent form cooling",
@@ -293,8 +293,8 @@
       },
       {
         "team": "Switzerland",
-        "learnedEdge": 0.3468,
-        "confidence": 0.8353,
+        "learnedEdge": 0.3483,
+        "confidence": 0.8358,
         "reasons": [
           "recent form 1.333 PPG, xG 2.23-1.75",
           "recent form improving",
@@ -305,8 +305,8 @@
       },
       {
         "team": "Paraguay",
-        "learnedEdge": -0.2722,
-        "confidence": 0.6086,
+        "learnedEdge": -0.2733,
+        "confidence": 0.6089,
         "reasons": [
           "recent form 0 PPG, xG 1.27-1.99",
           "recent form cooling",
@@ -316,8 +316,8 @@
       },
       {
         "team": "Sweden",
-        "learnedEdge": 0.2722,
-        "confidence": 0.7231,
+        "learnedEdge": 0.2733,
+        "confidence": 0.7234,
         "reasons": [
           "recent form 2.333 PPG, xG 2.23-1.51",
           "recent form improving",
@@ -326,50 +326,51 @@
         ]
       },
       {
-        "team": "Jordan",
-        "learnedEdge": 0.2722,
-        "confidence": 0.7227,
-        "reasons": [
-          "recent form 2 PPG, xG 2.23-1.03",
-          "recent form improving",
-          "market movement 0% across 8 bookie(s)",
-          "memory currently leans positive"
-        ]
-      },
-      {
         "team": "Tunisia",
-        "learnedEdge": -0.2721,
-        "confidence": 0.7231,
+        "learnedEdge": -0.2733,
+        "confidence": 0.7234,
         "reasons": [
           "recent form 1 PPG, xG 0.79-2.23",
           "recent form cooling",
           "market movement 0% across 8 bookie(s)",
           "memory currently leans negative"
         ]
+      },
+      {
+        "team": "Jordan",
+        "learnedEdge": 0.2733,
+        "confidence": 0.7233,
+        "reasons": [
+          "recent form 2 PPG, xG 2.23-1.03",
+          "recent form improving",
+          "market movement 0% across 8 bookie(s)",
+          "memory currently leans positive"
+        ]
       }
     ]
   },
-  "eligibleLegCount": 104,
+  "eligibleLegCount": 105,
   "betslip": [
     {
-      "id": "single_leg_9c036cd1",
+      "id": "single_leg_d36146cd",
       "rank": 1,
       "category": "single",
       "label": "Single",
       "type": "single",
-      "score": 99.46,
+      "score": 99.48,
       "legCount": 1,
       "combinedDecimalOdds": 2.7,
-      "stake": 1.43,
-      "potentialReturn": 3.86,
-      "potentialProfit": 2.43,
+      "stake": 10,
+      "potentialReturn": 27,
+      "potentialProfit": 17,
       "combinedProbability": 0.72,
       "expectedValue": 0.944,
-      "averageConfidence": 0.8148,
+      "averageConfidence": 0.8152,
+      "displayRating": 0.8865,
       "riskLegCount": 1,
       "legs": [
         {
-          "id": "leg_9c036cd1",
+          "id": "leg_d36146cd",
           "fixtureId": "fixture_ae576b27",
           "market": "both_teams_to_score",
           "selectionLabel": "Spain vs Cape Verde: Both teams to score: Yes",
@@ -378,23 +379,23 @@
           "modelProbability": 0.72,
           "impliedProbability": 0.3704,
           "edge": 0.3444,
-          "confidence": 0.8148,
+          "confidence": 0.8152,
           "riskTag": "calculated_risk",
           "marketImpliedProbability": 0.3841,
           "components": {
-            "intelligenceConfidence": 0.835,
+            "intelligenceConfidence": 0.836,
             "oddsMovement": 0,
             "oddsShortening": false,
             "oddsDrifting": false,
             "marketAverageOdds": 2.6033
           },
-          "thesis": "Spain vs Cape Verde: Both teams to score: Yes is priced at 2.7 with model edge 34.44%. Fixture model: expected goals 3.8, rating edge -15.6, style edge 2.9, memory edge -1.28. News impact is 0.126 for Spain and 0.126 for Cape Verde. Market focus: goal model likes the game at 3.8 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.6033 to 2.6033; best price is 3.71% over average. Confidence 81.5% after odds freshness and data completeness checks."
+          "thesis": "Spain vs Cape Verde: Both teams to score: Yes is priced at 2.7 with model edge 34.44%. Fixture model: expected goals 3.8, rating edge -15.7, style edge 2.9, memory edge -1.28. News impact is 0.126 for Spain and 0.126 for Cape Verde. Market focus: goal model likes the game at 3.8 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.6033 to 2.6033; best price is 3.71% over average. Confidence 81.5% after odds freshness and data completeness checks."
         }
       ],
       "thesis": "single at combined odds 2.7 with expected value 94.4%. 1 calculated-risk/value leg(s) stop this from being a favourite-only single. No high-implied-probability favourite crowding. Legs: Spain vs Cape Verde: Both teams to score: Yes."
     },
     {
-      "id": "double_leg_cb6327fb_leg_45e300a5",
+      "id": "double_leg_2c101f7_leg_7d40daa1",
       "rank": 2,
       "category": "double",
       "label": "Double",
@@ -402,25 +403,26 @@
       "score": 100,
       "legCount": 2,
       "combinedDecimalOdds": 9.58,
-      "stake": 1.43,
-      "potentialReturn": 13.7,
-      "potentialProfit": 12.27,
-      "combinedProbability": 0.4715,
-      "expectedValue": 3.5189,
-      "averageConfidence": 0.7773,
+      "stake": 10,
+      "potentialReturn": 95.8,
+      "potentialProfit": 85.8,
+      "combinedProbability": 0.4851,
+      "expectedValue": 3.65,
+      "averageConfidence": 0.782,
+      "displayRating": 0.8715,
       "riskLegCount": 2,
       "legs": [
         {
-          "id": "leg_cb6327fb",
+          "id": "leg_2c101f7",
           "fixtureId": "fixture_b064ec90",
           "market": "both_teams_to_score",
           "selectionLabel": "Mexico vs South Africa: Both teams to score: Yes",
           "bookmaker": "Pub",
           "decimalOdds": 2.13,
-          "modelProbability": 0.6997,
+          "modelProbability": 0.72,
           "impliedProbability": 0.4695,
-          "edge": 0.2249,
-          "confidence": 0.8129,
+          "edge": 0.2452,
+          "confidence": 0.822,
           "riskTag": "calculated_risk",
           "marketImpliedProbability": 0.4835,
           "components": {
@@ -430,10 +432,10 @@
             "oddsDrifting": false,
             "marketAverageOdds": 2.0683
           },
-          "thesis": "Mexico vs South Africa: Both teams to score: Yes is priced at 2.13 with model edge 22.49%. Fixture model: expected goals 2.57, rating edge 183.3, style edge 24.65, memory edge -0.99. News impact is 0.099 for Mexico and 0.126 for South Africa. Market focus: edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.0683 to 2.0683; best price is 2.98% over average. Confidence 81.3% after odds freshness and data completeness checks."
+          "thesis": "Mexico vs South Africa: Both teams to score: Yes is priced at 2.13 with model edge 24.52%. Fixture model: expected goals 2.67, rating edge 166.2, style edge 20.52, memory edge 9.2. News impact is 0.102 for Mexico and 0.126 for South Africa. Market focus: edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.0683 to 2.0683; best price is 2.98% over average. Confidence 82.2% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_45e300a5",
+          "id": "leg_7d40daa1",
           "fixtureId": "fixture_ac94436b",
           "market": "match_winner",
           "selectionLabel": "USA vs Australia: Australia to win",
@@ -442,135 +444,50 @@
           "modelProbability": 0.6738,
           "impliedProbability": 0.2222,
           "edge": 0.4494,
-          "confidence": 0.7416,
+          "confidence": 0.742,
           "riskTag": "longshot_value",
           "marketImpliedProbability": 0.228,
           "components": {
-            "intelligenceConfidence": 0.702,
+            "intelligenceConfidence": 0.703,
             "oddsMovement": 0,
             "oddsShortening": false,
             "oddsDrifting": false,
             "marketAverageOdds": 4.3867
           },
-          "thesis": "USA vs Australia: Australia to win is priced at 4.5 with model edge 44.94%. Fixture model: expected goals 2.56, rating edge -217.5, style edge -18.3, memory edge -3.9. News impact is 0.184 for USA and 0.142 for Australia. Market focus: team/result market backed by style or memory edge; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 4.3867 to 4.3867; best price is 2.58% over average. Confidence 74.2% after odds freshness and data completeness checks."
+          "thesis": "USA vs Australia: Australia to win is priced at 4.5 with model edge 44.94%. Fixture model: expected goals 2.56, rating edge -217.5, style edge -18.3, memory edge -3.86. News impact is 0.184 for USA and 0.142 for Australia. Market focus: team/result market backed by style or memory edge; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 4.3867 to 4.3867; best price is 2.58% over average. Confidence 74.2% after odds freshness and data completeness checks."
         }
       ],
-      "thesis": "double at combined odds 9.58 with expected value 351.89%. 2 calculated-risk/value leg(s) stop this from being a favourite-only double. No high-implied-probability favourite crowding. Legs: Mexico vs South Africa: Both teams to score: Yes | USA vs Australia: Australia to win."
+      "thesis": "double at combined odds 9.58 with expected value 365%. 2 calculated-risk/value leg(s) stop this from being a favourite-only double. No high-implied-probability favourite crowding. Legs: Mexico vs South Africa: Both teams to score: Yes | USA vs Australia: Australia to win."
     },
     {
-      "id": "trixie_leg_12a6c54f_leg_fa2116c6_leg_21b60013",
+      "id": "trixie_leg_2c101f7_leg_317ef0c2_leg_da9abad3",
       "rank": 3,
       "category": "trixie",
       "label": "Trixie",
       "type": "trixie",
       "score": 100,
       "legCount": 3,
-      "combinedDecimalOdds": 27.52,
-      "stake": 1.43,
-      "potentialReturn": 21.51,
-      "potentialProfit": 20.08,
-      "combinedProbability": 0.3753,
-      "expectedValue": 9.3292,
-      "averageConfidence": 0.7872,
-      "riskLegCount": 2,
-      "legs": [
-        {
-          "id": "leg_12a6c54f",
-          "fixtureId": "fixture_b064ec90",
-          "market": "match_winner",
-          "selectionLabel": "Mexico vs South Africa: Mexico to win",
-          "bookmaker": "Coral",
-          "decimalOdds": 1.53,
-          "modelProbability": 0.6947,
-          "impliedProbability": 0.6536,
-          "edge": 0.0389,
-          "confidence": 0.8106,
-          "riskTag": "steady_edge",
-          "marketImpliedProbability": 0.6595,
-          "components": {
-            "intelligenceConfidence": 0.849,
-            "oddsMovement": 0,
-            "oddsShortening": false,
-            "oddsDrifting": false,
-            "marketAverageOdds": 1.5162
-          },
-          "thesis": "Mexico vs South Africa: Mexico to win is priced at 1.53 with model edge 3.89%. Fixture model: expected goals 2.57, rating edge 183.3, style edge 24.65, memory edge -0.99. News impact is 0.099 for Mexico and 0.126 for South Africa. Market focus: team/result market backed by style or memory edge; short favourite price is not interesting for this risk profile. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.5162 to 1.5162; best price is 0.91% over average. Confidence 81.1% after odds freshness and data completeness checks."
-        },
-        {
-          "id": "leg_fa2116c6",
-          "fixtureId": "fixture_9081a649",
-          "market": "match_winner",
-          "selectionLabel": "South Korea vs Czechia: South Korea to win",
-          "bookmaker": "Pub",
-          "decimalOdds": 2.57,
-          "modelProbability": 0.7618,
-          "impliedProbability": 0.3891,
-          "edge": 0.3727,
-          "confidence": 0.743,
-          "riskTag": "calculated_risk",
-          "marketImpliedProbability": 0.3891,
-          "components": {
-            "intelligenceConfidence": 0.616,
-            "oddsMovement": 0,
-            "oddsShortening": false,
-            "oddsDrifting": false,
-            "marketAverageOdds": 2.57
-          },
-          "thesis": "South Korea vs Czechia: South Korea to win is priced at 2.57 with model edge 37.27%. Fixture model: expected goals 2.9, rating edge 333.6, style edge 37.38, memory edge 17.28. News impact is 0.126 for South Korea and 0 for Czechia. Market focus: team/result market backed by style or memory edge. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.57 to 2.57; best price is 0% over average. Confidence 74.3% after odds freshness and data completeness checks."
-        },
-        {
-          "id": "leg_21b60013",
-          "fixtureId": "fixture_62a53992",
-          "market": "match_winner",
-          "selectionLabel": "Uruguay vs Cape Verde: Cape Verde to win",
-          "bookmaker": "Pub",
-          "decimalOdds": 7,
-          "modelProbability": 0.7091,
-          "impliedProbability": 0.1429,
-          "edge": 0.5662,
-          "confidence": 0.8079,
-          "riskTag": "longshot_value",
-          "marketImpliedProbability": 0.1429,
-          "components": {
-            "intelligenceConfidence": 0.835,
-            "oddsMovement": 0,
-            "oddsShortening": false,
-            "oddsDrifting": false,
-            "marketAverageOdds": 7
-          },
-          "thesis": "Uruguay vs Cape Verde: Cape Verde to win is priced at 7 with model edge 56.62%. Fixture model: expected goals 2.94, rating edge -265.8, style edge -34.97, memory edge 6.38. News impact is 0.225 for Uruguay and 0.126 for Cape Verde. Market focus: team/result market backed by style or memory edge; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 7 to 7; best price is 0% over average. Confidence 80.8% after odds freshness and data completeness checks."
-        }
-      ],
-      "thesis": "trixie at combined odds 27.52 with expected value 932.92%. 2 calculated-risk/value leg(s) stop this from being a favourite-only trixie. No high-implied-probability favourite crowding. Legs: Mexico vs South Africa: Mexico to win | South Korea vs Czechia: South Korea to win | Uruguay vs Cape Verde: Cape Verde to win."
-    },
-    {
-      "id": "accumulator_leg_cb6327fb_leg_fa2116c6_leg_a33ce0d7",
-      "rank": 4,
-      "category": "accumulator_3",
-      "label": "3-leg accumulator",
-      "type": "accumulator",
-      "score": 100,
-      "legCount": 3,
       "combinedDecimalOdds": 23.7,
-      "stake": 1.43,
-      "potentialReturn": 33.89,
-      "potentialProfit": 32.46,
-      "combinedProbability": 0.3681,
-      "expectedValue": 7.7253,
-      "averageConfidence": 0.7548,
+      "stake": 10,
+      "potentialReturn": 123.82,
+      "potentialProfit": 113.82,
+      "combinedProbability": 0.3788,
+      "expectedValue": 7.9784,
+      "averageConfidence": 0.7579,
+      "displayRating": 0.8652,
       "riskLegCount": 3,
       "legs": [
         {
-          "id": "leg_cb6327fb",
+          "id": "leg_2c101f7",
           "fixtureId": "fixture_b064ec90",
           "market": "both_teams_to_score",
           "selectionLabel": "Mexico vs South Africa: Both teams to score: Yes",
           "bookmaker": "Pub",
           "decimalOdds": 2.13,
-          "modelProbability": 0.6997,
+          "modelProbability": 0.72,
           "impliedProbability": 0.4695,
-          "edge": 0.2249,
-          "confidence": 0.8129,
+          "edge": 0.2452,
+          "confidence": 0.822,
           "riskTag": "calculated_risk",
           "marketImpliedProbability": 0.4835,
           "components": {
@@ -580,10 +497,10 @@
             "oddsDrifting": false,
             "marketAverageOdds": 2.0683
           },
-          "thesis": "Mexico vs South Africa: Both teams to score: Yes is priced at 2.13 with model edge 22.49%. Fixture model: expected goals 2.57, rating edge 183.3, style edge 24.65, memory edge -0.99. News impact is 0.099 for Mexico and 0.126 for South Africa. Market focus: edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.0683 to 2.0683; best price is 2.98% over average. Confidence 81.3% after odds freshness and data completeness checks."
+          "thesis": "Mexico vs South Africa: Both teams to score: Yes is priced at 2.13 with model edge 24.52%. Fixture model: expected goals 2.67, rating edge 166.2, style edge 20.52, memory edge 9.2. News impact is 0.102 for Mexico and 0.126 for South Africa. Market focus: edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.0683 to 2.0683; best price is 2.98% over average. Confidence 82.2% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_fa2116c6",
+          "id": "leg_317ef0c2",
           "fixtureId": "fixture_9081a649",
           "market": "match_winner",
           "selectionLabel": "South Korea vs Czechia: South Korea to win",
@@ -602,10 +519,10 @@
             "oddsDrifting": false,
             "marketAverageOdds": 2.57
           },
-          "thesis": "South Korea vs Czechia: South Korea to win is priced at 2.57 with model edge 37.27%. Fixture model: expected goals 2.9, rating edge 333.6, style edge 37.38, memory edge 17.28. News impact is 0.126 for South Korea and 0 for Czechia. Market focus: team/result market backed by style or memory edge. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.57 to 2.57; best price is 0% over average. Confidence 74.3% after odds freshness and data completeness checks."
+          "thesis": "South Korea vs Czechia: South Korea to win is priced at 2.57 with model edge 37.27%. Fixture model: expected goals 2.9, rating edge 333.6, style edge 37.38, memory edge 17.32. News impact is 0.126 for South Korea and 0 for Czechia. Market focus: team/result market backed by style or memory edge. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.57 to 2.57; best price is 0% over average. Confidence 74.3% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_a33ce0d7",
+          "id": "leg_da9abad3",
           "fixtureId": "fixture_b1b2309a",
           "market": "match_winner",
           "selectionLabel": "Australia vs Türkiye: Australia to win",
@@ -614,11 +531,11 @@
           "modelProbability": 0.6906,
           "impliedProbability": 0.2309,
           "edge": 0.4574,
-          "confidence": 0.7085,
+          "confidence": 0.7086,
           "riskTag": "longshot_value",
           "marketImpliedProbability": 0.237,
           "components": {
-            "intelligenceConfidence": 0.605,
+            "intelligenceConfidence": 0.606,
             "oddsMovement": 0,
             "oddsShortening": false,
             "oddsDrifting": false,
@@ -627,49 +544,137 @@
           "thesis": "Australia vs Türkiye: Australia to win is priced at 4.33 with model edge 45.74%. Fixture model: expected goals 2.54, rating edge 220, style edge 18.31, memory edge 12.98. News impact is 0.142 for Australia and 0 for Türkiye. Market focus: team/result market backed by style or memory edge. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 4.22 to 4.22; best price is 2.61% over average. Confidence 70.9% after odds freshness and data completeness checks."
         }
       ],
-      "thesis": "accumulator at combined odds 23.7 with expected value 772.53%. 3 calculated-risk/value leg(s) stop this from being a favourite-only accumulator. No high-implied-probability favourite crowding. Legs: Mexico vs South Africa: Both teams to score: Yes | South Korea vs Czechia: South Korea to win | Australia vs Türkiye: Australia to win."
+      "thesis": "trixie at combined odds 23.7 with expected value 797.84%. 3 calculated-risk/value leg(s) stop this from being a favourite-only trixie. No high-implied-probability favourite crowding. Legs: Mexico vs South Africa: Both teams to score: Yes | South Korea vs Czechia: South Korea to win | Australia vs Türkiye: Australia to win."
     },
     {
-      "id": "accumulator_leg_12a6c54f_leg_fa2116c6_leg_a33ce0d7_leg_2c0c5",
+      "id": "accumulator_leg_2c101f7_leg_317ef0c2_leg_da9abad3",
+      "rank": 4,
+      "category": "accumulator_3",
+      "label": "3-leg accumulator",
+      "type": "accumulator",
+      "score": 100,
+      "legCount": 3,
+      "combinedDecimalOdds": 23.7,
+      "stake": 10,
+      "potentialReturn": 237,
+      "potentialProfit": 227,
+      "combinedProbability": 0.3788,
+      "expectedValue": 7.9784,
+      "averageConfidence": 0.7579,
+      "displayRating": 0.8652,
+      "riskLegCount": 3,
+      "legs": [
+        {
+          "id": "leg_2c101f7",
+          "fixtureId": "fixture_b064ec90",
+          "market": "both_teams_to_score",
+          "selectionLabel": "Mexico vs South Africa: Both teams to score: Yes",
+          "bookmaker": "Pub",
+          "decimalOdds": 2.13,
+          "modelProbability": 0.72,
+          "impliedProbability": 0.4695,
+          "edge": 0.2452,
+          "confidence": 0.822,
+          "riskTag": "calculated_risk",
+          "marketImpliedProbability": 0.4835,
+          "components": {
+            "intelligenceConfidence": 0.849,
+            "oddsMovement": 0,
+            "oddsShortening": false,
+            "oddsDrifting": false,
+            "marketAverageOdds": 2.0683
+          },
+          "thesis": "Mexico vs South Africa: Both teams to score: Yes is priced at 2.13 with model edge 24.52%. Fixture model: expected goals 2.67, rating edge 166.2, style edge 20.52, memory edge 9.2. News impact is 0.102 for Mexico and 0.126 for South Africa. Market focus: edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.0683 to 2.0683; best price is 2.98% over average. Confidence 82.2% after odds freshness and data completeness checks."
+        },
+        {
+          "id": "leg_317ef0c2",
+          "fixtureId": "fixture_9081a649",
+          "market": "match_winner",
+          "selectionLabel": "South Korea vs Czechia: South Korea to win",
+          "bookmaker": "Pub",
+          "decimalOdds": 2.57,
+          "modelProbability": 0.7618,
+          "impliedProbability": 0.3891,
+          "edge": 0.3727,
+          "confidence": 0.743,
+          "riskTag": "calculated_risk",
+          "marketImpliedProbability": 0.3891,
+          "components": {
+            "intelligenceConfidence": 0.616,
+            "oddsMovement": 0,
+            "oddsShortening": false,
+            "oddsDrifting": false,
+            "marketAverageOdds": 2.57
+          },
+          "thesis": "South Korea vs Czechia: South Korea to win is priced at 2.57 with model edge 37.27%. Fixture model: expected goals 2.9, rating edge 333.6, style edge 37.38, memory edge 17.32. News impact is 0.126 for South Korea and 0 for Czechia. Market focus: team/result market backed by style or memory edge. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.57 to 2.57; best price is 0% over average. Confidence 74.3% after odds freshness and data completeness checks."
+        },
+        {
+          "id": "leg_da9abad3",
+          "fixtureId": "fixture_b1b2309a",
+          "market": "match_winner",
+          "selectionLabel": "Australia vs Türkiye: Australia to win",
+          "bookmaker": "Pub",
+          "decimalOdds": 4.33,
+          "modelProbability": 0.6906,
+          "impliedProbability": 0.2309,
+          "edge": 0.4574,
+          "confidence": 0.7086,
+          "riskTag": "longshot_value",
+          "marketImpliedProbability": 0.237,
+          "components": {
+            "intelligenceConfidence": 0.606,
+            "oddsMovement": 0,
+            "oddsShortening": false,
+            "oddsDrifting": false,
+            "marketAverageOdds": 4.22
+          },
+          "thesis": "Australia vs Türkiye: Australia to win is priced at 4.33 with model edge 45.74%. Fixture model: expected goals 2.54, rating edge 220, style edge 18.31, memory edge 12.98. News impact is 0.142 for Australia and 0 for Türkiye. Market focus: team/result market backed by style or memory edge. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 4.22 to 4.22; best price is 2.61% over average. Confidence 70.9% after odds freshness and data completeness checks."
+        }
+      ],
+      "thesis": "accumulator at combined odds 23.7 with expected value 797.84%. 3 calculated-risk/value leg(s) stop this from being a favourite-only accumulator. No high-implied-probability favourite crowding. Legs: Mexico vs South Africa: Both teams to score: Yes | South Korea vs Czechia: South Korea to win | Australia vs Türkiye: Australia to win."
+    },
+    {
+      "id": "accumulator_leg_2c101f7_leg_317ef0c2_leg_da9abad3_leg_3a1e9f",
       "rank": 5,
       "category": "accumulator_4",
       "label": "4-leg accumulator",
       "type": "accumulator",
       "score": 100,
       "legCount": 4,
-      "combinedDecimalOdds": 57.89,
-      "stake": 1.43,
-      "potentialReturn": 82.78,
-      "potentialProfit": 81.35,
-      "combinedProbability": 0.2631,
-      "expectedValue": 14.2331,
-      "averageConfidence": 0.764,
-      "riskLegCount": 3,
+      "combinedDecimalOdds": 80.59,
+      "stake": 10,
+      "potentialReturn": 805.9,
+      "potentialProfit": 795.9,
+      "combinedProbability": 0.2727,
+      "expectedValue": 20.9792,
+      "averageConfidence": 0.767,
+      "displayRating": 0.8686,
+      "riskLegCount": 4,
       "legs": [
         {
-          "id": "leg_12a6c54f",
+          "id": "leg_2c101f7",
           "fixtureId": "fixture_b064ec90",
-          "market": "match_winner",
-          "selectionLabel": "Mexico vs South Africa: Mexico to win",
-          "bookmaker": "Coral",
-          "decimalOdds": 1.53,
-          "modelProbability": 0.6947,
-          "impliedProbability": 0.6536,
-          "edge": 0.0389,
-          "confidence": 0.8106,
-          "riskTag": "steady_edge",
-          "marketImpliedProbability": 0.6595,
+          "market": "both_teams_to_score",
+          "selectionLabel": "Mexico vs South Africa: Both teams to score: Yes",
+          "bookmaker": "Pub",
+          "decimalOdds": 2.13,
+          "modelProbability": 0.72,
+          "impliedProbability": 0.4695,
+          "edge": 0.2452,
+          "confidence": 0.822,
+          "riskTag": "calculated_risk",
+          "marketImpliedProbability": 0.4835,
           "components": {
             "intelligenceConfidence": 0.849,
             "oddsMovement": 0,
             "oddsShortening": false,
             "oddsDrifting": false,
-            "marketAverageOdds": 1.5162
+            "marketAverageOdds": 2.0683
           },
-          "thesis": "Mexico vs South Africa: Mexico to win is priced at 1.53 with model edge 3.89%. Fixture model: expected goals 2.57, rating edge 183.3, style edge 24.65, memory edge -0.99. News impact is 0.099 for Mexico and 0.126 for South Africa. Market focus: team/result market backed by style or memory edge; short favourite price is not interesting for this risk profile. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.5162 to 1.5162; best price is 0.91% over average. Confidence 81.1% after odds freshness and data completeness checks."
+          "thesis": "Mexico vs South Africa: Both teams to score: Yes is priced at 2.13 with model edge 24.52%. Fixture model: expected goals 2.67, rating edge 166.2, style edge 20.52, memory edge 9.2. News impact is 0.102 for Mexico and 0.126 for South Africa. Market focus: edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.0683 to 2.0683; best price is 2.98% over average. Confidence 82.2% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_fa2116c6",
+          "id": "leg_317ef0c2",
           "fixtureId": "fixture_9081a649",
           "market": "match_winner",
           "selectionLabel": "South Korea vs Czechia: South Korea to win",
@@ -688,10 +693,10 @@
             "oddsDrifting": false,
             "marketAverageOdds": 2.57
           },
-          "thesis": "South Korea vs Czechia: South Korea to win is priced at 2.57 with model edge 37.27%. Fixture model: expected goals 2.9, rating edge 333.6, style edge 37.38, memory edge 17.28. News impact is 0.126 for South Korea and 0 for Czechia. Market focus: team/result market backed by style or memory edge. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.57 to 2.57; best price is 0% over average. Confidence 74.3% after odds freshness and data completeness checks."
+          "thesis": "South Korea vs Czechia: South Korea to win is priced at 2.57 with model edge 37.27%. Fixture model: expected goals 2.9, rating edge 333.6, style edge 37.38, memory edge 17.32. News impact is 0.126 for South Korea and 0 for Czechia. Market focus: team/result market backed by style or memory edge. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.57 to 2.57; best price is 0% over average. Confidence 74.3% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_a33ce0d7",
+          "id": "leg_da9abad3",
           "fixtureId": "fixture_b1b2309a",
           "market": "match_winner",
           "selectionLabel": "Australia vs Türkiye: Australia to win",
@@ -700,11 +705,11 @@
           "modelProbability": 0.6906,
           "impliedProbability": 0.2309,
           "edge": 0.4574,
-          "confidence": 0.7085,
+          "confidence": 0.7086,
           "riskTag": "longshot_value",
           "marketImpliedProbability": 0.237,
           "components": {
-            "intelligenceConfidence": 0.605,
+            "intelligenceConfidence": 0.606,
             "oddsMovement": 0,
             "oddsShortening": false,
             "oddsDrifting": false,
@@ -713,7 +718,7 @@
           "thesis": "Australia vs Türkiye: Australia to win is priced at 4.33 with model edge 45.74%. Fixture model: expected goals 2.54, rating edge 220, style edge 18.31, memory edge 12.98. News impact is 0.142 for Australia and 0 for Türkiye. Market focus: team/result market backed by style or memory edge. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 4.22 to 4.22; best price is 2.61% over average. Confidence 70.9% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_2c0c5e5",
+          "id": "leg_3a1e9fe1",
           "fixtureId": "fixture_cd0e426c",
           "market": "both_teams_to_score",
           "selectionLabel": "Germany vs Curaçao: Both teams to score: Yes",
@@ -722,258 +727,107 @@
           "modelProbability": 0.72,
           "impliedProbability": 0.2941,
           "edge": 0.4151,
-          "confidence": 0.7938,
+          "confidence": 0.7942,
           "riskTag": "calculated_risk",
           "marketImpliedProbability": 0.3226,
           "components": {
-            "intelligenceConfidence": 0.792,
+            "intelligenceConfidence": 0.793,
             "oddsMovement": 0,
             "oddsShortening": false,
             "oddsDrifting": false,
             "marketAverageOdds": 3.1
           },
-          "thesis": "Germany vs Curaçao: Both teams to score: Yes is priced at 3.4 with model edge 41.51%. Fixture model: expected goals 3.8, rating edge 87, style edge 11.77, memory edge -17.42. News impact is -0.057 for Germany and 0 for Curaçao. Market focus: goal model likes the game at 3.8 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.1 to 3.1; best price is 9.68% over average. Confidence 79.4% after odds freshness and data completeness checks."
+          "thesis": "Germany vs Curaçao: Both teams to score: Yes is priced at 3.4 with model edge 41.51%. Fixture model: expected goals 3.8, rating edge 86.5, style edge 11.77, memory edge -19.18. News impact is -0.057 for Germany and 0 for Curaçao. Market focus: goal model likes the game at 3.8 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.1 to 3.1; best price is 9.68% over average. Confidence 79.4% after odds freshness and data completeness checks."
         }
       ],
-      "thesis": "accumulator at combined odds 57.89 with expected value 1423.31%. 3 calculated-risk/value leg(s) stop this from being a favourite-only accumulator. No high-implied-probability favourite crowding. Legs: Mexico vs South Africa: Mexico to win | South Korea vs Czechia: South Korea to win | Australia vs Türkiye: Australia to win | Germany vs Curaçao: Both teams to score: Yes."
+      "thesis": "accumulator at combined odds 80.59 with expected value 2097.92%. 4 calculated-risk/value leg(s) stop this from being a favourite-only accumulator. No high-implied-probability favourite crowding. Legs: Mexico vs South Africa: Both teams to score: Yes | South Korea vs Czechia: South Korea to win | Australia vs Türkiye: Australia to win | Germany vs Curaçao: Both teams to score: Yes."
     },
     {
-      "id": "accumulator_leg_12a6c54f_leg_fa2116c6_leg_79652c4a_leg_2c0c5",
+      "id": "accumulator_leg_2c101f7_leg_317ef0c2_leg_b0c30646_leg_3a1e9f",
       "rank": 6,
       "category": "accumulator_5",
       "label": "5-leg accumulator",
       "type": "accumulator",
-      "score": 99.06,
+      "score": 100,
       "legCount": 5,
-      "combinedDecimalOdds": 79.41,
-      "stake": 1.43,
-      "potentialReturn": 113.56,
-      "potentialProfit": 112.13,
-      "combinedProbability": 0.1975,
-      "expectedValue": 14.6865,
-      "averageConfidence": 0.7954,
+      "combinedDecimalOdds": 79.85,
+      "stake": 10,
+      "potentialReturn": 798.5,
+      "potentialProfit": 788.5,
+      "combinedProbability": 0.2088,
+      "expectedValue": 15.6755,
+      "averageConfidence": 0.788,
+      "displayRating": 0.8777,
       "riskLegCount": 4,
       "legs": [
         {
-          "id": "leg_12a6c54f",
+          "id": "leg_2c101f7",
           "fixtureId": "fixture_b064ec90",
-          "market": "match_winner",
-          "selectionLabel": "Mexico vs South Africa: Mexico to win",
-          "bookmaker": "Coral",
-          "decimalOdds": 1.53,
-          "modelProbability": 0.6947,
-          "impliedProbability": 0.6536,
-          "edge": 0.0389,
-          "confidence": 0.8106,
-          "riskTag": "steady_edge",
-          "marketImpliedProbability": 0.6595,
-          "components": {
-            "intelligenceConfidence": 0.849,
-            "oddsMovement": 0,
-            "oddsShortening": false,
-            "oddsDrifting": false,
-            "marketAverageOdds": 1.5162
-          },
-          "thesis": "Mexico vs South Africa: Mexico to win is priced at 1.53 with model edge 3.89%. Fixture model: expected goals 2.57, rating edge 183.3, style edge 24.65, memory edge -0.99. News impact is 0.099 for Mexico and 0.126 for South Africa. Market focus: team/result market backed by style or memory edge; short favourite price is not interesting for this risk profile. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.5162 to 1.5162; best price is 0.91% over average. Confidence 81.1% after odds freshness and data completeness checks."
-        },
-        {
-          "id": "leg_fa2116c6",
-          "fixtureId": "fixture_9081a649",
-          "market": "match_winner",
-          "selectionLabel": "South Korea vs Czechia: South Korea to win",
+          "market": "both_teams_to_score",
+          "selectionLabel": "Mexico vs South Africa: Both teams to score: Yes",
           "bookmaker": "Pub",
-          "decimalOdds": 2.57,
-          "modelProbability": 0.7618,
-          "impliedProbability": 0.3891,
-          "edge": 0.3727,
-          "confidence": 0.743,
-          "riskTag": "calculated_risk",
-          "marketImpliedProbability": 0.3891,
-          "components": {
-            "intelligenceConfidence": 0.616,
-            "oddsMovement": 0,
-            "oddsShortening": false,
-            "oddsDrifting": false,
-            "marketAverageOdds": 2.57
-          },
-          "thesis": "South Korea vs Czechia: South Korea to win is priced at 2.57 with model edge 37.27%. Fixture model: expected goals 2.9, rating edge 333.6, style edge 37.38, memory edge 17.28. News impact is 0.126 for South Korea and 0 for Czechia. Market focus: team/result market backed by style or memory edge. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.57 to 2.57; best price is 0% over average. Confidence 74.3% after odds freshness and data completeness checks."
-        },
-        {
-          "id": "leg_79652c4a",
-          "fixtureId": "fixture_a89ee8da",
-          "market": "both_teams_to_score",
-          "selectionLabel": "Qatar vs Switzerland: Both teams to score: Yes",
-          "bookmaker": "William Hill",
-          "decimalOdds": 2.2,
+          "decimalOdds": 2.13,
           "modelProbability": 0.72,
-          "impliedProbability": 0.4545,
-          "edge": 0.2572,
-          "confidence": 0.8148,
-          "riskTag": "calculated_risk",
-          "marketImpliedProbability": 0.4762,
-          "components": {
-            "intelligenceConfidence": 0.835,
-            "oddsMovement": 0,
-            "oddsShortening": false,
-            "oddsDrifting": false,
-            "marketAverageOdds": 2.1
-          },
-          "thesis": "Qatar vs Switzerland: Both teams to score: Yes is priced at 2.2 with model edge 25.72%. Fixture model: expected goals 2.99, rating edge 7, style edge 0.34, memory edge -72.56. News impact is -0.359 for Qatar and 0.142 for Switzerland. Market focus: goal model likes the game at 2.99 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.1 to 2.1; best price is 4.76% over average. Confidence 81.5% after odds freshness and data completeness checks."
-        },
-        {
-          "id": "leg_2c0c5e5",
-          "fixtureId": "fixture_cd0e426c",
-          "market": "both_teams_to_score",
-          "selectionLabel": "Germany vs Curaçao: Both teams to score: Yes",
-          "bookmaker": "All British Casino",
-          "decimalOdds": 3.4,
-          "modelProbability": 0.72,
-          "impliedProbability": 0.2941,
-          "edge": 0.4151,
-          "confidence": 0.7938,
-          "riskTag": "calculated_risk",
-          "marketImpliedProbability": 0.3226,
-          "components": {
-            "intelligenceConfidence": 0.792,
-            "oddsMovement": 0,
-            "oddsShortening": false,
-            "oddsDrifting": false,
-            "marketAverageOdds": 3.1
-          },
-          "thesis": "Germany vs Curaçao: Both teams to score: Yes is priced at 3.4 with model edge 41.51%. Fixture model: expected goals 3.8, rating edge 87, style edge 11.77, memory edge -17.42. News impact is -0.057 for Germany and 0 for Curaçao. Market focus: goal model likes the game at 3.8 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.1 to 3.1; best price is 9.68% over average. Confidence 79.4% after odds freshness and data completeness checks."
-        },
-        {
-          "id": "leg_9c036cd1",
-          "fixtureId": "fixture_ae576b27",
-          "market": "both_teams_to_score",
-          "selectionLabel": "Spain vs Cape Verde: Both teams to score: Yes",
-          "bookmaker": "Coral",
-          "decimalOdds": 2.7,
-          "modelProbability": 0.72,
-          "impliedProbability": 0.3704,
-          "edge": 0.3444,
-          "confidence": 0.8148,
-          "riskTag": "calculated_risk",
-          "marketImpliedProbability": 0.3841,
-          "components": {
-            "intelligenceConfidence": 0.835,
-            "oddsMovement": 0,
-            "oddsShortening": false,
-            "oddsDrifting": false,
-            "marketAverageOdds": 2.6033
-          },
-          "thesis": "Spain vs Cape Verde: Both teams to score: Yes is priced at 2.7 with model edge 34.44%. Fixture model: expected goals 3.8, rating edge -15.6, style edge 2.9, memory edge -1.28. News impact is 0.126 for Spain and 0.126 for Cape Verde. Market focus: goal model likes the game at 3.8 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.6033 to 2.6033; best price is 3.71% over average. Confidence 81.5% after odds freshness and data completeness checks."
-        }
-      ],
-      "thesis": "accumulator at combined odds 79.41 with expected value 1468.65%. 4 calculated-risk/value leg(s) stop this from being a favourite-only accumulator. No high-implied-probability favourite crowding. Legs: Mexico vs South Africa: Mexico to win | South Korea vs Czechia: South Korea to win | Qatar vs Switzerland: Both teams to score: Yes | Germany vs Curaçao: Both teams to score: Yes | Spain vs Cape Verde: Both teams to score: Yes."
-    },
-    {
-      "id": "accumulator_leg_12a6c54f_leg_fa2116c6_leg_79652c4a_leg_3c1ee",
-      "rank": 7,
-      "category": "accumulator_6",
-      "label": "6-leg accumulator",
-      "type": "accumulator",
-      "score": 93.14,
-      "legCount": 6,
-      "combinedDecimalOdds": 126.18,
-      "stake": 1.43,
-      "potentialReturn": 180.44,
-      "potentialProfit": 179.01,
-      "combinedProbability": 0.1422,
-      "expectedValue": 16.9453,
-      "averageConfidence": 0.7882,
-      "riskLegCount": 4,
-      "legs": [
-        {
-          "id": "leg_12a6c54f",
-          "fixtureId": "fixture_b064ec90",
-          "market": "match_winner",
-          "selectionLabel": "Mexico vs South Africa: Mexico to win",
-          "bookmaker": "Coral",
-          "decimalOdds": 1.53,
-          "modelProbability": 0.6947,
-          "impliedProbability": 0.6536,
-          "edge": 0.0389,
-          "confidence": 0.8106,
-          "riskTag": "steady_edge",
-          "marketImpliedProbability": 0.6595,
-          "components": {
-            "intelligenceConfidence": 0.849,
-            "oddsMovement": 0,
-            "oddsShortening": false,
-            "oddsDrifting": false,
-            "marketAverageOdds": 1.5162
-          },
-          "thesis": "Mexico vs South Africa: Mexico to win is priced at 1.53 with model edge 3.89%. Fixture model: expected goals 2.57, rating edge 183.3, style edge 24.65, memory edge -0.99. News impact is 0.099 for Mexico and 0.126 for South Africa. Market focus: team/result market backed by style or memory edge; short favourite price is not interesting for this risk profile. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.5162 to 1.5162; best price is 0.91% over average. Confidence 81.1% after odds freshness and data completeness checks."
-        },
-        {
-          "id": "leg_fa2116c6",
-          "fixtureId": "fixture_9081a649",
-          "market": "match_winner",
-          "selectionLabel": "South Korea vs Czechia: South Korea to win",
-          "bookmaker": "Pub",
-          "decimalOdds": 2.57,
-          "modelProbability": 0.7618,
-          "impliedProbability": 0.3891,
-          "edge": 0.3727,
-          "confidence": 0.743,
-          "riskTag": "calculated_risk",
-          "marketImpliedProbability": 0.3891,
-          "components": {
-            "intelligenceConfidence": 0.616,
-            "oddsMovement": 0,
-            "oddsShortening": false,
-            "oddsDrifting": false,
-            "marketAverageOdds": 2.57
-          },
-          "thesis": "South Korea vs Czechia: South Korea to win is priced at 2.57 with model edge 37.27%. Fixture model: expected goals 2.9, rating edge 333.6, style edge 37.38, memory edge 17.28. News impact is 0.126 for South Korea and 0 for Czechia. Market focus: team/result market backed by style or memory edge. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.57 to 2.57; best price is 0% over average. Confidence 74.3% after odds freshness and data completeness checks."
-        },
-        {
-          "id": "leg_79652c4a",
-          "fixtureId": "fixture_a89ee8da",
-          "market": "both_teams_to_score",
-          "selectionLabel": "Qatar vs Switzerland: Both teams to score: Yes",
-          "bookmaker": "William Hill",
-          "decimalOdds": 2.2,
-          "modelProbability": 0.72,
-          "impliedProbability": 0.4545,
-          "edge": 0.2572,
-          "confidence": 0.8148,
-          "riskTag": "calculated_risk",
-          "marketImpliedProbability": 0.4762,
-          "components": {
-            "intelligenceConfidence": 0.835,
-            "oddsMovement": 0,
-            "oddsShortening": false,
-            "oddsDrifting": false,
-            "marketAverageOdds": 2.1
-          },
-          "thesis": "Qatar vs Switzerland: Both teams to score: Yes is priced at 2.2 with model edge 25.72%. Fixture model: expected goals 2.99, rating edge 7, style edge 0.34, memory edge -72.56. News impact is -0.359 for Qatar and 0.142 for Switzerland. Market focus: goal model likes the game at 2.99 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.1 to 2.1; best price is 4.76% over average. Confidence 81.5% after odds freshness and data completeness checks."
-        },
-        {
-          "id": "leg_3c1eefb8",
-          "fixtureId": "fixture_b5106f3a",
-          "market": "both_teams_to_score",
-          "selectionLabel": "Brazil vs Morocco: Both teams to score: Yes",
-          "bookmaker": "Coral",
-          "decimalOdds": 1.95,
-          "modelProbability": 0.72,
-          "impliedProbability": 0.5128,
-          "edge": 0.204,
+          "impliedProbability": 0.4695,
+          "edge": 0.2452,
           "confidence": 0.822,
-          "riskTag": "steady_edge",
-          "marketImpliedProbability": 0.5213,
+          "riskTag": "calculated_risk",
+          "marketImpliedProbability": 0.4835,
           "components": {
             "intelligenceConfidence": 0.849,
             "oddsMovement": 0,
             "oddsShortening": false,
             "oddsDrifting": false,
-            "marketAverageOdds": 1.9183
+            "marketAverageOdds": 2.0683
           },
-          "thesis": "Brazil vs Morocco: Both teams to score: Yes is priced at 1.95 with model edge 20.4%. Fixture model: expected goals 3.8, rating edge -21.4, style edge -6.16, memory edge -1.43. News impact is 0.023 for Brazil and 0.126 for Morocco. Market focus: goal model likes the game at 3.8 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.9183 to 1.9183; best price is 1.65% over average. Confidence 82.2% after odds freshness and data completeness checks."
+          "thesis": "Mexico vs South Africa: Both teams to score: Yes is priced at 2.13 with model edge 24.52%. Fixture model: expected goals 2.67, rating edge 166.2, style edge 20.52, memory edge 9.2. News impact is 0.102 for Mexico and 0.126 for South Africa. Market focus: edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.0683 to 2.0683; best price is 2.98% over average. Confidence 82.2% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_2c0c5e5",
+          "id": "leg_317ef0c2",
+          "fixtureId": "fixture_9081a649",
+          "market": "match_winner",
+          "selectionLabel": "South Korea vs Czechia: South Korea to win",
+          "bookmaker": "Pub",
+          "decimalOdds": 2.57,
+          "modelProbability": 0.7618,
+          "impliedProbability": 0.3891,
+          "edge": 0.3727,
+          "confidence": 0.743,
+          "riskTag": "calculated_risk",
+          "marketImpliedProbability": 0.3891,
+          "components": {
+            "intelligenceConfidence": 0.616,
+            "oddsMovement": 0,
+            "oddsShortening": false,
+            "oddsDrifting": false,
+            "marketAverageOdds": 2.57
+          },
+          "thesis": "South Korea vs Czechia: South Korea to win is priced at 2.57 with model edge 37.27%. Fixture model: expected goals 2.9, rating edge 333.6, style edge 37.38, memory edge 17.32. News impact is 0.126 for South Korea and 0 for Czechia. Market focus: team/result market backed by style or memory edge. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.57 to 2.57; best price is 0% over average. Confidence 74.3% after odds freshness and data completeness checks."
+        },
+        {
+          "id": "leg_b0c30646",
+          "fixtureId": "fixture_a89ee8da",
+          "market": "both_teams_to_score",
+          "selectionLabel": "Qatar vs Switzerland: Both teams to score: Yes",
+          "bookmaker": "William Hill",
+          "decimalOdds": 2.2,
+          "modelProbability": 0.72,
+          "impliedProbability": 0.4545,
+          "edge": 0.2572,
+          "confidence": 0.8152,
+          "riskTag": "calculated_risk",
+          "marketImpliedProbability": 0.4762,
+          "components": {
+            "intelligenceConfidence": 0.836,
+            "oddsMovement": 0,
+            "oddsShortening": false,
+            "oddsDrifting": false,
+            "marketAverageOdds": 2.1
+          },
+          "thesis": "Qatar vs Switzerland: Both teams to score: Yes is priced at 2.2 with model edge 25.72%. Fixture model: expected goals 2.99, rating edge 6.8, style edge 0.34, memory edge -72.93. News impact is -0.359 for Qatar and 0.142 for Switzerland. Market focus: goal model likes the game at 2.99 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.1 to 2.1; best price is 4.76% over average. Confidence 81.5% after odds freshness and data completeness checks."
+        },
+        {
+          "id": "leg_3a1e9fe1",
           "fixtureId": "fixture_cd0e426c",
           "market": "both_teams_to_score",
           "selectionLabel": "Germany vs Curaçao: Both teams to score: Yes",
@@ -982,110 +836,202 @@
           "modelProbability": 0.72,
           "impliedProbability": 0.2941,
           "edge": 0.4151,
-          "confidence": 0.7938,
+          "confidence": 0.7942,
           "riskTag": "calculated_risk",
           "marketImpliedProbability": 0.3226,
           "components": {
-            "intelligenceConfidence": 0.792,
+            "intelligenceConfidence": 0.793,
             "oddsMovement": 0,
             "oddsShortening": false,
             "oddsDrifting": false,
             "marketAverageOdds": 3.1
           },
-          "thesis": "Germany vs Curaçao: Both teams to score: Yes is priced at 3.4 with model edge 41.51%. Fixture model: expected goals 3.8, rating edge 87, style edge 11.77, memory edge -17.42. News impact is -0.057 for Germany and 0 for Curaçao. Market focus: goal model likes the game at 3.8 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.1 to 3.1; best price is 9.68% over average. Confidence 79.4% after odds freshness and data completeness checks."
+          "thesis": "Germany vs Curaçao: Both teams to score: Yes is priced at 3.4 with model edge 41.51%. Fixture model: expected goals 3.8, rating edge 86.5, style edge 11.77, memory edge -19.18. News impact is -0.057 for Germany and 0 for Curaçao. Market focus: goal model likes the game at 3.8 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.1 to 3.1; best price is 9.68% over average. Confidence 79.4% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_fb6f5806",
+          "id": "leg_c0a31747",
           "fixtureId": "fixture_a3e16539",
-          "market": "over_2_5_goals",
-          "selectionLabel": "Sweden vs Tunisia: Over 2.5 goals",
-          "bookmaker": "QuickBet",
-          "decimalOdds": 2.2,
-          "modelProbability": 0.72,
-          "impliedProbability": 0.4545,
-          "edge": 0.2628,
-          "confidence": 0.7451,
-          "riskTag": "calculated_risk",
-          "marketImpliedProbability": 0.4615,
+          "market": "match_winner",
+          "selectionLabel": "Sweden vs Tunisia: Sweden to win",
+          "bookmaker": "Betfred",
+          "decimalOdds": 1.95,
+          "modelProbability": 0.7345,
+          "impliedProbability": 0.5128,
+          "edge": 0.2158,
+          "confidence": 0.7657,
+          "riskTag": "steady_edge",
+          "marketImpliedProbability": 0.5284,
           "components": {
             "intelligenceConfidence": 0.723,
             "oddsMovement": 0,
             "oddsShortening": false,
             "oddsDrifting": false,
-            "marketAverageOdds": 2.1667
+            "marketAverageOdds": 1.8925
           },
-          "thesis": "Sweden vs Tunisia: Over 2.5 goals is priced at 2.2 with model edge 26.28%. Fixture model: expected goals 3.38, rating edge 257.2, style edge 32.39, memory edge 47.9. News impact is 0 for Sweden and 0 for Tunisia. Market focus: goal model likes the game at 3.38 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.1667 to 2.1667; best price is 1.54% over average. Confidence 74.5% after odds freshness and data completeness checks."
+          "thesis": "Sweden vs Tunisia: Sweden to win is priced at 1.95 with model edge 21.58%. Fixture model: expected goals 3.38, rating edge 257.4, style edge 32.39, memory edge 48.1. News impact is 0 for Sweden and 0 for Tunisia. Market focus: team/result market backed by style or memory edge; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.8925 to 1.8925; best price is 3.04% over average. Confidence 76.6% after odds freshness and data completeness checks."
         }
       ],
-      "thesis": "accumulator at combined odds 126.18 with expected value 1694.53%. 4 calculated-risk/value leg(s) stop this from being a favourite-only accumulator. No high-implied-probability favourite crowding. Legs: Mexico vs South Africa: Mexico to win | South Korea vs Czechia: South Korea to win | Qatar vs Switzerland: Both teams to score: Yes | Brazil vs Morocco: Both teams to score: Yes | Germany vs Curaçao: Both teams to score: Yes | Sweden vs Tunisia: Over 2.5 goals."
+      "thesis": "accumulator at combined odds 79.85 with expected value 1567.55%. 4 calculated-risk/value leg(s) stop this from being a favourite-only accumulator. No high-implied-probability favourite crowding. Legs: Mexico vs South Africa: Both teams to score: Yes | South Korea vs Czechia: South Korea to win | Qatar vs Switzerland: Both teams to score: Yes | Germany vs Curaçao: Both teams to score: Yes | Sweden vs Tunisia: Sweden to win."
+    },
+    {
+      "id": "accumulator_leg_2c101f7_leg_317ef0c2_leg_b0c30646_leg_98fed1",
+      "rank": 7,
+      "category": "accumulator_6",
+      "label": "6-leg accumulator",
+      "type": "accumulator",
+      "score": 93.5,
+      "legCount": 6,
+      "combinedDecimalOdds": 134,
+      "stake": 10,
+      "potentialReturn": 1340,
+      "potentialProfit": 1330,
+      "combinedProbability": 0.1404,
+      "expectedValue": 17.8104,
+      "averageConfidence": 0.7982,
+      "displayRating": 0.878,
+      "riskLegCount": 4,
+      "legs": [
+        {
+          "id": "leg_2c101f7",
+          "fixtureId": "fixture_b064ec90",
+          "market": "both_teams_to_score",
+          "selectionLabel": "Mexico vs South Africa: Both teams to score: Yes",
+          "bookmaker": "Pub",
+          "decimalOdds": 2.13,
+          "modelProbability": 0.72,
+          "impliedProbability": 0.4695,
+          "edge": 0.2452,
+          "confidence": 0.822,
+          "riskTag": "calculated_risk",
+          "marketImpliedProbability": 0.4835,
+          "components": {
+            "intelligenceConfidence": 0.849,
+            "oddsMovement": 0,
+            "oddsShortening": false,
+            "oddsDrifting": false,
+            "marketAverageOdds": 2.0683
+          },
+          "thesis": "Mexico vs South Africa: Both teams to score: Yes is priced at 2.13 with model edge 24.52%. Fixture model: expected goals 2.67, rating edge 166.2, style edge 20.52, memory edge 9.2. News impact is 0.102 for Mexico and 0.126 for South Africa. Market focus: edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.0683 to 2.0683; best price is 2.98% over average. Confidence 82.2% after odds freshness and data completeness checks."
+        },
+        {
+          "id": "leg_317ef0c2",
+          "fixtureId": "fixture_9081a649",
+          "market": "match_winner",
+          "selectionLabel": "South Korea vs Czechia: South Korea to win",
+          "bookmaker": "Pub",
+          "decimalOdds": 2.57,
+          "modelProbability": 0.7618,
+          "impliedProbability": 0.3891,
+          "edge": 0.3727,
+          "confidence": 0.743,
+          "riskTag": "calculated_risk",
+          "marketImpliedProbability": 0.3891,
+          "components": {
+            "intelligenceConfidence": 0.616,
+            "oddsMovement": 0,
+            "oddsShortening": false,
+            "oddsDrifting": false,
+            "marketAverageOdds": 2.57
+          },
+          "thesis": "South Korea vs Czechia: South Korea to win is priced at 2.57 with model edge 37.27%. Fixture model: expected goals 2.9, rating edge 333.6, style edge 37.38, memory edge 17.32. News impact is 0.126 for South Korea and 0 for Czechia. Market focus: team/result market backed by style or memory edge. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.57 to 2.57; best price is 0% over average. Confidence 74.3% after odds freshness and data completeness checks."
+        },
+        {
+          "id": "leg_b0c30646",
+          "fixtureId": "fixture_a89ee8da",
+          "market": "both_teams_to_score",
+          "selectionLabel": "Qatar vs Switzerland: Both teams to score: Yes",
+          "bookmaker": "William Hill",
+          "decimalOdds": 2.2,
+          "modelProbability": 0.72,
+          "impliedProbability": 0.4545,
+          "edge": 0.2572,
+          "confidence": 0.8152,
+          "riskTag": "calculated_risk",
+          "marketImpliedProbability": 0.4762,
+          "components": {
+            "intelligenceConfidence": 0.836,
+            "oddsMovement": 0,
+            "oddsShortening": false,
+            "oddsDrifting": false,
+            "marketAverageOdds": 2.1
+          },
+          "thesis": "Qatar vs Switzerland: Both teams to score: Yes is priced at 2.2 with model edge 25.72%. Fixture model: expected goals 2.99, rating edge 6.8, style edge 0.34, memory edge -72.93. News impact is -0.359 for Qatar and 0.142 for Switzerland. Market focus: goal model likes the game at 2.99 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.1 to 2.1; best price is 4.76% over average. Confidence 81.5% after odds freshness and data completeness checks."
+        },
+        {
+          "id": "leg_98fed1ef",
+          "fixtureId": "fixture_b5106f3a",
+          "market": "over_2_5_goals",
+          "selectionLabel": "Brazil vs Morocco: Over 2.5 goals",
+          "bookmaker": "QuickBet",
+          "decimalOdds": 1.87,
+          "modelProbability": 0.72,
+          "impliedProbability": 0.5348,
+          "edge": 0.1838,
+          "confidence": 0.808,
+          "riskTag": "steady_edge",
+          "marketImpliedProbability": 0.5386,
+          "components": {
+            "intelligenceConfidence": 0.849,
+            "oddsMovement": 0,
+            "oddsShortening": false,
+            "oddsDrifting": false,
+            "marketAverageOdds": 1.8567
+          },
+          "thesis": "Brazil vs Morocco: Over 2.5 goals is priced at 1.87 with model edge 18.38%. Fixture model: expected goals 3.8, rating edge -21.5, style edge -6.16, memory edge -1.93. News impact is 0.023 for Brazil and 0.126 for Morocco. Market focus: goal model likes the game at 3.8 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.8567 to 1.8567; best price is 0.72% over average. Confidence 80.8% after odds freshness and data completeness checks."
+        },
+        {
+          "id": "leg_3a1e9fe1",
+          "fixtureId": "fixture_cd0e426c",
+          "market": "both_teams_to_score",
+          "selectionLabel": "Germany vs Curaçao: Both teams to score: Yes",
+          "bookmaker": "All British Casino",
+          "decimalOdds": 3.4,
+          "modelProbability": 0.72,
+          "impliedProbability": 0.2941,
+          "edge": 0.4151,
+          "confidence": 0.7942,
+          "riskTag": "calculated_risk",
+          "marketImpliedProbability": 0.3226,
+          "components": {
+            "intelligenceConfidence": 0.793,
+            "oddsMovement": 0,
+            "oddsShortening": false,
+            "oddsDrifting": false,
+            "marketAverageOdds": 3.1
+          },
+          "thesis": "Germany vs Curaçao: Both teams to score: Yes is priced at 3.4 with model edge 41.51%. Fixture model: expected goals 3.8, rating edge 86.5, style edge 11.77, memory edge -19.18. News impact is -0.057 for Germany and 0 for Curaçao. Market focus: goal model likes the game at 3.8 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.1 to 3.1; best price is 9.68% over average. Confidence 79.4% after odds freshness and data completeness checks."
+        },
+        {
+          "id": "leg_88f07de5",
+          "fixtureId": "fixture_33147663",
+          "market": "both_teams_to_score",
+          "selectionLabel": "Netherlands vs Japan: Both teams to score: Yes",
+          "bookmaker": "Coral",
+          "decimalOdds": 1.75,
+          "modelProbability": 0.6857,
+          "impliedProbability": 0.5714,
+          "edge": 0.113,
+          "confidence": 0.8066,
+          "riskTag": "steady_edge",
+          "marketImpliedProbability": 0.5747,
+          "components": {
+            "intelligenceConfidence": 0.849,
+            "oddsMovement": 0,
+            "oddsShortening": false,
+            "oddsDrifting": false,
+            "marketAverageOdds": 1.74
+          },
+          "thesis": "Netherlands vs Japan: Both teams to score: Yes is priced at 1.75 with model edge 11.3%. Fixture model: expected goals 2.53, rating edge 218.4, style edge 30.65, memory edge 27.17. News impact is -0.116 for Netherlands and 0.225 for Japan. Market focus: edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.74 to 1.74; best price is 0.57% over average. Confidence 80.7% after odds freshness and data completeness checks."
+        }
+      ],
+      "thesis": "accumulator at combined odds 134 with expected value 1781.04%. 4 calculated-risk/value leg(s) stop this from being a favourite-only accumulator. No high-implied-probability favourite crowding. Legs: Mexico vs South Africa: Both teams to score: Yes | South Korea vs Czechia: South Korea to win | Qatar vs Switzerland: Both teams to score: Yes | Brazil vs Morocco: Over 2.5 goals | Germany vs Curaçao: Both teams to score: Yes | Netherlands vs Japan: Both teams to score: Yes."
     }
   ],
   "offerRanking": [],
   "strongestLegs": [
     {
-      "id": "leg_12a6c54f",
-      "createdAt": "2026-06-07T10:03:15.936Z",
-      "fixtureId": "fixture_b064ec90",
-      "fixtureDate": "2026-06-11T19:00:00.000Z",
-      "homeTeam": "Mexico",
-      "awayTeam": "South Africa",
-      "market": "match_winner",
-      "outcome": "Mexico",
-      "selectionLabel": "Mexico vs South Africa: Mexico to win",
-      "bookmaker": "Coral",
-      "decimalOdds": 1.53,
-      "modelProbability": 0.6947,
-      "impliedProbability": 0.6536,
-      "marketImpliedProbability": 0.6595,
-      "edge": 0.0389,
-      "priceEdge": 0.0411,
-      "marketEdge": 0.0352,
-      "confidence": 0.8106,
-      "score": 100,
-      "riskTag": "steady_edge",
-      "hardBlocks": [],
-      "components": {
-        "ratingEdge": 183.3,
-        "formEdge": 70.01,
-        "xgEdge": 69.12,
-        "styleEdge": 24.65,
-        "newsEdge": -2.59,
-        "memoryEdge": -0.99,
-        "marketMemoryEdge": 0,
-        "expectedGoals": 2.57,
-        "homeNewsImpact": 0.099,
-        "awayNewsImpact": 0.126,
-        "homeLearnedEdge": 0.1925,
-        "awayLearnedEdge": 0.2038,
-        "intelligenceConfidence": 0.849,
-        "dataCompleteness": 0.846,
-        "oddsAgeHours": 0,
-        "oddsFreshness": 1,
-        "bookmakerCoverage": 8,
-        "marketAverageOdds": 1.5162,
-        "oddsMovement": 0,
-        "oddsShortening": false,
-        "oddsDrifting": false,
-        "bestOverAverage": 0.0091,
-        "oddsMovementBonus": 0.12,
-        "intelligenceBonus": 7.25,
-        "marketFocusBonus": -3,
-        "marketFocusReasons": [
-          "team/result market backed by style or memory edge",
-          "short favourite price is not interesting for this risk profile"
-        ],
-        "outcomeLearningAdjustment": 0,
-        "outcomeLearningConfidence": 0,
-        "outcomeLearningReasons": [],
-        "favoriteCrowdingPenalty": 0,
-        "valueOddsBonus": 0
-      },
-      "thesis": "Mexico vs South Africa: Mexico to win is priced at 1.53 with model edge 3.89%. Fixture model: expected goals 2.57, rating edge 183.3, style edge 24.65, memory edge -0.99. News impact is 0.099 for Mexico and 0.126 for South Africa. Market focus: team/result market backed by style or memory edge; short favourite price is not interesting for this risk profile. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.5162 to 1.5162; best price is 0.91% over average. Confidence 81.1% after odds freshness and data completeness checks.",
-      "rank": 1
-    },
-    {
-      "id": "leg_cb6327fb",
-      "createdAt": "2026-06-07T10:03:15.936Z",
+      "id": "leg_2c101f7",
+      "createdAt": "2026-06-07T12:55:28.427Z",
       "fixtureId": "fixture_b064ec90",
       "fixtureDate": "2026-06-11T19:00:00.000Z",
       "homeTeam": "Mexico",
@@ -1095,29 +1041,29 @@
       "selectionLabel": "Mexico vs South Africa: Both teams to score: Yes",
       "bookmaker": "Pub",
       "decimalOdds": 2.13,
-      "modelProbability": 0.6997,
+      "modelProbability": 0.72,
       "impliedProbability": 0.4695,
       "marketImpliedProbability": 0.4835,
-      "edge": 0.2249,
-      "priceEdge": 0.2302,
-      "marketEdge": 0.2162,
-      "confidence": 0.8129,
+      "edge": 0.2452,
+      "priceEdge": 0.2505,
+      "marketEdge": 0.2365,
+      "confidence": 0.822,
       "score": 100,
       "riskTag": "calculated_risk",
       "hardBlocks": [],
       "components": {
-        "ratingEdge": 183.3,
-        "formEdge": 70.01,
-        "xgEdge": 69.12,
-        "styleEdge": 24.65,
-        "newsEdge": -2.59,
-        "memoryEdge": -0.99,
+        "ratingEdge": 166.2,
+        "formEdge": 59.22,
+        "xgEdge": 59.57,
+        "styleEdge": 20.52,
+        "newsEdge": -2.3,
+        "memoryEdge": 9.2,
         "marketMemoryEdge": 0,
-        "expectedGoals": 2.57,
-        "homeNewsImpact": 0.099,
+        "expectedGoals": 2.67,
+        "homeNewsImpact": 0.102,
         "awayNewsImpact": 0.126,
-        "homeLearnedEdge": 0.1925,
-        "awayLearnedEdge": 0.2038,
+        "homeLearnedEdge": 0.1869,
+        "awayLearnedEdge": 0.0823,
         "intelligenceConfidence": 0.849,
         "dataCompleteness": 0.846,
         "oddsAgeHours": 0,
@@ -1140,12 +1086,12 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 0
       },
-      "thesis": "Mexico vs South Africa: Both teams to score: Yes is priced at 2.13 with model edge 22.49%. Fixture model: expected goals 2.57, rating edge 183.3, style edge 24.65, memory edge -0.99. News impact is 0.099 for Mexico and 0.126 for South Africa. Market focus: edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.0683 to 2.0683; best price is 2.98% over average. Confidence 81.3% after odds freshness and data completeness checks.",
-      "rank": 2
+      "thesis": "Mexico vs South Africa: Both teams to score: Yes is priced at 2.13 with model edge 24.52%. Fixture model: expected goals 2.67, rating edge 166.2, style edge 20.52, memory edge 9.2. News impact is 0.102 for Mexico and 0.126 for South Africa. Market focus: edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.0683 to 2.0683; best price is 2.98% over average. Confidence 82.2% after odds freshness and data completeness checks.",
+      "rank": 1
     },
     {
-      "id": "leg_fa2116c6",
-      "createdAt": "2026-06-07T10:03:15.936Z",
+      "id": "leg_317ef0c2",
+      "createdAt": "2026-06-07T12:55:28.427Z",
       "fixtureId": "fixture_9081a649",
       "fixtureDate": "2026-06-12T02:00:00.000Z",
       "homeTeam": "South Korea",
@@ -1171,12 +1117,12 @@
         "xgEdge": 37.3,
         "styleEdge": 37.38,
         "newsEdge": 11.97,
-        "memoryEdge": 17.28,
+        "memoryEdge": 17.32,
         "marketMemoryEdge": 0,
         "expectedGoals": 2.9,
         "homeNewsImpact": 0.126,
         "awayNewsImpact": 0,
-        "homeLearnedEdge": 0.1964,
+        "homeLearnedEdge": 0.1968,
         "awayLearnedEdge": 0,
         "intelligenceConfidence": 0.616,
         "dataCompleteness": 0.592,
@@ -1200,12 +1146,12 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 0
       },
-      "thesis": "South Korea vs Czechia: South Korea to win is priced at 2.57 with model edge 37.27%. Fixture model: expected goals 2.9, rating edge 333.6, style edge 37.38, memory edge 17.28. News impact is 0.126 for South Korea and 0 for Czechia. Market focus: team/result market backed by style or memory edge. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.57 to 2.57; best price is 0% over average. Confidence 74.3% after odds freshness and data completeness checks.",
-      "rank": 3
+      "thesis": "South Korea vs Czechia: South Korea to win is priced at 2.57 with model edge 37.27%. Fixture model: expected goals 2.9, rating edge 333.6, style edge 37.38, memory edge 17.32. News impact is 0.126 for South Korea and 0 for Czechia. Market focus: team/result market backed by style or memory edge. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.57 to 2.57; best price is 0% over average. Confidence 74.3% after odds freshness and data completeness checks.",
+      "rank": 2
     },
     {
-      "id": "leg_b8a5db92",
-      "createdAt": "2026-06-07T10:03:15.936Z",
+      "id": "leg_f003b58e",
+      "createdAt": "2026-06-07T12:55:28.427Z",
       "fixtureId": "fixture_9081a649",
       "fixtureDate": "2026-06-12T02:00:00.000Z",
       "homeTeam": "South Korea",
@@ -1231,12 +1177,12 @@
         "xgEdge": 37.3,
         "styleEdge": 37.38,
         "newsEdge": 11.97,
-        "memoryEdge": 17.28,
+        "memoryEdge": 17.32,
         "marketMemoryEdge": 0,
         "expectedGoals": 2.9,
         "homeNewsImpact": 0.126,
         "awayNewsImpact": 0,
-        "homeLearnedEdge": 0.1964,
+        "homeLearnedEdge": 0.1968,
         "awayLearnedEdge": 0,
         "intelligenceConfidence": 0.616,
         "dataCompleteness": 0.592,
@@ -1260,12 +1206,12 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 0
       },
-      "thesis": "South Korea vs Czechia: Both teams to score: Yes is priced at 1.89 with model edge 19.09%. Fixture model: expected goals 2.9, rating edge 333.6, style edge 37.38, memory edge 17.28. News impact is 0.126 for South Korea and 0 for Czechia. Market focus: goal model likes the game at 2.9 expected goals. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.89 to 1.89; best price is 0% over average. Confidence 72.4% after odds freshness and data completeness checks.",
-      "rank": 4
+      "thesis": "South Korea vs Czechia: Both teams to score: Yes is priced at 1.89 with model edge 19.09%. Fixture model: expected goals 2.9, rating edge 333.6, style edge 37.38, memory edge 17.32. News impact is 0.126 for South Korea and 0 for Czechia. Market focus: goal model likes the game at 2.9 expected goals. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.89 to 1.89; best price is 0% over average. Confidence 72.4% after odds freshness and data completeness checks.",
+      "rank": 3
     },
     {
-      "id": "leg_663f840d",
-      "createdAt": "2026-06-07T10:03:15.936Z",
+      "id": "leg_9d9d5e09",
+      "createdAt": "2026-06-07T12:55:28.427Z",
       "fixtureId": "fixture_9081a649",
       "fixtureDate": "2026-06-12T02:00:00.000Z",
       "homeTeam": "South Korea",
@@ -1291,12 +1237,12 @@
         "xgEdge": 37.3,
         "styleEdge": 37.38,
         "newsEdge": 11.97,
-        "memoryEdge": 17.28,
+        "memoryEdge": 17.32,
         "marketMemoryEdge": 0,
         "expectedGoals": 2.9,
         "homeNewsImpact": 0.126,
         "awayNewsImpact": 0,
-        "homeLearnedEdge": 0.1964,
+        "homeLearnedEdge": 0.1968,
         "awayLearnedEdge": 0,
         "intelligenceConfidence": 0.616,
         "dataCompleteness": 0.592,
@@ -1320,12 +1266,12 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 0
       },
-      "thesis": "South Korea vs Czechia: Over 2.5 goals is priced at 2.15 with model edge 13.94%. Fixture model: expected goals 2.9, rating edge 333.6, style edge 37.38, memory edge 17.28. News impact is 0.126 for South Korea and 0 for Czechia. Market focus: goal model likes the game at 2.9 expected goals. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.15 to 2.15; best price is 0% over average. Confidence 64.8% after odds freshness and data completeness checks.",
-      "rank": 5
+      "thesis": "South Korea vs Czechia: Over 2.5 goals is priced at 2.15 with model edge 13.94%. Fixture model: expected goals 2.9, rating edge 333.6, style edge 37.38, memory edge 17.32. News impact is 0.126 for South Korea and 0 for Czechia. Market focus: goal model likes the game at 2.9 expected goals. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.15 to 2.15; best price is 0% over average. Confidence 64.8% after odds freshness and data completeness checks.",
+      "rank": 4
     },
     {
-      "id": "leg_76d24a8e",
-      "createdAt": "2026-06-07T10:03:15.936Z",
+      "id": "leg_ae30248a",
+      "createdAt": "2026-06-07T12:55:28.427Z",
       "fixtureId": "fixture_b2dffeda",
       "fixtureDate": "2026-06-13T01:00:00.000Z",
       "homeTeam": "USA",
@@ -1341,25 +1287,25 @@
       "edge": 0.1806,
       "priceEdge": 0.1852,
       "marketEdge": 0.173,
-      "confidence": 0.7368,
+      "confidence": 0.7371,
       "score": 100,
       "riskTag": "steady_edge",
       "hardBlocks": [],
       "components": {
-        "ratingEdge": 73.1,
+        "ratingEdge": 73.2,
         "formEdge": 24.95,
         "xgEdge": -36.48,
         "styleEdge": 9.32,
         "newsEdge": 17.45,
-        "memoryEdge": 33.04,
+        "memoryEdge": 33.17,
         "marketMemoryEdge": 0,
         "expectedGoals": 2.9,
         "homeNewsImpact": 0.184,
         "awayNewsImpact": 0,
-        "homeLearnedEdge": 0.1032,
-        "awayLearnedEdge": -0.2722,
+        "homeLearnedEdge": 0.1036,
+        "awayLearnedEdge": -0.2733,
         "intelligenceConfidence": 0.616,
-        "dataCompleteness": 0.586,
+        "dataCompleteness": 0.587,
         "oddsAgeHours": 0,
         "oddsFreshness": 1,
         "bookmakerCoverage": 6,
@@ -1369,7 +1315,7 @@
         "oddsDrifting": false,
         "bestOverAverage": 0.0228,
         "oddsMovementBonus": 0.31,
-        "intelligenceBonus": 1.91,
+        "intelligenceBonus": 1.92,
         "marketFocusBonus": 5,
         "marketFocusReasons": [
           "goal model likes the game at 2.9 expected goals"
@@ -1380,12 +1326,12 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 0
       },
-      "thesis": "USA vs Paraguay: Both teams to score: Yes is priced at 1.87 with model edge 18.06%. Fixture model: expected goals 2.9, rating edge 73.1, style edge 9.32, memory edge 33.04. News impact is 0.184 for USA and 0 for Paraguay. Market focus: goal model likes the game at 2.9 expected goals. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.8283 to 1.8283; best price is 2.28% over average. Confidence 73.7% after odds freshness and data completeness checks.",
-      "rank": 6
+      "thesis": "USA vs Paraguay: Both teams to score: Yes is priced at 1.87 with model edge 18.06%. Fixture model: expected goals 2.9, rating edge 73.2, style edge 9.32, memory edge 33.17. News impact is 0.184 for USA and 0 for Paraguay. Market focus: goal model likes the game at 2.9 expected goals. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.8283 to 1.8283; best price is 2.28% over average. Confidence 73.7% after odds freshness and data completeness checks.",
+      "rank": 5
     },
     {
-      "id": "leg_6da0f491",
-      "createdAt": "2026-06-07T10:03:15.936Z",
+      "id": "leg_a4fece8d",
+      "createdAt": "2026-06-07T12:55:28.427Z",
       "fixtureId": "fixture_b2dffeda",
       "fixtureDate": "2026-06-13T01:00:00.000Z",
       "homeTeam": "USA",
@@ -1401,25 +1347,25 @@
       "edge": 0.1101,
       "priceEdge": 0.1163,
       "marketEdge": 0.0999,
-      "confidence": 0.6707,
+      "confidence": 0.6709,
       "score": 100,
       "riskTag": "calculated_risk",
       "hardBlocks": [],
       "components": {
-        "ratingEdge": 73.1,
+        "ratingEdge": 73.2,
         "formEdge": 24.95,
         "xgEdge": -36.48,
         "styleEdge": 9.32,
         "newsEdge": 17.45,
-        "memoryEdge": 33.04,
+        "memoryEdge": 33.17,
         "marketMemoryEdge": 0,
         "expectedGoals": 2.9,
         "homeNewsImpact": 0.184,
         "awayNewsImpact": 0,
-        "homeLearnedEdge": 0.1032,
-        "awayLearnedEdge": -0.2722,
+        "homeLearnedEdge": 0.1036,
+        "awayLearnedEdge": -0.2733,
         "intelligenceConfidence": 0.616,
-        "dataCompleteness": 0.586,
+        "dataCompleteness": 0.587,
         "oddsAgeHours": 0,
         "oddsFreshness": 1,
         "bookmakerCoverage": 3,
@@ -1429,7 +1375,7 @@
         "oddsDrifting": false,
         "bestOverAverage": 0.0336,
         "oddsMovementBonus": 0.45,
-        "intelligenceBonus": 1.91,
+        "intelligenceBonus": 1.92,
         "marketFocusBonus": 5,
         "marketFocusReasons": [
           "goal model likes the game at 2.9 expected goals"
@@ -1440,12 +1386,12 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 0
       },
-      "thesis": "USA vs Paraguay: Over 2.5 goals is priced at 2.05 with model edge 11.01%. Fixture model: expected goals 2.9, rating edge 73.1, style edge 9.32, memory edge 33.04. News impact is 0.184 for USA and 0 for Paraguay. Market focus: goal model likes the game at 2.9 expected goals. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.9833 to 1.9833; best price is 3.36% over average. Confidence 67.1% after odds freshness and data completeness checks.",
-      "rank": 7
+      "thesis": "USA vs Paraguay: Over 2.5 goals is priced at 2.05 with model edge 11.01%. Fixture model: expected goals 2.9, rating edge 73.2, style edge 9.32, memory edge 33.17. News impact is 0.184 for USA and 0 for Paraguay. Market focus: goal model likes the game at 2.9 expected goals. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.9833 to 1.9833; best price is 3.36% over average. Confidence 67.1% after odds freshness and data completeness checks.",
+      "rank": 6
     },
     {
-      "id": "leg_a33ce0d7",
-      "createdAt": "2026-06-07T10:03:15.936Z",
+      "id": "leg_da9abad3",
+      "createdAt": "2026-06-07T12:55:28.427Z",
       "fixtureId": "fixture_b1b2309a",
       "fixtureDate": "2026-06-13T04:00:00.000Z",
       "homeTeam": "Australia",
@@ -1461,7 +1407,7 @@
       "edge": 0.4574,
       "priceEdge": 0.4597,
       "marketEdge": 0.4536,
-      "confidence": 0.7085,
+      "confidence": 0.7086,
       "score": 100,
       "riskTag": "longshot_value",
       "hardBlocks": [],
@@ -1478,7 +1424,7 @@
         "awayNewsImpact": 0,
         "homeLearnedEdge": 0.1475,
         "awayLearnedEdge": 0,
-        "intelligenceConfidence": 0.605,
+        "intelligenceConfidence": 0.606,
         "dataCompleteness": 0.587,
         "oddsAgeHours": 0,
         "oddsFreshness": 1,
@@ -1489,7 +1435,7 @@
         "oddsDrifting": false,
         "bestOverAverage": 0.0261,
         "oddsMovementBonus": 0.35,
-        "intelligenceBonus": 1.77,
+        "intelligenceBonus": 1.78,
         "marketFocusBonus": 4,
         "marketFocusReasons": [
           "team/result market backed by style or memory edge"
@@ -1501,11 +1447,11 @@
         "valueOddsBonus": 6
       },
       "thesis": "Australia vs Türkiye: Australia to win is priced at 4.33 with model edge 45.74%. Fixture model: expected goals 2.54, rating edge 220, style edge 18.31, memory edge 12.98. News impact is 0.142 for Australia and 0 for Türkiye. Market focus: team/result market backed by style or memory edge. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 4.22 to 4.22; best price is 2.61% over average. Confidence 70.9% after odds freshness and data completeness checks.",
-      "rank": 8
+      "rank": 7
     },
     {
-      "id": "leg_152ee18",
-      "createdAt": "2026-06-07T10:03:15.936Z",
+      "id": "leg_38b0c814",
+      "createdAt": "2026-06-07T12:55:28.427Z",
       "fixtureId": "fixture_b1b2309a",
       "fixtureDate": "2026-06-13T04:00:00.000Z",
       "homeTeam": "Australia",
@@ -1521,7 +1467,7 @@
       "edge": 0.2005,
       "priceEdge": 0.2019,
       "marketEdge": 0.1983,
-      "confidence": 0.7217,
+      "confidence": 0.7219,
       "score": 100,
       "riskTag": "steady_edge",
       "hardBlocks": [],
@@ -1538,7 +1484,7 @@
         "awayNewsImpact": 0,
         "homeLearnedEdge": 0.1475,
         "awayLearnedEdge": 0,
-        "intelligenceConfidence": 0.605,
+        "intelligenceConfidence": 0.606,
         "dataCompleteness": 0.587,
         "oddsAgeHours": 0,
         "oddsFreshness": 1,
@@ -1549,7 +1495,7 @@
         "oddsDrifting": false,
         "bestOverAverage": 0.0069,
         "oddsMovementBonus": 0.09,
-        "intelligenceBonus": 1.77,
+        "intelligenceBonus": 1.78,
         "marketFocusBonus": 0,
         "marketFocusReasons": [],
         "outcomeLearningAdjustment": 0,
@@ -1559,11 +1505,11 @@
         "valueOddsBonus": 0
       },
       "thesis": "Australia vs Türkiye: Both teams to score: Yes is priced at 1.93 with model edge 20.05%. Fixture model: expected goals 2.54, rating edge 220, style edge 18.31, memory edge 12.98. News impact is 0.142 for Australia and 0 for Türkiye. Market focus: general value check. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.9167 to 1.9167; best price is 0.69% over average. Confidence 72.2% after odds freshness and data completeness checks.",
-      "rank": 9
+      "rank": 8
     },
     {
-      "id": "leg_c9550c32",
-      "createdAt": "2026-06-07T10:03:15.936Z",
+      "id": "leg_b2e62e",
+      "createdAt": "2026-06-07T12:55:28.427Z",
       "fixtureId": "fixture_a89ee8da",
       "fixtureDate": "2026-06-13T19:00:00.000Z",
       "homeTeam": "Qatar",
@@ -1573,31 +1519,31 @@
       "selectionLabel": "Qatar vs Switzerland: Qatar to win",
       "bookmaker": "Betfred",
       "decimalOdds": 11,
-      "modelProbability": 0.2541,
+      "modelProbability": 0.2537,
       "impliedProbability": 0.0909,
       "marketImpliedProbability": 0.1067,
-      "edge": 0.1572,
-      "priceEdge": 0.1632,
-      "marketEdge": 0.1474,
-      "confidence": 0.6052,
+      "edge": 0.1568,
+      "priceEdge": 0.1628,
+      "marketEdge": 0.147,
+      "confidence": 0.6053,
       "score": 100,
       "riskTag": "longshot_value",
       "hardBlocks": [],
       "components": {
-        "ratingEdge": 7,
+        "ratingEdge": 6.8,
         "formEdge": 42,
         "xgEdge": -92.16,
         "styleEdge": 0.34,
         "newsEdge": -47.57,
-        "memoryEdge": -72.56,
+        "memoryEdge": -72.93,
         "marketMemoryEdge": 0,
         "expectedGoals": 2.99,
         "homeNewsImpact": -0.359,
         "awayNewsImpact": 0.142,
-        "homeLearnedEdge": -0.4778,
-        "awayLearnedEdge": 0.3468,
-        "intelligenceConfidence": 0.835,
-        "dataCompleteness": 0.821,
+        "homeLearnedEdge": -0.4805,
+        "awayLearnedEdge": 0.3483,
+        "intelligenceConfidence": 0.836,
+        "dataCompleteness": 0.822,
         "oddsAgeHours": 0,
         "oddsFreshness": 1,
         "bookmakerCoverage": 8,
@@ -1607,7 +1553,7 @@
         "oddsDrifting": false,
         "bestOverAverage": 0.1733,
         "oddsMovementBonus": 2.34,
-        "intelligenceBonus": 6.86,
+        "intelligenceBonus": 6.88,
         "marketFocusBonus": 8,
         "marketFocusReasons": [
           "team/result market backed by style or memory edge",
@@ -1619,12 +1565,12 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 6
       },
-      "thesis": "Qatar vs Switzerland: Qatar to win is priced at 11 with model edge 15.72%. Fixture model: expected goals 2.99, rating edge 7, style edge 0.34, memory edge -72.56. News impact is -0.359 for Qatar and 0.142 for Switzerland. Market focus: team/result market backed by style or memory edge; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 9.375 to 9.375; best price is 17.33% over average. Confidence 60.5% after odds freshness and data completeness checks.",
-      "rank": 10
+      "thesis": "Qatar vs Switzerland: Qatar to win is priced at 11 with model edge 15.68%. Fixture model: expected goals 2.99, rating edge 6.8, style edge 0.34, memory edge -72.93. News impact is -0.359 for Qatar and 0.142 for Switzerland. Market focus: team/result market backed by style or memory edge; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 9.375 to 9.375; best price is 17.33% over average. Confidence 60.5% after odds freshness and data completeness checks.",
+      "rank": 9
     },
     {
-      "id": "leg_79652c4a",
-      "createdAt": "2026-06-07T10:03:15.936Z",
+      "id": "leg_b0c30646",
+      "createdAt": "2026-06-07T12:55:28.427Z",
       "fixtureId": "fixture_a89ee8da",
       "fixtureDate": "2026-06-13T19:00:00.000Z",
       "homeTeam": "Qatar",
@@ -1640,25 +1586,25 @@
       "edge": 0.2572,
       "priceEdge": 0.2655,
       "marketEdge": 0.2438,
-      "confidence": 0.8148,
+      "confidence": 0.8152,
       "score": 100,
       "riskTag": "calculated_risk",
       "hardBlocks": [],
       "components": {
-        "ratingEdge": 7,
+        "ratingEdge": 6.8,
         "formEdge": 42,
         "xgEdge": -92.16,
         "styleEdge": 0.34,
         "newsEdge": -47.57,
-        "memoryEdge": -72.56,
+        "memoryEdge": -72.93,
         "marketMemoryEdge": 0,
         "expectedGoals": 2.99,
         "homeNewsImpact": -0.359,
         "awayNewsImpact": 0.142,
-        "homeLearnedEdge": -0.4778,
-        "awayLearnedEdge": 0.3468,
-        "intelligenceConfidence": 0.835,
-        "dataCompleteness": 0.821,
+        "homeLearnedEdge": -0.4805,
+        "awayLearnedEdge": 0.3483,
+        "intelligenceConfidence": 0.836,
+        "dataCompleteness": 0.822,
         "oddsAgeHours": 0,
         "oddsFreshness": 1,
         "bookmakerCoverage": 6,
@@ -1668,7 +1614,7 @@
         "oddsDrifting": false,
         "bestOverAverage": 0.0476,
         "oddsMovementBonus": 0.64,
-        "intelligenceBonus": 6.86,
+        "intelligenceBonus": 6.88,
         "marketFocusBonus": 9,
         "marketFocusReasons": [
           "goal model likes the game at 2.99 expected goals",
@@ -1680,12 +1626,12 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 0
       },
-      "thesis": "Qatar vs Switzerland: Both teams to score: Yes is priced at 2.2 with model edge 25.72%. Fixture model: expected goals 2.99, rating edge 7, style edge 0.34, memory edge -72.56. News impact is -0.359 for Qatar and 0.142 for Switzerland. Market focus: goal model likes the game at 2.99 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.1 to 2.1; best price is 4.76% over average. Confidence 81.5% after odds freshness and data completeness checks.",
-      "rank": 11
+      "thesis": "Qatar vs Switzerland: Both teams to score: Yes is priced at 2.2 with model edge 25.72%. Fixture model: expected goals 2.99, rating edge 6.8, style edge 0.34, memory edge -72.93. News impact is -0.359 for Qatar and 0.142 for Switzerland. Market focus: goal model likes the game at 2.99 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.1 to 2.1; best price is 4.76% over average. Confidence 81.5% after odds freshness and data completeness checks.",
+      "rank": 10
     },
     {
-      "id": "leg_fcd8a5f6",
-      "createdAt": "2026-06-07T10:03:15.936Z",
+      "id": "leg_34367ff2",
+      "createdAt": "2026-06-07T12:55:28.427Z",
       "fixtureId": "fixture_a89ee8da",
       "fixtureDate": "2026-06-13T19:00:00.000Z",
       "homeTeam": "Qatar",
@@ -1701,25 +1647,25 @@
       "edge": 0.0147,
       "priceEdge": 0.0166,
       "marketEdge": 0.0116,
-      "confidence": 0.7604,
+      "confidence": 0.7607,
       "score": 100,
       "riskTag": "steady_edge",
       "hardBlocks": [],
       "components": {
-        "ratingEdge": 7,
+        "ratingEdge": 6.8,
         "formEdge": 42,
         "xgEdge": -92.16,
         "styleEdge": 0.34,
         "newsEdge": -47.57,
-        "memoryEdge": -72.56,
+        "memoryEdge": -72.93,
         "marketMemoryEdge": 0,
         "expectedGoals": 2.99,
         "homeNewsImpact": -0.359,
         "awayNewsImpact": 0.142,
-        "homeLearnedEdge": -0.4778,
-        "awayLearnedEdge": 0.3468,
-        "intelligenceConfidence": 0.835,
-        "dataCompleteness": 0.821,
+        "homeLearnedEdge": -0.4805,
+        "awayLearnedEdge": 0.3483,
+        "intelligenceConfidence": 0.836,
+        "dataCompleteness": 0.822,
         "oddsAgeHours": 0,
         "oddsFreshness": 1,
         "bookmakerCoverage": 3,
@@ -1729,7 +1675,7 @@
         "oddsDrifting": false,
         "bestOverAverage": 0.0082,
         "oddsMovementBonus": 0.11,
-        "intelligenceBonus": 6.86,
+        "intelligenceBonus": 6.88,
         "marketFocusBonus": 5,
         "marketFocusReasons": [
           "goal model likes the game at 2.99 expected goals"
@@ -1740,7 +1686,67 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 0
       },
-      "thesis": "Qatar vs Switzerland: Over 2.5 goals is priced at 1.63 with model edge 1.47%. Fixture model: expected goals 2.99, rating edge 7, style edge 0.34, memory edge -72.56. News impact is -0.359 for Qatar and 0.142 for Switzerland. Market focus: goal model likes the game at 2.99 expected goals. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.6167 to 1.6167; best price is 0.82% over average. Confidence 76% after odds freshness and data completeness checks.",
+      "thesis": "Qatar vs Switzerland: Over 2.5 goals is priced at 1.63 with model edge 1.47%. Fixture model: expected goals 2.99, rating edge 6.8, style edge 0.34, memory edge -72.93. News impact is -0.359 for Qatar and 0.142 for Switzerland. Market focus: goal model likes the game at 2.99 expected goals. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.6167 to 1.6167; best price is 0.82% over average. Confidence 76.1% after odds freshness and data completeness checks.",
+      "rank": 11
+    },
+    {
+      "id": "leg_9f23b2d0",
+      "createdAt": "2026-06-07T12:55:28.427Z",
+      "fixtureId": "fixture_b5106f3a",
+      "fixtureDate": "2026-06-13T22:00:00.000Z",
+      "homeTeam": "Brazil",
+      "awayTeam": "Morocco",
+      "market": "match_winner",
+      "outcome": "Morocco",
+      "selectionLabel": "Brazil vs Morocco: Morocco to win",
+      "bookmaker": "Betfred",
+      "decimalOdds": 6,
+      "modelProbability": 0.3437,
+      "impliedProbability": 0.1667,
+      "marketImpliedProbability": 0.1818,
+      "edge": 0.1713,
+      "priceEdge": 0.177,
+      "marketEdge": 0.1619,
+      "confidence": 0.6527,
+      "score": 100,
+      "riskTag": "longshot_value",
+      "hardBlocks": [],
+      "components": {
+        "ratingEdge": -21.5,
+        "formEdge": 0,
+        "xgEdge": 69.94,
+        "styleEdge": -6.16,
+        "newsEdge": -9.81,
+        "memoryEdge": -1.93,
+        "marketMemoryEdge": 0,
+        "expectedGoals": 3.8,
+        "homeNewsImpact": 0.023,
+        "awayNewsImpact": 0.126,
+        "homeLearnedEdge": 0.159,
+        "awayLearnedEdge": 0.1809,
+        "intelligenceConfidence": 0.849,
+        "dataCompleteness": 0.846,
+        "oddsAgeHours": 0,
+        "oddsFreshness": 1,
+        "bookmakerCoverage": 8,
+        "marketAverageOdds": 5.5,
+        "oddsMovement": 0,
+        "oddsShortening": false,
+        "oddsDrifting": false,
+        "bestOverAverage": 0.0909,
+        "oddsMovementBonus": 1.23,
+        "intelligenceBonus": 7.25,
+        "marketFocusBonus": 4,
+        "marketFocusReasons": [
+          "edge is strong enough to justify focus"
+        ],
+        "outcomeLearningAdjustment": 0,
+        "outcomeLearningConfidence": 0,
+        "outcomeLearningReasons": [],
+        "favoriteCrowdingPenalty": 0,
+        "valueOddsBonus": 6
+      },
+      "thesis": "Brazil vs Morocco: Morocco to win is priced at 6 with model edge 17.13%. Fixture model: expected goals 3.8, rating edge -21.5, style edge -6.16, memory edge -1.93. News impact is 0.023 for Brazil and 0.126 for Morocco. Market focus: edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 5.5 to 5.5; best price is 9.09% over average. Confidence 65.3% after odds freshness and data completeness checks.",
       "rank": 12
     }
   ]
