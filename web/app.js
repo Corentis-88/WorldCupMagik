@@ -393,9 +393,11 @@ function scoreCombo(legs, type, policy) {
   const combinedProbability = product(legs.map((leg) => leg.modelProbability));
   const expectedValue = combinedProbability * combinedDecimalOdds - 1;
   const averageEdge = mean(legs.map((leg) => leg.edge));
+  const averageIndependentEdge = mean(legs.map((leg) => leg.independentEdge ?? leg.edge));
   const averageConfidence = mean(legs.map((leg) => leg.confidence));
   const riskLegs = legs.filter((leg) => ["calculated_risk", "longshot_value", "contrarian_value"].includes(leg.riskTag));
   const intelligenceConfidence = mean(legs.map((leg) => leg.components?.intelligenceConfidence || 0.45));
+  const averageNonMarketSignalCount = mean(legs.map((leg) => leg.components?.nonMarketSignalCount || 0));
   const marketConfirmedLegs = legs.filter((leg) => leg.riskTag === "market_confirmed_edge");
   const contrarianLegs = legs.filter((leg) => leg.riskTag === "contrarian_value");
   const favouriteLegs = legs.filter((leg) => Number(leg.impliedProbability) >= Number(policy.riskProfile?.maxFavoriteImpliedProbability || 0.72));
@@ -423,15 +425,18 @@ function scoreCombo(legs, type, policy) {
 
   const oddsFit = oddsFitScore(combinedDecimalOdds, preferred.min, preferred.max);
   const diversityBonus = riskLegs.length > 0 ? Math.min(8, riskLegs.length * 3.5) : -5;
-  const intelligenceBonus = clamp((intelligenceConfidence - 0.5) * 11 + marketConfirmedLegs.length * 1.5 + contrarianLegs.length * 2, -5, 10);
+  const evidenceBonus = clamp((averageNonMarketSignalCount - 2) * 3.2, -4, 8);
+  const intelligenceBonus = clamp((intelligenceConfidence - 0.5) * 10 + marketConfirmedLegs.length + contrarianLegs.length * 1.5, -5, 9);
   const favouritePenalty = favouriteLegs.length * 4;
   const sizePenalty = type === "accumulator" ? Math.max(0, legs.length - 3) * 3 : 0;
-  const score = clamp(34
-    + averageEdge * 95
-    + averageConfidence * 22
+  const score = clamp(30
+    + averageEdge * 58
+    + averageIndependentEdge * 72
+    + averageConfidence * 20
     + clamp(expectedValue * 8, -8, 8)
     + oddsFit * 0.8
     + diversityBonus
+    + evidenceBonus
     + intelligenceBonus
     - favouritePenalty
     - sizePenalty, 0, 100);
@@ -445,12 +450,14 @@ function scoreCombo(legs, type, policy) {
     combinedProbability: round(combinedProbability, 4),
     expectedValue: round(expectedValue, 4),
     averageEdge: round(averageEdge, 4),
+    averageIndependentEdge: round(averageIndependentEdge, 4),
     averageConfidence: round(averageConfidence, 4),
     displayRating: displayConfidenceRating(legs),
     riskLegCount: riskLegs.length,
+    averageNonMarketSignalCount: round(averageNonMarketSignalCount, 2),
     score: round(score, 2),
     hardBlocks,
-    thesis: buildComboThesis({ type, legs, combinedDecimalOdds, expectedValue, riskLegs, favouriteLegs })
+    thesis: buildComboThesis({ type, legs, combinedDecimalOdds, expectedValue, averageIndependentEdge, averageNonMarketSignalCount, riskLegs, favouriteLegs })
   };
 }
 
@@ -660,27 +667,35 @@ function selectMostLikelyLegsForTarget({ fixtureSeparatedLegs, eligibleLegs, leg
 }
 
 function likelyLegScore(leg) {
-  return likelyWinProbability(leg) * 64
-    + Number(leg.confidence || 0) * 22
+  const edge = Number(leg.edge || 0);
+  const independentEdge = Number(leg.independentEdge ?? edge);
+  const signalScore = clamp(Number(leg.components?.nonMarketSignalCount || 0) / 4, 0, 1);
+
+  return likelyWinProbability(leg) * 58
+    + Number(leg.confidence || 0) * 18
     + Number(leg.components?.intelligenceConfidence || 0.45) * 7
     + Number(leg.components?.oddsFreshness || 0.75) * 4
-    + clamp(Number(leg.edge || 0), 0, 0.12) * 35;
+    + signalScore * 7
+    + clamp(edge, 0, 0.12) * 24
+    + clamp(independentEdge, -0.03, 0.12) * 36;
 }
 
 function likelyWinProbability(leg) {
   const model = Number(leg.modelProbability || 0);
+  const rawModel = Number(leg.rawModelProbability || model);
   const market = Number(leg.marketImpliedProbability || leg.impliedProbability || 0);
   const confidence = Number(leg.confidence || 0);
-  const edge = Number(leg.edge || 0);
+  const independentEdge = Number(leg.independentEdge ?? (rawModel - market));
+  const signalScore = clamp(Number(leg.components?.nonMarketSignalCount || 0) / 4, 0, 1);
 
   if (!market) {
-    return clamp(model, 0.03, 0.92);
+    return clamp((model * 0.68) + (rawModel * 0.24) + (confidence * 0.08), 0.03, 0.92);
   }
 
-  const modelLiftCap = 0.16 + confidence * 0.05 + clamp(edge, 0, 0.12) * 0.5;
+  const modelLiftCap = 0.1 + confidence * 0.035 + clamp(independentEdge, 0, 0.1) * 0.42 + signalScore * 0.025;
   const marketSaneModel = Math.min(model, market + modelLiftCap);
 
-  return clamp((marketSaneModel * 0.82) + (model * 0.12) + (confidence * 0.06), 0.03, 0.92);
+  return clamp((marketSaneModel * 0.55) + (rawModel * 0.25) + (market * 0.1) + (confidence * 0.06) + (signalScore * 0.04), 0.03, 0.92);
 }
 
 function scoreMostLikelyCombo(legs, target, rank) {
@@ -688,7 +703,9 @@ function scoreMostLikelyCombo(legs, target, rank) {
   const combinedProbability = product(legs.map(likelyWinProbability));
   const expectedValue = combinedProbability * combinedDecimalOdds - 1;
   const averageEdge = mean(legs.map((leg) => leg.edge));
+  const averageIndependentEdge = mean(legs.map((leg) => leg.independentEdge ?? leg.edge));
   const averageConfidence = mean(legs.map((leg) => leg.confidence));
+  const averageNonMarketSignalCount = mean(legs.map((leg) => leg.components?.nonMarketSignalCount || 0));
   const uniqueFixtureCount = new Set(legs.map((leg) => leg.fixtureId)).size;
   const reusedSignalCount = legs.filter((leg) => leg.reusedSignal).length;
   const shortWindowFallback = uniqueFixtureCount < legs.length || reusedSignalCount > 0;
@@ -707,14 +724,16 @@ function scoreMostLikelyCombo(legs, target, rank) {
     combinedProbability: round(combinedProbability, 4),
     expectedValue: round(expectedValue, 4),
     averageEdge: round(averageEdge, 4),
+    averageIndependentEdge: round(averageIndependentEdge, 4),
     averageConfidence: round(averageConfidence, 4),
-    score: round(combinedProbability * 100 + averageConfidence * 18 + clamp(averageEdge, 0, 0.12) * 55, 2),
+    score: round(combinedProbability * 100 + averageConfidence * 18 + clamp(averageEdge, 0, 0.12) * 32 + clamp(averageIndependentEdge, -0.03, 0.12) * 42 + clamp(averageNonMarketSignalCount / 4, 0, 1) * 8, 2),
     riskLegCount: legs.filter((leg) => ["calculated_risk", "longshot_value", "contrarian_value"].includes(leg.riskTag)).length,
+    averageNonMarketSignalCount: round(averageNonMarketSignalCount, 2),
     displayRating: displayConfidenceRating(legs, { likely: true }),
     shortWindowFallback,
     uniqueFixtureCount,
     reusedSignalCount,
-    thesis: `${target.label} chosen by the most-likely engine, ignoring the risk slider and ranking by AI rating, confidence, fresh odds, and positive edge. Combined odds ${round(combinedDecimalOdds, 2)}.${heatText}${shortWindowFallback ? ` Short-window fallback used ${uniqueFixtureCount} fixture(s) and ${legs.length} signal(s) so this Picks of the Day card stays populated.` : ""}`
+    thesis: `${target.label} chosen by the most-likely engine, ignoring the risk slider and ranking by raw AI probability, confidence, fresh odds, and independent evidence. Combined odds ${round(combinedDecimalOdds, 2)}, independent edge ${round(averageIndependentEdge * 100, 2)}%, non-market signals ${round(averageNonMarketSignalCount, 1)} per leg.${heatText}${shortWindowFallback ? ` Short-window fallback used ${uniqueFixtureCount} fixture(s) and ${legs.length} signal(s) so this Picks of the Day card stays populated.` : ""}`
   };
 }
 
@@ -740,7 +759,7 @@ function oddsFitScore(value, min, max) {
   return 10 * (1 - Math.min(1, Math.abs(value - midpoint) / spread));
 }
 
-function buildComboThesis({ type, legs, combinedDecimalOdds, expectedValue, riskLegs, favouriteLegs }) {
+function buildComboThesis({ type, legs, combinedDecimalOdds, expectedValue, averageIndependentEdge, averageNonMarketSignalCount, riskLegs, favouriteLegs }) {
   const selections = legs.map((leg) => leg.selectionLabel).join(" | ");
   const riskText = riskLegs.length
     ? `${riskLegs.length} calculated-risk/value leg(s) stop this from being a favourite-only ${type}.`
@@ -751,7 +770,7 @@ function buildComboThesis({ type, legs, combinedDecimalOdds, expectedValue, risk
     ? `Heat layer active on ${heatLegs.length} leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth.`
     : "Heat layer neutral or low impact on this slip.";
 
-  return `${type} at combined odds ${round(combinedDecimalOdds, 2)} with expected value ${round(expectedValue * 100, 2)}%. ${riskText} ${favouriteText} ${heatText} Legs: ${selections}.`;
+  return `${type} at combined odds ${round(combinedDecimalOdds, 2)} with expected value ${round(expectedValue * 100, 2)}%. Independent edge averages ${round(averageIndependentEdge * 100, 2)}% with ${round(averageNonMarketSignalCount, 1)} non-market signals per leg. ${riskText} ${favouriteText} ${heatText} Legs: ${selections}.`;
 }
 
 function nearest(values, value) {
@@ -832,10 +851,14 @@ function round(value, digits = 2) {
 function formatLegNote(leg) {
   const edge = percent(leg.edge);
   const confidence = percent(leg.confidence);
+  const rawAi = Number(leg.rawModelProbability || leg.modelProbability || 0);
+  const market = Number(leg.marketImpliedProbability || leg.impliedProbability || 0);
+  const independentEdge = Number(leg.independentEdge ?? (rawAi - market));
+  const signals = Number(leg.components?.nonMarketSignalCount || 0);
   const tag = String(leg.riskTag || "edge").replace(/_/g, " ");
   const bookmaker = leg.bookmaker ? ` via ${leg.bookmaker}` : "";
 
-  return `${tag}${bookmaker} | AI leg rating ${percent(displayLegRating(leg))} | edge ${edge} | data confidence ${confidence}`;
+  return `${tag}${bookmaker} | AI ${percent(rawAi)} vs market ${percent(market)} | independent edge ${percent(independentEdge)} | ${signals} signals | rating ${percent(displayLegRating(leg))} | final edge ${edge} | data ${confidence}`;
 }
 
 function confidenceLabel(bet) {
@@ -848,9 +871,13 @@ function likelihoodLabel(bet) {
 
 function formatLikelyLegNote(leg) {
   const confidence = percent(leg.confidence);
+  const rawAi = Number(leg.rawModelProbability || leg.modelProbability || leg.likelyProbability || 0);
+  const market = Number(leg.marketImpliedProbability || leg.impliedProbability || 0);
+  const independentEdge = Number(leg.independentEdge ?? (rawAi - market));
+  const signals = Number(leg.components?.nonMarketSignalCount || 0);
   const bookmaker = leg.bookmaker ? ` via ${leg.bookmaker}` : "";
 
-  return `AI leg rating ${percent(displayLegRating(leg, { likely: true }))}${bookmaker} | data confidence ${confidence}`;
+  return `AI leg rating ${percent(displayLegRating(leg, { likely: true }))}${bookmaker} | AI ${percent(rawAi)} vs market ${percent(market)} | independent edge ${percent(independentEdge)} | ${signals} signals | data ${confidence}`;
 }
 
 function displayRatingForBet(bet, options = {}) {
@@ -877,7 +904,9 @@ function displayLegRating(leg, { likely = false } = {}) {
   const intelligence = Number(leg.components?.intelligenceConfidence || 0.5);
   const freshness = Number(leg.components?.oddsFreshness || 0.75);
   const edgeLift = clamp(Number(leg.edge || 0), 0, 0.18) / 0.18;
-  const rawRating = (probability * 0.42) + (confidence * 0.25) + (intelligence * 0.14) + (freshness * 0.08) + (edgeLift * 0.11);
+  const independentLift = clamp(Number(leg.independentEdge ?? leg.edge ?? 0), -0.03, 0.16) / 0.16;
+  const evidenceLift = clamp(Number(leg.components?.nonMarketSignalCount || 0) / 4, 0, 1);
+  const rawRating = (probability * 0.38) + (confidence * 0.23) + (intelligence * 0.13) + (freshness * 0.07) + (edgeLift * 0.08) + (independentLift * 0.06) + (evidenceLift * 0.05);
   const rating = 0.48 + (rawRating * 0.5) + (likely ? 0.025 : 0);
 
   return clamp(rating, 0.55, likely ? 0.97 : 0.95);

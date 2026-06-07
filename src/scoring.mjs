@@ -39,6 +39,8 @@ export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, team
         continue;
       }
 
+      const rawProbabilities = model.rawMarketProbabilities?.[market] || probabilities;
+
       for (const [outcome, modelProbability] of Object.entries(probabilities)) {
         const odds = latestOdds.get(outcomeKey(fixture.id, market, outcome));
         const movement = oddsMovement.get(outcomeKey(fixture.id, market, outcome));
@@ -52,6 +54,7 @@ export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, team
           market,
           outcome,
           modelProbability,
+          rawModelProbability: rawProbabilities[outcome],
           odds,
           movement,
           model,
@@ -66,14 +69,15 @@ export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, team
 
     if ((policy.markets || []).includes("anytime_scorer")) {
       for (const odds of latestOddsRecords.filter((record) => record.fixtureId === fixture.id && record.market === "anytime_scorer")) {
-        const modelProbability = estimateAnytimeScorerProbability({ fixture, odds, homeStats, awayStats, model, playerStatsByKey });
+        const scorerProbability = estimateAnytimeScorerProbability({ fixture, odds, homeStats, awayStats, model, playerStatsByKey });
         const movement = oddsMovement.get(outcomeKey(fixture.id, "anytime_scorer", odds.outcome));
 
         candidates.push(scoreLeg({
           fixture,
           market: "anytime_scorer",
           outcome: odds.outcome,
-          modelProbability,
+          modelProbability: scorerProbability.modelProbability,
+          rawModelProbability: scorerProbability.rawModelProbability,
           odds,
           movement,
           model,
@@ -107,13 +111,21 @@ function estimateAnytimeScorerProbability({ fixture, odds, homeStats, awayStats,
   const scorerLift = playerRecord
     ? clamp(scorerSampleRate * Number(playerRecord.scorerConfidence || 0.35) * 0.16, 0, 0.075)
     : 0;
+  const rawRoleLikelihood = playerRecord
+    ? clamp(0.11 + scorerSampleRate * 0.85 + teamAttack * 0.035 + expectedGoals * 0.012, 0.07, 0.46)
+    : clamp(0.08 + teamAttack * 0.032 + expectedGoals * 0.01, 0.06, 0.2);
   const newsLift = playerTeam === fixture.homeTeam
     ? Number(model.components.homeNewsImpact || 0) * 0.035
     : playerTeam === fixture.awayTeam
       ? Number(model.components.awayNewsImpact || 0) * 0.035
       : 0;
+  const rawModelProbability = clamp(teamGoalLikelihood * rawRoleLikelihood + scorerLift + newsLift, 0.035, 0.48);
+  const marketAdjustedProbability = blendProbability(rawModelProbability, implied, playerRecord ? 0.28 : 0.42);
 
-  return round(clamp(teamGoalLikelihood * roleLikelihood + scorerLift + newsLift, 0.04, 0.58), 4);
+  return {
+    rawModelProbability: round(rawModelProbability, 4),
+    modelProbability: round(clamp((marketAdjustedProbability * 0.74) + (teamGoalLikelihood * roleLikelihood * 0.26), 0.04, 0.58), 4)
+  };
 }
 
 function inferPlayerTeam(odds, fixture) {
@@ -236,35 +248,40 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
   const homeNews = newsByTeam.get(fixture.homeTeam) || neutralNews();
   const awayNews = newsByTeam.get(fixture.awayTeam) || neutralNews();
   const heat = buildHeatImpact({ fixture, heatRecord, homeSquadDepth, awaySquadDepth });
-  const ratingEdge = Number(homeStats.rating || 1700) - Number(awayStats.rating || 1700);
-  const formEdge = (Number(homeStats.recentPointsPerGame || 1.4) - Number(awayStats.recentPointsPerGame || 1.4)) * 42;
-  const xgEdge = ((Number(homeStats.xgFor || 1.3) - Number(awayStats.xgAgainst || 1.2)) - (Number(awayStats.xgFor || 1.3) - Number(homeStats.xgAgainst || 1.2))) * 48;
-  const styleEdge = styleMatchupEdge(homeStats, awayStats);
-  const newsEdge = (homeNews.netImpact - awayNews.netImpact) * 95;
-  const memoryEdge = (Number(homeStats.learnedEdge || 0) - Number(awayStats.learnedEdge || 0)) * 88;
-  const marketMemoryEdge = (Number(homeStats.memoryOddsPressure || 0) - Number(awayStats.memoryOddsPressure || 0)) * 35;
+  const ratingEdge = clamp(Number(homeStats.rating || 1700) - Number(awayStats.rating || 1700), -180, 180);
+  const formEdge = clamp((Number(homeStats.recentPointsPerGame || 1.4) - Number(awayStats.recentPointsPerGame || 1.4)) * 42, -75, 75);
+  const xgEdge = clamp(((Number(homeStats.xgFor || 1.3) - Number(awayStats.xgAgainst || 1.2)) - (Number(awayStats.xgFor || 1.3) - Number(homeStats.xgAgainst || 1.2))) * 48, -90, 90);
+  const styleEdge = clamp(styleMatchupEdge(homeStats, awayStats), -65, 65);
+  const newsEdge = clamp((homeNews.netImpact - awayNews.netImpact) * 95, -55, 55);
+  const memoryEdge = clamp((Number(homeStats.learnedEdge || 0) - Number(awayStats.learnedEdge || 0)) * 88, -45, 45);
+  const marketMemoryEdge = clamp((Number(homeStats.memoryOddsPressure || 0) - Number(awayStats.memoryOddsPressure || 0)) * 28, -22, 22);
   const marketResultEdge = marketSnapshot?.matchWinner
-    ? (Number(marketSnapshot.matchWinner.homeWin || 0.37) - Number(marketSnapshot.matchWinner.awayWin || 0.37)) * 135 * Number(marketSnapshot.matchWinner.confidence || 0.5)
+    ? clamp((Number(marketSnapshot.matchWinner.homeWin || 0.37) - Number(marketSnapshot.matchWinner.awayWin || 0.37)) * 74 * Number(marketSnapshot.matchWinner.confidence || 0.5), -50, 50)
     : 0;
   const heatEdge = Number(heat.resultEdgeAdjustment || 0);
-  const totalEdge = ratingEdge + formEdge + xgEdge + styleEdge + newsEdge + memoryEdge + marketMemoryEdge + marketResultEdge + heatEdge;
-  const rawDrawProbability = clamp(0.265 - Math.abs(totalEdge) / 2500 + defensiveDrawLift(homeStats, awayStats) + Number(heat.drawLift || 0), 0.17, 0.33);
+  const independentResultEdge = clamp(ratingEdge + formEdge + xgEdge + styleEdge + newsEdge + memoryEdge + heatEdge, -220, 220);
+  const totalEdge = clamp(independentResultEdge + marketMemoryEdge + marketResultEdge, -240, 240);
+  const rawDrawProbability = clamp(0.265 - Math.abs(independentResultEdge) / 2500 + defensiveDrawLift(homeStats, awayStats) + Number(heat.drawLift || 0), 0.17, 0.33);
   const drawProbability = marketSnapshot?.matchWinner
-    ? blendProbability(rawDrawProbability, marketSnapshot.matchWinner.draw, 0.24 * Number(marketSnapshot.matchWinner.confidence || 0.5))
+    ? blendProbability(rawDrawProbability, marketSnapshot.matchWinner.draw, 0.14 * Number(marketSnapshot.matchWinner.confidence || 0.5))
     : rawDrawProbability;
+  const rawHomeShare = logistic(independentResultEdge / 210);
   const homeShare = logistic(totalEdge / 210);
+  const rawHomeWin = clamp((1 - rawDrawProbability) * rawHomeShare, 0.05, 0.82);
+  const rawAwayWin = clamp((1 - rawDrawProbability) * (1 - rawHomeShare), 0.05, 0.82);
   const homeWin = clamp((1 - drawProbability) * homeShare, 0.05, 0.82);
   const awayWin = clamp((1 - drawProbability) * (1 - homeShare), 0.05, 0.82);
+  const rawNormalizedTotal = rawHomeWin + rawAwayWin + rawDrawProbability;
   const normalizedTotal = homeWin + awayWin + drawProbability;
   const goalShape = goalShapeForFixture(homeStats, awayStats, homeNews, awayNews, heat);
   const expectedGoals = goalShape.expectedGoals;
   const rawOver25 = poissonOver25(expectedGoals);
   const rawBttsYes = poissonBothTeamsToScore(goalShape.homeExpectedGoals, goalShape.awayExpectedGoals, heat);
   const over25 = marketSnapshot?.over25
-    ? blendProbability(rawOver25, marketSnapshot.over25.over, 0.24 * Number(marketSnapshot.over25.confidence || 0.5))
+    ? blendProbability(rawOver25, marketSnapshot.over25.over, 0.14 * Number(marketSnapshot.over25.confidence || 0.5))
     : rawOver25;
   const bttsYes = marketSnapshot?.btts
-    ? blendProbability(rawBttsYes, marketSnapshot.btts.yes, 0.26 * Number(marketSnapshot.btts.confidence || 0.5))
+    ? blendProbability(rawBttsYes, marketSnapshot.btts.yes, 0.15 * Number(marketSnapshot.btts.confidence || 0.5))
     : rawBttsYes;
 
   return {
@@ -278,6 +295,7 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
       styleEdge: round(styleEdge, 2),
       newsEdge: round(newsEdge, 2),
       memoryEdge: round(memoryEdge, 2),
+      independentResultEdge: round(independentResultEdge, 2),
       marketMemoryEdge: round(marketMemoryEdge, 2),
       marketResultEdge: round(marketResultEdge, 2),
       marketConfidence: round(Number(marketSnapshot?.matchWinner?.confidence || 0), 4),
@@ -292,6 +310,9 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
       awayExpectedGoals: round(goalShape.awayExpectedGoals, 2),
       bttsShapeProbability: round(bttsYes, 4),
       over25ShapeProbability: round(over25, 4),
+      rawHomeWinProbability: round(rawHomeWin / rawNormalizedTotal, 4),
+      rawDrawProbability: round(rawDrawProbability / rawNormalizedTotal, 4),
+      rawAwayWinProbability: round(rawAwayWin / rawNormalizedTotal, 4),
       rawBttsShapeProbability: round(rawBttsYes, 4),
       rawOver25ShapeProbability: round(rawOver25, 4),
       homeLongMatchCount: Number(homeStats.longForm?.matchCount || homeStats.sourceMatchCount || 0),
@@ -336,6 +357,27 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
         awayStats.intelligenceConfidence
       ]), 3)
     },
+    rawMarketProbabilities: {
+      match_winner: {
+        [fixture.homeTeam]: round(rawHomeWin / rawNormalizedTotal, 4),
+        Draw: round(rawDrawProbability / rawNormalizedTotal, 4),
+        [fixture.awayTeam]: round(rawAwayWin / rawNormalizedTotal, 4)
+      },
+      draw_no_bet: {
+        [fixture.homeTeam]: round(rawHomeWin / (rawHomeWin + rawAwayWin), 4),
+        [fixture.awayTeam]: round(rawAwayWin / (rawHomeWin + rawAwayWin), 4)
+      },
+      both_teams_to_score: {
+        Yes: round(rawBttsYes, 4),
+        No: round(1 - rawBttsYes, 4)
+      },
+      over_2_5_goals: {
+        Over: round(rawOver25, 4)
+      },
+      under_2_5_goals: {
+        Under: round(1 - rawOver25, 4)
+      }
+    },
     marketProbabilities: {
       match_winner: {
         [fixture.homeTeam]: round(homeWin / normalizedTotal, 4),
@@ -360,12 +402,16 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
   };
 }
 
-function scoreLeg({ fixture, market, outcome, modelProbability, odds, movement, model, policy, now, outcomeLearning }) {
+function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbability, odds, movement, model, policy, now, outcomeLearning }) {
+  const adjustedModelProbability = clamp(Number(modelProbability || 0), 0.03, 0.92);
+  const independentModelProbability = clamp(Number(rawModelProbability ?? modelProbability ?? 0), 0.03, 0.92);
   const impliedProbability = decimalToImpliedProbability(odds.decimalOdds);
   const marketImpliedProbability = movement?.marketImpliedProbability || impliedProbability;
-  const priceEdge = modelProbability - impliedProbability;
-  const marketEdge = modelProbability - marketImpliedProbability;
-  const edge = priceEdge * 0.62 + marketEdge * 0.38;
+  const priceEdge = adjustedModelProbability - impliedProbability;
+  const marketEdge = adjustedModelProbability - marketImpliedProbability;
+  const independentEdge = independentModelProbability - marketImpliedProbability;
+  const edge = independentEdge * 0.58 + priceEdge * 0.28 + marketEdge * 0.14;
+  const marketBlendLift = adjustedModelProbability - independentModelProbability;
   const oddsAgeHours = hoursBetween(odds.capturedAt, now);
   const oddsFreshness = clamp(1 - oddsAgeHours / (policy.sourceRequirements?.maxOddsAgeHours || 30), 0, 1);
   const dataCompleteness = model.components.dataCompleteness;
@@ -374,40 +420,75 @@ function scoreLeg({ fixture, market, outcome, modelProbability, odds, movement, 
   const marketConfirmation = movement?.shortening && edge > 0 ? 1 : 0;
   const contrarianValue = movement?.drifting && edge > 0 && Number(odds.decimalOdds) >= policy.riskProfile.minDecimalOddsForRiskLeg ? 1 : 0;
   const oddsDisagreement = Math.max(0, Number(movement?.bestOverAverage || 0));
-  const preliminaryRiskTag = classifyRiskTag({ decimalOdds: odds.decimalOdds, impliedProbability, edge, modelProbability, movement, contrarianValue });
+  const independentEvidence = evaluateIndependentEvidence({
+    fixture,
+    market,
+    outcome,
+    model,
+    modelProbability: adjustedModelProbability,
+    rawModelProbability: independentModelProbability,
+    marketImpliedProbability,
+    independentEdge
+  });
+  const preliminaryRiskTag = classifyRiskTag({
+    decimalOdds: odds.decimalOdds,
+    impliedProbability,
+    edge,
+    independentEdge,
+    rawModelProbability: independentModelProbability,
+    modelProbability: adjustedModelProbability,
+    movement,
+    contrarianValue
+  });
   const learning = outcomeLearningAdjustment({ market, riskTag: preliminaryRiskTag, outcomeLearning });
-  const marketFocus = evaluateMarketFocus({ market, outcome, model, modelProbability, edge, odds, policy });
-  const learnedModelProbability = clamp(modelProbability + learning.adjustment * learning.confidence, 0.03, 0.92);
+  const marketFocus = evaluateMarketFocus({ market, outcome, model, modelProbability: adjustedModelProbability, edge, odds, policy });
+  const learnedModelProbability = clamp(adjustedModelProbability + learning.adjustment * learning.confidence, 0.03, 0.92);
+  const learnedIndependentProbability = clamp(independentModelProbability + learning.adjustment * learning.confidence * 0.55, 0.03, 0.92);
   const learnedEdge = learnedModelProbability - impliedProbability;
+  const learnedIndependentEdge = learnedIndependentProbability - marketImpliedProbability;
+  const evidenceConfidence = clamp(Number(independentEvidence.count || 0) / 4, 0, 1);
   const confidence = clamp(
-    (modelProbability * 0.45)
+    (independentModelProbability * 0.32)
     + (dataCompleteness * 0.22)
-    + (intelligenceConfidence * 0.12)
-    + (oddsFreshness * 0.16)
-    + Math.min(0.05, bookmakerCoverage * 0.012)
+    + (intelligenceConfidence * 0.16)
+    + (oddsFreshness * 0.12)
+    + (evidenceConfidence * 0.12)
+    + Math.min(0.04, bookmakerCoverage * 0.01)
     + marketConfirmation * Number(policy.riskProfile.marketConfirmationWeight || 0.2),
     0,
     1
   );
   const favoriteCrowdingPenalty = impliedProbability > policy.riskProfile.maxFavoriteImpliedProbability ? (impliedProbability - policy.riskProfile.maxFavoriteImpliedProbability) * 42 : 0;
-  const valueOddsBonus = Number(odds.decimalOdds) >= policy.riskProfile.minDecimalOddsForRiskLeg ? 6 : 0;
+  const valueOddsBonus = Number(odds.decimalOdds) >= policy.riskProfile.minDecimalOddsForRiskLeg ? 3.5 : 0;
   const oddsMovementBonus = clamp(
-    marketConfirmation * 5
-    + contrarianValue * Number(policy.riskProfile.contrarianWeight || 0.1) * 18
-    + oddsDisagreement * Number(policy.riskProfile.valueHuntingWeight || 0.2) * 40,
+    marketConfirmation * 3
+    + contrarianValue * Number(policy.riskProfile.contrarianWeight || 0.1) * 12
+    + oddsDisagreement * Number(policy.riskProfile.valueHuntingWeight || 0.2) * 28,
     -4,
-    12
+    8
   );
-  const intelligenceBonus = clamp((intelligenceConfidence - 0.5) * 14 + (dataCompleteness - 0.55) * 8, -8, 10);
+  const intelligenceBonus = clamp((intelligenceConfidence - 0.5) * 12 + (dataCompleteness - 0.55) * 7, -8, 9);
   const marketFocusBonus = marketFocus.score;
-  const edgeScore = (edge * 0.72 + learnedEdge * 0.28) * 185;
-  const probabilityScore = learnedModelProbability * 36;
-  const confidenceScore = confidence * 28;
-  const score = clamp(43 + edgeScore + probabilityScore + confidenceScore + valueOddsBonus + oddsMovementBonus + intelligenceBonus + marketFocusBonus - favoriteCrowdingPenalty, 0, 100);
+  const evidenceBonus = clamp(Number(independentEvidence.count || 0) * 2.1 + Number(independentEvidence.strength || 0) * 2.5, 0, 11);
+  const marketBlendPenalty = clamp(Math.max(0, marketBlendLift - 0.04) * 55, 0, 9);
+  const edgeScore = clamp(edge * 0.64 + learnedEdge * 0.18 + learnedIndependentEdge * 0.18, -0.05, 0.2) * 100;
+  const independentEdgeScore = clamp(learnedIndependentEdge, -0.05, 0.16) * 92;
+  const probabilityScore = learnedModelProbability * 23;
+  const confidenceScore = confidence * 18;
+  const rawScore = 28 + edgeScore + independentEdgeScore + probabilityScore + confidenceScore + evidenceBonus + valueOddsBonus + oddsMovementBonus + intelligenceBonus + marketFocusBonus - favoriteCrowdingPenalty - marketBlendPenalty;
+  const score = clamp(compressTopScore(rawScore), 0, 100);
   const hardBlocks = [];
 
   if (edge < policy.riskProfile.minLegEdge) {
     hardBlocks.push("edge_below_policy_minimum");
+  }
+
+  if (independentEdge < Number(policy.riskProfile.minIndependentEdge ?? 0)) {
+    hardBlocks.push("independent_edge_below_policy_minimum");
+  }
+
+  if (Number(independentEvidence.count || 0) < Number(policy.riskProfile.minNonMarketSignals || 2)) {
+    hardBlocks.push("insufficient_non_market_evidence");
   }
 
   if (confidence < policy.riskProfile.minLegConfidence) {
@@ -424,6 +505,55 @@ function scoreLeg({ fixture, market, outcome, modelProbability, odds, movement, 
 
   if (marketFocus.score < -6 && confidence < 0.76) {
     hardBlocks.push("market_does_not_match_evidence");
+  }
+
+  if (market === "match_winner" && outcome === "Draw") {
+    if (independentModelProbability < Number(policy.riskProfile.minDrawModelProbability || 0.22)) {
+      hardBlocks.push("draw_probability_below_model_floor");
+    }
+
+    if (Math.abs(Number(model.components.independentResultEdge || 0)) > Number(policy.riskProfile.maxDrawIndependentResultEdge || 58)) {
+      hardBlocks.push("draw_without_enough_balance");
+    }
+  }
+
+  if (Number(odds.decimalOdds) >= 4 || preliminaryRiskTag === "longshot_value") {
+    if (independentModelProbability < Number(policy.riskProfile.minLongshotModelProbability || 0.18)) {
+      hardBlocks.push("longshot_probability_below_model_floor");
+    }
+
+    if (Number(independentEvidence.count || 0) < Number(policy.riskProfile.minLongshotSignals || 3)) {
+      hardBlocks.push("longshot_without_enough_independent_signals");
+    }
+
+    if (
+      market === "match_winner"
+      && marketImpliedProbability < 0.18
+      && independentEdge > 0.2
+      && Math.abs(Number(model.components.independentResultEdge || 0)) < Number(policy.riskProfile.minLongshotResultEdgeForce || 48)
+    ) {
+      hardBlocks.push("longshot_market_disagreement_too_large");
+    }
+  }
+
+  if (
+    market === "match_winner"
+    && outcome !== "Draw"
+    && Number(odds.decimalOdds) > Number(policy.riskProfile.maxResultLongshotDecimalOdds || 16)
+  ) {
+    hardBlocks.push("result_longshot_above_risk_price_cap");
+  }
+
+  if (market === "both_teams_to_score" && outcome === "Yes") {
+    const lowerTeamExpectedGoals = Math.min(Number(model.components.homeExpectedGoals || 0), Number(model.components.awayExpectedGoals || 0));
+
+    if (independentModelProbability < Number(policy.riskProfile.minBttsYesRawProbability || 0.46)) {
+      hardBlocks.push("btts_yes_raw_probability_below_floor");
+    }
+
+    if (lowerTeamExpectedGoals < Number(policy.riskProfile.minBttsLowerTeamExpectedGoals || 0.78)) {
+      hardBlocks.push("btts_yes_one_team_goal_threat_too_low");
+    }
   }
 
   if (oddsAgeHours > (policy.sourceRequirements?.maxOddsAgeHours || 30)) {
@@ -444,9 +574,11 @@ function scoreLeg({ fixture, market, outcome, modelProbability, odds, movement, 
     selectionLabel: selectionLabel({ fixture, market, outcome }),
     bookmaker: odds.bookmaker,
     decimalOdds: Number(odds.decimalOdds),
-    modelProbability: round(modelProbability, 4),
+    modelProbability: round(adjustedModelProbability, 4),
+    rawModelProbability: round(independentModelProbability, 4),
     impliedProbability: round(impliedProbability, 4),
     marketImpliedProbability: round(marketImpliedProbability, 4),
+    independentEdge: round(independentEdge, 4),
     edge: round(edge, 4),
     priceEdge: round(priceEdge, 4),
     marketEdge: round(marketEdge, 4),
@@ -464,10 +596,17 @@ function scoreLeg({ fixture, market, outcome, modelProbability, odds, movement, 
       oddsShortening: movement?.shortening || false,
       oddsDrifting: movement?.drifting || false,
       bestOverAverage: round(oddsDisagreement, 4),
+      independentEdge: round(independentEdge, 4),
+      marketBlendLift: round(marketBlendLift, 4),
+      nonMarketSignalCount: independentEvidence.count,
+      nonMarketSignals: independentEvidence.signals,
+      independentEvidenceStrength: round(independentEvidence.strength, 4),
       intelligenceConfidence: round(intelligenceConfidence, 4),
       oddsMovementBonus: round(oddsMovementBonus, 2),
       intelligenceBonus: round(intelligenceBonus, 2),
       marketFocusBonus: round(marketFocusBonus, 2),
+      evidenceBonus: round(evidenceBonus, 2),
+      marketBlendPenalty: round(marketBlendPenalty, 2),
       marketFocusReasons: marketFocus.reasons,
       outcomeLearningAdjustment: learning.adjustment,
       outcomeLearningConfidence: learning.confidence,
@@ -475,7 +614,23 @@ function scoreLeg({ fixture, market, outcome, modelProbability, odds, movement, 
       favoriteCrowdingPenalty: round(favoriteCrowdingPenalty, 2),
       valueOddsBonus
     },
-    thesis: buildLegThesis({ fixture, market, outcome, edge, odds, movement, model, confidence, marketFocus, learning })
+    thesis: buildLegThesis({
+      fixture,
+      market,
+      outcome,
+      edge,
+      independentEdge,
+      rawModelProbability: independentModelProbability,
+      modelProbability: adjustedModelProbability,
+      marketImpliedProbability,
+      odds,
+      movement,
+      model,
+      confidence,
+      independentEvidence,
+      marketFocus,
+      learning
+    })
   };
 }
 
@@ -582,16 +737,137 @@ function poissonBothTeamsToScore(homeExpectedGoals, awayExpectedGoals, heat) {
   return round(clamp(homeScores * awayScores - balancePenalty + heatAdjustment, 0.16, 0.68), 4);
 }
 
-function classifyRiskTag({ decimalOdds, impliedProbability, edge, modelProbability, movement, contrarianValue }) {
+function compressTopScore(score) {
+  const value = Number(score || 0);
+
+  if (value <= 86) {
+    return value;
+  }
+
+  return 86 + Math.sqrt(Math.max(0, value - 86)) * 2.5;
+}
+
+function evaluateIndependentEvidence({ fixture, market, outcome, model, rawModelProbability, marketImpliedProbability, independentEdge }) {
+  const components = model.components || {};
+  const signals = [];
+  const strengths = [];
+  const expectedGoals = Number(components.expectedGoals || 2.5);
+  const homeExpectedGoals = Number(components.homeExpectedGoals || expectedGoals / 2);
+  const awayExpectedGoals = Number(components.awayExpectedGoals || expectedGoals / 2);
+  const lowerTeamExpectedGoals = Math.min(homeExpectedGoals, awayExpectedGoals);
+  const independentResultEdge = Number(components.independentResultEdge || 0);
+  const direction = outcome === fixture.homeTeam ? 1 : outcome === fixture.awayTeam ? -1 : 0;
+  const directional = (value) => Number(value || 0) * direction;
+  const add = (condition, label, strength = 0.55) => {
+    if (!condition || signals.includes(label)) {
+      return;
+    }
+
+    signals.push(label);
+    strengths.push(clamp(strength, 0.1, 1));
+  };
+
+  add(independentEdge >= 0.012, "raw AI probability beats market", clamp(independentEdge / 0.08, 0.25, 1));
+  add(Number(components.homeLongMatchCount || 0) >= 10 && Number(components.awayLongMatchCount || 0) >= 10, "20-match team sample", 0.62);
+
+  if (market === "match_winner" || market === "draw_no_bet") {
+    if (outcome === "Draw") {
+      const cleanSheetProfile = mean([
+        Number(components.homeCleanSheetRate || 0.28),
+        Number(components.awayCleanSheetRate || 0.28)
+      ]);
+
+      add(Math.abs(independentResultEdge) <= 34, "balanced team-strength profile", 0.72);
+      add(Math.abs(Number(components.formEdge || 0)) <= 20 && Math.abs(Number(components.xgEdge || 0)) <= 22, "form and xG are close", 0.58);
+      add(expectedGoals <= 2.42, "tight expected-goals profile", 0.55);
+      add(cleanSheetProfile >= 0.33, "clean-sheet history supports draw shape", 0.48);
+    } else if (direction) {
+      add(directional(components.ratingEdge) >= 32, "team rating edge", clamp(Math.abs(Number(components.ratingEdge || 0)) / 130, 0.3, 1));
+      add(directional(components.formEdge) >= 12, "recent form edge", clamp(Math.abs(Number(components.formEdge || 0)) / 58, 0.25, 1));
+      add(directional(components.xgEdge) >= 10, "xG attack-defense edge", clamp(Math.abs(Number(components.xgEdge || 0)) / 55, 0.25, 1));
+      add(directional(components.styleEdge) >= 10, "style matchup edge", clamp(Math.abs(Number(components.styleEdge || 0)) / 45, 0.25, 1));
+      add(directional(components.newsEdge) >= 8, "team news edge", clamp(Math.abs(Number(components.newsEdge || 0)) / 55, 0.22, 1));
+      add(directional(components.memoryEdge) >= 7, "local intelligence memory edge", clamp(Math.abs(Number(components.memoryEdge || 0)) / 40, 0.22, 1));
+      add(directional(components.heatEdge) >= 3, "heat and squad-depth edge", clamp(Math.abs(Number(components.heatEdge || 0)) / 20, 0.2, 0.8));
+    }
+  }
+
+  if (market === "both_teams_to_score") {
+    const bttsHistory = mean([
+      Number(components.homeBttsRate || 0.48),
+      Number(components.awayBttsRate || 0.48)
+    ]);
+
+    if (outcome === "Yes") {
+      add(rawModelProbability >= 0.52, "raw BTTS model is positive", clamp((rawModelProbability - 0.45) / 0.18, 0.25, 1));
+      add(homeExpectedGoals >= 0.85 && awayExpectedGoals >= 0.85, "both teams carry scoring threat", 0.72);
+      add(expectedGoals >= 2.45, "goals environment supports BTTS", 0.58);
+      add(bttsHistory >= 0.52, "20-match BTTS history", clamp((bttsHistory - 0.45) / 0.2, 0.2, 1));
+      add(Number(components.heatStress || 0) < 0.72 || Number(components.heatConfidence || 0) < 0.35, "heat does not strongly suppress tempo", 0.35);
+    } else {
+      const cleanSheetHistory = mean([
+        Number(components.homeCleanSheetRate || 0.28),
+        Number(components.awayCleanSheetRate || 0.28)
+      ]);
+
+      add(rawModelProbability >= 0.52, "raw BTTS-no model is positive", clamp((rawModelProbability - 0.45) / 0.18, 0.25, 1));
+      add(lowerTeamExpectedGoals <= 0.78, "one team goal threat is low", 0.7);
+      add(cleanSheetHistory >= 0.34, "clean-sheet history supports BTTS-no", 0.55);
+      add(expectedGoals <= 2.35, "tight goals environment", 0.5);
+    }
+  }
+
+  if (market === "over_2_5_goals") {
+    const overHistory = mean([
+      Number(components.homeOver25Rate || 0.48),
+      Number(components.awayOver25Rate || 0.48)
+    ]);
+
+    add(rawModelProbability >= 0.53, "raw over-2.5 model is positive", clamp((rawModelProbability - 0.45) / 0.2, 0.25, 1));
+    add(expectedGoals >= 2.58, "expected-goals model is high", clamp((expectedGoals - 2.25) / 0.85, 0.25, 1));
+    add(overHistory >= 0.52, "20-match over history", clamp((overHistory - 0.44) / 0.22, 0.2, 1));
+    add(lowerTeamExpectedGoals >= 0.75, "second team adds goal pressure", 0.45);
+  }
+
+  if (market === "under_2_5_goals") {
+    const overHistory = mean([
+      Number(components.homeOver25Rate || 0.48),
+      Number(components.awayOver25Rate || 0.48)
+    ]);
+
+    add(rawModelProbability >= 0.53, "raw under-2.5 model is positive", clamp((rawModelProbability - 0.45) / 0.2, 0.25, 1));
+    add(expectedGoals <= 2.34, "expected-goals model is tight", clamp((2.58 - expectedGoals) / 0.78, 0.25, 1));
+    add(overHistory <= 0.42, "20-match over history is modest", clamp((0.5 - overHistory) / 0.22, 0.2, 1));
+    add(Number(components.heatExpectedGoalsAdjustment || 0) < -0.02, "heat layer trims goal tempo", 0.42);
+  }
+
+  if (market === "anytime_scorer") {
+    add(independentEdge >= 0.01, "raw scorer probability beats market", clamp(independentEdge / 0.06, 0.25, 1));
+    add(expectedGoals >= 2.55, "team goals environment is live", 0.5);
+    add(rawModelProbability >= 0.18, "scorer raw probability clears floor", clamp((rawModelProbability - 0.12) / 0.22, 0.25, 1));
+  }
+
+  return {
+    count: signals.length,
+    signals,
+    strength: signals.length ? mean(strengths) : 0
+  };
+}
+
+function classifyRiskTag({ decimalOdds, impliedProbability, edge, independentEdge, rawModelProbability, modelProbability, movement, contrarianValue }) {
   if (contrarianValue) {
     return "contrarian_value";
   }
 
-  if (decimalOdds >= 4 && edge > 0.045) {
+  if (decimalOdds >= 4 && edge > 0.04 && independentEdge > 0.018 && rawModelProbability >= 0.18) {
     return "longshot_value";
   }
 
-  if (decimalOdds >= 2.05 && edge > 0.025) {
+  if (decimalOdds >= 2.05 && edge > 0.022 && independentEdge > 0) {
+    return "calculated_risk";
+  }
+
+  if (decimalOdds >= 1.85 && edge > 0.032 && independentEdge > 0.02) {
     return "calculated_risk";
   }
 
@@ -599,14 +875,14 @@ function classifyRiskTag({ decimalOdds, impliedProbability, edge, modelProbabili
     return "value_favourite";
   }
 
-  if (movement?.shortening && edge > 0.02) {
+  if (movement?.shortening && edge > 0.02 && independentEdge > -0.005) {
     return "market_confirmed_edge";
   }
 
   return "steady_edge";
 }
 
-function buildLegThesis({ fixture, market, outcome, edge, odds, movement, model, confidence, marketFocus, learning }) {
+function buildLegThesis({ fixture, market, outcome, edge, independentEdge, rawModelProbability, modelProbability, marketImpliedProbability, odds, movement, model, confidence, independentEvidence, marketFocus, learning }) {
   const movementText = movement?.previousAverageDecimalOdds
     ? `Market average moved from ${movement.previousAverageDecimalOdds} to ${movement.averageDecimalOdds}; best price is ${round(Number(movement.bestOverAverage || 0) * 100, 2)}% over average.`
     : `No prior market movement yet; this scan becomes part of the local memory.`;
@@ -614,9 +890,10 @@ function buildLegThesis({ fixture, market, outcome, edge, odds, movement, model,
     ? `Heat layer: ${model.components.heatLocation || "venue"} ${model.components.heatClimateBand || "weather"} stress ${round(Number(model.components.heatStress || 0) * 100, 1)}%, xG adjustment ${model.components.heatExpectedGoalsAdjustment}, result edge ${model.components.heatEdge}; climate/history/depth differential ${model.components.combinedHeatDifferential}.`
     : "";
   const notes = [
-    `${selectionLabel({ fixture, market, outcome })} is priced at ${odds.decimalOdds} with model edge ${round(edge * 100, 2)}%.`,
+    `${selectionLabel({ fixture, market, outcome })} is priced at ${odds.decimalOdds}; raw AI probability ${round(rawModelProbability * 100, 1)}%, market-adjusted probability ${round(modelProbability * 100, 1)}%, market view ${round(marketImpliedProbability * 100, 1)}%.`,
+    `Independent edge ${round(independentEdge * 100, 2)}%, final value edge ${round(edge * 100, 2)}%, backed by ${independentEvidence.count} non-market signal(s): ${independentEvidence.signals.join(", ") || "none yet"}.`,
     `Fixture model: expected goals ${model.components.expectedGoals} (${model.components.homeExpectedGoals}-${model.components.awayExpectedGoals}), rating edge ${model.components.ratingEdge}, style edge ${model.components.styleEdge}, memory edge ${model.components.memoryEdge}.`,
-    `Odds intelligence: market result edge ${model.components.marketResultEdge}, consensus probability ${model.components.marketHomeWinProbability ?? model.components.marketAwayWinProbability ?? "n/a"} where available.`,
+    `Odds intelligence is capped: market result edge ${model.components.marketResultEdge}, consensus probability ${model.components.marketHomeWinProbability ?? model.components.marketAwayWinProbability ?? "n/a"} where available.`,
     `News impact is ${model.components.homeNewsImpact} for ${fixture.homeTeam} and ${model.components.awayNewsImpact} for ${fixture.awayTeam}.`,
     heatText,
     `Market focus: ${marketFocus.reasons.join("; ") || "general value check"}.`,

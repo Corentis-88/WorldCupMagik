@@ -268,8 +268,13 @@ function summarizePolicy(policy) {
 
   return {
     minLegEdge: riskProfile.minLegEdge,
+    minIndependentEdge: riskProfile.minIndependentEdge,
     minLegConfidence: riskProfile.minLegConfidence,
     minIntelligenceConfidence: riskProfile.minIntelligenceConfidence,
+    minNonMarketSignals: riskProfile.minNonMarketSignals,
+    minLongshotModelProbability: riskProfile.minLongshotModelProbability,
+    minLongshotResultEdgeForce: riskProfile.minLongshotResultEdgeForce,
+    maxResultLongshotDecimalOdds: riskProfile.maxResultLongshotDecimalOdds,
     maxFavoriteImpliedProbability: riskProfile.maxFavoriteImpliedProbability,
     minDecimalOddsForRiskLeg: riskProfile.minDecimalOddsForRiskLeg,
     maxLegs: riskProfile.maxLegs,
@@ -291,6 +296,8 @@ function summarizeBet(bet) {
     potentialReturn: bet.potentialReturn,
     expectedValue: bet.expectedValue,
     averageConfidence: bet.averageConfidence,
+    averageIndependentEdge: bet.averageIndependentEdge,
+    averageNonMarketSignalCount: bet.averageNonMarketSignalCount,
     displayRating: bet.displayRating,
     riskLegCount: bet.riskLegCount,
     thesis: bet.thesis,
@@ -307,9 +314,21 @@ function summarizeLeg(leg) {
     decimalOdds: leg.decimalOdds,
     likelyProbability: leg.likelyProbability,
     modelProbability: leg.modelProbability,
+    rawModelProbability: leg.rawModelProbability,
+    impliedProbability: leg.impliedProbability,
+    marketImpliedProbability: leg.marketImpliedProbability,
+    independentEdge: leg.independentEdge,
     edge: leg.edge,
     confidence: leg.confidence,
-    riskTag: leg.riskTag
+    riskTag: leg.riskTag,
+    components: {
+      intelligenceConfidence: leg.components?.intelligenceConfidence,
+      oddsFreshness: leg.components?.oddsFreshness,
+      nonMarketSignalCount: leg.components?.nonMarketSignalCount,
+      nonMarketSignals: leg.components?.nonMarketSignals,
+      independentEvidenceStrength: leg.components?.independentEvidenceStrength,
+      marketBlendLift: leg.components?.marketBlendLift
+    }
   };
 }
 
@@ -330,14 +349,21 @@ function summarizeLegCandidate(leg) {
     decimalOdds: leg.decimalOdds,
     likelyProbability: leg.likelyProbability,
     modelProbability: leg.modelProbability,
+    rawModelProbability: leg.rawModelProbability,
     impliedProbability: leg.impliedProbability,
     marketImpliedProbability: leg.marketImpliedProbability,
+    independentEdge: leg.independentEdge,
     edge: leg.edge,
     confidence: leg.confidence,
     score: leg.score,
     riskTag: leg.riskTag,
     components: {
       intelligenceConfidence: leg.components?.intelligenceConfidence,
+      nonMarketSignalCount: leg.components?.nonMarketSignalCount,
+      nonMarketSignals: leg.components?.nonMarketSignals,
+      independentEvidenceStrength: leg.components?.independentEvidenceStrength,
+      independentEdge: leg.components?.independentEdge,
+      marketBlendLift: leg.components?.marketBlendLift,
       oddsMovement: leg.components?.oddsMovement,
       oddsShortening: leg.components?.oddsShortening,
       oddsDrifting: leg.components?.oddsDrifting,
