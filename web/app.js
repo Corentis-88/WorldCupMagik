@@ -1366,11 +1366,11 @@ function formatLegNote(leg) {
 }
 
 function confidenceLabel(bet) {
-  return `AI Chance Landing ${percent(displayRatingForBet(bet))}`;
+  return `AI Rating ${percent(displayRatingForBet(bet))}`;
 }
 
 function likelihoodLabel(bet) {
-  return `AI Chance Landing ${percent(displayRatingForBet(bet, { likely: true }))}`;
+  return `AI Rating ${percent(displayRatingForBet(bet, { likely: true }))}`;
 }
 
 function formatLikelyLegNote(leg) {
