@@ -101,6 +101,74 @@ test("most likely picks ignore risk score and choose highest model probability l
   assert.ok(!picks.find((pick) => pick.category === "accumulator_8").legs.some((leg) => leg.fixtureId === "flashy-longshot"));
 });
 
+test("most likely long accumulators prefer survivable legs over fragile BTTS value", () => {
+  const steadyLegs = Array.from({ length: 8 }, (_, index) => {
+    return likelyLeg(`safe-${index + 1}`, `safe ${index + 1}`, 0.7 - index * 0.015, 70 - index, 1.5 + index * 0.04);
+  });
+  const fragileBtts = {
+    ...likelyLeg("fragile-btts", "Spain vs Saudi Arabia: Both teams to score: Yes", 0.69, 96, 2.46),
+    market: "both_teams_to_score",
+    outcome: "Yes",
+    rawModelProbability: 0.69,
+    marketImpliedProbability: 1 / 2.46,
+    independentEdge: 0.28,
+    edge: 0.24,
+    riskTag: "calculated_risk",
+    components: {
+      intelligenceConfidence: 0.78,
+      oddsFreshness: 1,
+      nonMarketSignalCount: 6,
+      expectedGoals: 3.03,
+      homeExpectedGoals: 1.59,
+      awayExpectedGoals: 1.45,
+      homeBttsRate: 0.55,
+      awayBttsRate: 0.2,
+      homeOver25Rate: 0.7,
+      awayOver25Rate: 0.1
+    }
+  };
+  const picks = buildMostLikelyPicks([...steadyLegs, fragileBtts], {
+    riskProfile: {
+      minLegEdge: 0,
+      minLegConfidence: 0.5
+    }
+  });
+  const eightLeg = picks.find((pick) => pick.category === "accumulator_8");
+
+  assert.ok(eightLeg);
+  assert.ok(!eightLeg.legs.some((leg) => leg.fixtureId === "fragile-btts"));
+  assert.ok(Number(eightLeg.averageSurvivalProbability) > 0.55);
+});
+
+test("most likely long accumulators avoid all-one-market goal slips when alternatives exist", () => {
+  const overLegs = Array.from({ length: 8 }, (_, index) => ({
+    ...likelyLeg(`over-${index + 1}`, `open game ${index + 1}: Over 2.5 goals`, 0.71 - index * 0.01, 84 - index, 1.6 + index * 0.03),
+    market: "over_2_5_goals",
+    outcome: "over_2_5_goals",
+    components: {
+      intelligenceConfidence: 0.76,
+      oddsFreshness: 1,
+      nonMarketSignalCount: 5,
+      expectedGoals: 2.8,
+      homeExpectedGoals: 1.45,
+      awayExpectedGoals: 1.35
+    }
+  }));
+  const resultLegs = Array.from({ length: 4 }, (_, index) => likelyLeg(`result-${index + 1}`, `result ${index + 1}: team to win`, 0.66 - index * 0.01, 74 - index, 1.58 + index * 0.04));
+  const picks = buildMostLikelyPicks([...overLegs, ...resultLegs], {
+    riskProfile: {
+      minLegEdge: 0,
+      minLegConfidence: 0.5
+    }
+  });
+  const eightLeg = picks.find((pick) => pick.category === "accumulator_8");
+
+  assert.ok(eightLeg);
+  const overCount = eightLeg.legs.filter((leg) => leg.market === "over_2_5_goals").length;
+  assert.ok(overCount <= 5);
+  assert.ok(eightLeg.legs.some((leg) => leg.market === "match_winner"));
+});
+
 test("most likely picks only show categories the fixture window can support", () => {
   const legs = [
     likelyLeg("p1", "safe one", 0.74, 71, 1.45),

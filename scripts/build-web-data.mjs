@@ -297,9 +297,13 @@ function summarizeBet(bet) {
     expectedValue: bet.expectedValue,
     averageConfidence: bet.averageConfidence,
     averageIndependentEdge: bet.averageIndependentEdge,
+    survivalCombinedProbability: bet.survivalCombinedProbability,
+    averageSurvivalProbability: bet.averageSurvivalProbability,
     averageNonMarketSignalCount: bet.averageNonMarketSignalCount,
     displayRating: bet.displayRating,
     riskLegCount: bet.riskLegCount,
+    bttsLegCount: bet.bttsLegCount,
+    fragileLegCount: bet.fragileLegCount,
     thesis: bet.thesis,
     legs: bet.legs.map(summarizeLeg)
   };
@@ -327,7 +331,17 @@ function summarizeLeg(leg) {
       nonMarketSignalCount: leg.components?.nonMarketSignalCount,
       nonMarketSignals: leg.components?.nonMarketSignals,
       independentEvidenceStrength: leg.components?.independentEvidenceStrength,
-      marketBlendLift: leg.components?.marketBlendLift
+      marketBlendLift: leg.components?.marketBlendLift,
+      expectedGoals: leg.components?.expectedGoals,
+      homeExpectedGoals: leg.components?.homeExpectedGoals,
+      awayExpectedGoals: leg.components?.awayExpectedGoals,
+      homeLongMatchCount: leg.components?.homeLongMatchCount,
+      awayLongMatchCount: leg.components?.awayLongMatchCount,
+      homeBttsRate: leg.components?.homeBttsRate,
+      awayBttsRate: leg.components?.awayBttsRate,
+      homeOver25Rate: leg.components?.homeOver25Rate,
+      awayOver25Rate: leg.components?.awayOver25Rate,
+      survivalPenalty: leg.components?.survivalPenalty
     }
   };
 }
