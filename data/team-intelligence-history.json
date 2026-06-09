@@ -1,5 +1,5941 @@
 [
   {
+    "id": "intel_run_43623fc3",
+    "createdAt": "2026-06-09T01:26:06.889Z",
+    "teamCount": 48,
+    "teams": [
+      {
+        "team": "Mexico",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.3886,
+        "dataConfidence": 0.8611,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.9,
+          "goalsFor": 1.55,
+          "goalsAgainst": 0.5,
+          "xgFor": 1.666,
+          "xgAgainst": 0.91,
+          "shotsFor": 12.81,
+          "shotsAgainst": 9.55,
+          "shotsOnTargetFor": 4.51,
+          "shotsOnTargetAgainst": 3.09,
+          "possession": 52.2,
+          "formMomentum": 0.55,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 3,
+            "goalsFor": 2.667,
+            "goalsAgainst": 0.333,
+            "xgFor": 2.47,
+            "xgAgainst": 0.79,
+            "shotsFor": 16.27,
+            "shotsAgainst": 9.03,
+            "shotsOnTargetFor": 6.03,
+            "shotsOnTargetAgainst": 2.87,
+            "possession": 55.2,
+            "cleanSheetRate": 0.667,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.333,
+            "over25Rate": 0.333,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.333
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.9,
+            "goalsFor": 1.55,
+            "goalsAgainst": 0.5,
+            "xgFor": 1.666,
+            "xgAgainst": 0.91,
+            "shotsFor": 12.81,
+            "shotsAgainst": 9.55,
+            "shotsOnTargetFor": 4.51,
+            "shotsOnTargetAgainst": 3.09,
+            "possession": 52.2,
+            "cleanSheetRate": 0.6,
+            "failedToScoreRate": 0.3,
+            "bttsRate": 0.3,
+            "over25Rate": 0.2,
+            "scoringGameRate": 0.7,
+            "concedeGameRate": 0.4
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.6,
+            "failedToScoreRate": 0.3,
+            "bttsRate": 0.3,
+            "over25Rate": 0.2,
+            "scoringGameRate": 0.7,
+            "concedeGameRate": 0.4
+          }
+        },
+        "news": {
+          "articleCount": 21,
+          "sourceDiversity": 2,
+          "sentiment": -0.0076,
+          "injury": 0.0343,
+          "tacticalFit": 0.4671,
+          "lineupClarity": 0.4652,
+          "rotationRisk": 0.2086,
+          "impact": 0.0814,
+          "confidence": 0.8316,
+          "topSignals": [
+            "positive availability",
+            "style clue"
+          ]
+        },
+        "market": {
+          "pressure": 0.0473,
+          "confidence": 0.9,
+          "consensusOdds": 1.694,
+          "consensusImpliedProbability": 0.5902,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 18,
+          "topScorers": [
+            {
+              "playerName": "Jiménez",
+              "goals": 7,
+              "matchesSampled": 7
+            },
+            {
+              "playerName": "Montes",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Berterame",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Vega",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "A. González",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 1.9 PPG, xG 1.666-0.91",
+          "recent form improving",
+          "21 news item(s), news impact 0.0814",
+          "market intelligence 0% movement, consensus 1.694 across 8 bookie(s)",
+          "18 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "South Africa",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.1161,
+        "dataConfidence": 0.8397,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.6,
+          "goalsFor": 1.3,
+          "goalsAgainst": 0.7,
+          "xgFor": 1.486,
+          "xgAgainst": 1.054,
+          "shotsFor": 12.03,
+          "shotsAgainst": 10.17,
+          "shotsOnTargetFor": 4.18,
+          "shotsOnTargetAgainst": 3.37,
+          "possession": 51.5,
+          "formMomentum": 0.0386,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 1.667,
+            "goalsFor": 1,
+            "goalsAgainst": 0.333,
+            "xgFor": 1.27,
+            "xgAgainst": 0.79,
+            "shotsFor": 11.1,
+            "shotsAgainst": 9.03,
+            "shotsOnTargetFor": 3.77,
+            "shotsOnTargetAgainst": 2.87,
+            "possession": 51.7,
+            "cleanSheetRate": 0.667,
+            "failedToScoreRate": 0.333,
+            "bttsRate": 0.333,
+            "over25Rate": 0,
+            "scoringGameRate": 0.667,
+            "concedeGameRate": 0.333
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.6,
+            "goalsFor": 1.3,
+            "goalsAgainst": 0.7,
+            "xgFor": 1.486,
+            "xgAgainst": 1.054,
+            "shotsFor": 12.03,
+            "shotsAgainst": 10.17,
+            "shotsOnTargetFor": 4.18,
+            "shotsOnTargetAgainst": 3.37,
+            "possession": 51.5,
+            "cleanSheetRate": 0.4,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.5,
+            "over25Rate": 0.2,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.6
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.4,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.5,
+            "over25Rate": 0.2,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.6
+          }
+        },
+        "news": {
+          "articleCount": 2,
+          "sourceDiversity": 1,
+          "sentiment": 0,
+          "injury": 0,
+          "tacticalFit": 0.45,
+          "lineupClarity": 0.45,
+          "rotationRisk": 0.18,
+          "impact": 0.0954,
+          "confidence": 0.7316,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": -0.04,
+          "confidence": 0.9,
+          "consensusOdds": 4.943,
+          "consensusImpliedProbability": 0.2023,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 20,
+          "topScorers": [
+            {
+              "playerName": "Appollis",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "Foster",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "Mokoena",
+              "goals": 3,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Adams",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Maswanganyi",
+              "goals": 2,
+              "matchesSampled": 2
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 1.6 PPG, xG 1.486-1.054",
+          "2 news item(s), news impact 0.0954",
+          "market intelligence 0% movement, consensus 4.943 across 8 bookie(s)",
+          "20 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "South Korea",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.3171,
+        "dataConfidence": 0.8352,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.8,
+          "goalsFor": 2.2,
+          "goalsAgainst": 1.2,
+          "xgFor": 1.995,
+          "xgAgainst": 1.414,
+          "shotsFor": 14.25,
+          "shotsAgainst": 11.72,
+          "shotsOnTargetFor": 5.4,
+          "shotsOnTargetAgainst": 4.03,
+          "possession": 51.5,
+          "formMomentum": 0.55,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 3,
+            "goalsFor": 3.667,
+            "goalsAgainst": 0,
+            "xgFor": 2.727,
+            "xgAgainst": 0.55,
+            "shotsFor": 17.47,
+            "shotsAgainst": 8,
+            "shotsOnTargetFor": 7.37,
+            "shotsOnTargetAgainst": 2.4,
+            "possession": 56,
+            "cleanSheetRate": 1,
+            "failedToScoreRate": 0,
+            "bttsRate": 0,
+            "over25Rate": 0.333,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.8,
+            "goalsFor": 2.2,
+            "goalsAgainst": 1.2,
+            "xgFor": 1.995,
+            "xgAgainst": 1.414,
+            "shotsFor": 14.25,
+            "shotsAgainst": 11.72,
+            "shotsOnTargetFor": 5.4,
+            "shotsOnTargetAgainst": 4.03,
+            "possession": 51.5,
+            "cleanSheetRate": 0.6,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.2,
+            "over25Rate": 0.6,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.4
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.6,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.2,
+            "over25Rate": 0.6,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.4
+          }
+        },
+        "news": {
+          "articleCount": 3,
+          "sourceDiversity": 2,
+          "sentiment": -0.0667,
+          "injury": 0.06,
+          "tacticalFit": 0.51,
+          "lineupClarity": 0.4233,
+          "rotationRisk": 0.2633,
+          "impact": 0.0381,
+          "confidence": 0.8316,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": -0.0175,
+          "confidence": 0.78,
+          "consensusOdds": 3.31,
+          "consensusImpliedProbability": 0.3021,
+          "movement": 0,
+          "bookmakerCount": 4
+        },
+        "scorer": {
+          "trackedPlayers": 18,
+          "topScorers": [
+            {
+              "playerName": "Son Heung-min",
+              "goals": 6,
+              "matchesSampled": 6
+            },
+            {
+              "playerName": "Hwang Hee-chan",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "Kim Jin-gyu",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "Cho Gue-sung",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Lee Jae-sung",
+              "goals": 3,
+              "matchesSampled": 3
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 1.8 PPG, xG 1.995-1.414",
+          "recent form improving",
+          "3 news item(s), news impact 0.0381",
+          "market intelligence 0% movement, consensus 3.31 across 4 bookie(s)",
+          "18 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Czechia",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.0082,
+        "dataConfidence": 0.6221,
+        "form": {
+          "matchCount": 0,
+          "pointsPerGame": 1.4,
+          "goalsFor": 1.2,
+          "goalsAgainst": 1.1,
+          "xgFor": 1.35,
+          "xgAgainst": 1.2,
+          "shotsFor": 10,
+          "shotsAgainst": 10,
+          "shotsOnTargetFor": 3.5,
+          "shotsOnTargetAgainst": 3.5,
+          "possession": 50,
+          "formMomentum": 0,
+          "confidence": 0.35,
+          "marketAngles": {
+            "cleanSheetRate": 0.28,
+            "failedToScoreRate": 0.24,
+            "bttsRate": 0.48,
+            "over25Rate": 0.48
+          }
+        },
+        "news": {
+          "articleCount": 1,
+          "sourceDiversity": 1,
+          "sentiment": -0.2,
+          "injury": 0.18,
+          "tacticalFit": 0.45,
+          "lineupClarity": 0.37,
+          "rotationRisk": 0.43,
+          "impact": -0.1018,
+          "confidence": 0.7316,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": 0.0135,
+          "confidence": 0.7,
+          "consensusOdds": 2.272,
+          "consensusImpliedProbability": 0.4402,
+          "movement": 0,
+          "bookmakerCount": 3
+        },
+        "scorer": {
+          "trackedPlayers": 10,
+          "topScorers": [
+            {
+              "playerName": "Schick",
+              "goals": 5,
+              "matchesSampled": 5
+            },
+            {
+              "playerName": "Chorý",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "Karabec",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Barák",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Coufal",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.686
+        },
+        "reasons": [
+          "1 news item(s), news impact -0.1018",
+          "market intelligence 0% movement, consensus 2.272 across 3 bookie(s)",
+          "10 scorer record(s), top scorer signal 0.28"
+        ]
+      },
+      {
+        "team": "Canada",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.0455,
+        "dataConfidence": 0.8225,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.8,
+          "goalsFor": 2.55,
+          "goalsAgainst": 1,
+          "xgFor": 2.103,
+          "xgAgainst": 1.27,
+          "shotsFor": 14.71,
+          "shotsAgainst": 11.1,
+          "shotsOnTargetFor": 5.59,
+          "shotsOnTargetAgainst": 3.76,
+          "possession": 52.3,
+          "formMomentum": -0.3755,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 1.333,
+            "goalsFor": 1.667,
+            "goalsAgainst": 2,
+            "xgFor": 1.75,
+            "xgAgainst": 1.99,
+            "shotsFor": 13.17,
+            "shotsAgainst": 14.2,
+            "shotsOnTargetFor": 4.67,
+            "shotsOnTargetAgainst": 5.12,
+            "possession": 49.5,
+            "cleanSheetRate": 0.167,
+            "failedToScoreRate": 0.333,
+            "bttsRate": 0.5,
+            "over25Rate": 0.667,
+            "scoringGameRate": 0.667,
+            "concedeGameRate": 0.833
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.8,
+            "goalsFor": 2.55,
+            "goalsAgainst": 1,
+            "xgFor": 2.103,
+            "xgAgainst": 1.27,
+            "shotsFor": 14.71,
+            "shotsAgainst": 11.1,
+            "shotsOnTargetFor": 5.59,
+            "shotsOnTargetAgainst": 3.76,
+            "possession": 52.3,
+            "cleanSheetRate": 0.45,
+            "failedToScoreRate": 0.3,
+            "bttsRate": 0.35,
+            "over25Rate": 0.55,
+            "scoringGameRate": 0.7,
+            "concedeGameRate": 0.55
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.45,
+            "failedToScoreRate": 0.3,
+            "bttsRate": 0.35,
+            "over25Rate": 0.55,
+            "scoringGameRate": 0.7,
+            "concedeGameRate": 0.55
+          }
+        },
+        "news": {
+          "articleCount": 14,
+          "sourceDiversity": 2,
+          "sentiment": -0.0229,
+          "injury": 0.0514,
+          "tacticalFit": 0.4757,
+          "lineupClarity": 0.47,
+          "rotationRisk": 0.2086,
+          "impact": 0.0701,
+          "confidence": 0.8316,
+          "topSignals": [
+            "positive availability",
+            "style clue"
+          ]
+        },
+        "market": {
+          "pressure": 0.056,
+          "confidence": 0.72,
+          "consensusOdds": 1.59,
+          "consensusImpliedProbability": 0.6289,
+          "movement": 0,
+          "bookmakerCount": 4
+        },
+        "scorer": {
+          "trackedPlayers": 26,
+          "topScorers": [
+            {
+              "playerName": "Cornelius",
+              "goals": 7,
+              "matchesSampled": 7
+            },
+            {
+              "playerName": "Buchanan",
+              "goals": 6,
+              "matchesSampled": 6
+            },
+            {
+              "playerName": "J. David",
+              "goals": 6,
+              "matchesSampled": 6
+            },
+            {
+              "playerName": "Larin",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "Laryea",
+              "goals": 4,
+              "matchesSampled": 4
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 1.8 PPG, xG 2.103-1.27",
+          "recent form cooling",
+          "14 news item(s), news impact 0.0701",
+          "market intelligence 0% movement, consensus 1.59 across 4 bookie(s)",
+          "26 scorer record(s), top scorer signal 0.28"
+        ]
+      },
+      {
+        "team": "Bosnia and Herzegovina",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": -0.0064,
+        "dataConfidence": 0.6155,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.7,
+          "goalsFor": 2.1,
+          "goalsAgainst": 1.3,
+          "xgFor": 1.995,
+          "xgAgainst": 1.486,
+          "shotsFor": 14.25,
+          "shotsAgainst": 12.03,
+          "shotsOnTargetFor": 5.26,
+          "shotsOnTargetAgainst": 4.18,
+          "possession": 51.3,
+          "formMomentum": -0.2816,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 1.333,
+            "goalsFor": 1.333,
+            "goalsAgainst": 1.667,
+            "xgFor": 1.51,
+            "xgAgainst": 1.75,
+            "shotsFor": 12.13,
+            "shotsAgainst": 13.17,
+            "shotsOnTargetFor": 4.23,
+            "shotsOnTargetAgainst": 4.7,
+            "possession": 49.2,
+            "cleanSheetRate": 0,
+            "failedToScoreRate": 0.333,
+            "bttsRate": 0.667,
+            "over25Rate": 0.667,
+            "scoringGameRate": 0.667,
+            "concedeGameRate": 1
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.7,
+            "goalsFor": 2.1,
+            "goalsAgainst": 1.3,
+            "xgFor": 1.995,
+            "xgAgainst": 1.486,
+            "shotsFor": 14.25,
+            "shotsAgainst": 12.03,
+            "shotsOnTargetFor": 5.26,
+            "shotsOnTargetAgainst": 4.18,
+            "possession": 51.3,
+            "cleanSheetRate": 0.2,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.7,
+            "over25Rate": 0.8,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.8
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.2,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.7,
+            "over25Rate": 0.8,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.8
+          }
+        },
+        "news": {
+          "articleCount": 1,
+          "sourceDiversity": 1,
+          "sentiment": 0,
+          "injury": 0,
+          "tacticalFit": 0.63,
+          "lineupClarity": 0.45,
+          "rotationRisk": 0.18,
+          "impact": 0.1206,
+          "confidence": 0.7316,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": 0,
+          "confidence": 0.28,
+          "consensusOdds": null,
+          "movement": 0,
+          "bookmakerCount": 0
+        },
+        "scorer": {
+          "trackedPlayers": 2,
+          "topScorers": [
+            {
+              "playerName": "Matviyenko",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Michail",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.18,
+          "confidence": 0.354
+        },
+        "reasons": [
+          "20-match form 1.7 PPG, xG 1.995-1.486",
+          "recent form cooling",
+          "1 news item(s), news impact 0.1206",
+          "2 scorer record(s), top scorer signal 0.18"
+        ]
+      },
+      {
+        "team": "USA",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.1194,
+        "dataConfidence": 0.7075,
+        "form": {
+          "matchCount": 0,
+          "pointsPerGame": 1.4,
+          "goalsFor": 1.2,
+          "goalsAgainst": 1.1,
+          "xgFor": 1.35,
+          "xgAgainst": 1.2,
+          "shotsFor": 10,
+          "shotsAgainst": 10,
+          "shotsOnTargetFor": 3.5,
+          "shotsOnTargetAgainst": 3.5,
+          "possession": 50,
+          "formMomentum": 0,
+          "confidence": 0.35,
+          "marketAngles": {
+            "cleanSheetRate": 0.28,
+            "failedToScoreRate": 0.24,
+            "bttsRate": 0.48,
+            "over25Rate": 0.48
+          }
+        },
+        "news": {
+          "articleCount": 10,
+          "sourceDiversity": 2,
+          "sentiment": -0.044,
+          "injury": 0.054,
+          "tacticalFit": 0.468,
+          "lineupClarity": 0.454,
+          "rotationRisk": 0.215,
+          "impact": 0.0549,
+          "confidence": 0.8316,
+          "topSignals": [
+            "positive availability"
+          ]
+        },
+        "market": {
+          "pressure": 0.0337,
+          "confidence": 0.9,
+          "consensusOdds": 1.888,
+          "consensusImpliedProbability": 0.5296,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 25,
+          "topScorers": [
+            {
+              "playerName": "Pulisic",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "Aaronson",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Agyemang",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Balogun",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Dest",
+              "goals": 2,
+              "matchesSampled": 2
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "10 news item(s), news impact 0.0549",
+          "market intelligence 0% movement, consensus 1.888 across 8 bookie(s)",
+          "25 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Paraguay",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": -0.0876,
+        "dataConfidence": 0.6008,
+        "form": {
+          "matchCount": 10,
+          "pointsPerGame": 1.6,
+          "goalsFor": 1.4,
+          "goalsAgainst": 1,
+          "xgFor": 1.558,
+          "xgAgainst": 1.27,
+          "shotsFor": 12.34,
+          "shotsAgainst": 11.1,
+          "shotsOnTargetFor": 4.3,
+          "shotsOnTargetAgainst": 3.76,
+          "possession": 51,
+          "formMomentum": -0.2942,
+          "confidence": 0.65,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 1.333,
+            "goalsFor": 1.667,
+            "goalsAgainst": 1.667,
+            "xgFor": 1.75,
+            "xgAgainst": 1.75,
+            "shotsFor": 13.17,
+            "shotsAgainst": 13.17,
+            "shotsOnTargetFor": 4.67,
+            "shotsOnTargetAgainst": 4.67,
+            "possession": 50,
+            "cleanSheetRate": 0,
+            "failedToScoreRate": 0,
+            "bttsRate": 1,
+            "over25Rate": 1,
+            "scoringGameRate": 1,
+            "concedeGameRate": 1
+          },
+          "longForm": {
+            "matchCount": 10,
+            "pointsPerGame": 1.6,
+            "goalsFor": 1.4,
+            "goalsAgainst": 1,
+            "xgFor": 1.558,
+            "xgAgainst": 1.27,
+            "shotsFor": 12.34,
+            "shotsAgainst": 11.1,
+            "shotsOnTargetFor": 4.3,
+            "shotsOnTargetAgainst": 3.76,
+            "possession": 51,
+            "cleanSheetRate": 0.4,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.6,
+            "over25Rate": 0.6,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.6
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.4,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.6,
+            "over25Rate": 0.6,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.6
+          }
+        },
+        "news": {
+          "articleCount": 0,
+          "sourceDiversity": 0,
+          "sentiment": 0,
+          "injury": 0,
+          "tacticalFit": 0.45,
+          "lineupClarity": 0.45,
+          "rotationRisk": 0.18,
+          "impact": 0,
+          "confidence": 0.32,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": -0.0186,
+          "confidence": 0.9,
+          "consensusOdds": 3.365,
+          "consensusImpliedProbability": 0.2972,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 7,
+          "topScorers": [
+            {
+              "playerName": "Almirón",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Bobadilla",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Caballero",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "D. Gómez",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Enciso",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.515
+        },
+        "reasons": [
+          "20-match form 1.6 PPG, xG 1.558-1.27",
+          "recent form cooling",
+          "market intelligence 0% movement, consensus 3.365 across 8 bookie(s)",
+          "7 scorer record(s), top scorer signal 0.28",
+          "memory currently leans negative"
+        ]
+      },
+      {
+        "team": "Australia",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.2278,
+        "dataConfidence": 0.8097,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 2.4,
+          "goalsFor": 2.2,
+          "goalsAgainst": 0.6,
+          "xgFor": 2.134,
+          "xgAgainst": 0.982,
+          "shotsFor": 14.82,
+          "shotsAgainst": 9.86,
+          "shotsOnTargetFor": 5.4,
+          "shotsOnTargetAgainst": 3.23,
+          "possession": 53.4,
+          "formMomentum": 0.2583,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 3,
+            "goalsFor": 1.667,
+            "goalsAgainst": 0.333,
+            "xgFor": 1.75,
+            "xgAgainst": 0.79,
+            "shotsFor": 13.17,
+            "shotsAgainst": 9.03,
+            "shotsOnTargetFor": 4.67,
+            "shotsOnTargetAgainst": 2.87,
+            "possession": 53.3,
+            "cleanSheetRate": 0.667,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.333,
+            "over25Rate": 0.333,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.333
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 2.4,
+            "goalsFor": 2.2,
+            "goalsAgainst": 0.6,
+            "xgFor": 2.134,
+            "xgAgainst": 0.982,
+            "shotsFor": 14.82,
+            "shotsAgainst": 9.86,
+            "shotsOnTargetFor": 5.4,
+            "shotsOnTargetAgainst": 3.23,
+            "possession": 53.4,
+            "cleanSheetRate": 0.5,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.4,
+            "over25Rate": 0.5,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.5
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.5,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.4,
+            "over25Rate": 0.5,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.5
+          }
+        },
+        "news": {
+          "articleCount": 1,
+          "sourceDiversity": 1,
+          "sentiment": 0,
+          "injury": 0,
+          "tacticalFit": 0.54,
+          "lineupClarity": 0.45,
+          "rotationRisk": 0.18,
+          "impact": 0.108,
+          "confidence": 0.7316,
+          "topSignals": [
+            "style clue"
+          ]
+        },
+        "market": {
+          "pressure": -0.0329,
+          "confidence": 0.76,
+          "consensusOdds": 4.276,
+          "consensusImpliedProbability": 0.2339,
+          "movement": 0,
+          "bookmakerCount": 3
+        },
+        "scorer": {
+          "trackedPlayers": 27,
+          "topScorers": [
+            {
+              "playerName": "Irvine",
+              "goals": 6,
+              "matchesSampled": 6
+            },
+            {
+              "playerName": "Bos",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Mabil",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Behich",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Boyle",
+              "goals": 2,
+              "matchesSampled": 2
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 2.4 PPG, xG 2.134-0.982",
+          "recent form improving",
+          "1 news item(s), news impact 0.108",
+          "market intelligence 0% movement, consensus 4.276 across 3 bookie(s)",
+          "27 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Turkiye",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.0725,
+        "dataConfidence": 0.5636,
+        "form": {
+          "matchCount": 0,
+          "pointsPerGame": 1.4,
+          "goalsFor": 1.2,
+          "goalsAgainst": 1.1,
+          "xgFor": 1.35,
+          "xgAgainst": 1.2,
+          "shotsFor": 10,
+          "shotsAgainst": 10,
+          "shotsOnTargetFor": 3.5,
+          "shotsOnTargetAgainst": 3.5,
+          "possession": 50,
+          "formMomentum": 0,
+          "confidence": 0.35,
+          "marketAngles": {
+            "cleanSheetRate": 0.28,
+            "failedToScoreRate": 0.24,
+            "bttsRate": 0.48,
+            "over25Rate": 0.48
+          }
+        },
+        "news": {
+          "articleCount": 0,
+          "sourceDiversity": 0,
+          "sentiment": 0,
+          "injury": 0,
+          "tacticalFit": 0.45,
+          "lineupClarity": 0.45,
+          "rotationRisk": 0.18,
+          "impact": 0,
+          "confidence": 0.32,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": 0.0276,
+          "confidence": 0.82,
+          "consensusOdds": 1.99,
+          "consensusImpliedProbability": 0.5025,
+          "movement": 0,
+          "bookmakerCount": 3
+        },
+        "scorer": {
+          "trackedPlayers": 12,
+          "topScorers": [
+            {
+              "playerName": "Güler",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Kahveci",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Demiral",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Akaydin",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Akgün",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.7
+        },
+        "reasons": [
+          "market intelligence 0% movement, consensus 1.99 across 3 bookie(s)",
+          "12 scorer record(s), top scorer signal 0.28"
+        ]
+      },
+      {
+        "team": "Qatar",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.1246,
+        "dataConfidence": 0.8608,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.9,
+          "goalsFor": 1.8,
+          "goalsAgainst": 1.4,
+          "xgFor": 1.846,
+          "xgAgainst": 1.558,
+          "shotsFor": 13.58,
+          "shotsAgainst": 12.34,
+          "shotsOnTargetFor": 4.86,
+          "shotsOnTargetAgainst": 4.32,
+          "possession": 50.8,
+          "formMomentum": 0.2338,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 2.333,
+            "goalsFor": 1,
+            "goalsAgainst": 0.333,
+            "xgFor": 1.27,
+            "xgAgainst": 0.79,
+            "shotsFor": 11.1,
+            "shotsAgainst": 9.03,
+            "shotsOnTargetFor": 3.77,
+            "shotsOnTargetAgainst": 2.87,
+            "possession": 51.7,
+            "cleanSheetRate": 0.667,
+            "failedToScoreRate": 0.333,
+            "bttsRate": 0.333,
+            "over25Rate": 0.333,
+            "scoringGameRate": 0.667,
+            "concedeGameRate": 0.333
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.9,
+            "goalsFor": 1.8,
+            "goalsAgainst": 1.4,
+            "xgFor": 1.846,
+            "xgAgainst": 1.558,
+            "shotsFor": 13.58,
+            "shotsAgainst": 12.34,
+            "shotsOnTargetFor": 4.86,
+            "shotsOnTargetAgainst": 4.32,
+            "possession": 50.8,
+            "cleanSheetRate": 0.3,
+            "failedToScoreRate": 0.3,
+            "bttsRate": 0.5,
+            "over25Rate": 0.8,
+            "scoringGameRate": 0.7,
+            "concedeGameRate": 0.7
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.3,
+            "failedToScoreRate": 0.3,
+            "bttsRate": 0.5,
+            "over25Rate": 0.8,
+            "scoringGameRate": 0.7,
+            "concedeGameRate": 0.7
+          }
+        },
+        "news": {
+          "articleCount": 5,
+          "sourceDiversity": 2,
+          "sentiment": -0.096,
+          "injury": 0.144,
+          "tacticalFit": 0.558,
+          "lineupClarity": 0.498,
+          "rotationRisk": 0.22,
+          "impact": 0.0174,
+          "confidence": 0.8316,
+          "topSignals": [
+            "availability risk"
+          ]
+        },
+        "market": {
+          "pressure": -0.0559,
+          "confidence": 0.9,
+          "consensusOdds": 7.604,
+          "consensusImpliedProbability": 0.1315,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 13,
+          "topScorers": [
+            {
+              "playerName": "Afif",
+              "goals": 8,
+              "matchesSampled": 8
+            },
+            {
+              "playerName": "Ali",
+              "goals": 6,
+              "matchesSampled": 6
+            },
+            {
+              "playerName": "Al-Haydos",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Alaaeldin",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Al-Rawi",
+              "goals": 2,
+              "matchesSampled": 2
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 1.9 PPG, xG 1.846-1.558",
+          "recent form improving",
+          "5 news item(s), news impact 0.0174",
+          "market intelligence 0% movement, consensus 7.604 across 8 bookie(s)",
+          "13 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Switzerland",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.3158,
+        "dataConfidence": 0.8397,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.8,
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "xgFor": 1.99,
+          "xgAgainst": 1.27,
+          "shotsFor": 14.2,
+          "shotsAgainst": 11.1,
+          "shotsOnTargetFor": 5.12,
+          "shotsOnTargetAgainst": 3.77,
+          "possession": 52.5,
+          "formMomentum": 0.2883,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 2.333,
+            "goalsFor": 2,
+            "goalsAgainst": 0.667,
+            "xgFor": 1.99,
+            "xgAgainst": 1.03,
+            "shotsFor": 14.2,
+            "shotsAgainst": 10.07,
+            "shotsOnTargetFor": 5.1,
+            "shotsOnTargetAgainst": 3.33,
+            "possession": 53.3,
+            "cleanSheetRate": 0.333,
+            "failedToScoreRate": 0.333,
+            "bttsRate": 0.667,
+            "over25Rate": 0.667,
+            "scoringGameRate": 0.667,
+            "concedeGameRate": 0.667
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.8,
+            "goalsFor": 2,
+            "goalsAgainst": 1,
+            "xgFor": 1.99,
+            "xgAgainst": 1.27,
+            "shotsFor": 14.2,
+            "shotsAgainst": 11.1,
+            "shotsOnTargetFor": 5.12,
+            "shotsOnTargetAgainst": 3.77,
+            "possession": 52.5,
+            "cleanSheetRate": 0.4,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.6,
+            "over25Rate": 0.6,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.6
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.4,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.6,
+            "over25Rate": 0.6,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.6
+          }
+        },
+        "news": {
+          "articleCount": 1,
+          "sourceDiversity": 1,
+          "sentiment": 0,
+          "injury": 0,
+          "tacticalFit": 0.54,
+          "lineupClarity": 0.45,
+          "rotationRisk": 0.18,
+          "impact": 0.108,
+          "confidence": 0.7316,
+          "topSignals": [
+            "style clue"
+          ]
+        },
+        "market": {
+          "pressure": 0.091,
+          "confidence": 0.9,
+          "consensusOdds": 1.275,
+          "consensusImpliedProbability": 0.7843,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 18,
+          "topScorers": [
+            {
+              "playerName": "Embolo",
+              "goals": 9,
+              "matchesSampled": 9
+            },
+            {
+              "playerName": "Ndoye",
+              "goals": 6,
+              "matchesSampled": 6
+            },
+            {
+              "playerName": "Amdouni",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Vargas",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Freuler",
+              "goals": 2,
+              "matchesSampled": 2
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 1.8 PPG, xG 1.99-1.27",
+          "recent form improving",
+          "1 news item(s), news impact 0.108",
+          "market intelligence 0% movement, consensus 1.275 across 8 bookie(s)",
+          "18 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Brazil",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.3541,
+        "dataConfidence": 0.8271,
+        "form": {
+          "matchCount": 18,
+          "pointsPerGame": 1.556,
+          "goalsFor": 2.667,
+          "goalsAgainst": 1.889,
+          "xgFor": 2.396,
+          "xgAgainst": 1.91,
+          "shotsFor": 15.98,
+          "shotsAgainst": 13.86,
+          "shotsOnTargetFor": 6.03,
+          "shotsOnTargetAgainst": 4.98,
+          "possession": 51.5,
+          "formMomentum": 0.55,
+          "confidence": 0.85,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 3,
+            "goalsFor": 4.667,
+            "goalsAgainst": 1.333,
+            "xgFor": 3.687,
+            "xgAgainst": 1.51,
+            "shotsFor": 21.6,
+            "shotsAgainst": 12.13,
+            "shotsOnTargetFor": 8.73,
+            "shotsOnTargetAgainst": 4.23,
+            "possession": 57,
+            "cleanSheetRate": 0,
+            "failedToScoreRate": 0,
+            "bttsRate": 1,
+            "over25Rate": 1,
+            "scoringGameRate": 1,
+            "concedeGameRate": 1
+          },
+          "longForm": {
+            "matchCount": 18,
+            "pointsPerGame": 1.556,
+            "goalsFor": 2.667,
+            "goalsAgainst": 1.889,
+            "xgFor": 2.396,
+            "xgAgainst": 1.91,
+            "shotsFor": 15.98,
+            "shotsAgainst": 13.86,
+            "shotsOnTargetFor": 6.03,
+            "shotsOnTargetAgainst": 4.98,
+            "possession": 51.5,
+            "cleanSheetRate": 0.111,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.889,
+            "over25Rate": 0.778,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.889
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.111,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.889,
+            "over25Rate": 0.778,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.889
+          }
+        },
+        "news": {
+          "articleCount": 11,
+          "sourceDiversity": 2,
+          "sentiment": -0.1091,
+          "injury": 0.1636,
+          "tacticalFit": 0.4745,
+          "lineupClarity": 0.49,
+          "rotationRisk": 0.2618,
+          "impact": -0.0131,
+          "confidence": 0.8316,
+          "topSignals": [
+            "availability risk",
+            "positive availability"
+          ]
+        },
+        "market": {
+          "pressure": 0.099,
+          "confidence": 0.9,
+          "consensusOdds": 1.219,
+          "consensusImpliedProbability": 0.8201,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 16,
+          "topScorers": [
+            {
+              "playerName": "Endrick",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Paquetá",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Thiago",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Bremer",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Casemiro",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.776
+        },
+        "reasons": [
+          "20-match form 1.556 PPG, xG 2.396-1.91",
+          "recent form improving",
+          "11 news item(s), news impact -0.0131",
+          "market intelligence 0% movement, consensus 1.219 across 8 bookie(s)",
+          "16 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Morocco",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.204,
+        "dataConfidence": 0.8611,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 2.4,
+          "goalsFor": 2,
+          "goalsAgainst": 0.55,
+          "xgFor": 1.99,
+          "xgAgainst": 0.946,
+          "shotsFor": 14.2,
+          "shotsAgainst": 9.71,
+          "shotsOnTargetFor": 5.12,
+          "shotsOnTargetAgainst": 3.16,
+          "possession": 53,
+          "formMomentum": 0.1493,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 2.667,
+            "goalsFor": 1.833,
+            "goalsAgainst": 0.167,
+            "xgFor": 1.87,
+            "xgAgainst": 0.67,
+            "shotsFor": 13.68,
+            "shotsAgainst": 8.52,
+            "shotsOnTargetFor": 4.9,
+            "shotsOnTargetAgainst": 2.63,
+            "possession": 53.8,
+            "cleanSheetRate": 0.833,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.167,
+            "over25Rate": 0.167,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.167
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 2.4,
+            "goalsFor": 2,
+            "goalsAgainst": 0.55,
+            "xgFor": 1.99,
+            "xgAgainst": 0.946,
+            "shotsFor": 14.2,
+            "shotsAgainst": 9.71,
+            "shotsOnTargetFor": 5.12,
+            "shotsOnTargetAgainst": 3.16,
+            "possession": 53,
+            "cleanSheetRate": 0.65,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.25,
+            "over25Rate": 0.45,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.35
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.65,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.25,
+            "over25Rate": 0.45,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.35
+          }
+        },
+        "news": {
+          "articleCount": 6,
+          "sourceDiversity": 2,
+          "sentiment": 0.0733,
+          "injury": 0.03,
+          "tacticalFit": 0.51,
+          "lineupClarity": 0.5167,
+          "rotationRisk": 0.2217,
+          "impact": 0.1339,
+          "confidence": 0.8316,
+          "topSignals": [
+            "availability risk",
+            "positive availability",
+            "style clue"
+          ]
+        },
+        "market": {
+          "pressure": -0.0259,
+          "confidence": 0.9,
+          "consensusOdds": 3.777,
+          "consensusImpliedProbability": 0.2648,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 19,
+          "topScorers": [
+            {
+              "playerName": "Brahim",
+              "goals": 5,
+              "matchesSampled": 5
+            },
+            {
+              "playerName": "El Kaabi",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "Saibari",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "El Aynaoui",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "El Berkaoui",
+              "goals": 2,
+              "matchesSampled": 2
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 2.4 PPG, xG 1.99-0.946",
+          "recent form improving",
+          "6 news item(s), news impact 0.1339",
+          "market intelligence 0% movement, consensus 3.777 across 8 bookie(s)",
+          "19 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Haiti",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.0257,
+        "dataConfidence": 0.6143,
+        "form": {
+          "matchCount": 4,
+          "pointsPerGame": 0,
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "xgFor": 0.55,
+          "xgAgainst": 1.27,
+          "shotsFor": 8,
+          "shotsAgainst": 11.1,
+          "shotsOnTargetFor": 2.4,
+          "shotsOnTargetAgainst": 3.8,
+          "possession": 47.5,
+          "formMomentum": -0.072,
+          "confidence": 0.5,
+          "shortForm": {
+            "matchCount": 4,
+            "pointsPerGame": 0,
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "xgFor": 0.55,
+            "xgAgainst": 1.27,
+            "shotsFor": 8,
+            "shotsAgainst": 11.1,
+            "shotsOnTargetFor": 2.4,
+            "shotsOnTargetAgainst": 3.8,
+            "possession": 47.5,
+            "cleanSheetRate": 0,
+            "failedToScoreRate": 1,
+            "bttsRate": 0,
+            "over25Rate": 0,
+            "scoringGameRate": 0,
+            "concedeGameRate": 1
+          },
+          "longForm": {
+            "matchCount": 4,
+            "pointsPerGame": 0,
+            "goalsFor": 0,
+            "goalsAgainst": 1,
+            "xgFor": 0.55,
+            "xgAgainst": 1.27,
+            "shotsFor": 8,
+            "shotsAgainst": 11.1,
+            "shotsOnTargetFor": 2.4,
+            "shotsOnTargetAgainst": 3.8,
+            "possession": 47.5,
+            "cleanSheetRate": 0,
+            "failedToScoreRate": 1,
+            "bttsRate": 0,
+            "over25Rate": 0,
+            "scoringGameRate": 0,
+            "concedeGameRate": 1
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0,
+            "failedToScoreRate": 1,
+            "bttsRate": 0,
+            "over25Rate": 0,
+            "scoringGameRate": 0,
+            "concedeGameRate": 1
+          }
+        },
+        "news": {
+          "articleCount": 3,
+          "sourceDiversity": 2,
+          "sentiment": 0.0533,
+          "injury": 0,
+          "tacticalFit": 0.54,
+          "lineupClarity": 0.49,
+          "rotationRisk": 0.18,
+          "impact": 0.1395,
+          "confidence": 0.8316,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": -0.066,
+          "confidence": 0.9,
+          "consensusOdds": 28.493,
+          "consensusImpliedProbability": 0.0351,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 0,
+          "topScorers": [],
+          "threat": 0,
+          "confidence": 0.28
+        },
+        "reasons": [
+          "20-match form 0 PPG, xG 0.55-1.27",
+          "3 news item(s), news impact 0.1395",
+          "market intelligence 0% movement, consensus 28.493 across 8 bookie(s)"
+        ]
+      },
+      {
+        "team": "Scotland",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.2412,
+        "dataConfidence": 0.7399,
+        "form": {
+          "matchCount": 16,
+          "pointsPerGame": 1,
+          "goalsFor": 0.875,
+          "goalsAgainst": 1.375,
+          "xgFor": 1.18,
+          "xgAgainst": 1.54,
+          "shotsFor": 10.71,
+          "shotsAgainst": 12.26,
+          "shotsOnTargetFor": 3.6,
+          "shotsOnTargetAgainst": 4.26,
+          "possession": 49,
+          "formMomentum": 0.2738,
+          "confidence": 0.8,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 1.333,
+            "goalsFor": 1.333,
+            "goalsAgainst": 1,
+            "xgFor": 1.51,
+            "xgAgainst": 1.27,
+            "shotsFor": 12.13,
+            "shotsAgainst": 11.1,
+            "shotsOnTargetFor": 4.2,
+            "shotsOnTargetAgainst": 3.77,
+            "possession": 50.8,
+            "cleanSheetRate": 0.333,
+            "failedToScoreRate": 0.333,
+            "bttsRate": 0.333,
+            "over25Rate": 0.333,
+            "scoringGameRate": 0.667,
+            "concedeGameRate": 0.667
+          },
+          "longForm": {
+            "matchCount": 16,
+            "pointsPerGame": 1,
+            "goalsFor": 0.875,
+            "goalsAgainst": 1.375,
+            "xgFor": 1.18,
+            "xgAgainst": 1.54,
+            "shotsFor": 10.71,
+            "shotsAgainst": 12.26,
+            "shotsOnTargetFor": 3.6,
+            "shotsOnTargetAgainst": 4.26,
+            "possession": 49,
+            "cleanSheetRate": 0.375,
+            "failedToScoreRate": 0.375,
+            "bttsRate": 0.375,
+            "over25Rate": 0.5,
+            "scoringGameRate": 0.625,
+            "concedeGameRate": 0.625
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.375,
+            "failedToScoreRate": 0.375,
+            "bttsRate": 0.375,
+            "over25Rate": 0.5,
+            "scoringGameRate": 0.625,
+            "concedeGameRate": 0.625
+          }
+        },
+        "news": {
+          "articleCount": 20,
+          "sourceDiversity": 2,
+          "sentiment": -0.004,
+          "injury": 0.054,
+          "tacticalFit": 0.4905,
+          "lineupClarity": 0.488,
+          "rotationRisk": 0.205,
+          "impact": 0.0833,
+          "confidence": 0.8316,
+          "topSignals": [
+            "availability risk",
+            "positive availability",
+            "style clue"
+          ]
+        },
+        "market": {
+          "pressure": 0.0063,
+          "confidence": 0.9,
+          "consensusOdds": 2.45,
+          "consensusImpliedProbability": 0.4081,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 4,
+          "topScorers": [
+            {
+              "playerName": "McTominay",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Christie",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Depay",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "McGinn",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.44
+        },
+        "reasons": [
+          "20-match form 1 PPG, xG 1.18-1.54",
+          "recent form improving",
+          "20 news item(s), news impact 0.0833",
+          "market intelligence 0% movement, consensus 2.45 across 8 bookie(s)",
+          "4 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Germany",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.1452,
+        "dataConfidence": 0.8611,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 2.8,
+          "goalsFor": 2.8,
+          "goalsAgainst": 0.7,
+          "xgFor": 2.499,
+          "xgAgainst": 1.054,
+          "shotsFor": 16.42,
+          "shotsAgainst": 10.17,
+          "shotsOnTargetFor": 6.19,
+          "shotsOnTargetAgainst": 3.37,
+          "possession": 54.2,
+          "formMomentum": 0.0945,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 3,
+            "goalsFor": 2.667,
+            "goalsAgainst": 0.667,
+            "xgFor": 2.47,
+            "xgAgainst": 1.03,
+            "shotsFor": 16.27,
+            "shotsAgainst": 10.07,
+            "shotsOnTargetFor": 6,
+            "shotsOnTargetAgainst": 3.33,
+            "possession": 54.3,
+            "cleanSheetRate": 0.333,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.667,
+            "over25Rate": 1,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.667
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 2.8,
+            "goalsFor": 2.8,
+            "goalsAgainst": 0.7,
+            "xgFor": 2.499,
+            "xgAgainst": 1.054,
+            "shotsFor": 16.42,
+            "shotsAgainst": 10.17,
+            "shotsOnTargetFor": 6.19,
+            "shotsOnTargetAgainst": 3.37,
+            "possession": 54.2,
+            "cleanSheetRate": 0.5,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.5,
+            "over25Rate": 0.7,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.5
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.5,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.5,
+            "over25Rate": 0.7,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.5
+          }
+        },
+        "news": {
+          "articleCount": 6,
+          "sourceDiversity": 2,
+          "sentiment": -0.1,
+          "injury": 0.09,
+          "tacticalFit": 0.45,
+          "lineupClarity": 0.4367,
+          "rotationRisk": 0.2383,
+          "impact": 0.008,
+          "confidence": 0.8316,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": 0.0892,
+          "confidence": 0.9,
+          "consensusOdds": 1.288,
+          "consensusImpliedProbability": 0.7763,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 19,
+          "topScorers": [
+            {
+              "playerName": "Wirtz",
+              "goals": 6,
+              "matchesSampled": 6
+            },
+            {
+              "playerName": "Havertz",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "Musiala",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "Undav",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "Füllkrug",
+              "goals": 3,
+              "matchesSampled": 3
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 2.8 PPG, xG 2.499-1.054",
+          "recent form improving",
+          "6 news item(s), news impact 0.008",
+          "market intelligence 0% movement, consensus 1.288 across 8 bookie(s)",
+          "19 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Curaçao",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.3641,
+        "dataConfidence": 0.8394,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.35,
+          "goalsFor": 1.55,
+          "goalsAgainst": 1.55,
+          "xgFor": 1.666,
+          "xgAgainst": 1.666,
+          "shotsFor": 12.8,
+          "shotsAgainst": 12.8,
+          "shotsOnTargetFor": 4.51,
+          "shotsOnTargetAgainst": 4.5,
+          "possession": 50,
+          "formMomentum": 0.55,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 3,
+            "goalsFor": 3.333,
+            "goalsAgainst": 0.333,
+            "xgFor": 2.95,
+            "xgAgainst": 0.79,
+            "shotsFor": 18.33,
+            "shotsAgainst": 9.03,
+            "shotsOnTargetFor": 6.9,
+            "shotsOnTargetAgainst": 2.87,
+            "possession": 56.8,
+            "cleanSheetRate": 0.667,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.333,
+            "over25Rate": 0.667,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.333
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.35,
+            "goalsFor": 1.55,
+            "goalsAgainst": 1.55,
+            "xgFor": 1.666,
+            "xgAgainst": 1.666,
+            "shotsFor": 12.8,
+            "shotsAgainst": 12.8,
+            "shotsOnTargetFor": 4.51,
+            "shotsOnTargetAgainst": 4.5,
+            "possession": 50,
+            "cleanSheetRate": 0.3,
+            "failedToScoreRate": 0.25,
+            "bttsRate": 0.45,
+            "over25Rate": 0.5,
+            "scoringGameRate": 0.75,
+            "concedeGameRate": 0.7
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.3,
+            "failedToScoreRate": 0.25,
+            "bttsRate": 0.45,
+            "over25Rate": 0.5,
+            "scoringGameRate": 0.75,
+            "concedeGameRate": 0.7
+          }
+        },
+        "news": {
+          "articleCount": 2,
+          "sourceDiversity": 1,
+          "sentiment": 0.06,
+          "injury": 0.09,
+          "tacticalFit": 0.585,
+          "lineupClarity": 0.57,
+          "rotationRisk": 0.205,
+          "impact": 0.1269,
+          "confidence": 0.7316,
+          "topSignals": [
+            "availability risk",
+            "positive availability",
+            "style clue"
+          ]
+        },
+        "market": {
+          "pressure": -0.066,
+          "confidence": 0.9,
+          "consensusOdds": 31.938,
+          "consensusImpliedProbability": 0.0313,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 15,
+          "topScorers": [
+            {
+              "playerName": "Juninho Bacuna",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Bacuna",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Gervane Kastaneer",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "J. Bacuna",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Janga",
+              "goals": 2,
+              "matchesSampled": 2
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 1.35 PPG, xG 1.666-1.666",
+          "recent form improving",
+          "2 news item(s), news impact 0.1269",
+          "market intelligence 0% movement, consensus 31.938 across 8 bookie(s)",
+          "15 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Netherlands",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.2884,
+        "dataConfidence": 0.8611,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 2.1,
+          "goalsFor": 2,
+          "goalsAgainst": 0.7,
+          "xgFor": 1.99,
+          "xgAgainst": 1.054,
+          "shotsFor": 14.2,
+          "shotsAgainst": 10.17,
+          "shotsOnTargetFor": 5.12,
+          "shotsOnTargetAgainst": 3.37,
+          "possession": 53.1,
+          "formMomentum": 0.5177,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 3,
+            "goalsFor": 2.5,
+            "goalsAgainst": 0.333,
+            "xgFor": 2.35,
+            "xgAgainst": 0.79,
+            "shotsFor": 15.75,
+            "shotsAgainst": 9.03,
+            "shotsOnTargetFor": 5.78,
+            "shotsOnTargetAgainst": 2.87,
+            "possession": 55.1,
+            "cleanSheetRate": 0.667,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.333,
+            "over25Rate": 0.667,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.333
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 2.1,
+            "goalsFor": 2,
+            "goalsAgainst": 0.7,
+            "xgFor": 1.99,
+            "xgAgainst": 1.054,
+            "shotsFor": 14.2,
+            "shotsAgainst": 10.17,
+            "shotsOnTargetFor": 5.12,
+            "shotsOnTargetAgainst": 3.37,
+            "possession": 53.1,
+            "cleanSheetRate": 0.4,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.5,
+            "over25Rate": 0.6,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.6
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.4,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.5,
+            "over25Rate": 0.6,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.6
+          }
+        },
+        "news": {
+          "articleCount": 4,
+          "sourceDiversity": 2,
+          "sentiment": -0.16,
+          "injury": 0.18,
+          "tacticalFit": 0.5175,
+          "lineupClarity": 0.48,
+          "rotationRisk": 0.23,
+          "impact": -0.0352,
+          "confidence": 0.8316,
+          "topSignals": [
+            "availability risk"
+          ]
+        },
+        "market": {
+          "pressure": 0.036,
+          "confidence": 0.9,
+          "consensusOdds": 1.853,
+          "consensusImpliedProbability": 0.5398,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 23,
+          "topScorers": [
+            {
+              "playerName": "Depay",
+              "goals": 6,
+              "matchesSampled": 6
+            },
+            {
+              "playerName": "Gakpo",
+              "goals": 5,
+              "matchesSampled": 5
+            },
+            {
+              "playerName": "Reijnders",
+              "goals": 5,
+              "matchesSampled": 5
+            },
+            {
+              "playerName": "Weghorst",
+              "goals": 5,
+              "matchesSampled": 5
+            },
+            {
+              "playerName": "Dumfries",
+              "goals": 4,
+              "matchesSampled": 4
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 2.1 PPG, xG 1.99-1.054",
+          "recent form improving",
+          "4 news item(s), news impact -0.0352",
+          "market intelligence 0% movement, consensus 1.853 across 8 bookie(s)",
+          "23 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Japan",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.0931,
+        "dataConfidence": 0.8397,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 2.3,
+          "goalsFor": 1.6,
+          "goalsAgainst": 0.5,
+          "xgFor": 1.702,
+          "xgAgainst": 0.91,
+          "shotsFor": 12.96,
+          "shotsAgainst": 9.55,
+          "shotsOnTargetFor": 4.59,
+          "shotsOnTargetAgainst": 3.08,
+          "possession": 52.8,
+          "formMomentum": -0.2217,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 2,
+            "goalsFor": 0.667,
+            "goalsAgainst": 0.333,
+            "xgFor": 1.03,
+            "xgAgainst": 0.79,
+            "shotsFor": 10.07,
+            "shotsAgainst": 9.03,
+            "shotsOnTargetFor": 3.33,
+            "shotsOnTargetAgainst": 2.87,
+            "possession": 50.8,
+            "cleanSheetRate": 0.667,
+            "failedToScoreRate": 0.333,
+            "bttsRate": 0,
+            "over25Rate": 0,
+            "scoringGameRate": 0.667,
+            "concedeGameRate": 0.333
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 2.3,
+            "goalsFor": 1.6,
+            "goalsAgainst": 0.5,
+            "xgFor": 1.702,
+            "xgAgainst": 0.91,
+            "shotsFor": 12.96,
+            "shotsAgainst": 9.55,
+            "shotsOnTargetFor": 4.59,
+            "shotsOnTargetAgainst": 3.08,
+            "possession": 52.8,
+            "cleanSheetRate": 0.7,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.2,
+            "over25Rate": 0.4,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.3
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.7,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.2,
+            "over25Rate": 0.4,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.3
+          }
+        },
+        "news": {
+          "articleCount": 1,
+          "sourceDiversity": 1,
+          "sentiment": 0.16,
+          "injury": 0,
+          "tacticalFit": 0.45,
+          "lineupClarity": 0.57,
+          "rotationRisk": 0.18,
+          "impact": 0.1898,
+          "confidence": 0.7316,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": 0.0068,
+          "confidence": 0.9,
+          "consensusOdds": 2.438,
+          "consensusImpliedProbability": 0.4102,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 20,
+          "topScorers": [
+            {
+              "playerName": "Kamada",
+              "goals": 5,
+              "matchesSampled": 5
+            },
+            {
+              "playerName": "Minamino",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Ogawa",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Germain",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Hosoya",
+              "goals": 2,
+              "matchesSampled": 2
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 2.3 PPG, xG 1.702-0.91",
+          "recent form cooling",
+          "1 news item(s), news impact 0.1898",
+          "market intelligence 0% movement, consensus 2.438 across 8 bookie(s)",
+          "20 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Ivory Coast",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": -0.0339,
+        "dataConfidence": 0.7514,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 2.2,
+          "goalsFor": 1.8,
+          "goalsAgainst": 0.9,
+          "xgFor": 1.846,
+          "xgAgainst": 1.198,
+          "shotsFor": 13.58,
+          "shotsAgainst": 10.79,
+          "shotsOnTargetFor": 4.86,
+          "shotsOnTargetAgainst": 3.64,
+          "possession": 51.9,
+          "formMomentum": -0.1535,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 2,
+            "goalsFor": 1,
+            "goalsAgainst": 0.667,
+            "xgFor": 1.27,
+            "xgAgainst": 1.03,
+            "shotsFor": 11.1,
+            "shotsAgainst": 10.07,
+            "shotsOnTargetFor": 3.77,
+            "shotsOnTargetAgainst": 3.33,
+            "possession": 50.8,
+            "cleanSheetRate": 0.333,
+            "failedToScoreRate": 0.333,
+            "bttsRate": 0.333,
+            "over25Rate": 0.333,
+            "scoringGameRate": 0.667,
+            "concedeGameRate": 0.667
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 2.2,
+            "goalsFor": 1.8,
+            "goalsAgainst": 0.9,
+            "xgFor": 1.846,
+            "xgAgainst": 1.198,
+            "shotsFor": 13.58,
+            "shotsAgainst": 10.79,
+            "shotsOnTargetFor": 4.86,
+            "shotsOnTargetAgainst": 3.64,
+            "possession": 51.9,
+            "cleanSheetRate": 0.4,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.4,
+            "over25Rate": 0.5,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.6
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.4,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.4,
+            "over25Rate": 0.5,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.6
+          }
+        },
+        "news": {
+          "articleCount": 0,
+          "sourceDiversity": 0,
+          "sentiment": 0,
+          "injury": 0,
+          "tacticalFit": 0.45,
+          "lineupClarity": 0.45,
+          "rotationRisk": 0.18,
+          "impact": 0,
+          "confidence": 0.32,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": -0.0346,
+          "confidence": 0.9,
+          "consensusOdds": 4.422,
+          "consensusImpliedProbability": 0.2261,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 24,
+          "topScorers": [
+            {
+              "playerName": "A. Diallo",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "Guessand",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Kessié",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Diakité",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "I. Sangaré",
+              "goals": 2,
+              "matchesSampled": 2
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 2.2 PPG, xG 1.846-1.198",
+          "recent form cooling",
+          "market intelligence 0% movement, consensus 4.422 across 8 bookie(s)",
+          "24 scorer record(s), top scorer signal 0.28"
+        ]
+      },
+      {
+        "team": "Ecuador",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.2528,
+        "dataConfidence": 0.6291,
+        "form": {
+          "matchCount": 14,
+          "pointsPerGame": 1.143,
+          "goalsFor": 0.857,
+          "goalsAgainst": 1,
+          "xgFor": 1.167,
+          "xgAgainst": 1.27,
+          "shotsFor": 10.66,
+          "shotsAgainst": 11.1,
+          "shotsOnTargetFor": 3.59,
+          "shotsOnTargetAgainst": 3.79,
+          "possession": 49.6,
+          "formMomentum": 0.3656,
+          "confidence": 0.75,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 1.667,
+            "goalsFor": 1.333,
+            "goalsAgainst": 1,
+            "xgFor": 1.51,
+            "xgAgainst": 1.27,
+            "shotsFor": 12.13,
+            "shotsAgainst": 11.1,
+            "shotsOnTargetFor": 4.23,
+            "shotsOnTargetAgainst": 3.8,
+            "possession": 50.8,
+            "cleanSheetRate": 0,
+            "failedToScoreRate": 0,
+            "bttsRate": 1,
+            "over25Rate": 0.333,
+            "scoringGameRate": 1,
+            "concedeGameRate": 1
+          },
+          "longForm": {
+            "matchCount": 14,
+            "pointsPerGame": 1.143,
+            "goalsFor": 0.857,
+            "goalsAgainst": 1,
+            "xgFor": 1.167,
+            "xgAgainst": 1.27,
+            "shotsFor": 10.66,
+            "shotsAgainst": 11.1,
+            "shotsOnTargetFor": 3.59,
+            "shotsOnTargetAgainst": 3.79,
+            "possession": 49.6,
+            "cleanSheetRate": 0.286,
+            "failedToScoreRate": 0.286,
+            "bttsRate": 0.714,
+            "over25Rate": 0.286,
+            "scoringGameRate": 0.714,
+            "concedeGameRate": 0.714
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.286,
+            "failedToScoreRate": 0.286,
+            "bttsRate": 0.714,
+            "over25Rate": 0.286,
+            "scoringGameRate": 0.714,
+            "concedeGameRate": 0.714
+          }
+        },
+        "news": {
+          "articleCount": 0,
+          "sourceDiversity": 0,
+          "sentiment": 0,
+          "injury": 0,
+          "tacticalFit": 0.45,
+          "lineupClarity": 0.45,
+          "rotationRisk": 0.18,
+          "impact": 0,
+          "confidence": 0.32,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": 0.0402,
+          "confidence": 0.9,
+          "consensusOdds": 1.79,
+          "consensusImpliedProbability": 0.5587,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 7,
+          "topScorers": [
+            {
+              "playerName": "Alcívar",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Estupiñán",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Hincapié",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Pacho",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Torres",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.515
+        },
+        "reasons": [
+          "20-match form 1.143 PPG, xG 1.167-1.27",
+          "recent form improving",
+          "market intelligence 0% movement, consensus 1.79 across 8 bookie(s)",
+          "7 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Sweden",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.2989,
+        "dataConfidence": 0.7515,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.4,
+          "goalsFor": 1.6,
+          "goalsAgainst": 1.8,
+          "xgFor": 1.702,
+          "xgAgainst": 1.846,
+          "shotsFor": 12.96,
+          "shotsAgainst": 13.58,
+          "shotsOnTargetFor": 4.58,
+          "shotsOnTargetAgainst": 4.85,
+          "possession": 49.5,
+          "formMomentum": 0.55,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 2.333,
+            "goalsFor": 2.333,
+            "goalsAgainst": 1.333,
+            "xgFor": 2.23,
+            "xgAgainst": 1.51,
+            "shotsFor": 15.23,
+            "shotsAgainst": 12.13,
+            "shotsOnTargetFor": 5.6,
+            "shotsOnTargetAgainst": 4.23,
+            "possession": 52.5,
+            "cleanSheetRate": 0,
+            "failedToScoreRate": 0,
+            "bttsRate": 1,
+            "over25Rate": 0.667,
+            "scoringGameRate": 1,
+            "concedeGameRate": 1
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.4,
+            "goalsFor": 1.6,
+            "goalsAgainst": 1.8,
+            "xgFor": 1.702,
+            "xgAgainst": 1.846,
+            "shotsFor": 12.96,
+            "shotsAgainst": 13.58,
+            "shotsOnTargetFor": 4.58,
+            "shotsOnTargetAgainst": 4.85,
+            "possession": 49.5,
+            "cleanSheetRate": 0.1,
+            "failedToScoreRate": 0.3,
+            "bttsRate": 0.6,
+            "over25Rate": 0.5,
+            "scoringGameRate": 0.7,
+            "concedeGameRate": 0.9
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.1,
+            "failedToScoreRate": 0.3,
+            "bttsRate": 0.6,
+            "over25Rate": 0.5,
+            "scoringGameRate": 0.7,
+            "concedeGameRate": 0.9
+          }
+        },
+        "news": {
+          "articleCount": 0,
+          "sourceDiversity": 0,
+          "sentiment": 0,
+          "injury": 0,
+          "tacticalFit": 0.45,
+          "lineupClarity": 0.45,
+          "rotationRisk": 0.18,
+          "impact": 0,
+          "confidence": 0.32,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": -0.0134,
+          "confidence": 0.9,
+          "consensusOdds": 3.121,
+          "consensusImpliedProbability": 0.3204,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 12,
+          "topScorers": [
+            {
+              "playerName": "Gyökeres",
+              "goals": 7,
+              "matchesSampled": 7
+            },
+            {
+              "playerName": "Isak",
+              "goals": 5,
+              "matchesSampled": 5
+            },
+            {
+              "playerName": "Ayari",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Elanga",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Nygren",
+              "goals": 3,
+              "matchesSampled": 3
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 1.4 PPG, xG 1.702-1.846",
+          "recent form improving",
+          "market intelligence 0% movement, consensus 3.121 across 8 bookie(s)",
+          "12 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Tunisia",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": -0.324,
+        "dataConfidence": 0.8387,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.9,
+          "goalsFor": 0.8,
+          "goalsAgainst": 0.8,
+          "xgFor": 1.126,
+          "xgAgainst": 1.126,
+          "shotsFor": 10.48,
+          "shotsAgainst": 10.48,
+          "shotsOnTargetFor": 3.5,
+          "shotsOnTargetAgainst": 3.49,
+          "possession": 50.5,
+          "formMomentum": -0.55,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 1,
+            "goalsFor": 0.333,
+            "goalsAgainst": 2.333,
+            "xgFor": 0.79,
+            "xgAgainst": 2.23,
+            "shotsFor": 9.03,
+            "shotsAgainst": 15.23,
+            "shotsOnTargetFor": 2.87,
+            "shotsOnTargetAgainst": 5.57,
+            "possession": 46.5,
+            "cleanSheetRate": 0.333,
+            "failedToScoreRate": 0.667,
+            "bttsRate": 0,
+            "over25Rate": 0.333,
+            "scoringGameRate": 0.333,
+            "concedeGameRate": 0.667
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.9,
+            "goalsFor": 0.8,
+            "goalsAgainst": 0.8,
+            "xgFor": 1.126,
+            "xgAgainst": 1.126,
+            "shotsFor": 10.48,
+            "shotsAgainst": 10.48,
+            "shotsOnTargetFor": 3.5,
+            "shotsOnTargetAgainst": 3.49,
+            "possession": 50.5,
+            "cleanSheetRate": 0.7,
+            "failedToScoreRate": 0.4,
+            "bttsRate": 0,
+            "over25Rate": 0.1,
+            "scoringGameRate": 0.6,
+            "concedeGameRate": 0.3
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.7,
+            "failedToScoreRate": 0.4,
+            "bttsRate": 0,
+            "over25Rate": 0.1,
+            "scoringGameRate": 0.6,
+            "concedeGameRate": 0.3
+          }
+        },
+        "news": {
+          "articleCount": 1,
+          "sourceDiversity": 1,
+          "sentiment": -0.4,
+          "injury": 0.36,
+          "tacticalFit": 0.63,
+          "lineupClarity": 0.45,
+          "rotationRisk": 0.28,
+          "impact": -0.2066,
+          "confidence": 0.7316,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": -0.0318,
+          "confidence": 0.9,
+          "consensusOdds": 4.193,
+          "consensusImpliedProbability": 0.2385,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 19,
+          "topScorers": [
+            {
+              "playerName": "Achouri",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Ben Romdhane",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Abdi",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Ayari",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Chaouat",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 1.9 PPG, xG 1.126-1.126",
+          "recent form cooling",
+          "1 news item(s), news impact -0.2066",
+          "market intelligence 0% movement, consensus 4.193 across 8 bookie(s)",
+          "19 scorer record(s), top scorer signal 0.28",
+          "memory currently leans negative"
+        ]
+      },
+      {
+        "team": "Spain",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.3851,
+        "dataConfidence": 0.8611,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 2,
+          "goalsFor": 2.8,
+          "goalsAgainst": 0.9,
+          "xgFor": 2.566,
+          "xgAgainst": 1.198,
+          "shotsFor": 16.68,
+          "shotsAgainst": 10.79,
+          "shotsOnTargetFor": 6.21,
+          "shotsOnTargetAgainst": 3.63,
+          "possession": 53.5,
+          "formMomentum": 0.482,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 2.667,
+            "goalsFor": 4.167,
+            "goalsAgainst": 0.667,
+            "xgFor": 3.55,
+            "xgAgainst": 1.03,
+            "shotsFor": 20.92,
+            "shotsAgainst": 10.07,
+            "shotsOnTargetFor": 8.05,
+            "shotsOnTargetAgainst": 3.32,
+            "possession": 56.7,
+            "cleanSheetRate": 0.5,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.5,
+            "over25Rate": 1,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.5
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 2,
+            "goalsFor": 2.8,
+            "goalsAgainst": 0.9,
+            "xgFor": 2.566,
+            "xgAgainst": 1.198,
+            "shotsFor": 16.68,
+            "shotsAgainst": 10.79,
+            "shotsOnTargetFor": 6.21,
+            "shotsOnTargetAgainst": 3.63,
+            "possession": 53.5,
+            "cleanSheetRate": 0.5,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.5,
+            "over25Rate": 0.6,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.5
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.5,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.5,
+            "over25Rate": 0.6,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.5
+          }
+        },
+        "news": {
+          "articleCount": 6,
+          "sourceDiversity": 2,
+          "sentiment": -0.0133,
+          "injury": 0.06,
+          "tacticalFit": 0.48,
+          "lineupClarity": 0.49,
+          "rotationRisk": 0.1967,
+          "impact": 0.0765,
+          "confidence": 0.8316,
+          "topSignals": [
+            "style clue"
+          ]
+        },
+        "market": {
+          "pressure": 0.102,
+          "confidence": 0.9,
+          "consensusOdds": 1.114,
+          "consensusImpliedProbability": 0.898,
+          "movement": 0,
+          "bookmakerCount": 7
+        },
+        "scorer": {
+          "trackedPlayers": 26,
+          "topScorers": [
+            {
+              "playerName": "Morata",
+              "goals": 6,
+              "matchesSampled": 6
+            },
+            {
+              "playerName": "Olmo",
+              "goals": 6,
+              "matchesSampled": 6
+            },
+            {
+              "playerName": "Oyarzabal",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "Pedri",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "Williams",
+              "goals": 4,
+              "matchesSampled": 4
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 2 PPG, xG 2.566-1.198",
+          "recent form improving",
+          "6 news item(s), news impact 0.0765",
+          "market intelligence 0% movement, consensus 1.114 across 7 bookie(s)",
+          "26 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Cape Verde",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.2709,
+        "dataConfidence": 0.8462,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.5,
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "xgFor": 1.27,
+          "xgAgainst": 1.27,
+          "shotsFor": 11.1,
+          "shotsAgainst": 11.1,
+          "shotsOnTargetFor": 3.78,
+          "shotsOnTargetAgainst": 3.78,
+          "possession": 50,
+          "formMomentum": 0.534,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 2.333,
+            "goalsFor": 2,
+            "goalsAgainst": 0.667,
+            "xgFor": 1.99,
+            "xgAgainst": 1.03,
+            "shotsFor": 14.2,
+            "shotsAgainst": 10.07,
+            "shotsOnTargetFor": 5.13,
+            "shotsOnTargetAgainst": 3.33,
+            "possession": 53.3,
+            "cleanSheetRate": 0.333,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.667,
+            "over25Rate": 0.667,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.667
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.5,
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "xgFor": 1.27,
+            "xgAgainst": 1.27,
+            "shotsFor": 11.1,
+            "shotsAgainst": 11.1,
+            "shotsOnTargetFor": 3.78,
+            "shotsOnTargetAgainst": 3.78,
+            "possession": 50,
+            "cleanSheetRate": 0.3,
+            "failedToScoreRate": 0.3,
+            "bttsRate": 0.4,
+            "over25Rate": 0.3,
+            "scoringGameRate": 0.7,
+            "concedeGameRate": 0.7
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.3,
+            "failedToScoreRate": 0.3,
+            "bttsRate": 0.4,
+            "over25Rate": 0.3,
+            "scoringGameRate": 0.7,
+            "concedeGameRate": 0.7
+          }
+        },
+        "news": {
+          "articleCount": 2,
+          "sourceDiversity": 2,
+          "sentiment": -0.1,
+          "injury": 0.09,
+          "tacticalFit": 0.45,
+          "lineupClarity": 0.41,
+          "rotationRisk": 0.305,
+          "impact": -0.0032,
+          "confidence": 0.8316,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": -0.066,
+          "confidence": 0.9,
+          "consensusOdds": 17.357,
+          "consensusImpliedProbability": 0.0576,
+          "movement": 0,
+          "bookmakerCount": 7
+        },
+        "scorer": {
+          "trackedPlayers": 12,
+          "topScorers": [
+            {
+              "playerName": "Mendes",
+              "goals": 6,
+              "matchesSampled": 6
+            },
+            {
+              "playerName": "Bebé",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Benchimol",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Cabral",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Fernandes",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.712
+        },
+        "reasons": [
+          "20-match form 1.5 PPG, xG 1.27-1.27",
+          "recent form improving",
+          "2 news item(s), news impact -0.0032",
+          "market intelligence 0% movement, consensus 17.357 across 7 bookie(s)",
+          "12 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Belgium",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.1366,
+        "dataConfidence": 0.8608,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 2.2,
+          "goalsFor": 3.3,
+          "goalsAgainst": 0.8,
+          "xgFor": 2.72,
+          "xgAgainst": 1.126,
+          "shotsFor": 17.4,
+          "shotsAgainst": 10.48,
+          "shotsOnTargetFor": 6.88,
+          "shotsOnTargetAgainst": 3.49,
+          "possession": 54.2,
+          "formMomentum": 0.0758,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 2.333,
+            "goalsFor": 2.667,
+            "goalsAgainst": 0.333,
+            "xgFor": 2.47,
+            "xgAgainst": 0.79,
+            "shotsFor": 16.27,
+            "shotsAgainst": 9.03,
+            "shotsOnTargetFor": 6.03,
+            "shotsOnTargetAgainst": 2.87,
+            "possession": 54.3,
+            "cleanSheetRate": 0.667,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.333,
+            "over25Rate": 0.333,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.333
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 2.2,
+            "goalsFor": 3.3,
+            "goalsAgainst": 0.8,
+            "xgFor": 2.72,
+            "xgAgainst": 1.126,
+            "shotsFor": 17.4,
+            "shotsAgainst": 10.48,
+            "shotsOnTargetFor": 6.88,
+            "shotsOnTargetAgainst": 3.49,
+            "possession": 54.2,
+            "cleanSheetRate": 0.5,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.5,
+            "over25Rate": 0.6,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.5
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.5,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.5,
+            "over25Rate": 0.6,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.5
+          }
+        },
+        "news": {
+          "articleCount": 4,
+          "sourceDiversity": 2,
+          "sentiment": -0.06,
+          "injury": 0.09,
+          "tacticalFit": 0.4725,
+          "lineupClarity": 0.46,
+          "rotationRisk": 0.255,
+          "impact": 0.032,
+          "confidence": 0.8316,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": 0.0602,
+          "confidence": 0.9,
+          "consensusOdds": 1.544,
+          "consensusImpliedProbability": 0.6478,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 16,
+          "topScorers": [
+            {
+              "playerName": "De Bruyne",
+              "goals": 6,
+              "matchesSampled": 6
+            },
+            {
+              "playerName": "Tielemans",
+              "goals": 6,
+              "matchesSampled": 6
+            },
+            {
+              "playerName": "De Cuyper",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "De Ketelaere",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Doku",
+              "goals": 3,
+              "matchesSampled": 3
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 2.2 PPG, xG 2.72-1.126",
+          "4 news item(s), news impact 0.032",
+          "market intelligence 0% movement, consensus 1.544 across 8 bookie(s)",
+          "16 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Egypt",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": -0.0215,
+        "dataConfidence": 0.8608,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 2.1,
+          "goalsFor": 1.2,
+          "goalsAgainst": 0.6,
+          "xgFor": 1.414,
+          "xgAgainst": 0.982,
+          "shotsFor": 11.72,
+          "shotsAgainst": 9.86,
+          "shotsOnTargetFor": 4.04,
+          "shotsOnTargetAgainst": 3.23,
+          "possession": 51.5,
+          "formMomentum": 0.118,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 2.333,
+            "goalsFor": 1,
+            "goalsAgainst": 0.333,
+            "xgFor": 1.27,
+            "xgAgainst": 0.79,
+            "shotsFor": 11.1,
+            "shotsAgainst": 9.03,
+            "shotsOnTargetFor": 3.77,
+            "shotsOnTargetAgainst": 2.87,
+            "possession": 51.7,
+            "cleanSheetRate": 0.667,
+            "failedToScoreRate": 0.333,
+            "bttsRate": 0.333,
+            "over25Rate": 0.333,
+            "scoringGameRate": 0.667,
+            "concedeGameRate": 0.333
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 2.1,
+            "goalsFor": 1.2,
+            "goalsAgainst": 0.6,
+            "xgFor": 1.414,
+            "xgAgainst": 0.982,
+            "shotsFor": 11.72,
+            "shotsAgainst": 9.86,
+            "shotsOnTargetFor": 4.04,
+            "shotsOnTargetAgainst": 3.23,
+            "possession": 51.5,
+            "cleanSheetRate": 0.6,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.4,
+            "over25Rate": 0.3,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.4
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.6,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.4,
+            "over25Rate": 0.3,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.4
+          }
+        },
+        "news": {
+          "articleCount": 2,
+          "sourceDiversity": 2,
+          "sentiment": -0.3,
+          "injury": 0.27,
+          "tacticalFit": 0.495,
+          "lineupClarity": 0.41,
+          "rotationRisk": 0.355,
+          "impact": -0.1605,
+          "confidence": 0.8316,
+          "topSignals": [
+            "availability risk"
+          ]
+        },
+        "market": {
+          "pressure": -0.0155,
+          "confidence": 0.9,
+          "consensusOdds": 3.216,
+          "consensusImpliedProbability": 0.3109,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 16,
+          "topScorers": [
+            {
+              "playerName": "Trézéguet",
+              "goals": 6,
+              "matchesSampled": 6
+            },
+            {
+              "playerName": "Salah",
+              "goals": 5,
+              "matchesSampled": 5
+            },
+            {
+              "playerName": "Rabia",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "Adel",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Marmoush",
+              "goals": 2,
+              "matchesSampled": 2
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 2.1 PPG, xG 1.414-0.982",
+          "recent form improving",
+          "2 news item(s), news impact -0.1605",
+          "market intelligence 0% movement, consensus 3.216 across 8 bookie(s)",
+          "16 scorer record(s), top scorer signal 0.28"
+        ]
+      },
+      {
+        "team": "Saudi Arabia",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.2641,
+        "dataConfidence": 0.8327,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 2.4,
+          "goalsFor": 1.3,
+          "goalsAgainst": 0.1,
+          "xgFor": 1.486,
+          "xgAgainst": 0.622,
+          "shotsFor": 12.03,
+          "shotsAgainst": 8.31,
+          "shotsOnTargetFor": 4.18,
+          "shotsOnTargetAgainst": 2.54,
+          "possession": 53,
+          "formMomentum": 0.4023,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 3,
+            "goalsFor": 2.333,
+            "goalsAgainst": 0,
+            "xgFor": 2.23,
+            "xgAgainst": 0.55,
+            "shotsFor": 15.23,
+            "shotsAgainst": 8,
+            "shotsOnTargetFor": 5.57,
+            "shotsOnTargetAgainst": 2.4,
+            "possession": 55.8,
+            "cleanSheetRate": 1,
+            "failedToScoreRate": 0,
+            "bttsRate": 0,
+            "over25Rate": 0.333,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 2.4,
+            "goalsFor": 1.3,
+            "goalsAgainst": 0.1,
+            "xgFor": 1.486,
+            "xgAgainst": 0.622,
+            "shotsFor": 12.03,
+            "shotsAgainst": 8.31,
+            "shotsOnTargetFor": 4.18,
+            "shotsOnTargetAgainst": 2.54,
+            "possession": 53,
+            "cleanSheetRate": 0.9,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.1,
+            "over25Rate": 0.1,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.1
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.9,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.1,
+            "over25Rate": 0.1,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.1
+          }
+        },
+        "news": {
+          "articleCount": 1,
+          "sourceDiversity": 1,
+          "sentiment": 0,
+          "injury": 0,
+          "tacticalFit": 0.45,
+          "lineupClarity": 0.45,
+          "rotationRisk": 0.18,
+          "impact": 0.0954,
+          "confidence": 0.7316,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": -0.066,
+          "confidence": 0.9,
+          "consensusOdds": 11.886,
+          "consensusImpliedProbability": 0.0841,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 12,
+          "topScorers": [
+            {
+              "playerName": "Al-Buraikan",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "S. Al-Dawsari",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "Al-Shehri",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Al-Juwayr",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Al-Aboud",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.748
+        },
+        "reasons": [
+          "20-match form 2.4 PPG, xG 1.486-0.622",
+          "recent form improving",
+          "1 news item(s), news impact 0.0954",
+          "market intelligence 0% movement, consensus 11.886 across 8 bookie(s)",
+          "12 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Uruguay",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.2139,
+        "dataConfidence": 0.8332,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.7,
+          "goalsFor": 1,
+          "goalsAgainst": 0.8,
+          "xgFor": 1.27,
+          "xgAgainst": 1.126,
+          "shotsFor": 11.1,
+          "shotsAgainst": 10.48,
+          "shotsOnTargetFor": 3.77,
+          "shotsOnTargetAgainst": 3.5,
+          "possession": 50.7,
+          "formMomentum": -0.0022,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 1.667,
+            "goalsFor": 0.667,
+            "goalsAgainst": 0.333,
+            "xgFor": 1.03,
+            "xgAgainst": 0.79,
+            "shotsFor": 10.07,
+            "shotsAgainst": 9.03,
+            "shotsOnTargetFor": 3.3,
+            "shotsOnTargetAgainst": 2.87,
+            "possession": 50.8,
+            "cleanSheetRate": 0.667,
+            "failedToScoreRate": 0.667,
+            "bttsRate": 0.333,
+            "over25Rate": 0.333,
+            "scoringGameRate": 0.333,
+            "concedeGameRate": 0.333
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.7,
+            "goalsFor": 1,
+            "goalsAgainst": 0.8,
+            "xgFor": 1.27,
+            "xgAgainst": 1.126,
+            "shotsFor": 11.1,
+            "shotsAgainst": 10.48,
+            "shotsOnTargetFor": 3.77,
+            "shotsOnTargetAgainst": 3.5,
+            "possession": 50.7,
+            "cleanSheetRate": 0.6,
+            "failedToScoreRate": 0.4,
+            "bttsRate": 0.4,
+            "over25Rate": 0.4,
+            "scoringGameRate": 0.6,
+            "concedeGameRate": 0.4
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.6,
+            "failedToScoreRate": 0.4,
+            "bttsRate": 0.4,
+            "over25Rate": 0.4,
+            "scoringGameRate": 0.6,
+            "concedeGameRate": 0.4
+          }
+        },
+        "news": {
+          "articleCount": 3,
+          "sourceDiversity": 2,
+          "sentiment": 0.1067,
+          "injury": 0,
+          "tacticalFit": 0.51,
+          "lineupClarity": 0.5033,
+          "rotationRisk": 0.2467,
+          "impact": 0.1555,
+          "confidence": 0.8316,
+          "topSignals": [
+            "positive availability"
+          ]
+        },
+        "market": {
+          "pressure": 0.067,
+          "confidence": 0.9,
+          "consensusOdds": 1.476,
+          "consensusImpliedProbability": 0.6777,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 11,
+          "topScorers": [
+            {
+              "playerName": "Aguirre",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "De Arrascaeta",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Coates",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Laquintana",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "M. Olivera",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.651
+        },
+        "reasons": [
+          "20-match form 1.7 PPG, xG 1.27-1.126",
+          "3 news item(s), news impact 0.1555",
+          "market intelligence 0% movement, consensus 1.476 across 8 bookie(s)",
+          "11 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Iran",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": -0.067,
+        "dataConfidence": 0.7036,
+        "form": {
+          "matchCount": 11,
+          "pointsPerGame": 1,
+          "goalsFor": 1.455,
+          "goalsAgainst": 1.091,
+          "xgFor": 1.597,
+          "xgAgainst": 1.335,
+          "shotsFor": 12.51,
+          "shotsAgainst": 11.38,
+          "shotsOnTargetFor": 4.36,
+          "shotsOnTargetAgainst": 3.89,
+          "possession": 50.5,
+          "formMomentum": -0.3548,
+          "confidence": 0.675,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 0.667,
+            "goalsFor": 0.667,
+            "goalsAgainst": 1,
+            "xgFor": 1.03,
+            "xgAgainst": 1.27,
+            "shotsFor": 10.07,
+            "shotsAgainst": 11.1,
+            "shotsOnTargetFor": 3.3,
+            "shotsOnTargetAgainst": 3.77,
+            "possession": 49.2,
+            "cleanSheetRate": 0.333,
+            "failedToScoreRate": 0.667,
+            "bttsRate": 0.333,
+            "over25Rate": 0.333,
+            "scoringGameRate": 0.333,
+            "concedeGameRate": 0.667
+          },
+          "longForm": {
+            "matchCount": 11,
+            "pointsPerGame": 1,
+            "goalsFor": 1.455,
+            "goalsAgainst": 1.091,
+            "xgFor": 1.597,
+            "xgAgainst": 1.335,
+            "shotsFor": 12.51,
+            "shotsAgainst": 11.38,
+            "shotsOnTargetFor": 4.36,
+            "shotsOnTargetAgainst": 3.89,
+            "possession": 50.5,
+            "cleanSheetRate": 0.455,
+            "failedToScoreRate": 0.455,
+            "bttsRate": 0.364,
+            "over25Rate": 0.545,
+            "scoringGameRate": 0.545,
+            "concedeGameRate": 0.545
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.455,
+            "failedToScoreRate": 0.455,
+            "bttsRate": 0.364,
+            "over25Rate": 0.545,
+            "scoringGameRate": 0.545,
+            "concedeGameRate": 0.545
+          }
+        },
+        "news": {
+          "articleCount": 7,
+          "sourceDiversity": 2,
+          "sentiment": -0.0343,
+          "injury": 0.0514,
+          "tacticalFit": 0.4757,
+          "lineupClarity": 0.4671,
+          "rotationRisk": 0.1943,
+          "impact": 0.0657,
+          "confidence": 0.8316,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": -0.0307,
+          "confidence": 0.9,
+          "consensusOdds": 4.103,
+          "consensusImpliedProbability": 0.2437,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 4,
+          "topScorers": [
+            {
+              "playerName": "Azmoun",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Jahanbakhsh",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Kanaanizadegan",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Taremi",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.452
+        },
+        "reasons": [
+          "20-match form 1 PPG, xG 1.597-1.335",
+          "recent form cooling",
+          "7 news item(s), news impact 0.0657",
+          "market intelligence 0% movement, consensus 4.103 across 8 bookie(s)",
+          "4 scorer record(s), top scorer signal 0.28"
+        ]
+      },
+      {
+        "team": "New Zealand",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.1674,
+        "dataConfidence": 0.6591,
+        "form": {
+          "matchCount": 9,
+          "pointsPerGame": 0.778,
+          "goalsFor": 0.333,
+          "goalsAgainst": 1,
+          "xgFor": 0.79,
+          "xgAgainst": 1.27,
+          "shotsFor": 9.03,
+          "shotsAgainst": 11.1,
+          "shotsOnTargetFor": 2.87,
+          "shotsOnTargetAgainst": 3.78,
+          "possession": 48.3,
+          "formMomentum": 0.2942,
+          "confidence": 0.625,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 1,
+            "goalsFor": 0.333,
+            "goalsAgainst": 0.667,
+            "xgFor": 0.79,
+            "xgAgainst": 1.03,
+            "shotsFor": 9.03,
+            "shotsAgainst": 10.07,
+            "shotsOnTargetFor": 2.87,
+            "shotsOnTargetAgainst": 3.33,
+            "possession": 49.2,
+            "cleanSheetRate": 0.333,
+            "failedToScoreRate": 0.667,
+            "bttsRate": 0,
+            "over25Rate": 0,
+            "scoringGameRate": 0.333,
+            "concedeGameRate": 0.667
+          },
+          "longForm": {
+            "matchCount": 9,
+            "pointsPerGame": 0.778,
+            "goalsFor": 0.333,
+            "goalsAgainst": 1,
+            "xgFor": 0.79,
+            "xgAgainst": 1.27,
+            "shotsFor": 9.03,
+            "shotsAgainst": 11.1,
+            "shotsOnTargetFor": 2.87,
+            "shotsOnTargetAgainst": 3.78,
+            "possession": 48.3,
+            "cleanSheetRate": 0.222,
+            "failedToScoreRate": 0.667,
+            "bttsRate": 0.111,
+            "over25Rate": 0,
+            "scoringGameRate": 0.333,
+            "concedeGameRate": 0.778
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.222,
+            "failedToScoreRate": 0.667,
+            "bttsRate": 0.111,
+            "over25Rate": 0,
+            "scoringGameRate": 0.333,
+            "concedeGameRate": 0.778
+          }
+        },
+        "news": {
+          "articleCount": 14,
+          "sourceDiversity": 2,
+          "sentiment": -0.0314,
+          "injury": 0.09,
+          "tacticalFit": 0.495,
+          "lineupClarity": 0.4843,
+          "rotationRisk": 0.2479,
+          "impact": 0.0532,
+          "confidence": 0.8316,
+          "topSignals": [
+            "availability risk",
+            "lineup/tactical clue",
+            "positive availability",
+            "style clue"
+          ]
+        },
+        "market": {
+          "pressure": -0.0387,
+          "confidence": 0.9,
+          "consensusOdds": 4.813,
+          "consensusImpliedProbability": 0.2078,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 1,
+          "topScorers": [
+            {
+              "playerName": "Just",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.09,
+          "confidence": 0.317
+        },
+        "reasons": [
+          "20-match form 0.778 PPG, xG 0.79-1.27",
+          "recent form improving",
+          "14 news item(s), news impact 0.0532",
+          "market intelligence 0% movement, consensus 4.813 across 8 bookie(s)",
+          "1 scorer record(s), top scorer signal 0.09",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "France",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": -0.0718,
+        "dataConfidence": 0.8611,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 2.2,
+          "goalsFor": 2.8,
+          "goalsAgainst": 1.3,
+          "xgFor": 2.566,
+          "xgAgainst": 1.486,
+          "shotsFor": 16.68,
+          "shotsAgainst": 12.03,
+          "shotsOnTargetFor": 6.2,
+          "shotsOnTargetAgainst": 4.18,
+          "possession": 53.4,
+          "formMomentum": -0.55,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 1,
+            "goalsFor": 2.667,
+            "goalsAgainst": 2.667,
+            "xgFor": 2.47,
+            "xgAgainst": 2.47,
+            "shotsFor": 16.27,
+            "shotsAgainst": 16.27,
+            "shotsOnTargetFor": 6.03,
+            "shotsOnTargetAgainst": 6.03,
+            "possession": 50,
+            "cleanSheetRate": 0,
+            "failedToScoreRate": 0,
+            "bttsRate": 1,
+            "over25Rate": 1,
+            "scoringGameRate": 1,
+            "concedeGameRate": 1
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 2.2,
+            "goalsFor": 2.8,
+            "goalsAgainst": 1.3,
+            "xgFor": 2.566,
+            "xgAgainst": 1.486,
+            "shotsFor": 16.68,
+            "shotsAgainst": 12.03,
+            "shotsOnTargetFor": 6.2,
+            "shotsOnTargetAgainst": 4.18,
+            "possession": 53.4,
+            "cleanSheetRate": 0.3,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.7,
+            "over25Rate": 1,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.7
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.3,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.7,
+            "over25Rate": 1,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.7
+          }
+        },
+        "news": {
+          "articleCount": 10,
+          "sourceDiversity": 2,
+          "sentiment": 0.008,
+          "injury": 0.036,
+          "tacticalFit": 0.486,
+          "lineupClarity": 0.478,
+          "rotationRisk": 0.21,
+          "impact": 0.0927,
+          "confidence": 0.8316,
+          "topSignals": [
+            "availability risk",
+            "positive availability"
+          ]
+        },
+        "market": {
+          "pressure": 0.0903,
+          "confidence": 0.9,
+          "consensusOdds": 1.28,
+          "consensusImpliedProbability": 0.7813,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 24,
+          "topScorers": [
+            {
+              "playerName": "Mbappé",
+              "goals": 8,
+              "matchesSampled": 8
+            },
+            {
+              "playerName": "Barcola",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Cherki",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Olise",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Ekitike",
+              "goals": 2,
+              "matchesSampled": 2
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 2.2 PPG, xG 2.566-1.486",
+          "recent form cooling",
+          "10 news item(s), news impact 0.0927",
+          "market intelligence 0% movement, consensus 1.28 across 8 bookie(s)",
+          "24 scorer record(s), top scorer signal 0.28"
+        ]
+      },
+      {
+        "team": "Senegal",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": -0.145,
+        "dataConfidence": 0.8397,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 2.1,
+          "goalsFor": 1.4,
+          "goalsAgainst": 0.5,
+          "xgFor": 1.558,
+          "xgAgainst": 0.91,
+          "shotsFor": 12.34,
+          "shotsAgainst": 9.55,
+          "shotsOnTargetFor": 4.32,
+          "shotsOnTargetAgainst": 3.09,
+          "possession": 52.3,
+          "formMomentum": -0.55,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 0.667,
+            "goalsFor": 1.333,
+            "goalsAgainst": 1.667,
+            "xgFor": 1.51,
+            "xgAgainst": 1.75,
+            "shotsFor": 12.13,
+            "shotsAgainst": 13.17,
+            "shotsOnTargetFor": 4.23,
+            "shotsOnTargetAgainst": 4.7,
+            "possession": 49.2,
+            "cleanSheetRate": 0,
+            "failedToScoreRate": 0,
+            "bttsRate": 1,
+            "over25Rate": 0.333,
+            "scoringGameRate": 1,
+            "concedeGameRate": 1
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 2.1,
+            "goalsFor": 1.4,
+            "goalsAgainst": 0.5,
+            "xgFor": 1.558,
+            "xgAgainst": 0.91,
+            "shotsFor": 12.34,
+            "shotsAgainst": 9.55,
+            "shotsOnTargetFor": 4.32,
+            "shotsOnTargetAgainst": 3.09,
+            "possession": 52.3,
+            "cleanSheetRate": 0.7,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.3,
+            "over25Rate": 0.2,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.3
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.7,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.3,
+            "over25Rate": 0.2,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.3
+          }
+        },
+        "news": {
+          "articleCount": 1,
+          "sourceDiversity": 1,
+          "sentiment": 0,
+          "injury": 0,
+          "tacticalFit": 0.54,
+          "lineupClarity": 0.45,
+          "rotationRisk": 0.18,
+          "impact": 0.108,
+          "confidence": 0.7316,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": -0.0416,
+          "confidence": 0.9,
+          "consensusOdds": 5.124,
+          "consensusImpliedProbability": 0.1952,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 18,
+          "topScorers": [
+            {
+              "playerName": "Mané",
+              "goals": 7,
+              "matchesSampled": 7
+            },
+            {
+              "playerName": "Diarra",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Appindangoyé",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Boma",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Camara",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 2.1 PPG, xG 1.558-0.91",
+          "recent form cooling",
+          "1 news item(s), news impact 0.108",
+          "market intelligence 0% movement, consensus 5.124 across 8 bookie(s)",
+          "18 scorer record(s), top scorer signal 0.28",
+          "memory currently leans negative"
+        ]
+      },
+      {
+        "team": "Iraq",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.0777,
+        "dataConfidence": 0.7955,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.6,
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "xgFor": 1.27,
+          "xgAgainst": 1.27,
+          "shotsFor": 11.1,
+          "shotsAgainst": 11.1,
+          "shotsOnTargetFor": 3.76,
+          "shotsOnTargetAgainst": 3.78,
+          "possession": 50,
+          "formMomentum": -0.1613,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 1.333,
+            "goalsFor": 0.667,
+            "goalsAgainst": 1,
+            "xgFor": 1.03,
+            "xgAgainst": 1.27,
+            "shotsFor": 10.07,
+            "shotsAgainst": 11.1,
+            "shotsOnTargetFor": 3.33,
+            "shotsOnTargetAgainst": 3.77,
+            "possession": 49.2,
+            "cleanSheetRate": 0.333,
+            "failedToScoreRate": 0.333,
+            "bttsRate": 0.333,
+            "over25Rate": 0,
+            "scoringGameRate": 0.667,
+            "concedeGameRate": 0.667
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.6,
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "xgFor": 1.27,
+            "xgAgainst": 1.27,
+            "shotsFor": 11.1,
+            "shotsAgainst": 11.1,
+            "shotsOnTargetFor": 3.76,
+            "shotsOnTargetAgainst": 3.78,
+            "possession": 50,
+            "cleanSheetRate": 0.2,
+            "failedToScoreRate": 0.4,
+            "bttsRate": 0.4,
+            "over25Rate": 0.3,
+            "scoringGameRate": 0.6,
+            "concedeGameRate": 0.8
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.2,
+            "failedToScoreRate": 0.4,
+            "bttsRate": 0.4,
+            "over25Rate": 0.3,
+            "scoringGameRate": 0.6,
+            "concedeGameRate": 0.8
+          }
+        },
+        "news": {
+          "articleCount": 3,
+          "sourceDiversity": 1,
+          "sentiment": 0.16,
+          "injury": 0,
+          "tacticalFit": 0.54,
+          "lineupClarity": 0.5433,
+          "rotationRisk": 0.2467,
+          "impact": 0.1912,
+          "confidence": 0.7316,
+          "topSignals": [
+            "positive availability",
+            "style clue"
+          ]
+        },
+        "market": {
+          "pressure": -0.066,
+          "confidence": 0.9,
+          "consensusOdds": 14.906,
+          "consensusImpliedProbability": 0.0671,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 6,
+          "topScorers": [
+            {
+              "playerName": "Ali",
+              "goals": 5,
+              "matchesSampled": 5
+            },
+            {
+              "playerName": "Hussein",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Al-Hamadi",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Doski",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Iqbal",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.574
+        },
+        "reasons": [
+          "20-match form 1.6 PPG, xG 1.27-1.27",
+          "recent form cooling",
+          "3 news item(s), news impact 0.1912",
+          "market intelligence 0% movement, consensus 14.906 across 8 bookie(s)",
+          "6 scorer record(s), top scorer signal 0.28"
+        ]
+      },
+      {
+        "team": "Norway",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.0397,
+        "dataConfidence": 0.8611,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.5,
+          "goalsFor": 2.1,
+          "goalsAgainst": 0.9,
+          "xgFor": 1.779,
+          "xgAgainst": 1.198,
+          "shotsFor": 13.32,
+          "shotsAgainst": 10.79,
+          "shotsOnTargetFor": 5.02,
+          "shotsOnTargetAgainst": 3.63,
+          "possession": 51.6,
+          "formMomentum": -0.5313,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 0.667,
+            "goalsFor": 1.333,
+            "goalsAgainst": 1.833,
+            "xgFor": 1.51,
+            "xgAgainst": 1.87,
+            "shotsFor": 12.13,
+            "shotsAgainst": 13.68,
+            "shotsOnTargetFor": 4.25,
+            "shotsOnTargetAgainst": 4.9,
+            "possession": 48.8,
+            "cleanSheetRate": 0.167,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.833,
+            "over25Rate": 0.833,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.833
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.5,
+            "goalsFor": 2.1,
+            "goalsAgainst": 0.9,
+            "xgFor": 1.779,
+            "xgAgainst": 1.198,
+            "shotsFor": 13.32,
+            "shotsAgainst": 10.79,
+            "shotsOnTargetFor": 5.02,
+            "shotsOnTargetAgainst": 3.63,
+            "possession": 51.6,
+            "cleanSheetRate": 0.5,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.5,
+            "over25Rate": 0.6,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.5
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.5,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.5,
+            "over25Rate": 0.6,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.5
+          }
+        },
+        "news": {
+          "articleCount": 7,
+          "sourceDiversity": 2,
+          "sentiment": 0.0343,
+          "injury": 0.0514,
+          "tacticalFit": 0.5271,
+          "lineupClarity": 0.5071,
+          "rotationRisk": 0.2229,
+          "impact": 0.1086,
+          "confidence": 0.8316,
+          "topSignals": [
+            "availability risk",
+            "positive availability",
+            "style clue"
+          ]
+        },
+        "market": {
+          "pressure": 0.0484,
+          "confidence": 0.9,
+          "consensusOdds": 1.68,
+          "consensusImpliedProbability": 0.5952,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 17,
+          "topScorers": [
+            {
+              "playerName": "Haaland",
+              "goals": 12,
+              "matchesSampled": 12
+            },
+            {
+              "playerName": "Sørloth",
+              "goals": 9,
+              "matchesSampled": 9
+            },
+            {
+              "playerName": "Nusa",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Ødegaard",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Aasgaard",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 1.5 PPG, xG 1.779-1.198",
+          "recent form cooling",
+          "7 news item(s), news impact 0.1086",
+          "market intelligence 0% movement, consensus 1.68 across 8 bookie(s)",
+          "17 scorer record(s), top scorer signal 0.28"
+        ]
+      },
+      {
+        "team": "Argentina",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.152,
+        "dataConfidence": 0.7029,
+        "form": {
+          "matchCount": 8,
+          "pointsPerGame": 3,
+          "goalsFor": 3,
+          "goalsAgainst": 0.25,
+          "xgFor": 2.362,
+          "xgAgainst": 0.73,
+          "shotsFor": 15.88,
+          "shotsAgainst": 8.78,
+          "shotsOnTargetFor": 6.48,
+          "shotsOnTargetAgainst": 2.75,
+          "possession": 54.5,
+          "formMomentum": 0.1217,
+          "confidence": 0.6,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 3,
+            "goalsFor": 3.333,
+            "goalsAgainst": 0,
+            "xgFor": 2.487,
+            "xgAgainst": 0.55,
+            "shotsFor": 16.43,
+            "shotsAgainst": 8,
+            "shotsOnTargetFor": 6.93,
+            "shotsOnTargetAgainst": 2.4,
+            "possession": 55.2,
+            "cleanSheetRate": 1,
+            "failedToScoreRate": 0,
+            "bttsRate": 0,
+            "over25Rate": 0.333,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0
+          },
+          "longForm": {
+            "matchCount": 8,
+            "pointsPerGame": 3,
+            "goalsFor": 3,
+            "goalsAgainst": 0.25,
+            "xgFor": 2.362,
+            "xgAgainst": 0.73,
+            "shotsFor": 15.88,
+            "shotsAgainst": 8.78,
+            "shotsOnTargetFor": 6.48,
+            "shotsOnTargetAgainst": 2.75,
+            "possession": 54.5,
+            "cleanSheetRate": 0.75,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.25,
+            "over25Rate": 0.5,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.25
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.75,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.25,
+            "over25Rate": 0.5,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.25
+          }
+        },
+        "news": {
+          "articleCount": 9,
+          "sourceDiversity": 2,
+          "sentiment": -0.08,
+          "injury": 0.12,
+          "tacticalFit": 0.51,
+          "lineupClarity": 0.4722,
+          "rotationRisk": 0.2578,
+          "impact": 0.0187,
+          "confidence": 0.8316,
+          "topSignals": [
+            "availability risk"
+          ]
+        },
+        "market": {
+          "pressure": 0.0665,
+          "confidence": 0.9,
+          "consensusOdds": 1.48,
+          "consensusImpliedProbability": 0.6757,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 7,
+          "topScorers": [
+            {
+              "playerName": "Messi",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Almada",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Álvarez",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Di María",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Fernández",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.551
+        },
+        "reasons": [
+          "20-match form 3 PPG, xG 2.362-0.73",
+          "recent form improving",
+          "9 news item(s), news impact 0.0187",
+          "market intelligence 0% movement, consensus 1.48 across 8 bookie(s)",
+          "7 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Algeria",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": -0.0637,
+        "dataConfidence": 0.8397,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 2.5,
+          "goalsFor": 2.9,
+          "goalsAgainst": 0.4,
+          "xgFor": 2.499,
+          "xgAgainst": 0.838,
+          "shotsFor": 16.42,
+          "shotsAgainst": 9.24,
+          "shotsOnTargetFor": 6.35,
+          "shotsOnTargetAgainst": 2.95,
+          "possession": 54.9,
+          "formMomentum": -0.4068,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 2,
+            "goalsFor": 1.333,
+            "goalsAgainst": 0.667,
+            "xgFor": 1.51,
+            "xgAgainst": 1.03,
+            "shotsFor": 12.13,
+            "shotsAgainst": 10.07,
+            "shotsOnTargetFor": 4.23,
+            "shotsOnTargetAgainst": 3.3,
+            "possession": 51.7,
+            "cleanSheetRate": 0.667,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.333,
+            "over25Rate": 0.333,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.333
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 2.5,
+            "goalsFor": 2.9,
+            "goalsAgainst": 0.4,
+            "xgFor": 2.499,
+            "xgAgainst": 0.838,
+            "shotsFor": 16.42,
+            "shotsAgainst": 9.24,
+            "shotsOnTargetFor": 6.35,
+            "shotsOnTargetAgainst": 2.95,
+            "possession": 54.9,
+            "cleanSheetRate": 0.7,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.3,
+            "over25Rate": 0.7,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.3
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.7,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.3,
+            "over25Rate": 0.7,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.3
+          }
+        },
+        "news": {
+          "articleCount": 2,
+          "sourceDiversity": 1,
+          "sentiment": 0.06,
+          "injury": 0.09,
+          "tacticalFit": 0.675,
+          "lineupClarity": 0.57,
+          "rotationRisk": 0.205,
+          "impact": 0.1395,
+          "confidence": 0.7316,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": -0.0378,
+          "confidence": 0.9,
+          "consensusOdds": 4.719,
+          "consensusImpliedProbability": 0.2119,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 21,
+          "topScorers": [
+            {
+              "playerName": "Gouiri",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "Aouar",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Amoura",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Bensebaini",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Hadjam",
+              "goals": 2,
+              "matchesSampled": 2
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 2.5 PPG, xG 2.499-0.838",
+          "recent form cooling",
+          "2 news item(s), news impact 0.1395",
+          "market intelligence 0% movement, consensus 4.719 across 8 bookie(s)",
+          "21 scorer record(s), top scorer signal 0.28"
+        ]
+      },
+      {
+        "team": "Austria",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": -0.0597,
+        "dataConfidence": 0.8395,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 2.2,
+          "goalsFor": 2.3,
+          "goalsAgainst": 0.5,
+          "xgFor": 1.851,
+          "xgAgainst": 0.91,
+          "shotsFor": 13.63,
+          "shotsAgainst": 9.55,
+          "shotsOnTargetFor": 5.14,
+          "shotsOnTargetAgainst": 3.1,
+          "possession": 52.6,
+          "formMomentum": -0.1954,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 2,
+            "goalsFor": 0.667,
+            "goalsAgainst": 0.333,
+            "xgFor": 1.03,
+            "xgAgainst": 0.79,
+            "shotsFor": 10.07,
+            "shotsAgainst": 9.03,
+            "shotsOnTargetFor": 3.33,
+            "shotsOnTargetAgainst": 2.87,
+            "possession": 50.8,
+            "cleanSheetRate": 0.667,
+            "failedToScoreRate": 0.333,
+            "bttsRate": 0,
+            "over25Rate": 0,
+            "scoringGameRate": 0.667,
+            "concedeGameRate": 0.333
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 2.2,
+            "goalsFor": 2.3,
+            "goalsAgainst": 0.5,
+            "xgFor": 1.851,
+            "xgAgainst": 0.91,
+            "shotsFor": 13.63,
+            "shotsAgainst": 9.55,
+            "shotsOnTargetFor": 5.14,
+            "shotsOnTargetAgainst": 3.1,
+            "possession": 52.6,
+            "cleanSheetRate": 0.5,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.3,
+            "over25Rate": 0.3,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.5
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.5,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.3,
+            "over25Rate": 0.3,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.5
+          }
+        },
+        "news": {
+          "articleCount": 2,
+          "sourceDiversity": 1,
+          "sentiment": -0.2,
+          "injury": 0.18,
+          "tacticalFit": 0.585,
+          "lineupClarity": 0.45,
+          "rotationRisk": 0.23,
+          "impact": -0.0493,
+          "confidence": 0.7316,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": -0.0234,
+          "confidence": 0.9,
+          "consensusOdds": 3.621,
+          "consensusImpliedProbability": 0.2762,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 11,
+          "topScorers": [
+            {
+              "playerName": "Gregoritsch",
+              "goals": 9,
+              "matchesSampled": 9
+            },
+            {
+              "playerName": "Sabitzer",
+              "goals": 9,
+              "matchesSampled": 9
+            },
+            {
+              "playerName": "Baumgartner",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Laimer",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Posch",
+              "goals": 3,
+              "matchesSampled": 3
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 2.2 PPG, xG 1.851-0.91",
+          "recent form cooling",
+          "2 news item(s), news impact -0.0493",
+          "market intelligence 0% movement, consensus 3.621 across 8 bookie(s)",
+          "11 scorer record(s), top scorer signal 0.28"
+        ]
+      },
+      {
+        "team": "Jordan",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.2966,
+        "dataConfidence": 0.8367,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.1,
+          "goalsFor": 1.4,
+          "goalsAgainst": 1.8,
+          "xgFor": 1.558,
+          "xgAgainst": 1.846,
+          "shotsFor": 12.34,
+          "shotsAgainst": 13.58,
+          "shotsOnTargetFor": 4.32,
+          "shotsOnTargetAgainst": 4.84,
+          "possession": 49.2,
+          "formMomentum": 0.55,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 2,
+            "goalsFor": 2,
+            "goalsAgainst": 0.667,
+            "xgFor": 1.99,
+            "xgAgainst": 1.03,
+            "shotsFor": 14.2,
+            "shotsAgainst": 10.07,
+            "shotsOnTargetFor": 5.13,
+            "shotsOnTargetAgainst": 3.3,
+            "possession": 53.3,
+            "cleanSheetRate": 0.667,
+            "failedToScoreRate": 0.333,
+            "bttsRate": 0,
+            "over25Rate": 0.667,
+            "scoringGameRate": 0.667,
+            "concedeGameRate": 0.333
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.1,
+            "goalsFor": 1.4,
+            "goalsAgainst": 1.8,
+            "xgFor": 1.558,
+            "xgAgainst": 1.846,
+            "shotsFor": 12.34,
+            "shotsAgainst": 13.58,
+            "shotsOnTargetFor": 4.32,
+            "shotsOnTargetAgainst": 4.84,
+            "possession": 49.2,
+            "cleanSheetRate": 0.3,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.5,
+            "over25Rate": 0.6,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.7
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.3,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.5,
+            "over25Rate": 0.6,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.7
+          }
+        },
+        "news": {
+          "articleCount": 2,
+          "sourceDiversity": 2,
+          "sentiment": 0,
+          "injury": 0,
+          "tacticalFit": 0.54,
+          "lineupClarity": 0.45,
+          "rotationRisk": 0.18,
+          "impact": 0.108,
+          "confidence": 0.8316,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": -0.0543,
+          "confidence": 0.9,
+          "consensusOdds": 7.219,
+          "consensusImpliedProbability": 0.1385,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 16,
+          "topScorers": [
+            {
+              "playerName": "Al-Naimat",
+              "goals": 7,
+              "matchesSampled": 7
+            },
+            {
+              "playerName": "Al-Taamari",
+              "goals": 6,
+              "matchesSampled": 6
+            },
+            {
+              "playerName": "Olwan",
+              "goals": 5,
+              "matchesSampled": 5
+            },
+            {
+              "playerName": "Faisal",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Abu Zrayq",
+              "goals": 2,
+              "matchesSampled": 2
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 1.1 PPG, xG 1.558-1.846",
+          "recent form improving",
+          "2 news item(s), news impact 0.108",
+          "market intelligence 0% movement, consensus 7.219 across 8 bookie(s)",
+          "16 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Portugal",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.0237,
+        "dataConfidence": 0.8387,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.9,
+          "goalsFor": 2.3,
+          "goalsAgainst": 0.8,
+          "xgFor": 1.923,
+          "xgAgainst": 1.126,
+          "shotsFor": 13.94,
+          "shotsAgainst": 10.48,
+          "shotsOnTargetFor": 5.27,
+          "shotsOnTargetAgainst": 3.49,
+          "possession": 52.1,
+          "formMomentum": -0.1564,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 1.667,
+            "goalsFor": 1,
+            "goalsAgainst": 0.333,
+            "xgFor": 1.27,
+            "xgAgainst": 0.79,
+            "shotsFor": 11.1,
+            "shotsAgainst": 9.03,
+            "shotsOnTargetFor": 3.77,
+            "shotsOnTargetAgainst": 2.87,
+            "possession": 51.7,
+            "cleanSheetRate": 0.667,
+            "failedToScoreRate": 0.333,
+            "bttsRate": 0.333,
+            "over25Rate": 0,
+            "scoringGameRate": 0.667,
+            "concedeGameRate": 0.333
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.9,
+            "goalsFor": 2.3,
+            "goalsAgainst": 0.8,
+            "xgFor": 1.923,
+            "xgAgainst": 1.126,
+            "shotsFor": 13.94,
+            "shotsAgainst": 10.48,
+            "shotsOnTargetFor": 5.27,
+            "shotsOnTargetAgainst": 3.49,
+            "possession": 52.1,
+            "cleanSheetRate": 0.5,
+            "failedToScoreRate": 0.3,
+            "bttsRate": 0.4,
+            "over25Rate": 0.4,
+            "scoringGameRate": 0.7,
+            "concedeGameRate": 0.5
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.5,
+            "failedToScoreRate": 0.3,
+            "bttsRate": 0.4,
+            "over25Rate": 0.4,
+            "scoringGameRate": 0.7,
+            "concedeGameRate": 0.5
+          }
+        },
+        "news": {
+          "articleCount": 3,
+          "sourceDiversity": 1,
+          "sentiment": -0.1333,
+          "injury": 0.12,
+          "tacticalFit": 0.45,
+          "lineupClarity": 0.4233,
+          "rotationRisk": 0.28,
+          "impact": -0.0249,
+          "confidence": 0.7316,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": 0.0971,
+          "confidence": 0.9,
+          "consensusOdds": 1.233,
+          "consensusImpliedProbability": 0.8114,
+          "movement": 0,
+          "bookmakerCount": 6
+        },
+        "scorer": {
+          "trackedPlayers": 17,
+          "topScorers": [
+            {
+              "playerName": "Ronaldo",
+              "goals": 9,
+              "matchesSampled": 9
+            },
+            {
+              "playerName": "Félix",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "Fernandes",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Cancelo",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Silva",
+              "goals": 2,
+              "matchesSampled": 2
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 1.9 PPG, xG 1.923-1.126",
+          "recent form cooling",
+          "3 news item(s), news impact -0.0249",
+          "market intelligence 0% movement, consensus 1.233 across 6 bookie(s)",
+          "17 scorer record(s), top scorer signal 0.28"
+        ]
+      },
+      {
+        "team": "DR Congo",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.0447,
+        "dataConfidence": 0.8233,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.9,
+          "goalsFor": 1.2,
+          "goalsAgainst": 0.6,
+          "xgFor": 1.414,
+          "xgAgainst": 0.982,
+          "shotsFor": 11.72,
+          "shotsAgainst": 9.86,
+          "shotsOnTargetFor": 4.05,
+          "shotsOnTargetAgainst": 3.23,
+          "possession": 51.5,
+          "formMomentum": -0.0249,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 1.833,
+            "goalsFor": 1.5,
+            "goalsAgainst": 0.833,
+            "xgFor": 1.63,
+            "xgAgainst": 1.15,
+            "shotsFor": 12.65,
+            "shotsAgainst": 10.58,
+            "shotsOnTargetFor": 4.47,
+            "shotsOnTargetAgainst": 3.57,
+            "possession": 51.7,
+            "cleanSheetRate": 0.167,
+            "failedToScoreRate": 0.167,
+            "bttsRate": 0.667,
+            "over25Rate": 0.333,
+            "scoringGameRate": 0.833,
+            "concedeGameRate": 0.833
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.9,
+            "goalsFor": 1.2,
+            "goalsAgainst": 0.6,
+            "xgFor": 1.414,
+            "xgAgainst": 0.982,
+            "shotsFor": 11.72,
+            "shotsAgainst": 9.86,
+            "shotsOnTargetFor": 4.05,
+            "shotsOnTargetAgainst": 3.23,
+            "possession": 51.5,
+            "cleanSheetRate": 0.5,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.3,
+            "over25Rate": 0.2,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.5
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.5,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.3,
+            "over25Rate": 0.2,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.5
+          }
+        },
+        "news": {
+          "articleCount": 1,
+          "sourceDiversity": 1,
+          "sentiment": 0,
+          "injury": 0,
+          "tacticalFit": 0.45,
+          "lineupClarity": 0.45,
+          "rotationRisk": 0.18,
+          "impact": 0.0954,
+          "confidence": 0.7316,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": -0.0628,
+          "confidence": 0.88,
+          "consensusOdds": 9.917,
+          "consensusImpliedProbability": 0.1008,
+          "movement": 0,
+          "bookmakerCount": 6
+        },
+        "scorer": {
+          "trackedPlayers": 12,
+          "topScorers": [
+            {
+              "playerName": "Wissa",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "Mayele",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Bongonda",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Mbemba",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Banza",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.724
+        },
+        "reasons": [
+          "20-match form 1.9 PPG, xG 1.414-0.982",
+          "1 news item(s), news impact 0.0954",
+          "market intelligence 0% movement, consensus 9.917 across 6 bookie(s)",
+          "12 scorer record(s), top scorer signal 0.28"
+        ]
+      },
+      {
+        "team": "England",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.0773,
+        "dataConfidence": 0.8611,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 2.2,
+          "goalsFor": 1.3,
+          "goalsAgainst": 0.35,
+          "xgFor": 1.486,
+          "xgAgainst": 0.802,
+          "shotsFor": 12.03,
+          "shotsAgainst": 9.08,
+          "shotsOnTargetFor": 4.19,
+          "shotsOnTargetAgainst": 2.89,
+          "possession": 52.4,
+          "formMomentum": -0.1587,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 2,
+            "goalsFor": 0.667,
+            "goalsAgainst": 0.333,
+            "xgFor": 1.03,
+            "xgAgainst": 0.79,
+            "shotsFor": 10.07,
+            "shotsAgainst": 9.03,
+            "shotsOnTargetFor": 3.33,
+            "shotsOnTargetAgainst": 2.87,
+            "possession": 50.8,
+            "cleanSheetRate": 0.667,
+            "failedToScoreRate": 0.333,
+            "bttsRate": 0,
+            "over25Rate": 0,
+            "scoringGameRate": 0.667,
+            "concedeGameRate": 0.333
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 2.2,
+            "goalsFor": 1.3,
+            "goalsAgainst": 0.35,
+            "xgFor": 1.486,
+            "xgAgainst": 0.802,
+            "shotsFor": 12.03,
+            "shotsAgainst": 9.08,
+            "shotsOnTargetFor": 4.19,
+            "shotsOnTargetAgainst": 2.89,
+            "possession": 52.4,
+            "cleanSheetRate": 0.65,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.15,
+            "over25Rate": 0.25,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.35
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.65,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.15,
+            "over25Rate": 0.25,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.35
+          }
+        },
+        "news": {
+          "articleCount": 32,
+          "sourceDiversity": 2,
+          "sentiment": -0.005,
+          "injury": 0.0675,
+          "tacticalFit": 0.4978,
+          "lineupClarity": 0.49,
+          "rotationRisk": 0.23,
+          "impact": 0.0768,
+          "confidence": 0.8316,
+          "topSignals": [
+            "availability risk",
+            "lineup/tactical clue",
+            "positive availability",
+            "style clue"
+          ]
+        },
+        "market": {
+          "pressure": 0.0646,
+          "confidence": 0.9,
+          "consensusOdds": 1.499,
+          "consensusImpliedProbability": 0.6672,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 22,
+          "topScorers": [
+            {
+              "playerName": "Kane",
+              "goals": 9,
+              "matchesSampled": 9
+            },
+            {
+              "playerName": "Alexander-Arnold",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Palmer",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Rice",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Saka",
+              "goals": 2,
+              "matchesSampled": 2
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 2.2 PPG, xG 1.486-0.802",
+          "recent form cooling",
+          "32 news item(s), news impact 0.0768",
+          "market intelligence 0% movement, consensus 1.499 across 8 bookie(s)",
+          "22 scorer record(s), top scorer signal 0.28"
+        ]
+      },
+      {
+        "team": "Croatia",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": -0.124,
+        "dataConfidence": 0.8307,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 2.2,
+          "goalsFor": 2.2,
+          "goalsAgainst": 1,
+          "xgFor": 2.134,
+          "xgAgainst": 1.27,
+          "shotsFor": 14.82,
+          "shotsAgainst": 11.1,
+          "shotsOnTargetFor": 5.4,
+          "shotsOnTargetAgainst": 3.77,
+          "possession": 52.6,
+          "formMomentum": -0.55,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 1,
+            "goalsFor": 1,
+            "goalsAgainst": 2,
+            "xgFor": 1.27,
+            "xgAgainst": 1.99,
+            "shotsFor": 11.1,
+            "shotsAgainst": 14.2,
+            "shotsOnTargetFor": 3.77,
+            "shotsOnTargetAgainst": 5.13,
+            "possession": 47.5,
+            "cleanSheetRate": 0,
+            "failedToScoreRate": 0.333,
+            "bttsRate": 0.667,
+            "over25Rate": 0.667,
+            "scoringGameRate": 0.667,
+            "concedeGameRate": 1
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 2.2,
+            "goalsFor": 2.2,
+            "goalsAgainst": 1,
+            "xgFor": 2.134,
+            "xgAgainst": 1.27,
+            "shotsFor": 14.82,
+            "shotsAgainst": 11.1,
+            "shotsOnTargetFor": 5.4,
+            "shotsOnTargetAgainst": 3.77,
+            "possession": 52.6,
+            "cleanSheetRate": 0.4,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.5,
+            "over25Rate": 0.7,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.6
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.4,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.5,
+            "over25Rate": 0.7,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.6
+          }
+        },
+        "news": {
+          "articleCount": 8,
+          "sourceDiversity": 2,
+          "sentiment": 0.08,
+          "injury": 0.09,
+          "tacticalFit": 0.5062,
+          "lineupClarity": 0.565,
+          "rotationRisk": 0.255,
+          "impact": 0.1193,
+          "confidence": 0.8316,
+          "topSignals": [
+            "availability risk",
+            "lineup/tactical clue",
+            "positive availability"
+          ]
+        },
+        "market": {
+          "pressure": -0.0129,
+          "confidence": 0.9,
+          "consensusOdds": 3.101,
+          "consensusImpliedProbability": 0.3225,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 10,
+          "topScorers": [
+            {
+              "playerName": "Budimir",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Gvardiol",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Majer",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Baturina",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Dalot",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.638
+        },
+        "reasons": [
+          "20-match form 2.2 PPG, xG 2.134-1.27",
+          "recent form cooling",
+          "8 news item(s), news impact 0.1193",
+          "market intelligence 0% movement, consensus 3.101 across 8 bookie(s)",
+          "10 scorer record(s), top scorer signal 0.28",
+          "memory currently leans negative"
+        ]
+      },
+      {
+        "team": "Ghana",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.0984,
+        "dataConfidence": 0.7504,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.1,
+          "goalsFor": 1.6,
+          "goalsAgainst": 1.6,
+          "xgFor": 1.702,
+          "xgAgainst": 1.702,
+          "shotsFor": 12.96,
+          "shotsAgainst": 12.96,
+          "shotsOnTargetFor": 4.59,
+          "shotsOnTargetAgainst": 4.58,
+          "possession": 49.8,
+          "formMomentum": 0.1111,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 1.333,
+            "goalsFor": 1,
+            "goalsAgainst": 1,
+            "xgFor": 1.27,
+            "xgAgainst": 1.27,
+            "shotsFor": 11.1,
+            "shotsAgainst": 11.1,
+            "shotsOnTargetFor": 3.77,
+            "shotsOnTargetAgainst": 3.8,
+            "possession": 50,
+            "cleanSheetRate": 0,
+            "failedToScoreRate": 0.333,
+            "bttsRate": 0.667,
+            "over25Rate": 0.333,
+            "scoringGameRate": 0.667,
+            "concedeGameRate": 1
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.1,
+            "goalsFor": 1.6,
+            "goalsAgainst": 1.6,
+            "xgFor": 1.702,
+            "xgAgainst": 1.702,
+            "shotsFor": 12.96,
+            "shotsAgainst": 12.96,
+            "shotsOnTargetFor": 4.59,
+            "shotsOnTargetAgainst": 4.58,
+            "possession": 49.8,
+            "cleanSheetRate": 0.2,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.6,
+            "over25Rate": 0.7,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.8
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.2,
+            "failedToScoreRate": 0.2,
+            "bttsRate": 0.6,
+            "over25Rate": 0.7,
+            "scoringGameRate": 0.8,
+            "concedeGameRate": 0.8
+          }
+        },
+        "news": {
+          "articleCount": 0,
+          "sourceDiversity": 0,
+          "sentiment": 0,
+          "injury": 0,
+          "tacticalFit": 0.45,
+          "lineupClarity": 0.45,
+          "rotationRisk": 0.18,
+          "impact": 0,
+          "confidence": 0.32,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": -0.044,
+          "confidence": 0.9,
+          "consensusOdds": 5.427,
+          "consensusImpliedProbability": 0.1843,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 15,
+          "topScorers": [
+            {
+              "playerName": "J. Ayew",
+              "goals": 5,
+              "matchesSampled": 5
+            },
+            {
+              "playerName": "Nuamah",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Afriyie",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Agyekum",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Fatawu",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.775
+        },
+        "reasons": [
+          "20-match form 1.1 PPG, xG 1.702-1.702",
+          "recent form improving",
+          "market intelligence 0% movement, consensus 5.427 across 8 bookie(s)",
+          "15 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Panama",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.2849,
+        "dataConfidence": 0.7514,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.7,
+          "goalsFor": 1.6,
+          "goalsAgainst": 1.8,
+          "xgFor": 1.702,
+          "xgAgainst": 1.779,
+          "shotsFor": 12.96,
+          "shotsAgainst": 13.32,
+          "shotsOnTargetFor": 4.58,
+          "shotsOnTargetAgainst": 4.85,
+          "possession": 49.9,
+          "formMomentum": 0.55,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 3,
+            "goalsFor": 2.667,
+            "goalsAgainst": 0.667,
+            "xgFor": 2.47,
+            "xgAgainst": 1.03,
+            "shotsFor": 16.27,
+            "shotsAgainst": 10.07,
+            "shotsOnTargetFor": 6,
+            "shotsOnTargetAgainst": 3.3,
+            "possession": 55,
+            "cleanSheetRate": 0.667,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.333,
+            "over25Rate": 0.333,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.333
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.7,
+            "goalsFor": 1.6,
+            "goalsAgainst": 1.8,
+            "xgFor": 1.702,
+            "xgAgainst": 1.779,
+            "shotsFor": 12.96,
+            "shotsAgainst": 13.32,
+            "shotsOnTargetFor": 4.58,
+            "shotsOnTargetAgainst": 4.85,
+            "possession": 49.9,
+            "cleanSheetRate": 0.3,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.6,
+            "over25Rate": 0.4,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.7
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.3,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.6,
+            "over25Rate": 0.4,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.7
+          }
+        },
+        "news": {
+          "articleCount": 0,
+          "sourceDiversity": 0,
+          "sentiment": 0,
+          "injury": 0,
+          "tacticalFit": 0.45,
+          "lineupClarity": 0.45,
+          "rotationRisk": 0.18,
+          "impact": 0,
+          "confidence": 0.32,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": -0.0442,
+          "confidence": 0.9,
+          "consensusOdds": 5.443,
+          "consensusImpliedProbability": 0.1837,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 20,
+          "topScorers": [
+            {
+              "playerName": "Bárcenas",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Díaz",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Ayarza",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Barría",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Guerrero",
+              "goals": 2,
+              "matchesSampled": 2
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 1.7 PPG, xG 1.702-1.779",
+          "recent form improving",
+          "market intelligence 0% movement, consensus 5.443 across 8 bookie(s)",
+          "20 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Uzbekistan",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": -0.136,
+        "dataConfidence": 0.7514,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.9,
+          "goalsFor": 1.85,
+          "goalsAgainst": 0.9,
+          "xgFor": 1.882,
+          "xgAgainst": 1.198,
+          "shotsFor": 13.74,
+          "shotsAgainst": 10.79,
+          "shotsOnTargetFor": 4.92,
+          "shotsOnTargetAgainst": 3.63,
+          "possession": 52.2,
+          "formMomentum": -0.55,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 1,
+            "goalsFor": 1.333,
+            "goalsAgainst": 1.667,
+            "xgFor": 1.51,
+            "xgAgainst": 1.75,
+            "shotsFor": 12.13,
+            "shotsAgainst": 13.17,
+            "shotsOnTargetFor": 4.23,
+            "shotsOnTargetAgainst": 4.67,
+            "possession": 49.2,
+            "cleanSheetRate": 0,
+            "failedToScoreRate": 0.333,
+            "bttsRate": 0.667,
+            "over25Rate": 0.667,
+            "scoringGameRate": 0.667,
+            "concedeGameRate": 1
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.9,
+            "goalsFor": 1.85,
+            "goalsAgainst": 0.9,
+            "xgFor": 1.882,
+            "xgAgainst": 1.198,
+            "shotsFor": 13.74,
+            "shotsAgainst": 10.79,
+            "shotsOnTargetFor": 4.92,
+            "shotsOnTargetAgainst": 3.63,
+            "possession": 52.2,
+            "cleanSheetRate": 0.4,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.5,
+            "over25Rate": 0.55,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.6
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.4,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.5,
+            "over25Rate": 0.55,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.6
+          }
+        },
+        "news": {
+          "articleCount": 0,
+          "sourceDiversity": 0,
+          "sentiment": 0,
+          "injury": 0,
+          "tacticalFit": 0.45,
+          "lineupClarity": 0.45,
+          "rotationRisk": 0.18,
+          "impact": 0,
+          "confidence": 0.32,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": -0.0649,
+          "confidence": 0.9,
+          "consensusOdds": 10.927,
+          "consensusImpliedProbability": 0.0915,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 15,
+          "topScorers": [
+            {
+              "playerName": "Shomurodov",
+              "goals": 4,
+              "matchesSampled": 4
+            },
+            {
+              "playerName": "Erkinov",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Fayzullaev",
+              "goals": 3,
+              "matchesSampled": 3
+            },
+            {
+              "playerName": "Sergeev",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Shukurov",
+              "goals": 2,
+              "matchesSampled": 2
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.78
+        },
+        "reasons": [
+          "20-match form 1.9 PPG, xG 1.882-1.198",
+          "recent form cooling",
+          "market intelligence 0% movement, consensus 10.927 across 8 bookie(s)",
+          "15 scorer record(s), top scorer signal 0.28",
+          "memory currently leans negative"
+        ]
+      },
+      {
+        "team": "Colombia",
+        "updatedAt": "2026-06-09T01:26:06.889Z",
+        "learnedEdge": 0.1295,
+        "dataConfidence": 0.72,
+        "form": {
+          "matchCount": 20,
+          "pointsPerGame": 1.7,
+          "goalsFor": 1.9,
+          "goalsAgainst": 1.1,
+          "xgFor": 1.918,
+          "xgAgainst": 1.342,
+          "shotsFor": 13.89,
+          "shotsAgainst": 11.41,
+          "shotsOnTargetFor": 4.99,
+          "shotsOnTargetAgainst": 3.9,
+          "possession": 51.6,
+          "formMomentum": 0.1977,
+          "confidence": 0.9,
+          "shortForm": {
+            "matchCount": 6,
+            "pointsPerGame": 2,
+            "goalsFor": 2.667,
+            "goalsAgainst": 1.333,
+            "xgFor": 2.47,
+            "xgAgainst": 1.51,
+            "shotsFor": 16.27,
+            "shotsAgainst": 12.13,
+            "shotsOnTargetFor": 6.03,
+            "shotsOnTargetAgainst": 4.23,
+            "possession": 52.7,
+            "cleanSheetRate": 0.333,
+            "failedToScoreRate": 0,
+            "bttsRate": 0.667,
+            "over25Rate": 0.667,
+            "scoringGameRate": 1,
+            "concedeGameRate": 0.667
+          },
+          "longForm": {
+            "matchCount": 20,
+            "pointsPerGame": 1.7,
+            "goalsFor": 1.9,
+            "goalsAgainst": 1.1,
+            "xgFor": 1.918,
+            "xgAgainst": 1.342,
+            "shotsFor": 13.89,
+            "shotsAgainst": 11.41,
+            "shotsOnTargetFor": 4.99,
+            "shotsOnTargetAgainst": 3.9,
+            "possession": 51.6,
+            "cleanSheetRate": 0.5,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.5,
+            "over25Rate": 0.6,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.5
+          },
+          "marketAngles": {
+            "cleanSheetRate": 0.5,
+            "failedToScoreRate": 0.1,
+            "bttsRate": 0.5,
+            "over25Rate": 0.6,
+            "scoringGameRate": 0.9,
+            "concedeGameRate": 0.5
+          }
+        },
+        "news": {
+          "articleCount": 0,
+          "sourceDiversity": 0,
+          "sentiment": 0,
+          "injury": 0,
+          "tacticalFit": 0.45,
+          "lineupClarity": 0.45,
+          "rotationRisk": 0.18,
+          "impact": 0,
+          "confidence": 0.32,
+          "topSignals": []
+        },
+        "market": {
+          "pressure": 0.0754,
+          "confidence": 0.9,
+          "consensusOdds": 1.399,
+          "consensusImpliedProbability": 0.7149,
+          "movement": 0,
+          "bookmakerCount": 8
+        },
+        "scorer": {
+          "trackedPlayers": 14,
+          "topScorers": [
+            {
+              "playerName": "Carrascal",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "J. Arias",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Lerma",
+              "goals": 2,
+              "matchesSampled": 2
+            },
+            {
+              "playerName": "Arias",
+              "goals": 1,
+              "matchesSampled": 1
+            },
+            {
+              "playerName": "Borré",
+              "goals": 1,
+              "matchesSampled": 1
+            }
+          ],
+          "threat": 0.28,
+          "confidence": 0.726
+        },
+        "reasons": [
+          "20-match form 1.7 PPG, xG 1.918-1.342",
+          "recent form improving",
+          "market intelligence 0% movement, consensus 1.399 across 8 bookie(s)",
+          "14 scorer record(s), top scorer signal 0.28",
+          "memory currently leans positive"
+        ]
+      }
+    ]
+  },
+  {
     "id": "intel_run_405d8baf",
     "createdAt": "2026-06-08T22:07:50.498Z",
     "teamCount": 48,
