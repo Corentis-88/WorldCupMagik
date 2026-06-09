@@ -251,7 +251,8 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
   const ratingEdge = clamp(Number(homeStats.rating || 1700) - Number(awayStats.rating || 1700), -180, 180);
   const formEdge = clamp((Number(homeStats.recentPointsPerGame || 1.4) - Number(awayStats.recentPointsPerGame || 1.4)) * 42, -75, 75);
   const xgEdge = clamp(((Number(homeStats.xgFor || 1.3) - Number(awayStats.xgAgainst || 1.2)) - (Number(awayStats.xgFor || 1.3) - Number(homeStats.xgAgainst || 1.2))) * 48, -90, 90);
-  const styleEdge = clamp(styleMatchupEdge(homeStats, awayStats), -65, 65);
+  const styleDetails = styleMatchupDetails(homeStats, awayStats);
+  const styleEdge = clamp(styleDetails.edge, -65, 65);
   const newsEdge = clamp((homeNews.netImpact - awayNews.netImpact) * 95, -55, 55);
   const memoryEdge = clamp((Number(homeStats.learnedEdge || 0) - Number(awayStats.learnedEdge || 0)) * 88, -45, 45);
   const marketMemoryEdge = clamp((Number(homeStats.memoryOddsPressure || 0) - Number(awayStats.memoryOddsPressure || 0)) * 28, -22, 22);
@@ -293,6 +294,22 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
       formEdge: round(formEdge, 2),
       xgEdge: round(xgEdge, 2),
       styleEdge: round(styleEdge, 2),
+      buildUpEdge: round(styleDetails.buildUpEdge, 2),
+      pressBuildEdge: round(styleDetails.pressBuildEdge, 2),
+      homeManager: homeStats.manager || "",
+      awayManager: awayStats.manager || "",
+      homeLikelyFormation: homeStats.tacticalProfile?.likelyFormation || "",
+      awayLikelyFormation: awayStats.tacticalProfile?.likelyFormation || "",
+      homeStyleOfPlay: homeStats.tacticalProfile?.styleOfPlay || "",
+      awayStyleOfPlay: awayStats.tacticalProfile?.styleOfPlay || "",
+      homeStyleTags: homeStats.tacticalProfile?.styleTags || [],
+      awayStyleTags: awayStats.tacticalProfile?.styleTags || [],
+      homePassCompletion: nullableComponent(homeStats.passCompletion || homeStats.passing?.completion),
+      awayPassCompletion: nullableComponent(awayStats.passCompletion || awayStats.passing?.completion),
+      homePassesAttempted: nullableComponent(homeStats.passesAttempted || homeStats.passing?.attempted),
+      awayPassesAttempted: nullableComponent(awayStats.passesAttempted || awayStats.passing?.attempted),
+      homeTopScorers: (homeStats.topScorers || homeStats.scorerSummary || []).slice(0, 5).map((scorer) => scorer.playerName || scorer.name).filter(Boolean),
+      awayTopScorers: (awayStats.topScorers || awayStats.scorerSummary || []).slice(0, 5).map((scorer) => scorer.playerName || scorer.name).filter(Boolean),
       newsEdge: round(newsEdge, 2),
       memoryEdge: round(memoryEdge, 2),
       independentResultEdge: round(independentResultEdge, 2),
@@ -689,13 +706,39 @@ function neutralNews() {
   };
 }
 
-function styleMatchupEdge(homeStats, awayStats) {
+function styleMatchupDetails(homeStats, awayStats) {
   const homePressVsAwayBuild = (Number(homeStats.highPressIndex || 55) - Number(awayStats.possession || 50)) * 0.6;
   const awayPressVsHomeBuild = (Number(awayStats.highPressIndex || 55) - Number(homeStats.possession || 50)) * 0.6;
+  const pressBuildEdge = homePressVsAwayBuild - awayPressVsHomeBuild;
   const setPieceEdge = (Number(homeStats.setPieceThreat || 55) - Number(awayStats.setPieceThreat || 55)) * 0.35;
   const transitionEdge = (Number(homeStats.transitionThreat || 55) - Number(awayStats.transitionThreat || 55)) * 0.32;
   const keeperEdge = (Number(homeStats.keeperForm || 55) - Number(awayStats.keeperForm || 55)) * 0.4;
-  return homePressVsAwayBuild - awayPressVsHomeBuild + setPieceEdge + transitionEdge + keeperEdge;
+  const homeBuildQuality = buildUpQuality(homeStats);
+  const awayBuildQuality = buildUpQuality(awayStats);
+  const buildUpEdge = (homeBuildQuality - awayBuildQuality) * 0.42;
+
+  return {
+    edge: pressBuildEdge + setPieceEdge + transitionEdge + keeperEdge + buildUpEdge,
+    pressBuildEdge,
+    buildUpEdge
+  };
+}
+
+function buildUpQuality(stats) {
+  const passCompletion = Number(stats.passCompletion || stats.passing?.completion || 0.815);
+  const passesAttempted = Number(stats.passesAttempted || stats.passing?.attempted || 420);
+  const possession = Number(stats.possession || 50);
+  const styleTags = stats.tacticalProfile?.styleTags || [];
+  const patientBuild = styleTags.some((tag) => /possession|build/i.test(tag)) ? 2.5 : 0;
+
+  return clamp(
+    ((passCompletion - 0.8) * 95)
+    + ((passesAttempted - 420) * 0.035)
+    + ((possession - 50) * 0.18)
+    + patientBuild,
+    -18,
+    22
+  );
 }
 
 function defensiveDrawLift(homeStats, awayStats) {
@@ -889,12 +932,20 @@ function buildLegThesis({ fixture, market, outcome, edge, independentEdge, rawMo
   const heatText = Number(model.components.heatConfidence || 0) > 0.18
     ? `Heat layer: ${model.components.heatLocation || "venue"} ${model.components.heatClimateBand || "weather"} stress ${round(Number(model.components.heatStress || 0) * 100, 1)}%, xG adjustment ${model.components.heatExpectedGoalsAdjustment}, result edge ${model.components.heatEdge}; climate/history/depth differential ${model.components.combinedHeatDifferential}.`
     : "";
+  const tacticalText = model.components.homeLikelyFormation || model.components.awayLikelyFormation
+    ? `Tactical memory: ${fixture.homeTeam} ${model.components.homeLikelyFormation || "shape unknown"} (${model.components.homeStyleOfPlay || "style mixed"}) vs ${fixture.awayTeam} ${model.components.awayLikelyFormation || "shape unknown"} (${model.components.awayStyleOfPlay || "style mixed"}); build-up edge ${model.components.buildUpEdge}.`
+    : "";
+  const scorerText = (model.components.homeTopScorers?.length || model.components.awayTopScorers?.length)
+    ? `Scorer memory: ${fixture.homeTeam} top recent scorers ${formatNames(model.components.homeTopScorers)}; ${fixture.awayTeam} top recent scorers ${formatNames(model.components.awayTopScorers)}.`
+    : "";
   const notes = [
     `${selectionLabel({ fixture, market, outcome })} is priced at ${odds.decimalOdds}; raw AI probability ${round(rawModelProbability * 100, 1)}%, market-adjusted probability ${round(modelProbability * 100, 1)}%, market view ${round(marketImpliedProbability * 100, 1)}%.`,
     `Independent edge ${round(independentEdge * 100, 2)}%, final value edge ${round(edge * 100, 2)}%, backed by ${independentEvidence.count} non-market signal(s): ${independentEvidence.signals.join(", ") || "none yet"}.`,
     `Fixture model: expected goals ${model.components.expectedGoals} (${model.components.homeExpectedGoals}-${model.components.awayExpectedGoals}), rating edge ${model.components.ratingEdge}, style edge ${model.components.styleEdge}, memory edge ${model.components.memoryEdge}.`,
     `Odds intelligence is capped: market result edge ${model.components.marketResultEdge}, consensus probability ${model.components.marketHomeWinProbability ?? model.components.marketAwayWinProbability ?? "n/a"} where available.`,
     `News impact is ${model.components.homeNewsImpact} for ${fixture.homeTeam} and ${model.components.awayNewsImpact} for ${fixture.awayTeam}.`,
+    tacticalText,
+    scorerText,
     heatText,
     `Market focus: ${marketFocus.reasons.join("; ") || "general value check"}.`,
     learning.reasons.length ? `Outcome learning: ${learning.reasons.join("; ")}.` : "Outcome learning: waiting for enough settled bets before adjusting.",
@@ -916,6 +967,11 @@ function selectionLabel({ fixture, market, outcome }) {
   };
 
   return `${fixture.homeTeam} vs ${fixture.awayTeam}: ${marketLabels[market] || `${market} ${outcome}`}`;
+}
+
+function formatNames(names = []) {
+  const cleaned = names.filter(Boolean).slice(0, 3);
+  return cleaned.length ? cleaned.join(", ") : "not enough scorer data yet";
 }
 
 function outcomeKey(fixtureId, market, outcome) {

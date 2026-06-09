@@ -33,7 +33,18 @@ test("20-match intelligence keeps long form and short momentum separate", () => 
   const longHistory = Array.from({ length: 20 }, (_item, index) => {
     const day = String(25 - index).padStart(2, "0");
     const latestGoodRun = index < 6;
-    return match(`2026-05-${day}T19:00:00.000Z`, "Japan", `Opponent ${index}`, latestGoodRun ? 2 : 0, latestGoodRun ? 0 : 1);
+    return match(
+      `2026-05-${day}T19:00:00.000Z`,
+      "Japan",
+      `Opponent ${index}`,
+      latestGoodRun ? 2 : 0,
+      latestGoodRun ? 0 : 1,
+      {
+        homeScorers: latestGoodRun
+          ? [{ name: "Riku Tanaka", goals: 1 }, { name: "Daichi Sato", goals: 1 }]
+          : []
+      }
+    );
   });
   const form = deriveTeamForm(longHistory, "Japan", now);
 
@@ -42,6 +53,50 @@ test("20-match intelligence keeps long form and short momentum separate", () => 
   assert.equal(form.shortForm.matchCount, 6);
   assert.ok(form.shortForm.pointsPerGame > form.longForm.pointsPerGame);
   assert.ok(form.formMomentum > 0);
+  assert.ok(form.topScorers.some((scorer) => scorer.playerName === "Riku Tanaka"));
+  assert.equal(form.recentMatches.length, 20);
+  assert.ok(form.passesAttempted > 400);
+  assert.ok(form.passCompletion > 0.78);
+});
+
+test("enriched team stats expose a consistent 20-match tactical and scorer profile", () => {
+  const now = new Date("2026-06-06T10:00:00.000Z");
+  const longHistory = Array.from({ length: 20 }, (_item, index) => {
+    const day = String(25 - index).padStart(2, "0");
+    return match(`2026-05-${day}T19:00:00.000Z`, "Japan", `Opponent ${index}`, 2, index % 3 === 0 ? 1 : 0, {
+      homeScorers: [
+        { name: "Riku Tanaka", goals: 1 },
+        { name: index % 2 === 0 ? "Daichi Sato" : "Kento Mori", goals: 1 }
+      ],
+      homePossession: 59,
+      awayPossession: 41,
+      homePassesAttempted: 560,
+      awayPassesAttempted: 345,
+      homeCompletedPasses: 482,
+      awayCompletedPasses: 268,
+      homePassCompletion: 0.861,
+      awayPassCompletion: 0.777
+    });
+  });
+  const enriched = buildTeamStatsWithIntelligence({
+    baseStats: [{
+      ...teamStats("Japan", 1710),
+      manager: "Sample Manager",
+      tacticalProfile: null
+    }],
+    matchHistory: longHistory,
+    teamIntelligence: [],
+    now
+  });
+  const japan = enriched[0];
+
+  assert.equal(japan.longForm.matchCount, 20);
+  assert.equal(japan.intelligenceCoverage.equalSchemaForAllTeams, true);
+  assert.equal(japan.manager, "Sample Manager");
+  assert.ok(japan.topScorers[0].goals >= 20);
+  assert.equal(japan.topScorers[0].playerName, "Riku Tanaka");
+  assert.ok(japan.passing.attempted > 470);
+  assert.ok(japan.tacticalProfile.likelyFormation.includes("4-3-3"));
 });
 
 test("builds odds movement summaries from repeated snapshots", () => {
@@ -151,7 +206,10 @@ function teamStats(team, rating) {
   };
 }
 
-function match(date, homeTeam, awayTeam, homeGoals, awayGoals) {
+function match(date, homeTeam, awayTeam, homeGoals, awayGoals, overrides = {}) {
+  const homeShots = 10 + homeGoals;
+  const awayShots = 9 + awayGoals;
+
   return {
     id: `${date}-${homeTeam}-${awayTeam}`,
     date,
@@ -161,10 +219,21 @@ function match(date, homeTeam, awayTeam, homeGoals, awayGoals) {
     awayGoals,
     homeXg: homeGoals + 0.4,
     awayXg: awayGoals + 0.35,
-    homeShots: 10 + homeGoals,
-    awayShots: 9 + awayGoals,
+    homeShots,
+    awayShots,
+    homeShotsOnTarget: 3 + homeGoals,
+    awayShotsOnTarget: 2 + awayGoals,
     homePossession: 53,
     awayPossession: 47,
-    sourceType: "public-web"
+    homePassesAttempted: 455,
+    awayPassesAttempted: 388,
+    homeCompletedPasses: 375,
+    awayCompletedPasses: 304,
+    homePassCompletion: 0.824,
+    awayPassCompletion: 0.784,
+    homeScorers: homeGoals ? [{ name: `${homeTeam} scorer`, goals: homeGoals }] : [],
+    awayScorers: awayGoals ? [{ name: `${awayTeam} scorer`, goals: awayGoals }] : [],
+    sourceType: "public-web",
+    ...overrides
   };
 }

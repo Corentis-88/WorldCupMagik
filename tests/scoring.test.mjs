@@ -118,6 +118,46 @@ test("heat layer is capped as a small result and goals adjustment", () => {
   assert.ok(model.components.heatStress <= 1);
 });
 
+test("fixture model exposes passing and tactical intelligence in the style edge", () => {
+  const fixtureRecord = fixture("esp-cro", "Spain", "Croatia", "2026-06-20T20:00:00.000Z");
+  const model = fixtureModel({
+    fixture: fixtureRecord,
+    homeStats: {
+      ...stats("Spain", 1840, 2.2, 1.8, 0.8, 63),
+      manager: "Luis de la Fuente",
+      passesAttempted: 610,
+      completedPasses: 540,
+      passCompletion: 0.885,
+      tacticalProfile: {
+        likelyFormation: "4-3-3",
+        styleOfPlay: "possession-led build-up with high territory",
+        styleTags: ["possession", "patient build-up"]
+      },
+      topScorers: [{ playerName: "Spain Forward", goals: 6 }]
+    },
+    awayStats: {
+      ...stats("Croatia", 1715, 1.4, 1.1, 1.2, 50),
+      manager: "Croatia Coach",
+      passesAttempted: 420,
+      completedPasses: 334,
+      passCompletion: 0.795,
+      tacticalProfile: {
+        likelyFormation: "4-2-3-1",
+        styleOfPlay: "balanced mid-block with mixed build-up",
+        styleTags: ["balanced"]
+      },
+      topScorers: [{ playerName: "Croatia Forward", goals: 4 }]
+    },
+    newsByTeam: new Map()
+  });
+
+  assert.equal(model.components.homeManager, "Luis de la Fuente");
+  assert.equal(model.components.homeLikelyFormation, "4-3-3");
+  assert.ok(model.components.homeTopScorers.includes("Spain Forward"));
+  assert.ok(model.components.buildUpEdge > 0);
+  assert.ok(model.components.homePassCompletion > model.components.awayPassCompletion);
+});
+
 function fixture(id, homeTeam, awayTeam, date) {
   return {
     id,
@@ -236,6 +276,9 @@ function stats(team, rating, ppg, xgFor, xgAgainst, possession) {
     keeperForm: 54,
     statsCompleteness: 0.78,
     intelligenceConfidence: 0.72,
-    sourceMatchCount: 3
+    sourceMatchCount: 3,
+    passesAttempted: 450,
+    completedPasses: 365,
+    passCompletion: 0.811
   };
 }

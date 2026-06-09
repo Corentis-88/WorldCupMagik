@@ -86,9 +86,24 @@ export function buildTeamStatsWithIntelligence({ baseStats, matchHistory = [], t
     const formPossession = form.matchCount ? form.possession : Number(team.possession || 50);
     const formShotsFor = form.matchCount ? form.shotsFor : Number(team.shotsFor || 10);
     const formShotsAgainst = form.matchCount ? form.shotsAgainst : Number(team.shotsAgainst || 10);
+    const formPassesAttempted = form.matchCount ? form.passesAttempted : Number(team.passesAttempted || 420);
+    const formCompletedPasses = form.matchCount ? form.completedPasses : Number(team.completedPasses || 342);
+    const formPassCompletion = form.matchCount ? form.passCompletion : Number(team.passCompletion || 0.815);
+    const basePassesAttempted = team.passesAttempted || team.passing?.attempted || (form.matchCount ? formPassesAttempted : 420);
+    const baseCompletedPasses = team.completedPasses || team.passing?.completed || (form.matchCount ? formCompletedPasses : 342);
+    const basePassCompletion = team.passCompletion || team.passing?.completion || (form.matchCount ? formPassCompletion : 0.815);
     const memoryScore = Number(memory.learnedEdge || 0);
     const memoryConfidence = Number(memory.dataConfidence || 0);
     const longForm = form.longForm || form;
+    const topScorers = form.topScorers?.length ? form.topScorers : team.topScorers || team.scorerSummary || [];
+    const tacticalProfile = team.tacticalProfile || inferMemoryTacticalProfile({
+      possession: formPossession,
+      shotsFor: formShotsFor,
+      shotsAgainst: formShotsAgainst,
+      xgFor: formXgFor,
+      xgAgainst: formXgAgainst,
+      passCompletion: formPassCompletion
+    });
 
     return {
       ...team,
@@ -98,6 +113,9 @@ export function buildTeamStatsWithIntelligence({ baseStats, matchHistory = [], t
       shotsFor: round(blend(Number(team.shotsFor || 10), formShotsFor, form.matchCount ? 0.28 : 0), 2),
       shotsAgainst: round(blend(Number(team.shotsAgainst || 10), formShotsAgainst, form.matchCount ? 0.28 : 0), 2),
       possession: round(blend(Number(team.possession || 50), formPossession, form.matchCount ? 0.2 : 0), 1),
+      passesAttempted: round(blend(Number(basePassesAttempted), formPassesAttempted, form.matchCount ? 0.24 : 0), 1),
+      completedPasses: round(blend(Number(baseCompletedPasses), formCompletedPasses, form.matchCount ? 0.24 : 0), 1),
+      passCompletion: round(blend(Number(basePassCompletion), formPassCompletion, form.matchCount ? 0.2 : 0), 3),
       rating: round(Number(team.rating || 1700) + form.formMomentum * 22 + memoryScore * 24, 1),
       statsCompleteness: round(clamp(mean([
         team.statsCompleteness || 0.5,
@@ -106,6 +124,23 @@ export function buildTeamStatsWithIntelligence({ baseStats, matchHistory = [], t
       ]), 0, 1), 3),
       formMemory: form,
       longForm,
+      topScorers,
+      scorerSummary: topScorers,
+      manager: team.manager || memory.manager || "",
+      captain: team.captain || "",
+      tacticalProfile,
+      passing: {
+        attempted: round(blend(Number(basePassesAttempted), formPassesAttempted, form.matchCount ? 0.24 : 0), 1),
+        completed: round(blend(Number(baseCompletedPasses), formCompletedPasses, form.matchCount ? 0.24 : 0), 1),
+        completion: round(blend(Number(basePassCompletion), formPassCompletion, form.matchCount ? 0.2 : 0), 3),
+        source: team.passing?.source || "score-and-possession-derived estimate"
+      },
+      intelligenceCoverage: {
+        ...(team.intelligenceCoverage || {}),
+        matchWindowAvailable: form.matchCount || team.sourceMatchCount || 0,
+        topScorerCount: topScorers.length,
+        equalSchemaForAllTeams: true
+      },
       learnedEdge: round(memoryScore, 4),
       intelligenceConfidence: round(memoryConfidence, 4),
       memoryNewsImpact: round(Number(memory.news?.impact || 0), 4),
@@ -134,6 +169,8 @@ export function buildScanIntelligence({ fixtures, oddsRecords, allOddsSnapshots,
     const previous = previousByTeam.get(team);
     const previousEdge = Number(previous?.learnedEdge || 0);
     const stats = statsByTeam.get(team) || {};
+    const topScorers = stats.topScorers || stats.scorerSummary || scorer.topScorers || [];
+    const tacticalProfile = stats.tacticalProfile || inferMemoryTacticalProfile(stats);
     const learnedEdge = clamp(
       previousEdge * 0.48
       + form.formMomentum * 0.18
@@ -162,6 +199,21 @@ export function buildScanIntelligence({ fixtures, oddsRecords, allOddsSnapshots,
       news,
       market,
       scorer,
+      manager: stats.manager || previous?.manager || "",
+      tacticalProfile,
+      topScorers,
+      passing: stats.passing || {
+        attempted: stats.passesAttempted || form.passesAttempted || 420,
+        completed: stats.completedPasses || form.completedPasses || 342,
+        completion: stats.passCompletion || form.passCompletion || 0.815,
+        source: "score-and-possession-derived estimate"
+      },
+      intelligenceCoverage: stats.intelligenceCoverage || {
+        matchWindowTarget: 20,
+        matchWindowAvailable: form.matchCount,
+        topScorerCount: topScorers.length,
+        equalSchemaForAllTeams: true
+      },
       reasons
     };
 
@@ -221,6 +273,10 @@ export function deriveTeamForm(matchHistory, team, now = new Date(), limit = 20)
       shotsOnTargetFor: 3.5,
       shotsOnTargetAgainst: 3.5,
       possession: 50,
+      passesAttempted: 420,
+      completedPasses: 342,
+      passCompletion: 0.815,
+      topScorers: [],
       formMomentum: 0,
       confidence: 0.35,
       marketAngles: {
@@ -248,7 +304,11 @@ export function deriveTeamForm(matchHistory, team, now = new Date(), limit = 20)
       shotsAgainst: Number(isHome ? match.awayShots : match.homeShots),
       shotsOnTargetFor: Number(isHome ? match.homeShotsOnTarget : match.awayShotsOnTarget),
       shotsOnTargetAgainst: Number(isHome ? match.awayShotsOnTarget : match.homeShotsOnTarget),
-      possession: Number(isHome ? match.homePossession : match.awayPossession)
+      possession: Number(isHome ? match.homePossession : match.awayPossession),
+      passesAttempted: Number(isHome ? match.homePassesAttempted : match.awayPassesAttempted) || 420,
+      completedPasses: Number(isHome ? match.homeCompletedPasses : match.awayCompletedPasses) || 342,
+      passCompletion: Number(isHome ? match.homePassCompletion : match.awayPassCompletion) || 0.815,
+      scorers: isHome ? match.homeScorers || [] : match.awayScorers || []
     };
   });
   const latestSix = rows.slice(0, 6);
@@ -260,6 +320,7 @@ export function deriveTeamForm(matchHistory, team, now = new Date(), limit = 20)
   const formMomentum = clamp(((latestPpg - priorPpg) / 3) + (latestXgDelta - priorXgDelta) * 0.1, -0.55, 0.55);
   const longForm = summarizeFormRows(rows);
   const shortForm = summarizeFormRows(latestSix);
+  const topScorers = summarizeFormScorers(rows);
 
   return {
     matchCount: rows.length,
@@ -273,6 +334,10 @@ export function deriveTeamForm(matchHistory, team, now = new Date(), limit = 20)
     shotsOnTargetFor: longForm.shotsOnTargetFor,
     shotsOnTargetAgainst: longForm.shotsOnTargetAgainst,
     possession: longForm.possession,
+    passesAttempted: longForm.passesAttempted,
+    completedPasses: longForm.completedPasses,
+    passCompletion: longForm.passCompletion,
+    topScorers,
     formMomentum: round(formMomentum, 4),
     confidence: round(clamp(0.4 + rows.length * 0.025, 0, 0.9), 3),
     shortForm: {
@@ -287,7 +352,21 @@ export function deriveTeamForm(matchHistory, team, now = new Date(), limit = 20)
       over25Rate: longForm.over25Rate,
       scoringGameRate: longForm.scoringGameRate,
       concedeGameRate: longForm.concedeGameRate
-    }
+    },
+    recentMatches: rows.map((row) => ({
+      points: row.points,
+      goalsFor: row.goalsFor,
+      goalsAgainst: row.goalsAgainst,
+      xgFor: row.xgFor,
+      xgAgainst: row.xgAgainst,
+      shotsFor: row.shotsFor,
+      shotsOnTargetFor: row.shotsOnTargetFor,
+      possession: row.possession,
+      passesAttempted: row.passesAttempted,
+      completedPasses: row.completedPasses,
+      passCompletion: row.passCompletion,
+      scorers: row.scorers
+    }))
   };
 }
 
@@ -302,7 +381,10 @@ function summarizeFormRows(rows) {
     shotsAgainst: 10,
     shotsOnTargetFor: 3.5,
     shotsOnTargetAgainst: 3.5,
-    possession: 50
+    possession: 50,
+    passesAttempted: 420,
+    completedPasses: 342,
+    passCompletion: 0.815
   }];
 
   return {
@@ -317,12 +399,91 @@ function summarizeFormRows(rows) {
     shotsOnTargetFor: round(mean(safeRows.map((row) => row.shotsOnTargetFor)), 2),
     shotsOnTargetAgainst: round(mean(safeRows.map((row) => row.shotsOnTargetAgainst)), 2),
     possession: round(mean(safeRows.map((row) => row.possession)), 1),
+    passesAttempted: round(mean(safeRows.map((row) => row.passesAttempted)), 1),
+    completedPasses: round(mean(safeRows.map((row) => row.completedPasses)), 1),
+    passCompletion: round(mean(safeRows.map((row) => row.passCompletion)), 3),
     cleanSheetRate: round(safeRows.filter((row) => row.goalsAgainst === 0).length / safeRows.length, 3),
     failedToScoreRate: round(safeRows.filter((row) => row.goalsFor === 0).length / safeRows.length, 3),
     bttsRate: round(safeRows.filter((row) => row.goalsFor > 0 && row.goalsAgainst > 0).length / safeRows.length, 3),
     over25Rate: round(safeRows.filter((row) => row.goalsFor + row.goalsAgainst > 2.5).length / safeRows.length, 3),
     scoringGameRate: round(safeRows.filter((row) => row.goalsFor > 0).length / safeRows.length, 3),
     concedeGameRate: round(safeRows.filter((row) => row.goalsAgainst > 0).length / safeRows.length, 3)
+  };
+}
+
+function summarizeFormScorers(rows) {
+  const byPlayer = new Map();
+
+  for (const row of rows) {
+    for (const scorer of row.scorers || []) {
+      const key = normalizeName(scorer.name);
+      if (!key) {
+        continue;
+      }
+
+      const existing = byPlayer.get(key) || { playerName: scorer.name, goals: 0, scoringMatches: 0 };
+      existing.goals += Number(scorer.goals || 1);
+      existing.scoringMatches += 1;
+      byPlayer.set(key, existing);
+    }
+  }
+
+  return [...byPlayer.values()]
+    .sort((left, right) => Number(right.goals || 0) - Number(left.goals || 0) || normalizeName(left.playerName).localeCompare(normalizeName(right.playerName)))
+    .slice(0, 8)
+    .map((record) => ({
+      playerName: record.playerName,
+      goals: record.goals,
+      scoringMatches: record.scoringMatches,
+      goalsPerTwentyTeamMatches: round(record.goals / Math.max(1, rows.length) * 20, 3)
+    }));
+}
+
+function inferMemoryTacticalProfile(stats = {}) {
+  const possession = Number(stats.possession || 50);
+  const shotsFor = Number(stats.shotsFor || 10);
+  const shotsAgainst = Number(stats.shotsAgainst || 10);
+  const xgFor = Number(stats.xgFor || 1.25);
+  const xgAgainst = Number(stats.xgAgainst || 1.25);
+  const passCompletion = Number(stats.passCompletion || stats.passing?.completion || 0.815);
+  const chanceVolume = shotsFor - shotsAgainst;
+  const xgBalance = xgFor - xgAgainst;
+  const tags = [];
+  let likelyFormation = "4-2-3-1 / 4-3-3";
+  let styleOfPlay = "balanced mid-block with mixed build-up";
+
+  if (possession >= 57 && passCompletion >= 0.82) {
+    likelyFormation = "4-3-3 / 4-2-3-1";
+    styleOfPlay = "possession-led build-up with high territory";
+    tags.push("possession", "territory", "patient build-up");
+  } else if (possession <= 47 && xgBalance >= 0) {
+    likelyFormation = "4-4-2 / 4-2-3-1";
+    styleOfPlay = "direct transition and counter-attacking";
+    tags.push("transition", "direct", "counter");
+  } else if (chanceVolume >= 2) {
+    likelyFormation = "4-3-3 / 4-2-3-1";
+    styleOfPlay = "front-foot pressing and fast regains";
+    tags.push("pressing", "front-foot", "regains");
+  } else if (xgAgainst <= 1.05 && possession < 52) {
+    likelyFormation = "5-4-1 / 4-4-2";
+    styleOfPlay = "compact defensive block with selective counters";
+    tags.push("compact", "defensive", "counter");
+  } else {
+    tags.push("balanced", "mixed build-up");
+  }
+
+  if (xgBalance >= 0.35) {
+    tags.push("positive xG balance");
+  }
+
+  return {
+    likelyFormation,
+    styleOfPlay,
+    styleTags: [...new Set(tags)].slice(0, 6),
+    possessionTier: possession >= 57 ? "high" : possession <= 47 ? "low" : "medium",
+    pressingTier: chanceVolume >= 2 ? "high" : chanceVolume <= -2 ? "low" : "medium",
+    transitionTier: possession <= 47 && xgBalance >= 0 ? "high" : "medium",
+    source: "derived from 20-match public result sample and score-derived event estimates"
   };
 }
 
