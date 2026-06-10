@@ -7,6 +7,8 @@ import { fetchHeatSnapshots } from "./providers/weather-provider.mjs";
 import { buildBetRecommendations } from "./portfolio-builder.mjs";
 import { rankBookmakerOffers } from "./offer-engine.mjs";
 import { buildDailyReport } from "./reporting.mjs";
+import { loadOutcomeLearning } from "./intelligence-memory.mjs";
+import { settleStoredBetOutcomes } from "./outcome-settler.mjs";
 import { buildLegCandidates } from "./scoring.mjs";
 import { isoDate, makeId, normalizeName } from "./utils.mjs";
 
@@ -114,6 +116,8 @@ export async function runSnapshotCycle({ state, now = new Date(), forceSnapshot 
 
 export async function runAnalysisCycle({ state, now = new Date() } = {}) {
   const engineState = state || await loadEngineState();
+  const outcomeSettlement = await settleStoredBetOutcomes({ now });
+  const outcomeLearning = await loadOutcomeLearning();
   const legCandidates = buildLegCandidates({
     fixtures: engineState.fixtures,
     oddsSnapshots: engineState.oddsSnapshots,
@@ -121,8 +125,10 @@ export async function runAnalysisCycle({ state, now = new Date() } = {}) {
     teamStats: engineState.teamStats,
     policy: engineState.policy,
     now,
+    outcomeLearning,
     heatSnapshots: engineState.heatSnapshots,
-    squadDepthRecords: engineState.squadDepthRecords
+    squadDepthRecords: engineState.squadDepthRecords,
+    playerStats: engineState.playerStats
   });
   const recommendations = buildBetRecommendations(legCandidates, engineState.policy);
   const offerRanking = rankBookmakerOffers(engineState.bookmakerOffers, engineState.policy, now);
@@ -132,6 +138,8 @@ export async function runAnalysisCycle({ state, now = new Date() } = {}) {
     teamStatsCount: engineState.teamStats.length,
     legCandidateCount: legCandidates.length,
     eligibleLegCount: recommendations.eligibleLegCount,
+    outcomeRecordsSettled: outcomeSettlement.insertedCount,
+    outcomeLearningCount: outcomeLearning.outcomeCount,
     recommendationCounts: {
       doubles: recommendations.doubles.length,
       trixies: recommendations.trixies.length,

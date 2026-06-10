@@ -99,6 +99,7 @@ function selectMostLikelyLegsForTarget({ fixtureSeparatedLegs, eligibleLegs, leg
   addMostLikelyLegs({ selected, selectedIds, pool: fixtureSeparatedLegs, legCount, mode: "strict" });
   addMostLikelyLegs({ selected, selectedIds, pool: fixtureSeparatedLegs, legCount, mode: "balanced" });
   addMostLikelyLegs({ selected, selectedIds, pool: eligibleLegs, legCount, mode: "fallback" });
+  addLeastCorrelatedLegs({ selected, selectedIds, pool: fixtureSeparatedLegs, legCount });
 
   if (!selected.length) {
     return [];
@@ -141,6 +142,31 @@ function addMostLikelyLegs({ selected, selectedIds, pool, legCount, mode }) {
 
     selected.push(leg);
     selectedIds.add(leg.id);
+  }
+}
+
+function addLeastCorrelatedLegs({ selected, selectedIds, pool, legCount }) {
+  while (selected.length < legCount) {
+    const candidates = pool
+      .filter((leg) => !selectedIds.has(leg.id))
+      .filter((leg) => !selected.some((item) => fixtureKeyForLeg(item) === fixtureKeyForLeg(leg)))
+      .filter((leg) => likelyWinProbability(leg, { legCount }) >= minimumSurvivalProbability(legCount) - 0.04)
+      .filter((leg) => !(legCount >= 6 && fragileBttsHistory(leg)))
+      .map((leg) => {
+        const correlation = portfolioCorrelationProfile([...selected, leg], { legCount, appetite: 0 });
+        return {
+          leg,
+          fit: likelyLegScore(leg, legCount) - correlation.penalty * 4.8
+        };
+      })
+      .sort((left, right) => right.fit - left.fit);
+
+    if (!candidates.length) {
+      break;
+    }
+
+    selected.push(candidates[0].leg);
+    selectedIds.add(candidates[0].leg.id);
   }
 }
 
@@ -216,6 +242,7 @@ function scoreMostLikelyCombo(legs, target, rank) {
   const reusedSignalCount = legs.filter((leg) => leg.reusedSignal).length;
   const shortWindowFallback = uniqueFixtureCount < legs.length || reusedSignalCount > 0;
   const survivalPressure = survivalPressureForLegCount(target.legCount);
+  const correlation = portfolioCorrelationProfile(legs, { legCount: target.legCount, appetite: 0 });
   const score = clamp(
     combinedProbability * (120 + survivalPressure * 240)
     + averageSurvivalProbability * (42 + survivalPressure * 42)
@@ -226,6 +253,7 @@ function scoreMostLikelyCombo(legs, target, rank) {
     + clamp(averageNonMarketSignalCount / 4, 0, 1) * (8 - survivalPressure * 4)
     - bttsClusterPenalty(bttsLegCount, target.legCount)
     - marketClusterPenalty(legs, target.legCount)
+    - correlation.penalty
     - fragileLegCount * 4.5,
     0,
     100
@@ -241,6 +269,9 @@ function scoreMostLikelyCombo(legs, target, rank) {
     legs: legs.map((leg) => ({
       id: leg.id,
       fixtureId: leg.fixtureId,
+      fixtureDate: leg.fixtureDate,
+      homeTeam: leg.homeTeam,
+      awayTeam: leg.awayTeam,
       market: leg.market,
       playerName: leg.playerName,
       selectionLabel: leg.selectionLabel,
@@ -284,6 +315,11 @@ function scoreMostLikelyCombo(legs, target, rank) {
         awayBttsRate: leg.components?.awayBttsRate,
         homeOver25Rate: leg.components?.homeOver25Rate,
         awayOver25Rate: leg.components?.awayOver25Rate,
+        confidenceReasons: leg.components?.confidenceReasons,
+        starterLikelihood: leg.components?.starterLikelihood,
+        projectedMinutes: leg.components?.projectedMinutes,
+        scorerGoalsPerTwentyTeamMatches: leg.components?.scorerGoalsPerTwentyTeamMatches,
+        scorerConfidence: leg.components?.scorerConfidence,
         survivalPenalty: round(mostLikelyPortfolioPenalty(leg, target.legCount), 4)
       },
       shortWindowFallback: Boolean(leg.shortWindowFallback),
@@ -307,12 +343,17 @@ function scoreMostLikelyCombo(legs, target, rank) {
     shortWindowFallback,
     uniqueFixtureCount,
     reusedSignalCount,
+    correlationPenalty: round(correlation.penalty, 2),
+    correlationReasons: correlation.reasons,
+    marketFamilyMix: correlation.familyCounts,
+    repeatedTeamCount: correlation.repeatedTeamCount,
+    sameDateCluster: correlation.sameDateCluster,
     hardBlocks: [],
-    thesis: buildMostLikelyThesis({ target, legs, combinedDecimalOdds, combinedProbability, averageSurvivalProbability, averageConfidence, averageIndependentEdge, averageNonMarketSignalCount, bttsLegCount, fragileLegCount, marketClusterScore: marketClusterPenalty(legs, target.legCount), shortWindowFallback, uniqueFixtureCount, reusedSignalCount })
+    thesis: buildMostLikelyThesis({ target, legs, combinedDecimalOdds, combinedProbability, averageSurvivalProbability, averageConfidence, averageIndependentEdge, averageNonMarketSignalCount, bttsLegCount, fragileLegCount, marketClusterScore: marketClusterPenalty(legs, target.legCount), correlation, shortWindowFallback, uniqueFixtureCount, reusedSignalCount })
   };
 }
 
-function buildMostLikelyThesis({ target, legs, combinedDecimalOdds, combinedProbability, averageSurvivalProbability, averageConfidence, averageIndependentEdge, averageNonMarketSignalCount, bttsLegCount, fragileLegCount, marketClusterScore, shortWindowFallback, uniqueFixtureCount, reusedSignalCount }) {
+function buildMostLikelyThesis({ target, legs, combinedDecimalOdds, combinedProbability, averageSurvivalProbability, averageConfidence, averageIndependentEdge, averageNonMarketSignalCount, bttsLegCount, fragileLegCount, marketClusterScore, correlation, shortWindowFallback, uniqueFixtureCount, reusedSignalCount }) {
   const selections = legs.map((leg) => leg.selectionLabel).join(" | ");
   const fallbackText = shortWindowFallback
     ? ` Short-window fallback used ${uniqueFixtureCount} fixture(s) and ${legs.length} signal(s) so Picks of the Day stay populated. ${reusedSignalCount ? `${reusedSignalCount} strongest signal(s) were repeated.` : "Some same-game signals were included."}`
@@ -320,14 +361,15 @@ function buildMostLikelyThesis({ target, legs, combinedDecimalOdds, combinedProb
   const heatLegs = legs.filter((leg) => Number(leg.components?.heatConfidence || 0) > 0.18 && Number(leg.components?.heatStress || 0) > 0.2);
   const heatText = heatLegs.length ? ` Heat layer active on ${heatLegs.length} leg(s) as a capped weather, climate-history, and squad-depth nudge.` : "";
   const portfolioText = target.legCount >= 4
-    ? ` Long-slip survival controls active: average leg survival ${round(averageSurvivalProbability * 100, 1)}%, estimated slip chance ${round(combinedProbability * 100, 2)}%, ${bttsLegCount} BTTS leg(s), ${fragileLegCount} fragile-value leg(s), market-mix pressure ${round(marketClusterScore, 1)}.`
+    ? ` Long-slip survival controls active: average leg survival ${round(averageSurvivalProbability * 100, 1)}%, estimated slip chance ${round(combinedProbability * 100, 2)}%, ${bttsLegCount} BTTS leg(s), ${fragileLegCount} fragile-value leg(s), market-mix pressure ${round(marketClusterScore, 1)}, correlation pressure ${round(correlation?.penalty || 0, 1)}.`
     : ` Estimated win chance ${round(combinedProbability * 100, 1)}%.`;
+  const correlationText = correlation?.reasons?.length ? ` Correlation layer trimmed: ${correlation.reasons.join("; ")}.` : "";
 
-  return `${target.label} chosen by the Pick of the Day engine, ignoring the risk slider and prioritising estimated win chance, data confidence, fixture separation, and only then price edge. Combined odds ${round(combinedDecimalOdds, 2)}, average data confidence ${round(averageConfidence * 100, 1)}%, independent edge ${round(averageIndependentEdge * 100, 2)}%, non-market signals ${round(averageNonMarketSignalCount, 1)} per leg.${portfolioText}${heatText}${fallbackText} Legs: ${selections}.`;
+  return `${target.label} chosen by the Pick of the Day engine, ignoring the risk slider and prioritising estimated win chance, data confidence, fixture separation, and only then price edge. Combined odds ${round(combinedDecimalOdds, 2)}, average data confidence ${round(averageConfidence * 100, 1)}%, independent edge ${round(averageIndependentEdge * 100, 2)}%, non-market signals ${round(averageNonMarketSignalCount, 1)} per leg.${portfolioText}${correlationText}${heatText}${fallbackText} Legs: ${selections}.`;
 }
 
 function mostLikelyLegPassesPortfolioShape(leg, selected, legCount, mode) {
-  if (mode === "fallback" || legCount < 4) {
+  if (legCount < 4) {
     return true;
   }
 
@@ -338,6 +380,13 @@ function mostLikelyLegPassesPortfolioShape(leg, selected, legCount, mode) {
     + (mostLikelyPortfolioPenalty(leg, legCount) >= 0.035 ? 1 : 0);
   const sameMarketCount = selected.filter((item) => item.market === leg.market).length + 1;
   const totalGoalsCount = selected.filter(isTotalGoalsLeg).length + (isTotalGoalsLeg(leg) ? 1 : 0);
+  const correlation = portfolioCorrelationProfile([...selected, leg], { legCount, appetite: 0 });
+
+  if (mode === "fallback") {
+    return probability >= minimumSurvivalProbability(legCount) - 0.04
+      && !(legCount >= 6 && fragileBttsHistory(leg))
+      && correlation.penalty <= maximumPortfolioCorrelationPenalty(legCount, "balanced");
+  }
 
   if (mode === "strict") {
     if (probability < minimumSurvivalProbability(legCount)) {
@@ -361,6 +410,9 @@ function mostLikelyLegPassesPortfolioShape(leg, selected, legCount, mode) {
     if (totalGoalsCount > maximumTotalGoalsLegs(legCount)) {
       return false;
     }
+    if (correlation.penalty > maximumPortfolioCorrelationPenalty(legCount, "strict")) {
+      return false;
+    }
   }
 
   if (mode === "balanced") {
@@ -377,6 +429,9 @@ function mostLikelyLegPassesPortfolioShape(leg, selected, legCount, mode) {
       return false;
     }
     if (totalGoalsCount > maximumTotalGoalsLegs(legCount) + 1) {
+      return false;
+    }
+    if (correlation.penalty > maximumPortfolioCorrelationPenalty(legCount, "balanced")) {
       return false;
     }
   }
@@ -538,6 +593,176 @@ function marketClusterPenalty(legs, legCount) {
   return penalty;
 }
 
+function portfolioCorrelationProfile(legs, { legCount = legs.length, appetite = 0 } = {}) {
+  if (legCount < 3) {
+    return emptyCorrelationProfile();
+  }
+
+  const familyCounts = countBy(legs, marketFamilyForLeg);
+  const teamCounts = countBy(legs.flatMap(teamsForLeg), (team) => team);
+  const dateCounts = countBy(legs.map((leg) => fixtureDateKey(leg)).filter(Boolean), (date) => date);
+  const heatLegCount = legs.filter((leg) => Number(leg.components?.heatStress || 0) >= 0.55 && Number(leg.components?.heatConfidence || 0) >= 0.3).length;
+  const scorerCount = legs.filter((leg) => leg.market === "anytime_scorer").length;
+  const reasons = [];
+  let penalty = 0;
+
+  for (const [family, count] of Object.entries(familyCounts)) {
+    const allowed = maximumMarketFamilyLegs(legCount, family, appetite);
+    const excess = Math.max(0, count - allowed);
+
+    if (excess) {
+      penalty += excess * (family === "goals" ? 4.7 : family === "scorer" ? 5.4 : 3.8);
+      reasons.push(`${count} ${family} legs`);
+    }
+  }
+
+  const repeatedTeamCount = Object.values(teamCounts).reduce((total, count) => total + Math.max(0, count - 1), 0);
+  const teamRepeatAllowance = legCount >= 8 ? 1 + Math.floor(appetite * 3) : legCount >= 6 ? 1 + Math.floor(appetite * 2) : Math.floor(appetite * 1.5);
+  const repeatedTeamExcess = Math.max(0, repeatedTeamCount - teamRepeatAllowance);
+
+  if (repeatedTeamExcess) {
+    penalty += repeatedTeamExcess * (legCount >= 8 ? 2.8 : 3.4);
+    reasons.push(`${repeatedTeamCount} repeated team exposures`);
+  }
+
+  const sameDateCluster = Math.max(0, ...Object.values(dateCounts));
+  const dateAllowance = legCount >= 8 ? 5 : legCount >= 6 ? 4 : 3;
+  const dateExcess = Math.max(0, sameDateCluster - dateAllowance);
+
+  if (dateExcess) {
+    penalty += dateExcess * 1.9;
+    reasons.push(`${sameDateCluster} legs on one matchday`);
+  }
+
+  const heatAllowance = legCount >= 8 ? 3 : legCount >= 6 ? 2 : 1;
+  const heatExcess = Math.max(0, heatLegCount - heatAllowance);
+
+  if (heatExcess) {
+    penalty += heatExcess * 1.8;
+    reasons.push(`${heatLegCount} heat-sensitive legs`);
+  }
+
+  const scorerAllowance = legCount >= 8 ? 2 : legCount >= 5 ? 1 : legCount;
+  const scorerExcess = Math.max(0, scorerCount - scorerAllowance);
+
+  if (scorerExcess) {
+    penalty += scorerExcess * 4.2;
+    reasons.push(`${scorerCount} scorer legs`);
+  }
+
+  const pressure = survivalPressureForLegCount(legCount);
+  const appetiteRelief = 1 - clamp(appetite, 0, 1) * 0.3;
+  const finalPenalty = penalty * (0.45 + pressure * 0.75) * appetiteRelief;
+
+  return {
+    penalty: round(finalPenalty, 3),
+    reasons,
+    familyCounts,
+    repeatedTeamCount,
+    sameDateCluster,
+    heatLegCount,
+    scorerCount
+  };
+}
+
+function emptyCorrelationProfile() {
+  return {
+    penalty: 0,
+    reasons: [],
+    familyCounts: {},
+    repeatedTeamCount: 0,
+    sameDateCluster: 0,
+    heatLegCount: 0,
+    scorerCount: 0
+  };
+}
+
+function maximumPortfolioCorrelationPenalty(legCount, mode) {
+  const strictBase = legCount >= 8 ? 7.2 : legCount >= 6 ? 6.4 : 5.2;
+  return mode === "balanced" ? strictBase + 2.5 : strictBase;
+}
+
+function maximumMarketFamilyLegs(legCount, family, appetite = 0) {
+  const relief = Math.floor(clamp(appetite, 0, 1) * 1.5);
+
+  if (family === "goals") {
+    if (legCount >= 8) {
+      return 5 + relief;
+    }
+    if (legCount >= 6) {
+      return 4 + relief;
+    }
+    return 3;
+  }
+
+  if (family === "scorer") {
+    if (legCount >= 8) {
+      return 2 + Math.floor(clamp(appetite, 0, 1));
+    }
+    if (legCount >= 5) {
+      return 1 + Math.floor(clamp(appetite, 0, 1));
+    }
+    return legCount;
+  }
+
+  if (legCount >= 8) {
+    return 5 + relief;
+  }
+  if (legCount >= 6) {
+    return 4 + relief;
+  }
+  return 3;
+}
+
+function marketFamilyForLeg(leg) {
+  if (isTotalGoalsLeg(leg) || leg.market === "both_teams_to_score") {
+    return "goals";
+  }
+
+  if (leg.market === "anytime_scorer") {
+    return "scorer";
+  }
+
+  if (leg.market === "match_winner" || leg.market === "draw_no_bet") {
+    return "result";
+  }
+
+  return leg.market || "other";
+}
+
+function teamsForLeg(leg) {
+  return [leg.homeTeam, leg.awayTeam]
+    .map(normalizeFixtureName)
+    .filter(Boolean);
+}
+
+function fixtureDateKey(leg) {
+  const value = leg.fixtureDate || leg.date;
+
+  if (!value) {
+    return "";
+  }
+
+  const date = new Date(value);
+  return Number.isFinite(date.getTime()) ? date.toISOString().slice(0, 10) : "";
+}
+
+function countBy(items, keyFn) {
+  const counts = {};
+
+  for (const item of items) {
+    const key = keyFn(item);
+
+    if (!key) {
+      continue;
+    }
+
+    counts[key] = (counts[key] || 0) + 1;
+  }
+
+  return counts;
+}
+
 function isBttsYesLeg(leg) {
   return leg.market === "both_teams_to_score" && String(leg.outcome || leg.selectionLabel || "").toLowerCase().includes("yes");
 }
@@ -673,6 +898,7 @@ export function scoreCombo(legs, type, policy) {
   const bttsLegCount = legs.filter(isBttsYesLeg).length;
   const fragileLegCount = legs.filter((leg) => riskPortfolioLegPenalty(leg, legs.length, appetite) >= 0.025).length;
   const preferred = preferredOddsRange(type, legs.length, policy);
+  const correlation = portfolioCorrelationProfile(legs, { legCount: legs.length, appetite });
 
   if (fixtureIds.size !== legs.length) {
     hardBlocks.push("same_fixture_correlation");
@@ -713,7 +939,7 @@ export function scoreCombo(legs, type, policy) {
     + oddsFit * 0.65;
   const survivalWeight = 1.08 - appetite * 0.42;
   const valueWeight = 0.72 + appetite * 0.54;
-  const portfolioPenalty = riskPortfolioPenalty({ legs, type, appetite, bttsLegCount, fragileLegCount });
+  const portfolioPenalty = riskPortfolioPenalty({ legs, type, appetite, bttsLegCount, fragileLegCount }) + correlation.penalty;
   const favouritePenalty = favouriteLegs.length * 4;
   const sizePenalty = type === "accumulator" ? Math.max(0, legs.length - 3) * 3 : 0;
   const score = clamp(22
@@ -734,6 +960,9 @@ export function scoreCombo(legs, type, policy) {
     legs: legs.map((leg) => ({
       id: leg.id,
       fixtureId: leg.fixtureId,
+      fixtureDate: leg.fixtureDate,
+      homeTeam: leg.homeTeam,
+      awayTeam: leg.awayTeam,
       market: leg.market,
       playerName: leg.playerName,
       selectionLabel: leg.selectionLabel,
@@ -778,6 +1007,11 @@ export function scoreCombo(legs, type, policy) {
         awayBttsRate: leg.components?.awayBttsRate,
         homeOver25Rate: leg.components?.homeOver25Rate,
         awayOver25Rate: leg.components?.awayOver25Rate,
+        confidenceReasons: leg.components?.confidenceReasons,
+        starterLikelihood: leg.components?.starterLikelihood,
+        projectedMinutes: leg.components?.projectedMinutes,
+        scorerGoalsPerTwentyTeamMatches: leg.components?.scorerGoalsPerTwentyTeamMatches,
+        scorerConfidence: leg.components?.scorerConfidence,
         survivalPenalty: round(riskPortfolioLegPenalty(leg, legs.length, appetite), 4)
       },
       thesis: leg.thesis
@@ -799,9 +1033,14 @@ export function scoreCombo(legs, type, policy) {
     marketConfirmedLegCount: marketConfirmedLegs.length,
     contrarianLegCount: contrarianLegs.length,
     favouriteLegCount: favouriteLegs.length,
+    correlationPenalty: round(correlation.penalty, 2),
+    correlationReasons: correlation.reasons,
+    marketFamilyMix: correlation.familyCounts,
+    repeatedTeamCount: correlation.repeatedTeamCount,
+    sameDateCluster: correlation.sameDateCluster,
     score: round(score, 2),
     hardBlocks,
-    thesis: buildComboThesis({ type, legs, combinedDecimalOdds, expectedValue, averageIndependentEdge, averageNonMarketSignalCount, riskLegs, favouriteLegs, survivalCombinedProbability, averageSurvivalProbability, bttsLegCount, fragileLegCount })
+    thesis: buildComboThesis({ type, legs, combinedDecimalOdds, expectedValue, averageIndependentEdge, averageNonMarketSignalCount, riskLegs, favouriteLegs, survivalCombinedProbability, averageSurvivalProbability, bttsLegCount, fragileLegCount, correlation })
   };
 }
 
@@ -951,7 +1190,7 @@ function oddsFitScore(value, min, max) {
   return 10 * (1 - Math.min(1, Math.abs(value - midpoint) / spread));
 }
 
-function buildComboThesis({ type, legs, combinedDecimalOdds, expectedValue, averageIndependentEdge, averageNonMarketSignalCount, riskLegs, favouriteLegs, survivalCombinedProbability, averageSurvivalProbability, bttsLegCount, fragileLegCount }) {
+function buildComboThesis({ type, legs, combinedDecimalOdds, expectedValue, averageIndependentEdge, averageNonMarketSignalCount, riskLegs, favouriteLegs, survivalCombinedProbability, averageSurvivalProbability, bttsLegCount, fragileLegCount, correlation }) {
   const selections = legs.map((leg) => leg.selectionLabel).join(" | ");
   const riskText = riskLegs.length
     ? `${riskLegs.length} calculated-risk/value leg(s) stop this from being a favourite-only ${type}.`
@@ -961,10 +1200,13 @@ function buildComboThesis({ type, legs, combinedDecimalOdds, expectedValue, aver
   const clusterText = legs.length >= 4
     ? `Long-slip controls: ${bttsLegCount} BTTS leg(s), ${fragileLegCount} fragile-value leg(s), so edge cannot outrank survivability.`
     : "Short-slip controls keep model chance ahead of price hunting.";
+  const correlationText = legs.length >= 3
+    ? `Correlation control: ${correlation?.reasons?.length ? correlation.reasons.join("; ") : "market families and team repeats look acceptable"}.`
+    : "";
   const heatLegs = legs.filter((leg) => Number(leg.components?.heatConfidence || 0) > 0.18 && Number(leg.components?.heatStress || 0) > 0.2);
   const heatText = heatLegs.length
     ? `Heat layer active on ${heatLegs.length} leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth.`
     : "Heat layer neutral or low impact on this slip.";
 
-  return `${survivalText} Expected value is ${round(expectedValue * 100, 2)}%, independent edge averages ${round(averageIndependentEdge * 100, 2)}%, and the model has ${round(averageNonMarketSignalCount, 1)} non-market signals per leg. ${clusterText} ${riskText} ${favouriteText} ${heatText} Legs: ${selections}.`;
+  return `${survivalText} Expected value is ${round(expectedValue * 100, 2)}%, independent edge averages ${round(averageIndependentEdge * 100, 2)}%, and the model has ${round(averageNonMarketSignalCount, 1)} non-market signals per leg. ${clusterText} ${correlationText} ${riskText} ${favouriteText} ${heatText} Legs: ${selections}.`;
 }

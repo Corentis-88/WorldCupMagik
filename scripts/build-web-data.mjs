@@ -186,6 +186,7 @@ const payload = {
   intelligence: {
     teamCount: intelligenceState.teamIntelligence.length,
     outcomeLearningCount: outcomeLearning.outcomeCount,
+    outcomeCalibration: summarizeOutcomeCalibration(outcomeLearning.calibration),
     teams: intelligenceState.teamIntelligence
   },
   profiles
@@ -305,6 +306,11 @@ function summarizeBet(bet) {
     riskLegCount: bet.riskLegCount,
     bttsLegCount: bet.bttsLegCount,
     fragileLegCount: bet.fragileLegCount,
+    correlationPenalty: bet.correlationPenalty,
+    correlationReasons: bet.correlationReasons,
+    marketFamilyMix: bet.marketFamilyMix,
+    repeatedTeamCount: bet.repeatedTeamCount,
+    sameDateCluster: bet.sameDateCluster,
     thesis: bet.thesis,
     legs: bet.legs.map(summarizeLeg)
   };
@@ -354,7 +360,12 @@ function summarizeLeg(leg) {
       awayBttsRate: leg.components?.awayBttsRate,
       homeOver25Rate: leg.components?.homeOver25Rate,
       awayOver25Rate: leg.components?.awayOver25Rate,
-      survivalPenalty: leg.components?.survivalPenalty
+      survivalPenalty: leg.components?.survivalPenalty,
+      confidenceReasons: leg.components?.confidenceReasons,
+      starterLikelihood: leg.components?.starterLikelihood,
+      projectedMinutes: leg.components?.projectedMinutes,
+      scorerGoalsPerTwentyTeamMatches: leg.components?.scorerGoalsPerTwentyTeamMatches,
+      scorerConfidence: leg.components?.scorerConfidence
     }
   };
 }
@@ -426,9 +437,30 @@ function summarizeLegCandidate(leg) {
       homeBttsRate: leg.components?.homeBttsRate,
       awayBttsRate: leg.components?.awayBttsRate,
       homeOver25Rate: leg.components?.homeOver25Rate,
-      awayOver25Rate: leg.components?.awayOver25Rate
+      awayOver25Rate: leg.components?.awayOver25Rate,
+      confidenceReasons: leg.components?.confidenceReasons,
+      starterLikelihood: leg.components?.starterLikelihood,
+      projectedMinutes: leg.components?.projectedMinutes,
+      scorerGoalsPerTwentyTeamMatches: leg.components?.scorerGoalsPerTwentyTeamMatches,
+      scorerConfidence: leg.components?.scorerConfidence
     },
     thesis: leg.thesis
+  };
+}
+
+function summarizeOutcomeCalibration(calibration = {}) {
+  const compactMap = (items = {}) => Object.fromEntries(
+    Object.entries(items)
+      .filter(([, value]) => Number(value?.count || 0) > 0)
+      .sort((left, right) => Number(right[1].count || 0) - Number(left[1].count || 0))
+      .slice(0, 12)
+  );
+
+  return {
+    overall: calibration.overall || null,
+    probabilityBand: compactMap(calibration.probabilityBand),
+    market: compactMap(calibration.market),
+    riskTag: compactMap(calibration.riskTag)
   };
 }
 

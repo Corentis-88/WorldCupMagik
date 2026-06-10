@@ -161,7 +161,9 @@ test("outcome learning waits for sample size then adjusts market/risk patterns",
   const outcomes = Array.from({ length: 10 }, (_, index) => ({
     status: index < 7 ? "won" : "lost",
     market: "both_teams_to_score",
-    riskTags: ["market_confirmed_edge"]
+    riskTags: ["market_confirmed_edge"],
+    modelProbability: 0.58,
+    impliedProbability: 0.52
   }));
   const learning = buildOutcomeLearning(outcomes);
   const adjustment = outcomeLearningAdjustment({
@@ -173,6 +175,32 @@ test("outcome learning waits for sample size then adjusts market/risk patterns",
   assert.equal(learning.outcomeCount, 10);
   assert.ok(adjustment.adjustment > 0);
   assert.ok(adjustment.reasons.length > 0);
+  assert.equal(learning.calibration.market.both_teams_to_score.count, 10);
+  assert.ok(learning.calibration.market.both_teams_to_score.calibrationError > 0);
+});
+
+test("outcome learning builds calibration buckets from settled probabilities", () => {
+  const outcomes = [
+    ...Array.from({ length: 6 }, () => ({
+      status: "won",
+      market: "over_2_5_goals",
+      riskTag: "steady_edge",
+      modelProbability: 0.62,
+      impliedProbability: 0.55
+    })),
+    ...Array.from({ length: 4 }, () => ({
+      status: "lost",
+      market: "over_2_5_goals",
+      riskTag: "steady_edge",
+      modelProbability: 0.62,
+      impliedProbability: 0.55
+    }))
+  ];
+  const learning = buildOutcomeLearning(outcomes);
+
+  assert.equal(learning.calibration.probabilityBand["60-69"].count, 10);
+  assert.equal(learning.calibration.probabilityBand["60-69"].winRate, 0.6);
+  assert.ok(Number.isFinite(learning.calibration.overall.brierScore));
 });
 
 function odds(capturedAt, decimalOdds, bookmaker) {

@@ -169,6 +169,38 @@ test("most likely long accumulators avoid all-one-market goal slips when alterna
   assert.ok(eightLeg.legs.some((leg) => leg.market === "match_winner"));
 });
 
+test("most likely long accumulators limit repeated team correlation when alternatives exist", () => {
+  const canadaLegs = Array.from({ length: 6 }, (_, index) => likelyLeg(
+    `canada-${index + 1}`,
+    `Canada fixture ${index + 1}: Canada to win`,
+    0.72 - index * 0.006,
+    82 - index,
+    1.55 + index * 0.03,
+    { homeTeam: "Canada", awayTeam: `Opponent ${index + 1}`, fixtureDate: `2026-06-${String(12 + index).padStart(2, "0")}T19:00:00.000Z` }
+  ));
+  const alternatives = Array.from({ length: 6 }, (_, index) => likelyLeg(
+    `alt-${index + 1}`,
+    `Alternative ${index + 1}: home to win`,
+    0.66 - index * 0.006,
+    74 - index,
+    1.62 + index * 0.03,
+    { homeTeam: `Home ${index + 1}`, awayTeam: `Away ${index + 1}`, fixtureDate: `2026-06-${String(12 + index).padStart(2, "0")}T21:00:00.000Z` }
+  ));
+  const picks = buildMostLikelyPicks([...canadaLegs, ...alternatives], {
+    riskProfile: {
+      minLegEdge: 0,
+      minLegConfidence: 0.5
+    }
+  });
+  const eightLeg = picks.find((pick) => pick.category === "accumulator_8");
+
+  assert.ok(eightLeg);
+  const canadaExposure = eightLeg.legs.filter((leg) => [leg.homeTeam, leg.awayTeam].includes("Canada")).length;
+  assert.ok(canadaExposure <= 4, `Canada exposure was ${canadaExposure}`);
+  assert.ok(Number.isFinite(eightLeg.correlationPenalty));
+  assert.equal(eightLeg.marketFamilyMix.result >= 1, true);
+});
+
 test("most likely picks only show categories the fixture window can support", () => {
   const legs = [
     likelyLeg("p1", "safe one", 0.74, 71, 1.45),
@@ -207,10 +239,13 @@ function combo(type, odds, score, legCount) {
   };
 }
 
-function likelyLeg(fixtureId, label, modelProbability, score, decimalOdds) {
+function likelyLeg(fixtureId, label, modelProbability, score, decimalOdds, overrides = {}) {
   return {
     id: `leg-${fixtureId}`,
     fixtureId,
+    fixtureDate: overrides.fixtureDate || "2026-06-13T19:00:00.000Z",
+    homeTeam: overrides.homeTeam || `Home ${fixtureId}`,
+    awayTeam: overrides.awayTeam || `Away ${fixtureId}`,
     market: "match_winner",
     selectionLabel: label,
     bookmaker: "Public Test Book",

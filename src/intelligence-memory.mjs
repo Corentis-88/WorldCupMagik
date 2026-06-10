@@ -24,19 +24,32 @@ export function buildOutcomeLearning(outcomes = []) {
   const settled = outcomes.filter((outcome) => outcome.status === "won" || outcome.status === "lost");
   const byMarket = new Map();
   const byRiskTag = new Map();
+  const byProbabilityBand = new Map();
+  const calibrationByMarket = new Map();
+  const calibrationByRiskTag = new Map();
 
   for (const outcome of settled) {
+    const probability = outcomeProbability(outcome);
     incrementLearning(byMarket, outcome.market || outcome.type || "unknown", outcome.status);
+    incrementCalibration(byProbabilityBand, probabilityBand(probability), outcome);
+    incrementCalibration(calibrationByMarket, outcome.market || outcome.type || "unknown", outcome);
 
     for (const tag of outcome.riskTags || [outcome.riskTag].filter(Boolean)) {
       incrementLearning(byRiskTag, tag, outcome.status);
+      incrementCalibration(calibrationByRiskTag, tag, outcome);
     }
   }
 
   return {
     outcomeCount: settled.length,
     market: Object.fromEntries([...byMarket.entries()].map(([key, value]) => [key, finalizeLearning(value)])),
-    riskTag: Object.fromEntries([...byRiskTag.entries()].map(([key, value]) => [key, finalizeLearning(value)]))
+    riskTag: Object.fromEntries([...byRiskTag.entries()].map(([key, value]) => [key, finalizeLearning(value)])),
+    calibration: {
+      overall: finalizeCalibration(buildCalibrationBucket(settled)),
+      probabilityBand: Object.fromEntries([...byProbabilityBand.entries()].map(([key, value]) => [key, finalizeCalibration(value)])),
+      market: Object.fromEntries([...calibrationByMarket.entries()].map(([key, value]) => [key, finalizeCalibration(value)])),
+      riskTag: Object.fromEntries([...calibrationByRiskTag.entries()].map(([key, value]) => [key, finalizeCalibration(value)]))
+    }
   };
 }
 
@@ -51,12 +64,17 @@ export function outcomeLearningAdjustment({ market, riskTag, outcomeLearning }) 
 
   const marketLearning = outcomeLearning.market?.[market];
   const tagLearning = outcomeLearning.riskTag?.[riskTag];
+  const marketCalibration = outcomeLearning.calibration?.market?.[market];
+  const tagCalibration = outcomeLearning.calibration?.riskTag?.[riskTag];
   const marketAdjustment = marketLearning ? learningToAdjustment(marketLearning) : 0;
   const tagAdjustment = tagLearning ? learningToAdjustment(tagLearning) : 0;
-  const adjustment = clamp(marketAdjustment * 0.65 + tagAdjustment * 0.35, -0.08, 0.08);
+  const calibrationAdjustment = calibrationToAdjustment(marketCalibration) * 0.62 + calibrationToAdjustment(tagCalibration) * 0.38;
+  const adjustment = clamp(marketAdjustment * 0.5 + tagAdjustment * 0.26 + calibrationAdjustment * 0.24, -0.08, 0.08);
   const confidence = clamp(mean([
     marketLearning ? Math.min(1, marketLearning.count / 20) : 0,
-    tagLearning ? Math.min(1, tagLearning.count / 20) : 0
+    tagLearning ? Math.min(1, tagLearning.count / 20) : 0,
+    marketCalibration ? Math.min(1, marketCalibration.count / 24) : 0,
+    tagCalibration ? Math.min(1, tagCalibration.count / 24) : 0
   ]), 0, 1);
   const reasons = [];
 
@@ -66,6 +84,14 @@ export function outcomeLearningAdjustment({ market, riskTag, outcomeLearning }) 
 
   if (tagLearning) {
     reasons.push(`${riskTag} historical strike ${round(tagLearning.winRate * 100, 1)}% over ${tagLearning.count}`);
+  }
+
+  if (marketCalibration && marketCalibration.count >= 6) {
+    reasons.push(`${market} calibration ${round(marketCalibration.winRate * 100, 1)}% actual vs ${round(marketCalibration.averageModelProbability * 100, 1)}% projected`);
+  }
+
+  if (tagCalibration && tagCalibration.count >= 6) {
+    reasons.push(`${riskTag} calibration ${round(tagCalibration.winRate * 100, 1)}% actual vs ${round(tagCalibration.averageModelProbability * 100, 1)}% projected`);
   }
 
   return {
@@ -780,4 +806,117 @@ function finalizeLearning(item) {
 function learningToAdjustment(item) {
   const sampleWeight = clamp(item.count / 30, 0, 1);
   return (item.winRate - 0.5) * 0.16 * sampleWeight;
+}
+
+function buildCalibrationBucket(outcomes) {
+  const bucket = emptyCalibrationBucket();
+
+  for (const outcome of outcomes) {
+    addCalibrationOutcome(bucket, outcome);
+  }
+
+  return bucket;
+}
+
+function incrementCalibration(map, key, outcome) {
+  const bucket = map.get(key) || emptyCalibrationBucket();
+  addCalibrationOutcome(bucket, outcome);
+  map.set(key, bucket);
+}
+
+function emptyCalibrationBucket() {
+  return {
+    count: 0,
+    wins: 0,
+    losses: 0,
+    modelProbabilityTotal: 0,
+    impliedProbabilityTotal: 0,
+    brierTotal: 0
+  };
+}
+
+function addCalibrationOutcome(bucket, outcome) {
+  const probability = outcomeProbability(outcome);
+  const impliedProbability = Number(outcome.marketImpliedProbability ?? outcome.impliedProbability ?? 0);
+  const actual = outcome.status === "won" ? 1 : 0;
+
+  bucket.count += 1;
+  bucket.wins += actual;
+  bucket.losses += actual ? 0 : 1;
+  bucket.modelProbabilityTotal += probability;
+  bucket.impliedProbabilityTotal += Number.isFinite(impliedProbability) ? impliedProbability : 0;
+  bucket.brierTotal += (probability - actual) ** 2;
+}
+
+function finalizeCalibration(bucket) {
+  const count = Number(bucket?.count || 0);
+
+  if (!count) {
+    return {
+      count: 0,
+      wins: 0,
+      losses: 0,
+      winRate: 0,
+      averageModelProbability: 0,
+      averageImpliedProbability: 0,
+      calibrationError: 0,
+      brierScore: 0
+    };
+  }
+
+  const winRate = bucket.wins / count;
+  const averageModelProbability = bucket.modelProbabilityTotal / count;
+
+  return {
+    count,
+    wins: bucket.wins,
+    losses: bucket.losses,
+    winRate: round(winRate, 4),
+    averageModelProbability: round(averageModelProbability, 4),
+    averageImpliedProbability: round(bucket.impliedProbabilityTotal / count, 4),
+    calibrationError: round(winRate - averageModelProbability, 4),
+    brierScore: round(bucket.brierTotal / count, 4)
+  };
+}
+
+function calibrationToAdjustment(item) {
+  if (!item || Number(item.count || 0) < 6) {
+    return 0;
+  }
+
+  const sampleWeight = clamp(Number(item.count || 0) / 36, 0, 1);
+  return clamp(Number(item.calibrationError || 0) * 0.18 * sampleWeight, -0.045, 0.045);
+}
+
+function outcomeProbability(outcome) {
+  const value = Number(
+    outcome.likelyProbability
+    ?? outcome.modelProbability
+    ?? outcome.rawModelProbability
+    ?? outcome.confidence
+    ?? 0.5
+  );
+
+  return clamp(Number.isFinite(value) ? value : 0.5, 0.02, 0.98);
+}
+
+function probabilityBand(probability) {
+  const pct = Math.floor(clamp(probability, 0, 0.999) * 100);
+
+  if (pct < 40) {
+    return "00-39";
+  }
+  if (pct < 50) {
+    return "40-49";
+  }
+  if (pct < 60) {
+    return "50-59";
+  }
+  if (pct < 70) {
+    return "60-69";
+  }
+  if (pct < 80) {
+    return "70-79";
+  }
+  return "80-99";
 }

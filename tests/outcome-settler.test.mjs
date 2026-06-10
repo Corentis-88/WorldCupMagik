@@ -1,0 +1,96 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { gradeLegAgainstMatch, settleBetOutcomes } from "../src/outcome-settler.mjs";
+
+test("settles recommended result and goals legs against completed match history", () => {
+  const now = new Date("2026-06-12T12:00:00.000Z");
+  const legCandidates = [
+    leg("leg-mex-win", "match_winner", "Mexico", 1.86),
+    leg("leg-btts", "both_teams_to_score", "Yes", 2.1),
+    leg("leg-over", "over_2_5_goals", "Over", 1.9),
+    leg("leg-dnb", "draw_no_bet", "South Africa", 2.8)
+  ];
+  const recommendations = {
+    singles: [{ legs: [legCandidates[0]] }],
+    doubles: [{ legs: [legCandidates[1], legCandidates[2]] }],
+    trixies: [{ legs: [legCandidates[3]] }],
+    accumulators: [],
+    accumulatorsByLegCount: {}
+  };
+  const settlement = settleBetOutcomes({
+    legCandidates,
+    recommendations,
+    matchHistory: [match("Mexico", "South Africa", 2, 1)],
+    existingOutcomes: [],
+    now
+  });
+
+  assert.equal(settlement.insertedCount, 4);
+  assert.equal(statusFor(settlement, "match_winner"), "won");
+  assert.equal(statusFor(settlement, "both_teams_to_score"), "won");
+  assert.equal(statusFor(settlement, "over_2_5_goals"), "won");
+  assert.equal(statusFor(settlement, "draw_no_bet"), "lost");
+  assert.ok(settlement.newRecords.every((record) => record.source === "auto-settled-public-match-history"));
+});
+
+test("settles draw-no-bet pushes as void and leaves them out of learning", () => {
+  const result = gradeLegAgainstMatch(leg("leg-dnb", "draw_no_bet", "Mexico", 1.7), match("Mexico", "South Africa", 1, 1));
+
+  assert.equal(result.status, "void");
+  assert.equal(result.reason, "draw_no_bet_push");
+});
+
+test("does not settle scorer bets when public scorer rows are missing for a goal game", () => {
+  const result = gradeLegAgainstMatch(
+    { ...leg("leg-scorer", "anytime_scorer", "Raul Jimenez", 3.4), playerName: "Raul Jimenez", playerTeam: "Mexico" },
+    match("Mexico", "South Africa", 2, 1)
+  );
+
+  assert.equal(result.status, "unknown");
+  assert.equal(result.reason, "scorer_list_missing");
+});
+
+function statusFor(settlement, market) {
+  return settlement.newRecords.find((record) => record.market === market)?.status;
+}
+
+function leg(id, market, outcome, decimalOdds) {
+  return {
+    id,
+    createdAt: "2026-06-10T10:00:00.000Z",
+    fixtureId: "mex-rsa",
+    fixtureDate: "2026-06-11T19:00:00.000Z",
+    homeTeam: "Mexico",
+    awayTeam: "South Africa",
+    market,
+    outcome,
+    selectionLabel: `Mexico vs South Africa: ${outcome}`,
+    bookmaker: "Public Test Book",
+    decimalOdds,
+    modelProbability: 0.62,
+    rawModelProbability: 0.64,
+    impliedProbability: 1 / decimalOdds,
+    marketImpliedProbability: 1 / decimalOdds,
+    confidence: 0.77,
+    edge: 0.08,
+    independentEdge: 0.09,
+    riskTag: "steady_edge",
+    components: {
+      nonMarketSignalCount: 5,
+      dataCompleteness: 0.8
+    }
+  };
+}
+
+function match(homeTeam, awayTeam, homeGoals, awayGoals) {
+  return {
+    date: "2026-06-11T19:00:00.000Z",
+    homeTeam,
+    awayTeam,
+    homeGoals,
+    awayGoals,
+    homeScorers: [],
+    awayScorers: [],
+    sourceType: "public-web"
+  };
+}

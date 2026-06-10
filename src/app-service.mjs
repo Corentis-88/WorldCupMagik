@@ -8,6 +8,7 @@ import { fetchOddsSnapshotWithDiagnostics } from "./providers/odds-provider.mjs"
 import { fetchSquadDepthWithDiagnostics } from "./providers/squad-provider.mjs";
 import { fetchTeamStatsWithDiagnostics } from "./providers/stats-provider.mjs";
 import { fetchHeatSnapshotsWithDiagnostics } from "./providers/weather-provider.mjs";
+import { settleStoredBetOutcomes } from "./outcome-settler.mjs";
 import { buildLegCandidates } from "./scoring.mjs";
 import { isoDate, makeId, normalizeName, round } from "./utils.mjs";
 
@@ -80,7 +81,7 @@ export async function saveAppSettings(settings) {
 export async function scanForBets(settings, { now = new Date(), scheduled = false } = {}) {
   const engineState = await loadEngineState();
   const intelligenceState = await loadIntelligenceState();
-  const outcomeLearning = await loadOutcomeLearning();
+  let outcomeLearning = await loadOutcomeLearning();
   const appSettings = await saveAppSettings(settings);
   const policy = buildRiskPolicy(engineState.policy, appSettings.risk);
   const sourceDiagnostics = [];
@@ -110,6 +111,15 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
 
   if (statsResult.matchHistory?.length) {
     await upsertJsonRecords(["data", "team-match-history.json"], statsResult.matchHistory, matchHistoryKey, 12000);
+  }
+
+  const outcomeSettlement = await settleStoredBetOutcomes({
+    matchHistory: liveMatchHistory,
+    now
+  });
+
+  if (outcomeSettlement.insertedCount) {
+    outcomeLearning = await loadOutcomeLearning();
   }
 
   if (statsResult.playerStats?.length) {
@@ -269,6 +279,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
       newsArticles: newsArticles.length,
       teamStats: teamStats.length,
       matchHistoryRecords: statsResult.matchHistory?.length || 0,
+      outcomeRecordsSettled: outcomeSettlement.insertedCount,
       intelligenceObservations: intelligence.observations.length,
       sourceDiagnostics: sourceDiagnostics.length
     },
@@ -278,6 +289,12 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
       teamCount: intelligence.teamIntelligence.length,
       observationCount: intelligence.observations.length,
       outcomeLearningCount: outcomeLearning.outcomeCount,
+      outcomeCalibration: outcomeLearning.calibration,
+      lastOutcomeSettlement: {
+        examinedLegCount: outcomeSettlement.examinedLegCount,
+        insertedCount: outcomeSettlement.insertedCount,
+        skipped: outcomeSettlement.skipped
+      },
       topTeams: intelligence.teamIntelligence
         .sort((left, right) => Math.abs(right.learnedEdge) - Math.abs(left.learnedEdge))
         .slice(0, 6)

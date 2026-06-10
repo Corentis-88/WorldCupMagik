@@ -11,9 +11,13 @@ It is decision support only. It does not place bets, does not guarantee returns,
 - Gathers public football news from RSS/Atom/HTML pages without news APIs.
 - Gathers up to 20 recent national-team results per team, stores long-form/short-form trends, and records public scorer rows when available.
 - Stores source health for every scan so blocked or empty sources are visible.
+- Auto-settles previously recommended legs from completed public match-history rows and feeds those results into outcome learning.
+- Tracks calibration by market, risk tag, and confidence band so future scans can gently cool or lift patterns that are over/under-performing.
 - Scores Single, Double, Trixie, 3-leg accumulator, 4-leg accumulator, 5-leg accumulator, 6-leg accumulator, and 8-leg accumulator categories.
-- Uses risk-slider policy to trade confidence, edge, price, bookmaker coverage, and calculated-risk appetite.
+- Uses risk-slider policy to trade confidence, edge, price, bookmaker coverage, calculated-risk appetite, and accumulator correlation.
+- Applies long-slip correlation control so eight-leg style slips are not overloaded with the same market family, repeated team exposure, same-day clusters, heat-sensitive legs, or scorer punts.
 - Supports match winner, draw no bet, both teams to score, over/under 2.5 goals, and anytime scorer when public scorer prices are available.
+- Adds scorer starter/minutes-style context when anytime-scorer prices and public scorer memory are available.
 
 ## Hosted Web Edition
 
@@ -30,6 +34,7 @@ Each run writes `web/data/latest.json` with:
 - collection duration;
 - source-health summary;
 - fixture, odds, news, team-form, player-scorer, and intelligence counts;
+- outcome-learning and calibration summaries;
 - pre-scored profiles for days-ahead values `0` to `14`;
 - pre-scored profiles for risk values `0` to `100` in `5` point steps.
 

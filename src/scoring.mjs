@@ -78,12 +78,16 @@ export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, team
           outcome: odds.outcome,
           modelProbability: scorerProbability.modelProbability,
           rawModelProbability: scorerProbability.rawModelProbability,
-          odds,
+          odds: {
+            ...odds,
+            playerTeam: odds.playerTeam || scorerProbability.components.playerTeam
+          },
           movement,
           model,
           policy,
           now,
-          outcomeLearning
+          outcomeLearning,
+          extraComponents: scorerProbability.components
         }));
       }
     }
@@ -121,10 +125,24 @@ function estimateAnytimeScorerProbability({ fixture, odds, homeStats, awayStats,
       : 0;
   const rawModelProbability = clamp(teamGoalLikelihood * rawRoleLikelihood + scorerLift + newsLift, 0.035, 0.48);
   const marketAdjustedProbability = blendProbability(rawModelProbability, implied, playerRecord ? 0.28 : 0.42);
+  const starterLikelihood = clamp(0.26 + implied * 1.04 + scorerSampleRate * 0.32 + Number(playerRecord?.scorerConfidence || 0.28) * 0.08, 0.22, 0.9);
+  const projectedMinutes = round(28 + starterLikelihood * 64, 1);
 
   return {
     rawModelProbability: round(rawModelProbability, 4),
-    modelProbability: round(clamp((marketAdjustedProbability * 0.74) + (teamGoalLikelihood * roleLikelihood * 0.26), 0.04, 0.58), 4)
+    modelProbability: round(clamp((marketAdjustedProbability * 0.74) + (teamGoalLikelihood * roleLikelihood * 0.26), 0.04, 0.58), 4),
+    components: {
+      playerTeam,
+      starterLikelihood: round(starterLikelihood, 4),
+      projectedMinutes,
+      scorerSampleRate: round(scorerSampleRate, 4),
+      scorerGoalsPerTwentyTeamMatches: round(scorerSampleRate * 20, 3),
+      scorerConfidence: round(Number(playerRecord?.scorerConfidence || 0), 4),
+      scorerMatchesSampled: Number(playerRecord?.matchesSampled || 0),
+      playerMinutesSource: playerRecord
+        ? "public scorer sample plus market role estimate"
+        : "market role estimate until public scorer sample improves"
+    }
   };
 }
 
@@ -419,7 +437,14 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
   };
 }
 
-function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbability, odds, movement, model, policy, now, outcomeLearning }) {
+function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbability, odds, movement, model, policy, now, outcomeLearning, extraComponents = {} }) {
+  const legModel = {
+    ...model,
+    components: {
+      ...(model.components || {}),
+      ...(extraComponents || {})
+    }
+  };
   const adjustedModelProbability = clamp(Number(modelProbability || 0), 0.03, 0.92);
   const independentModelProbability = clamp(Number(rawModelProbability ?? modelProbability ?? 0), 0.03, 0.92);
   const impliedProbability = decimalToImpliedProbability(odds.decimalOdds);
@@ -431,8 +456,8 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
   const marketBlendLift = adjustedModelProbability - independentModelProbability;
   const oddsAgeHours = hoursBetween(odds.capturedAt, now);
   const oddsFreshness = clamp(1 - oddsAgeHours / (policy.sourceRequirements?.maxOddsAgeHours || 30), 0, 1);
-  const dataCompleteness = model.components.dataCompleteness;
-  const intelligenceConfidence = model.components.intelligenceConfidence;
+  const dataCompleteness = legModel.components.dataCompleteness;
+  const intelligenceConfidence = legModel.components.intelligenceConfidence;
   const bookmakerCoverage = movement?.bookmakerCount || 1;
   const marketConfirmation = movement?.shortening && edge > 0 ? 1 : 0;
   const contrarianValue = movement?.drifting && edge > 0 && Number(odds.decimalOdds) >= policy.riskProfile.minDecimalOddsForRiskLeg ? 1 : 0;
@@ -441,7 +466,7 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     fixture,
     market,
     outcome,
-    model,
+    model: legModel,
     modelProbability: adjustedModelProbability,
     rawModelProbability: independentModelProbability,
     marketImpliedProbability,
@@ -458,7 +483,7 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     contrarianValue
   });
   const learning = outcomeLearningAdjustment({ market, riskTag: preliminaryRiskTag, outcomeLearning });
-  const marketFocus = evaluateMarketFocus({ market, outcome, model, modelProbability: adjustedModelProbability, edge, odds, policy });
+  const marketFocus = evaluateMarketFocus({ market, outcome, model: legModel, modelProbability: adjustedModelProbability, edge, odds, policy });
   const learnedModelProbability = clamp(adjustedModelProbability + learning.adjustment * learning.confidence, 0.03, 0.92);
   const learnedIndependentProbability = clamp(independentModelProbability + learning.adjustment * learning.confidence * 0.55, 0.03, 0.92);
   const learnedEdge = learnedModelProbability - impliedProbability;
@@ -529,7 +554,7 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
       hardBlocks.push("draw_probability_below_model_floor");
     }
 
-    if (Math.abs(Number(model.components.independentResultEdge || 0)) > Number(policy.riskProfile.maxDrawIndependentResultEdge || 58)) {
+    if (Math.abs(Number(legModel.components.independentResultEdge || 0)) > Number(policy.riskProfile.maxDrawIndependentResultEdge || 58)) {
       hardBlocks.push("draw_without_enough_balance");
     }
   }
@@ -547,7 +572,7 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
       market === "match_winner"
       && marketImpliedProbability < 0.18
       && independentEdge > 0.2
-      && Math.abs(Number(model.components.independentResultEdge || 0)) < Number(policy.riskProfile.minLongshotResultEdgeForce || 48)
+      && Math.abs(Number(legModel.components.independentResultEdge || 0)) < Number(policy.riskProfile.minLongshotResultEdgeForce || 48)
     ) {
       hardBlocks.push("longshot_market_disagreement_too_large");
     }
@@ -562,7 +587,7 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
   }
 
   if (market === "both_teams_to_score" && outcome === "Yes") {
-    const lowerTeamExpectedGoals = Math.min(Number(model.components.homeExpectedGoals || 0), Number(model.components.awayExpectedGoals || 0));
+    const lowerTeamExpectedGoals = Math.min(Number(legModel.components.homeExpectedGoals || 0), Number(legModel.components.awayExpectedGoals || 0));
 
     if (independentModelProbability < Number(policy.riskProfile.minBttsYesRawProbability || 0.46)) {
       hardBlocks.push("btts_yes_raw_probability_below_floor");
@@ -604,7 +629,7 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     riskTag: preliminaryRiskTag,
     hardBlocks,
     components: {
-      ...model.components,
+      ...legModel.components,
       oddsAgeHours: round(oddsAgeHours, 2),
       oddsFreshness: round(oddsFreshness, 3),
       bookmakerCoverage,
@@ -628,6 +653,17 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
       outcomeLearningAdjustment: learning.adjustment,
       outcomeLearningConfidence: learning.confidence,
       outcomeLearningReasons: learning.reasons,
+      confidenceReasons: buildConfidenceReasons({
+        confidence,
+        dataCompleteness,
+        intelligenceConfidence,
+        oddsFreshness,
+        bookmakerCoverage,
+        independentEvidence,
+        marketBlendLift,
+        learning,
+        marketFocus
+      }),
       favoriteCrowdingPenalty: round(favoriteCrowdingPenalty, 2),
       valueOddsBonus
     },
@@ -642,7 +678,7 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
       marketImpliedProbability,
       odds,
       movement,
-      model,
+      model: legModel,
       confidence,
       independentEvidence,
       marketFocus,
@@ -674,6 +710,52 @@ function buildNewsByTeam(newsArticles, policy, now) {
   }
 
   return aggregates;
+}
+
+function buildConfidenceReasons({ confidence, dataCompleteness, intelligenceConfidence, oddsFreshness, bookmakerCoverage, independentEvidence, marketBlendLift, learning, marketFocus }) {
+  const reasons = [];
+
+  if (confidence >= 0.78) {
+    reasons.push("high combined confidence");
+  } else if (confidence < 0.6) {
+    reasons.push("thin confidence, use cautiously");
+  }
+
+  if (dataCompleteness >= 0.75) {
+    reasons.push("strong team-data completeness");
+  }
+
+  if (intelligenceConfidence >= 0.72) {
+    reasons.push("team intelligence memory is mature");
+  }
+
+  if (oddsFreshness >= 0.85) {
+    reasons.push("fresh odds snapshot");
+  } else if (oddsFreshness < 0.45) {
+    reasons.push("odds are ageing");
+  }
+
+  if (bookmakerCoverage >= 3) {
+    reasons.push(`${bookmakerCoverage} bookie samples`);
+  }
+
+  if (Number(independentEvidence?.count || 0) >= 5) {
+    reasons.push("many non-market signals agree");
+  }
+
+  if (Number(marketBlendLift || 0) > 0.04) {
+    reasons.push("market lift capped to avoid bookie-following");
+  }
+
+  if (Number(learning?.confidence || 0) > 0.2) {
+    reasons.push("settled-outcome learning active");
+  }
+
+  if (Number(marketFocus?.score || 0) >= 6) {
+    reasons.push("market type fits the football evidence");
+  }
+
+  return reasons.slice(0, 7);
 }
 
 function aggregateNews(articles) {
@@ -888,6 +970,8 @@ function evaluateIndependentEvidence({ fixture, market, outcome, model, rawModel
     add(independentEdge >= 0.01, "raw scorer probability beats market", clamp(independentEdge / 0.06, 0.25, 1));
     add(expectedGoals >= 2.55, "team goals environment is live", 0.5);
     add(rawModelProbability >= 0.18, "scorer raw probability clears floor", clamp((rawModelProbability - 0.12) / 0.22, 0.25, 1));
+    add(Number(components.starterLikelihood || 0) >= 0.55, "starter/minutes projection is healthy", clamp(Number(components.starterLikelihood || 0), 0.25, 0.9));
+    add(Number(components.scorerGoalsPerTwentyTeamMatches || 0) >= 3, "20-match scorer memory", clamp(Number(components.scorerGoalsPerTwentyTeamMatches || 0) / 8, 0.25, 1));
   }
 
   return {
