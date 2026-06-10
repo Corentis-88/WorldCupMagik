@@ -11,6 +11,7 @@ export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, team
   const heatByFixture = latestHeatByFixture(heatSnapshots);
   const squadDepthByTeam = latestSquadDepthByTeam(squadDepthRecords);
   const playerStatsByKey = latestPlayerStatsByKey(playerStats);
+  const tournamentContextByFixture = buildTournamentContextByFixture(fixtures);
   const candidates = [];
 
   for (const fixture of fixtures) {
@@ -29,7 +30,8 @@ export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, team
       marketSnapshot: fixtureMarketSnapshot({ fixture, latestOdds }),
       heatRecord: heatByFixture.get(fixture.id),
       homeSquadDepth: squadDepthByTeam.get(normalizeName(fixture.homeTeam)),
-      awaySquadDepth: squadDepthByTeam.get(normalizeName(fixture.awayTeam))
+      awaySquadDepth: squadDepthByTeam.get(normalizeName(fixture.awayTeam)),
+      tournamentContext: tournamentContextByFixture.get(fixture.id)
     });
 
     for (const market of policy.markets || []) {
@@ -262,7 +264,174 @@ function normalizeTwoOutcomeMarket({ yes, no, yesKey, noKey }) {
   };
 }
 
-export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, marketSnapshot = null, heatRecord = null, homeSquadDepth = null, awaySquadDepth = null }) {
+export function buildTournamentContextByFixture(fixtures = []) {
+  const byFixture = new Map();
+  const groupFixtures = [...fixtures]
+    .filter(isGroupStageFixture)
+    .sort((left, right) => new Date(left.date || 0) - new Date(right.date || 0));
+  const canonicalByPair = new Map();
+
+  for (const fixture of groupFixtures) {
+    const key = tournamentPairKey(fixture);
+
+    if (!key || canonicalByPair.has(key)) {
+      continue;
+    }
+
+    canonicalByPair.set(key, fixture);
+  }
+
+  const teamAppearances = new Map();
+  const contextByPair = new Map();
+
+  for (const fixture of [...canonicalByPair.values()].sort((left, right) => new Date(left.date || 0) - new Date(right.date || 0))) {
+    const homeKey = normalizeName(fixture.homeTeam);
+    const awayKey = normalizeName(fixture.awayTeam);
+    const homeGroupGameNumber = (teamAppearances.get(homeKey) || 0) + 1;
+    const awayGroupGameNumber = (teamAppearances.get(awayKey) || 0) + 1;
+    const context = buildTournamentContext({ fixture, homeGroupGameNumber, awayGroupGameNumber });
+
+    contextByPair.set(tournamentPairKey(fixture), context);
+    teamAppearances.set(homeKey, homeGroupGameNumber);
+    teamAppearances.set(awayKey, awayGroupGameNumber);
+  }
+
+  for (const fixture of fixtures) {
+    if (!isGroupStageFixture(fixture)) {
+      byFixture.set(fixture.id, neutralTournamentContext(fixture));
+      continue;
+    }
+
+    const context = contextByPair.get(tournamentPairKey(fixture)) || neutralTournamentContext(fixture);
+    byFixture.set(fixture.id, {
+      ...context,
+      fixtureId: fixture.id,
+      sourceFixtureId: context.fixtureId,
+      duplicateFixture: Boolean(context.fixtureId && context.fixtureId !== fixture.id)
+    });
+  }
+
+  return byFixture;
+}
+
+function buildTournamentContext({ fixture, homeGroupGameNumber, awayGroupGameNumber }) {
+  const bothOpeningGroupGame = homeGroupGameNumber === 1 && awayGroupGameNumber === 1;
+  const oneOpeningGroupGame = !bothOpeningGroupGame && (homeGroupGameNumber === 1 || awayGroupGameNumber === 1);
+  const maxGameNumber = Math.max(homeGroupGameNumber, awayGroupGameNumber);
+  const phase = bothOpeningGroupGame
+    ? "opening_group_game"
+    : oneOpeningGroupGame
+      ? "mixed_opening_group_game"
+      : maxGameNumber >= 3
+        ? "final_group_game"
+        : maxGameNumber === 2
+          ? "middle_group_game"
+          : "group_game";
+  const note = bothOpeningGroupGame
+    ? "Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets."
+    : oneOpeningGroupGame
+      ? "One team is in its first group game, so the model adds a lighter opening-game caution."
+      : maxGameNumber >= 3
+        ? "Final group-game pressure is noted, but the model waits for live standings before forcing a tactical lean."
+        : "Middle group game: no automatic opening-game caution.";
+
+  return {
+    fixtureId: fixture.id,
+    phase,
+    homeGroupGameNumber,
+    awayGroupGameNumber,
+    bothOpeningGroupGame,
+    oneOpeningGroupGame,
+    note
+  };
+}
+
+function neutralTournamentContext(fixture = {}) {
+  return {
+    fixtureId: fixture.id,
+    phase: isGroupStageFixture(fixture) ? "group_game" : "non_group_game",
+    homeGroupGameNumber: null,
+    awayGroupGameNumber: null,
+    bothOpeningGroupGame: false,
+    oneOpeningGroupGame: false,
+    note: isGroupStageFixture(fixture)
+      ? "Group context is available, but no opening-game caution applies."
+      : "Tournament pressure layer inactive outside group-stage fixtures."
+  };
+}
+
+function buildTournamentPressure({ context, expectedGoals, homeExpectedGoals, awayExpectedGoals }) {
+  const openingCaution = context?.bothOpeningGroupGame
+    ? 1
+    : context?.oneOpeningGroupGame
+      ? 0.58
+      : 0;
+  const lowerGoalThreat = Math.min(Number(homeExpectedGoals || 0), Number(awayExpectedGoals || 0));
+  const goalStrengthRelief = clamp((Number(expectedGoals || 2.5) - 2.7) / 0.9, 0, 0.45);
+  const balanceRelief = clamp((lowerGoalThreat - 0.95) / 0.5, 0, 0.25);
+  const expectedGoalsAdjustment = openingCaution
+    ? -clamp((0.13 - goalStrengthRelief * 0.055 - balanceRelief * 0.025) * openingCaution, 0.035, 0.13)
+    : 0;
+  const bttsAdjustment = openingCaution
+    ? -clamp((0.026 - balanceRelief * 0.012) * openingCaution, 0.006, 0.026)
+    : 0;
+  const drawLift = openingCaution
+    ? clamp(0.017 * openingCaution, 0.006, 0.018)
+    : 0;
+
+  return {
+    phase: context?.phase || "unknown",
+    homeGroupGameNumber: context?.homeGroupGameNumber ?? null,
+    awayGroupGameNumber: context?.awayGroupGameNumber ?? null,
+    bothOpeningGroupGame: Boolean(context?.bothOpeningGroupGame),
+    oneOpeningGroupGame: Boolean(context?.oneOpeningGroupGame),
+    openingCaution,
+    expectedGoalsAdjustment: round(expectedGoalsAdjustment, 4),
+    bttsAdjustment: round(bttsAdjustment, 4),
+    drawLift: round(drawLift, 4),
+    note: context?.note || "Tournament pressure context unavailable."
+  };
+}
+
+function applyTournamentPressureToGoalShape(goalShape, tournamentPressure) {
+  const adjustment = Number(tournamentPressure?.expectedGoalsAdjustment || 0);
+
+  if (!adjustment) {
+    return goalShape;
+  }
+
+  const homeExpectedGoals = Number(goalShape.homeExpectedGoals || 0);
+  const awayExpectedGoals = Number(goalShape.awayExpectedGoals || 0);
+  const total = Math.max(0.1, homeExpectedGoals + awayExpectedGoals);
+  const homeShare = clamp(homeExpectedGoals / total, 0.22, 0.78);
+  const awayShare = 1 - homeShare;
+
+  return {
+    homeExpectedGoals: clamp(homeExpectedGoals + adjustment * homeShare, 0.18, 3.2),
+    awayExpectedGoals: clamp(awayExpectedGoals + adjustment * awayShare, 0.18, 3.2),
+    expectedGoals: clamp(total + adjustment, 1.25, 4.1)
+  };
+}
+
+function isGroupStageFixture(fixture = {}) {
+  const stage = String(fixture.stage || fixture.round || "").toLowerCase();
+
+  if (/round of|quarter|semi|final|play[- ]?off|knockout/.test(stage)) {
+    return false;
+  }
+
+  return !stage || /group|first stage|stage 1/.test(stage);
+}
+
+function tournamentPairKey(fixture = {}) {
+  const teams = [normalizeName(fixture.homeTeam), normalizeName(fixture.awayTeam)]
+    .filter(Boolean)
+    .sort();
+
+  return teams.length === 2 ? teams.join("|") : "";
+}
+
+export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, marketSnapshot = null, heatRecord = null, homeSquadDepth = null, awaySquadDepth = null, tournamentContext = null }) {
   const homeNews = newsByTeam.get(fixture.homeTeam) || neutralNews();
   const awayNews = newsByTeam.get(fixture.awayTeam) || neutralNews();
   const heat = buildHeatImpact({ fixture, heatRecord, homeSquadDepth, awaySquadDepth });
@@ -280,7 +449,14 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
   const heatEdge = Number(heat.resultEdgeAdjustment || 0);
   const independentResultEdge = clamp(ratingEdge + formEdge + xgEdge + styleEdge + newsEdge + memoryEdge + heatEdge, -220, 220);
   const totalEdge = clamp(independentResultEdge + marketMemoryEdge + marketResultEdge, -240, 240);
-  const rawDrawProbability = clamp(0.265 - Math.abs(independentResultEdge) / 2500 + defensiveDrawLift(homeStats, awayStats) + Number(heat.drawLift || 0), 0.17, 0.33);
+  const baseGoalShape = goalShapeForFixture(homeStats, awayStats, homeNews, awayNews, heat);
+  const tournamentPressure = buildTournamentPressure({
+    context: tournamentContext,
+    expectedGoals: baseGoalShape.expectedGoals,
+    homeExpectedGoals: baseGoalShape.homeExpectedGoals,
+    awayExpectedGoals: baseGoalShape.awayExpectedGoals
+  });
+  const rawDrawProbability = clamp(0.265 - Math.abs(independentResultEdge) / 2500 + defensiveDrawLift(homeStats, awayStats) + Number(heat.drawLift || 0) + Number(tournamentPressure.drawLift || 0), 0.17, 0.35);
   const drawProbability = marketSnapshot?.matchWinner
     ? blendProbability(rawDrawProbability, marketSnapshot.matchWinner.draw, 0.14 * Number(marketSnapshot.matchWinner.confidence || 0.5))
     : rawDrawProbability;
@@ -292,10 +468,14 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
   const awayWin = clamp((1 - drawProbability) * (1 - homeShare), 0.05, 0.82);
   const rawNormalizedTotal = rawHomeWin + rawAwayWin + rawDrawProbability;
   const normalizedTotal = homeWin + awayWin + drawProbability;
-  const goalShape = goalShapeForFixture(homeStats, awayStats, homeNews, awayNews, heat);
+  const goalShape = applyTournamentPressureToGoalShape(baseGoalShape, tournamentPressure);
   const expectedGoals = goalShape.expectedGoals;
   const rawOver25 = poissonOver25(expectedGoals);
-  const rawBttsYes = poissonBothTeamsToScore(goalShape.homeExpectedGoals, goalShape.awayExpectedGoals, heat);
+  const rawBttsYes = round(clamp(
+    poissonBothTeamsToScore(goalShape.homeExpectedGoals, goalShape.awayExpectedGoals, heat) + Number(tournamentPressure.bttsAdjustment || 0),
+    0.16,
+    0.68
+  ), 4);
   const over25 = marketSnapshot?.over25
     ? blendProbability(rawOver25, marketSnapshot.over25.over, 0.14 * Number(marketSnapshot.over25.confidence || 0.5))
     : rawOver25;
@@ -340,6 +520,16 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
       marketBttsYesProbability: nullableComponent(marketSnapshot?.btts?.yes),
       marketOver25Probability: nullableComponent(marketSnapshot?.over25?.over),
       heatEdge: round(heatEdge, 2),
+      tournamentPhase: tournamentPressure.phase,
+      homeGroupGameNumber: tournamentPressure.homeGroupGameNumber,
+      awayGroupGameNumber: tournamentPressure.awayGroupGameNumber,
+      bothOpeningGroupGame: tournamentPressure.bothOpeningGroupGame,
+      oneOpeningGroupGame: tournamentPressure.oneOpeningGroupGame,
+      openingGameCaution: round(Number(tournamentPressure.openingCaution || 0), 3),
+      tournamentExpectedGoalsAdjustment: round(Number(tournamentPressure.expectedGoalsAdjustment || 0), 3),
+      tournamentBttsAdjustment: round(Number(tournamentPressure.bttsAdjustment || 0), 4),
+      tournamentDrawLift: round(Number(tournamentPressure.drawLift || 0), 4),
+      tournamentContextNote: tournamentPressure.note,
       expectedGoals: round(expectedGoals, 2),
       homeExpectedGoals: round(goalShape.homeExpectedGoals, 2),
       awayExpectedGoals: round(goalShape.awayExpectedGoals, 2),
@@ -596,6 +786,15 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     if (lowerTeamExpectedGoals < Number(policy.riskProfile.minBttsLowerTeamExpectedGoals || 0.78)) {
       hardBlocks.push("btts_yes_one_team_goal_threat_too_low");
     }
+  }
+
+  if (
+    Number(legModel.components.openingGameCaution || 0) >= 0.75
+    && (market === "over_2_5_goals" || (market === "both_teams_to_score" && outcome === "Yes"))
+    && Number(legModel.components.expectedGoals || 0) < 2.82
+    && independentEdge < 0.04
+  ) {
+    hardBlocks.push("opening_group_game_goal_market_edge_not_strong_enough");
   }
 
   if (oddsAgeHours > (policy.sourceRequirements?.maxOddsAgeHours || 30)) {
@@ -881,6 +1080,7 @@ function evaluateIndependentEvidence({ fixture, market, outcome, model, rawModel
   const awayExpectedGoals = Number(components.awayExpectedGoals || expectedGoals / 2);
   const lowerTeamExpectedGoals = Math.min(homeExpectedGoals, awayExpectedGoals);
   const independentResultEdge = Number(components.independentResultEdge || 0);
+  const openingCaution = Number(components.openingGameCaution || 0);
   const direction = outcome === fixture.homeTeam ? 1 : outcome === fixture.awayTeam ? -1 : 0;
   const directional = (value) => Number(value || 0) * direction;
   const add = (condition, label, strength = 0.55) => {
@@ -906,6 +1106,7 @@ function evaluateIndependentEvidence({ fixture, market, outcome, model, rawModel
       add(Math.abs(Number(components.formEdge || 0)) <= 20 && Math.abs(Number(components.xgEdge || 0)) <= 22, "form and xG are close", 0.58);
       add(expectedGoals <= 2.42, "tight expected-goals profile", 0.55);
       add(cleanSheetProfile >= 0.33, "clean-sheet history supports draw shape", 0.48);
+      add(openingCaution >= 0.75, "opening group-game caution supports draw cover", 0.42);
     } else if (direction) {
       add(directional(components.ratingEdge) >= 32, "team rating edge", clamp(Math.abs(Number(components.ratingEdge || 0)) / 130, 0.3, 1));
       add(directional(components.formEdge) >= 12, "recent form edge", clamp(Math.abs(Number(components.formEdge || 0)) / 58, 0.25, 1));
@@ -939,6 +1140,7 @@ function evaluateIndependentEvidence({ fixture, market, outcome, model, rawModel
       add(lowerTeamExpectedGoals <= 0.78, "one team goal threat is low", 0.7);
       add(cleanSheetHistory >= 0.34, "clean-sheet history supports BTTS-no", 0.55);
       add(expectedGoals <= 2.35, "tight goals environment", 0.5);
+      add(openingCaution >= 0.75 && expectedGoals <= 2.55, "opening group-game caution trims BTTS", 0.42);
     }
   }
 
@@ -964,6 +1166,7 @@ function evaluateIndependentEvidence({ fixture, market, outcome, model, rawModel
     add(expectedGoals <= 2.34, "expected-goals model is tight", clamp((2.58 - expectedGoals) / 0.78, 0.25, 1));
     add(overHistory <= 0.42, "20-match over history is modest", clamp((0.5 - overHistory) / 0.22, 0.2, 1));
     add(Number(components.heatExpectedGoalsAdjustment || 0) < -0.02, "heat layer trims goal tempo", 0.42);
+    add(openingCaution >= 0.75 && expectedGoals <= 2.55, "opening group-game caution supports unders", 0.42);
   }
 
   if (market === "anytime_scorer") {
@@ -1022,6 +1225,9 @@ function buildLegThesis({ fixture, market, outcome, edge, independentEdge, rawMo
   const scorerText = (model.components.homeTopScorers?.length || model.components.awayTopScorers?.length)
     ? `Scorer memory: ${fixture.homeTeam} top recent scorers ${formatNames(model.components.homeTopScorers)}; ${fixture.awayTeam} top recent scorers ${formatNames(model.components.awayTopScorers)}.`
     : "";
+  const tournamentText = model.components.tournamentPhase
+    ? `Tournament context: ${model.components.tournamentContextNote || model.components.tournamentPhase}; group-game numbers ${model.components.homeGroupGameNumber ?? "?"}-${model.components.awayGroupGameNumber ?? "?"}; xG adjustment ${model.components.tournamentExpectedGoalsAdjustment}, BTTS adjustment ${model.components.tournamentBttsAdjustment}, draw lift ${model.components.tournamentDrawLift}.`
+    : "";
   const notes = [
     `${selectionLabel({ fixture, market, outcome })} is priced at ${odds.decimalOdds}; raw AI probability ${round(rawModelProbability * 100, 1)}%, market-adjusted probability ${round(modelProbability * 100, 1)}%, market view ${round(marketImpliedProbability * 100, 1)}%.`,
     `Independent edge ${round(independentEdge * 100, 2)}%, final value edge ${round(edge * 100, 2)}%, backed by ${independentEvidence.count} non-market signal(s): ${independentEvidence.signals.join(", ") || "none yet"}.`,
@@ -1031,6 +1237,7 @@ function buildLegThesis({ fixture, market, outcome, edge, independentEdge, rawMo
     tacticalText,
     scorerText,
     heatText,
+    tournamentText,
     `Market focus: ${marketFocus.reasons.join("; ") || "general value check"}.`,
     learning.reasons.length ? `Outcome learning: ${learning.reasons.join("; ")}.` : "Outcome learning: waiting for enough settled bets before adjusting.",
     movementText,
@@ -1072,6 +1279,8 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
   const dataCompleteness = Number(model.components.dataCompleteness || 0);
   const heatStress = Number(model.components.heatStress || 0);
   const heatConfidence = Number(model.components.heatConfidence || 0);
+  const openingCaution = Number(model.components.openingGameCaution || 0);
+  const bothOpeningGroupGame = Boolean(model.components.bothOpeningGroupGame);
   const appetite = riskAppetite(policy);
   const reasons = [];
   let score = 0;
@@ -1083,6 +1292,13 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
     } else if (expectedGoals < 2.28) {
       score -= 8;
       reasons.push(`goal model is low at ${expectedGoals} expected goals`);
+    }
+
+    if (openingCaution > 0 && expectedGoals < 2.92) {
+      score -= bothOpeningGroupGame ? 4 : 2;
+      reasons.push("opening group-game caution cools marginal over-2.5 bets");
+    } else if (openingCaution > 0 && expectedGoals >= 3.05) {
+      reasons.push("goal case remains strong after opening-game caution");
     }
   }
 
@@ -1107,6 +1323,13 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
       score -= 4;
       reasons.push(`20-match BTTS history is low at ${round(bttsHistory * 100, 1)}%`);
     }
+
+    if (openingCaution > 0 && expectedGoals < 2.85) {
+      score -= bothOpeningGroupGame ? 5 : 2.5;
+      reasons.push("opening group-game caution asks BTTS to clear a higher bar");
+    } else if (openingCaution > 0 && lowerTeamExpectedGoals >= 1 && expectedGoals >= 2.95) {
+      reasons.push("BTTS survives opening-game caution because both sides still project scoring threat");
+    }
   }
 
   if (market === "under_2_5_goals" || (market === "both_teams_to_score" && outcome === "No")) {
@@ -1130,9 +1353,19 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
       score += 3;
       reasons.push(`20-match clean-sheet signal is useful at ${round(cleanSheetHistory * 100, 1)}%`);
     }
+
+    if (openingCaution > 0 && expectedGoals <= 2.58) {
+      score += bothOpeningGroupGame ? 3 : 1.5;
+      reasons.push("opening group-game caution supports a tighter first-game angle");
+    }
   }
 
   if (market === "match_winner") {
+    if (outcome === "Draw" && openingCaution > 0 && Math.abs(Number(model.components.independentResultEdge || 0)) <= 42) {
+      score += bothOpeningGroupGame ? 3 : 1.5;
+      reasons.push("opening group-game caution gives the draw a small tournament-pressure lift");
+    }
+
     if (styleEdge >= 18 || memoryEdge >= 10) {
       score += 4;
       reasons.push("team/result market backed by style or memory edge");

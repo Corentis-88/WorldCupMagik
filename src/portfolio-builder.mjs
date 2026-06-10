@@ -315,6 +315,16 @@ function scoreMostLikelyCombo(legs, target, rank) {
         awayBttsRate: leg.components?.awayBttsRate,
         homeOver25Rate: leg.components?.homeOver25Rate,
         awayOver25Rate: leg.components?.awayOver25Rate,
+        tournamentPhase: leg.components?.tournamentPhase,
+        homeGroupGameNumber: leg.components?.homeGroupGameNumber,
+        awayGroupGameNumber: leg.components?.awayGroupGameNumber,
+        bothOpeningGroupGame: leg.components?.bothOpeningGroupGame,
+        oneOpeningGroupGame: leg.components?.oneOpeningGroupGame,
+        openingGameCaution: leg.components?.openingGameCaution,
+        tournamentExpectedGoalsAdjustment: leg.components?.tournamentExpectedGoalsAdjustment,
+        tournamentBttsAdjustment: leg.components?.tournamentBttsAdjustment,
+        tournamentDrawLift: leg.components?.tournamentDrawLift,
+        tournamentContextNote: leg.components?.tournamentContextNote,
         confidenceReasons: leg.components?.confidenceReasons,
         starterLikelihood: leg.components?.starterLikelihood,
         projectedMinutes: leg.components?.projectedMinutes,
@@ -496,6 +506,10 @@ function mostLikelyPortfolioPenalty(leg, legCount) {
     penalty += 0.035;
   }
 
+  if (isOpeningGroupGoalLeg(leg) && legCount >= 4) {
+    penalty += 0.018 + pressure * 0.026;
+  }
+
   return clamp(penalty * pressure, 0, 0.12);
 }
 
@@ -603,6 +617,7 @@ function portfolioCorrelationProfile(legs, { legCount = legs.length, appetite = 
   const dateCounts = countBy(legs.map((leg) => fixtureDateKey(leg)).filter(Boolean), (date) => date);
   const heatLegCount = legs.filter((leg) => Number(leg.components?.heatStress || 0) >= 0.55 && Number(leg.components?.heatConfidence || 0) >= 0.3).length;
   const scorerCount = legs.filter((leg) => leg.market === "anytime_scorer").length;
+  const openingGoalCount = legs.filter(isOpeningGroupGoalLeg).length;
   const reasons = [];
   let penalty = 0;
 
@@ -650,6 +665,14 @@ function portfolioCorrelationProfile(legs, { legCount = legs.length, appetite = 
     reasons.push(`${scorerCount} scorer legs`);
   }
 
+  const openingGoalAllowance = legCount >= 8 ? 2 + Math.floor(appetite * 1.5) : legCount >= 6 ? 2 : legCount >= 4 ? 1 : legCount;
+  const openingGoalExcess = Math.max(0, openingGoalCount - openingGoalAllowance);
+
+  if (openingGoalExcess) {
+    penalty += openingGoalExcess * (legCount >= 8 ? 3.6 : 3.1);
+    reasons.push(`${openingGoalCount} opening-game goal legs`);
+  }
+
   const pressure = survivalPressureForLegCount(legCount);
   const appetiteRelief = 1 - clamp(appetite, 0, 1) * 0.3;
   const finalPenalty = penalty * (0.45 + pressure * 0.75) * appetiteRelief;
@@ -661,7 +684,8 @@ function portfolioCorrelationProfile(legs, { legCount = legs.length, appetite = 
     repeatedTeamCount,
     sameDateCluster,
     heatLegCount,
-    scorerCount
+    scorerCount,
+    openingGoalCount
   };
 }
 
@@ -673,7 +697,8 @@ function emptyCorrelationProfile() {
     repeatedTeamCount: 0,
     sameDateCluster: 0,
     heatLegCount: 0,
-    scorerCount: 0
+    scorerCount: 0,
+    openingGoalCount: 0
   };
 }
 
@@ -769,6 +794,11 @@ function isBttsYesLeg(leg) {
 
 function isTotalGoalsLeg(leg) {
   return leg.market === "over_2_5_goals" || leg.market === "under_2_5_goals";
+}
+
+function isOpeningGroupGoalLeg(leg) {
+  return Boolean(leg.components?.bothOpeningGroupGame)
+    && (leg.market === "over_2_5_goals" || isBttsYesLeg(leg));
 }
 
 function maximumSameMarketLegs(legCount, market) {
@@ -1007,6 +1037,16 @@ export function scoreCombo(legs, type, policy) {
         awayBttsRate: leg.components?.awayBttsRate,
         homeOver25Rate: leg.components?.homeOver25Rate,
         awayOver25Rate: leg.components?.awayOver25Rate,
+        tournamentPhase: leg.components?.tournamentPhase,
+        homeGroupGameNumber: leg.components?.homeGroupGameNumber,
+        awayGroupGameNumber: leg.components?.awayGroupGameNumber,
+        bothOpeningGroupGame: leg.components?.bothOpeningGroupGame,
+        oneOpeningGroupGame: leg.components?.oneOpeningGroupGame,
+        openingGameCaution: leg.components?.openingGameCaution,
+        tournamentExpectedGoalsAdjustment: leg.components?.tournamentExpectedGoalsAdjustment,
+        tournamentBttsAdjustment: leg.components?.tournamentBttsAdjustment,
+        tournamentDrawLift: leg.components?.tournamentDrawLift,
+        tournamentContextNote: leg.components?.tournamentContextNote,
         confidenceReasons: leg.components?.confidenceReasons,
         starterLikelihood: leg.components?.starterLikelihood,
         projectedMinutes: leg.components?.projectedMinutes,

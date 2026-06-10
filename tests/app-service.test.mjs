@@ -169,6 +169,50 @@ test("most likely long accumulators avoid all-one-market goal slips when alterna
   assert.ok(eightLeg.legs.some((leg) => leg.market === "match_winner"));
 });
 
+test("most likely long accumulators avoid overloading opening-game goal legs", () => {
+  const openingGoalLegs = Array.from({ length: 6 }, (_, index) => ({
+    ...likelyLeg(
+      `opening-goal-${index + 1}`,
+      `opening game ${index + 1}: Over 2.5 goals`,
+      0.72 - index * 0.01,
+      86 - index,
+      1.58 + index * 0.03,
+      { fixtureDate: `2026-06-${String(12 + index).padStart(2, "0")}T19:00:00.000Z` }
+    ),
+    market: "over_2_5_goals",
+    outcome: "Over",
+    components: {
+      intelligenceConfidence: 0.78,
+      oddsFreshness: 1,
+      nonMarketSignalCount: 6,
+      expectedGoals: 3.05,
+      homeExpectedGoals: 1.56,
+      awayExpectedGoals: 1.49,
+      bothOpeningGroupGame: true,
+      openingGameCaution: 1
+    }
+  }));
+  const resultLegs = Array.from({ length: 8 }, (_, index) => likelyLeg(
+    `result-option-${index + 1}`,
+    `result option ${index + 1}: team to win`,
+    0.66 - index * 0.004,
+    76 - index,
+    1.56 + index * 0.025,
+    { fixtureDate: `2026-06-${String(12 + index).padStart(2, "0")}T21:00:00.000Z` }
+  ));
+  const picks = buildMostLikelyPicks([...openingGoalLegs, ...resultLegs], {
+    riskProfile: {
+      minLegEdge: 0,
+      minLegConfidence: 0.5
+    }
+  });
+  const eightLeg = picks.find((pick) => pick.category === "accumulator_8");
+
+  assert.ok(eightLeg);
+  const openingGoalCount = eightLeg.legs.filter((leg) => leg.components?.bothOpeningGroupGame && leg.market === "over_2_5_goals").length;
+  assert.ok(openingGoalCount <= 3, `opening goal exposure was ${openingGoalCount}`);
+});
+
 test("most likely long accumulators limit repeated team correlation when alternatives exist", () => {
   const canadaLegs = Array.from({ length: 6 }, (_, index) => likelyLeg(
     `canada-${index + 1}`,

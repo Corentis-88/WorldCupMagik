@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { buildRiskPolicy } from "../src/app-service.mjs";
 import { buildBetRecommendations } from "../src/portfolio-builder.mjs";
-import { buildLegCandidates, fixtureModel } from "../src/scoring.mjs";
+import { buildLegCandidates, buildTournamentContextByFixture, fixtureModel } from "../src/scoring.mjs";
 import basePolicy from "../config/engine-policy.json" with { type: "json" };
 
 const fixtures = [
@@ -116,6 +116,66 @@ test("heat layer is capped as a small result and goals adjustment", () => {
   assert.ok(model.components.heatExpectedGoalsAdjustment >= -0.15);
   assert.ok(model.components.expectedGoals < 2.75);
   assert.ok(model.components.heatStress <= 1);
+});
+
+test("tournament context applies a capped opening-game caution to goal markets", () => {
+  const fixtureRecord = fixture("qat-sui", "Qatar", "Switzerland", "2026-06-13T20:00:00.000Z");
+  const homeStats = stats("Qatar", 1690, 1.6, 1.45, 1.2, 51);
+  const awayStats = stats("Switzerland", 1740, 1.7, 1.48, 1.05, 55);
+  const middleContext = {
+    phase: "middle_group_game",
+    homeGroupGameNumber: 2,
+    awayGroupGameNumber: 2,
+    bothOpeningGroupGame: false,
+    oneOpeningGroupGame: false,
+    note: "Middle group game."
+  };
+  const openingContext = {
+    phase: "opening_group_game",
+    homeGroupGameNumber: 1,
+    awayGroupGameNumber: 1,
+    bothOpeningGroupGame: true,
+    oneOpeningGroupGame: false,
+    note: "Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets."
+  };
+  const middle = fixtureModel({
+    fixture: fixtureRecord,
+    homeStats,
+    awayStats,
+    newsByTeam: new Map(),
+    tournamentContext: middleContext
+  });
+  const opening = fixtureModel({
+    fixture: fixtureRecord,
+    homeStats,
+    awayStats,
+    newsByTeam: new Map(),
+    tournamentContext: openingContext
+  });
+
+  assert.ok(opening.components.expectedGoals < middle.components.expectedGoals);
+  assert.ok(opening.rawMarketProbabilities.over_2_5_goals.Over < middle.rawMarketProbabilities.over_2_5_goals.Over);
+  assert.ok(opening.rawMarketProbabilities.both_teams_to_score.Yes < middle.rawMarketProbabilities.both_teams_to_score.Yes);
+  assert.ok(opening.rawMarketProbabilities.match_winner.Draw > middle.rawMarketProbabilities.match_winner.Draw);
+  assert.equal(opening.components.bothOpeningGroupGame, true);
+  assert.ok(opening.components.tournamentContextNote.includes("don't-lose-first"));
+});
+
+test("tournament context counts group-game order from the known fixture list and ignores duplicate pair rows", () => {
+  const context = buildTournamentContextByFixture([
+    fixture("tun-jpn-a", "Tunisia", "Japan", "2026-06-15T03:00:00.000Z"),
+    fixture("ned-swe", "Netherlands", "Sweden", "2026-06-15T18:00:00.000Z"),
+    fixture("tun-jpn-b", "Tunisia", "Japan", "2026-06-16T03:00:00.000Z"),
+    fixture("swe-tun", "Sweden", "Tunisia", "2026-06-20T18:00:00.000Z"),
+    fixture("jpn-ned", "Japan", "Netherlands", "2026-06-20T20:00:00.000Z")
+  ]);
+
+  assert.equal(context.get("tun-jpn-a").bothOpeningGroupGame, true);
+  assert.equal(context.get("tun-jpn-b").duplicateFixture, true);
+  assert.equal(context.get("tun-jpn-b").homeGroupGameNumber, 1);
+  assert.equal(context.get("swe-tun").homeGroupGameNumber, 2);
+  assert.equal(context.get("swe-tun").awayGroupGameNumber, 2);
+  assert.equal(context.get("swe-tun").phase, "middle_group_game");
 });
 
 test("fixture model exposes passing and tactical intelligence in the style edge", () => {
