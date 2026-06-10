@@ -1,6 +1,6 @@
 {
-  "id": "app_scan_f19c6004",
-  "createdAt": "2026-06-10T19:46:14.472Z",
+  "id": "app_scan_9864cb53",
+  "createdAt": "2026-06-10T22:23:42.392Z",
   "scheduled": true,
   "settings": {
     "stake": 10,
@@ -41,9 +41,9 @@
     "freshScorerOddsRecords": 0,
     "freshHeatRecords": 17,
     "freshSquadDepthRecords": 48,
-    "oddsHistoryRecords": 38121,
+    "oddsHistoryRecords": 39524,
     "scorerOddsHistoryRecords": 0,
-    "heatHistoryRecords": 400,
+    "heatHistoryRecords": 417,
     "squadDepthHistoryRecords": 48,
     "playerStatsRecords": 809,
     "newsArticleCount": 36,
@@ -52,7 +52,7 @@
     "fixtureOddsCoverage": 0.911,
     "fixtureHeatCoverage": 0.5,
     "squadDepthCoverage": 1,
-    "fixtureNewsCoverage": 0.688,
+    "fixtureNewsCoverage": 0.542,
     "message": "Real public-web data was gathered and scored. Source misses are recorded instead of filled with made-up data."
   },
   "sourceHealth": {
@@ -67,7 +67,7 @@
         "ok": 50,
         "empty": 0,
         "error": 5,
-        "records": 3100
+        "records": 3101
       },
       "team_profile": {
         "ok": 47,
@@ -102,8 +102,8 @@
     },
     "failures": [
       {
-        "id": "source_f21cee79",
-        "createdAt": "2026-06-10T19:46:14.472Z",
+        "id": "source_a0acd3c8",
+        "createdAt": "2026-06-10T22:23:42.392Z",
         "kind": "team_profile",
         "source": "Canada public profile 1",
         "url": "https://en.wikipedia.org/wiki/Canada_national_football_team",
@@ -112,8 +112,8 @@
         "reason": "Fetched public team page but found no manager/profile fields for Canada."
       },
       {
-        "id": "source_aaa815fe",
-        "createdAt": "2026-06-10T19:46:14.472Z",
+        "id": "source_5937fb4d",
+        "createdAt": "2026-06-10T22:23:42.392Z",
         "kind": "team_profile",
         "source": "Canada public profile 2",
         "url": "https://en.wikipedia.org/wiki/Canada_national_soccer_team",
@@ -122,8 +122,8 @@
         "reason": "Fetched public team page but found no manager/profile fields for Canada."
       },
       {
-        "id": "source_ca09b8a9",
-        "createdAt": "2026-06-10T19:46:14.472Z",
+        "id": "source_78999df8",
+        "createdAt": "2026-06-10T22:23:42.392Z",
         "kind": "stats",
         "source": "USA public results 1",
         "url": "https://en.wikipedia.org/wiki/United_States_men's_national_football_team_results_(2020%E2%80%93present)",
@@ -132,8 +132,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_93c0e224",
-        "createdAt": "2026-06-10T19:46:14.472Z",
+        "id": "source_4250c773",
+        "createdAt": "2026-06-10T22:23:42.392Z",
         "kind": "team_profile",
         "source": "USA public profile 1",
         "url": "https://en.wikipedia.org/wiki/United_States_men's_national_football_team",
@@ -142,8 +142,8 @@
         "reason": "Fetched public team page but found no manager/profile fields for USA."
       },
       {
-        "id": "source_96de9d07",
-        "createdAt": "2026-06-10T19:46:14.472Z",
+        "id": "source_456e8256",
+        "createdAt": "2026-06-10T22:23:42.392Z",
         "kind": "stats",
         "source": "Australia public results 1",
         "url": "https://en.wikipedia.org/wiki/Australia_national_football_team_results_(2020%E2%80%93present)",
@@ -152,8 +152,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_faa06a83",
-        "createdAt": "2026-06-10T19:46:14.472Z",
+        "id": "source_a9304fd2",
+        "createdAt": "2026-06-10T22:23:42.392Z",
         "kind": "team_profile",
         "source": "Australia public profile 1",
         "url": "https://en.wikipedia.org/wiki/Australia_national_football_team",
@@ -162,8 +162,8 @@
         "reason": "Fetched public team page but found no manager/profile fields for Australia."
       },
       {
-        "id": "source_7d3c4040",
-        "createdAt": "2026-06-10T19:46:14.472Z",
+        "id": "source_2bcc258f",
+        "createdAt": "2026-06-10T22:23:42.392Z",
         "kind": "team_profile",
         "source": "Australia public profile 2",
         "url": "https://en.wikipedia.org/wiki/Australia_national_soccer_team",
@@ -172,8 +172,8 @@
         "reason": "Fetched public team page but found no manager/profile fields for Australia."
       },
       {
-        "id": "source_7b58b467",
-        "createdAt": "2026-06-10T19:46:14.472Z",
+        "id": "source_29e899b6",
+        "createdAt": "2026-06-10T22:23:42.392Z",
         "kind": "stats",
         "source": "Haiti public results 1",
         "url": "https://en.wikipedia.org/wiki/Haiti_national_football_team_results_(2020%E2%80%93present)",
@@ -182,8 +182,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_c29b908a",
-        "createdAt": "2026-06-10T19:46:14.472Z",
+        "id": "source_712b75d9",
+        "createdAt": "2026-06-10T22:23:42.392Z",
         "kind": "stats",
         "source": "Haiti public results 2",
         "url": "https://en.wikipedia.org/wiki/Haiti_national_soccer_team_results_(2020%E2%80%93present)",
@@ -192,8 +192,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_85bcc309",
-        "createdAt": "2026-06-10T19:46:14.472Z",
+        "id": "source_344ca858",
+        "createdAt": "2026-06-10T22:23:42.392Z",
         "kind": "stats",
         "source": "Haiti public results 3",
         "url": "https://en.wikipedia.org/wiki/Haiti_men%27s_national_soccer_team_results_(2020%E2%80%93present)",
@@ -202,8 +202,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_79d83cdb",
-        "createdAt": "2026-06-10T19:46:14.472Z",
+        "id": "source_2868222a",
+        "createdAt": "2026-06-10T22:23:42.392Z",
         "kind": "team_profile",
         "source": "Sweden public profile 1",
         "url": "https://en.wikipedia.org/wiki/Sweden_national_football_team",
@@ -212,8 +212,8 @@
         "reason": "Fetched public team page but found no manager/profile fields for Sweden."
       },
       {
-        "id": "source_57ec359d",
-        "createdAt": "2026-06-10T19:46:14.472Z",
+        "id": "source_67c1aec",
+        "createdAt": "2026-06-10T22:23:42.392Z",
         "kind": "team_profile",
         "source": "Sweden public profile 2",
         "url": "https://en.wikipedia.org/wiki/Sweden_national_soccer_team",
@@ -222,8 +222,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_b4ea719c",
-        "createdAt": "2026-06-10T19:46:14.472Z",
+        "id": "source_637a56eb",
+        "createdAt": "2026-06-10T22:23:42.392Z",
         "kind": "team_profile",
         "source": "Sweden public profile 3",
         "url": "https://en.wikipedia.org/wiki/Sweden_men%27s_national_soccer_team",
@@ -232,8 +232,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_6d8d9465",
-        "createdAt": "2026-06-10T19:46:14.472Z",
+        "id": "source_1c1d79b4",
+        "createdAt": "2026-06-10T22:23:42.392Z",
         "kind": "team_profile",
         "source": "New Zealand public profile 1",
         "url": "https://en.wikipedia.org/wiki/New_Zealand_national_football_team",
@@ -242,8 +242,8 @@
         "reason": "Fetched public team page but found no manager/profile fields for New Zealand."
       },
       {
-        "id": "source_8fb16622",
-        "createdAt": "2026-06-10T19:46:14.472Z",
+        "id": "source_3e414b71",
+        "createdAt": "2026-06-10T22:23:42.392Z",
         "kind": "news",
         "source": "FIFA World Cup Articles",
         "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
@@ -252,8 +252,8 @@
         "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
       },
       {
-        "id": "source_b2f81e93",
-        "createdAt": "2026-06-10T19:46:14.472Z",
+        "id": "source_618803e2",
+        "createdAt": "2026-06-10T22:23:42.392Z",
         "kind": "odds",
         "source": "OnlyOdds match pages: Canada v Bosnia and Herzegovina",
         "url": "https://worldcup.onlyodds.co.uk/match/canada-v-bosnia-and-herzegovina",
@@ -262,8 +262,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_a9562e85",
-        "createdAt": "2026-06-10T19:46:14.472Z",
+        "id": "source_57e613d4",
+        "createdAt": "2026-06-10T22:23:42.392Z",
         "kind": "odds",
         "source": "OnlyOdds match pages: Switzerland v Bosnia and Herzegovina",
         "url": "https://worldcup.onlyodds.co.uk/match/switzerland-v-bosnia-and-herzegovina",
@@ -272,8 +272,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_4d9d558a",
-        "createdAt": "2026-06-10T19:46:14.472Z",
+        "id": "source_fc2d3ad9",
+        "createdAt": "2026-06-10T22:23:42.392Z",
         "kind": "odds",
         "source": "OnlyOdds match pages: Switzerland v Canada",
         "url": "https://worldcup.onlyodds.co.uk/match/switzerland-v-canada",
@@ -282,8 +282,8 @@
         "reason": "Fetched public match page but found no supported odds offers."
       },
       {
-        "id": "source_3c8aa8b9",
-        "createdAt": "2026-06-10T19:46:14.472Z",
+        "id": "source_eb1a8e08",
+        "createdAt": "2026-06-10T22:23:42.392Z",
         "kind": "odds",
         "source": "OnlyOdds match pages: Bosnia and Herzegovina v Qatar",
         "url": "https://worldcup.onlyodds.co.uk/match/bosnia-and-herzegovina-v-qatar",
@@ -292,8 +292,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_b3ec7f98",
-        "createdAt": "2026-06-10T19:46:14.472Z",
+        "id": "source_627c64e7",
+        "createdAt": "2026-06-10T22:23:42.392Z",
         "kind": "odds",
         "source": "OnlyOdds match pages: Morocco v Haiti",
         "url": "https://worldcup.onlyodds.co.uk/match/morocco-v-haiti",
@@ -335,7 +335,7 @@
     "topTeams": [
       {
         "team": "Tunisia",
-        "learnedEdge": -0.4041,
+        "learnedEdge": -0.4044,
         "confidence": 0.8397,
         "reasons": [
           "20-match form 1.7 PPG, xG 0.982-1.126",
@@ -348,10 +348,10 @@
       },
       {
         "team": "Colombia",
-        "learnedEdge": 0.3684,
+        "learnedEdge": 0.3603,
         "confidence": 0.8397,
         "reasons": [
-          "20-match form 1.6 PPG, xG 1.954-1.558",
+          "20-match form 1.6 PPG, xG 1.918-1.558",
           "recent form improving",
           "3 news item(s), news impact 0.0577",
           "market intelligence 0% movement, consensus 1.469 across 8 bookie(s)",
@@ -361,7 +361,7 @@
       },
       {
         "team": "Spain",
-        "learnedEdge": 0.3641,
+        "learnedEdge": 0.3547,
         "confidence": 0.8611,
         "reasons": [
           "20-match form 2.2 PPG, xG 2.494-1.27",
@@ -374,32 +374,20 @@
       },
       {
         "team": "Mexico",
-        "learnedEdge": 0.3486,
+        "learnedEdge": 0.3489,
         "confidence": 0.8611,
         "reasons": [
           "20-match form 2.05 PPG, xG 1.702-0.838",
           "recent form improving",
-          "41 news item(s), news impact 0.0863",
+          "44 news item(s), news impact 0.087",
           "market intelligence 0% movement, consensus 1.694 across 8 bookie(s)",
           "18 scorer record(s), top scorer signal 0.063",
           "memory currently leans positive"
         ]
       },
       {
-        "team": "Sweden",
-        "learnedEdge": 0.334,
-        "confidence": 0.7711,
-        "reasons": [
-          "20-match form 1.4 PPG, xG 1.846-2.062",
-          "recent form improving",
-          "market intelligence 0% movement, consensus 3.121 across 8 bookie(s)",
-          "12 scorer record(s), top scorer signal 0.099",
-          "memory currently leans positive"
-        ]
-      },
-      {
         "team": "Brazil",
-        "learnedEdge": 0.3323,
+        "learnedEdge": 0.3304,
         "confidence": 0.8611,
         "reasons": [
           "20-match form 2.2 PPG, xG 2.648-1.63",
@@ -409,13 +397,26 @@
           "26 scorer record(s), top scorer signal 0.0765",
           "memory currently leans positive"
         ]
+      },
+      {
+        "team": "Netherlands",
+        "learnedEdge": 0.3116,
+        "confidence": 0.8611,
+        "reasons": [
+          "20-match form 2.1 PPG, xG 2.283-0.982",
+          "recent form improving",
+          "9 news item(s), news impact 0.0418",
+          "market intelligence 0% movement, consensus 1.853 across 8 bookie(s)",
+          "26 scorer record(s), top scorer signal 0.1035",
+          "memory currently leans positive"
+        ]
       }
     ]
   },
   "eligibleLegCount": 104,
   "betslip": [
     {
-      "id": "single_leg_43294446",
+      "id": "single_leg_f1b92995",
       "rank": 1,
       "category": "single",
       "label": "Single",
@@ -433,7 +434,7 @@
       "riskLegCount": 1,
       "legs": [
         {
-          "id": "leg_43294446",
+          "id": "leg_f1b92995",
           "fixtureId": "fixture_f3ee58df",
           "fixtureDate": "2026-06-22T21:00:00.000Z",
           "homeTeam": "France",
@@ -509,13 +510,13 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "France vs Iraq: Both teams to score: Yes is priced at 2.75; raw AI probability 63.4%, market-adjusted probability 60.2%, market view 36.9%. Independent edge 26.48%, final value edge 25.31%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.24 (1.85-1.4), rating edge 30.9, style edge 14.02, memory edge -4.8. Odds intelligence is capped: market result edge 41.77, consensus probability 0.829 where available. News impact is 0.121 for France and 0.161 for Iraq. Tactical memory: France 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Iraq 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge 0.8. Scorer memory: France top recent scorers Mbappé, Cherki, Ekitike; Iraq top recent scorers Al-Hamadi, Doski, Hussein. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.85-1.40 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.71 to 2.71; best price is 1.48% over average. Confidence 79.8% after odds freshness and data completeness checks."
+          "thesis": "France vs Iraq: Both teams to score: Yes is priced at 2.75; raw AI probability 63.4%, market-adjusted probability 60.2%, market view 36.9%. Independent edge 26.48%, final value edge 25.31%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.24 (1.85-1.4), rating edge 30.6, style edge 14.02, memory edge -5.56. Odds intelligence is capped: market result edge 41.77, consensus probability 0.829 where available. News impact is 0.121 for France and 0.161 for Iraq. Tactical memory: France 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Iraq 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge 0.8. Scorer memory: France top recent scorers Mbappé, Cherki, Ekitike; Iraq top recent scorers Al-Hamadi, Doski, Hussein. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.85-1.40 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.71 to 2.71; best price is 1.48% over average. Confidence 79.8% after odds freshness and data completeness checks."
         }
       ],
       "thesis": "single at combined odds 2.75 with estimated slip chance 58.53% and average leg survival 58.5%. Expected value is 65.63%, independent edge averages 26.48%, and the model has 6 non-market signals per leg. Short-slip controls keep model chance ahead of price hunting.  1 calculated-risk/value leg(s) stop this from being a favourite-only single. No high-implied-probability favourite crowding. Heat layer neutral or low impact on this slip. Legs: France vs Iraq: Both teams to score: Yes."
     },
     {
-      "id": "double_leg_40cd8de1_leg_97bae52f",
+      "id": "double_leg_ef5d7330_leg_464aca7e",
       "rank": 2,
       "category": "double",
       "label": "Double",
@@ -533,7 +534,7 @@
       "riskLegCount": 2,
       "legs": [
         {
-          "id": "leg_40cd8de1",
+          "id": "leg_ef5d7330",
           "fixtureId": "fixture_cd0e426c",
           "fixtureDate": "2026-06-14T17:00:00.000Z",
           "homeTeam": "Germany",
@@ -610,10 +611,10 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "Germany vs Curaçao: Both teams to score: Yes is priced at 3.4; raw AI probability 65.7%, market-adjusted probability 61.8%, market view 32.3%. Independent edge 33.44%, final value edge 32.58%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, 20-match BTTS history, heat does not strongly suppress tempo. Fixture model: expected goals 3.66 (1.97-1.69), rating edge 19.2, style edge 4.16, memory edge -12.56. Odds intelligence is capped: market result edge 49.07, consensus probability 0.9317 where available. News impact is 0.051 for Germany and 0.122 for Curaçao. Tactical memory: Germany 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Curaçao 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.43. Scorer memory: Germany top recent scorers Woltemade, Gnabry, Sané; Curaçao top recent scorers Bacuna, Gervane Kastaneer, Janga. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.97-1.69 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.1 to 3.1; best price is 9.68% over average. Confidence 81.5% after odds freshness and data completeness checks."
+          "thesis": "Germany vs Curaçao: Both teams to score: Yes is priced at 3.4; raw AI probability 65.7%, market-adjusted probability 61.8%, market view 32.3%. Independent edge 33.44%, final value edge 32.58%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, 20-match BTTS history, heat does not strongly suppress tempo. Fixture model: expected goals 3.66 (1.97-1.69), rating edge 19.4, style edge 4.16, memory edge -12.18. Odds intelligence is capped: market result edge 49.07, consensus probability 0.9317 where available. News impact is 0.075 for Germany and 0.122 for Curaçao. Tactical memory: Germany 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Curaçao 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.43. Scorer memory: Germany top recent scorers Woltemade, Gnabry, Sané; Curaçao top recent scorers Bacuna, Gervane Kastaneer, Janga. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.97-1.69 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.1 to 3.1; best price is 9.68% over average. Confidence 81.5% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_97bae52f",
+          "id": "leg_464aca7e",
           "fixtureId": "fixture_b4d82456",
           "fixtureDate": "2026-06-20T00:30:00.000Z",
           "homeTeam": "Brazil",
@@ -689,13 +690,13 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "Brazil vs Haiti: Both teams to score: Yes is priced at 2.63; raw AI probability 68%, market-adjusted probability 64.5%, market view 38.7%. Independent edge 29.34%, final value edge 28.06%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.75 (2.1-1.65), rating edge 123.4, style edge 16.59, memory edge 9.35. Odds intelligence is capped: market result edge 46.56, consensus probability 0.8942 where available. News impact is 0.069 for Brazil and 0.132 for Haiti. Tactical memory: Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Haiti 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.08. Scorer memory: Brazil top recent scorers Danilo, Endrick, Bremer; Haiti top recent scorers Gervane Kastaneer, Jearl Margaritha, Kenji Gorré. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 2.10-1.65 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.5867 to 2.5867; best price is 1.67% over average. Confidence 81.9% after odds freshness and data completeness checks."
+          "thesis": "Brazil vs Haiti: Both teams to score: Yes is priced at 2.63; raw AI probability 68%, market-adjusted probability 64.5%, market view 38.7%. Independent edge 29.34%, final value edge 28.06%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.75 (2.1-1.65), rating edge 123.8, style edge 16.59, memory edge 10.65. Odds intelligence is capped: market result edge 46.56, consensus probability 0.8942 where available. News impact is 0.069 for Brazil and 0.131 for Haiti. Tactical memory: Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Haiti 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.08. Scorer memory: Brazil top recent scorers Danilo, Endrick, Bremer; Haiti top recent scorers Gervane Kastaneer, Jearl Margaritha, Kenji Gorré. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 2.10-1.65 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.5867 to 2.5867; best price is 1.67% over average. Confidence 81.9% after odds freshness and data completeness checks."
         }
       ],
       "thesis": "double at combined odds 8.94 with estimated slip chance 34.39% and average leg survival 58.7%. Expected value is 256.31%, independent edge averages 31.39%, and the model has 6.5 non-market signals per leg. Short-slip controls keep model chance ahead of price hunting.  2 calculated-risk/value leg(s) stop this from being a favourite-only double. No high-implied-probability favourite crowding. Heat layer neutral or low impact on this slip. Legs: Germany vs Curaçao: Both teams to score: Yes | Brazil vs Haiti: Both teams to score: Yes."
     },
     {
-      "id": "trixie_leg_40cd8de1_leg_da1034cd_leg_97bae52f",
+      "id": "trixie_leg_ef5d7330_leg_88a01a1c_leg_464aca7e",
       "rank": 3,
       "category": "trixie",
       "label": "Trixie",
@@ -713,7 +714,7 @@
       "riskLegCount": 3,
       "legs": [
         {
-          "id": "leg_40cd8de1",
+          "id": "leg_ef5d7330",
           "fixtureId": "fixture_cd0e426c",
           "fixtureDate": "2026-06-14T17:00:00.000Z",
           "homeTeam": "Germany",
@@ -790,10 +791,10 @@
             ],
             "survivalPenalty": 0.0058
           },
-          "thesis": "Germany vs Curaçao: Both teams to score: Yes is priced at 3.4; raw AI probability 65.7%, market-adjusted probability 61.8%, market view 32.3%. Independent edge 33.44%, final value edge 32.58%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, 20-match BTTS history, heat does not strongly suppress tempo. Fixture model: expected goals 3.66 (1.97-1.69), rating edge 19.2, style edge 4.16, memory edge -12.56. Odds intelligence is capped: market result edge 49.07, consensus probability 0.9317 where available. News impact is 0.051 for Germany and 0.122 for Curaçao. Tactical memory: Germany 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Curaçao 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.43. Scorer memory: Germany top recent scorers Woltemade, Gnabry, Sané; Curaçao top recent scorers Bacuna, Gervane Kastaneer, Janga. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.97-1.69 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.1 to 3.1; best price is 9.68% over average. Confidence 81.5% after odds freshness and data completeness checks."
+          "thesis": "Germany vs Curaçao: Both teams to score: Yes is priced at 3.4; raw AI probability 65.7%, market-adjusted probability 61.8%, market view 32.3%. Independent edge 33.44%, final value edge 32.58%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, 20-match BTTS history, heat does not strongly suppress tempo. Fixture model: expected goals 3.66 (1.97-1.69), rating edge 19.4, style edge 4.16, memory edge -12.18. Odds intelligence is capped: market result edge 49.07, consensus probability 0.9317 where available. News impact is 0.075 for Germany and 0.122 for Curaçao. Tactical memory: Germany 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Curaçao 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.43. Scorer memory: Germany top recent scorers Woltemade, Gnabry, Sané; Curaçao top recent scorers Bacuna, Gervane Kastaneer, Janga. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.97-1.69 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.1 to 3.1; best price is 9.68% over average. Confidence 81.5% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_da1034cd",
+          "id": "leg_88a01a1c",
           "fixtureId": "fixture_ae576b27",
           "fixtureDate": "2026-06-15T16:00:00.000Z",
           "homeTeam": "Spain",
@@ -869,10 +870,10 @@
             ],
             "survivalPenalty": 0.0068
           },
-          "thesis": "Spain vs Cape Verde: Both teams to score: Yes is priced at 2.7; raw AI probability 56.9%, market-adjusted probability 54.6%, market view 38.4%. Independent edge 18.44%, final value edge 17.87%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.04 (1.81-1.23), rating edge 76.3, style edge 18.37, memory edge 12.8. Odds intelligence is capped: market result edge 45.29, consensus probability 0.8768 where available. News impact is 0.093 for Spain and 0.049 for Cape Verde. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Cape Verde 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.46. Scorer memory: Spain top recent scorers Oyarzabal, Pedri, Morata; Cape Verde top recent scorers Mendes, H. Tavares, Livramento. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.81-1.23 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.6033 to 2.6033; best price is 3.71% over average. Confidence 79.4% after odds freshness and data completeness checks."
+          "thesis": "Spain vs Cape Verde: Both teams to score: Yes is priced at 2.7; raw AI probability 56.9%, market-adjusted probability 54.6%, market view 38.4%. Independent edge 18.44%, final value edge 17.87%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.04 (1.81-1.23), rating edge 76, style edge 18.37, memory edge 11.7. Odds intelligence is capped: market result edge 45.29, consensus probability 0.8768 where available. News impact is 0.093 for Spain and 0.049 for Cape Verde. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Cape Verde 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.46. Scorer memory: Spain top recent scorers Oyarzabal, Pedri, Morata; Cape Verde top recent scorers Mendes, H. Tavares, Livramento. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.81-1.23 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.6033 to 2.6033; best price is 3.71% over average. Confidence 79.4% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_97bae52f",
+          "id": "leg_464aca7e",
           "fixtureId": "fixture_b4d82456",
           "fixtureDate": "2026-06-20T00:30:00.000Z",
           "homeTeam": "Brazil",
@@ -948,13 +949,13 @@
             ],
             "survivalPenalty": 0.006
           },
-          "thesis": "Brazil vs Haiti: Both teams to score: Yes is priced at 2.63; raw AI probability 68%, market-adjusted probability 64.5%, market view 38.7%. Independent edge 29.34%, final value edge 28.06%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.75 (2.1-1.65), rating edge 123.4, style edge 16.59, memory edge 9.35. Odds intelligence is capped: market result edge 46.56, consensus probability 0.8942 where available. News impact is 0.069 for Brazil and 0.132 for Haiti. Tactical memory: Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Haiti 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.08. Scorer memory: Brazil top recent scorers Danilo, Endrick, Bremer; Haiti top recent scorers Gervane Kastaneer, Jearl Margaritha, Kenji Gorré. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 2.10-1.65 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.5867 to 2.5867; best price is 1.67% over average. Confidence 81.9% after odds freshness and data completeness checks."
+          "thesis": "Brazil vs Haiti: Both teams to score: Yes is priced at 2.63; raw AI probability 68%, market-adjusted probability 64.5%, market view 38.7%. Independent edge 29.34%, final value edge 28.06%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.75 (2.1-1.65), rating edge 123.8, style edge 16.59, memory edge 10.65. Odds intelligence is capped: market result edge 46.56, consensus probability 0.8942 where available. News impact is 0.069 for Brazil and 0.131 for Haiti. Tactical memory: Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Haiti 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.08. Scorer memory: Brazil top recent scorers Danilo, Endrick, Bremer; Haiti top recent scorers Gervane Kastaneer, Jearl Margaritha, Kenji Gorré. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 2.10-1.65 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.5867 to 2.5867; best price is 1.67% over average. Confidence 81.9% after odds freshness and data completeness checks."
         }
       ],
       "thesis": "trixie at combined odds 24.14 with estimated slip chance 17.05% and average leg survival 55.5%. Expected value is 424.99%, independent edge averages 27.07%, and the model has 6.3 non-market signals per leg. Short-slip controls keep model chance ahead of price hunting. Correlation control: market families and team repeats look acceptable. 3 calculated-risk/value leg(s) stop this from being a favourite-only trixie. No high-implied-probability favourite crowding. Heat layer neutral or low impact on this slip. Legs: Germany vs Curaçao: Both teams to score: Yes | Spain vs Cape Verde: Both teams to score: Yes | Brazil vs Haiti: Both teams to score: Yes."
     },
     {
-      "id": "accumulator_leg_40cd8de1_leg_da1034cd_leg_97bae52f",
+      "id": "accumulator_leg_ef5d7330_leg_88a01a1c_leg_464aca7e",
       "rank": 4,
       "category": "accumulator_3",
       "label": "3-leg accumulator",
@@ -972,7 +973,7 @@
       "riskLegCount": 3,
       "legs": [
         {
-          "id": "leg_40cd8de1",
+          "id": "leg_ef5d7330",
           "fixtureId": "fixture_cd0e426c",
           "fixtureDate": "2026-06-14T17:00:00.000Z",
           "homeTeam": "Germany",
@@ -1049,10 +1050,10 @@
             ],
             "survivalPenalty": 0.0058
           },
-          "thesis": "Germany vs Curaçao: Both teams to score: Yes is priced at 3.4; raw AI probability 65.7%, market-adjusted probability 61.8%, market view 32.3%. Independent edge 33.44%, final value edge 32.58%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, 20-match BTTS history, heat does not strongly suppress tempo. Fixture model: expected goals 3.66 (1.97-1.69), rating edge 19.2, style edge 4.16, memory edge -12.56. Odds intelligence is capped: market result edge 49.07, consensus probability 0.9317 where available. News impact is 0.051 for Germany and 0.122 for Curaçao. Tactical memory: Germany 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Curaçao 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.43. Scorer memory: Germany top recent scorers Woltemade, Gnabry, Sané; Curaçao top recent scorers Bacuna, Gervane Kastaneer, Janga. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.97-1.69 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.1 to 3.1; best price is 9.68% over average. Confidence 81.5% after odds freshness and data completeness checks."
+          "thesis": "Germany vs Curaçao: Both teams to score: Yes is priced at 3.4; raw AI probability 65.7%, market-adjusted probability 61.8%, market view 32.3%. Independent edge 33.44%, final value edge 32.58%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, 20-match BTTS history, heat does not strongly suppress tempo. Fixture model: expected goals 3.66 (1.97-1.69), rating edge 19.4, style edge 4.16, memory edge -12.18. Odds intelligence is capped: market result edge 49.07, consensus probability 0.9317 where available. News impact is 0.075 for Germany and 0.122 for Curaçao. Tactical memory: Germany 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Curaçao 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.43. Scorer memory: Germany top recent scorers Woltemade, Gnabry, Sané; Curaçao top recent scorers Bacuna, Gervane Kastaneer, Janga. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.97-1.69 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.1 to 3.1; best price is 9.68% over average. Confidence 81.5% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_da1034cd",
+          "id": "leg_88a01a1c",
           "fixtureId": "fixture_ae576b27",
           "fixtureDate": "2026-06-15T16:00:00.000Z",
           "homeTeam": "Spain",
@@ -1128,10 +1129,10 @@
             ],
             "survivalPenalty": 0.0068
           },
-          "thesis": "Spain vs Cape Verde: Both teams to score: Yes is priced at 2.7; raw AI probability 56.9%, market-adjusted probability 54.6%, market view 38.4%. Independent edge 18.44%, final value edge 17.87%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.04 (1.81-1.23), rating edge 76.3, style edge 18.37, memory edge 12.8. Odds intelligence is capped: market result edge 45.29, consensus probability 0.8768 where available. News impact is 0.093 for Spain and 0.049 for Cape Verde. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Cape Verde 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.46. Scorer memory: Spain top recent scorers Oyarzabal, Pedri, Morata; Cape Verde top recent scorers Mendes, H. Tavares, Livramento. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.81-1.23 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.6033 to 2.6033; best price is 3.71% over average. Confidence 79.4% after odds freshness and data completeness checks."
+          "thesis": "Spain vs Cape Verde: Both teams to score: Yes is priced at 2.7; raw AI probability 56.9%, market-adjusted probability 54.6%, market view 38.4%. Independent edge 18.44%, final value edge 17.87%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.04 (1.81-1.23), rating edge 76, style edge 18.37, memory edge 11.7. Odds intelligence is capped: market result edge 45.29, consensus probability 0.8768 where available. News impact is 0.093 for Spain and 0.049 for Cape Verde. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Cape Verde 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.46. Scorer memory: Spain top recent scorers Oyarzabal, Pedri, Morata; Cape Verde top recent scorers Mendes, H. Tavares, Livramento. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.81-1.23 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.6033 to 2.6033; best price is 3.71% over average. Confidence 79.4% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_97bae52f",
+          "id": "leg_464aca7e",
           "fixtureId": "fixture_b4d82456",
           "fixtureDate": "2026-06-20T00:30:00.000Z",
           "homeTeam": "Brazil",
@@ -1207,13 +1208,13 @@
             ],
             "survivalPenalty": 0.006
           },
-          "thesis": "Brazil vs Haiti: Both teams to score: Yes is priced at 2.63; raw AI probability 68%, market-adjusted probability 64.5%, market view 38.7%. Independent edge 29.34%, final value edge 28.06%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.75 (2.1-1.65), rating edge 123.4, style edge 16.59, memory edge 9.35. Odds intelligence is capped: market result edge 46.56, consensus probability 0.8942 where available. News impact is 0.069 for Brazil and 0.132 for Haiti. Tactical memory: Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Haiti 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.08. Scorer memory: Brazil top recent scorers Danilo, Endrick, Bremer; Haiti top recent scorers Gervane Kastaneer, Jearl Margaritha, Kenji Gorré. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 2.10-1.65 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.5867 to 2.5867; best price is 1.67% over average. Confidence 81.9% after odds freshness and data completeness checks."
+          "thesis": "Brazil vs Haiti: Both teams to score: Yes is priced at 2.63; raw AI probability 68%, market-adjusted probability 64.5%, market view 38.7%. Independent edge 29.34%, final value edge 28.06%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.75 (2.1-1.65), rating edge 123.8, style edge 16.59, memory edge 10.65. Odds intelligence is capped: market result edge 46.56, consensus probability 0.8942 where available. News impact is 0.069 for Brazil and 0.131 for Haiti. Tactical memory: Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Haiti 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.08. Scorer memory: Brazil top recent scorers Danilo, Endrick, Bremer; Haiti top recent scorers Gervane Kastaneer, Jearl Margaritha, Kenji Gorré. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 2.10-1.65 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.5867 to 2.5867; best price is 1.67% over average. Confidence 81.9% after odds freshness and data completeness checks."
         }
       ],
       "thesis": "accumulator at combined odds 24.14 with estimated slip chance 17.05% and average leg survival 55.5%. Expected value is 424.99%, independent edge averages 27.07%, and the model has 6.3 non-market signals per leg. Short-slip controls keep model chance ahead of price hunting. Correlation control: market families and team repeats look acceptable. 3 calculated-risk/value leg(s) stop this from being a favourite-only accumulator. No high-implied-probability favourite crowding. Heat layer neutral or low impact on this slip. Legs: Germany vs Curaçao: Both teams to score: Yes | Spain vs Cape Verde: Both teams to score: Yes | Brazil vs Haiti: Both teams to score: Yes."
     },
     {
-      "id": "accumulator_leg_40cd8de1_leg_da1034cd_leg_97bae52f_leg_43294",
+      "id": "accumulator_leg_ef5d7330_leg_88a01a1c_leg_464aca7e_leg_f1b92",
       "rank": 5,
       "category": "accumulator_4",
       "label": "4-leg accumulator",
@@ -1231,7 +1232,7 @@
       "riskLegCount": 4,
       "legs": [
         {
-          "id": "leg_40cd8de1",
+          "id": "leg_ef5d7330",
           "fixtureId": "fixture_cd0e426c",
           "fixtureDate": "2026-06-14T17:00:00.000Z",
           "homeTeam": "Germany",
@@ -1308,10 +1309,10 @@
             ],
             "survivalPenalty": 0.0225
           },
-          "thesis": "Germany vs Curaçao: Both teams to score: Yes is priced at 3.4; raw AI probability 65.7%, market-adjusted probability 61.8%, market view 32.3%. Independent edge 33.44%, final value edge 32.58%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, 20-match BTTS history, heat does not strongly suppress tempo. Fixture model: expected goals 3.66 (1.97-1.69), rating edge 19.2, style edge 4.16, memory edge -12.56. Odds intelligence is capped: market result edge 49.07, consensus probability 0.9317 where available. News impact is 0.051 for Germany and 0.122 for Curaçao. Tactical memory: Germany 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Curaçao 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.43. Scorer memory: Germany top recent scorers Woltemade, Gnabry, Sané; Curaçao top recent scorers Bacuna, Gervane Kastaneer, Janga. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.97-1.69 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.1 to 3.1; best price is 9.68% over average. Confidence 81.5% after odds freshness and data completeness checks."
+          "thesis": "Germany vs Curaçao: Both teams to score: Yes is priced at 3.4; raw AI probability 65.7%, market-adjusted probability 61.8%, market view 32.3%. Independent edge 33.44%, final value edge 32.58%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, 20-match BTTS history, heat does not strongly suppress tempo. Fixture model: expected goals 3.66 (1.97-1.69), rating edge 19.4, style edge 4.16, memory edge -12.18. Odds intelligence is capped: market result edge 49.07, consensus probability 0.9317 where available. News impact is 0.075 for Germany and 0.122 for Curaçao. Tactical memory: Germany 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Curaçao 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.43. Scorer memory: Germany top recent scorers Woltemade, Gnabry, Sané; Curaçao top recent scorers Bacuna, Gervane Kastaneer, Janga. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.97-1.69 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.1 to 3.1; best price is 9.68% over average. Confidence 81.5% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_da1034cd",
+          "id": "leg_88a01a1c",
           "fixtureId": "fixture_ae576b27",
           "fixtureDate": "2026-06-15T16:00:00.000Z",
           "homeTeam": "Spain",
@@ -1387,10 +1388,10 @@
             ],
             "survivalPenalty": 0.0204
           },
-          "thesis": "Spain vs Cape Verde: Both teams to score: Yes is priced at 2.7; raw AI probability 56.9%, market-adjusted probability 54.6%, market view 38.4%. Independent edge 18.44%, final value edge 17.87%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.04 (1.81-1.23), rating edge 76.3, style edge 18.37, memory edge 12.8. Odds intelligence is capped: market result edge 45.29, consensus probability 0.8768 where available. News impact is 0.093 for Spain and 0.049 for Cape Verde. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Cape Verde 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.46. Scorer memory: Spain top recent scorers Oyarzabal, Pedri, Morata; Cape Verde top recent scorers Mendes, H. Tavares, Livramento. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.81-1.23 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.6033 to 2.6033; best price is 3.71% over average. Confidence 79.4% after odds freshness and data completeness checks."
+          "thesis": "Spain vs Cape Verde: Both teams to score: Yes is priced at 2.7; raw AI probability 56.9%, market-adjusted probability 54.6%, market view 38.4%. Independent edge 18.44%, final value edge 17.87%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.04 (1.81-1.23), rating edge 76, style edge 18.37, memory edge 11.7. Odds intelligence is capped: market result edge 45.29, consensus probability 0.8768 where available. News impact is 0.093 for Spain and 0.049 for Cape Verde. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Cape Verde 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.46. Scorer memory: Spain top recent scorers Oyarzabal, Pedri, Morata; Cape Verde top recent scorers Mendes, H. Tavares, Livramento. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.81-1.23 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.6033 to 2.6033; best price is 3.71% over average. Confidence 79.4% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_97bae52f",
+          "id": "leg_464aca7e",
           "fixtureId": "fixture_b4d82456",
           "fixtureDate": "2026-06-20T00:30:00.000Z",
           "homeTeam": "Brazil",
@@ -1466,10 +1467,10 @@
             ],
             "survivalPenalty": 0.0128
           },
-          "thesis": "Brazil vs Haiti: Both teams to score: Yes is priced at 2.63; raw AI probability 68%, market-adjusted probability 64.5%, market view 38.7%. Independent edge 29.34%, final value edge 28.06%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.75 (2.1-1.65), rating edge 123.4, style edge 16.59, memory edge 9.35. Odds intelligence is capped: market result edge 46.56, consensus probability 0.8942 where available. News impact is 0.069 for Brazil and 0.132 for Haiti. Tactical memory: Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Haiti 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.08. Scorer memory: Brazil top recent scorers Danilo, Endrick, Bremer; Haiti top recent scorers Gervane Kastaneer, Jearl Margaritha, Kenji Gorré. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 2.10-1.65 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.5867 to 2.5867; best price is 1.67% over average. Confidence 81.9% after odds freshness and data completeness checks."
+          "thesis": "Brazil vs Haiti: Both teams to score: Yes is priced at 2.63; raw AI probability 68%, market-adjusted probability 64.5%, market view 38.7%. Independent edge 29.34%, final value edge 28.06%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.75 (2.1-1.65), rating edge 123.8, style edge 16.59, memory edge 10.65. Odds intelligence is capped: market result edge 46.56, consensus probability 0.8942 where available. News impact is 0.069 for Brazil and 0.131 for Haiti. Tactical memory: Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Haiti 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.08. Scorer memory: Brazil top recent scorers Danilo, Endrick, Bremer; Haiti top recent scorers Gervane Kastaneer, Jearl Margaritha, Kenji Gorré. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 2.10-1.65 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.5867 to 2.5867; best price is 1.67% over average. Confidence 81.9% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_43294446",
+          "id": "leg_f1b92995",
           "fixtureId": "fixture_f3ee58df",
           "fixtureDate": "2026-06-22T21:00:00.000Z",
           "homeTeam": "France",
@@ -1545,13 +1546,13 @@
             ],
             "survivalPenalty": 0.0124
           },
-          "thesis": "France vs Iraq: Both teams to score: Yes is priced at 2.75; raw AI probability 63.4%, market-adjusted probability 60.2%, market view 36.9%. Independent edge 26.48%, final value edge 25.31%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.24 (1.85-1.4), rating edge 30.9, style edge 14.02, memory edge -4.8. Odds intelligence is capped: market result edge 41.77, consensus probability 0.829 where available. News impact is 0.121 for France and 0.161 for Iraq. Tactical memory: France 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Iraq 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge 0.8. Scorer memory: France top recent scorers Mbappé, Cherki, Ekitike; Iraq top recent scorers Al-Hamadi, Doski, Hussein. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.85-1.40 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.71 to 2.71; best price is 1.48% over average. Confidence 79.8% after odds freshness and data completeness checks."
+          "thesis": "France vs Iraq: Both teams to score: Yes is priced at 2.75; raw AI probability 63.4%, market-adjusted probability 60.2%, market view 36.9%. Independent edge 26.48%, final value edge 25.31%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.24 (1.85-1.4), rating edge 30.6, style edge 14.02, memory edge -5.56. Odds intelligence is capped: market result edge 41.77, consensus probability 0.829 where available. News impact is 0.121 for France and 0.161 for Iraq. Tactical memory: France 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Iraq 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge 0.8. Scorer memory: France top recent scorers Mbappé, Cherki, Ekitike; Iraq top recent scorers Al-Hamadi, Doski, Hussein. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.85-1.40 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.71 to 2.71; best price is 1.48% over average. Confidence 79.8% after odds freshness and data completeness checks."
         }
       ],
       "thesis": "accumulator at combined odds 66.39 with estimated slip chance 7.79% and average leg survival 52.9%. Expected value is 769.55%, independent edge averages 26.92%, and the model has 6.3 non-market signals per leg. Long-slip controls: 4 BTTS leg(s), 0 fragile-value leg(s), so edge cannot outrank survivability. Correlation control: 4 goals legs; 2 opening-game goal legs. 4 calculated-risk/value leg(s) stop this from being a favourite-only accumulator. No high-implied-probability favourite crowding. Heat layer neutral or low impact on this slip. Legs: Germany vs Curaçao: Both teams to score: Yes | Spain vs Cape Verde: Both teams to score: Yes | Brazil vs Haiti: Both teams to score: Yes | France vs Iraq: Both teams to score: Yes."
     },
     {
-      "id": "accumulator_leg_40cd8de1_leg_97bae52f_leg_73b931d8_leg_d9603",
+      "id": "accumulator_leg_ef5d7330_leg_464aca7e_leg_22491727_leg_87f02",
       "rank": 6,
       "category": "accumulator_5",
       "label": "5-leg accumulator",
@@ -1562,14 +1563,14 @@
       "stake": 10,
       "potentialReturn": 1248.9,
       "potentialProfit": 1238.9,
-      "combinedProbability": 0.0968,
-      "expectedValue": 11.0895,
-      "averageConfidence": 0.7861,
-      "displayRating": 0.8714,
+      "combinedProbability": 0.0957,
+      "expectedValue": 10.9558,
+      "averageConfidence": 0.7855,
+      "displayRating": 0.8711,
       "riskLegCount": 5,
       "legs": [
         {
-          "id": "leg_40cd8de1",
+          "id": "leg_ef5d7330",
           "fixtureId": "fixture_cd0e426c",
           "fixtureDate": "2026-06-14T17:00:00.000Z",
           "homeTeam": "Germany",
@@ -1646,10 +1647,10 @@
             ],
             "survivalPenalty": 0.0349
           },
-          "thesis": "Germany vs Curaçao: Both teams to score: Yes is priced at 3.4; raw AI probability 65.7%, market-adjusted probability 61.8%, market view 32.3%. Independent edge 33.44%, final value edge 32.58%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, 20-match BTTS history, heat does not strongly suppress tempo. Fixture model: expected goals 3.66 (1.97-1.69), rating edge 19.2, style edge 4.16, memory edge -12.56. Odds intelligence is capped: market result edge 49.07, consensus probability 0.9317 where available. News impact is 0.051 for Germany and 0.122 for Curaçao. Tactical memory: Germany 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Curaçao 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.43. Scorer memory: Germany top recent scorers Woltemade, Gnabry, Sané; Curaçao top recent scorers Bacuna, Gervane Kastaneer, Janga. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.97-1.69 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.1 to 3.1; best price is 9.68% over average. Confidence 81.5% after odds freshness and data completeness checks."
+          "thesis": "Germany vs Curaçao: Both teams to score: Yes is priced at 3.4; raw AI probability 65.7%, market-adjusted probability 61.8%, market view 32.3%. Independent edge 33.44%, final value edge 32.58%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, 20-match BTTS history, heat does not strongly suppress tempo. Fixture model: expected goals 3.66 (1.97-1.69), rating edge 19.4, style edge 4.16, memory edge -12.18. Odds intelligence is capped: market result edge 49.07, consensus probability 0.9317 where available. News impact is 0.075 for Germany and 0.122 for Curaçao. Tactical memory: Germany 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Curaçao 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.43. Scorer memory: Germany top recent scorers Woltemade, Gnabry, Sané; Curaçao top recent scorers Bacuna, Gervane Kastaneer, Janga. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.97-1.69 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.1 to 3.1; best price is 9.68% over average. Confidence 81.5% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_97bae52f",
+          "id": "leg_464aca7e",
           "fixtureId": "fixture_b4d82456",
           "fixtureDate": "2026-06-20T00:30:00.000Z",
           "homeTeam": "Brazil",
@@ -1725,10 +1726,10 @@
             ],
             "survivalPenalty": 0.0203
           },
-          "thesis": "Brazil vs Haiti: Both teams to score: Yes is priced at 2.63; raw AI probability 68%, market-adjusted probability 64.5%, market view 38.7%. Independent edge 29.34%, final value edge 28.06%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.75 (2.1-1.65), rating edge 123.4, style edge 16.59, memory edge 9.35. Odds intelligence is capped: market result edge 46.56, consensus probability 0.8942 where available. News impact is 0.069 for Brazil and 0.132 for Haiti. Tactical memory: Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Haiti 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.08. Scorer memory: Brazil top recent scorers Danilo, Endrick, Bremer; Haiti top recent scorers Gervane Kastaneer, Jearl Margaritha, Kenji Gorré. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 2.10-1.65 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.5867 to 2.5867; best price is 1.67% over average. Confidence 81.9% after odds freshness and data completeness checks."
+          "thesis": "Brazil vs Haiti: Both teams to score: Yes is priced at 2.63; raw AI probability 68%, market-adjusted probability 64.5%, market view 38.7%. Independent edge 29.34%, final value edge 28.06%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.75 (2.1-1.65), rating edge 123.8, style edge 16.59, memory edge 10.65. Odds intelligence is capped: market result edge 46.56, consensus probability 0.8942 where available. News impact is 0.069 for Brazil and 0.131 for Haiti. Tactical memory: Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Haiti 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.08. Scorer memory: Brazil top recent scorers Danilo, Endrick, Bremer; Haiti top recent scorers Gervane Kastaneer, Jearl Margaritha, Kenji Gorré. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 2.10-1.65 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.5867 to 2.5867; best price is 1.67% over average. Confidence 81.9% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_73b931d8",
+          "id": "leg_22491727",
           "fixtureId": "fixture_bc8dec5c",
           "fixtureDate": "2026-06-20T17:00:00.000Z",
           "homeTeam": "Netherlands",
@@ -1743,10 +1744,10 @@
           "marketImpliedProbability": 0.5128,
           "independentEdge": 0.1966,
           "edge": 0.1865,
-          "confidence": 0.7772,
+          "confidence": 0.7754,
           "riskTag": "calculated_risk",
           "components": {
-            "intelligenceConfidence": 0.816,
+            "intelligenceConfidence": 0.809,
             "nonMarketSignalCount": 6,
             "nonMarketSignals": [
               "raw AI probability beats market",
@@ -1802,10 +1803,10 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "Netherlands vs Sweden: Over 2.5 goals is priced at 1.95; raw AI probability 70.9%, market-adjusted probability 68.5%, market view 51.3%. Independent edge 19.66%, final value edge 18.65%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-2.5 model is positive, expected-goals model is high, 20-match over history, second team adds goal pressure. Fixture model: expected goals 3.67 (2.21-1.46), rating edge 125, style edge 22.78, memory edge -2.4. Odds intelligence is capped: market result edge 17.44, consensus probability 0.5375 where available. News impact is 0.074 for Netherlands and 0 for Sweden. Tactical memory: Netherlands 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Sweden 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.02. Scorer memory: Netherlands top recent scorers Depay, Dijk, Malen; Sweden top recent scorers Elanga, Gyökeres, Salétros. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model likes the game at 3.67 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.95 to 1.95; best price is 0% over average. Confidence 77.7% after odds freshness and data completeness checks."
+          "thesis": "Netherlands vs Sweden: Over 2.5 goals is priced at 1.95; raw AI probability 70.9%, market-adjusted probability 68.5%, market view 51.3%. Independent edge 19.66%, final value edge 18.65%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-2.5 model is positive, expected-goals model is high, 20-match over history, second team adds goal pressure. Fixture model: expected goals 3.67 (2.21-1.46), rating edge 125.8, style edge 22.78, memory edge 0.66. Odds intelligence is capped: market result edge 17.44, consensus probability 0.5375 where available. News impact is 0.074 for Netherlands and 0 for Sweden. Tactical memory: Netherlands 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Sweden 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.02. Scorer memory: Netherlands top recent scorers Depay, Dijk, Malen; Sweden top recent scorers Elanga, Gyökeres, Salétros. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model likes the game at 3.67 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.95 to 1.95; best price is 0% over average. Confidence 77.5% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_d9603da2",
+          "id": "leg_87f022f1",
           "fixtureId": "fixture_faed6778",
           "fixtureDate": "2026-06-17T23:00:00.000Z",
           "homeTeam": "Ghana",
@@ -1814,16 +1815,16 @@
           "selectionLabel": "Ghana vs Panama: Panama to win",
           "bookmaker": "Betfred",
           "decimalOdds": 3.75,
-          "modelProbability": 0.5337,
-          "rawModelProbability": 0.5479,
+          "modelProbability": 0.5278,
+          "rawModelProbability": 0.5419,
           "impliedProbability": 0.2667,
           "marketImpliedProbability": 0.2816,
-          "independentEdge": 0.2663,
-          "edge": 0.2645,
-          "confidence": 0.7525,
+          "independentEdge": 0.2603,
+          "edge": 0.2586,
+          "confidence": 0.7509,
           "riskTag": "calculated_risk",
           "components": {
-            "intelligenceConfidence": 0.804,
+            "intelligenceConfidence": 0.806,
             "nonMarketSignalCount": 6,
             "nonMarketSignals": [
               "raw AI probability beats market",
@@ -1833,8 +1834,8 @@
               "xG attack-defense edge",
               "style matchup edge"
             ],
-            "independentEvidenceStrength": 0.6165,
-            "marketBlendLift": -0.0142,
+            "independentEvidenceStrength": 0.6149,
+            "marketBlendLift": -0.0141,
             "oddsMovement": 0,
             "oddsShortening": false,
             "oddsDrifting": false,
@@ -1879,10 +1880,10 @@
             ],
             "survivalPenalty": 0.0356
           },
-          "thesis": "Ghana vs Panama: Panama to win is priced at 3.75; raw AI probability 54.8%, market-adjusted probability 53.4%, market view 28.2%. Independent edge 26.63%, final value edge 26.45%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, team rating edge, recent form edge, xG attack-defense edge, style matchup edge. Fixture model: expected goals 3.35 (1.48-1.87), rating edge -95.3, style edge -13.08, memory edge -3.65. Odds intelligence is capped: market result edge 11.54, consensus probability 0.4777 where available. News impact is 0.15 for Ghana and 0 for Panama. Tactical memory: Ghana 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Panama 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -1.05. Scorer memory: Ghana top recent scorers J. Ayew, Fatawu, Kudus; Panama top recent scorers Rodríguez, Barría, Córdoba. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.5513 to 3.5513; best price is 5.6% over average. Confidence 75.2% after odds freshness and data completeness checks."
+          "thesis": "Ghana vs Panama: Panama to win is priced at 3.75; raw AI probability 54.2%, market-adjusted probability 52.8%, market view 28.2%. Independent edge 26.03%, final value edge 25.86%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, team rating edge, recent form edge, xG attack-defense edge, style matchup edge. Fixture model: expected goals 3.35 (1.48-1.87), rating edge -94.1, style edge -13.08, memory edge 0.57. Odds intelligence is capped: market result edge 11.54, consensus probability 0.4777 where available. News impact is 0.15 for Ghana and 0 for Panama. Tactical memory: Ghana 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Panama 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -1.05. Scorer memory: Ghana top recent scorers J. Ayew, Fatawu, Kudus; Panama top recent scorers Rodríguez, Barría, Córdoba. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.5513 to 3.5513; best price is 5.6% over average. Confidence 75.1% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_dc3a3a00",
+          "id": "leg_8aca1f4f",
           "fixtureId": "fixture_c68ca6e3",
           "fixtureDate": "2026-06-23T23:00:00.000Z",
           "homeTeam": "Panama",
@@ -1956,18 +1957,18 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "Panama vs Croatia: Over 2.5 goals is priced at 1.91; raw AI probability 68.5%, market-adjusted probability 66.4%, market view 52.4%. Independent edge 16.1%, final value edge 15.24%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-2.5 model is positive, expected-goals model is high, 20-match over history, second team adds goal pressure. Fixture model: expected goals 3.53 (1.85-1.68), rating edge 100.5, style edge 5.66, memory edge 34.84. Odds intelligence is capped: market result edge -29.6, consensus probability 0.1143 where available. News impact is 0 for Panama and 0.135 for Croatia. Tactical memory: Panama 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Croatia 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge 0.69. Scorer memory: Panama top recent scorers Rodríguez, Barría, Córdoba; Croatia top recent scorers Fruk, Gvardiol, Majer. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model likes the game at 3.53 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.91 to 1.91; best price is 0% over average. Confidence 76.7% after odds freshness and data completeness checks."
+          "thesis": "Panama vs Croatia: Over 2.5 goals is priced at 1.91; raw AI probability 68.5%, market-adjusted probability 66.4%, market view 52.4%. Independent edge 16.1%, final value edge 15.24%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-2.5 model is positive, expected-goals model is high, 20-match over history, second team adds goal pressure. Fixture model: expected goals 3.53 (1.85-1.68), rating edge 100.4, style edge 5.66, memory edge 34.7. Odds intelligence is capped: market result edge -29.6, consensus probability 0.1143 where available. News impact is 0 for Panama and 0.135 for Croatia. Tactical memory: Panama 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Croatia 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge 0.69. Scorer memory: Panama top recent scorers Rodríguez, Barría, Córdoba; Croatia top recent scorers Fruk, Gvardiol, Majer. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model likes the game at 3.53 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.91 to 1.91; best price is 0% over average. Confidence 76.7% after odds freshness and data completeness checks."
         }
       ],
-      "thesis": "accumulator at combined odds 124.89 with estimated slip chance 4.51% and average leg survival 54.6%. Expected value is 1108.95%, independent edge averages 25.03%, and the model has 6.2 non-market signals per leg. Long-slip controls: 2 BTTS leg(s), 2 fragile-value leg(s), so edge cannot outrank survivability. Correlation control: 4 goals legs; 1 repeated team exposures. 5 calculated-risk/value leg(s) stop this from being a favourite-only accumulator. No high-implied-probability favourite crowding. Heat layer neutral or low impact on this slip. Legs: Germany vs Curaçao: Both teams to score: Yes | Brazil vs Haiti: Both teams to score: Yes | Netherlands vs Sweden: Over 2.5 goals | Ghana vs Panama: Panama to win | Panama vs Croatia: Over 2.5 goals."
+      "thesis": "accumulator at combined odds 124.89 with estimated slip chance 4.49% and average leg survival 54.6%. Expected value is 1095.58%, independent edge averages 24.91%, and the model has 6.2 non-market signals per leg. Long-slip controls: 2 BTTS leg(s), 2 fragile-value leg(s), so edge cannot outrank survivability. Correlation control: 4 goals legs; 1 repeated team exposures. 5 calculated-risk/value leg(s) stop this from being a favourite-only accumulator. No high-implied-probability favourite crowding. Heat layer neutral or low impact on this slip. Legs: Germany vs Curaçao: Both teams to score: Yes | Brazil vs Haiti: Both teams to score: Yes | Netherlands vs Sweden: Over 2.5 goals | Ghana vs Panama: Panama to win | Panama vs Croatia: Over 2.5 goals."
     },
     {
-      "id": "accumulator_leg_40cd8de1_leg_97bae52f_leg_84e39ab7_leg_73b93",
+      "id": "accumulator_leg_ef5d7330_leg_464aca7e_leg_33738006_leg_22491",
       "rank": 7,
       "category": "accumulator_6",
       "label": "6-leg accumulator",
       "type": "accumulator",
-      "score": 99.71,
+      "score": 99.69,
       "legCount": 6,
       "combinedDecimalOdds": 124.69,
       "stake": 10,
@@ -1975,12 +1976,12 @@
       "potentialProfit": 1236.9,
       "combinedProbability": 0.0816,
       "expectedValue": 9.1703,
-      "averageConfidence": 0.8025,
-      "displayRating": 0.878,
+      "averageConfidence": 0.8022,
+      "displayRating": 0.8779,
       "riskLegCount": 5,
       "legs": [
         {
-          "id": "leg_40cd8de1",
+          "id": "leg_ef5d7330",
           "fixtureId": "fixture_cd0e426c",
           "fixtureDate": "2026-06-14T17:00:00.000Z",
           "homeTeam": "Germany",
@@ -2057,10 +2058,10 @@
             ],
             "survivalPenalty": 0.0496
           },
-          "thesis": "Germany vs Curaçao: Both teams to score: Yes is priced at 3.4; raw AI probability 65.7%, market-adjusted probability 61.8%, market view 32.3%. Independent edge 33.44%, final value edge 32.58%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, 20-match BTTS history, heat does not strongly suppress tempo. Fixture model: expected goals 3.66 (1.97-1.69), rating edge 19.2, style edge 4.16, memory edge -12.56. Odds intelligence is capped: market result edge 49.07, consensus probability 0.9317 where available. News impact is 0.051 for Germany and 0.122 for Curaçao. Tactical memory: Germany 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Curaçao 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.43. Scorer memory: Germany top recent scorers Woltemade, Gnabry, Sané; Curaçao top recent scorers Bacuna, Gervane Kastaneer, Janga. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.97-1.69 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.1 to 3.1; best price is 9.68% over average. Confidence 81.5% after odds freshness and data completeness checks."
+          "thesis": "Germany vs Curaçao: Both teams to score: Yes is priced at 3.4; raw AI probability 65.7%, market-adjusted probability 61.8%, market view 32.3%. Independent edge 33.44%, final value edge 32.58%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, 20-match BTTS history, heat does not strongly suppress tempo. Fixture model: expected goals 3.66 (1.97-1.69), rating edge 19.4, style edge 4.16, memory edge -12.18. Odds intelligence is capped: market result edge 49.07, consensus probability 0.9317 where available. News impact is 0.075 for Germany and 0.122 for Curaçao. Tactical memory: Germany 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Curaçao 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.43. Scorer memory: Germany top recent scorers Woltemade, Gnabry, Sané; Curaçao top recent scorers Bacuna, Gervane Kastaneer, Janga. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.97-1.69 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.1 to 3.1; best price is 9.68% over average. Confidence 81.5% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_97bae52f",
+          "id": "leg_464aca7e",
           "fixtureId": "fixture_b4d82456",
           "fixtureDate": "2026-06-20T00:30:00.000Z",
           "homeTeam": "Brazil",
@@ -2136,10 +2137,10 @@
             ],
             "survivalPenalty": 0.0286
           },
-          "thesis": "Brazil vs Haiti: Both teams to score: Yes is priced at 2.63; raw AI probability 68%, market-adjusted probability 64.5%, market view 38.7%. Independent edge 29.34%, final value edge 28.06%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.75 (2.1-1.65), rating edge 123.4, style edge 16.59, memory edge 9.35. Odds intelligence is capped: market result edge 46.56, consensus probability 0.8942 where available. News impact is 0.069 for Brazil and 0.132 for Haiti. Tactical memory: Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Haiti 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.08. Scorer memory: Brazil top recent scorers Danilo, Endrick, Bremer; Haiti top recent scorers Gervane Kastaneer, Jearl Margaritha, Kenji Gorré. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 2.10-1.65 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.5867 to 2.5867; best price is 1.67% over average. Confidence 81.9% after odds freshness and data completeness checks."
+          "thesis": "Brazil vs Haiti: Both teams to score: Yes is priced at 2.63; raw AI probability 68%, market-adjusted probability 64.5%, market view 38.7%. Independent edge 29.34%, final value edge 28.06%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.75 (2.1-1.65), rating edge 123.8, style edge 16.59, memory edge 10.65. Odds intelligence is capped: market result edge 46.56, consensus probability 0.8942 where available. News impact is 0.069 for Brazil and 0.131 for Haiti. Tactical memory: Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Haiti 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.08. Scorer memory: Brazil top recent scorers Danilo, Endrick, Bremer; Haiti top recent scorers Gervane Kastaneer, Jearl Margaritha, Kenji Gorré. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 2.10-1.65 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.5867 to 2.5867; best price is 1.67% over average. Confidence 81.9% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_84e39ab7",
+          "id": "leg_33738006",
           "fixtureId": "fixture_c68ca6e3",
           "fixtureDate": "2026-06-23T23:00:00.000Z",
           "homeTeam": "Panama",
@@ -2216,10 +2217,10 @@
             ],
             "survivalPenalty": 0.0041
           },
-          "thesis": "Panama vs Croatia: Both teams to score: Yes is priced at 2.14; raw AI probability 68%, market-adjusted probability 65.5%, market view 47.8%. Independent edge 20.23%, final value edge 19.45%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, 20-match BTTS history, heat does not strongly suppress tempo. Fixture model: expected goals 3.53 (1.85-1.68), rating edge 100.5, style edge 5.66, memory edge 34.84. Odds intelligence is capped: market result edge -29.6, consensus probability 0.1143 where available. News impact is 0 for Panama and 0.135 for Croatia. Tactical memory: Panama 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Croatia 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge 0.69. Scorer memory: Panama top recent scorers Rodríguez, Barría, Córdoba; Croatia top recent scorers Fruk, Gvardiol, Majer. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.85-1.68 expected goals; 20-match BTTS history is lively at 57.5%; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.0933 to 2.0933; best price is 2.23% over average. Confidence 78.5% after odds freshness and data completeness checks."
+          "thesis": "Panama vs Croatia: Both teams to score: Yes is priced at 2.14; raw AI probability 68%, market-adjusted probability 65.5%, market view 47.8%. Independent edge 20.23%, final value edge 19.45%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, 20-match BTTS history, heat does not strongly suppress tempo. Fixture model: expected goals 3.53 (1.85-1.68), rating edge 100.4, style edge 5.66, memory edge 34.7. Odds intelligence is capped: market result edge -29.6, consensus probability 0.1143 where available. News impact is 0 for Panama and 0.135 for Croatia. Tactical memory: Panama 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Croatia 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge 0.69. Scorer memory: Panama top recent scorers Rodríguez, Barría, Córdoba; Croatia top recent scorers Fruk, Gvardiol, Majer. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.85-1.68 expected goals; 20-match BTTS history is lively at 57.5%; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.0933 to 2.0933; best price is 2.23% over average. Confidence 78.5% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_73b931d8",
+          "id": "leg_22491727",
           "fixtureId": "fixture_bc8dec5c",
           "fixtureDate": "2026-06-20T17:00:00.000Z",
           "homeTeam": "Netherlands",
@@ -2234,10 +2235,10 @@
           "marketImpliedProbability": 0.5128,
           "independentEdge": 0.1966,
           "edge": 0.1865,
-          "confidence": 0.7772,
+          "confidence": 0.7754,
           "riskTag": "calculated_risk",
           "components": {
-            "intelligenceConfidence": 0.816,
+            "intelligenceConfidence": 0.809,
             "nonMarketSignalCount": 6,
             "nonMarketSignals": [
               "raw AI probability beats market",
@@ -2293,10 +2294,10 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "Netherlands vs Sweden: Over 2.5 goals is priced at 1.95; raw AI probability 70.9%, market-adjusted probability 68.5%, market view 51.3%. Independent edge 19.66%, final value edge 18.65%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-2.5 model is positive, expected-goals model is high, 20-match over history, second team adds goal pressure. Fixture model: expected goals 3.67 (2.21-1.46), rating edge 125, style edge 22.78, memory edge -2.4. Odds intelligence is capped: market result edge 17.44, consensus probability 0.5375 where available. News impact is 0.074 for Netherlands and 0 for Sweden. Tactical memory: Netherlands 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Sweden 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.02. Scorer memory: Netherlands top recent scorers Depay, Dijk, Malen; Sweden top recent scorers Elanga, Gyökeres, Salétros. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model likes the game at 3.67 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.95 to 1.95; best price is 0% over average. Confidence 77.7% after odds freshness and data completeness checks."
+          "thesis": "Netherlands vs Sweden: Over 2.5 goals is priced at 1.95; raw AI probability 70.9%, market-adjusted probability 68.5%, market view 51.3%. Independent edge 19.66%, final value edge 18.65%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-2.5 model is positive, expected-goals model is high, 20-match over history, second team adds goal pressure. Fixture model: expected goals 3.67 (2.21-1.46), rating edge 125.8, style edge 22.78, memory edge 0.66. Odds intelligence is capped: market result edge 17.44, consensus probability 0.5375 where available. News impact is 0.074 for Netherlands and 0 for Sweden. Tactical memory: Netherlands 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Sweden 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.02. Scorer memory: Netherlands top recent scorers Depay, Dijk, Malen; Sweden top recent scorers Elanga, Gyökeres, Salétros. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model likes the game at 3.67 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.95 to 1.95; best price is 0% over average. Confidence 77.5% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_d17f8958",
+          "id": "leg_800f6ea7",
           "fixtureId": "fixture_22685454",
           "fixtureDate": "2026-06-21T19:00:00.000Z",
           "homeTeam": "Belgium",
@@ -2371,10 +2372,10 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "Belgium vs Iran: Both teams to score: Yes is priced at 2.05; raw AI probability 66%, market-adjusted probability 63.7%, market view 48.8%. Independent edge 17.19%, final value edge 16.25%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.39 (1.89-1.5), rating edge 48.4, style edge 9.15, memory edge -6.02. Odds intelligence is capped: market result edge 26.27, consensus probability 0.636 where available. News impact is 0.077 for Belgium and 0.096 for Iran. Tactical memory: Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Iran 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.84. Scorer memory: Belgium top recent scorers De Bruyne, De Ketelaere, Lukébakio; Iran top recent scorers Taremi, Hosseinzadeh, Mohebbi. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.89-1.50 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.05 to 2.05; best price is 0% over average. Confidence 80.3% after odds freshness and data completeness checks."
+          "thesis": "Belgium vs Iran: Both teams to score: Yes is priced at 2.05; raw AI probability 66%, market-adjusted probability 63.7%, market view 48.8%. Independent edge 17.19%, final value edge 16.25%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.39 (1.89-1.5), rating edge 48.5, style edge 9.15, memory edge -6.12. Odds intelligence is capped: market result edge 26.27, consensus probability 0.636 where available. News impact is 0.077 for Belgium and 0.098 for Iran. Tactical memory: Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Iran 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.84. Scorer memory: Belgium top recent scorers De Bruyne, De Ketelaere, Lukébakio; Iran top recent scorers Taremi, Hosseinzadeh, Mohebbi. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.89-1.50 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.05 to 2.05; best price is 0% over average. Confidence 80.3% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_d26cf14d",
+          "id": "leg_80fcd69c",
           "fixtureId": "fixture_f99f832e",
           "fixtureDate": "2026-06-24T22:00:00.000Z",
           "homeTeam": "Scotland",
@@ -2449,7 +2450,7 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "Scotland vs Brazil: Over 2.5 goals is priced at 1.63; raw AI probability 73.2%, market-adjusted probability 71.6%, market view 61.4%. Independent edge 11.84%, final value edge 11.17%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-2.5 model is positive, expected-goals model is high, 20-match over history, second team adds goal pressure. Fixture model: expected goals 3.8 (1.72-2.08), rating edge -78.3, style edge -11.35, memory edge -3.21. Odds intelligence is capped: market result edge -30.14, consensus probability 0.1179 where available. News impact is 0.102 for Scotland and 0.069 for Brazil. Tactical memory: Scotland 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.52. Scorer memory: Scotland top recent scorers Lawrence Shankland, Ché Adams, Ryan Christie; Brazil top recent scorers Danilo, Endrick, Bremer. Tournament context: Final group-game pressure is noted, but the model waits for live standings before forcing a tactical lean.; group-game numbers 3-3; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model likes the game at 3.8 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.63 to 1.63; best price is 0% over average. Confidence 81.6% after odds freshness and data completeness checks."
+          "thesis": "Scotland vs Brazil: Over 2.5 goals is priced at 1.63; raw AI probability 73.2%, market-adjusted probability 71.6%, market view 61.4%. Independent edge 11.84%, final value edge 11.17%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-2.5 model is positive, expected-goals model is high, 20-match over history, second team adds goal pressure. Fixture model: expected goals 3.8 (1.72-2.08), rating edge -78.3, style edge -11.35, memory edge -3. Odds intelligence is capped: market result edge -30.14, consensus probability 0.1179 where available. News impact is 0.102 for Scotland and 0.069 for Brazil. Tactical memory: Scotland 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.52. Scorer memory: Scotland top recent scorers Lawrence Shankland, Ché Adams, Ryan Christie; Brazil top recent scorers Danilo, Endrick, Bremer. Tournament context: Final group-game pressure is noted, but the model waits for live standings before forcing a tactical lean.; group-game numbers 3-3; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model likes the game at 3.8 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.63 to 1.63; best price is 0% over average. Confidence 81.6% after odds freshness and data completeness checks."
         }
       ],
       "thesis": "accumulator at combined odds 124.69 with estimated slip chance 3.77% and average leg survival 58.6%. Expected value is 917.03%, independent edge averages 21.95%, and the model has 6.3 non-market signals per leg. Long-slip controls: 4 BTTS leg(s), 2 fragile-value leg(s), so edge cannot outrank survivability. Correlation control: 6 goals legs. 5 calculated-risk/value leg(s) stop this from being a favourite-only accumulator. No high-implied-probability favourite crowding. Heat layer neutral or low impact on this slip. Legs: Germany vs Curaçao: Both teams to score: Yes | Brazil vs Haiti: Both teams to score: Yes | Panama vs Croatia: Both teams to score: Yes | Netherlands vs Sweden: Over 2.5 goals | Belgium vs Iran: Both teams to score: Yes | Scotland vs Brazil: Over 2.5 goals."
@@ -2458,8 +2459,8 @@
   "offerRanking": [],
   "strongestLegs": [
     {
-      "id": "leg_40cd8de1",
-      "createdAt": "2026-06-10T19:46:14.472Z",
+      "id": "leg_ef5d7330",
+      "createdAt": "2026-06-10T22:23:42.392Z",
       "fixtureId": "fixture_cd0e426c",
       "fixtureDate": "2026-06-14T17:00:00.000Z",
       "homeTeam": "Germany",
@@ -2482,7 +2483,7 @@
       "riskTag": "calculated_risk",
       "hardBlocks": [],
       "components": {
-        "ratingEdge": 19.2,
+        "ratingEdge": 19.4,
         "formEdge": 37.21,
         "xgEdge": -17.28,
         "styleEdge": 4.16,
@@ -2525,9 +2526,9 @@
           "Juninho Bacuna",
           "Martha"
         ],
-        "newsEdge": -6.78,
-        "memoryEdge": -12.56,
-        "independentResultEdge": 23.96,
+        "newsEdge": -4.52,
+        "memoryEdge": -12.18,
+        "independentResultEdge": 26.8,
         "marketMemoryEdge": 4.35,
         "marketResultEdge": 49.07,
         "marketConfidence": 0.72,
@@ -2551,12 +2552,12 @@
         "homeExpectedGoals": 1.97,
         "awayExpectedGoals": 1.69,
         "bttsShapeProbability": 0.6175,
-        "over25ShapeProbability": 0.7136,
-        "rawHomeWinProbability": 0.3928,
-        "rawDrawProbability": 0.2567,
-        "rawAwayWinProbability": 0.3505,
+        "over25ShapeProbability": 0.7139,
+        "rawHomeWinProbability": 0.3959,
+        "rawDrawProbability": 0.2556,
+        "rawAwayWinProbability": 0.3485,
         "rawBttsShapeProbability": 0.657,
-        "rawOver25ShapeProbability": 0.7077,
+        "rawOver25ShapeProbability": 0.708,
         "homeLongMatchCount": 20,
         "awayLongMatchCount": 20,
         "homeBttsRate": 0.55,
@@ -2565,7 +2566,7 @@
         "awayOver25Rate": 0.6,
         "homeCleanSheetRate": 0.35,
         "awayCleanSheetRate": 0.4,
-        "homeNewsImpact": 0.051,
+        "homeNewsImpact": 0.075,
         "awayNewsImpact": 0.122,
         "heatStress": 0,
         "heatConfidence": 0,
@@ -2584,8 +2585,8 @@
         "heatHistoryDifferential": 0,
         "heatSquadDepthDifferential": 0,
         "combinedHeatDifferential": 0,
-        "homeLearnedEdge": 0.1388,
-        "awayLearnedEdge": 0.2815,
+        "homeLearnedEdge": 0.1414,
+        "awayLearnedEdge": 0.2798,
         "intelligenceConfidence": 0.85,
         "dataCompleteness": 0.858,
         "oddsAgeHours": 0,
@@ -2634,12 +2635,12 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 3.5
       },
-      "thesis": "Germany vs Curaçao: Both teams to score: Yes is priced at 3.4; raw AI probability 65.7%, market-adjusted probability 61.8%, market view 32.3%. Independent edge 33.44%, final value edge 32.58%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, 20-match BTTS history, heat does not strongly suppress tempo. Fixture model: expected goals 3.66 (1.97-1.69), rating edge 19.2, style edge 4.16, memory edge -12.56. Odds intelligence is capped: market result edge 49.07, consensus probability 0.9317 where available. News impact is 0.051 for Germany and 0.122 for Curaçao. Tactical memory: Germany 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Curaçao 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.43. Scorer memory: Germany top recent scorers Woltemade, Gnabry, Sané; Curaçao top recent scorers Bacuna, Gervane Kastaneer, Janga. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.97-1.69 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.1 to 3.1; best price is 9.68% over average. Confidence 81.5% after odds freshness and data completeness checks.",
+      "thesis": "Germany vs Curaçao: Both teams to score: Yes is priced at 3.4; raw AI probability 65.7%, market-adjusted probability 61.8%, market view 32.3%. Independent edge 33.44%, final value edge 32.58%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, 20-match BTTS history, heat does not strongly suppress tempo. Fixture model: expected goals 3.66 (1.97-1.69), rating edge 19.4, style edge 4.16, memory edge -12.18. Odds intelligence is capped: market result edge 49.07, consensus probability 0.9317 where available. News impact is 0.075 for Germany and 0.122 for Curaçao. Tactical memory: Germany 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Curaçao 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.43. Scorer memory: Germany top recent scorers Woltemade, Gnabry, Sané; Curaçao top recent scorers Bacuna, Gervane Kastaneer, Janga. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.97-1.69 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 3.1 to 3.1; best price is 9.68% over average. Confidence 81.5% after odds freshness and data completeness checks.",
       "rank": 2
     },
     {
-      "id": "leg_da1034cd",
-      "createdAt": "2026-06-10T19:46:14.472Z",
+      "id": "leg_88a01a1c",
+      "createdAt": "2026-06-10T22:23:42.392Z",
       "fixtureId": "fixture_ae576b27",
       "fixtureDate": "2026-06-15T16:00:00.000Z",
       "homeTeam": "Spain",
@@ -2662,7 +2663,7 @@
       "riskTag": "calculated_risk",
       "hardBlocks": [],
       "components": {
-        "ratingEdge": 76.3,
+        "ratingEdge": 76,
         "formEdge": 23.44,
         "xgEdge": 62.16,
         "styleEdge": 18.37,
@@ -2704,8 +2705,8 @@
           "Semedo"
         ],
         "newsEdge": 4.16,
-        "memoryEdge": 12.8,
-        "independentResultEdge": 197.23,
+        "memoryEdge": 11.7,
+        "independentResultEdge": 195.82,
         "marketMemoryEdge": 4.7,
         "marketResultEdge": 45.29,
         "marketConfidence": 0.72,
@@ -2730,9 +2731,9 @@
         "awayExpectedGoals": 1.23,
         "bttsShapeProbability": 0.5457,
         "over25ShapeProbability": 0.5962,
-        "rawHomeWinProbability": 0.5737,
-        "rawDrawProbability": 0.202,
-        "rawAwayWinProbability": 0.2243,
+        "rawHomeWinProbability": 0.5722,
+        "rawDrawProbability": 0.2026,
+        "rawAwayWinProbability": 0.2252,
         "rawBttsShapeProbability": 0.5685,
         "rawOver25ShapeProbability": 0.5857,
         "homeLongMatchCount": 20,
@@ -2762,8 +2763,8 @@
         "heatHistoryDifferential": 0,
         "heatSquadDepthDifferential": 0,
         "combinedHeatDifferential": 0,
-        "homeLearnedEdge": 0.3641,
-        "awayLearnedEdge": 0.2186,
+        "homeLearnedEdge": 0.3547,
+        "awayLearnedEdge": 0.2218,
         "intelligenceConfidence": 0.861,
         "dataCompleteness": 0.881,
         "oddsAgeHours": 0,
@@ -2811,12 +2812,12 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 3.5
       },
-      "thesis": "Spain vs Cape Verde: Both teams to score: Yes is priced at 2.7; raw AI probability 56.9%, market-adjusted probability 54.6%, market view 38.4%. Independent edge 18.44%, final value edge 17.87%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.04 (1.81-1.23), rating edge 76.3, style edge 18.37, memory edge 12.8. Odds intelligence is capped: market result edge 45.29, consensus probability 0.8768 where available. News impact is 0.093 for Spain and 0.049 for Cape Verde. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Cape Verde 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.46. Scorer memory: Spain top recent scorers Oyarzabal, Pedri, Morata; Cape Verde top recent scorers Mendes, H. Tavares, Livramento. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.81-1.23 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.6033 to 2.6033; best price is 3.71% over average. Confidence 79.4% after odds freshness and data completeness checks.",
+      "thesis": "Spain vs Cape Verde: Both teams to score: Yes is priced at 2.7; raw AI probability 56.9%, market-adjusted probability 54.6%, market view 38.4%. Independent edge 18.44%, final value edge 17.87%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.04 (1.81-1.23), rating edge 76, style edge 18.37, memory edge 11.7. Odds intelligence is capped: market result edge 45.29, consensus probability 0.8768 where available. News impact is 0.093 for Spain and 0.049 for Cape Verde. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Cape Verde 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.46. Scorer memory: Spain top recent scorers Oyarzabal, Pedri, Morata; Cape Verde top recent scorers Mendes, H. Tavares, Livramento. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: BTTS shape is balanced at 1.81-1.23 expected goals; BTTS survives opening-game caution because both sides still project scoring threat; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.6033 to 2.6033; best price is 3.71% over average. Confidence 79.4% after odds freshness and data completeness checks.",
       "rank": 3
     },
     {
-      "id": "leg_97bae52f",
-      "createdAt": "2026-06-10T19:46:14.472Z",
+      "id": "leg_464aca7e",
+      "createdAt": "2026-06-10T22:23:42.392Z",
       "fixtureId": "fixture_b4d82456",
       "fixtureDate": "2026-06-20T00:30:00.000Z",
       "homeTeam": "Brazil",
@@ -2839,7 +2840,7 @@
       "riskTag": "calculated_risk",
       "hardBlocks": [],
       "components": {
-        "ratingEdge": 123.4,
+        "ratingEdge": 123.8,
         "formEdge": 39.52,
         "xgEdge": 55.63,
         "styleEdge": 16.59,
@@ -2880,8 +2881,8 @@
           "Kenji Gorré",
           "Kevin Felida"
         ],
-        "newsEdge": -5.94,
-        "memoryEdge": 9.35,
+        "newsEdge": -5.88,
+        "memoryEdge": 10.65,
         "independentResultEdge": 220,
         "marketMemoryEdge": 4.47,
         "marketResultEdge": 46.56,
@@ -2906,12 +2907,12 @@
         "homeExpectedGoals": 2.1,
         "awayExpectedGoals": 1.65,
         "bttsShapeProbability": 0.6453,
-        "over25ShapeProbability": 0.7229,
+        "over25ShapeProbability": 0.7228,
         "rawHomeWinProbability": 0.6145,
         "rawDrawProbability": 0.17,
         "rawAwayWinProbability": 0.2155,
         "rawBttsShapeProbability": 0.68,
-        "rawOver25ShapeProbability": 0.7229,
+        "rawOver25ShapeProbability": 0.7228,
         "homeLongMatchCount": 20,
         "awayLongMatchCount": 20,
         "homeBttsRate": 0.65,
@@ -2921,7 +2922,7 @@
         "homeCleanSheetRate": 0.3,
         "awayCleanSheetRate": 0.45,
         "homeNewsImpact": 0.069,
-        "awayNewsImpact": 0.132,
+        "awayNewsImpact": 0.131,
         "heatStress": 0,
         "heatConfidence": 0,
         "heatClimateBand": "",
@@ -2939,8 +2940,8 @@
         "heatHistoryDifferential": 0,
         "heatSquadDepthDifferential": 0,
         "combinedHeatDifferential": 0,
-        "homeLearnedEdge": 0.3323,
-        "awayLearnedEdge": 0.226,
+        "homeLearnedEdge": 0.3304,
+        "awayLearnedEdge": 0.2094,
         "intelligenceConfidence": 0.861,
         "dataCompleteness": 0.881,
         "oddsAgeHours": 0,
@@ -2987,12 +2988,12 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 0
       },
-      "thesis": "Brazil vs Haiti: Both teams to score: Yes is priced at 2.63; raw AI probability 68%, market-adjusted probability 64.5%, market view 38.7%. Independent edge 29.34%, final value edge 28.06%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.75 (2.1-1.65), rating edge 123.4, style edge 16.59, memory edge 9.35. Odds intelligence is capped: market result edge 46.56, consensus probability 0.8942 where available. News impact is 0.069 for Brazil and 0.132 for Haiti. Tactical memory: Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Haiti 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.08. Scorer memory: Brazil top recent scorers Danilo, Endrick, Bremer; Haiti top recent scorers Gervane Kastaneer, Jearl Margaritha, Kenji Gorré. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 2.10-1.65 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.5867 to 2.5867; best price is 1.67% over average. Confidence 81.9% after odds freshness and data completeness checks.",
+      "thesis": "Brazil vs Haiti: Both teams to score: Yes is priced at 2.63; raw AI probability 68%, market-adjusted probability 64.5%, market view 38.7%. Independent edge 29.34%, final value edge 28.06%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.75 (2.1-1.65), rating edge 123.8, style edge 16.59, memory edge 10.65. Odds intelligence is capped: market result edge 46.56, consensus probability 0.8942 where available. News impact is 0.069 for Brazil and 0.131 for Haiti. Tactical memory: Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Haiti 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.08. Scorer memory: Brazil top recent scorers Danilo, Endrick, Bremer; Haiti top recent scorers Gervane Kastaneer, Jearl Margaritha, Kenji Gorré. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 2.10-1.65 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.5867 to 2.5867; best price is 1.67% over average. Confidence 81.9% after odds freshness and data completeness checks.",
       "rank": 4
     },
     {
-      "id": "leg_87a04e81",
-      "createdAt": "2026-06-10T19:46:14.472Z",
+      "id": "leg_363033d0",
+      "createdAt": "2026-06-10T22:23:42.392Z",
       "fixtureId": "fixture_5a73a594",
       "fixtureDate": "2026-06-20T01:00:00.000Z",
       "homeTeam": "Brazil",
@@ -3015,7 +3016,7 @@
       "riskTag": "calculated_risk",
       "hardBlocks": [],
       "components": {
-        "ratingEdge": 123.4,
+        "ratingEdge": 123.8,
         "formEdge": 39.52,
         "xgEdge": 55.63,
         "styleEdge": 16.59,
@@ -3056,8 +3057,8 @@
           "Kenji Gorré",
           "Kevin Felida"
         ],
-        "newsEdge": -5.94,
-        "memoryEdge": 9.35,
+        "newsEdge": -5.88,
+        "memoryEdge": 10.65,
         "independentResultEdge": 220,
         "marketMemoryEdge": 4.47,
         "marketResultEdge": 46.56,
@@ -3082,12 +3083,12 @@
         "homeExpectedGoals": 2.1,
         "awayExpectedGoals": 1.65,
         "bttsShapeProbability": 0.6453,
-        "over25ShapeProbability": 0.7229,
+        "over25ShapeProbability": 0.7228,
         "rawHomeWinProbability": 0.6145,
         "rawDrawProbability": 0.17,
         "rawAwayWinProbability": 0.2155,
         "rawBttsShapeProbability": 0.68,
-        "rawOver25ShapeProbability": 0.7229,
+        "rawOver25ShapeProbability": 0.7228,
         "homeLongMatchCount": 20,
         "awayLongMatchCount": 20,
         "homeBttsRate": 0.65,
@@ -3097,7 +3098,7 @@
         "homeCleanSheetRate": 0.3,
         "awayCleanSheetRate": 0.45,
         "homeNewsImpact": 0.069,
-        "awayNewsImpact": 0.132,
+        "awayNewsImpact": 0.131,
         "heatStress": 0,
         "heatConfidence": 0,
         "heatClimateBand": "",
@@ -3115,8 +3116,8 @@
         "heatHistoryDifferential": 0,
         "heatSquadDepthDifferential": 0,
         "combinedHeatDifferential": 0,
-        "homeLearnedEdge": 0.3323,
-        "awayLearnedEdge": 0.226,
+        "homeLearnedEdge": 0.3304,
+        "awayLearnedEdge": 0.2094,
         "intelligenceConfidence": 0.861,
         "dataCompleteness": 0.881,
         "oddsAgeHours": 0,
@@ -3163,12 +3164,12 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 0
       },
-      "thesis": "Brazil vs Haiti: Both teams to score: Yes is priced at 2.63; raw AI probability 68%, market-adjusted probability 64.5%, market view 38.7%. Independent edge 29.34%, final value edge 28.06%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.75 (2.1-1.65), rating edge 123.4, style edge 16.59, memory edge 9.35. Odds intelligence is capped: market result edge 46.56, consensus probability 0.8942 where available. News impact is 0.069 for Brazil and 0.132 for Haiti. Tactical memory: Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Haiti 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.08. Scorer memory: Brazil top recent scorers Danilo, Endrick, Bremer; Haiti top recent scorers Gervane Kastaneer, Jearl Margaritha, Kenji Gorré. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 2.10-1.65 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.5867 to 2.5867; best price is 1.67% over average. Confidence 81.9% after odds freshness and data completeness checks.",
+      "thesis": "Brazil vs Haiti: Both teams to score: Yes is priced at 2.63; raw AI probability 68%, market-adjusted probability 64.5%, market view 38.7%. Independent edge 29.34%, final value edge 28.06%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.75 (2.1-1.65), rating edge 123.8, style edge 16.59, memory edge 10.65. Odds intelligence is capped: market result edge 46.56, consensus probability 0.8942 where available. News impact is 0.069 for Brazil and 0.131 for Haiti. Tactical memory: Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Haiti 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.08. Scorer memory: Brazil top recent scorers Danilo, Endrick, Bremer; Haiti top recent scorers Gervane Kastaneer, Jearl Margaritha, Kenji Gorré. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 2.10-1.65 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.5867 to 2.5867; best price is 1.67% over average. Confidence 81.9% after odds freshness and data completeness checks.",
       "rank": 5
     },
     {
-      "id": "leg_f52a2ed3",
-      "createdAt": "2026-06-10T19:46:14.472Z",
+      "id": "leg_a3ba1422",
+      "createdAt": "2026-06-10T22:23:42.392Z",
       "fixtureId": "fixture_f4587d18",
       "fixtureDate": "2026-06-21T00:00:00.000Z",
       "homeTeam": "Ecuador",
@@ -3186,12 +3187,12 @@
       "edge": 0.211,
       "priceEdge": 0.1952,
       "marketEdge": 0.1952,
-      "confidence": 0.7911,
+      "confidence": 0.793,
       "score": 100,
       "riskTag": "calculated_risk",
       "hardBlocks": [],
       "components": {
-        "ratingEdge": -84.1,
+        "ratingEdge": -83.6,
         "formEdge": -14.32,
         "xgEdge": -66.72,
         "styleEdge": -10.36,
@@ -3232,8 +3233,8 @@
           "Martha"
         ],
         "newsEdge": 0.37,
-        "memoryEdge": -15.58,
-        "independentResultEdge": -190.7,
+        "memoryEdge": -14.09,
+        "independentResultEdge": -188.72,
         "marketMemoryEdge": 2.97,
         "marketResultEdge": 37.81,
         "marketConfidence": 0.72,
@@ -3258,9 +3259,9 @@
         "awayExpectedGoals": 1.73,
         "bttsShapeProbability": 0.6154,
         "over25ShapeProbability": 0.6212,
-        "rawHomeWinProbability": 0.2376,
-        "rawDrawProbability": 0.1733,
-        "rawAwayWinProbability": 0.5891,
+        "rawHomeWinProbability": 0.239,
+        "rawDrawProbability": 0.1741,
+        "rawAwayWinProbability": 0.587,
         "rawBttsShapeProbability": 0.6427,
         "rawOver25ShapeProbability": 0.6304,
         "homeLongMatchCount": 20,
@@ -3290,10 +3291,10 @@
         "heatHistoryDifferential": 0,
         "heatSquadDepthDifferential": 0,
         "combinedHeatDifferential": 0,
-        "homeLearnedEdge": 0.1045,
-        "awayLearnedEdge": 0.2815,
-        "intelligenceConfidence": 0.83,
-        "dataCompleteness": 0.83,
+        "homeLearnedEdge": 0.1197,
+        "awayLearnedEdge": 0.2798,
+        "intelligenceConfidence": 0.838,
+        "dataCompleteness": 0.833,
         "oddsAgeHours": 0,
         "oddsFreshness": 1,
         "bookmakerCoverage": 3,
@@ -3315,7 +3316,7 @@
         ],
         "independentEvidenceStrength": 0.7117,
         "oddsMovementBonus": 0,
-        "intelligenceBonus": 5.92,
+        "intelligenceBonus": 6.04,
         "marketFocusBonus": 10,
         "evidenceBonus": 11,
         "marketBlendPenalty": 0,
@@ -3338,12 +3339,12 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 0
       },
-      "thesis": "Ecuador vs Curaçao: Both teams to score: Yes is priced at 2.38; raw AI probability 64.3%, market-adjusted probability 61.5%, market view 42%. Independent edge 22.25%, final value edge 21.1%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.25 (1.52-1.73), rating edge -84.1, style edge -10.36, memory edge -15.58. Odds intelligence is capped: market result edge 37.81, consensus probability 0.7742 where available. News impact is 0.126 for Ecuador and 0.122 for Curaçao. Tactical memory: Ecuador 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Curaçao 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge 0.01. Scorer memory: Ecuador top recent scorers Pacho, Valencia, Yeboah; Curaçao top recent scorers Bacuna, Gervane Kastaneer, Janga. Heat layer: Kansas City temperate stress 0%, xG adjustment 0, result edge 0; climate/history/depth differential 0. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.52-1.73 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.38 to 2.38; best price is 0% over average. Confidence 79.1% after odds freshness and data completeness checks.",
+      "thesis": "Ecuador vs Curaçao: Both teams to score: Yes is priced at 2.38; raw AI probability 64.3%, market-adjusted probability 61.5%, market view 42%. Independent edge 22.25%, final value edge 21.1%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.25 (1.52-1.73), rating edge -83.6, style edge -10.36, memory edge -14.09. Odds intelligence is capped: market result edge 37.81, consensus probability 0.7742 where available. News impact is 0.126 for Ecuador and 0.122 for Curaçao. Tactical memory: Ecuador 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Curaçao 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge 0.01. Scorer memory: Ecuador top recent scorers Pacho, Valencia, Yeboah; Curaçao top recent scorers Bacuna, Gervane Kastaneer, Janga. Heat layer: Kansas City temperate stress 0%, xG adjustment 0, result edge 0; climate/history/depth differential 0. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.52-1.73 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.38 to 2.38; best price is 0% over average. Confidence 79.3% after odds freshness and data completeness checks.",
       "rank": 7
     },
     {
-      "id": "leg_43294446",
-      "createdAt": "2026-06-10T19:46:14.472Z",
+      "id": "leg_f1b92995",
+      "createdAt": "2026-06-10T22:23:42.392Z",
       "fixtureId": "fixture_f3ee58df",
       "fixtureDate": "2026-06-22T21:00:00.000Z",
       "homeTeam": "France",
@@ -3366,7 +3367,7 @@
       "riskTag": "calculated_risk",
       "hardBlocks": [],
       "components": {
-        "ratingEdge": 30.9,
+        "ratingEdge": 30.6,
         "formEdge": 27.01,
         "xgEdge": 80.64,
         "styleEdge": 14.02,
@@ -3406,8 +3407,8 @@
           "Jassim"
         ],
         "newsEdge": -3.81,
-        "memoryEdge": -4.8,
-        "independentResultEdge": 143.96,
+        "memoryEdge": -5.56,
+        "independentResultEdge": 142.89,
         "marketMemoryEdge": 4.38,
         "marketResultEdge": 41.77,
         "marketConfidence": 0.72,
@@ -3432,9 +3433,9 @@
         "awayExpectedGoals": 1.4,
         "bttsShapeProbability": 0.6023,
         "over25ShapeProbability": 0.6262,
-        "rawHomeWinProbability": 0.5368,
-        "rawDrawProbability": 0.1928,
-        "rawAwayWinProbability": 0.2704,
+        "rawHomeWinProbability": 0.5356,
+        "rawDrawProbability": 0.1932,
+        "rawAwayWinProbability": 0.2712,
         "rawBttsShapeProbability": 0.6338,
         "rawOver25ShapeProbability": 0.6289,
         "homeLongMatchCount": 20,
@@ -3464,8 +3465,8 @@
         "heatHistoryDifferential": 0,
         "heatSquadDepthDifferential": 0,
         "combinedHeatDifferential": 0,
-        "homeLearnedEdge": -0.1139,
-        "awayLearnedEdge": -0.0594,
+        "homeLearnedEdge": -0.1136,
+        "awayLearnedEdge": -0.0504,
         "intelligenceConfidence": 0.85,
         "dataCompleteness": 0.858,
         "oddsAgeHours": 0,
@@ -3512,12 +3513,12 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 3.5
       },
-      "thesis": "France vs Iraq: Both teams to score: Yes is priced at 2.75; raw AI probability 63.4%, market-adjusted probability 60.2%, market view 36.9%. Independent edge 26.48%, final value edge 25.31%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.24 (1.85-1.4), rating edge 30.9, style edge 14.02, memory edge -4.8. Odds intelligence is capped: market result edge 41.77, consensus probability 0.829 where available. News impact is 0.121 for France and 0.161 for Iraq. Tactical memory: France 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Iraq 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge 0.8. Scorer memory: France top recent scorers Mbappé, Cherki, Ekitike; Iraq top recent scorers Al-Hamadi, Doski, Hussein. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.85-1.40 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.71 to 2.71; best price is 1.48% over average. Confidence 79.8% after odds freshness and data completeness checks.",
+      "thesis": "France vs Iraq: Both teams to score: Yes is priced at 2.75; raw AI probability 63.4%, market-adjusted probability 60.2%, market view 36.9%. Independent edge 26.48%, final value edge 25.31%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.24 (1.85-1.4), rating edge 30.6, style edge 14.02, memory edge -5.56. Odds intelligence is capped: market result edge 41.77, consensus probability 0.829 where available. News impact is 0.121 for France and 0.161 for Iraq. Tactical memory: France 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Iraq 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge 0.8. Scorer memory: France top recent scorers Mbappé, Cherki, Ekitike; Iraq top recent scorers Al-Hamadi, Doski, Hussein. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.85-1.40 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.71 to 2.71; best price is 1.48% over average. Confidence 79.8% after odds freshness and data completeness checks.",
       "rank": 8
     },
     {
-      "id": "leg_610a7edc",
-      "createdAt": "2026-06-10T19:46:14.472Z",
+      "id": "leg_f9a642b",
+      "createdAt": "2026-06-10T22:23:42.392Z",
       "fixtureId": "fixture_c68ca6e3",
       "fixtureDate": "2026-06-23T23:00:00.000Z",
       "homeTeam": "Panama",
@@ -3527,20 +3528,20 @@
       "selectionLabel": "Panama vs Croatia: Panama to win",
       "bookmaker": "All British Casino",
       "decimalOdds": 8.5,
-      "modelProbability": 0.5196,
-      "rawModelProbability": 0.5484,
+      "modelProbability": 0.5193,
+      "rawModelProbability": 0.5481,
       "impliedProbability": 0.1176,
       "marketImpliedProbability": 0.1363,
-      "independentEdge": 0.4121,
-      "edge": 0.4052,
-      "priceEdge": 0.402,
-      "marketEdge": 0.3833,
-      "confidence": 0.7532,
+      "independentEdge": 0.4118,
+      "edge": 0.4049,
+      "priceEdge": 0.4017,
+      "marketEdge": 0.383,
+      "confidence": 0.7531,
       "score": 100,
       "riskTag": "longshot_value",
       "hardBlocks": [],
       "components": {
-        "ratingEdge": 100.5,
+        "ratingEdge": 100.4,
         "formEdge": 16.88,
         "xgEdge": 5.66,
         "styleEdge": 5.66,
@@ -3582,8 +3583,8 @@
           "Sucic"
         ],
         "newsEdge": -12.83,
-        "memoryEdge": 34.84,
-        "independentResultEdge": 150.71,
+        "memoryEdge": 34.7,
+        "independentResultEdge": 150.47,
         "marketMemoryEdge": -0.88,
         "marketResultEdge": -29.6,
         "marketConfidence": 0.72,
@@ -3608,9 +3609,9 @@
         "awayExpectedGoals": 1.68,
         "bttsShapeProbability": 0.6545,
         "over25ShapeProbability": 0.6641,
-        "rawHomeWinProbability": 0.5484,
-        "rawDrawProbability": 0.1841,
-        "rawAwayWinProbability": 0.2675,
+        "rawHomeWinProbability": 0.5481,
+        "rawDrawProbability": 0.1842,
+        "rawAwayWinProbability": 0.2677,
         "rawBttsShapeProbability": 0.68,
         "rawOver25ShapeProbability": 0.6846,
         "homeLongMatchCount": 20,
@@ -3640,8 +3641,8 @@
         "heatHistoryDifferential": 0,
         "heatSquadDepthDifferential": 0,
         "combinedHeatDifferential": 0,
-        "homeLearnedEdge": 0.2259,
-        "awayLearnedEdge": -0.17,
+        "homeLearnedEdge": 0.2218,
+        "awayLearnedEdge": -0.1725,
         "intelligenceConfidence": 0.806,
         "dataCompleteness": 0.767,
         "oddsAgeHours": 0,
@@ -3652,7 +3653,7 @@
         "oddsShortening": false,
         "oddsDrifting": false,
         "bestOverAverage": 0.1588,
-        "independentEdge": 0.4121,
+        "independentEdge": 0.4118,
         "marketBlendLift": -0.0288,
         "nonMarketSignalCount": 5,
         "nonMarketSignals": [
@@ -3662,7 +3663,7 @@
           "recent form edge",
           "local intelligence memory edge"
         ],
-        "independentEvidenceStrength": 0.711,
+        "independentEvidenceStrength": 0.7102,
         "oddsMovementBonus": 1.5,
         "intelligenceBonus": 5.19,
         "marketFocusBonus": 8,
@@ -3686,12 +3687,12 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 3.5
       },
-      "thesis": "Panama vs Croatia: Panama to win is priced at 8.5; raw AI probability 54.8%, market-adjusted probability 52%, market view 13.6%. Independent edge 41.21%, final value edge 40.52%, backed by 5 non-market signal(s): raw AI probability beats market, 20-match team sample, team rating edge, recent form edge, local intelligence memory edge. Fixture model: expected goals 3.53 (1.85-1.68), rating edge 100.5, style edge 5.66, memory edge 34.84. Odds intelligence is capped: market result edge -29.6, consensus probability 0.1143 where available. News impact is 0 for Panama and 0.135 for Croatia. Tactical memory: Panama 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Croatia 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge 0.69. Scorer memory: Panama top recent scorers Rodríguez, Barría, Córdoba; Croatia top recent scorers Fruk, Gvardiol, Majer. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: team/result market backed by style or memory edge; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 7.335 to 7.335; best price is 15.88% over average. Confidence 75.3% after odds freshness and data completeness checks.",
+      "thesis": "Panama vs Croatia: Panama to win is priced at 8.5; raw AI probability 54.8%, market-adjusted probability 51.9%, market view 13.6%. Independent edge 41.18%, final value edge 40.49%, backed by 5 non-market signal(s): raw AI probability beats market, 20-match team sample, team rating edge, recent form edge, local intelligence memory edge. Fixture model: expected goals 3.53 (1.85-1.68), rating edge 100.4, style edge 5.66, memory edge 34.7. Odds intelligence is capped: market result edge -29.6, consensus probability 0.1143 where available. News impact is 0 for Panama and 0.135 for Croatia. Tactical memory: Panama 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Croatia 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge 0.69. Scorer memory: Panama top recent scorers Rodríguez, Barría, Córdoba; Croatia top recent scorers Fruk, Gvardiol, Majer. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: team/result market backed by style or memory edge; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 7.335 to 7.335; best price is 15.88% over average. Confidence 75.3% after odds freshness and data completeness checks.",
       "rank": 9
     },
     {
-      "id": "leg_84e39ab7",
-      "createdAt": "2026-06-10T19:46:14.472Z",
+      "id": "leg_33738006",
+      "createdAt": "2026-06-10T22:23:42.392Z",
       "fixtureId": "fixture_c68ca6e3",
       "fixtureDate": "2026-06-23T23:00:00.000Z",
       "homeTeam": "Panama",
@@ -3714,7 +3715,7 @@
       "riskTag": "calculated_risk",
       "hardBlocks": [],
       "components": {
-        "ratingEdge": 100.5,
+        "ratingEdge": 100.4,
         "formEdge": 16.88,
         "xgEdge": 5.66,
         "styleEdge": 5.66,
@@ -3756,8 +3757,8 @@
           "Sucic"
         ],
         "newsEdge": -12.83,
-        "memoryEdge": 34.84,
-        "independentResultEdge": 150.71,
+        "memoryEdge": 34.7,
+        "independentResultEdge": 150.47,
         "marketMemoryEdge": -0.88,
         "marketResultEdge": -29.6,
         "marketConfidence": 0.72,
@@ -3782,9 +3783,9 @@
         "awayExpectedGoals": 1.68,
         "bttsShapeProbability": 0.6545,
         "over25ShapeProbability": 0.6641,
-        "rawHomeWinProbability": 0.5484,
-        "rawDrawProbability": 0.1841,
-        "rawAwayWinProbability": 0.2675,
+        "rawHomeWinProbability": 0.5481,
+        "rawDrawProbability": 0.1842,
+        "rawAwayWinProbability": 0.2677,
         "rawBttsShapeProbability": 0.68,
         "rawOver25ShapeProbability": 0.6846,
         "homeLongMatchCount": 20,
@@ -3814,8 +3815,8 @@
         "heatHistoryDifferential": 0,
         "heatSquadDepthDifferential": 0,
         "combinedHeatDifferential": 0,
-        "homeLearnedEdge": 0.2259,
-        "awayLearnedEdge": -0.17,
+        "homeLearnedEdge": 0.2218,
+        "awayLearnedEdge": -0.1725,
         "intelligenceConfidence": 0.806,
         "dataCompleteness": 0.767,
         "oddsAgeHours": 0,
@@ -3864,12 +3865,12 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 0
       },
-      "thesis": "Panama vs Croatia: Both teams to score: Yes is priced at 2.14; raw AI probability 68%, market-adjusted probability 65.5%, market view 47.8%. Independent edge 20.23%, final value edge 19.45%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, 20-match BTTS history, heat does not strongly suppress tempo. Fixture model: expected goals 3.53 (1.85-1.68), rating edge 100.5, style edge 5.66, memory edge 34.84. Odds intelligence is capped: market result edge -29.6, consensus probability 0.1143 where available. News impact is 0 for Panama and 0.135 for Croatia. Tactical memory: Panama 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Croatia 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge 0.69. Scorer memory: Panama top recent scorers Rodríguez, Barría, Córdoba; Croatia top recent scorers Fruk, Gvardiol, Majer. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.85-1.68 expected goals; 20-match BTTS history is lively at 57.5%; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.0933 to 2.0933; best price is 2.23% over average. Confidence 78.5% after odds freshness and data completeness checks.",
+      "thesis": "Panama vs Croatia: Both teams to score: Yes is priced at 2.14; raw AI probability 68%, market-adjusted probability 65.5%, market view 47.8%. Independent edge 20.23%, final value edge 19.45%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, 20-match BTTS history, heat does not strongly suppress tempo. Fixture model: expected goals 3.53 (1.85-1.68), rating edge 100.4, style edge 5.66, memory edge 34.7. Odds intelligence is capped: market result edge -29.6, consensus probability 0.1143 where available. News impact is 0 for Panama and 0.135 for Croatia. Tactical memory: Panama 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Croatia 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge 0.69. Scorer memory: Panama top recent scorers Rodríguez, Barría, Córdoba; Croatia top recent scorers Fruk, Gvardiol, Majer. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.85-1.68 expected goals; 20-match BTTS history is lively at 57.5%; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.0933 to 2.0933; best price is 2.23% over average. Confidence 78.5% after odds freshness and data completeness checks.",
       "rank": 10
     },
     {
-      "id": "leg_73b931d8",
-      "createdAt": "2026-06-10T19:46:14.472Z",
+      "id": "leg_22491727",
+      "createdAt": "2026-06-10T22:23:42.392Z",
       "fixtureId": "fixture_bc8dec5c",
       "fixtureDate": "2026-06-20T17:00:00.000Z",
       "homeTeam": "Netherlands",
@@ -3887,12 +3888,12 @@
       "edge": 0.1865,
       "priceEdge": 0.1726,
       "marketEdge": 0.1726,
-      "confidence": 0.7772,
-      "score": 99.78,
+      "confidence": 0.7754,
+      "score": 99.75,
       "riskTag": "calculated_risk",
       "hardBlocks": [],
       "components": {
-        "ratingEdge": 125,
+        "ratingEdge": 125.8,
         "formEdge": 32.51,
         "xgEdge": -20.74,
         "styleEdge": 22.78,
@@ -3935,8 +3936,8 @@
           "Ayari"
         ],
         "newsEdge": 7.03,
-        "memoryEdge": -2.4,
-        "independentResultEdge": 164.18,
+        "memoryEdge": 0.66,
+        "independentResultEdge": 168.04,
         "marketMemoryEdge": 1.38,
         "marketResultEdge": 17.44,
         "marketConfidence": 0.72,
@@ -3961,9 +3962,9 @@
         "awayExpectedGoals": 1.46,
         "bttsShapeProbability": 0.6618,
         "over25ShapeProbability": 0.6854,
-        "rawHomeWinProbability": 0.5588,
-        "rawDrawProbability": 0.1855,
-        "rawAwayWinProbability": 0.2557,
+        "rawHomeWinProbability": 0.5631,
+        "rawDrawProbability": 0.184,
+        "rawAwayWinProbability": 0.253,
         "rawBttsShapeProbability": 0.68,
         "rawOver25ShapeProbability": 0.7094,
         "homeLongMatchCount": 20,
@@ -3993,10 +3994,10 @@
         "heatHistoryDifferential": 0,
         "heatSquadDepthDifferential": 0,
         "combinedHeatDifferential": 0,
-        "homeLearnedEdge": 0.3067,
-        "awayLearnedEdge": 0.334,
-        "intelligenceConfidence": 0.816,
-        "dataCompleteness": 0.771,
+        "homeLearnedEdge": 0.3116,
+        "awayLearnedEdge": 0.3041,
+        "intelligenceConfidence": 0.809,
+        "dataCompleteness": 0.768,
         "oddsAgeHours": 0,
         "oddsFreshness": 1,
         "bookmakerCoverage": 1,
@@ -4018,7 +4019,7 @@
         ],
         "independentEvidenceStrength": 0.845,
         "oddsMovementBonus": 0,
-        "intelligenceBonus": 5.34,
+        "intelligenceBonus": 5.23,
         "marketFocusBonus": 9,
         "evidenceBonus": 11,
         "marketBlendPenalty": 0,
@@ -4039,12 +4040,12 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 0
       },
-      "thesis": "Netherlands vs Sweden: Over 2.5 goals is priced at 1.95; raw AI probability 70.9%, market-adjusted probability 68.5%, market view 51.3%. Independent edge 19.66%, final value edge 18.65%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-2.5 model is positive, expected-goals model is high, 20-match over history, second team adds goal pressure. Fixture model: expected goals 3.67 (2.21-1.46), rating edge 125, style edge 22.78, memory edge -2.4. Odds intelligence is capped: market result edge 17.44, consensus probability 0.5375 where available. News impact is 0.074 for Netherlands and 0 for Sweden. Tactical memory: Netherlands 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Sweden 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.02. Scorer memory: Netherlands top recent scorers Depay, Dijk, Malen; Sweden top recent scorers Elanga, Gyökeres, Salétros. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model likes the game at 3.67 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.95 to 1.95; best price is 0% over average. Confidence 77.7% after odds freshness and data completeness checks.",
+      "thesis": "Netherlands vs Sweden: Over 2.5 goals is priced at 1.95; raw AI probability 70.9%, market-adjusted probability 68.5%, market view 51.3%. Independent edge 19.66%, final value edge 18.65%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-2.5 model is positive, expected-goals model is high, 20-match over history, second team adds goal pressure. Fixture model: expected goals 3.67 (2.21-1.46), rating edge 125.8, style edge 22.78, memory edge 0.66. Odds intelligence is capped: market result edge 17.44, consensus probability 0.5375 where available. News impact is 0.074 for Netherlands and 0 for Sweden. Tactical memory: Netherlands 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Sweden 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.02. Scorer memory: Netherlands top recent scorers Depay, Dijk, Malen; Sweden top recent scorers Elanga, Gyökeres, Salétros. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model likes the game at 3.67 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.95 to 1.95; best price is 0% over average. Confidence 77.5% after odds freshness and data completeness checks.",
       "rank": 11
     },
     {
-      "id": "leg_d17f8958",
-      "createdAt": "2026-06-10T19:46:14.472Z",
+      "id": "leg_800f6ea7",
+      "createdAt": "2026-06-10T22:23:42.392Z",
       "fixtureId": "fixture_22685454",
       "fixtureDate": "2026-06-21T19:00:00.000Z",
       "homeTeam": "Belgium",
@@ -4067,7 +4068,7 @@
       "riskTag": "calculated_risk",
       "hardBlocks": [],
       "components": {
-        "ratingEdge": 48.4,
+        "ratingEdge": 48.5,
         "formEdge": 23.27,
         "xgEdge": 48.77,
         "styleEdge": 9.15,
@@ -4110,9 +4111,9 @@
           "Rezaeian",
           "Ezzatollahi"
         ],
-        "newsEdge": -1.84,
-        "memoryEdge": -6.02,
-        "independentResultEdge": 121.72,
+        "newsEdge": -1.99,
+        "memoryEdge": -6.12,
+        "independentResultEdge": 121.58,
         "marketMemoryEdge": 2.55,
         "marketResultEdge": 26.27,
         "marketConfidence": 0.72,
@@ -4137,9 +4138,9 @@
         "awayExpectedGoals": 1.5,
         "bttsShapeProbability": 0.6373,
         "over25ShapeProbability": 0.6423,
-        "rawHomeWinProbability": 0.5027,
+        "rawHomeWinProbability": 0.5025,
         "rawDrawProbability": 0.2158,
-        "rawAwayWinProbability": 0.2816,
+        "rawAwayWinProbability": 0.2817,
         "rawBttsShapeProbability": 0.6597,
         "rawOver25ShapeProbability": 0.6583,
         "homeLongMatchCount": 20,
@@ -4151,7 +4152,7 @@
         "homeCleanSheetRate": 0.3,
         "awayCleanSheetRate": 0.4,
         "homeNewsImpact": 0.077,
-        "awayNewsImpact": 0.096,
+        "awayNewsImpact": 0.098,
         "heatStress": 0,
         "heatConfidence": 0,
         "heatClimateBand": "",
@@ -4169,8 +4170,8 @@
         "heatHistoryDifferential": 0,
         "heatSquadDepthDifferential": 0,
         "combinedHeatDifferential": 0,
-        "homeLearnedEdge": 0.1193,
-        "awayLearnedEdge": 0.1877,
+        "homeLearnedEdge": 0.1202,
+        "awayLearnedEdge": 0.1897,
         "intelligenceConfidence": 0.861,
         "dataCompleteness": 0.881,
         "oddsAgeHours": 0,
@@ -4216,12 +4217,12 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 0
       },
-      "thesis": "Belgium vs Iran: Both teams to score: Yes is priced at 2.05; raw AI probability 66%, market-adjusted probability 63.7%, market view 48.8%. Independent edge 17.19%, final value edge 16.25%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.39 (1.89-1.5), rating edge 48.4, style edge 9.15, memory edge -6.02. Odds intelligence is capped: market result edge 26.27, consensus probability 0.636 where available. News impact is 0.077 for Belgium and 0.096 for Iran. Tactical memory: Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Iran 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.84. Scorer memory: Belgium top recent scorers De Bruyne, De Ketelaere, Lukébakio; Iran top recent scorers Taremi, Hosseinzadeh, Mohebbi. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.89-1.50 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.05 to 2.05; best price is 0% over average. Confidence 80.3% after odds freshness and data completeness checks.",
+      "thesis": "Belgium vs Iran: Both teams to score: Yes is priced at 2.05; raw AI probability 66%, market-adjusted probability 63.7%, market view 48.8%. Independent edge 17.19%, final value edge 16.25%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, heat does not strongly suppress tempo. Fixture model: expected goals 3.39 (1.89-1.5), rating edge 48.5, style edge 9.15, memory edge -6.12. Odds intelligence is capped: market result edge 26.27, consensus probability 0.636 where available. News impact is 0.077 for Belgium and 0.098 for Iran. Tactical memory: Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Iran 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.84. Scorer memory: Belgium top recent scorers De Bruyne, De Ketelaere, Lukébakio; Iran top recent scorers Taremi, Hosseinzadeh, Mohebbi. Tournament context: Middle group game: no automatic opening-game caution.; group-game numbers 2-2; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.89-1.50 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 2.05 to 2.05; best price is 0% over average. Confidence 80.3% after odds freshness and data completeness checks.",
       "rank": 12
     },
     {
-      "id": "leg_530645ca",
-      "createdAt": "2026-06-10T19:46:14.472Z",
+      "id": "leg_1962b19",
+      "createdAt": "2026-06-10T22:23:42.392Z",
       "fixtureId": "fixture_f99f832e",
       "fixtureDate": "2026-06-24T22:00:00.000Z",
       "homeTeam": "Scotland",
@@ -4287,9 +4288,9 @@
           "Casemiro",
           "Igor Thiago"
         ],
-        "newsEdge": 3.09,
-        "memoryEdge": -3.21,
-        "independentResultEdge": -175.29,
+        "newsEdge": 3.14,
+        "memoryEdge": -3,
+        "independentResultEdge": -175.02,
         "marketMemoryEdge": -3.51,
         "marketResultEdge": -30.14,
         "marketConfidence": 0.72,
@@ -4314,9 +4315,9 @@
         "awayExpectedGoals": 2.08,
         "bttsShapeProbability": 0.6593,
         "over25ShapeProbability": 0.716,
-        "rawHomeWinProbability": 0.2486,
-        "rawDrawProbability": 0.1787,
-        "rawAwayWinProbability": 0.5727,
+        "rawHomeWinProbability": 0.2488,
+        "rawDrawProbability": 0.1788,
+        "rawAwayWinProbability": 0.5725,
         "rawBttsShapeProbability": 0.68,
         "rawOver25ShapeProbability": 0.7319,
         "homeLongMatchCount": 20,
@@ -4346,8 +4347,8 @@
         "heatHistoryDifferential": 0,
         "heatSquadDepthDifferential": 0,
         "combinedHeatDifferential": 0,
-        "homeLearnedEdge": 0.2958,
-        "awayLearnedEdge": 0.3323,
+        "homeLearnedEdge": 0.2963,
+        "awayLearnedEdge": 0.3304,
         "intelligenceConfidence": 0.861,
         "dataCompleteness": 0.881,
         "oddsAgeHours": 0,
@@ -4395,12 +4396,12 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 0
       },
-      "thesis": "Scotland vs Brazil: Both teams to score: Yes is priced at 1.91; raw AI probability 68%, market-adjusted probability 65.9%, market view 52.5%. Independent edge 15.46%, final value edge 14.64%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, 20-match BTTS history, heat does not strongly suppress tempo. Fixture model: expected goals 3.8 (1.72-2.08), rating edge -78.3, style edge -11.35, memory edge -3.21. Odds intelligence is capped: market result edge -30.14, consensus probability 0.1179 where available. News impact is 0.102 for Scotland and 0.069 for Brazil. Tactical memory: Scotland 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.52. Scorer memory: Scotland top recent scorers Lawrence Shankland, Ché Adams, Ryan Christie; Brazil top recent scorers Danilo, Endrick, Bremer. Tournament context: Final group-game pressure is noted, but the model waits for live standings before forcing a tactical lean.; group-game numbers 3-3; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.72-2.08 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.9033 to 1.9033; best price is 0.35% over average. Confidence 81.9% after odds freshness and data completeness checks.",
+      "thesis": "Scotland vs Brazil: Both teams to score: Yes is priced at 1.91; raw AI probability 68%, market-adjusted probability 65.9%, market view 52.5%. Independent edge 15.46%, final value edge 14.64%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS, 20-match BTTS history, heat does not strongly suppress tempo. Fixture model: expected goals 3.8 (1.72-2.08), rating edge -78.3, style edge -11.35, memory edge -3. Odds intelligence is capped: market result edge -30.14, consensus probability 0.1179 where available. News impact is 0.102 for Scotland and 0.069 for Brazil. Tactical memory: Scotland 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.52. Scorer memory: Scotland top recent scorers Lawrence Shankland, Ché Adams, Ryan Christie; Brazil top recent scorers Danilo, Endrick, Bremer. Tournament context: Final group-game pressure is noted, but the model waits for live standings before forcing a tactical lean.; group-game numbers 3-3; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.72-2.08 expected goals; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 1.9033 to 1.9033; best price is 0.35% over average. Confidence 81.9% after odds freshness and data completeness checks.",
       "rank": 13
     },
     {
-      "id": "leg_5a67ef9c",
-      "createdAt": "2026-06-10T19:46:14.472Z",
+      "id": "leg_8f7d4eb",
+      "createdAt": "2026-06-10T22:23:42.392Z",
       "fixtureId": "fixture_cd0e426c",
       "fixtureDate": "2026-06-14T17:00:00.000Z",
       "homeTeam": "Germany",
@@ -4410,20 +4411,20 @@
       "selectionLabel": "Germany vs Curaçao: Draw to win",
       "bookmaker": "Coral",
       "decimalOdds": 17,
-      "modelProbability": 0.2367,
-      "rawModelProbability": 0.2567,
+      "modelProbability": 0.2356,
+      "rawModelProbability": 0.2556,
       "impliedProbability": 0.0588,
       "marketImpliedProbability": 0.0748,
-      "independentEdge": 0.1819,
-      "edge": 0.178,
-      "priceEdge": 0.1779,
-      "marketEdge": 0.1619,
-      "confidence": 0.6869,
-      "score": 98.94,
+      "independentEdge": 0.1808,
+      "edge": 0.1769,
+      "priceEdge": 0.1768,
+      "marketEdge": 0.1608,
+      "confidence": 0.6866,
+      "score": 98.91,
       "riskTag": "longshot_value",
       "hardBlocks": [],
       "components": {
-        "ratingEdge": 19.2,
+        "ratingEdge": 19.4,
         "formEdge": 37.21,
         "xgEdge": -17.28,
         "styleEdge": 4.16,
@@ -4466,9 +4467,9 @@
           "Juninho Bacuna",
           "Martha"
         ],
-        "newsEdge": -6.78,
-        "memoryEdge": -12.56,
-        "independentResultEdge": 23.96,
+        "newsEdge": -4.52,
+        "memoryEdge": -12.18,
+        "independentResultEdge": 26.8,
         "marketMemoryEdge": 4.35,
         "marketResultEdge": 49.07,
         "marketConfidence": 0.72,
@@ -4492,12 +4493,12 @@
         "homeExpectedGoals": 1.97,
         "awayExpectedGoals": 1.69,
         "bttsShapeProbability": 0.6175,
-        "over25ShapeProbability": 0.7136,
-        "rawHomeWinProbability": 0.3928,
-        "rawDrawProbability": 0.2567,
-        "rawAwayWinProbability": 0.3505,
+        "over25ShapeProbability": 0.7139,
+        "rawHomeWinProbability": 0.3959,
+        "rawDrawProbability": 0.2556,
+        "rawAwayWinProbability": 0.3485,
         "rawBttsShapeProbability": 0.657,
-        "rawOver25ShapeProbability": 0.7077,
+        "rawOver25ShapeProbability": 0.708,
         "homeLongMatchCount": 20,
         "awayLongMatchCount": 20,
         "homeBttsRate": 0.55,
@@ -4506,7 +4507,7 @@
         "awayOver25Rate": 0.6,
         "homeCleanSheetRate": 0.35,
         "awayCleanSheetRate": 0.4,
-        "homeNewsImpact": 0.051,
+        "homeNewsImpact": 0.075,
         "awayNewsImpact": 0.122,
         "heatStress": 0,
         "heatConfidence": 0,
@@ -4525,8 +4526,8 @@
         "heatHistoryDifferential": 0,
         "heatSquadDepthDifferential": 0,
         "combinedHeatDifferential": 0,
-        "homeLearnedEdge": 0.1388,
-        "awayLearnedEdge": 0.2815,
+        "homeLearnedEdge": 0.1414,
+        "awayLearnedEdge": 0.2798,
         "intelligenceConfidence": 0.85,
         "dataCompleteness": 0.858,
         "oddsAgeHours": 0,
@@ -4537,7 +4538,7 @@
         "oddsShortening": false,
         "oddsDrifting": false,
         "bestOverAverage": 0.271,
-        "independentEdge": 0.1819,
+        "independentEdge": 0.1808,
         "marketBlendLift": -0.02,
         "nonMarketSignalCount": 5,
         "nonMarketSignals": [
@@ -4572,7 +4573,7 @@
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 3.5
       },
-      "thesis": "Germany vs Curaçao: Draw to win is priced at 17; raw AI probability 25.7%, market-adjusted probability 23.7%, market view 7.5%. Independent edge 18.19%, final value edge 17.8%, backed by 5 non-market signal(s): raw AI probability beats market, 20-match team sample, balanced team-strength profile, clean-sheet history supports draw shape, opening group-game caution supports draw cover. Fixture model: expected goals 3.66 (1.97-1.69), rating edge 19.2, style edge 4.16, memory edge -12.56. Odds intelligence is capped: market result edge 49.07, consensus probability 0.9317 where available. News impact is 0.051 for Germany and 0.122 for Curaçao. Tactical memory: Germany 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Curaçao 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.43. Scorer memory: Germany top recent scorers Woltemade, Gnabry, Sané; Curaçao top recent scorers Bacuna, Gervane Kastaneer, Janga. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: opening group-game caution gives the draw a small tournament-pressure lift; team/result market backed by style or memory edge; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 13.375 to 13.375; best price is 27.1% over average. Confidence 68.7% after odds freshness and data completeness checks.",
+      "thesis": "Germany vs Curaçao: Draw to win is priced at 17; raw AI probability 25.6%, market-adjusted probability 23.6%, market view 7.5%. Independent edge 18.08%, final value edge 17.69%, backed by 5 non-market signal(s): raw AI probability beats market, 20-match team sample, balanced team-strength profile, clean-sheet history supports draw shape, opening group-game caution supports draw cover. Fixture model: expected goals 3.66 (1.97-1.69), rating edge 19.4, style edge 4.16, memory edge -12.18. Odds intelligence is capped: market result edge 49.07, consensus probability 0.9317 where available. News impact is 0.075 for Germany and 0.122 for Curaçao. Tactical memory: Germany 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Curaçao 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.43. Scorer memory: Germany top recent scorers Woltemade, Gnabry, Sané; Curaçao top recent scorers Bacuna, Gervane Kastaneer, Janga. Tournament context: Both teams are playing their first group game, so the model adds a small don't-lose-first caution to goal-heavy bets.; group-game numbers 1-1; xG adjustment -0.099, BTTS adjustment -0.023, draw lift 0.017. Market focus: opening group-game caution gives the draw a small tournament-pressure lift; team/result market backed by style or memory edge; edge is strong enough to justify focus. Outcome learning: waiting for enough settled bets before adjusting. Market average moved from 13.375 to 13.375; best price is 27.1% over average. Confidence 68.7% after odds freshness and data completeness checks.",
       "rank": 15
     }
   ]
