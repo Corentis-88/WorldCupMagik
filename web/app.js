@@ -40,7 +40,8 @@ const el = {
   returnTotal: document.getElementById("returnTotal"),
   marketLine: document.getElementById("marketLine"),
   betslip: document.getElementById("betslipList"),
-  pickOfDay: document.getElementById("pickOfDayList")
+  pickOfDay: document.getElementById("pickOfDayList"),
+  likelyScorers: document.getElementById("likelyScorersList")
 };
 
 for (const input of [el.stake, el.dateFrom, el.dateTo, el.risk]) {
@@ -105,6 +106,7 @@ function render() {
   }
   renderSlip(slip, profile);
   renderPickOfDay(pickSlip, pickProfile || profile);
+  renderLikelyGoalscorers(buildLikelyGoalscorersToday(state.data));
 }
 
 function initialiseDateInputs() {
@@ -273,6 +275,257 @@ function renderPickOfDay(slip, profile) {
   `).concat(missingCards).join("");
 }
 
+function renderLikelyGoalscorers(groups) {
+  if (!el.likelyScorers) {
+    return;
+  }
+
+  if (!groups.length) {
+    el.likelyScorers.innerHTML = `
+      <article class="scorer-card unavailable">
+        <header>
+          <span class="tag scorer-tag">Today</span>
+          <span class="score">waiting</span>
+        </header>
+        <p class="why">No World Cup fixtures are listed for today in the current database.</p>
+      </article>
+    `;
+    return;
+  }
+
+  el.likelyScorers.innerHTML = groups.map((group) => {
+    const players = group.players.length
+      ? group.players.map((player, index) => `
+        <li>
+          <span class="rank">${index + 1}</span>
+          <div>
+            <strong>${escapeHtml(player.playerName)}</strong>
+            <span>${escapeHtml(player.team)} | ${escapeHtml(player.reason)}</span>
+          </div>
+          <em>${percent(player.probability)}</em>
+        </li>
+      `).join("")
+      : `<li class="empty-scorers">Scorer data is still building for this game.</li>`;
+
+    return `
+      <article class="scorer-card">
+        <header>
+          <span class="tag scorer-tag">${escapeHtml(group.fixtureLabel)}</span>
+          <span class="score">${escapeHtml(formatKickoff(group.fixture.date))}</span>
+        </header>
+        <ol class="scorers">
+          ${players}
+        </ol>
+      </article>
+    `;
+  }).join("");
+}
+
+function buildLikelyGoalscorersToday(data, today = localDateKey(new Date())) {
+  const fixtures = (data?.fixtures || [])
+    .filter((fixture) => (fixture.dateKey || dateKey(fixture.date)) === today)
+    .sort((left, right) => new Date(left.date) - new Date(right.date));
+
+  return fixtures.map((fixture) => ({
+    fixture,
+    fixtureLabel: `${fixture.homeTeam} vs ${fixture.awayTeam}`,
+    players: likelyGoalscorersForFixture(data, fixture).slice(0, 4)
+  }));
+}
+
+function likelyGoalscorersForFixture(data, fixture) {
+  const byPlayer = new Map();
+  const model = fixtureModelComponents(data, fixture.id);
+
+  addScorerMemoryCandidates({ byPlayer, data, fixture, model });
+  addScorerOddsCandidates({ byPlayer, data, fixture });
+
+  return [...byPlayer.values()]
+    .sort((left, right) => scorerRankScore(right) - scorerRankScore(left));
+}
+
+function addScorerMemoryCandidates({ byPlayer, data, fixture, model }) {
+  const teamPlayers = data?.playerStats?.teams || {};
+
+  for (const side of ["home", "away"]) {
+    const team = side === "home" ? fixture.homeTeam : fixture.awayTeam;
+    const players = teamPlayers[team] || [];
+    const teamExpectedGoals = Number(model?.[`${side}ExpectedGoals`] || model?.expectedGoals) / (model?.[`${side}ExpectedGoals`] ? 1 : 2) || 1.25;
+    const teamGoalChance = 1 - Math.exp(-teamExpectedGoals);
+    const topGoalTotal = Math.max(1, players.slice(0, 8).reduce((total, player) => total + Number(player.goalsPerTwentyTeamMatches || player.goals || 0), 0));
+
+    for (const player of players.slice(0, 8)) {
+      const playerGoals = Number(player.goalsPerTwentyTeamMatches || player.goals || 0);
+      if (!player.playerName || playerGoals <= 0) {
+        continue;
+      }
+
+      const scoringRate = clamp(playerGoals / Number(player.matchesSampled || 20), 0.02, 0.85);
+      const scorerShare = clamp(playerGoals / (topGoalTotal + 4), 0.04, 0.5);
+      const confidence = Number(player.scorerConfidence || 0.45);
+      const probability = clamp(
+        (scoringRate * 0.43)
+          + (teamGoalChance * scorerShare * 0.44)
+          + (teamExpectedGoals * scorerShare * 0.12)
+          + (confidence * 0.015),
+        0.03,
+        0.46
+      );
+
+      upsertScorerCandidate(byPlayer, {
+        playerName: player.playerName,
+        team,
+        probability,
+        confidence,
+        sourceWeight: 0.72,
+        reason: `${round(playerGoals, 1)} goals in last ${Number(player.matchesSampled || 20)} team games; ${round(teamExpectedGoals, 2)} team xG`
+      });
+    }
+  }
+}
+
+function addScorerOddsCandidates({ byPlayer, data, fixture }) {
+  for (const leg of scorerLegCandidates(data, fixture.id)) {
+    const playerName = leg.playerName || leg.outcome;
+    if (!playerName) {
+      continue;
+    }
+
+    const baseProbability = Number(leg.rawModelProbability || leg.modelProbability || leg.likelyProbability || 0);
+    const probability = leg.market === "first_goalscorer"
+      ? clamp(baseProbability * 2.1, 0.04, 0.48)
+      : clamp(baseProbability, 0.04, 0.52);
+    const bookmaker = leg.bookmaker ? ` via ${leg.bookmaker}` : "";
+    const oddsText = leg.decimalOdds ? ` @ ${Number(leg.decimalOdds).toFixed(2)}` : "";
+
+    upsertScorerCandidate(byPlayer, {
+      playerName,
+      team: playerTeamFromScorerData(leg, fixture, data),
+      probability,
+      confidence: Number(leg.confidence || 0.5),
+      sourceWeight: leg.market === "anytime_scorer" ? 1 : 0.82,
+      reason: `${leg.market === "first_goalscorer" ? "first-scorer price proxy" : "scorer odds"}${bookmaker}${oddsText}`
+    });
+  }
+}
+
+function scorerLegCandidates(data, fixtureId) {
+  const fromRisks = Object.values(data?.legCandidatesByRisk || {}).flat();
+  const legs = [
+    ...(data?.mostLikelyLegCandidates || []),
+    ...fromRisks
+  ];
+  const seen = new Set();
+
+  return legs.filter((leg) => {
+    if (leg.fixtureId !== fixtureId || !isScorerLeg(leg)) {
+      return false;
+    }
+
+    const key = `${leg.market}:${normalizeLookupKey(leg.playerName || leg.outcome)}:${normalizeLookupKey(leg.playerTeam)}`;
+    if (seen.has(key)) {
+      return false;
+    }
+    seen.add(key);
+    return true;
+  });
+}
+
+function fixtureModelComponents(data, fixtureId) {
+  const candidates = [
+    ...(data?.mostLikelyLegCandidates || []),
+    ...Object.values(data?.legCandidatesByRisk || {}).flat()
+  ];
+  const leg = candidates.find((candidate) => candidate.fixtureId === fixtureId && (candidate.components || candidate.thesis));
+  const components = { ...(leg?.components || {}) };
+  const thesisExpectedGoals = parseThesisExpectedGoals(leg?.thesis);
+
+  if (thesisExpectedGoals && !Number(components.homeExpectedGoals)) {
+    components.expectedGoals = thesisExpectedGoals.total;
+    components.homeExpectedGoals = thesisExpectedGoals.home;
+    components.awayExpectedGoals = thesisExpectedGoals.away;
+  }
+
+  return components;
+}
+
+function parseThesisExpectedGoals(thesis) {
+  const match = String(thesis || "").match(/expected goals\s+([\d.]+)\s+\(([\d.]+)-([\d.]+)\)/i);
+
+  if (!match) {
+    return null;
+  }
+
+  return {
+    total: Number(match[1]),
+    home: Number(match[2]),
+    away: Number(match[3])
+  };
+}
+
+function upsertScorerCandidate(byPlayer, candidate) {
+  const key = `${normalizeLookupKey(candidate.team)}:${normalizeLookupKey(candidate.playerName)}`;
+  const existing = byPlayer.get(key);
+
+  if (!existing) {
+    byPlayer.set(key, candidate);
+    return;
+  }
+
+  const probability = (existing.probability * existing.sourceWeight + candidate.probability * candidate.sourceWeight)
+    / Math.max(0.01, existing.sourceWeight + candidate.sourceWeight);
+  byPlayer.set(key, {
+    ...existing,
+    ...candidate,
+    probability: clamp(probability, 0.03, 0.54),
+    confidence: Math.max(Number(existing.confidence || 0), Number(candidate.confidence || 0)),
+    sourceWeight: existing.sourceWeight + candidate.sourceWeight,
+    reason: candidate.reason
+  });
+}
+
+function scorerRankScore(player) {
+  return Number(player.probability || 0) * 100
+    + Number(player.confidence || 0) * 4
+    + Math.min(4, Number(player.sourceWeight || 0));
+}
+
+function playerTeamFromScorerData(leg, fixture, data) {
+  if (leg.playerTeam) {
+    return leg.playerTeam;
+  }
+
+  const playerKey = normalizeLookupKey(leg.playerName || leg.outcome);
+  const teams = data?.playerStats?.teams || {};
+
+  for (const team of [fixture.homeTeam, fixture.awayTeam]) {
+    if ((teams[team] || []).some((player) => normalizeLookupKey(player.playerName) === playerKey)) {
+      return team;
+    }
+  }
+
+  return "Unknown team";
+}
+
+function localDateKey(value) {
+  const date = new Date(value);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function formatKickoff(value) {
+  if (!value) {
+    return "today";
+  }
+
+  return new Intl.DateTimeFormat("en-GB", {
+    hour: "2-digit",
+    minute: "2-digit"
+  }).format(new Date(value));
+}
+
 function unavailableCard(label, profile, prefix = "No real-data pick passed this date/risk profile yet.") {
   const message = profile?.dataQuality?.message || state.data?.collection?.dataQuality?.message || "The database is still collecting public-web source data.";
 
@@ -397,6 +650,15 @@ function fixtureKeyForLeg(leg) {
 
 function normalizeFixtureName(value) {
   return String(value || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim().replace(/\s+/g, "_");
+}
+
+function normalizeLookupKey(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
 }
 
 function rankCombos(combos, type, policy) {

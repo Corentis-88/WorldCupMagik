@@ -232,6 +232,12 @@ input {
   border-top: 2px solid rgba(214, 169, 52, 0.34);
 }
 
+.scorer-section {
+  margin-top: 26px;
+  padding-top: 8px;
+  border-top: 2px solid rgba(15, 122, 79, 0.24);
+}
+
 .section-title h2 {
   margin: 0;
   font-size: 32px;
@@ -343,6 +349,99 @@ input {
   margin-top: 2px;
 }
 
+.scorer-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.scorer-card {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid rgba(23, 34, 29, 0.13);
+  border-radius: 8px;
+  background: linear-gradient(180deg, #fffaf1, #eff8ef);
+  box-shadow: 0 10px 28px rgba(23, 34, 29, 0.1);
+}
+
+.scorer-card.unavailable {
+  opacity: 0.72;
+  border-style: dashed;
+}
+
+.scorer-card header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.scorer-tag {
+  background: var(--green);
+}
+
+.scorers {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.scorers li {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 9px;
+  border-radius: 8px;
+  background: rgba(242, 236, 223, 0.9);
+}
+
+.scorers .rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: #fff;
+  border-radius: 999px;
+  background: var(--ink);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.scorers strong,
+.scorers span {
+  display: block;
+}
+
+.scorers strong {
+  overflow-wrap: anywhere;
+}
+
+.scorers span {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.scorers em {
+  color: var(--green);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 950;
+}
+
+.scorers .empty-scorers {
+  display: block;
+  color: var(--muted);
+  font-weight: 750;
+}
+
 @media (max-width: 760px) {
   .hero {
     align-items: start;
@@ -357,12 +456,22 @@ input {
   .controls,
   .engine-status,
   .summary,
-  .betslip {
+  .betslip,
+  .scorer-list {
     grid-template-columns: 1fr;
   }
 
   .section-title h2 {
     font-size: 26px;
     line-height: 1.08;
+  }
+
+  .scorers li {
+    grid-template-columns: 28px minmax(0, 1fr);
+  }
+
+  .scorers em {
+    grid-column: 2;
+    font-size: 16px;
   }
 }
