@@ -11,6 +11,12 @@
     "requestTimeoutMs": 14000,
     "userAgent": "WorldCupMagik/1.0 public-web gatherer; no APIs"
   },
+  "lineups": {
+    "mode": "self-gather",
+    "sourcesFile": "config/lineup-sources.json",
+    "requestTimeoutMs": 12000,
+    "userAgent": "WorldCupMagik/1.0 public-web lineup gatherer; no APIs"
+  },
   "news": {
     "mode": "self-gather",
     "sourcesFile": "config/news-sources.json",

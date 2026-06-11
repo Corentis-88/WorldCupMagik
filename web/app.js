@@ -55,16 +55,42 @@ async function loadData() {
   el.scanStamp.textContent = "Loading latest database...";
 
   try {
-    const response = await fetch(`./data/latest.json?v=${Date.now()}`);
-    if (!response.ok) {
-      throw new Error(`${response.status} ${response.statusText}`);
-    }
-    state.data = await response.json();
+    const [database, lineups] = await Promise.all([
+      fetchRequiredJson("./data/latest.json"),
+      fetchOptionalJson("./data/lineups-latest.json")
+    ]);
+
+    state.data = database;
+    state.data.lineupAdjustments = lineups;
     initialiseDateInputs();
     render();
   } catch (error) {
     el.scanStamp.textContent = `No generated database yet: ${error.message}`;
     el.betslip.innerHTML = `<article class="bet-card">Run <strong>npm run web:build-data</strong> locally or let GitHub Actions publish the latest database.</article>`;
+  }
+}
+
+async function fetchRequiredJson(path) {
+  const response = await fetch(`${path}?v=${Date.now()}`);
+
+  if (!response.ok) {
+    throw new Error(`${response.status} ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
+async function fetchOptionalJson(path) {
+  try {
+    const response = await fetch(`${path}?v=${Date.now()}`);
+
+    if (!response.ok) {
+      return null;
+    }
+
+    return response.json();
+  } catch {
+    return null;
   }
 }
 
@@ -336,25 +362,42 @@ function buildLikelyGoalscorersToday(data, today = localDateKey(new Date())) {
 function likelyGoalscorersForFixture(data, fixture) {
   const byPlayer = new Map();
   const model = fixtureModelComponents(data, fixture.id);
+  const legs = scorerLegCandidates(data, fixture.id);
+  const firstScorerLegs = legs.filter((leg) => leg.market === "first_goalscorer");
+  const anytimeScorerLegs = legs.filter((leg) => leg.market === "anytime_scorer");
 
-  addScorerMemoryCandidates({ byPlayer, data, fixture, model });
-  addScorerOddsCandidates({ byPlayer, data, fixture });
+  if (firstScorerLegs.length) {
+    addScorerOddsCandidates({ byPlayer, data, fixture, legs: firstScorerLegs, preferredMarket: "first_goalscorer" });
+    if (byPlayer.size < 4) {
+      addScorerMemoryCandidates({ byPlayer, data, fixture, model, mode: "first_goalscorer", maxPerTeam: 5 });
+    }
+  } else if (anytimeScorerLegs.length) {
+    addScorerOddsCandidates({ byPlayer, data, fixture, legs: anytimeScorerLegs, preferredMarket: "anytime_scorer" });
+    if (byPlayer.size < 4) {
+      addScorerMemoryCandidates({ byPlayer, data, fixture, model, mode: "anytime_scorer", maxPerTeam: 5 });
+    }
+  } else {
+    addScorerMemoryCandidates({ byPlayer, data, fixture, model, mode: "anytime_scorer", maxPerTeam: 8 });
+  }
 
-  return [...byPlayer.values()]
+  return applyLineupAdjustments([...byPlayer.values()], data, fixture)
     .sort((left, right) => scorerRankScore(right) - scorerRankScore(left));
 }
 
-function addScorerMemoryCandidates({ byPlayer, data, fixture, model }) {
+function addScorerMemoryCandidates({ byPlayer, data, fixture, model, mode = "anytime_scorer", maxPerTeam = 8 }) {
   const teamPlayers = data?.playerStats?.teams || {};
+  const firstScorerMode = mode === "first_goalscorer";
 
   for (const side of ["home", "away"]) {
     const team = side === "home" ? fixture.homeTeam : fixture.awayTeam;
     const players = teamPlayers[team] || [];
     const teamExpectedGoals = Number(model?.[`${side}ExpectedGoals`] || model?.expectedGoals) / (model?.[`${side}ExpectedGoals`] ? 1 : 2) || 1.25;
     const teamGoalChance = 1 - Math.exp(-teamExpectedGoals);
+    const totalExpectedGoals = Math.max(0.2, Number(model?.expectedGoals || teamExpectedGoals * 2));
+    const teamFirstGoalShare = clamp(teamExpectedGoals / totalExpectedGoals, 0.18, 0.82);
     const topGoalTotal = Math.max(1, players.slice(0, 8).reduce((total, player) => total + Number(player.goalsPerTwentyTeamMatches || player.goals || 0), 0));
 
-    for (const player of players.slice(0, 8)) {
+    for (const player of players.slice(0, maxPerTeam)) {
       const playerGoals = Number(player.goalsPerTwentyTeamMatches || player.goals || 0);
       if (!player.playerName || playerGoals <= 0) {
         continue;
@@ -371,41 +414,51 @@ function addScorerMemoryCandidates({ byPlayer, data, fixture, model }) {
         0.03,
         0.46
       );
+      const firstGoalProbability = clamp(
+        probability * teamFirstGoalShare * 0.58,
+        0.018,
+        0.18
+      );
 
       upsertScorerCandidate(byPlayer, {
         playerName: player.playerName,
         team,
-        probability,
+        probability: firstScorerMode ? firstGoalProbability : probability,
         confidence,
-        sourceWeight: 0.72,
-        reason: `${round(playerGoals, 1)} goals in last ${Number(player.matchesSampled || 20)} team games; ${round(teamExpectedGoals, 2)} team xG`
-      });
+        market: mode,
+        sourceWeight: firstScorerMode ? 0.28 : 0.72,
+        reason: firstScorerMode
+          ? `first-scorer fallback from ${round(playerGoals, 1)} goals in last ${Number(player.matchesSampled || 20)} team games; ${round(teamExpectedGoals, 2)} team xG`
+          : `${round(playerGoals, 1)} goals in last ${Number(player.matchesSampled || 20)} team games; ${round(teamExpectedGoals, 2)} team xG`
+      }, data, fixture);
     }
   }
 }
 
-function addScorerOddsCandidates({ byPlayer, data, fixture }) {
-  for (const leg of scorerLegCandidates(data, fixture.id)) {
+function addScorerOddsCandidates({ byPlayer, data, fixture, legs, preferredMarket }) {
+  for (const leg of legs) {
     const playerName = leg.playerName || leg.outcome;
     if (!playerName) {
       continue;
     }
 
-    const baseProbability = Number(leg.rawModelProbability || leg.modelProbability || leg.likelyProbability || 0);
+    const baseProbability = Number(leg.modelProbability || leg.rawModelProbability || leg.likelyProbability || 0);
     const probability = leg.market === "first_goalscorer"
-      ? clamp(baseProbability * 2.1, 0.04, 0.48)
-      : clamp(baseProbability, 0.04, 0.52);
+      ? clamp(baseProbability, 0.018, 0.34)
+      : clamp(baseProbability, 0.04, 0.58);
     const bookmaker = leg.bookmaker ? ` via ${leg.bookmaker}` : "";
     const oddsText = leg.decimalOdds ? ` @ ${Number(leg.decimalOdds).toFixed(2)}` : "";
+    const label = leg.market === "first_goalscorer" ? "first-goalscorer odds" : "anytime-scorer odds";
 
     upsertScorerCandidate(byPlayer, {
       playerName,
       team: playerTeamFromScorerData(leg, fixture, data),
       probability,
       confidence: Number(leg.confidence || 0.5),
-      sourceWeight: leg.market === "anytime_scorer" ? 1 : 0.82,
-      reason: `${leg.market === "first_goalscorer" ? "first-scorer price proxy" : "scorer odds"}${bookmaker}${oddsText}`
-    });
+      market: leg.market,
+      sourceWeight: leg.market === preferredMarket ? 1.25 : 0.82,
+      reason: `${label}${bookmaker}${oddsText}`
+    }, data, fixture);
   }
 }
 
@@ -463,24 +516,29 @@ function parseThesisExpectedGoals(thesis) {
   };
 }
 
-function upsertScorerCandidate(byPlayer, candidate) {
-  const key = `${normalizeLookupKey(candidate.team)}:${normalizeLookupKey(candidate.playerName)}`;
+function upsertScorerCandidate(byPlayer, candidate, data, fixture) {
+  const canonical = canonicalScorerIdentity(candidate, data, fixture);
+  const key = canonical.key;
   const existing = byPlayer.get(key);
+  const displayName = betterDisplayPlayerName(canonical.playerName, existing?.playerName || candidate.playerName);
 
   if (!existing) {
-    byPlayer.set(key, candidate);
+    byPlayer.set(key, { ...candidate, playerName: displayName });
     return;
   }
 
+  const keepCandidateReason = Number(candidate.sourceWeight || 0) >= Number(existing.sourceWeight || 0)
+    || candidate.market === "first_goalscorer";
   const probability = (existing.probability * existing.sourceWeight + candidate.probability * candidate.sourceWeight)
     / Math.max(0.01, existing.sourceWeight + candidate.sourceWeight);
   byPlayer.set(key, {
     ...existing,
     ...candidate,
+    playerName: displayName,
     probability: clamp(probability, 0.03, 0.54),
     confidence: Math.max(Number(existing.confidence || 0), Number(candidate.confidence || 0)),
     sourceWeight: existing.sourceWeight + candidate.sourceWeight,
-    reason: candidate.reason
+    reason: keepCandidateReason ? candidate.reason : existing.reason
   });
 }
 
@@ -505,6 +563,156 @@ function playerTeamFromScorerData(leg, fixture, data) {
   }
 
   return "Unknown team";
+}
+
+function canonicalScorerIdentity(candidate, data, fixture) {
+  const team = candidate.team || "Unknown team";
+  const names = knownPlayerNamesForTeam(data, fixture, team);
+  const directName = candidate.playerName || "";
+  const matched = names.find((name) => playerNamesMatch(name, directName));
+  const playerName = matched ? betterDisplayPlayerName(matched, directName) : directName;
+
+  return {
+    key: `${normalizeLookupKey(team)}:${normalizeLookupKey(playerName)}`,
+    playerName
+  };
+}
+
+function knownPlayerNamesForTeam(data, fixture, team) {
+  const names = [];
+  const teams = data?.playerStats?.teams || {};
+  const lineup = teamLineup(data, fixture, team);
+
+  for (const player of teams[team] || []) {
+    if (player.playerName) {
+      names.push(player.playerName);
+    }
+  }
+
+  for (const starter of lineup?.starters || []) {
+    names.push(starter);
+  }
+
+  for (const leg of scorerLegCandidates(data, fixture.id)) {
+    if (sameTeam(playerTeamFromScorerData(leg, fixture, data), team) && (leg.playerName || leg.outcome)) {
+      names.push(leg.playerName || leg.outcome);
+    }
+  }
+
+  return names.filter(Boolean).filter((name, index, items) => items.findIndex((other) => normalizeLookupKey(other) === normalizeLookupKey(name)) === index);
+}
+
+function betterDisplayPlayerName(left, right) {
+  const a = String(left || "");
+  const b = String(right || "");
+  const aWords = normalizeLookupKey(a).split(/\s+/).filter(Boolean).length;
+  const bWords = normalizeLookupKey(b).split(/\s+/).filter(Boolean).length;
+
+  if (!a) {
+    return b;
+  }
+
+  if (!b) {
+    return a;
+  }
+
+  return bWords > aWords ? b : a;
+}
+
+function playerNamesMatch(left, right) {
+  const a = normalizeLookupKey(left);
+  const b = normalizeLookupKey(right);
+
+  if (!a || !b) {
+    return false;
+  }
+
+  if (a === b || a.endsWith(` ${b}`) || b.endsWith(` ${a}`)) {
+    return true;
+  }
+
+  const aTokens = a.split(/\s+/).filter(Boolean);
+  const bTokens = b.split(/\s+/).filter(Boolean);
+  const aSurname = aTokens.at(-1);
+  const bSurname = bTokens.at(-1);
+
+  return Boolean(aSurname && bSurname && aSurname.length > 3 && aSurname === bSurname);
+}
+
+function applyLineupAdjustments(players, data, fixture) {
+  const lineup = lineupForFixture(data, fixture);
+
+  if (!lineup) {
+    return players;
+  }
+
+  const adjusted = players.map((player) => {
+    const team = teamLineupFromRecord(lineup, player.team);
+
+    if (!team || team.status !== "confirmed" || !Array.isArray(team.starters) || team.starters.length < 7) {
+      return player;
+    }
+
+    const starterName = team.starters.find((starter) => playerNamesMatch(starter, player.playerName));
+
+    if (!starterName) {
+      return {
+        ...player,
+        lineupStatus: "not_starting",
+        probability: clamp(Number(player.probability || 0) * 0.08, 0.01, 0.08),
+        confidence: clamp(Number(player.confidence || 0) * 0.55, 0, 1),
+        sourceWeight: Number(player.sourceWeight || 0) * 0.35,
+        reason: `${player.reason} | not in confirmed XI`
+      };
+    }
+
+    return {
+      ...player,
+      playerName: betterDisplayPlayerName(starterName, player.playerName),
+      lineupStatus: "confirmed_starter",
+      reason: `${player.reason} | confirmed starter`
+    };
+  });
+  const starterOnly = adjusted.filter((player) => player.lineupStatus !== "not_starting");
+
+  return starterOnly.length ? starterOnly : adjusted;
+}
+
+function lineupForFixture(data, fixture) {
+  const records = data?.lineupAdjustments?.lineups || [];
+
+  return records.find((record) => record.fixtureId === fixture.id)
+    || records.find((record) => sameTeam(record.homeTeam, fixture.homeTeam)
+      && sameTeam(record.awayTeam, fixture.awayTeam)
+      && String(record.fixtureDate || "").slice(0, 10) === (fixture.dateKey || dateKey(fixture.date)))
+    || null;
+}
+
+function teamLineup(data, fixture, teamName) {
+  const lineup = lineupForFixture(data, fixture);
+  return teamLineupFromRecord(lineup, teamName);
+}
+
+function teamLineupFromRecord(lineup, teamName) {
+  if (!lineup?.teams || !teamName) {
+    return null;
+  }
+
+  const exact = lineup.teams[teamName];
+
+  if (exact) {
+    return exact;
+  }
+
+  const entry = Object.entries(lineup.teams).find(([team]) => sameTeam(team, teamName));
+  return entry?.[1] || null;
+}
+
+function sameTeam(left, right) {
+  const a = normalizeLookupKey(left);
+  const b = normalizeLookupKey(right);
+
+  return Boolean(a && b && (a === b || a.includes(b) || b.includes(a)));
 }
 
 function localDateKey(value) {

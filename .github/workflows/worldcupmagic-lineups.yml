@@ -1,0 +1,48 @@
+name: WorldCupMagic Lineups
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: worldcupmagic-pages
+  cancel-in-progress: false
+
+jobs:
+  lineup-check:
+    name: Quick Lineup Check
+    runs-on: ubuntu-latest
+    if: github.ref_type != 'tag'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - run: npm ci
+      - name: Preserve current published database
+        run: |
+          mkdir -p web/data
+          curl --fail --location --silent --show-error https://corentis-88.github.io/WorldCupMagik/data/latest.json --output web/data/latest.json || echo "Using repository database fallback."
+      - run: npm run lineups:build
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web
+      - id: deployment
+        uses: actions/deploy-pages@v4

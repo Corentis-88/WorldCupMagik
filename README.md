@@ -26,8 +26,10 @@ The production app lives in `web/` and is deployed by `.github/workflows/worldcu
 The scheduled job currently runs at:
 
 ```text
-05:23, 08:23, 11:23, 14:23, 17:23, 20:23, and 23:23 UTC
+05:23, 08:23, 11:23, 14:23, 17:23, 20:23, 21:23, and 23:23 UTC
 ```
+
+A separate lightweight lineup check runs every 10 minutes. It only targets group fixtures around the pre-kickoff lineup window, updates `web/data/lineups-latest.json`, and redeploys the static app so the goalscorer panel can visually drop confirmed non-starters without rebuilding the full database.
 
 Each run writes `web/data/latest.json` with:
 
