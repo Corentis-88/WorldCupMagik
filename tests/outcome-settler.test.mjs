@@ -50,6 +50,23 @@ test("does not settle scorer bets when public scorer rows are missing for a goal
   assert.equal(result.reason, "scorer_list_missing");
 });
 
+test("settles first-goalscorer only when scorer order is available", () => {
+  const selected = { ...leg("leg-first", "first_goalscorer", "Raul Jimenez", 4.2), playerName: "Raul Jimenez", playerTeam: "Mexico" };
+  const orderedMatch = {
+    ...match("Mexico", "South Africa", 2, 1),
+    homeScorers: [{ name: "Raul Jimenez", minute: 12 }, { name: "Santiago Gimenez", minute: 68 }],
+    awayScorers: [{ name: "Lyle Foster", minute: 54 }]
+  };
+  const unorderedMatch = {
+    ...match("Mexico", "South Africa", 2, 1),
+    homeScorers: [{ name: "Raul Jimenez" }],
+    awayScorers: [{ name: "Lyle Foster" }]
+  };
+
+  assert.equal(gradeLegAgainstMatch(selected, orderedMatch).status, "won");
+  assert.equal(gradeLegAgainstMatch(selected, unorderedMatch).reason, "first_scorer_order_missing");
+});
+
 function statusFor(settlement, market) {
   return settlement.newRecords.find((record) => record.market === market)?.status;
 }

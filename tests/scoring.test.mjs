@@ -90,6 +90,52 @@ test("BTTS model requires balanced scoring threat, not just high total goals", (
   assert.ok(bttsYes.components.marketFocusReasons.some((reason) => /one-sided/.test(reason)));
 });
 
+test("scorer odds become anytime and first-goalscorer leg candidates when prices are captured", () => {
+  const now = new Date("2026-06-11T09:00:00.000Z");
+  const fixtureRecord = fixture("mex-rsa", "Mexico", "South Africa", "2026-06-11T19:00:00.000Z");
+  const policy = buildRiskPolicy(basePolicy, 80);
+  const oddsRecords = [
+    odds(fixtureRecord, "anytime_scorer", "Raul Jimenez", 2.3, now, { playerName: "Raul Jimenez", playerTeam: "Mexico" }),
+    odds(fixtureRecord, "first_goalscorer", "Raul Jimenez", 4.2, now, { playerName: "Raul Jimenez", playerTeam: "Mexico" })
+  ];
+  const teamStats = [
+    {
+      ...stats("Mexico", 1740, 2.1, 1.55, 0.9, 58),
+      topScorers: [{ playerName: "Jimenez", goals: 6, matchesSampled: 20, scorerConfidence: 0.76 }]
+    },
+    stats("South Africa", 1605, 1.1, 1.0, 1.35, 47)
+  ];
+  const playerStats = [
+    {
+      team: "Mexico",
+      playerName: "Jimenez",
+      goals: 6,
+      matchesSampled: 20,
+      scoringMatches: 5,
+      scorerConfidence: 0.76,
+      updatedAt: now.toISOString()
+    }
+  ];
+  const legs = buildLegCandidates({
+    fixtures: [fixtureRecord],
+    oddsSnapshots: oddsRecords,
+    newsArticles: [],
+    teamStats,
+    policy,
+    now,
+    playerStats
+  });
+  const anytime = legs.find((leg) => leg.market === "anytime_scorer");
+  const first = legs.find((leg) => leg.market === "first_goalscorer");
+
+  assert.ok(anytime);
+  assert.ok(first);
+  assert.equal(first.selectionLabel, "Mexico vs South Africa: Raul Jimenez first goalscorer");
+  assert.ok(first.modelProbability < anytime.modelProbability);
+  assert.equal(first.components.scorerMarketType, "first_goalscorer");
+  assert.ok(first.components.scorerGoalsPerTwentyTeamMatches > 0);
+});
+
 test("heat layer is capped as a small result and goals adjustment", () => {
   const fixtureRecord = fixture("ksa-nor", "Saudi Arabia", "Norway", "2026-06-18T20:00:00.000Z");
   const model = fixtureModel({
@@ -259,7 +305,7 @@ function sampleOdds(items, now) {
   return records;
 }
 
-function odds(fixture, market, outcome, decimalOdds, now) {
+function odds(fixture, market, outcome, decimalOdds, now, extra = {}) {
   return {
     id: `${fixture.id}-${market}-${outcome}`,
     capturedAt: now.toISOString(),
@@ -271,7 +317,8 @@ function odds(fixture, market, outcome, decimalOdds, now) {
     awayTeam: fixture.awayTeam,
     market,
     outcome,
-    decimalOdds
+    decimalOdds,
+    ...extra
   };
 }
 

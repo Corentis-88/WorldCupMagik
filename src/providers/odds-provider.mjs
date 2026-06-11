@@ -129,10 +129,12 @@ function buildFixtureUrl(source, fixture) {
 
   const homeSlug = normalizeName(fixture.homeTeam).replace(/\s+/g, "-");
   const awaySlug = normalizeName(fixture.awayTeam).replace(/\s+/g, "-");
+  const dateKey = String(fixture.date || "").slice(0, 10);
 
   return source.urlTemplate
     .replace(/\{homeSlug\}/g, homeSlug)
     .replace(/\{awaySlug\}/g, awaySlug)
+    .replace(/\{dateKey\}/g, dateKey)
     .replace(/\{home\}/g, encodeURIComponent(fixture.homeTeam))
     .replace(/\{away\}/g, encodeURIComponent(fixture.awayTeam));
 }
@@ -148,7 +150,7 @@ function extractOddsFromPage({ html, fixtures, source, now }) {
   const records = [];
 
   for (const fixture of fixtures) {
-    const blocks = fixtureBlocks(text, fixture);
+    const blocks = fixtureBlocks(text, fixture, source);
 
     for (const block of blocks) {
       records.push(...extractFixtureOdds({ block, fixture, source, now }));
@@ -215,13 +217,13 @@ function matchFixtureFromJsonLd(fixtures, item) {
 
 function mapJsonLdOffer(offer, fixture, event) {
   const name = String(offer.name || "");
-  const scorer = parseAnytimeScorerOffer(name);
+  const scorer = parseScorerOffer(name);
   const prefix = normalizeName(name.split(/[—-]/)[0]);
   const homeNames = [fixture.homeTeam, event.homeTeam?.alternateName, event.homeTeam?.name].filter(Boolean).map(normalizeName);
   const awayNames = [fixture.awayTeam, event.awayTeam?.alternateName, event.awayTeam?.name].filter(Boolean).map(normalizeName);
 
   if (scorer) {
-    return { market: "anytime_scorer", outcome: scorer.playerName, playerName: scorer.playerName };
+    return { market: scorer.market, outcome: scorer.playerName, playerName: scorer.playerName, playerTeam: scorer.playerTeam };
   }
 
   if (prefix === "draw") {
@@ -263,12 +265,17 @@ function teamValue(value) {
   return typeof value === "string" ? value : value.name || value.alternateName || "";
 }
 
-function fixtureBlocks(text, fixture) {
+function fixtureBlocks(text, fixture, source = {}) {
   const normalized = normalizeName(text);
   const home = normalizeName(fixture.homeTeam);
   const away = normalizeName(fixture.awayTeam);
   const blocks = [];
   const raw = String(text || "");
+
+  if (source.fullPageFixtureBlock && normalized.includes(home) && normalized.includes(away)) {
+    blocks.push(raw.slice(0, Number(source.maxFixtureBlockChars || 45000)));
+  }
+
   const patterns = [
     new RegExp(`${escapeRegExp(fixture.homeTeam)}[\\s\\S]{0,1200}${escapeRegExp(fixture.awayTeam)}`, "gi"),
     new RegExp(`${escapeRegExp(fixture.awayTeam)}[\\s\\S]{0,1200}${escapeRegExp(fixture.homeTeam)}`, "gi")
@@ -345,7 +352,7 @@ function extractFixtureOdds({ block, fixture, source, now }) {
     outcome: "No",
     labelPattern: /(?:btts|both teams to score)[\s\S]{0,80}\bno\b/i
   }));
-  records.push(...extractAnytimeScorerOdds({
+  records.push(...extractScorerMarketOdds({
     block,
     fixture,
     source,
@@ -431,6 +438,79 @@ function extractMarketPairOdds({ block, fixture, source, bookmaker, capturedAt, 
   })];
 }
 
+function extractScorerMarketOdds({ block, fixture, source, bookmaker, capturedAt }) {
+  const section = String(block || "");
+
+  if (!section) {
+    return [];
+  }
+
+  const records = [];
+  const add = ({ playerName, playerTeam, market, price }) => {
+    const cleanPlayer = cleanScorerName(playerName);
+    const cleanTeam = cleanPlayerTeam(playerTeam, fixture);
+    const decimalOdds = toDecimalOdds(price);
+
+    if (!cleanPlayer || !decimalOdds || !looksLikeScorerName(cleanPlayer, fixture)) {
+      return;
+    }
+
+    records.push(toOddsRecord({
+      fixture,
+      source,
+      bookmaker,
+      capturedAt,
+      market,
+      outcome: cleanPlayer,
+      decimalOdds,
+      playerName: cleanPlayer,
+      playerTeam: cleanTeam
+    }));
+  };
+  const name = scorerNamePattern();
+  const price = oddsPricePattern();
+  const tableFirstAnytime = new RegExp(`\\b(${name})(?:\\s*\\(([^)]+)\\))?\\s+First\\s+(${price})\\s+Anytime\\s+(${price})`, "gi");
+  const tableAnytimeFirst = new RegExp(`\\b(${name})(?:\\s*\\(([^)]+)\\))?\\s+Anytime\\s+(${price})\\s+First\\s+(${price})`, "gi");
+  const latestPlayerProps = new RegExp(`\\bLatest\\s+(${name})\\s+Player\\s+Prop\\s+Odds[\\s\\S]{0,120}?Goalscorer\\s+Anytime\\s+(${price})\\s+First\\s+(${price})`, "gi");
+  const playerAnytime = new RegExp(`\\b(${name})(?:\\s*\\(([^)]+)\\))?\\s+(?:anytime\\s+(?:goal)?scorer|anytime\\s+to\\s+score|to\\s+score\\s+anytime|to\\s+score)\\s+(${price})`, "gi");
+  const anytimePlayer = new RegExp(`\\b(?:anytime\\s+(?:goal)?scorer|anytime\\s+to\\s+score|to\\s+score\\s+anytime)\\s+(${name})(?:\\s*\\(([^)]+)\\))?\\s+(${price})`, "gi");
+  const playerFirst = new RegExp(`\\b(${name})(?:\\s*\\(([^)]+)\\))?\\s+(?:first\\s+(?:goal)?scorer|first\\s+goalscorer)\\s+(${price})`, "gi");
+  const firstPlayer = new RegExp(`\\b(?:first\\s+(?:goal)?scorer|first\\s+goalscorer)\\s+(${name})(?:\\s*\\(([^)]+)\\))?\\s+(${price})`, "gi");
+
+  for (const match of section.matchAll(tableFirstAnytime)) {
+    add({ playerName: match[1], playerTeam: match[2], market: "first_goalscorer", price: match[3] });
+    add({ playerName: match[1], playerTeam: match[2], market: "anytime_scorer", price: match[4] });
+  }
+
+  for (const match of section.matchAll(tableAnytimeFirst)) {
+    add({ playerName: match[1], playerTeam: match[2], market: "anytime_scorer", price: match[3] });
+    add({ playerName: match[1], playerTeam: match[2], market: "first_goalscorer", price: match[4] });
+  }
+
+  for (const match of section.matchAll(latestPlayerProps)) {
+    add({ playerName: match[1], market: "anytime_scorer", price: match[2] });
+    add({ playerName: match[1], market: "first_goalscorer", price: match[3] });
+  }
+
+  for (const match of section.matchAll(playerAnytime)) {
+    add({ playerName: match[1], playerTeam: match[2], market: "anytime_scorer", price: match[3] });
+  }
+
+  for (const match of section.matchAll(anytimePlayer)) {
+    add({ playerName: match[1], playerTeam: match[2], market: "anytime_scorer", price: match[3] });
+  }
+
+  for (const match of section.matchAll(playerFirst)) {
+    add({ playerName: match[1], playerTeam: match[2], market: "first_goalscorer", price: match[3] });
+  }
+
+  for (const match of section.matchAll(firstPlayer)) {
+    add({ playerName: match[1], playerTeam: match[2], market: "first_goalscorer", price: match[3] });
+  }
+
+  return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}`);
+}
+
 function extractAnytimeScorerOdds({ block, fixture, source, bookmaker, capturedAt }) {
   const section = scorerSection(block);
 
@@ -465,8 +545,29 @@ function extractAnytimeScorerOdds({ block, fixture, source, bookmaker, capturedA
 }
 
 function scorerSection(block) {
-  const match = String(block || "").match(/(?:anytime\s+(?:goal)?scorer|anytime\s+to\s+score|to\s+score\s+anytime)[\s\S]{0,2200}?(?=(?:full\s+time\s+result|over\/under|both\s+teams|correct\s+score|odds\s+last|$))/i);
+  const match = String(block || "").match(/(?:player\s+goals|player\s+prop|anytime\s+(?:goal)?scorer|anytime\s+to\s+score|to\s+score\s+anytime|first\s+(?:goal)?scorer)[\s\S]{0,4200}?(?=(?:bet\s+builder|full\s+time\s+result|over\/under|both\s+teams|correct\s+score|odds\s+last|popular|more markets|$))/i);
   return match?.[0] || "";
+}
+
+function parseScorerOffer(name) {
+  const text = String(name || "").replace(/\s+/g, " ").trim();
+  const firstScorer = /(?:first\s+(?:goal)?scorer|first\s+goalscorer)/i.test(text);
+  const anytimeScorer = /(?:anytime\s+(?:goal)?scorer|anytime\s+to\s+score|to\s+score\s+anytime|\bto\s+score\b)/i.test(text);
+
+  if (!firstScorer && !anytimeScorer) {
+    return null;
+  }
+
+  if (/(?:both\s+teams|team\s+to\s+score|correct\s+score|scorecast|top\s+(?:team\s+)?goalscorer|golden\s+boot)/i.test(text)) {
+    return null;
+  }
+
+  const [candidate] = text.split(/\s+(?:first\s+(?:goal)?scorer|first\s+goalscorer|anytime\s+(?:goal)?scorer|anytime\s+to\s+score|to\s+score\s+anytime|to\s+score)\b|[-\u2013\u2014]| at /i);
+  const playerName = cleanScorerName(candidate);
+
+  return playerName && looksLikeScorerName(playerName)
+    ? { market: firstScorer ? "first_goalscorer" : "anytime_scorer", playerName }
+    : null;
 }
 
 function parseAnytimeScorerOffer(name) {
@@ -488,10 +589,24 @@ function parseAnytimeScorerOffer(name) {
 
 function cleanScorerName(value) {
   return String(value || "")
-    .replace(/\b(?:World Cup|FIFA|Odds|Price|Bet|Boost|Selection|Player|Anytime|Goalscorer|Scorer)\b/gi, " ")
+    .replace(/\b(?:World Cup|FIFA|Odds|Price|Bet|Boost|Selection|Player|Prop|Props|Top Pick|Latest|Goalscorer|Scorer|Anytime|First|Goals|Goal)\b/gi, " ")
     .replace(/^[^A-Za-zÀ-ÿ]+|[^A-Za-zÀ-ÿ]+$/g, "")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function cleanPlayerTeam(value, fixture) {
+  const text = String(value || "").trim();
+
+  if (teamNameMatches(text, fixture.homeTeam)) {
+    return fixture.homeTeam;
+  }
+
+  if (teamNameMatches(text, fixture.awayTeam)) {
+    return fixture.awayTeam;
+  }
+
+  return "";
 }
 
 function looksLikeScorerName(value, fixture = null) {
@@ -528,7 +643,7 @@ function firstPriceNearAliases(block, aliases) {
 
 function priceTokens(block) {
   const tokens = [];
-  const pattern = /\b(\d{1,2}\.\d{2}|\d{1,3}\s*\/\s*\d{1,3})\b/g;
+  const pattern = /\b(\d{1,2}\.\d{2}|[+-]\d{3,4}|\d{1,3}\s*\/\s*\d{1,3})\b/g;
 
   for (const match of String(block || "").matchAll(pattern)) {
     const value = toDecimalOdds(match[1]);
@@ -539,6 +654,14 @@ function priceTokens(block) {
   }
 
   return tokens;
+}
+
+function scorerNamePattern() {
+  return "[A-Z\\u00C0-\\u017F][A-Za-z\\u00C0-\\u017F' .-]{2,45}";
+}
+
+function oddsPricePattern() {
+  return "(?:\\d{1,2}\\.\\d{2}|[+-]\\d{3,4}|\\d{1,3}\\s*\\/\\s*\\d{1,3})";
 }
 
 function containsBothTeams(block, fixture) {
@@ -561,6 +684,7 @@ function toOddsRecord({ fixture, source, bookmaker, capturedAt, market, outcome,
     outcome,
     playerName,
     playerTeam,
-    decimalOdds: Number(decimalOdds)
+    decimalOdds: Number(decimalOdds),
+    sourceReliability: source.reliability
   };
 }

@@ -719,7 +719,7 @@ function isSquadDepthRecord(record) {
 }
 
 function isScorerOddsRecord(record) {
-  return record?.market === "anytime_scorer";
+  return record?.market === "anytime_scorer" || record?.market === "first_goalscorer";
 }
 
 function isPublicNewsArticle(article) {

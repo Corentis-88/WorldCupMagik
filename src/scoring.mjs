@@ -69,14 +69,18 @@ export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, team
       }
     }
 
-    if ((policy.markets || []).includes("anytime_scorer")) {
-      for (const odds of latestOddsRecords.filter((record) => record.fixtureId === fixture.id && record.market === "anytime_scorer")) {
-        const scorerProbability = estimateAnytimeScorerProbability({ fixture, odds, homeStats, awayStats, model, playerStatsByKey });
-        const movement = oddsMovement.get(outcomeKey(fixture.id, "anytime_scorer", odds.outcome));
+    for (const scorerMarket of ["anytime_scorer", "first_goalscorer"]) {
+      if (!(policy.markets || []).includes(scorerMarket)) {
+        continue;
+      }
+
+      for (const odds of latestOddsRecords.filter((record) => record.fixtureId === fixture.id && record.market === scorerMarket)) {
+        const scorerProbability = estimateScorerProbability({ fixture, odds, market: scorerMarket, homeStats, awayStats, model, playerStatsByKey });
+        const movement = oddsMovement.get(outcomeKey(fixture.id, scorerMarket, odds.outcome));
 
         candidates.push(scoreLeg({
           fixture,
-          market: "anytime_scorer",
+          market: scorerMarket,
           outcome: odds.outcome,
           modelProbability: scorerProbability.modelProbability,
           rawModelProbability: scorerProbability.rawModelProbability,
@@ -100,15 +104,21 @@ export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, team
     .map((candidate, index) => ({ ...candidate, rank: index + 1 }));
 }
 
-function estimateAnytimeScorerProbability({ fixture, odds, homeStats, awayStats, model, playerStatsByKey }) {
+function estimateScorerProbability({ fixture, odds, market, homeStats, awayStats, model, playerStatsByKey }) {
   const implied = decimalToImpliedProbability(odds.decimalOdds);
   const playerTeam = inferPlayerTeam(odds, fixture);
   const playerName = odds.playerName || odds.outcome;
-  const playerRecord = playerStatsByKey.get(playerStatKey(playerTeam, playerName));
+  const playerRecord = findPlayerRecord({ playerStatsByKey, team: playerTeam, playerName });
   const expectedGoals = Number(model.components.expectedGoals || 2.5);
   const homeAttack = (Number(homeStats.xgFor || 1.3) + Number(awayStats.xgAgainst || 1.2)) / 2;
   const awayAttack = (Number(awayStats.xgFor || 1.3) + Number(homeStats.xgAgainst || 1.2)) / 2;
   const teamAttack = playerTeam === fixture.homeTeam ? homeAttack : playerTeam === fixture.awayTeam ? awayAttack : mean([homeAttack, awayAttack]);
+  const totalAttack = Math.max(0.2, homeAttack + awayAttack);
+  const teamFirstGoalShare = playerTeam === fixture.homeTeam
+    ? homeAttack / totalAttack
+    : playerTeam === fixture.awayTeam
+      ? awayAttack / totalAttack
+      : 0.5;
   const teamGoalLikelihood = clamp(0.32 + teamAttack * 0.18 + expectedGoals * 0.045, 0.28, 0.84);
   const roleLikelihood = clamp(0.2 + implied * 0.78, 0.16, 0.62);
   const scorerSampleRate = playerRecord
@@ -127,16 +137,30 @@ function estimateAnytimeScorerProbability({ fixture, odds, homeStats, awayStats,
       : 0;
   const rawModelProbability = clamp(teamGoalLikelihood * rawRoleLikelihood + scorerLift + newsLift, 0.035, 0.48);
   const marketAdjustedProbability = blendProbability(rawModelProbability, implied, playerRecord ? 0.28 : 0.42);
+  const firstGoalRawProbability = clamp(
+    (teamGoalLikelihood * teamFirstGoalShare * rawRoleLikelihood * 0.78)
+    + scorerLift * 0.42
+    + newsLift * 0.55,
+    0.018,
+    0.28
+  );
+  const firstGoalAdjustedProbability = blendProbability(firstGoalRawProbability, implied, playerRecord ? 0.24 : 0.38);
   const starterLikelihood = clamp(0.26 + implied * 1.04 + scorerSampleRate * 0.32 + Number(playerRecord?.scorerConfidence || 0.28) * 0.08, 0.22, 0.9);
   const projectedMinutes = round(28 + starterLikelihood * 64, 1);
+  const isFirstScorer = market === "first_goalscorer";
 
   return {
-    rawModelProbability: round(rawModelProbability, 4),
-    modelProbability: round(clamp((marketAdjustedProbability * 0.74) + (teamGoalLikelihood * roleLikelihood * 0.26), 0.04, 0.58), 4),
+    rawModelProbability: round(isFirstScorer ? firstGoalRawProbability : rawModelProbability, 4),
+    modelProbability: round(isFirstScorer
+      ? clamp((firstGoalAdjustedProbability * 0.82) + (teamGoalLikelihood * teamFirstGoalShare * roleLikelihood * 0.18), 0.018, 0.34)
+      : clamp((marketAdjustedProbability * 0.74) + (teamGoalLikelihood * roleLikelihood * 0.26), 0.04, 0.58), 4),
     components: {
       playerTeam,
       starterLikelihood: round(starterLikelihood, 4),
       projectedMinutes,
+      scorerMarketType: isFirstScorer ? "first_goalscorer" : "anytime_scorer",
+      teamGoalLikelihood: round(teamGoalLikelihood, 4),
+      teamFirstGoalShare: round(teamFirstGoalShare, 4),
       scorerSampleRate: round(scorerSampleRate, 4),
       scorerGoalsPerTwentyTeamMatches: round(scorerSampleRate * 20, 3),
       scorerConfidence: round(Number(playerRecord?.scorerConfidence || 0), 4),
@@ -146,6 +170,36 @@ function estimateAnytimeScorerProbability({ fixture, odds, homeStats, awayStats,
         : "market role estimate until public scorer sample improves"
     }
   };
+}
+
+function findPlayerRecord({ playerStatsByKey, team, playerName }) {
+  const exact = playerStatsByKey.get(playerStatKey(team, playerName));
+
+  if (exact) {
+    return exact;
+  }
+
+  const normalizedPlayer = normalizeName(playerName);
+  const tokens = normalizedPlayer.split(/\s+/).filter((part) => part.length > 2);
+  const surname = tokens.at(-1);
+
+  if (!surname) {
+    return null;
+  }
+
+  for (const [key, record] of playerStatsByKey.entries()) {
+    if (team && !key.startsWith(`${normalizeName(team)}|`)) {
+      continue;
+    }
+
+    const recordName = normalizeName(record.playerName || "");
+
+    if (recordName === normalizedPlayer || recordName.endsWith(` ${surname}`) || recordName === surname || normalizedPlayer.endsWith(` ${recordName}`)) {
+      return record;
+    }
+  }
+
+  return null;
 }
 
 function inferPlayerTeam(odds, fixture) {
@@ -750,11 +804,15 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
   }
 
   if (Number(odds.decimalOdds) >= 4 || preliminaryRiskTag === "longshot_value") {
-    if (independentModelProbability < Number(policy.riskProfile.minLongshotModelProbability || 0.18)) {
+    const scorerLongshotFloor = market === "first_goalscorer" ? 0.07 : market === "anytime_scorer" ? 0.14 : null;
+    const longshotModelFloor = scorerLongshotFloor ?? Number(policy.riskProfile.minLongshotModelProbability || 0.18);
+    const longshotSignalFloor = isScorerMarket(market) ? 3 : Number(policy.riskProfile.minLongshotSignals || 3);
+
+    if (independentModelProbability < longshotModelFloor) {
       hardBlocks.push("longshot_probability_below_model_floor");
     }
 
-    if (Number(independentEvidence.count || 0) < Number(policy.riskProfile.minLongshotSignals || 3)) {
+    if (Number(independentEvidence.count || 0) < longshotSignalFloor) {
       hardBlocks.push("longshot_without_enough_independent_signals");
     }
 
@@ -1169,12 +1227,13 @@ function evaluateIndependentEvidence({ fixture, market, outcome, model, rawModel
     add(openingCaution >= 0.75 && expectedGoals <= 2.55, "opening group-game caution supports unders", 0.42);
   }
 
-  if (market === "anytime_scorer") {
+  if (isScorerMarket(market)) {
     add(independentEdge >= 0.01, "raw scorer probability beats market", clamp(independentEdge / 0.06, 0.25, 1));
     add(expectedGoals >= 2.55, "team goals environment is live", 0.5);
-    add(rawModelProbability >= 0.18, "scorer raw probability clears floor", clamp((rawModelProbability - 0.12) / 0.22, 0.25, 1));
+    add(rawModelProbability >= (market === "first_goalscorer" ? 0.08 : 0.18), "scorer raw probability clears floor", clamp((rawModelProbability - (market === "first_goalscorer" ? 0.05 : 0.12)) / 0.22, 0.25, 1));
     add(Number(components.starterLikelihood || 0) >= 0.55, "starter/minutes projection is healthy", clamp(Number(components.starterLikelihood || 0), 0.25, 0.9));
     add(Number(components.scorerGoalsPerTwentyTeamMatches || 0) >= 3, "20-match scorer memory", clamp(Number(components.scorerGoalsPerTwentyTeamMatches || 0) / 8, 0.25, 1));
+    add(market === "first_goalscorer" && Number(components.teamFirstGoalShare || 0) >= 0.46, "team first-goal share is credible", 0.42);
   }
 
   return {
@@ -1252,6 +1311,7 @@ function selectionLabel({ fixture, market, outcome }) {
     match_winner: `${outcome} to win`,
     draw_no_bet: `${outcome} draw no bet`,
     anytime_scorer: `${outcome} anytime scorer`,
+    first_goalscorer: `${outcome} first goalscorer`,
     both_teams_to_score: `Both teams to score: ${outcome}`,
     over_2_5_goals: `${outcome} 2.5 goals`,
     under_2_5_goals: `${outcome} 2.5 goals`
@@ -1392,7 +1452,7 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
     }
   }
 
-  if (market === "anytime_scorer") {
+  if (isScorerMarket(market)) {
     if (expectedGoals >= 2.65) {
       score += 4;
       reasons.push(`goals environment is live at ${expectedGoals} expected goals`);
@@ -1403,12 +1463,17 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
 
     if (Number(odds.decimalOdds) < 1.75 && appetite > 0.45) {
       score -= 5;
-      reasons.push("anytime scorer price is too short for this risk setting");
+      reasons.push("scorer price is too short for this risk setting");
     }
 
-    if (Number(odds.decimalOdds) >= 3 && appetite >= 0.45 && modelProbability >= 0.2) {
+    if (Number(odds.decimalOdds) >= 3 && appetite >= 0.45 && modelProbability >= (market === "first_goalscorer" ? 0.08 : 0.2)) {
       score += 3;
       reasons.push("scorer price gives the betslip a higher-upside angle");
+    }
+
+    if (market === "first_goalscorer" && appetite < 0.55) {
+      score -= 4;
+      reasons.push("first goalscorer is reserved for bolder risk settings");
     }
   }
 
@@ -1449,6 +1514,10 @@ function teamTextMatches(left, right) {
 
 function playerStatKey(team, playerName) {
   return `${normalizeName(team)}|${normalizeName(playerName)}`;
+}
+
+function isScorerMarket(market) {
+  return market === "anytime_scorer" || market === "first_goalscorer";
 }
 
 function blendProbability(modelProbability, marketProbability, weight) {

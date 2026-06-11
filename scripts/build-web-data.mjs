@@ -372,6 +372,9 @@ function summarizeLeg(leg) {
       tournamentContextNote: leg.components?.tournamentContextNote,
       survivalPenalty: leg.components?.survivalPenalty,
       confidenceReasons: leg.components?.confidenceReasons,
+      scorerMarketType: leg.components?.scorerMarketType,
+      teamGoalLikelihood: leg.components?.teamGoalLikelihood,
+      teamFirstGoalShare: leg.components?.teamFirstGoalShare,
       starterLikelihood: leg.components?.starterLikelihood,
       projectedMinutes: leg.components?.projectedMinutes,
       scorerGoalsPerTwentyTeamMatches: leg.components?.scorerGoalsPerTwentyTeamMatches,
@@ -459,6 +462,9 @@ function summarizeLegCandidate(leg) {
       tournamentDrawLift: leg.components?.tournamentDrawLift,
       tournamentContextNote: leg.components?.tournamentContextNote,
       confidenceReasons: leg.components?.confidenceReasons,
+      scorerMarketType: leg.components?.scorerMarketType,
+      teamGoalLikelihood: leg.components?.teamGoalLikelihood,
+      teamFirstGoalShare: leg.components?.teamFirstGoalShare,
       starterLikelihood: leg.components?.starterLikelihood,
       projectedMinutes: leg.components?.projectedMinutes,
       scorerGoalsPerTwentyTeamMatches: leg.components?.scorerGoalsPerTwentyTeamMatches,
@@ -494,7 +500,9 @@ function summarizeMarkets(oddsSnapshots, policy) {
   return {
     configured: policy.markets || [],
     observed: counts,
-    anytimeScorerRecords: counts.anytime_scorer || 0
+    anytimeScorerRecords: counts.anytime_scorer || 0,
+    firstGoalscorerRecords: counts.first_goalscorer || 0,
+    scorerRecords: (counts.anytime_scorer || 0) + (counts.first_goalscorer || 0)
   };
 }
 

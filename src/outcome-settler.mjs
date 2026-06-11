@@ -132,6 +132,10 @@ export function gradeLegAgainstMatch(leg, match) {
     return gradeAnytimeScorer(leg, match, totalGoals);
   }
 
+  if (leg.market === "first_goalscorer") {
+    return gradeFirstGoalscorer(leg, match, totalGoals);
+  }
+
   return { status: "unknown", reason: "unsupported_market" };
 }
 
@@ -227,6 +231,52 @@ function gradeAnytimeScorer(leg, match, totalGoals) {
   return { status: landed ? "won" : "lost", reason: "anytime_scorer" };
 }
 
+function gradeFirstGoalscorer(leg, match, totalGoals) {
+  const scorerName = normalizeName(leg.playerName || leg.outcome);
+  const scorerTeam = normalizeName(leg.playerTeam);
+  const allScorers = [
+    ...(match.homeScorers || []).map((scorer) => ({ ...scorer, team: match.homeTeam })),
+    ...(match.awayScorers || []).map((scorer) => ({ ...scorer, team: match.awayTeam }))
+  ];
+
+  if (!scorerName) {
+    return { status: "unknown", reason: "missing_scorer_name" };
+  }
+
+  if (!allScorers.length && totalGoals > 0) {
+    return { status: "unknown", reason: "scorer_list_missing" };
+  }
+
+  if (totalGoals === 0) {
+    return { status: "lost", reason: "first_goalscorer_no_goals" };
+  }
+
+  const ordered = allScorers
+    .map((scorer, index) => ({
+      ...scorer,
+      order: Number.isFinite(Number(scorer.order)) ? Number(scorer.order) : null,
+      fallbackOrder: index + 1,
+      minute: Number.isFinite(Number(scorer.minute)) ? Number(scorer.minute) : null
+    }))
+    .filter((scorer) => Number.isFinite(scorer.minute) || Number.isFinite(scorer.order));
+
+  if (!ordered.length) {
+    return { status: "unknown", reason: "first_scorer_order_missing" };
+  }
+
+  ordered.sort((left, right) => {
+    const leftMinute = Number.isFinite(left.minute) ? left.minute : 999 + left.order;
+    const rightMinute = Number.isFinite(right.minute) ? right.minute : 999 + right.order;
+    return leftMinute - rightMinute || (left.order ?? left.fallbackOrder) - (right.order ?? right.fallbackOrder);
+  });
+
+  const first = ordered[0];
+  const samePlayer = normalizeName(first.name || first.playerName) === scorerName;
+  const sameTeam = !scorerTeam || normalizeName(first.team) === scorerTeam;
+
+  return { status: samePlayer && sameTeam ? "won" : "lost", reason: "first_goalscorer" };
+}
+
 function buildOutcomeRecord({ leg, match, result, now }) {
   return {
     id: makeId("outcome", [
@@ -305,7 +355,7 @@ function inferredOutcomeFromLabel(leg) {
     return "Under";
   }
 
-  const match = label.match(/:\s*(.*?)\s+(?:to win|draw no bet|anytime scorer)/i);
+  const match = label.match(/:\s*(.*?)\s+(?:to win|draw no bet|anytime scorer|first goalscorer)/i);
   return match?.[1] || "";
 }
 

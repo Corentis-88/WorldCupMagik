@@ -281,6 +281,20 @@ export function toDecimalOdds(value) {
     return denominator > 0 ? Math.round((1 + numerator / denominator) * 100) / 100 : null;
   }
 
+  const american = text.match(/(^|[^\d])([+-]\d{3,4})\b/);
+
+  if (american) {
+    const value = Number(american[2]);
+
+    if (value > 0) {
+      return Math.round((1 + value / 100) * 100) / 100;
+    }
+
+    if (value < 0) {
+      return Math.round((1 + 100 / Math.abs(value)) * 100) / 100;
+    }
+  }
+
   return null;
 }
 

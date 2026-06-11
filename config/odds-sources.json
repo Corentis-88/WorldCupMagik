@@ -8,6 +8,14 @@
     "reliability": 0.86
   },
   {
+    "name": "SportsGambler public prop pages",
+    "type": "html",
+    "urlTemplate": "https://www.sportsgambler.com/betting-tips/football/{homeSlug}-vs-{awaySlug}-prediction-lineups-odds-{dateKey}/",
+    "fixtureUrlFromFixtures": true,
+    "fullPageFixtureBlock": true,
+    "reliability": 0.66
+  },
+  {
     "name": "Odds1x2 match pages",
     "type": "html",
     "urlTemplate": "https://www.odds1x2.com/football/world-cup-2026/odds/{homeSlug}-vs-{awaySlug}/",

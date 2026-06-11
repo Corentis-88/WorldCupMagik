@@ -326,6 +326,9 @@ function scoreMostLikelyCombo(legs, target, rank) {
         tournamentDrawLift: leg.components?.tournamentDrawLift,
         tournamentContextNote: leg.components?.tournamentContextNote,
         confidenceReasons: leg.components?.confidenceReasons,
+        scorerMarketType: leg.components?.scorerMarketType,
+        teamGoalLikelihood: leg.components?.teamGoalLikelihood,
+        teamFirstGoalShare: leg.components?.teamFirstGoalShare,
         starterLikelihood: leg.components?.starterLikelihood,
         projectedMinutes: leg.components?.projectedMinutes,
         scorerGoalsPerTwentyTeamMatches: leg.components?.scorerGoalsPerTwentyTeamMatches,
@@ -502,7 +505,7 @@ function mostLikelyPortfolioPenalty(leg, legCount) {
     penalty += Math.min(0.06, (decimalOdds - 3.2) * 0.025);
   }
 
-  if (leg.market === "anytime_scorer") {
+  if (isScorerLeg(leg)) {
     penalty += 0.035;
   }
 
@@ -616,7 +619,7 @@ function portfolioCorrelationProfile(legs, { legCount = legs.length, appetite = 
   const teamCounts = countBy(legs.flatMap(teamsForLeg), (team) => team);
   const dateCounts = countBy(legs.map((leg) => fixtureDateKey(leg)).filter(Boolean), (date) => date);
   const heatLegCount = legs.filter((leg) => Number(leg.components?.heatStress || 0) >= 0.55 && Number(leg.components?.heatConfidence || 0) >= 0.3).length;
-  const scorerCount = legs.filter((leg) => leg.market === "anytime_scorer").length;
+  const scorerCount = legs.filter(isScorerLeg).length;
   const openingGoalCount = legs.filter(isOpeningGroupGoalLeg).length;
   const reasons = [];
   let penalty = 0;
@@ -744,7 +747,7 @@ function marketFamilyForLeg(leg) {
     return "goals";
   }
 
-  if (leg.market === "anytime_scorer") {
+  if (isScorerLeg(leg)) {
     return "scorer";
   }
 
@@ -794,6 +797,10 @@ function isBttsYesLeg(leg) {
 
 function isTotalGoalsLeg(leg) {
   return leg.market === "over_2_5_goals" || leg.market === "under_2_5_goals";
+}
+
+function isScorerLeg(leg) {
+  return leg.market === "anytime_scorer" || leg.market === "first_goalscorer";
 }
 
 function isOpeningGroupGoalLeg(leg) {
@@ -1048,6 +1055,9 @@ export function scoreCombo(legs, type, policy) {
         tournamentDrawLift: leg.components?.tournamentDrawLift,
         tournamentContextNote: leg.components?.tournamentContextNote,
         confidenceReasons: leg.components?.confidenceReasons,
+        scorerMarketType: leg.components?.scorerMarketType,
+        teamGoalLikelihood: leg.components?.teamGoalLikelihood,
+        teamFirstGoalShare: leg.components?.teamFirstGoalShare,
         starterLikelihood: leg.components?.starterLikelihood,
         projectedMinutes: leg.components?.projectedMinutes,
         scorerGoalsPerTwentyTeamMatches: leg.components?.scorerGoalsPerTwentyTeamMatches,
@@ -1125,7 +1135,7 @@ function riskPortfolioLegPenalty(leg, legCount, appetite) {
   const decimalOdds = Number(leg.decimalOdds || 1);
   let penalty = mostLikelyPortfolioPenalty(leg, legCount) * (0.75 + pressure * 0.3);
 
-  if (leg.market === "anytime_scorer" && legCount >= 3) {
+  if (isScorerLeg(leg) && legCount >= 3) {
     penalty += (0.018 + pressure * 0.028) * (1 - appetite * 0.25);
   }
 
@@ -1162,7 +1172,7 @@ function riskPortfolioPenalty({ legs, appetite, bttsLegCount, fragileLegCount })
       : legCount;
   const bttsPenalty = Math.max(0, Number(bttsLegCount || 0) - bttsAllowance) * (legCount >= 8 ? 6 : 4) * (1 - appetite * 0.28);
   const fragilePenalty = Math.max(0, Number(fragileLegCount || 0) - fragileAllowance) * 5 * (1 - appetite * 0.3);
-  const scorerCount = legs.filter((leg) => leg.market === "anytime_scorer").length;
+  const scorerCount = legs.filter(isScorerLeg).length;
   const scorerPenalty = legCount >= 4
     ? Math.max(0, scorerCount - (appetite > 0.7 ? 2 : 1)) * 5 * (1 - appetite * 0.2)
     : 0;
