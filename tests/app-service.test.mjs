@@ -245,6 +245,54 @@ test("most likely long accumulators limit repeated team correlation when alterna
   assert.equal(eightLeg.marketFamilyMix.result >= 1, true);
 });
 
+test("most likely picks downgrade stale drifting legs close to kickoff", () => {
+  const staleDrifter = likelyLeg(
+    "late-stale-drifter",
+    "Opening match: stale drifting goal angle",
+    0.72,
+    92,
+    1.68,
+    {
+      fixtureDate: "2026-06-11T19:00:00.000Z",
+      createdAt: "2026-06-11T17:20:00.000Z",
+      components: {
+        oddsAgeHours: 4.1,
+        oddsFreshness: 0.42,
+        oddsDrifting: true,
+        bothOpeningGroupGame: true,
+        expectedGoals: 2.74,
+        nonMarketSignalCount: 4
+      }
+    }
+  );
+  const freshStable = likelyLeg(
+    "late-fresh-stable",
+    "Opening match: fresh stable result angle",
+    0.695,
+    78,
+    1.62,
+    {
+      fixtureDate: "2026-06-11T19:00:00.000Z",
+      createdAt: "2026-06-11T17:20:00.000Z",
+      components: {
+        oddsAgeHours: 0.6,
+        oddsFreshness: 0.96,
+        oddsShortening: true,
+        nonMarketSignalCount: 4
+      }
+    }
+  );
+  const picks = buildMostLikelyPicks([staleDrifter, freshStable], {
+    riskProfile: {
+      minLegEdge: 0,
+      minLegConfidence: 0.5
+    }
+  });
+
+  assert.equal(picks.find((pick) => pick.category === "single").legs[0].fixtureId, "late-fresh-stable");
+  assert.ok(picks.find((pick) => pick.category === "double").thesis.includes("Late-kickoff guard"));
+});
+
 test("most likely picks only show categories the fixture window can support", () => {
   const legs = [
     likelyLeg("p1", "safe one", 0.74, 71, 1.45),
@@ -288,6 +336,7 @@ function likelyLeg(fixtureId, label, modelProbability, score, decimalOdds, overr
     id: `leg-${fixtureId}`,
     fixtureId,
     fixtureDate: overrides.fixtureDate || "2026-06-13T19:00:00.000Z",
+    createdAt: overrides.createdAt || "2026-06-13T10:00:00.000Z",
     homeTeam: overrides.homeTeam || `Home ${fixtureId}`,
     awayTeam: overrides.awayTeam || `Away ${fixtureId}`,
     market: "match_winner",
@@ -303,7 +352,9 @@ function likelyLeg(fixtureId, label, modelProbability, score, decimalOdds, overr
     hardBlocks: [],
     components: {
       intelligenceConfidence: 0.72,
-      oddsFreshness: 1
+      oddsFreshness: 1,
+      nonMarketSignalCount: 4,
+      ...(overrides.components || {})
     },
     thesis: `${label} thesis`
   };

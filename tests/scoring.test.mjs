@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { buildRiskPolicy } from "../src/app-service.mjs";
+import { buildMostLikelyPolicy, buildRiskPolicy } from "../src/app-service.mjs";
 import { buildBetRecommendations } from "../src/portfolio-builder.mjs";
 import { buildLegCandidates, buildTournamentContextByFixture, fixtureModel } from "../src/scoring.mjs";
 import basePolicy from "../config/engine-policy.json" with { type: "json" };
@@ -88,6 +88,38 @@ test("BTTS model requires balanced scoring threat, not just high total goals", (
   assert.ok(bttsYes.modelProbability < 0.46, `BTTS was too high: ${bttsYes.modelProbability}`);
   assert.ok(over25.modelProbability > bttsYes.modelProbability, "one-sided goal shape should favour totals over BTTS");
   assert.ok(bttsYes.components.marketFocusReasons.some((reason) => /one-sided/.test(reason)));
+});
+
+test("survival markets become scored candidates when public prices are captured", () => {
+  const now = new Date("2026-06-11T09:00:00.000Z");
+  const fixtureRecord = fixture("mex-rsa", "Mexico", "South Africa", "2026-06-11T19:00:00.000Z");
+  const policy = buildMostLikelyPolicy(basePolicy);
+  const oddsRecords = [
+    odds(fixtureRecord, "double_chance", "Mexico or Draw", 1.28, now),
+    odds(fixtureRecord, "over_1_5_goals", "Over", 1.45, now),
+    odds(fixtureRecord, "under_3_5_goals", "Under", 1.52, now),
+    odds(fixtureRecord, "under_4_5_goals", "Under", 1.2, now),
+    odds(fixtureRecord, "match_winner", "Mexico", 1.86, now),
+    odds(fixtureRecord, "match_winner", "Draw", 4.1, now),
+    odds(fixtureRecord, "match_winner", "South Africa", 5.8, now)
+  ];
+  const legs = buildLegCandidates({
+    fixtures: [fixtureRecord],
+    oddsSnapshots: oddsRecords,
+    newsArticles: [],
+    teamStats: [
+      stats("Mexico", 1740, 2.1, 1.55, 0.9, 58),
+      stats("South Africa", 1605, 1.1, 1.0, 1.35, 47)
+    ],
+    policy,
+    now
+  });
+  const byMarket = new Map(legs.map((leg) => [leg.market, leg]));
+
+  assert.equal(byMarket.get("double_chance")?.selectionLabel, "Mexico vs South Africa: Double chance: Mexico or Draw");
+  assert.ok(byMarket.get("over_1_5_goals")?.modelProbability > 0.65);
+  assert.ok(byMarket.get("under_3_5_goals")?.components.nonMarketSignals.some((signal) => /under-3.5/.test(signal)));
+  assert.ok(byMarket.get("under_4_5_goals")?.modelProbability > byMarket.get("under_3_5_goals")?.modelProbability);
 });
 
 test("scorer odds become anytime and first-goalscorer leg candidates when prices are captured", () => {
@@ -294,8 +326,12 @@ function sampleOdds(items, now) {
       odds(item, "match_winner", item.homeTeam, prices[item.homeTeam], now),
       odds(item, "match_winner", "Draw", 4.1, now),
       odds(item, "match_winner", item.awayTeam, prices[item.awayTeam], now),
+      odds(item, "double_chance", `${item.homeTeam} or Draw`, 1.32, now),
+      odds(item, "over_1_5_goals", "Over", 1.42, now),
       odds(item, "over_2_5_goals", "Over", 2.05, now),
       odds(item, "under_2_5_goals", "Under", 1.9, now),
+      odds(item, "under_3_5_goals", "Under", 1.5, now),
+      odds(item, "under_4_5_goals", "Under", 1.2, now),
       odds(item, "both_teams_to_score", "Yes", 2.12, now),
       odds(item, "both_teams_to_score", "No", 1.82, now),
       odds(item, "anytime_scorer", `${item.homeTeam} striker`, 4.5, now)

@@ -524,7 +524,10 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
   const normalizedTotal = homeWin + awayWin + drawProbability;
   const goalShape = applyTournamentPressureToGoalShape(baseGoalShape, tournamentPressure);
   const expectedGoals = goalShape.expectedGoals;
+  const rawOver15 = poissonOver(expectedGoals, 1.5);
   const rawOver25 = poissonOver25(expectedGoals);
+  const rawUnder35 = poissonUnder(expectedGoals, 3.5);
+  const rawUnder45 = poissonUnder(expectedGoals, 4.5);
   const rawBttsYes = round(clamp(
     poissonBothTeamsToScore(goalShape.homeExpectedGoals, goalShape.awayExpectedGoals, heat) + Number(tournamentPressure.bttsAdjustment || 0),
     0.16,
@@ -588,12 +591,18 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
       homeExpectedGoals: round(goalShape.homeExpectedGoals, 2),
       awayExpectedGoals: round(goalShape.awayExpectedGoals, 2),
       bttsShapeProbability: round(bttsYes, 4),
+      over15ShapeProbability: round(rawOver15, 4),
       over25ShapeProbability: round(over25, 4),
+      under35ShapeProbability: round(rawUnder35, 4),
+      under45ShapeProbability: round(rawUnder45, 4),
       rawHomeWinProbability: round(rawHomeWin / rawNormalizedTotal, 4),
       rawDrawProbability: round(rawDrawProbability / rawNormalizedTotal, 4),
       rawAwayWinProbability: round(rawAwayWin / rawNormalizedTotal, 4),
       rawBttsShapeProbability: round(rawBttsYes, 4),
+      rawOver15ShapeProbability: round(rawOver15, 4),
       rawOver25ShapeProbability: round(rawOver25, 4),
+      rawUnder35ShapeProbability: round(rawUnder35, 4),
+      rawUnder45ShapeProbability: round(rawUnder45, 4),
       homeLongMatchCount: Number(homeStats.longForm?.matchCount || homeStats.sourceMatchCount || 0),
       awayLongMatchCount: Number(awayStats.longForm?.matchCount || awayStats.sourceMatchCount || 0),
       homeBttsRate: nullableComponent(homeStats.marketAngles?.bttsRate || homeStats.longForm?.bttsRate),
@@ -646,15 +655,30 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
         [fixture.homeTeam]: round(rawHomeWin / (rawHomeWin + rawAwayWin), 4),
         [fixture.awayTeam]: round(rawAwayWin / (rawHomeWin + rawAwayWin), 4)
       },
+      double_chance: doubleChanceProbabilities({
+        fixture,
+        homeWin: rawHomeWin / rawNormalizedTotal,
+        draw: rawDrawProbability / rawNormalizedTotal,
+        awayWin: rawAwayWin / rawNormalizedTotal
+      }),
       both_teams_to_score: {
         Yes: round(rawBttsYes, 4),
         No: round(1 - rawBttsYes, 4)
+      },
+      over_1_5_goals: {
+        Over: round(rawOver15, 4)
       },
       over_2_5_goals: {
         Over: round(rawOver25, 4)
       },
       under_2_5_goals: {
         Under: round(1 - rawOver25, 4)
+      },
+      under_3_5_goals: {
+        Under: round(rawUnder35, 4)
+      },
+      under_4_5_goals: {
+        Under: round(rawUnder45, 4)
       }
     },
     marketProbabilities: {
@@ -667,15 +691,30 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
         [fixture.homeTeam]: round(homeWin / (homeWin + awayWin), 4),
         [fixture.awayTeam]: round(awayWin / (homeWin + awayWin), 4)
       },
+      double_chance: doubleChanceProbabilities({
+        fixture,
+        homeWin: homeWin / normalizedTotal,
+        draw: drawProbability / normalizedTotal,
+        awayWin: awayWin / normalizedTotal
+      }),
       both_teams_to_score: {
         Yes: round(bttsYes, 4),
         No: round(1 - bttsYes, 4)
+      },
+      over_1_5_goals: {
+        Over: round(rawOver15, 4)
       },
       over_2_5_goals: {
         Over: round(over25, 4)
       },
       under_2_5_goals: {
         Under: round(1 - over25, 4)
+      },
+      under_3_5_goals: {
+        Under: round(rawUnder35, 4)
+      },
+      under_4_5_goals: {
+        Under: round(rawUnder45, 4)
       }
     }
   };
@@ -1104,10 +1143,55 @@ function goalShapeForFixture(homeStats, awayStats, homeNews, awayNews, heat) {
   };
 }
 
+function doubleChanceProbabilities({ fixture, homeWin, draw, awayWin }) {
+  return {
+    [`${fixture.homeTeam} or Draw`]: round(homeWin + draw, 4),
+    [`Draw or ${fixture.awayTeam}`]: round(draw + awayWin, 4),
+    [`${fixture.homeTeam} or ${fixture.awayTeam}`]: round(homeWin + awayWin, 4)
+  };
+}
+
 function poissonOver25(expectedGoals) {
+  return poissonOver(expectedGoals, 2.5);
+}
+
+function poissonOver(expectedGoals, line) {
   const lambda = clamp(Number(expectedGoals || 2.4), 0.8, 4.2);
-  const underOrEqualTwo = Math.exp(-lambda) * (1 + lambda + (lambda ** 2) / 2);
-  return round(clamp(1 - underOrEqualTwo, 0.18, 0.82), 4);
+  const floor = Math.floor(Number(line || 2.5));
+  const underOrEqualLine = poissonCumulative(lambda, floor);
+  const max = line <= 1.5 ? 0.92 : 0.82;
+  const min = line <= 1.5 ? 0.42 : 0.18;
+
+  return round(clamp(1 - underOrEqualLine, min, max), 4);
+}
+
+function poissonUnder(expectedGoals, line) {
+  const lambda = clamp(Number(expectedGoals || 2.4), 0.8, 4.2);
+  const floor = Math.floor(Number(line || 2.5));
+  const max = line >= 4.5 ? 0.96 : line >= 3.5 ? 0.92 : 0.82;
+  const min = line >= 4.5 ? 0.52 : line >= 3.5 ? 0.38 : 0.18;
+
+  return round(clamp(poissonCumulative(lambda, floor), min, max), 4);
+}
+
+function poissonCumulative(lambda, maxGoals) {
+  let total = 0;
+
+  for (let goals = 0; goals <= maxGoals; goals += 1) {
+    total += Math.exp(-lambda) * (lambda ** goals) / factorial(goals);
+  }
+
+  return total;
+}
+
+function factorial(value) {
+  let result = 1;
+
+  for (let index = 2; index <= value; index += 1) {
+    result *= index;
+  }
+
+  return result;
 }
 
 function poissonBothTeamsToScore(homeExpectedGoals, awayExpectedGoals, heat) {
@@ -1153,7 +1237,7 @@ function evaluateIndependentEvidence({ fixture, market, outcome, model, rawModel
   add(independentEdge >= 0.012, "raw AI probability beats market", clamp(independentEdge / 0.08, 0.25, 1));
   add(Number(components.homeLongMatchCount || 0) >= 10 && Number(components.awayLongMatchCount || 0) >= 10, "20-match team sample", 0.62);
 
-  if (market === "match_winner" || market === "draw_no_bet") {
+  if (market === "match_winner" || market === "draw_no_bet" || market === "double_chance") {
     if (outcome === "Draw") {
       const cleanSheetProfile = mean([
         Number(components.homeCleanSheetRate || 0.28),
@@ -1173,6 +1257,18 @@ function evaluateIndependentEvidence({ fixture, market, outcome, model, rawModel
       add(directional(components.newsEdge) >= 8, "team news edge", clamp(Math.abs(Number(components.newsEdge || 0)) / 55, 0.22, 1));
       add(directional(components.memoryEdge) >= 7, "local intelligence memory edge", clamp(Math.abs(Number(components.memoryEdge || 0)) / 40, 0.22, 1));
       add(directional(components.heatEdge) >= 3, "heat and squad-depth edge", clamp(Math.abs(Number(components.heatEdge || 0)) / 20, 0.2, 0.8));
+    }
+
+    if (market === "double_chance") {
+      const coversHome = outcome.includes(fixture.homeTeam);
+      const coversAway = outcome.includes(fixture.awayTeam);
+      const coversDraw = /draw/i.test(outcome);
+      const protectedFavourite = (coversHome && independentResultEdge >= 12) || (coversAway && independentResultEdge <= -12);
+
+      add(rawModelProbability >= 0.66, "raw double-chance survival profile", clamp((rawModelProbability - 0.58) / 0.24, 0.25, 1));
+      add(protectedFavourite, "result edge protected by draw cover", clamp(Math.abs(independentResultEdge) / 120, 0.25, 1));
+      add(coversDraw && openingCaution >= 0.55, "opening-game caution supports draw cover", 0.45);
+      add(!coversDraw && expectedGoals >= 2.62, "draw risk is lower in a livelier goal profile", 0.38);
     }
   }
 
@@ -1214,6 +1310,19 @@ function evaluateIndependentEvidence({ fixture, market, outcome, model, rawModel
     add(lowerTeamExpectedGoals >= 0.75, "second team adds goal pressure", 0.45);
   }
 
+  if (market === "over_1_5_goals") {
+    const overHistory = mean([
+      Number(components.homeOver25Rate || 0.48),
+      Number(components.awayOver25Rate || 0.48)
+    ]);
+
+    add(rawModelProbability >= 0.68, "raw over-1.5 model clears survival line", clamp((rawModelProbability - 0.6) / 0.24, 0.25, 1));
+    add(expectedGoals >= 2.18, "expected-goals base supports two goals", clamp((expectedGoals - 1.95) / 0.9, 0.25, 1));
+    add(overHistory >= 0.44, "20-match goals history is not dead", clamp((overHistory - 0.36) / 0.28, 0.2, 1));
+    add(lowerTeamExpectedGoals >= 0.65 || expectedGoals >= 2.45, "second goal can arrive from either match shape", 0.44);
+    add(openingCaution < 0.75 || expectedGoals >= 2.38, "opening caution still leaves a two-goal route", 0.35);
+  }
+
   if (market === "under_2_5_goals") {
     const overHistory = mean([
       Number(components.homeOver25Rate || 0.48),
@@ -1225,6 +1334,20 @@ function evaluateIndependentEvidence({ fixture, market, outcome, model, rawModel
     add(overHistory <= 0.42, "20-match over history is modest", clamp((0.5 - overHistory) / 0.22, 0.2, 1));
     add(Number(components.heatExpectedGoalsAdjustment || 0) < -0.02, "heat layer trims goal tempo", 0.42);
     add(openingCaution >= 0.75 && expectedGoals <= 2.55, "opening group-game caution supports unders", 0.42);
+  }
+
+  if (market === "under_3_5_goals" || market === "under_4_5_goals") {
+    const line = market === "under_4_5_goals" ? 4.5 : 3.5;
+    const overHistory = mean([
+      Number(components.homeOver25Rate || 0.48),
+      Number(components.awayOver25Rate || 0.48)
+    ]);
+
+    add(rawModelProbability >= (line === 4.5 ? 0.78 : 0.66), `raw under-${line} model clears survival line`, clamp((rawModelProbability - (line === 4.5 ? 0.68 : 0.58)) / 0.24, 0.25, 1));
+    add(expectedGoals <= (line === 4.5 ? 3.55 : 3.0), `expected-goals model stays below under-${line} danger zone`, clamp(((line === 4.5 ? 3.9 : 3.25) - expectedGoals) / 1.1, 0.25, 1));
+    add(overHistory <= 0.62 || line === 4.5, "20-match goal history is survivable for the line", 0.42);
+    add(openingCaution >= 0.55, "opening group-game caution supports lower ceiling", 0.4);
+    add(Number(components.heatExpectedGoalsAdjustment || 0) < -0.015, "heat layer trims goal tempo", 0.35);
   }
 
   if (isScorerMarket(market)) {
@@ -1313,8 +1436,12 @@ function selectionLabel({ fixture, market, outcome }) {
     anytime_scorer: `${outcome} anytime scorer`,
     first_goalscorer: `${outcome} first goalscorer`,
     both_teams_to_score: `Both teams to score: ${outcome}`,
+    double_chance: `Double chance: ${outcome}`,
+    over_1_5_goals: `${outcome} 1.5 goals`,
     over_2_5_goals: `${outcome} 2.5 goals`,
-    under_2_5_goals: `${outcome} 2.5 goals`
+    under_2_5_goals: `${outcome} 2.5 goals`,
+    under_3_5_goals: `${outcome} 3.5 goals`,
+    under_4_5_goals: `${outcome} 4.5 goals`
   };
 
   return `${fixture.homeTeam} vs ${fixture.awayTeam}: ${marketLabels[market] || `${market} ${outcome}`}`;
@@ -1359,6 +1486,21 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
       reasons.push("opening group-game caution cools marginal over-2.5 bets");
     } else if (openingCaution > 0 && expectedGoals >= 3.05) {
       reasons.push("goal case remains strong after opening-game caution");
+    }
+  }
+
+  if (market === "over_1_5_goals") {
+    if (expectedGoals >= 2.25) {
+      score += 5;
+      reasons.push(`safer two-goal line has ${expectedGoals} expected-goals support`);
+    } else if (expectedGoals < 1.95) {
+      score -= 7;
+      reasons.push(`two-goal line is thin at ${expectedGoals} expected goals`);
+    }
+
+    if (openingCaution > 0 && expectedGoals < 2.35) {
+      score -= bothOpeningGroupGame ? 2.5 : 1;
+      reasons.push("opening group-game caution trims marginal over-1.5 bets");
     }
   }
 
@@ -1420,6 +1562,29 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
     }
   }
 
+  if (market === "under_3_5_goals" || market === "under_4_5_goals") {
+    const line = market === "under_4_5_goals" ? 4.5 : 3.5;
+    const ceiling = line === 4.5 ? 3.65 : 3.05;
+
+    if (expectedGoals <= ceiling) {
+      score += line === 4.5 ? 4 : 5;
+      reasons.push(`goal model keeps under-${line} below its danger zone at ${expectedGoals} expected goals`);
+    } else if (expectedGoals > (line === 4.5 ? 4.0 : 3.35)) {
+      score -= 7;
+      reasons.push(`goal model is too open for under-${line} at ${expectedGoals} expected goals`);
+    }
+
+    if (openingCaution > 0) {
+      score += bothOpeningGroupGame ? 2.5 : 1;
+      reasons.push("opening group-game caution helps a safer goals ceiling");
+    }
+
+    if (heatStress >= 0.45 && heatConfidence >= 0.35) {
+      score += 1.5;
+      reasons.push("heat layer modestly supports a lower game tempo");
+    }
+  }
+
   if (market === "match_winner") {
     if (outcome === "Draw" && openingCaution > 0 && Math.abs(Number(model.components.independentResultEdge || 0)) <= 42) {
       score += bothOpeningGroupGame ? 3 : 1.5;
@@ -1449,6 +1614,28 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
     } else if (appetite > 0.7 && Number(odds.decimalOdds) < 1.45) {
       score -= 5;
       reasons.push("draw-no-bet is too conservative for bold mode at this price");
+    }
+  }
+
+  if (market === "double_chance") {
+    const shortPrice = Number(odds.decimalOdds) < 1.22;
+
+    if (modelProbability >= 0.68) {
+      score += 5;
+      reasons.push(`double chance suits survival with model probability ${round(modelProbability * 100, 1)}%`);
+    } else if (modelProbability < 0.58) {
+      score -= 6;
+      reasons.push("double chance does not clear the survival bar");
+    }
+
+    if (/draw/i.test(outcome) && openingCaution > 0) {
+      score += bothOpeningGroupGame ? 2 : 1;
+      reasons.push("draw cover fits the don't-lose-first tournament layer");
+    }
+
+    if (shortPrice && appetite > 0.58) {
+      score -= 3;
+      reasons.push("double chance price is very short for bold risk settings");
     }
   }
 

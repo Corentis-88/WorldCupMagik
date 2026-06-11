@@ -12,7 +12,7 @@ const outputDir = join(rootDir, "web", "data");
 const now = new Date();
 const riskBuckets = Array.from({ length: 21 }, (_, index) => index * 5);
 const dayBuckets = Array.from({ length: 15 }, (_, index) => index);
-const automaticRunMinutesUtc = [5, 8, 11, 14, 17, 20, 23].map((hour) => (hour * 60) + 23);
+const automaticRunMinutesUtc = [5, 8, 11, 14, 17, 20, 21, 23].map((hour) => (hour * 60) + 23);
 const maxDaysAhead = Math.max(...dayBuckets);
 
 await mkdir(outputDir, { recursive: true });
@@ -318,6 +318,12 @@ function summarizeBet(bet) {
 
 function summarizeLeg(leg) {
   return {
+    id: leg.id,
+    fixtureId: leg.fixtureId,
+    fixtureDate: leg.fixtureDate,
+    createdAt: leg.createdAt,
+    homeTeam: leg.homeTeam,
+    awayTeam: leg.awayTeam,
     market: leg.market,
     selectionLabel: leg.selectionLabel,
     playerName: leg.playerName,
@@ -334,7 +340,11 @@ function summarizeLeg(leg) {
     riskTag: leg.riskTag,
     components: {
       intelligenceConfidence: leg.components?.intelligenceConfidence,
+      oddsAgeHours: leg.components?.oddsAgeHours,
       oddsFreshness: leg.components?.oddsFreshness,
+      oddsMovement: leg.components?.oddsMovement,
+      oddsShortening: leg.components?.oddsShortening,
+      oddsDrifting: leg.components?.oddsDrifting,
       nonMarketSignalCount: leg.components?.nonMarketSignalCount,
       nonMarketSignals: leg.components?.nonMarketSignals,
       independentEvidenceStrength: leg.components?.independentEvidenceStrength,
@@ -342,6 +352,9 @@ function summarizeLeg(leg) {
       expectedGoals: leg.components?.expectedGoals,
       homeExpectedGoals: leg.components?.homeExpectedGoals,
       awayExpectedGoals: leg.components?.awayExpectedGoals,
+      over15ShapeProbability: leg.components?.over15ShapeProbability,
+      under35ShapeProbability: leg.components?.under35ShapeProbability,
+      under45ShapeProbability: leg.components?.under45ShapeProbability,
       buildUpEdge: leg.components?.buildUpEdge,
       pressBuildEdge: leg.components?.pressBuildEdge,
       homeManager: leg.components?.homeManager,
@@ -371,6 +384,7 @@ function summarizeLeg(leg) {
       tournamentDrawLift: leg.components?.tournamentDrawLift,
       tournamentContextNote: leg.components?.tournamentContextNote,
       survivalPenalty: leg.components?.survivalPenalty,
+      lateKickoffGuard: leg.components?.lateKickoffGuard,
       confidenceReasons: leg.components?.confidenceReasons,
       scorerMarketType: leg.components?.scorerMarketType,
       teamGoalLikelihood: leg.components?.teamGoalLikelihood,
@@ -386,6 +400,7 @@ function summarizeLeg(leg) {
 function summarizeLegCandidate(leg) {
   return {
     id: leg.id,
+    createdAt: leg.createdAt,
     fixtureId: leg.fixtureId,
     fixtureDate: leg.fixtureDate,
     fixtureDateKey: isoDate(leg.fixtureDate),
@@ -415,6 +430,7 @@ function summarizeLegCandidate(leg) {
       independentEvidenceStrength: leg.components?.independentEvidenceStrength,
       independentEdge: leg.components?.independentEdge,
       marketBlendLift: leg.components?.marketBlendLift,
+      oddsAgeHours: leg.components?.oddsAgeHours,
       oddsMovement: leg.components?.oddsMovement,
       oddsShortening: leg.components?.oddsShortening,
       oddsDrifting: leg.components?.oddsDrifting,
@@ -433,6 +449,12 @@ function summarizeLegCandidate(leg) {
       awayHistoricalHeatMemory: leg.components?.awayHistoricalHeatMemory,
       combinedHeatDifferential: leg.components?.combinedHeatDifferential,
       marketResultEdge: leg.components?.marketResultEdge,
+      expectedGoals: leg.components?.expectedGoals,
+      homeExpectedGoals: leg.components?.homeExpectedGoals,
+      awayExpectedGoals: leg.components?.awayExpectedGoals,
+      over15ShapeProbability: leg.components?.over15ShapeProbability,
+      under35ShapeProbability: leg.components?.under35ShapeProbability,
+      under45ShapeProbability: leg.components?.under45ShapeProbability,
       buildUpEdge: leg.components?.buildUpEdge,
       pressBuildEdge: leg.components?.pressBuildEdge,
       homeManager: leg.components?.homeManager,

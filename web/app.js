@@ -19,7 +19,7 @@ const pickOfDaySlip = [
   ["accumulator_8", "8-leg accumulator"]
 ];
 const defaultGatheringSchedule = {
-  automaticRunMinutesUtc: [323, 503, 683, 863, 1043, 1223, 1403],
+  automaticRunMinutesUtc: [323, 503, 683, 863, 1043, 1223, 1283, 1403],
   gatheringWindowMinutes: 5,
   gatheringMessage: "Data Gathering: Come back in 5"
 };
@@ -866,7 +866,8 @@ function scoreMostLikelyCombo(legs, target, rank) {
       likelyProbability: round(likelyWinProbability(leg, { legCount: target.legCount }), 4),
       components: {
         ...(leg.components || {}),
-        survivalPenalty: round(mostLikelyPortfolioPenalty(leg, target.legCount), 4)
+        survivalPenalty: round(mostLikelyPortfolioPenalty(leg, target.legCount), 4),
+        lateKickoffGuard: lateKickoffGuard(leg, target.legCount)
       }
     })),
     combinedDecimalOdds: round(combinedDecimalOdds, 2),
@@ -902,12 +903,14 @@ function buildMostLikelyThesis({ target, legs, combinedDecimalOdds, combinedProb
     : "";
   const heatLegs = legs.filter((leg) => Number(leg.components?.heatConfidence || 0) > 0.18 && Number(leg.components?.heatStress || 0) > 0.2);
   const heatText = heatLegs.length ? ` Heat layer active on ${heatLegs.length} leg(s) as a capped weather, climate-history, and squad-depth nudge.` : "";
+  const lateGuardedLegs = legs.filter((leg) => lateKickoffGuard(leg, target.legCount).penalty > 0.004);
+  const lateText = lateGuardedLegs.length ? ` Late-kickoff guard active on ${lateGuardedLegs.length} leg(s), trimming stale/drifting prices and fragile pre-match angles.` : "";
   const portfolioText = target.legCount >= 4
     ? ` Long-slip survival controls active: average leg survival ${round(averageSurvivalProbability * 100, 1)}%, estimated slip chance ${round(combinedProbability * 100, 2)}%, ${bttsLegCount} BTTS leg(s), ${fragileLegCount} fragile-value leg(s), market-mix pressure ${round(marketClusterScore, 1)}, correlation pressure ${round(correlation?.penalty || 0, 1)}.`
     : ` Estimated win chance ${round(combinedProbability * 100, 1)}%.`;
   const correlationText = correlation?.reasons?.length ? ` Correlation layer trimmed: ${correlation.reasons.join("; ")}.` : "";
 
-  return `${target.label} chosen by the Pick of the Day engine, ignoring the risk slider and prioritising estimated win chance, data confidence, fixture separation, and only then price edge. Combined odds ${round(combinedDecimalOdds, 2)}, average data confidence ${round(averageConfidence * 100, 1)}%, independent edge ${round(averageIndependentEdge * 100, 2)}%, non-market signals ${round(averageNonMarketSignalCount, 1)} per leg.${portfolioText}${correlationText}${heatText}${fallbackText} Legs: ${selections}.`;
+  return `${target.label} chosen by the Pick of the Day engine, ignoring the risk slider and prioritising estimated win chance, data confidence, fixture separation, and only then price edge. Combined odds ${round(combinedDecimalOdds, 2)}, average data confidence ${round(averageConfidence * 100, 1)}%, independent edge ${round(averageIndependentEdge * 100, 2)}%, non-market signals ${round(averageNonMarketSignalCount, 1)} per leg.${portfolioText}${correlationText}${heatText}${lateText}${fallbackText} Legs: ${selections}.`;
 }
 
 function mostLikelyLegPassesPortfolioShape(leg, selected, legCount, mode) {
@@ -983,9 +986,10 @@ function mostLikelyLegPassesPortfolioShape(leg, selected, legCount, mode) {
 
 function mostLikelyPortfolioPenalty(leg, legCount) {
   const pressure = survivalPressureForLegCount(legCount);
+  const latePenalty = lateKickoffGuard(leg, legCount).penalty;
 
   if (!pressure) {
-    return 0;
+    return latePenalty;
   }
 
   const decimalOdds = Number(leg.decimalOdds || 1);
@@ -1042,7 +1046,90 @@ function mostLikelyPortfolioPenalty(leg, legCount) {
     penalty += 0.018 + pressure * 0.026;
   }
 
-  return clamp(penalty * pressure, 0, 0.12);
+  return clamp((penalty * pressure) + latePenalty, 0, 0.14);
+}
+
+function lateKickoffGuard(leg, legCount = 1) {
+  const hoursUntilKickoff = hoursUntilFixture(leg);
+
+  if (!Number.isFinite(hoursUntilKickoff) || hoursUntilKickoff < -0.5 || hoursUntilKickoff > 6) {
+    return {
+      active: false,
+      hoursUntilKickoff: null,
+      penalty: 0,
+      reasons: []
+    };
+  }
+
+  const pressure = clamp((6 - Math.max(0, hoursUntilKickoff)) / 6, 0, 1);
+  const survivalPressure = survivalPressureForLegCount(legCount);
+  const reasons = [];
+  let penalty = 0;
+  const oddsAgeHours = Number(leg.components?.oddsAgeHours || 0);
+  const freshness = Number(leg.components?.oddsFreshness ?? 0.75);
+  const confidence = Number(leg.confidence || 0);
+  const independentEdge = Number(leg.independentEdge ?? leg.edge ?? 0);
+  const expectedGoals = Number(leg.components?.expectedGoals || 0);
+
+  if (oddsAgeHours > 2) {
+    penalty += clamp((oddsAgeHours - 2) / 8, 0, 1) * 0.045;
+    reasons.push("odds snapshot is ageing close to kick-off");
+  }
+
+  if (freshness < 0.78) {
+    penalty += clamp((0.78 - freshness) / 0.5, 0, 1) * 0.035;
+    reasons.push("freshness below late-match comfort level");
+  }
+
+  if (leg.components?.oddsDrifting) {
+    penalty += 0.024;
+    reasons.push("selection is drifting in the market");
+  }
+
+  if (confidence < 0.68 && legCount >= 3) {
+    penalty += (0.68 - confidence) * 0.065;
+    reasons.push("confidence is thin for a near-kick-off slip");
+  }
+
+  if (isOpeningGroupGoalLeg(leg) && (expectedGoals < 3.05 || independentEdge < 0.075)) {
+    penalty += 0.028;
+    reasons.push("opening-game goal angle needs extra proof");
+  }
+
+  if (isScorerLeg(leg)) {
+    const starterLikelihood = Number(leg.components?.starterLikelihood || 0);
+
+    if (starterLikelihood < 0.64) {
+      penalty += 0.03;
+      reasons.push("scorer leg lacks strong starter/minutes confidence");
+    }
+
+    if (leg.market === "first_goalscorer") {
+      penalty += 0.014;
+      reasons.push("first goalscorer remains fragile before confirmed lineups");
+    }
+  }
+
+  const scaledPenalty = clamp(penalty * pressure * (0.55 + survivalPressure * 0.55), 0, 0.09);
+
+  return {
+    active: scaledPenalty > 0,
+    hoursUntilKickoff: round(hoursUntilKickoff, 2),
+    pressure: round(pressure, 3),
+    penalty: round(scaledPenalty, 4),
+    reasons: reasons.slice(0, 4)
+  };
+}
+
+function hoursUntilFixture(leg) {
+  const fixtureDate = new Date(leg.fixtureDate || leg.date || "");
+  const referenceDate = new Date(leg.createdAt || leg.components?.createdAt || state.data?.generatedAt || "");
+
+  if (!Number.isFinite(fixtureDate.getTime()) || !Number.isFinite(referenceDate.getTime())) {
+    return null;
+  }
+
+  return (fixtureDate - referenceDate) / 36e5;
 }
 
 function survivalPressureForLegCount(legCount) {
@@ -1280,7 +1367,7 @@ function marketFamilyForLeg(leg) {
     return "scorer";
   }
 
-  if (leg.market === "match_winner" || leg.market === "draw_no_bet") {
+  if (leg.market === "match_winner" || leg.market === "draw_no_bet" || leg.market === "double_chance") {
     return "result";
   }
 
@@ -1325,7 +1412,7 @@ function isBttsYesLeg(leg) {
 }
 
 function isTotalGoalsLeg(leg) {
-  return leg.market === "over_2_5_goals" || leg.market === "under_2_5_goals";
+  return ["over_1_5_goals", "over_2_5_goals", "under_2_5_goals", "under_3_5_goals", "under_4_5_goals"].includes(leg.market);
 }
 
 function isScorerLeg(leg) {
@@ -1370,7 +1457,7 @@ function maximumTotalGoalsLegs(legCount) {
 }
 
 function isTotalGoalsMarket(market) {
-  return market === "over_2_5_goals" || market === "under_2_5_goals";
+  return ["over_1_5_goals", "over_2_5_goals", "under_2_5_goals", "under_3_5_goals", "under_4_5_goals"].includes(market);
 }
 
 function fragileBttsHistory(leg) {
@@ -1680,8 +1767,12 @@ function marketLine(data) {
     anytime_scorer: "Anytime scorer",
     first_goalscorer: "First goalscorer",
     both_teams_to_score: "Both teams to score",
+    double_chance: "Double chance",
+    over_1_5_goals: "Over 1.5 goals",
     over_2_5_goals: "Over 2.5 goals",
-    under_2_5_goals: "Under 2.5 goals"
+    under_2_5_goals: "Under 2.5 goals",
+    under_3_5_goals: "Under 3.5 goals",
+    under_4_5_goals: "Under 4.5 goals"
   };
   const configured = data?.markets?.configured || [];
   const observed = data?.markets?.observed || {};

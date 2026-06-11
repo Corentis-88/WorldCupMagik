@@ -114,6 +114,19 @@ export function gradeLegAgainstMatch(leg, match) {
     return { status: selectedHome ? (homeWon ? "won" : "lost") : (awayWon ? "won" : "lost"), reason: "draw_no_bet_result" };
   }
 
+  if (leg.market === "double_chance") {
+    const wantsHome = teamMatches(outcome, match.homeTeam);
+    const wantsAway = teamMatches(outcome, match.awayTeam);
+    const wantsDraw = /draw/i.test(outcome || leg.selectionLabel || "");
+
+    if (!wantsHome && !wantsAway && !wantsDraw) {
+      return { status: "unknown", reason: "double_chance_outcome_not_matched" };
+    }
+
+    const landed = (wantsHome && homeWon) || (wantsAway && awayWon) || (wantsDraw && draw);
+    return { status: landed ? "won" : "lost", reason: "double_chance_result" };
+  }
+
   if (leg.market === "both_teams_to_score") {
     const landed = homeGoals > 0 && awayGoals > 0;
     const wantsYes = /yes/i.test(outcome || leg.selectionLabel || "");
@@ -124,8 +137,20 @@ export function gradeLegAgainstMatch(leg, match) {
     return { status: totalGoals > 2.5 ? "won" : "lost", reason: "goal_total" };
   }
 
+  if (leg.market === "over_1_5_goals") {
+    return { status: totalGoals > 1.5 ? "won" : "lost", reason: "goal_total" };
+  }
+
   if (leg.market === "under_2_5_goals") {
     return { status: totalGoals < 2.5 ? "won" : "lost", reason: "goal_total" };
+  }
+
+  if (leg.market === "under_3_5_goals") {
+    return { status: totalGoals < 3.5 ? "won" : "lost", reason: "goal_total" };
+  }
+
+  if (leg.market === "under_4_5_goals") {
+    return { status: totalGoals < 4.5 ? "won" : "lost", reason: "goal_total" };
   }
 
   if (leg.market === "anytime_scorer") {
@@ -351,8 +376,21 @@ function inferredOutcomeFromLabel(leg) {
     return "Over";
   }
 
+  if (leg.market === "over_1_5_goals") {
+    return "Over";
+  }
+
   if (leg.market === "under_2_5_goals") {
     return "Under";
+  }
+
+  if (leg.market === "under_3_5_goals" || leg.market === "under_4_5_goals") {
+    return "Under";
+  }
+
+  if (leg.market === "double_chance") {
+    const match = label.match(/:\s*double chance:\s*(.*)$/i);
+    return match?.[1] || "";
   }
 
   const match = label.match(/:\s*(.*?)\s+(?:to win|draw no bet|anytime scorer|first goalscorer)/i);

@@ -8,14 +8,20 @@ test("settles recommended result and goals legs against completed match history"
     leg("leg-mex-win", "match_winner", "Mexico", 1.86),
     leg("leg-btts", "both_teams_to_score", "Yes", 2.1),
     leg("leg-over", "over_2_5_goals", "Over", 1.9),
-    leg("leg-dnb", "draw_no_bet", "South Africa", 2.8)
+    leg("leg-dnb", "draw_no_bet", "South Africa", 2.8),
+    leg("leg-dc", "double_chance", "Mexico or Draw", 1.28),
+    leg("leg-over15", "over_1_5_goals", "Over", 1.45),
+    leg("leg-under35", "under_3_5_goals", "Under", 1.52),
+    leg("leg-under45", "under_4_5_goals", "Under", 1.2)
   ];
   const recommendations = {
     singles: [{ legs: [legCandidates[0]] }],
     doubles: [{ legs: [legCandidates[1], legCandidates[2]] }],
-    trixies: [{ legs: [legCandidates[3]] }],
+    trixies: [{ legs: [legCandidates[3], legCandidates[4], legCandidates[5]] }],
     accumulators: [],
-    accumulatorsByLegCount: {}
+    accumulatorsByLegCount: {
+      4: [{ legs: [legCandidates[4], legCandidates[5], legCandidates[6], legCandidates[7]] }]
+    }
   };
   const settlement = settleBetOutcomes({
     legCandidates,
@@ -25,11 +31,15 @@ test("settles recommended result and goals legs against completed match history"
     now
   });
 
-  assert.equal(settlement.insertedCount, 4);
+  assert.equal(settlement.insertedCount, 8);
   assert.equal(statusFor(settlement, "match_winner"), "won");
   assert.equal(statusFor(settlement, "both_teams_to_score"), "won");
   assert.equal(statusFor(settlement, "over_2_5_goals"), "won");
   assert.equal(statusFor(settlement, "draw_no_bet"), "lost");
+  assert.equal(statusFor(settlement, "double_chance"), "won");
+  assert.equal(statusFor(settlement, "over_1_5_goals"), "won");
+  assert.equal(statusFor(settlement, "under_3_5_goals"), "won");
+  assert.equal(statusFor(settlement, "under_4_5_goals"), "won");
   assert.ok(settlement.newRecords.every((record) => record.source === "auto-settled-public-match-history"));
 });
 

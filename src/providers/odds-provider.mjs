@@ -226,6 +226,12 @@ function mapJsonLdOffer(offer, fixture, event) {
     return { market: scorer.market, outcome: scorer.playerName, playerName: scorer.playerName, playerTeam: scorer.playerTeam };
   }
 
+  const doubleChance = parseDoubleChanceOffer(name, fixture);
+
+  if (doubleChance) {
+    return doubleChance;
+  }
+
   if (prefix === "draw") {
     return { market: "match_winner", outcome: "Draw" };
   }
@@ -238,12 +244,24 @@ function mapJsonLdOffer(offer, fixture, event) {
     return { market: "match_winner", outcome: fixture.awayTeam };
   }
 
+  if (/over\s*1\.?5/i.test(name)) {
+    return { market: "over_1_5_goals", outcome: "Over" };
+  }
+
   if (/over\s*2\.?5/i.test(name)) {
     return { market: "over_2_5_goals", outcome: "Over" };
   }
 
   if (/under\s*2\.?5/i.test(name)) {
     return { market: "under_2_5_goals", outcome: "Under" };
+  }
+
+  if (/under\s*3\.?5/i.test(name)) {
+    return { market: "under_3_5_goals", outcome: "Under" };
+  }
+
+  if (/under\s*4\.?5/i.test(name)) {
+    return { market: "under_4_5_goals", outcome: "Under" };
   }
 
   if (/^yes\b/i.test(name)) {
@@ -312,6 +330,30 @@ function extractFixtureOdds({ block, fixture, source, now }) {
     capturedAt,
     now
   }));
+  records.push(...extractDoubleChanceOdds({
+    block,
+    fixture,
+    source,
+    bookmaker,
+    capturedAt
+  }));
+  records.push(...extractTotalGoalLineOdds({
+    block,
+    fixture,
+    source,
+    bookmaker,
+    capturedAt
+  }));
+  records.push(...extractMarketPairOdds({
+    block,
+    fixture,
+    source,
+    bookmaker,
+    capturedAt,
+    market: "over_1_5_goals",
+    outcome: "Over",
+    labelPattern: /(?:over|o)\s*1\.?5/i
+  }));
   records.push(...extractMarketPairOdds({
     block,
     fixture,
@@ -331,6 +373,26 @@ function extractFixtureOdds({ block, fixture, source, now }) {
     market: "under_2_5_goals",
     outcome: "Under",
     labelPattern: /(?:under|u)\s*2\.?5/i
+  }));
+  records.push(...extractMarketPairOdds({
+    block,
+    fixture,
+    source,
+    bookmaker,
+    capturedAt,
+    market: "under_3_5_goals",
+    outcome: "Under",
+    labelPattern: /(?:under|u)\s*3\.?5/i
+  }));
+  records.push(...extractMarketPairOdds({
+    block,
+    fixture,
+    source,
+    bookmaker,
+    capturedAt,
+    market: "under_4_5_goals",
+    outcome: "Under",
+    labelPattern: /(?:under|u)\s*4\.?5/i
   }));
   records.push(...extractMarketPairOdds({
     block,
@@ -436,6 +498,139 @@ function extractMarketPairOdds({ block, fixture, source, bookmaker, capturedAt, 
     outcome,
     decimalOdds: token.value
   })];
+}
+
+function extractDoubleChanceOdds({ block, fixture, source, bookmaker, capturedAt }) {
+  const section = doubleChanceSection(block) || String(block || "");
+  const outcomes = [
+    {
+      outcome: `${fixture.homeTeam} or Draw`,
+      aliases: [
+        `${fixture.homeTeam} or draw`,
+        `${fixture.homeTeam} / draw`,
+        `${fixture.homeTeam}/draw`,
+        `double chance ${fixture.homeTeam}`,
+        `${fixture.homeTeam} double chance`
+      ]
+    },
+    {
+      outcome: `Draw or ${fixture.awayTeam}`,
+      aliases: [
+        `draw or ${fixture.awayTeam}`,
+        `draw / ${fixture.awayTeam}`,
+        `draw/${fixture.awayTeam}`,
+        `double chance ${fixture.awayTeam}`,
+        `${fixture.awayTeam} double chance`
+      ]
+    },
+    {
+      outcome: `${fixture.homeTeam} or ${fixture.awayTeam}`,
+      aliases: [
+        `${fixture.homeTeam} or ${fixture.awayTeam}`,
+        `${fixture.homeTeam} / ${fixture.awayTeam}`,
+        `${fixture.homeTeam}/${fixture.awayTeam}`,
+        "no draw"
+      ]
+    }
+  ];
+  const records = [];
+
+  for (const outcome of outcomes) {
+    const price = firstPriceNearAliases(section, outcome.aliases);
+
+    if (!price) {
+      continue;
+    }
+
+    records.push(toOddsRecord({
+      fixture,
+      source,
+      bookmaker,
+      capturedAt,
+      market: "double_chance",
+      outcome: outcome.outcome,
+      decimalOdds: price
+    }));
+  }
+
+  return records;
+}
+
+function extractTotalGoalLineOdds({ block, fixture, source, bookmaker, capturedAt }) {
+  const section = totalGoalsSection(block);
+
+  if (!section) {
+    return [];
+  }
+
+  const records = [];
+  const price = oddsPricePattern();
+  const lines = [
+    { line: "1.5", overMarket: "over_1_5_goals" },
+    { line: "2.5", overMarket: "over_2_5_goals", underMarket: "under_2_5_goals" },
+    { line: "3.5", underMarket: "under_3_5_goals" },
+    { line: "4.5", underMarket: "under_4_5_goals" }
+  ];
+
+  for (const item of lines) {
+    const linePattern = item.line.replace(".", "\\.?");
+    const rowPattern = new RegExp(`\\b${linePattern}\\b[\\s\\S]{0,24}?(${price})[\\s\\S]{0,24}?(${price})`, "i");
+    const row = rowPattern.exec(section);
+
+    if (!row) {
+      continue;
+    }
+
+    const beforeLine = section.slice(Math.max(0, row.index - 14), row.index).toLowerCase();
+
+    if (/[a-z]\s*$/.test(beforeLine)) {
+      continue;
+    }
+
+    if (item.overMarket) {
+      const decimalOdds = toDecimalOdds(row[1]);
+
+      if (decimalOdds) {
+        records.push(toOddsRecord({
+          fixture,
+          source,
+          bookmaker,
+          capturedAt,
+          market: item.overMarket,
+          outcome: "Over",
+          decimalOdds
+        }));
+      }
+    }
+
+    if (item.underMarket) {
+      const decimalOdds = toDecimalOdds(row[2]);
+
+      if (decimalOdds) {
+        records.push(toOddsRecord({
+          fixture,
+          source,
+          bookmaker,
+          capturedAt,
+          market: item.underMarket,
+          outcome: "Under",
+          decimalOdds
+        }));
+      }
+    }
+  }
+
+  return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}`);
+}
+
+function doubleChanceSection(block) {
+  const match = String(block || "").match(/(?:double\s+chance)[\s\S]{0,900}?(?=(?:draw\s+no\s+bet|handicap|total goals|over\/under|both teams|correct score|player|corners|cards|$))/i);
+  return match?.[0] || "";
+}
+
+function totalGoalsSection(block) {
+  const match = String(block || "").match(/(?:total\s+goals|match\s+goals|goals\s+over\/under|over\/under|asian\s+total)[\s\S]{0,1200}?(?=(?:handicap|both teams|correct score|player|corners|cards|double chance|$))/i);
+  return match?.[0] || "";
 }
 
 function extractScorerMarketOdds({ block, fixture, source, bookmaker, capturedAt }) {
@@ -568,6 +763,40 @@ function parseScorerOffer(name) {
   return playerName && looksLikeScorerName(playerName)
     ? { market: firstScorer ? "first_goalscorer" : "anytime_scorer", playerName }
     : null;
+}
+
+function parseDoubleChanceOffer(name, fixture) {
+  const text = String(name || "").replace(/\s+/g, " ").trim();
+
+  if (/draw\s+no\s+bet|handicap|correct\s+score|to\s+qualify/i.test(text)) {
+    return null;
+  }
+
+  const selectionText = text.split(/\s+-\s+|\s+at\s+/i)[0] || text;
+  const lower = selectionText.toLowerCase();
+  const home = fixture.homeTeam;
+  const away = fixture.awayTeam;
+  const homeDraw = (teamNameMatches(lower, home) && /\bor\s+draw\b|\/\s*draw|\b1x\b|double\s+chance/i.test(selectionText))
+    && !teamNameMatches(lower, away);
+  const awayDraw = (teamNameMatches(lower, away) && /\bdraw\s+or\b|draw\s*\/|\bx2\b|double\s+chance/i.test(selectionText))
+    && !teamNameMatches(lower, home);
+  const noDraw = teamNameMatches(lower, home)
+    && teamNameMatches(lower, away)
+    && (/\bor\b|\/|\b12\b|\bno draw\b/i.test(selectionText));
+
+  if (homeDraw) {
+    return { market: "double_chance", outcome: `${home} or Draw` };
+  }
+
+  if (awayDraw) {
+    return { market: "double_chance", outcome: `Draw or ${away}` };
+  }
+
+  if (noDraw) {
+    return { market: "double_chance", outcome: `${home} or ${away}` };
+  }
+
+  return null;
 }
 
 function parseAnytimeScorerOffer(name) {

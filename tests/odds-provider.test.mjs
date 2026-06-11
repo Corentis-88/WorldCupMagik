@@ -14,6 +14,10 @@ test("public-web odds parser maps match winner, totals, and BTTS offers", async 
         "homeTeam": { "@type": "SportsTeam", "name": "Mexico", "alternateName": "MEX" },
         "awayTeam": { "@type": "SportsTeam", "name": "South Africa", "alternateName": "RSA" },
         "offers": [
+          { "@type": "Offer", "name": "Mexico or Draw double chance - Mexico v South Africa at Coral", "price": "1.14", "offeredBy": { "name": "Coral" } },
+          { "@type": "Offer", "name": "Over 1.5 - Mexico v South Africa at Coral", "price": "1.32", "offeredBy": { "name": "Coral" } },
+          { "@type": "Offer", "name": "Under 3.5 - Mexico v South Africa at Coral", "price": "1.28", "offeredBy": { "name": "Coral" } },
+          { "@type": "Offer", "name": "Under 4.5 - Mexico v South Africa at Coral", "price": "1.10", "offeredBy": { "name": "Coral" } },
           { "@type": "Offer", "name": "RSA — Mexico v South Africa at Coral", "price": "6.00", "offeredBy": { "name": "Coral" } },
           { "@type": "Offer", "name": "Draw — Mexico v South Africa at Coral", "price": "4.20", "offeredBy": { "name": "Coral" } },
           { "@type": "Offer", "name": "MEX — Mexico v South Africa at Coral", "price": "1.53", "offeredBy": { "name": "Coral" } },
@@ -55,12 +59,16 @@ test("public-web odds parser maps match winner, totals, and BTTS offers", async 
       "anytime_scorer:Raul Jimenez",
       "both_teams_to_score:No",
       "both_teams_to_score:Yes",
+      "double_chance:Mexico or Draw",
       "first_goalscorer:Raul Jimenez",
       "match_winner:Draw",
       "match_winner:Mexico",
       "match_winner:South Africa",
+      "over_1_5_goals:Over",
       "over_2_5_goals:Over",
-      "under_2_5_goals:Under"
+      "under_2_5_goals:Under",
+      "under_3_5_goals:Under",
+      "under_4_5_goals:Under"
     ]);
     assert.equal(records.find((record) => record.market === "anytime_scorer")?.playerName, "Raul Jimenez");
     assert.equal(records.find((record) => record.market === "first_goalscorer")?.decimalOdds, 5);
