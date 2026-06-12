@@ -37,10 +37,14 @@
           <span>Date to</span>
           <input id="dateToInput" type="date" />
         </label>
-        <label>
-          <span>Risk <strong id="riskValue">65</strong></span>
-          <input id="riskInput" type="range" min="0" max="100" step="5" value="65" />
-        </label>
+        <div class="control-card risk-control">
+          <span id="riskLabel">Risk <strong id="riskValue">65</strong></span>
+          <div class="risk-row">
+            <button class="risk-step" type="button" data-risk-step="-5" aria-label="Reduce risk">-</button>
+            <input id="riskInput" type="range" min="0" max="100" step="5" value="65" aria-labelledby="riskLabel" />
+            <button class="risk-step" type="button" data-risk-step="5" aria-label="Increase risk">+</button>
+          </div>
+        </div>
       </section>
 
       <section class="engine-status">

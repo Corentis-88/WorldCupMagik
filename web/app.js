@@ -1,5 +1,14 @@
 const state = {
-  data: null
+  data: null,
+  renderTimer: null,
+  renderFrame: null,
+  scrollTimer: null,
+  renderPending: false,
+  riskInteracting: false,
+  isScrolling: false,
+  profileCache: new Map(),
+  pickProfileCache: new Map(),
+  scorerCache: new Map()
 };
 const standardSlip = [
   ["single", "Single"],
@@ -32,6 +41,7 @@ const el = {
   dateFrom: document.getElementById("dateFromInput"),
   dateTo: document.getElementById("dateToInput"),
   risk: document.getElementById("riskInput"),
+  riskSteps: document.querySelectorAll("[data-risk-step]"),
   riskValue: document.getElementById("riskValue"),
   engineNotes: document.getElementById("engineNotes"),
   fixtureCount: document.getElementById("fixtureCount"),
@@ -45,7 +55,20 @@ const el = {
 };
 
 for (const input of [el.stake, el.dateFrom, el.dateTo, el.risk]) {
-  input.addEventListener("input", render);
+  input.addEventListener("input", () => handleControlInput(input));
+}
+
+el.risk.addEventListener("pointerdown", beginRiskInteraction, { passive: true });
+el.risk.addEventListener("pointerup", endRiskInteraction, { passive: true });
+el.risk.addEventListener("pointercancel", endRiskInteraction, { passive: true });
+el.risk.addEventListener("touchstart", beginRiskInteraction, { passive: true });
+el.risk.addEventListener("touchend", endRiskInteraction, { passive: true });
+el.risk.addEventListener("touchcancel", endRiskInteraction, { passive: true });
+el.risk.addEventListener("change", endRiskInteraction);
+window.addEventListener("scroll", handleScroll, { passive: true });
+
+for (const button of el.riskSteps) {
+  button.addEventListener("click", () => adjustRisk(Number(button.dataset.riskStep || 0)));
 }
 
 loadData();
@@ -62,6 +85,7 @@ async function loadData() {
 
     state.data = database;
     state.data.lineupAdjustments = lineups;
+    clearRenderCaches();
     initialiseDateInputs();
     render();
   } catch (error) {
@@ -92,6 +116,101 @@ async function fetchOptionalJson(path) {
   } catch {
     return null;
   }
+}
+
+function handleControlInput(input) {
+  if (input === el.risk) {
+    el.riskValue.textContent = el.risk.value;
+    scheduleRender(state.riskInteracting ? 320 : 180);
+    return;
+  }
+
+  scheduleRender(input === el.stake ? 0 : 80);
+}
+
+function beginRiskInteraction() {
+  state.riskInteracting = true;
+}
+
+function endRiskInteraction() {
+  state.riskInteracting = false;
+  el.riskValue.textContent = el.risk.value;
+  scheduleRender(0);
+}
+
+function adjustRisk(step) {
+  const min = Number(el.risk.min || 0);
+  const max = Number(el.risk.max || 100);
+  const next = Math.max(min, Math.min(max, Number(el.risk.value || 0) + step));
+
+  el.risk.value = String(next);
+  el.riskValue.textContent = el.risk.value;
+  scheduleRender(0);
+}
+
+function handleScroll() {
+  state.isScrolling = true;
+
+  if (state.scrollTimer) {
+    clearTimeout(state.scrollTimer);
+  }
+
+  state.scrollTimer = setTimeout(() => {
+    state.isScrolling = false;
+
+    if (state.renderPending) {
+      scheduleRender(0);
+    }
+  }, 140);
+}
+
+function scheduleRender(delayMs = 0) {
+  if (!state.data) {
+    return;
+  }
+
+  state.renderPending = true;
+
+  if (state.renderTimer) {
+    clearTimeout(state.renderTimer);
+    state.renderTimer = null;
+  }
+
+  if (delayMs > 0) {
+    state.renderTimer = setTimeout(flushScheduledRender, delayMs);
+  } else {
+    flushScheduledRender();
+  }
+}
+
+function flushScheduledRender() {
+  state.renderTimer = null;
+
+  if (!state.renderPending) {
+    return;
+  }
+
+  if (state.riskInteracting || state.isScrolling) {
+    state.renderTimer = setTimeout(flushScheduledRender, state.riskInteracting ? 180 : 120);
+    return;
+  }
+
+  state.renderPending = false;
+
+  if (state.renderFrame) {
+    cancelAnimationFrame(state.renderFrame);
+  }
+
+  state.renderFrame = requestAnimationFrame(() => {
+    state.renderFrame = null;
+    render();
+  });
+}
+
+function clearRenderCaches() {
+  state.profileCache.clear();
+  state.pickProfileCache.clear();
+  state.scorerCache.clear();
 }
 
 function render() {
@@ -176,10 +295,16 @@ function fallbackDateRange() {
 }
 
 function buildRangeProfile({ data, riskBucket, dateRange }) {
+  const cacheKey = rangeCacheKey(data, riskBucket, dateRange);
+
+  if (state.profileCache.has(cacheKey)) {
+    return state.profileCache.get(cacheKey);
+  }
+
   if (!data.legCandidatesByRisk) {
     const fallbackRisk = nearest(data.riskBuckets || [riskBucket], riskBucket);
     const fallbackDay = nearest(data.dayBuckets || [14], 14);
-    return data.profiles?.[`d${fallbackDay}_r${fallbackRisk}`] || Object.values(data.profiles || {})[0] || null;
+    return rememberCache(state.profileCache, cacheKey, data.profiles?.[`d${fallbackDay}_r${fallbackRisk}`] || Object.values(data.profiles || {})[0] || null);
   }
 
   const fixtures = fixturesInRange(data.fixtures || [], dateRange);
@@ -189,7 +314,7 @@ function buildRangeProfile({ data, riskBucket, dateRange }) {
   const policy = { riskProfile: data.riskProfiles?.[riskBucket] || {} };
   const recommendations = buildBetRecommendations(candidates, policy);
 
-  return {
+  return rememberCache(state.profileCache, cacheKey, {
     dateFrom: dateRange.from,
     dateTo: dateRange.to,
     risk: riskBucket,
@@ -197,16 +322,22 @@ function buildRangeProfile({ data, riskBucket, dateRange }) {
     fixtureCount: fixtures.length,
     eligibleLegCount: recommendations.eligibleLegCount,
     betslip: selectRangeBetslip({ recommendations, risk: riskBucket })
-  };
+  });
 }
 
 function buildPickOfDayRangeProfile({ data, dateRange }) {
+  const cacheKey = rangeCacheKey(data, "pick", dateRange);
+
+  if (state.pickProfileCache.has(cacheKey)) {
+    return state.pickProfileCache.get(cacheKey);
+  }
+
   const fixtures = fixturesInRange(data.fixtures || [], dateRange);
   const fixtureIds = new Set(fixtures.map((fixture) => fixture.id));
   const candidates = (data.mostLikelyLegCandidates || [])
     .filter((leg) => fixtureIds.has(leg.fixtureId));
 
-  return {
+  return rememberCache(state.pickProfileCache, cacheKey, {
     dateFrom: dateRange.from,
     dateTo: dateRange.to,
     mode: "most_likely",
@@ -214,7 +345,27 @@ function buildPickOfDayRangeProfile({ data, dateRange }) {
     fixtureCount: fixtures.length,
     eligibleLegCount: candidates.length,
     betslip: buildMostLikelyPicks(candidates, { fixtureCount: fixtures.length })
-  };
+  });
+}
+
+function rangeCacheKey(data, bucket, dateRange) {
+  return [
+    data?.generatedAt || "database",
+    data?.lineupAdjustments?.generatedAt || "",
+    bucket,
+    dateRange.from,
+    dateRange.to
+  ].join("|");
+}
+
+function rememberCache(cache, key, value) {
+  cache.set(key, value);
+
+  if (cache.size > 36) {
+    cache.delete(cache.keys().next().value);
+  }
+
+  return value;
 }
 
 function fixturesInRange(fixtures, dateRange) {
@@ -348,15 +499,21 @@ function renderLikelyGoalscorers(groups) {
 }
 
 function buildLikelyGoalscorersToday(data, today = localDateKey(new Date())) {
+  const cacheKey = `${data?.generatedAt || "database"}|${data?.lineupAdjustments?.generatedAt || ""}|${today}`;
+
+  if (state.scorerCache.has(cacheKey)) {
+    return state.scorerCache.get(cacheKey);
+  }
+
   const fixtures = (data?.fixtures || [])
     .filter((fixture) => (fixture.dateKey || dateKey(fixture.date)) === today)
     .sort((left, right) => new Date(left.date) - new Date(right.date));
 
-  return fixtures.map((fixture) => ({
+  return rememberCache(state.scorerCache, cacheKey, fixtures.map((fixture) => ({
     fixture,
     fixtureLabel: `${fixture.homeTeam} vs ${fixture.awayTeam}`,
     players: likelyGoalscorersForFixture(data, fixture).slice(0, 4)
-  }));
+  })));
 }
 
 function likelyGoalscorersForFixture(data, fixture) {

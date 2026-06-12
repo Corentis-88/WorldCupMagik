@@ -13,11 +13,17 @@
   box-sizing: border-box;
 }
 
+html {
+  overscroll-behavior-y: contain;
+}
+
 body {
   margin: 0;
   color: var(--ink);
   background: linear-gradient(135deg, #f6f0e4, #edf6ee);
   font-family: "Segoe UI", system-ui, sans-serif;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
 }
 
 button,
@@ -76,6 +82,7 @@ input {
 
 .help-link,
 .controls label,
+.controls .control-card,
 .summary div,
 .bet-card {
   border: 1px solid rgba(23, 34, 29, 0.13);
@@ -188,6 +195,7 @@ input {
 }
 
 .controls label,
+.controls .control-card,
 .summary div {
   display: grid;
   gap: 8px;
@@ -214,8 +222,79 @@ input {
 }
 
 .controls input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
   width: 100%;
+  height: 44px;
+  min-height: 44px;
+  margin: 0;
+  background: transparent;
   accent-color: var(--green);
+  touch-action: none;
+}
+
+.controls input[type="range"]::-webkit-slider-runnable-track {
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--green), #63ad65);
+  box-shadow: inset 0 0 0 1px rgba(23, 34, 29, 0.12);
+}
+
+.controls input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  margin-top: -10px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 3px 10px rgba(23, 34, 29, 0.28);
+}
+
+.controls input[type="range"]::-moz-range-track {
+  height: 10px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--green), #63ad65);
+  box-shadow: inset 0 0 0 1px rgba(23, 34, 29, 0.12);
+}
+
+.controls input[type="range"]::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 3px 10px rgba(23, 34, 29, 0.28);
+}
+
+.risk-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+}
+
+.risk-step {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(23, 34, 29, 0.18);
+  border-radius: 8px;
+  background: #f2ecdf;
+  color: var(--ink);
+  font-size: 24px;
+  font-weight: 950;
+  line-height: 1;
+  touch-action: manipulation;
+}
+
+.risk-step:active {
+  transform: translateY(1px);
 }
 
 .summary strong {
@@ -259,6 +338,7 @@ input {
   display: grid;
   gap: 10px;
   padding: 14px;
+  contain: content;
 }
 
 .bet-card.unavailable {
@@ -364,6 +444,7 @@ input {
   border-radius: 8px;
   background: linear-gradient(180deg, #fffaf1, #eff8ef);
   box-shadow: 0 10px 28px rgba(23, 34, 29, 0.1);
+  contain: content;
 }
 
 .scorer-card.unavailable {
@@ -443,6 +524,11 @@ input {
 }
 
 @media (max-width: 760px) {
+  .page {
+    width: min(100% - 20px, 1120px);
+    padding-top: 12px;
+  }
+
   .hero {
     align-items: start;
     flex-direction: column;
@@ -459,6 +545,44 @@ input {
   .betslip,
   .scorer-list {
     grid-template-columns: 1fr;
+  }
+
+  .controls label,
+  .controls .control-card {
+    min-height: 78px;
+  }
+
+  .risk-row {
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+  }
+
+  .risk-step {
+    display: inline-flex;
+  }
+
+  .controls input[type="range"] {
+    height: 54px;
+    min-height: 54px;
+    padding: 9px 0;
+  }
+
+  .controls input[type="range"]::-webkit-slider-runnable-track {
+    height: 12px;
+  }
+
+  .controls input[type="range"]::-webkit-slider-thumb {
+    width: 36px;
+    height: 36px;
+    margin-top: -12px;
+  }
+
+  .controls input[type="range"]::-moz-range-track {
+    height: 12px;
+  }
+
+  .controls input[type="range"]::-moz-range-thumb {
+    width: 34px;
+    height: 34px;
   }
 
   .section-title h2 {
