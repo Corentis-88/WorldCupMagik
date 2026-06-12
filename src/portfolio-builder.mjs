@@ -20,7 +20,7 @@ export function buildBetRecommendations(legs, policy) {
   return {
     createdAt: new Date().toISOString(),
     eligibleLegCount: eligibleLegs.length,
-    singles: rankCombos(eligibleLegs.map((leg) => [leg]), "single", policy).slice(0, 12),
+    singles: rankCombos(eligibleLegs.map((leg) => [leg]), "single", policy),
     doubles: rankCombos(combinations(eligibleLegs, 2), "double", policy).slice(0, 8),
     trixies: rankCombos(combinations(eligibleLegs, 3), "trixie", policy).slice(0, 8),
     accumulatorsByLegCount,
@@ -1036,7 +1036,7 @@ export function scoreCombo(legs, type, policy) {
     hardBlocks.push("combined_odds_above_absolute_cap");
   }
 
-  if (type === "trixie" && riskLegs.length < Number(riskProfile.minRiskLegsForTrixie || 1)) {
+  if (type === "trixie" && riskLegs.length < Number(riskProfile.minRiskLegsForTrixie ?? 1)) {
     hardBlocks.push("trixie_missing_calculated_risk_leg");
   }
 

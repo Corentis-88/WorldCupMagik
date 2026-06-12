@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { buildMostLikelyPolicy, buildRiskPolicy } from "../src/app-service.mjs";
+import { buildMostLikelyPolicy, buildRiskPolicy, selectBetslip } from "../src/app-service.mjs";
 import { buildBetRecommendations } from "../src/portfolio-builder.mjs";
 import { buildLegCandidates, buildTournamentContextByFixture, fixtureModel } from "../src/scoring.mjs";
 import basePolicy from "../config/engine-policy.json" with { type: "json" };
@@ -54,6 +54,100 @@ test("builds fixed-category combinations without same-fixture legs", () => {
     assert.equal(fixtureIds.size, combo.legs.length);
     assert.equal(combo.hardBlocks.length, 0);
   }
+});
+
+test("risk-zero single selection can choose a steady leg outside the general top twelve", () => {
+  const policy = {
+    riskProfile: {
+      minLegEdge: 0.03,
+      minLegConfidence: 0.72,
+      maxFavoriteImpliedProbability: 0.82,
+      maxCombinedOdds: 38,
+      minRiskLegsForTrixie: 0,
+      preferredCombinedOdds: {
+        double: { min: 2, max: 4.6 },
+        trixie: { min: 3.2, max: 10 },
+        accumulatorByLegCount: {
+          3: { min: 4.2, max: 14 },
+          4: { min: 6.5, max: 26 },
+          5: { min: 9, max: 42 },
+          6: { min: 12, max: 68 },
+          8: { min: 22, max: 140 }
+        }
+      }
+    }
+  };
+  const highScoreLegs = Array.from({ length: 12 }, (_, index) => mockSingleLeg({
+    id: `risk-${index}`,
+    homeTeam: `Risk ${index}`,
+    awayTeam: `Away ${index}`,
+    decimalOdds: 2.7,
+    modelProbability: 0.58,
+    edge: 0.22,
+    independentEdge: 0.23,
+    confidence: 0.81,
+    riskTag: "calculated_risk",
+    score: 100
+  }));
+  const steadyLeg = mockSingleLeg({
+    id: "steady-low-risk",
+    homeTeam: "Belgium",
+    awayTeam: "Egypt",
+    market: "over_2_5_goals",
+    outcome: "Over",
+    decimalOdds: 1.77,
+    modelProbability: 0.5933,
+    edge: 0.03,
+    independentEdge: 0.0323,
+    confidence: 0.7941,
+    riskTag: "steady_edge",
+    score: 89.38
+  });
+  const recommendations = buildBetRecommendations([...highScoreLegs, steadyLeg], policy);
+  const selected = selectBetslip({ recommendations, stake: 10, risk: 0 });
+  const single = selected.find((item) => item.category === "single");
+
+  assert.equal(recommendations.singles.length, 13);
+  assert.equal(single?.legs[0].id, "steady-low-risk");
+});
+
+test("low-risk trixies respect an explicit zero calculated-risk-leg requirement", () => {
+  const policy = {
+    riskProfile: {
+      minLegEdge: 0.03,
+      minLegConfidence: 0.72,
+      maxFavoriteImpliedProbability: 0.82,
+      maxCombinedOdds: 38,
+      minRiskLegsForTrixie: 0,
+      preferredCombinedOdds: {
+        trixie: { min: 3.2, max: 10 },
+        accumulatorByLegCount: {
+          3: { min: 4.2, max: 14 },
+          4: { min: 6.5, max: 26 },
+          5: { min: 9, max: 42 },
+          6: { min: 12, max: 68 },
+          8: { min: 22, max: 140 }
+        }
+      }
+    }
+  };
+  const steadyLegs = ["France", "Belgium", "USA"].map((team, index) => mockSingleLeg({
+    id: `steady-${index}`,
+    homeTeam: team,
+    awayTeam: `Opponent ${index}`,
+    market: "over_2_5_goals",
+    outcome: "Over",
+    decimalOdds: 1.8,
+    modelProbability: 0.61,
+    edge: 0.05,
+    independentEdge: 0.055,
+    confidence: 0.79,
+    riskTag: "steady_edge",
+    score: 92
+  }));
+  const recommendations = buildBetRecommendations(steadyLegs, policy);
+
+  assert.ok(recommendations.trixies.some((combo) => combo.riskLegCount === 0));
 });
 
 test("BTTS model requires balanced scoring threat, not just high total goals", () => {
@@ -305,6 +399,52 @@ function fixture(id, homeTeam, awayTeam, date) {
     awayTeam,
     neutralVenue: true,
     sourceType: "public-web"
+  };
+}
+
+function mockSingleLeg({
+  id,
+  homeTeam,
+  awayTeam,
+  market = "both_teams_to_score",
+  outcome = "Yes",
+  decimalOdds,
+  modelProbability,
+  edge,
+  independentEdge,
+  confidence,
+  riskTag,
+  score
+}) {
+  const impliedProbability = 1 / decimalOdds;
+
+  return {
+    id,
+    fixtureId: `fixture-${id}`,
+    fixtureDate: "2026-06-20T20:00:00.000Z",
+    homeTeam,
+    awayTeam,
+    market,
+    outcome,
+    selectionLabel: `${homeTeam} vs ${awayTeam}: ${outcome}`,
+    bookmaker: "Public Test Book",
+    decimalOdds,
+    modelProbability,
+    rawModelProbability: modelProbability,
+    impliedProbability,
+    marketImpliedProbability: impliedProbability,
+    edge,
+    independentEdge,
+    confidence,
+    riskTag,
+    score,
+    hardBlocks: [],
+    components: {
+      intelligenceConfidence: confidence,
+      nonMarketSignalCount: 4,
+      oddsFreshness: 1,
+      nonMarketSignals: ["test signal one", "test signal two", "test signal three", "test signal four"]
+    }
   };
 }
 
