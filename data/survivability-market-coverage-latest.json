@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-06-12T12:18:16.543Z",
+  "createdAt": "2026-06-12T14:20:43.077Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -82,8 +82,8 @@
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 15,
-    "freshRecordCount": 15,
+    "totalRecords": 18,
+    "freshRecordCount": 18,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -104,13 +104,12 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 3 more fresh records",
         "needs 2 more covered fixtures",
         "needs 14 more fixtures for coverage",
         "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 15,
-      "freshRecordCount": 15,
+      "recordCount": 18,
+      "freshRecordCount": 18,
       "fixtureCount": 3,
       "totalFixtureCount": 65,
       "fixtureCoverage": 0.046,
@@ -118,7 +117,7 @@
       "averageBookmakersPerFixture": 1,
       "lineCount": 3,
       "outcomeCount": 3,
-      "latestCapturedAt": "2026-06-12T12:18:16.543Z",
+      "latestCapturedAt": "2026-06-12T14:20:43.077Z",
       "sampleOutcomes": [
         {
           "fixtureId": "fixture_b2dffeda",
@@ -128,7 +127,7 @@
           "line": "+0.5",
           "team": "Paraguay",
           "decimalOdds": 1.86,
-          "capturedAt": "2026-06-12T12:18:16.543Z"
+          "capturedAt": "2026-06-12T14:20:43.077Z"
         },
         {
           "fixtureId": "fixture_a89ee8da",
@@ -138,7 +137,7 @@
           "line": "-1.75",
           "team": "Switzerland",
           "decimalOdds": 1.88,
-          "capturedAt": "2026-06-12T12:18:16.543Z"
+          "capturedAt": "2026-06-12T14:20:43.077Z"
         },
         {
           "fixtureId": "fixture_fc94e491",
@@ -148,7 +147,7 @@
           "line": "-1",
           "team": "Scotland",
           "decimalOdds": 1.92,
-          "capturedAt": "2026-06-12T12:18:16.543Z"
+          "capturedAt": "2026-06-12T14:20:43.077Z"
         }
       ]
     },
