@@ -7,6 +7,7 @@ import { buildTeamStatsWithIntelligence, loadIntelligenceState, loadOutcomeLearn
 import { buildMobilePayload } from "../src/mobile-web-data.mjs";
 import { buildBetRecommendations, buildMostLikelyPicks } from "../src/portfolio-builder.mjs";
 import { buildLegCandidates } from "../src/scoring.mjs";
+import { buildSurvivabilityMarketCoverage } from "../src/survivability-market-coverage.mjs";
 
 const rootDir = dirname(dirname(fileURLToPath(import.meta.url)));
 const outputDir = join(rootDir, "web", "data");
@@ -47,8 +48,15 @@ const profiles = {};
 const pickOfTheDay = {};
 const riskProfiles = {};
 const legCandidatesByRisk = {};
+const fullLegCandidatesByRisk = {};
 const mostLikelyPolicy = buildMostLikelyPolicy(engineState.policy);
 const maxRangeFixtures = selectFixturesForWindow(liveFixtures, maxDaysAhead, now);
+const survivabilityMarketCoverage = buildSurvivabilityMarketCoverage({
+  fixtures: maxRangeFixtures,
+  oddsSnapshots: liveOddsSnapshots,
+  policy: engineState.policy,
+  now
+});
 const mostLikelyRangeLegCandidates = buildLegCandidates({
   fixtures: maxRangeFixtures,
   oddsSnapshots: liveOddsSnapshots,
@@ -78,6 +86,7 @@ for (const risk of riskBuckets) {
   });
 
   riskProfiles[risk] = policy.riskProfile;
+  fullLegCandidatesByRisk[risk] = legCandidates;
   legCandidatesByRisk[risk] = legCandidates
     .filter((leg) => !leg.hardBlocks?.length)
     .map(summarizeLegCandidate);
@@ -85,18 +94,7 @@ for (const risk of riskBuckets) {
 
 for (const daysAhead of dayBuckets) {
   const scanFixtures = selectFixturesForWindow(liveFixtures, daysAhead, now);
-  const mostLikelyLegCandidates = buildLegCandidates({
-    fixtures: scanFixtures,
-    oddsSnapshots: liveOddsSnapshots,
-    newsArticles: liveNewsArticles,
-    teamStats,
-    policy: mostLikelyPolicy,
-    now,
-    outcomeLearning,
-    heatSnapshots: liveHeatSnapshots,
-    squadDepthRecords: liveSquadDepthRecords,
-    playerStats: livePlayerStats
-  });
+  const mostLikelyLegCandidates = filterLegCandidatesForFixtures(mostLikelyRangeLegCandidates, scanFixtures);
   const mostLikelyPicks = buildMostLikelyPicks(mostLikelyLegCandidates, mostLikelyPolicy, {
     fixtureCount: scanFixtures.length
   });
@@ -113,19 +111,9 @@ for (const daysAhead of dayBuckets) {
 
   for (const risk of riskBuckets) {
     const policy = buildRiskPolicy(engineState.policy, risk);
-    const legCandidates = buildLegCandidates({
-      fixtures: scanFixtures,
-      oddsSnapshots: liveOddsSnapshots,
-      newsArticles: liveNewsArticles,
-      teamStats,
-      policy,
-      now,
-      outcomeLearning,
-      heatSnapshots: liveHeatSnapshots,
-      squadDepthRecords: liveSquadDepthRecords,
-      playerStats: livePlayerStats
-    });
-    const recommendations = buildBetRecommendations(legCandidates, policy);
+    const legCandidates = filterLegCandidatesForFixtures(fullLegCandidatesByRisk[risk], scanFixtures);
+    const recommendationLegCandidates = trimRecommendationLegPool(legCandidates, scanFixtures);
+    const recommendations = buildBetRecommendations(recommendationLegCandidates, policy);
     const betslip = selectBetslip({ recommendations, stake: 10, risk });
 
     profiles[profileKey(daysAhead, risk)] = {
@@ -135,7 +123,7 @@ for (const daysAhead of dayBuckets) {
       policyMarkers: summarizePolicy(policy),
       dataQuality: centralScan.dataQuality,
       fixtureCount: scanFixtures.length,
-      eligibleLegCount: recommendations.eligibleLegCount,
+      eligibleLegCount: legCandidates.filter((leg) => !leg.hardBlocks?.length).length,
       betslip: betslip.map(summarizeBet)
     };
   }
@@ -166,7 +154,8 @@ const payload = {
       gatheringMessage: "Data Gathering: Come back in 5"
     },
     sourceHealth: centralScan.sourceHealth,
-    dataQuality: centralScan.dataQuality
+    dataQuality: centralScan.dataQuality,
+    survivabilityMarketCoverage
   },
   riskBuckets,
   dayBuckets,
@@ -178,7 +167,8 @@ const payload = {
     .filter((leg) => !leg.hardBlocks?.length)
     .map(summarizeLegCandidate),
   dashboard: summarizeDashboard(dashboard),
-  markets: summarizeMarkets(liveOddsSnapshots, engineState.policy),
+  survivabilityMarketCoverage,
+  markets: summarizeMarkets(liveOddsSnapshots, engineState.policy, survivabilityMarketCoverage),
   heat: summarizeHeat(liveHeatSnapshots),
   squadDepth: summarizeSquadDepth(liveSquadDepthRecords),
   playerStats: summarizePlayerStats(livePlayerStats),
@@ -195,8 +185,10 @@ const payload = {
 
 await writeFile(join(outputDir, "latest.json"), `${JSON.stringify(payload, null, 2)}\n`, "utf8");
 await writeFile(join(outputDir, "mobile-latest.json"), `${JSON.stringify(buildMobilePayload(payload))}\n`, "utf8");
+await writeFile(join(outputDir, "survivability-market-coverage-latest.json"), `${JSON.stringify(survivabilityMarketCoverage, null, 2)}\n`, "utf8");
 console.log(`Wrote ${join(outputDir, "latest.json")}`);
 console.log(`Wrote ${join(outputDir, "mobile-latest.json")}`);
+console.log(`Wrote ${join(outputDir, "survivability-market-coverage-latest.json")}`);
 
 function profileKey(daysAhead, risk) {
   return `d${daysAhead}_r${risk}`;
@@ -204,6 +196,50 @@ function profileKey(daysAhead, risk) {
 
 function pickOfDayKey(daysAhead) {
   return `d${daysAhead}`;
+}
+
+function filterLegCandidatesForFixtures(legCandidates, fixtures) {
+  const fixtureIds = new Set((fixtures || []).map((fixture) => fixture.id).filter(Boolean));
+
+  if (!fixtureIds.size) {
+    return [];
+  }
+
+  return (legCandidates || [])
+    .filter((leg) => fixtureIds.has(leg.fixtureId))
+    .map((leg, index) => ({ ...leg, rank: index + 1 }));
+}
+
+function trimRecommendationLegPool(legCandidates, fixtures) {
+  const fixtureTarget = Math.max(8, Math.min(14, Math.max(1, fixtures.length) * 2));
+  const byId = new Map();
+  const fixtureCounts = new Map();
+
+  for (const leg of legCandidates || []) {
+    if (byId.size >= fixtureTarget) {
+      break;
+    }
+
+    const fixtureCount = fixtureCounts.get(leg.fixtureId) || 0;
+
+    if (fixtureCount >= 3) {
+      continue;
+    }
+
+    byId.set(leg.id, leg);
+    fixtureCounts.set(leg.fixtureId, fixtureCount + 1);
+  }
+
+  for (const leg of legCandidates || []) {
+    if (byId.size >= fixtureTarget) {
+      break;
+    }
+
+    byId.set(leg.id, leg);
+  }
+
+  return [...byId.values()]
+    .sort((left, right) => Number(right.score || 0) - Number(left.score || 0));
 }
 
 function summarizeDateRange(fixtures, now) {
@@ -515,7 +551,7 @@ function summarizeOutcomeCalibration(calibration = {}) {
   };
 }
 
-function summarizeMarkets(oddsSnapshots, policy) {
+function summarizeMarkets(oddsSnapshots, policy, survivabilityMarketCoverage = null) {
   const counts = {};
 
   for (const record of oddsSnapshots) {
@@ -524,10 +560,12 @@ function summarizeMarkets(oddsSnapshots, policy) {
 
   return {
     configured: policy.markets || [],
+    collectOnly: Object.keys(survivabilityMarketCoverage?.markets || {}),
     observed: counts,
     anytimeScorerRecords: counts.anytime_scorer || 0,
     firstGoalscorerRecords: counts.first_goalscorer || 0,
-    scorerRecords: (counts.anytime_scorer || 0) + (counts.first_goalscorer || 0)
+    scorerRecords: (counts.anytime_scorer || 0) + (counts.first_goalscorer || 0),
+    survivabilityCoverage: survivabilityMarketCoverage
   };
 }
 

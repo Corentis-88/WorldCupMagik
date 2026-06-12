@@ -124,3 +124,80 @@ test("public-web odds parser extracts scorer prop tables and American prices", a
     globalThis.fetch = originalFetch;
   }
 });
+
+test("public-web odds parser stores survivability markets as collect-only line records", async () => {
+  const originalFetch = globalThis.fetch;
+  const html = `
+    <main>
+      <h1>Mexico v South Africa betting odds</h1>
+      <section>
+        <h2>Asian Handicap</h2>
+        Mexico -0.75 1.92 South Africa +0.75 1.88
+      </section>
+      <section>
+        <h2>Asian Total Goals</h2>
+        Over 2.25 1.94 Under 2.25 1.86
+      </section>
+      <section>
+        <h2>3-Way Handicap</h2>
+        Mexico -1 Mexico 2.23 Draw 3.05 South Africa 2.88
+      </section>
+      <section>
+        <h2>Team Total Goals</h2>
+        Mexico Over 1.5 1.72 Under 1.5 2.05
+        South Africa Over 0.5 1.61 Under 0.5 2.20
+      </section>
+      <section>
+        <h2>Team to Score</h2>
+        Mexico Yes 1.18 No 4.80
+        South Africa to score Yes 1.95 No 1.82
+      </section>
+      <section>
+        <h2>To Qualify</h2>
+        Mexico to qualify 1.33 South Africa to qualify 3.25
+      </section>
+    </main>
+  `;
+
+  globalThis.fetch = async () => ({
+    ok: true,
+    text: async () => html
+  });
+
+  try {
+    const records = await fetchOddsSnapshot({
+      fixtures: [
+        {
+          id: "mex-rsa",
+          date: "2026-06-11T19:00:00.000Z",
+          homeTeam: "Mexico",
+          awayTeam: "South Africa"
+        }
+      ],
+      providerConfig: {
+        mode: "self-gather",
+        sources: [{
+          name: "Survival markets test",
+          bookmaker: "ExampleBook",
+          fixtureUrlFromFixtures: true,
+          fullPageFixtureBlock: true,
+          urlTemplate: "https://example.test/{homeSlug}-v-{awaySlug}"
+        }]
+      },
+      now: new Date("2026-06-11T10:00:00.000Z")
+    });
+    const byKey = new Map(records.map((record) => [`${record.market}:${record.outcome}`, record]));
+
+    assert.equal(byKey.get("asian_handicap:Mexico -0.75")?.line, "-0.75");
+    assert.equal(byKey.get("asian_handicap:South Africa +0.75")?.team, "South Africa");
+    assert.equal(byKey.get("asian_total_goals:Over 2.25")?.decimalOdds, 1.94);
+    assert.equal(byKey.get("asian_total_goals:Under 2.25")?.settlementType, "asian_total_goals");
+    assert.equal(byKey.get("three_way_handicap:Draw (Mexico -1)")?.decimalOdds, 3.05);
+    assert.equal(byKey.get("team_total_goals:Mexico Over 1.5")?.team, "Mexico");
+    assert.equal(byKey.get("team_to_score:South Africa to score: No")?.decimalOdds, 1.82);
+    assert.equal(byKey.get("to_qualify:Mexico to qualify")?.dataOnly, true);
+    assert.ok(records.filter((record) => record.dataOnly).length >= 10);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});

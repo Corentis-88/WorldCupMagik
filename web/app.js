@@ -2399,19 +2399,30 @@ function marketLine(data) {
     over_2_5_goals: "Over 2.5 goals",
     under_2_5_goals: "Under 2.5 goals",
     under_3_5_goals: "Under 3.5 goals",
-    under_4_5_goals: "Under 4.5 goals"
+    under_4_5_goals: "Under 4.5 goals",
+    asian_handicap: "Asian handicap",
+    asian_total_goals: "Asian totals",
+    three_way_handicap: "3-way handicap",
+    team_total_goals: "Team totals",
+    team_to_score: "Team to score",
+    to_qualify: "To qualify"
   };
   const configured = data?.markets?.configured || [];
+  const collectOnly = data?.markets?.collectOnly || [];
   const observed = data?.markets?.observed || {};
   const active = configured.map((market) => labels[market] || market).join(", ");
+  const survivabilityRecords = Number(data?.markets?.survivabilityCoverage?.summary?.freshRecordCount || 0);
   const anytimeCount = Number(observed.anytime_scorer || 0);
   const firstCount = Number(observed.first_goalscorer || 0);
   const scorerCount = anytimeCount + firstCount;
   const scorerText = scorerCount
     ? ` Scorer prices found: ${scorerCount} (${anytimeCount} anytime, ${firstCount} first).`
     : " Scorer markets are switched on, but current public sources have not exposed scorer prices yet.";
+  const collectOnlyText = collectOnly.length
+    ? ` Collect-only survival markets: ${collectOnly.map((market) => labels[market] || market).join(", ")}${survivabilityRecords ? ` (${survivabilityRecords} fresh records).` : "."}`
+    : "";
 
-  return `Markets: ${active}.${scorerText}`;
+  return `Markets: ${active}.${scorerText}${collectOnlyText}`;
 }
 
 function percent(value) {

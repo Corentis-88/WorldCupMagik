@@ -10,6 +10,7 @@ import { buildDailyReport } from "./reporting.mjs";
 import { loadOutcomeLearning } from "./intelligence-memory.mjs";
 import { settleStoredBetOutcomes } from "./outcome-settler.mjs";
 import { buildLegCandidates } from "./scoring.mjs";
+import { buildSurvivabilityMarketCoverage, isSurvivabilityMarketRecord } from "./survivability-market-coverage.mjs";
 import { isoDate, makeId, normalizeName } from "./utils.mjs";
 
 export async function runDailyCycle({ now = new Date(), forceSnapshot = false } = {}) {
@@ -98,9 +99,18 @@ export async function runSnapshotCycle({ state, now = new Date(), forceSnapshot 
     await persistPlayerStats(statsResult);
   }
 
+  const survivabilityMarketCoverage = buildSurvivabilityMarketCoverage({
+    fixtures: engineState.fixtures,
+    oddsSnapshots: [...oddsRecords, ...engineState.oddsSnapshots],
+    policy: engineState.policy,
+    now
+  });
+  await writeJson(["data", "survivability-market-coverage-latest.json"], survivabilityMarketCoverage);
+
   const run = buildRunRecord("snapshot", now, {
     snapshotAllowed: shouldCollectOdds,
     oddsRecordsCollected: oddsRecords.length,
+    survivabilityOddsRecordsCollected: oddsRecords.filter(isSurvivabilityMarketRecord).length,
     newsRecordsCollected: newsArticles.length,
     heatRecordsCollected: heatRecords.length,
     squadDepthRecordsCollected: squadDepthRecords.length,
@@ -132,8 +142,15 @@ export async function runAnalysisCycle({ state, now = new Date() } = {}) {
   });
   const recommendations = buildBetRecommendations(legCandidates, engineState.policy);
   const offerRanking = rankBookmakerOffers(engineState.bookmakerOffers, engineState.policy, now);
+  const survivabilityMarketCoverage = buildSurvivabilityMarketCoverage({
+    fixtures: engineState.fixtures,
+    oddsSnapshots: engineState.oddsSnapshots,
+    policy: engineState.policy,
+    now
+  });
   const run = buildRunRecord("analysis", now, {
     oddsRecordsAvailable: engineState.oddsSnapshots.length,
+    survivabilityOddsRecordsAvailable: engineState.oddsSnapshots.filter(isSurvivabilityMarketRecord).length,
     newsRecordsAvailable: engineState.newsArticles.length,
     teamStatsCount: engineState.teamStats.length,
     legCandidateCount: legCandidates.length,
@@ -150,6 +167,7 @@ export async function runAnalysisCycle({ state, now = new Date() } = {}) {
   await writeJson(["data", "leg-candidates-latest.json"], legCandidates);
   await writeJson(["data", "recommendations-latest.json"], recommendations);
   await writeJson(["data", "bookmaker-offer-ranking-latest.json"], offerRanking);
+  await writeJson(["data", "survivability-market-coverage-latest.json"], survivabilityMarketCoverage);
   await appendJsonRecords(["data", "recommendation-runs.json"], [run], 1000);
   await writeText(["data", "daily-report-latest.md"], buildDailyReport({
     recommendations,
@@ -224,6 +242,7 @@ function printSnapshotSummary(run) {
   console.log("======================");
   console.log(`Snapshot allowed: ${run.snapshotAllowed ? "yes" : "no, before configured start date"}`);
   console.log(`Odds records collected: ${run.oddsRecordsCollected}`);
+  console.log(`Survivability odds collected: ${run.survivabilityOddsRecordsCollected || 0}`);
   console.log(`News records collected: ${run.newsRecordsCollected}`);
   console.log(`Squad depth records collected: ${run.squadDepthRecordsCollected || 0}`);
   console.log(`Team stat records available: ${run.teamStatsCount}`);
@@ -245,6 +264,7 @@ function printAnalysisSummary({ run, recommendations, offerRanking }) {
   console.log("WorldCupMagic analysis");
   console.log("======================");
   console.log(`Leg candidates: ${run.legCandidateCount}; eligible=${recommendations.eligibleLegCount}`);
+  console.log(`Survivability odds available: ${run.survivabilityOddsRecordsAvailable || 0}`);
   console.log(`Doubles=${recommendations.doubles.length}; Trixies=${recommendations.trixies.length}; Accumulators=${recommendations.accumulators.length}`);
   console.log(`Offer candidates passing policy: ${offerRanking.length}`);
 }

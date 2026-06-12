@@ -10,6 +10,7 @@ import { fetchTeamStatsWithDiagnostics } from "./providers/stats-provider.mjs";
 import { fetchHeatSnapshotsWithDiagnostics } from "./providers/weather-provider.mjs";
 import { settleStoredBetOutcomes } from "./outcome-settler.mjs";
 import { buildLegCandidates } from "./scoring.mjs";
+import { buildSurvivabilityMarketCoverage, isSurvivabilityMarketRecord } from "./survivability-market-coverage.mjs";
 import { isoDate, makeId, normalizeName, round } from "./utils.mjs";
 
 const settingsPath = ["data", "app-settings.json"];
@@ -28,10 +29,11 @@ export async function getDashboardState({ now = new Date() } = {}) {
   const state = await loadEngineState();
   const settings = await loadAppSettings(state.policy);
   const liveFixtures = state.fixtures.filter(isPublicFixture);
-  const [latestScan, recommendations, offers] = await Promise.all([
+  const [latestScan, recommendations, offers, survivabilityMarketCoverage] = await Promise.all([
     readJson(["data", "app-scan-latest.json"], null),
     readJson(["data", "recommendations-latest.json"], null),
-    readJson(["data", "bookmaker-offer-ranking-latest.json"], [])
+    readJson(["data", "bookmaker-offer-ranking-latest.json"], []),
+    readJson(["data", "survivability-market-coverage-latest.json"], null)
   ]);
 
   return {
@@ -41,6 +43,7 @@ export async function getDashboardState({ now = new Date() } = {}) {
     stats: {
       fixtureCount: liveFixtures.length,
       oddsSnapshotCount: state.oddsSnapshots.filter(isPublicOddsRecord).length,
+      survivabilityOddsCount: state.oddsSnapshots.filter(isPublicOddsRecord).filter(isSurvivabilityMarketRecord).length,
       scorerOddsCount: state.oddsSnapshots.filter(isPublicOddsRecord).filter(isScorerOddsRecord).length,
       heatSnapshotCount: state.heatSnapshots.filter(isPublicHeatRecord).length,
       squadDepthCount: state.squadDepthRecords.filter(isSquadDepthRecord).length,
@@ -54,6 +57,7 @@ export async function getDashboardState({ now = new Date() } = {}) {
     },
     recommendations,
     latestScan,
+    survivabilityMarketCoverage,
     offers,
     appDefaults: state.policy.appDefaults || {}
   };
@@ -208,6 +212,12 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
   const allHeatSnapshots = latestState.heatSnapshots.filter(isPublicHeatRecord);
   const allSquadDepthRecords = latestState.squadDepthRecords.filter(isSquadDepthRecord);
   const allPlayerStats = latestState.playerStats.filter(isPublicPlayerStat);
+  const survivabilityMarketCoverage = buildSurvivabilityMarketCoverage({
+    fixtures: scanFixtures,
+    oddsSnapshots: allOddsSnapshots,
+    policy: latestState.policy,
+    now
+  });
   const intelligence = buildScanIntelligence({
     fixtures: scanFixtures,
     oddsRecords,
@@ -272,6 +282,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
     collected: {
       fixtures: fixtureResult.records.length,
       oddsRecords: oddsRecords.length,
+      survivabilityOddsRecords: oddsRecords.filter(isSurvivabilityMarketRecord).length,
       scorerOddsRecords: oddsRecords.filter(isScorerOddsRecord).length,
       heatRecords: heatRecords.length,
       squadDepthRecords: squadDepthRecords.length,
@@ -284,6 +295,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
       sourceDiagnostics: sourceDiagnostics.length
     },
     dataQuality,
+    survivabilityMarketCoverage,
     sourceHealth: summarizeSourceHealth(sourceDiagnostics),
     intelligence: {
       teamCount: intelligence.teamIntelligence.length,
@@ -314,6 +326,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
   await writeJson(["data", "leg-candidates-latest.json"], legCandidates);
   await writeJson(["data", "recommendations-latest.json"], recommendations);
   await writeJson(["data", "bookmaker-offer-ranking-latest.json"], offerRanking);
+  await writeJson(["data", "survivability-market-coverage-latest.json"], survivabilityMarketCoverage);
   await writeJson(["data", "app-scan-latest.json"], scan);
   await appendJsonRecords(["data", "app-scans.json"], [scan], 1000);
 
@@ -353,10 +366,12 @@ function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, 
     sourceErrors,
     fixtureCount: scanFixtures.length,
     freshOddsRecords: oddsRecords.length,
+    freshSurvivabilityOddsRecords: oddsRecords.filter(isSurvivabilityMarketRecord).length,
     freshScorerOddsRecords: oddsRecords.filter(isScorerOddsRecord).length,
     freshHeatRecords: heatRecords.length,
     freshSquadDepthRecords: squadDepthRecords.length,
     oddsHistoryRecords: allOddsSnapshots.length,
+    survivabilityOddsHistoryRecords: allOddsSnapshots.filter(isSurvivabilityMarketRecord).length,
     scorerOddsHistoryRecords: allOddsSnapshots.filter(isScorerOddsRecord).length,
     heatHistoryRecords: allHeatSnapshots.length,
     squadDepthHistoryRecords: allSquadDepthRecords.length,

@@ -485,14 +485,25 @@ function marketLine(data) {
     over_2_5_goals: "Over 2.5",
     under_2_5_goals: "Under 2.5",
     under_3_5_goals: "Under 3.5",
-    under_4_5_goals: "Under 4.5"
+    under_4_5_goals: "Under 4.5",
+    asian_handicap: "Asian handicap",
+    asian_total_goals: "Asian totals",
+    three_way_handicap: "3-way handicap",
+    team_total_goals: "Team totals",
+    team_to_score: "Team to score",
+    to_qualify: "To qualify"
   };
   const configured = data?.markets?.configured || [];
+  const collectOnly = data?.markets?.collectOnly || [];
   const observed = data?.markets?.observed || {};
   const active = configured.map((market) => labels[market] || market).join(", ");
   const scorerCount = Number(observed.anytime_scorer || 0) + Number(observed.first_goalscorer || 0);
+  const survivalCount = Number(data?.markets?.survivabilityCoverage?.summary?.freshRecordCount || 0);
+  const collectOnlyText = collectOnly.length
+    ? ` Survival data: ${collectOnly.map((market) => labels[market] || market).join(", ")}${survivalCount ? ` (${survivalCount}).` : "."}`
+    : "";
 
-  return `Markets: ${active}.${scorerCount ? ` Scorer prices found: ${scorerCount}.` : ""}`;
+  return `Markets: ${active}.${scorerCount ? ` Scorer prices found: ${scorerCount}.` : ""}${collectOnlyText}`;
 }
 
 function automaticGatheringState(data, now = new Date()) {

@@ -52,6 +52,47 @@
     "minIndependentNewsSources": 1,
     "minStatsCompleteness": 0.55
   },
+  "survivabilityMarketGate": {
+    "enabled": true,
+    "collectOnlyUntilSatisfied": true,
+    "maxRecordAgeHours": 72,
+    "minRecords": 18,
+    "minFixtures": 5,
+    "minFixtureCoverage": 0.25,
+    "minBookmakers": 2,
+    "minAverageBookmakersPerFixture": 1.2,
+    "minLineCount": 2,
+    "markets": [
+      {
+        "key": "asian_handicap",
+        "label": "Asian handicap"
+      },
+      {
+        "key": "asian_total_goals",
+        "label": "Asian total goals"
+      },
+      {
+        "key": "three_way_handicap",
+        "label": "3-way handicap"
+      },
+      {
+        "key": "team_total_goals",
+        "label": "Team total goals"
+      },
+      {
+        "key": "team_to_score",
+        "label": "Team to score",
+        "minLineCount": 0
+      },
+      {
+        "key": "to_qualify",
+        "label": "To qualify",
+        "minLineCount": 0,
+        "minFixtures": 2,
+        "minFixtureCoverage": 0.1
+      }
+    ]
+  },
   "bookmakerOfferPolicy": {
     "region": "GB",
     "minTermsClarity": 0.45,

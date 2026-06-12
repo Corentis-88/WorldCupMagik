@@ -1,4 +1,5 @@
 import { readJson } from "../db.mjs";
+import { SURVIVABILITY_MARKET_KEYS } from "../survivability-market-coverage.mjs";
 import { makeId, normalizeName } from "../utils.mjs";
 import {
   escapeRegExp,
@@ -194,6 +195,12 @@ function extractJsonLdOdds({ html, fixtures, source, now }) {
         outcome: mapped.outcome,
         playerName: mapped.playerName,
         playerTeam: mapped.playerTeam,
+        line: mapped.line,
+        team: mapped.team,
+        side: mapped.side,
+        handicapType: mapped.handicapType,
+        settlementType: mapped.settlementType,
+        dataOnly: mapped.dataOnly,
         decimalOdds: price
       }));
     }
@@ -230,6 +237,12 @@ function mapJsonLdOffer(offer, fixture, event) {
 
   if (doubleChance) {
     return doubleChance;
+  }
+
+  const survivability = parseSurvivabilityOffer(name, fixture);
+
+  if (survivability) {
+    return survivability;
   }
 
   if (prefix === "draw") {
@@ -413,6 +426,13 @@ function extractFixtureOdds({ block, fixture, source, now }) {
     market: "both_teams_to_score",
     outcome: "No",
     labelPattern: /(?:btts|both teams to score)[\s\S]{0,80}\bno\b/i
+  }));
+  records.push(...extractSurvivabilityMarketOdds({
+    block,
+    fixture,
+    source,
+    bookmaker,
+    capturedAt
   }));
   records.push(...extractScorerMarketOdds({
     block,
@@ -633,6 +653,416 @@ function totalGoalsSection(block) {
   return match?.[0] || "";
 }
 
+function extractSurvivabilityMarketOdds({ block, fixture, source, bookmaker, capturedAt }) {
+  const records = [
+    ...extractAsianHandicapOdds({ block, fixture, source, bookmaker, capturedAt }),
+    ...extractAsianTotalOdds({ block, fixture, source, bookmaker, capturedAt }),
+    ...extractThreeWayHandicapOdds({ block, fixture, source, bookmaker, capturedAt }),
+    ...extractTeamTotalOdds({ block, fixture, source, bookmaker, capturedAt }),
+    ...extractTeamToScoreOdds({ block, fixture, source, bookmaker, capturedAt }),
+    ...extractToQualifyOdds({ block, fixture, source, bookmaker, capturedAt })
+  ];
+
+  return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}`);
+}
+
+function extractAsianHandicapOdds({ block, fixture, source, bookmaker, capturedAt }) {
+  const section = marketSection(block, /asian\s+handicap/i, /(?:asian\s+total|total goals|team total|team to score|to qualify|3[-\s]?way|european handicap|both teams|correct score|player|corners|cards|$)/i, 1600);
+
+  if (!section) {
+    return [];
+  }
+
+  const records = [];
+  const price = oddsPricePattern();
+  const line = signedLinePattern();
+
+  for (const team of [fixture.homeTeam, fixture.awayTeam]) {
+    const teamPattern = teamPatternFor(team);
+    const patterns = [
+      new RegExp(`(?:asian\\s+handicap|ah)\\s+${teamPattern}\\s*(${line})[\\s\\S]{0,32}?(${price})`, "gi"),
+      new RegExp(`${teamPattern}\\s*(${line})\\s*(?:asian\\s+handicap|ah)?[\\s\\S]{0,32}?(${price})`, "gi"),
+      new RegExp(`${teamPattern}\\s*(?:asian\\s+handicap|ah)\\s*(${line})[\\s\\S]{0,32}?(${price})`, "gi")
+    ];
+
+    for (const pattern of patterns) {
+      for (const match of section.matchAll(pattern)) {
+        const lineValue = formatLine(match[1], { signed: true });
+        addCollectOnlyRecord(records, {
+          fixture,
+          source,
+          bookmaker,
+          capturedAt,
+          market: "asian_handicap",
+          outcome: `${team} ${lineValue}`,
+          decimalOdds: match[2],
+          team,
+          side: teamNameMatches(team, fixture.homeTeam) ? "home" : "away",
+          line: lineValue,
+          handicapType: "asian",
+          settlementType: "asian_handicap"
+        });
+      }
+    }
+  }
+
+  return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}`);
+}
+
+function extractAsianTotalOdds({ block, fixture, source, bookmaker, capturedAt }) {
+  const section = marketSection(block, /asian\s+(?:total|goals)|total\s+goals\s+asian/i, /(?:asian\s+handicap|team total|team to score|to qualify|3[-\s]?way|european handicap|both teams|correct score|player|corners|cards|$)/i, 1600);
+
+  if (!section) {
+    return [];
+  }
+
+  return extractOverUnderLineRecords({
+    section,
+    fixture,
+    source,
+    bookmaker,
+    capturedAt,
+    market: "asian_total_goals",
+    settlementType: "asian_total_goals",
+    outcomePrefix: "",
+    team: "",
+    lineAlias: "Goals"
+  });
+}
+
+function extractThreeWayHandicapOdds({ block, fixture, source, bookmaker, capturedAt }) {
+  const section = marketSection(block, /(?:3[-\s]?way|european|match)\s+handicap|handicap\s+result/i, /(?:asian\s+handicap|asian\s+total|team total|team to score|to qualify|both teams|correct score|player|corners|cards|$)/i, 1700);
+
+  if (!section) {
+    return [];
+  }
+
+  const records = [];
+  const price = oddsPricePattern();
+  const line = signedLinePattern();
+  const homePattern = teamPatternFor(fixture.homeTeam);
+  const awayPattern = teamPatternFor(fixture.awayTeam);
+
+  for (const handicapTeam of [fixture.homeTeam, fixture.awayTeam]) {
+    const handicapTeamPattern = teamPatternFor(handicapTeam);
+    const pattern = new RegExp(`${handicapTeamPattern}\\s*(${line})[\\s\\S]{0,120}?${homePattern}\\s+(${price})[\\s\\S]{0,80}?draw\\s+(${price})[\\s\\S]{0,80}?${awayPattern}\\s+(${price})`, "i");
+    const match = section.match(pattern);
+
+    if (!match) {
+      continue;
+    }
+
+    const lineValue = formatLine(match[1], { signed: true });
+
+    addCollectOnlyRecord(records, {
+      fixture,
+      source,
+      bookmaker,
+      capturedAt,
+      market: "three_way_handicap",
+      outcome: `${fixture.homeTeam} (${handicapTeam} ${lineValue})`,
+      decimalOdds: match[2],
+      team: fixture.homeTeam,
+      side: "home",
+      line: lineValue,
+      handicapType: "three_way",
+      settlementType: "three_way_handicap"
+    });
+    addCollectOnlyRecord(records, {
+      fixture,
+      source,
+      bookmaker,
+      capturedAt,
+      market: "three_way_handicap",
+      outcome: `Draw (${handicapTeam} ${lineValue})`,
+      decimalOdds: match[3],
+      side: "draw",
+      line: lineValue,
+      handicapType: "three_way",
+      settlementType: "three_way_handicap"
+    });
+    addCollectOnlyRecord(records, {
+      fixture,
+      source,
+      bookmaker,
+      capturedAt,
+      market: "three_way_handicap",
+      outcome: `${fixture.awayTeam} (${handicapTeam} ${lineValue})`,
+      decimalOdds: match[4],
+      team: fixture.awayTeam,
+      side: "away",
+      line: lineValue,
+      handicapType: "three_way",
+      settlementType: "three_way_handicap"
+    });
+  }
+
+  return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}`);
+}
+
+function extractTeamTotalOdds({ block, fixture, source, bookmaker, capturedAt }) {
+  const section = marketSection(block, /team\s+(?:total|goals)|team\s+goals/i, /(?:asian\s+handicap|asian\s+total|team to score|to qualify|3[-\s]?way|european handicap|both teams|correct score|player|corners|cards|$)/i, 1800);
+
+  if (!section) {
+    return [];
+  }
+
+  const records = [];
+
+  for (const team of [fixture.homeTeam, fixture.awayTeam]) {
+    records.push(...extractOverUnderLineRecords({
+      section,
+      fixture,
+      source,
+      bookmaker,
+      capturedAt,
+      market: "team_total_goals",
+      settlementType: "team_total_goals",
+      outcomePrefix: team,
+      team,
+      teamPattern: teamPatternFor(team),
+      lineAlias: "Team goals"
+    }));
+  }
+
+  return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}`);
+}
+
+function extractTeamToScoreOdds({ block, fixture, source, bookmaker, capturedAt }) {
+  const section = marketSection(block, /team\s+to\s+score|to\s+score/i, /(?:asian\s+handicap|asian\s+total|team total|to qualify|3[-\s]?way|european handicap|both teams|correct score|player|corners|cards|$)/i, 1400);
+
+  if (!section) {
+    return [];
+  }
+
+  const records = [];
+  const price = oddsPricePattern();
+
+  for (const team of [fixture.homeTeam, fixture.awayTeam]) {
+    const teamPattern = teamPatternFor(team);
+    const patterns = [
+      new RegExp(`(?:team\\s+to\\s+score\\s+)?${teamPattern}[\\s\\S]{0,24}?\\byes\\b[\\s\\S]{0,24}?(${price})[\\s\\S]{0,40}?\\bno\\b[\\s\\S]{0,24}?(${price})`, "gi"),
+      new RegExp(`${teamPattern}\\s+to\\s+score[\\s\\S]{0,24}?\\byes\\b[\\s\\S]{0,24}?(${price})[\\s\\S]{0,40}?\\bno\\b[\\s\\S]{0,24}?(${price})`, "gi")
+    ];
+
+    for (const pattern of patterns) {
+      for (const match of section.matchAll(pattern)) {
+        addCollectOnlyRecord(records, {
+          fixture,
+          source,
+          bookmaker,
+          capturedAt,
+          market: "team_to_score",
+          outcome: `${team} to score: Yes`,
+          decimalOdds: match[1],
+          team,
+          side: "yes",
+          settlementType: "team_to_score"
+        });
+        addCollectOnlyRecord(records, {
+          fixture,
+          source,
+          bookmaker,
+          capturedAt,
+          market: "team_to_score",
+          outcome: `${team} to score: No`,
+          decimalOdds: match[2],
+          team,
+          side: "no",
+          settlementType: "team_to_score"
+        });
+      }
+    }
+  }
+
+  return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}`);
+}
+
+function extractToQualifyOdds({ block, fixture, source, bookmaker, capturedAt }) {
+  const section = marketSection(block, /to\s+qualify|qualification/i, /(?:asian\s+handicap|asian\s+total|team total|team to score|3[-\s]?way|european handicap|both teams|correct score|player|corners|cards|$)/i, 1200);
+
+  if (!section) {
+    return [];
+  }
+
+  const records = [];
+  const price = oddsPricePattern();
+
+  for (const team of [fixture.homeTeam, fixture.awayTeam]) {
+    const teamPattern = teamPatternFor(team);
+    const patterns = [
+      new RegExp(`${teamPattern}\\s+to\\s+qualify[\\s\\S]{0,24}?(${price})`, "gi"),
+      new RegExp(`to\\s+qualify[\\s\\S]{0,40}?${teamPattern}[\\s\\S]{0,24}?(${price})`, "gi")
+    ];
+
+    for (const pattern of patterns) {
+      for (const match of section.matchAll(pattern)) {
+        addCollectOnlyRecord(records, {
+          fixture,
+          source,
+          bookmaker,
+          capturedAt,
+          market: "to_qualify",
+          outcome: `${team} to qualify`,
+          decimalOdds: match[1],
+          team,
+          settlementType: "to_qualify"
+        });
+      }
+    }
+  }
+
+  return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}`);
+}
+
+function extractOverUnderLineRecords({
+  section,
+  fixture,
+  source,
+  bookmaker,
+  capturedAt,
+  market,
+  settlementType,
+  outcomePrefix = "",
+  team = "",
+  teamPattern = "",
+  lineAlias = "Goals"
+}) {
+  const records = [];
+  const price = oddsPricePattern();
+  const line = goalLinePattern();
+  const prefixPattern = teamPattern ? `${teamPattern}[\\s\\S]{0,45}?` : "";
+  const overUnder = new RegExp(`${prefixPattern}\\bover\\s*(${line})(?:\\s+${lineAlias})?[\\s\\S]{0,28}?(${price})[\\s\\S]{0,58}?\\bunder\\s*\\1(?:\\s+${lineAlias})?[\\s\\S]{0,28}?(${price})`, "gi");
+  const lineThenPrices = new RegExp(`${prefixPattern}\\b(${line})\\b[\\s\\S]{0,28}?(${price})[\\s\\S]{0,28}?(${price})`, "gi");
+
+  for (const match of section.matchAll(overUnder)) {
+    const lineValue = formatLine(match[1]);
+    addOverUnderRecords(records, {
+      fixture,
+      source,
+      bookmaker,
+      capturedAt,
+      market,
+      settlementType,
+      outcomePrefix,
+      team,
+      line: lineValue,
+      overPrice: match[2],
+      underPrice: match[3]
+    });
+  }
+
+  for (const match of section.matchAll(lineThenPrices)) {
+    const before = section.slice(Math.max(0, match.index - 40), match.index).toLowerCase();
+    const immediateBefore = section.slice(Math.max(0, match.index - 12), match.index).toLowerCase();
+
+    if (/\b(?:price|odds|rank|group|match)\b/.test(before) || /\b(?:over|under)\s*$/.test(immediateBefore)) {
+      continue;
+    }
+
+    const lineValue = formatLine(match[1]);
+    addOverUnderRecords(records, {
+      fixture,
+      source,
+      bookmaker,
+      capturedAt,
+      market,
+      settlementType,
+      outcomePrefix,
+      team,
+      line: lineValue,
+      overPrice: match[2],
+      underPrice: match[3]
+    });
+  }
+
+  return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}`);
+}
+
+function addOverUnderRecords(records, { fixture, source, bookmaker, capturedAt, market, settlementType, outcomePrefix, team, line, overPrice, underPrice }) {
+  const prefix = outcomePrefix ? `${outcomePrefix} ` : "";
+
+  addCollectOnlyRecord(records, {
+    fixture,
+    source,
+    bookmaker,
+    capturedAt,
+    market,
+    outcome: `${prefix}Over ${line}`,
+    decimalOdds: overPrice,
+    team,
+    side: "over",
+    line,
+    settlementType
+  });
+  addCollectOnlyRecord(records, {
+    fixture,
+    source,
+    bookmaker,
+    capturedAt,
+    market,
+    outcome: `${prefix}Under ${line}`,
+    decimalOdds: underPrice,
+    team,
+    side: "under",
+    line,
+    settlementType
+  });
+}
+
+function addCollectOnlyRecord(records, values) {
+  const decimalOdds = toDecimalOdds(values.decimalOdds);
+
+  if (!decimalOdds) {
+    return;
+  }
+
+  records.push(toOddsRecord({
+    ...values,
+    decimalOdds,
+    dataOnly: true
+  }));
+}
+
+function marketSection(block, startPattern, stopPattern, maxChars = 1400) {
+  const text = String(block || "");
+  const start = text.search(startPattern);
+
+  if (start < 0) {
+    return "";
+  }
+
+  const raw = text.slice(start, start + maxChars);
+  const stopSearch = raw.slice(24).search(stopPattern);
+
+  return stopSearch >= 0 ? raw.slice(0, stopSearch + 24) : raw;
+}
+
+function teamPatternFor(team) {
+  return escapeRegExp(team).replace(/\s+/g, "\\s+");
+}
+
+function signedLinePattern() {
+  return "[+-]?(?:\\d+(?:\\.\\d{1,2})?|\\.\\d{1,2})";
+}
+
+function goalLinePattern() {
+  return "(?:\\d+(?:\\.\\d{1,2})?)";
+}
+
+function formatLine(value, { signed = false } = {}) {
+  const numeric = Number(String(value || "").replace(/^\+/, ""));
+
+  if (!Number.isFinite(numeric)) {
+    return String(value || "").trim();
+  }
+
+  const rounded = Math.round(numeric * 100) / 100;
+  const text = Number.isInteger(rounded) ? String(rounded) : String(rounded).replace(/0+$/, "").replace(/\.$/, "");
+
+  return signed && rounded > 0 ? `+${text}` : text;
+}
+
 function extractScorerMarketOdds({ block, fixture, source, bookmaker, capturedAt }) {
   const section = String(block || "");
 
@@ -744,6 +1174,106 @@ function scorerSection(block) {
   return match?.[0] || "";
 }
 
+function parseSurvivabilityOffer(name, fixture) {
+  const text = String(name || "").replace(/\s+/g, " ").trim();
+  const selection = text.split(/\s+-\s+|\s+at\s+/i)[0] || text;
+  const team = teamFromSelection(selection, fixture);
+  const overUnder = selection.match(new RegExp(`\\b(over|under)\\s*(${goalLinePattern()})\\b`, "i"));
+  const signedLine = selection.match(new RegExp(`\\b(${signedLinePattern()})\\b`));
+
+  if (/asian\s+handicap|\bah\b/i.test(selection) && team && signedLine) {
+    const line = formatLine(signedLine[1], { signed: true });
+
+    return {
+      market: "asian_handicap",
+      outcome: `${team} ${line}`,
+      team,
+      side: sideFromTeam(team, fixture),
+      line,
+      handicapType: "asian",
+      settlementType: "asian_handicap",
+      dataOnly: true
+    };
+  }
+
+  if (/asian\s+(?:total|goals)|total\s+goals\s+asian/i.test(selection) && overUnder) {
+    const side = overUnder[1].toLowerCase();
+    const line = formatLine(overUnder[2]);
+
+    return {
+      market: "asian_total_goals",
+      outcome: `${capitalized(side)} ${line}`,
+      side,
+      line,
+      settlementType: "asian_total_goals",
+      dataOnly: true
+    };
+  }
+
+  if (/(?:3[-\s]?way|european|match)\s+handicap|handicap\s+result/i.test(selection) && signedLine) {
+    const line = formatLine(signedLine[1], { signed: true });
+    const handicapTeam = team || teamFromSelection(text, fixture);
+    const outcome = /^draw\b/i.test(selection)
+      ? `Draw (${handicapTeam || "handicap"} ${line})`
+      : team
+        ? `${team} (${handicapTeam || team} ${line})`
+        : "";
+
+    if (outcome) {
+      return {
+        market: "three_way_handicap",
+        outcome,
+        team: /^draw\b/i.test(selection) ? "" : team,
+        side: /^draw\b/i.test(selection) ? "draw" : sideFromTeam(team, fixture),
+        line,
+        handicapType: "three_way",
+        settlementType: "three_way_handicap",
+        dataOnly: true
+      };
+    }
+  }
+
+  if (/(?:team\s+total|team\s+goals)/i.test(selection) && team && overUnder) {
+    const side = overUnder[1].toLowerCase();
+    const line = formatLine(overUnder[2]);
+
+    return {
+      market: "team_total_goals",
+      outcome: `${team} ${capitalized(side)} ${line}`,
+      team,
+      side,
+      line,
+      settlementType: "team_total_goals",
+      dataOnly: true
+    };
+  }
+
+  if (/(?:team\s+to\s+score|\bto\s+score\b)/i.test(selection) && team) {
+    const side = /\bno\b/i.test(selection) ? "no" : "yes";
+
+    return {
+      market: "team_to_score",
+      outcome: `${team} to score: ${capitalized(side)}`,
+      team,
+      side,
+      settlementType: "team_to_score",
+      dataOnly: true
+    };
+  }
+
+  if (/to\s+qualify/i.test(selection) && team) {
+    return {
+      market: "to_qualify",
+      outcome: `${team} to qualify`,
+      team,
+      settlementType: "to_qualify",
+      dataOnly: true
+    };
+  }
+
+  return null;
+}
+
 function parseScorerOffer(name) {
   const text = String(name || "").replace(/\s+/g, " ").trim();
   const firstScorer = /(?:first\s+(?:goal)?scorer|first\s+goalscorer)/i.test(text);
@@ -814,6 +1344,33 @@ function parseAnytimeScorerOffer(name) {
   const playerName = cleanScorerName(candidate);
 
   return playerName && looksLikeScorerName(playerName) ? { playerName } : null;
+}
+
+function teamFromSelection(selection, fixture) {
+  for (const team of [fixture.homeTeam, fixture.awayTeam]) {
+    if (teamNameMatches(selection, team)) {
+      return team;
+    }
+  }
+
+  return "";
+}
+
+function sideFromTeam(team, fixture) {
+  if (teamNameMatches(team, fixture.homeTeam)) {
+    return "home";
+  }
+
+  if (teamNameMatches(team, fixture.awayTeam)) {
+    return "away";
+  }
+
+  return "";
+}
+
+function capitalized(value) {
+  const text = String(value || "");
+  return text ? `${text[0].toUpperCase()}${text.slice(1).toLowerCase()}` : "";
 }
 
 function cleanScorerName(value) {
@@ -897,8 +1454,25 @@ function containsBothTeams(block, fixture) {
   return teamNameMatches(block, fixture.homeTeam) && teamNameMatches(block, fixture.awayTeam);
 }
 
-function toOddsRecord({ fixture, source, bookmaker, capturedAt, market, outcome, decimalOdds, playerName, playerTeam }) {
-  return {
+function toOddsRecord({
+  fixture,
+  source,
+  bookmaker,
+  capturedAt,
+  market,
+  outcome,
+  decimalOdds,
+  playerName,
+  playerTeam,
+  line,
+  team,
+  side,
+  handicapType,
+  settlementType,
+  dataOnly
+}) {
+  const collectOnly = dataOnly ?? SURVIVABILITY_MARKET_KEYS.includes(market);
+  const record = {
     id: makeId("odds", [capturedAt, bookmaker, fixture.id, market, outcome, decimalOdds]),
     capturedAt,
     provider: "public-web",
@@ -913,7 +1487,18 @@ function toOddsRecord({ fixture, source, bookmaker, capturedAt, market, outcome,
     outcome,
     playerName,
     playerTeam,
+    line,
+    team,
+    side,
+    handicapType,
+    settlementType,
     decimalOdds: Number(decimalOdds),
     sourceReliability: source.reliability
   };
+
+  if (collectOnly) {
+    record.dataOnly = true;
+  }
+
+  return record;
 }
