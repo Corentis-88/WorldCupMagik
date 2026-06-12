@@ -57,6 +57,8 @@ The betting model uses odds as market intelligence, not as an enemy signal. Matc
 
 It gathers public host-city forecast pages and extracts forecast summary windows for the selected fixture dates. The scoring engine uses venue, local kickoff hour, humidity estimate, heat index, roof factor, and conservative team heat-adaptation priors.
 
+When a future fixture has no fresh forecast row yet, the heat model falls back to a low-confidence host-climate baseline from `config/weather-sources.json` and the built-in host climate table. That keeps Miami/Houston/Monterrey-style heat from being treated as neutral while still allowing live public weather to replace the fallback as soon as it is collected.
+
 Heat is deliberately capped as a small model edge: it can nudge result probability and expected goals, but it cannot dominate odds, team quality, form, news, or market movement.
 
 The heat layer also reads:
@@ -65,7 +67,9 @@ The heat layer also reads:
 - `config/world-cup-climate-history.json` for stable historical World Cup climate memory by team and confederation;
 - `data/squad-depth.json` for the latest squad-depth records.
 
-Those signals are combined only when a venue weather record exists. Squad depth can slightly cushion the expected-goals drag in heat, but it cannot turn heat into a goal boost.
+Those signals are combined when either a fresh venue weather record or a low-confidence host-climate fallback exists. Squad depth can slightly cushion the expected-goals drag in heat, but it cannot turn heat into a goal boost.
+
+Every scan reports 20-match team-sample coverage and historical heat-memory coverage in `dataQuality`. A scan is not marked ready unless every selected team has a full 20-match sample.
 
 ## Squad Depth
 

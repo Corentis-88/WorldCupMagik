@@ -12,6 +12,8 @@ import { settleStoredBetOutcomes } from "./outcome-settler.mjs";
 import { buildLegCandidates } from "./scoring.mjs";
 import { buildSurvivabilityMarketCoverage, isSurvivabilityMarketRecord } from "./survivability-market-coverage.mjs";
 import { isoDate, makeId, normalizeName, round } from "./utils.mjs";
+import climateProfiles from "../config/team-climate-profiles.json" with { type: "json" };
+import climateHistory from "../config/world-cup-climate-history.json" with { type: "json" };
 
 const settingsPath = ["data", "app-settings.json"];
 const STANDARD_BET_TYPES = [
@@ -345,6 +347,31 @@ function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, 
   const sourceEmpty = sourceDiagnostics.filter((item) => item.status === "empty").length;
   const sourceOk = sourceDiagnostics.filter((item) => item.status === "ok").length;
   const teamsWithRecentMatches = teamStats.filter((team) => Number(team.sourceMatchCount || team.formMemory?.matchCount || 0) >= 2).length;
+  const selectedTeamLabels = [...new Set(scanFixtures.flatMap((fixture) => [fixture.homeTeam, fixture.awayTeam]).filter(Boolean))].sort();
+  const selectedTeams = new Set(selectedTeamLabels.map(normalizeName).filter(Boolean));
+  const teamStatsByName = new Map(teamStats.map((team) => [normalizeName(team.team), team]));
+  const teamMatchSamples = selectedTeamLabels.map((team) => ({
+    team,
+    matchCount: teamMatchSampleCount(teamStatsByName.get(normalizeName(team)))
+  }));
+  const missingTwentyMatchTeams = teamMatchSamples.filter((team) => team.matchCount < 20);
+  const teamsWithTwentyMatchSamples = teamMatchSamples.length - missingTwentyMatchTeams.length;
+  const teamTwentyMatchCoverage = teamMatchSamples.length
+    ? teamsWithTwentyMatchSamples / teamMatchSamples.length
+    : 0;
+  const minimumTeamMatchSample = teamMatchSamples.length
+    ? Math.min(...teamMatchSamples.map((team) => team.matchCount))
+    : 0;
+  const climateProfileTeams = new Set(Object.keys(climateProfiles.teams || {}).map(normalizeName));
+  const heatMemoryTeams = new Set(Object.keys(climateHistory.teamMemory || {}).map(normalizeName));
+  const missingClimateProfileTeams = selectedTeamLabels.filter((team) => !climateProfileTeams.has(normalizeName(team)));
+  const missingHeatMemoryTeams = selectedTeamLabels.filter((team) => !heatMemoryTeams.has(normalizeName(team)));
+  const climateProfileCoverage = selectedTeams.size
+    ? (selectedTeamLabels.length - missingClimateProfileTeams.length) / selectedTeamLabels.length
+    : 0;
+  const heatMemoryCoverage = selectedTeams.size
+    ? (selectedTeamLabels.length - missingHeatMemoryTeams.length) / selectedTeamLabels.length
+    : 0;
   const selectedFixtureIds = new Set(scanFixtures.map((fixture) => fixture.id));
   const fixtureOddsCoverage = scanFixtures.length
     ? new Set(allOddsSnapshots.filter((record) => selectedFixtureIds.has(record.fixtureId)).map((record) => record.fixtureId)).size / scanFixtures.length
@@ -355,7 +382,6 @@ function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, 
   const fixtureHeatCoverage = scanFixtures.length
     ? new Set(allHeatSnapshots.filter((record) => selectedFixtureIds.has(record.fixtureId)).map((record) => record.fixtureId)).size / scanFixtures.length
     : 0;
-  const selectedTeams = new Set(scanFixtures.flatMap((fixture) => [normalizeName(fixture.homeTeam), normalizeName(fixture.awayTeam)]).filter(Boolean));
   const squadTeams = new Set(allSquadDepthRecords.map((record) => normalizeName(record.team)).filter(Boolean));
   const squadDepthCoverage = selectedTeams.size
     ? [...selectedTeams].filter((team) => squadTeams.has(team)).length / selectedTeams.size
@@ -363,6 +389,7 @@ function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, 
   const readiness = scanFixtures.length
     && oddsRecords.length
     && teamStats.length
+    && teamTwentyMatchCoverage >= 1
     ? "ready"
     : "collecting";
 
@@ -386,14 +413,36 @@ function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, 
     newsArticleCount: newsArticles.length,
     teamStatsCount: teamStats.length,
     teamsWithRecentMatches,
+    requiredTeamCount: selectedTeamLabels.length,
+    teamsWithTwentyMatchSamples,
+    teamTwentyMatchCoverage: round(teamTwentyMatchCoverage, 3),
+    minimumTeamMatchSample,
+    missingTwentyMatchTeams: missingTwentyMatchTeams.map((team) => ({
+      team: team.team,
+      matchCount: team.matchCount
+    })).slice(0, 16),
     fixtureOddsCoverage: round(fixtureOddsCoverage, 3),
     fixtureHeatCoverage: round(fixtureHeatCoverage, 3),
     squadDepthCoverage: round(squadDepthCoverage, 3),
+    climateProfileCoverage: round(climateProfileCoverage, 3),
+    heatMemoryCoverage: round(heatMemoryCoverage, 3),
+    missingClimateProfileTeams: missingClimateProfileTeams.slice(0, 16),
+    missingHeatMemoryTeams: missingHeatMemoryTeams.slice(0, 16),
     fixtureNewsCoverage: round(fixtureNewsCoverage, 3),
     message: readiness === "ready"
       ? "Real public-web data was gathered and scored. Source misses are recorded instead of filled with made-up data."
-      : "The database is still collecting real public-web data. Missing sources are visible in source health; no fake bets are generated."
+      : "The database is still collecting real public-web data, including full 20-match team samples. Missing sources are visible in source health; no fake bets are generated."
   };
+}
+
+function teamMatchSampleCount(teamStats = {}) {
+  return Number(
+    teamStats.longForm?.matchCount
+      || teamStats.sourceMatchCount
+      || teamStats.formMemory?.matchCount
+      || teamStats.matchCount
+      || 0
+  );
 }
 
 function summarizeSourceHealth(sourceDiagnostics) {

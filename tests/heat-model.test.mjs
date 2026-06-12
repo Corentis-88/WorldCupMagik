@@ -90,3 +90,26 @@ test("Mexico City heat is treated as altitude heat", () => {
     humidityPct: 52
   }), "altitude");
 });
+
+test("host-climate fallback activates Miami heat before a live forecast exists", () => {
+  const fixture = {
+    id: "sco-bra-miami",
+    date: "2026-06-24T22:00:00.000Z",
+    homeTeam: "Scotland",
+    awayTeam: "Brazil",
+    venue: "Hard Rock Stadium, Miami"
+  };
+  const impact = buildHeatImpact({
+    fixture,
+    homeSquadDepth: { team: "Scotland", depthScore: 0.54, confidence: 0.44 },
+    awaySquadDepth: { team: "Brazil", depthScore: 0.9, confidence: 0.7 }
+  });
+
+  assert.equal(impact.climateBand, "hotHumid");
+  assert.ok(impact.heatStress > 0);
+  assert.ok(impact.confidence > 0);
+  assert.ok(impact.awayClimateAdaptation > impact.homeClimateAdaptation);
+  assert.ok(impact.combinedHeatDifferential < 0);
+  assert.ok(impact.resultEdgeAdjustment < 0);
+  assert.match(impact.notes, /host-climate baseline/);
+});

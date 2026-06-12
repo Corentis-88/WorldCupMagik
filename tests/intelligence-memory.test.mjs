@@ -59,6 +59,20 @@ test("20-match intelligence keeps long form and short momentum separate", () => 
   assert.ok(form.passCompletion > 0.78);
 });
 
+test("20-match intelligence treats common country aliases as the same team", () => {
+  const now = new Date("2026-06-06T10:00:00.000Z");
+  const usaHistory = Array.from({ length: 20 }, (_item, index) => {
+    const day = String(25 - index).padStart(2, "0");
+    return match(`2026-05-${day}T19:00:00.000Z`, "United States", `Opponent ${index}`, 2, 1);
+  });
+  const form = deriveTeamForm(usaHistory, "USA", now);
+
+  assert.equal(form.matchCount, 20);
+  assert.equal(form.longForm.matchCount, 20);
+  assert.equal(form.marketAngles.scoringGameRate, 1);
+  assert.equal(form.marketAngles.concedeGameRate, 1);
+});
+
 test("enriched team stats expose a consistent 20-match tactical and scorer profile", () => {
   const now = new Date("2026-06-06T10:00:00.000Z");
   const longHistory = Array.from({ length: 20 }, (_item, index) => {

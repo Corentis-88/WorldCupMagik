@@ -390,6 +390,71 @@ test("fixture model exposes passing and tactical intelligence in the style edge"
   assert.ok(model.components.homePassCompletion > model.components.awayPassCompletion);
 });
 
+test("fixture model reins in weaker-team goal share when quality gap and Miami heat point the same way", () => {
+  const fixtureRecord = {
+    ...fixture("sco-bra", "Scotland", "Brazil", "2026-06-24T22:00:00.000Z"),
+    venue: "Hard Rock Stadium, Miami"
+  };
+  const model = fixtureModel({
+    fixture: fixtureRecord,
+    homeStats: {
+      ...stats("Scotland", 1741.9, 1.702, 1.891, 1.271, 51),
+      sourceMatchCount: 20,
+      longForm: {
+        matchCount: 20,
+        scoringGameRate: 0.7,
+        concedeGameRate: 0.65,
+        cleanSheetRate: 0.35,
+        failedToScoreRate: 0.3,
+        bttsRate: 0.4,
+        over25Rate: 0.6
+      },
+      marketAngles: {
+        scoringGameRate: 0.7,
+        concedeGameRate: 0.65,
+        cleanSheetRate: 0.35,
+        failedToScoreRate: 0.3,
+        bttsRate: 0.4,
+        over25Rate: 0.6
+      }
+    },
+    awayStats: {
+      ...stats("Brazil", 1806.4, 2.366, 2.652, 1.482, 53),
+      sourceMatchCount: 20,
+      longForm: {
+        matchCount: 20,
+        scoringGameRate: 0.95,
+        concedeGameRate: 0.75,
+        cleanSheetRate: 0.25,
+        failedToScoreRate: 0.05,
+        bttsRate: 0.7,
+        over25Rate: 0.7
+      },
+      marketAngles: {
+        scoringGameRate: 0.95,
+        concedeGameRate: 0.75,
+        cleanSheetRate: 0.25,
+        failedToScoreRate: 0.05,
+        bttsRate: 0.7,
+        over25Rate: 0.7
+      }
+    },
+    newsByTeam: new Map(),
+    homeSquadDepth: { team: "Scotland", depthScore: 0.54, confidence: 0.44 },
+    awaySquadDepth: { team: "Brazil", depthScore: 0.9, confidence: 0.7 }
+  });
+
+  assert.ok(model.components.heatStress > 0);
+  assert.equal(model.components.heatClimateBand, "hotHumid");
+  assert.ok(model.components.combinedHeatDifferential < 0);
+  assert.ok(model.components.qualityGapEdge < 0);
+  assert.ok(model.components.homeQualityGoalAdjustment < -0.25);
+  assert.ok(model.components.awayQualityGoalAdjustment > 0);
+  assert.ok(model.components.homeExpectedGoals < 1.35);
+  assert.ok(model.components.awayExpectedGoals > model.components.homeExpectedGoals);
+  assert.ok(model.rawMarketProbabilities.over_2_5_goals.Over < 0.67);
+});
+
 function fixture(id, homeTeam, awayTeam, date) {
   return {
     id,

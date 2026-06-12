@@ -461,6 +461,7 @@ function applyTournamentPressureToGoalShape(goalShape, tournamentPressure) {
   const awayShare = 1 - homeShare;
 
   return {
+    ...goalShape,
     homeExpectedGoals: clamp(homeExpectedGoals + adjustment * homeShare, 0.18, 3.2),
     awayExpectedGoals: clamp(awayExpectedGoals + adjustment * awayShare, 0.18, 3.2),
     expectedGoals: clamp(total + adjustment, 1.25, 4.1)
@@ -503,7 +504,12 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
   const heatEdge = Number(heat.resultEdgeAdjustment || 0);
   const independentResultEdge = clamp(ratingEdge + formEdge + xgEdge + styleEdge + newsEdge + memoryEdge + heatEdge, -220, 220);
   const totalEdge = clamp(independentResultEdge + marketMemoryEdge + marketResultEdge, -240, 240);
-  const baseGoalShape = goalShapeForFixture(homeStats, awayStats, homeNews, awayNews, heat);
+  const baseGoalShape = goalShapeForFixture(homeStats, awayStats, homeNews, awayNews, heat, {
+    ratingEdge,
+    xgEdge,
+    homeSquadDepth,
+    awaySquadDepth
+  });
   const tournamentPressure = buildTournamentPressure({
     context: tournamentContext,
     expectedGoals: baseGoalShape.expectedGoals,
@@ -587,6 +593,10 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
       tournamentBttsAdjustment: round(Number(tournamentPressure.bttsAdjustment || 0), 4),
       tournamentDrawLift: round(Number(tournamentPressure.drawLift || 0), 4),
       tournamentContextNote: tournamentPressure.note,
+      qualityGapEdge: round(Number(goalShape.qualityGapEdge || 0), 2),
+      qualityGapPressure: round(Number(goalShape.qualityGapPressure || 0), 4),
+      homeQualityGoalAdjustment: round(Number(goalShape.homeQualityGoalAdjustment || 0), 3),
+      awayQualityGoalAdjustment: round(Number(goalShape.awayQualityGoalAdjustment || 0), 3),
       expectedGoals: round(expectedGoals, 2),
       homeExpectedGoals: round(goalShape.homeExpectedGoals, 2),
       awayExpectedGoals: round(goalShape.awayExpectedGoals, 2),
@@ -1124,7 +1134,7 @@ function defensiveDrawLift(homeStats, awayStats) {
   return clamp(defensiveStrength * 0.025, -0.025, 0.04);
 }
 
-function goalShapeForFixture(homeStats, awayStats, homeNews, awayNews, heat) {
+function goalShapeForFixture(homeStats, awayStats, homeNews, awayNews, heat, matchup = {}) {
   const homeAttack = (Number(homeStats.xgFor || 1.35) + Number(awayStats.xgAgainst || 1.2)) / 2;
   const awayAttack = (Number(awayStats.xgFor || 1.35) + Number(homeStats.xgAgainst || 1.2)) / 2;
   const homeNewsLift = Number(homeNews.netImpact || 0) * 0.08;
@@ -1135,12 +1145,125 @@ function goalShapeForFixture(homeStats, awayStats, homeNews, awayNews, heat) {
   const heatShareShift = Number(heat.goalShareAdjustment || 0);
   const homeExpectedGoals = clamp(homeAttack + homeNewsLift - homeInjuryDrag + heatGoalDrag + heatShareShift, 0.28, 2.95);
   const awayExpectedGoals = clamp(awayAttack + awayNewsLift - awayInjuryDrag + heatGoalDrag - heatShareShift, 0.28, 2.95);
-
-  return {
+  const adjusted = applyOpponentQualityGoalAdjustment({
     homeExpectedGoals,
     awayExpectedGoals,
-    expectedGoals: clamp(homeExpectedGoals + awayExpectedGoals, 1.25, 4.1)
+    homeStats,
+    awayStats,
+    ratingEdge: matchup.ratingEdge,
+    xgEdge: matchup.xgEdge,
+    homeSquadDepth: matchup.homeSquadDepth,
+    awaySquadDepth: matchup.awaySquadDepth
+  });
+
+  return {
+    ...adjusted,
+    expectedGoals: clamp(adjusted.homeExpectedGoals + adjusted.awayExpectedGoals, 1.25, 4.1)
   };
+}
+
+function applyOpponentQualityGoalAdjustment({ homeExpectedGoals, awayExpectedGoals, homeStats, awayStats, ratingEdge = 0, xgEdge = 0, homeSquadDepth = null, awaySquadDepth = null }) {
+  const depthEdge = (squadDepthValue(homeSquadDepth) - squadDepthValue(awaySquadDepth)) * 75;
+  const qualityGapEdge = clamp(Number(ratingEdge || 0) + Number(xgEdge || 0) * 0.45 + depthEdge, -220, 220);
+  const rawQualityGapPressure = clamp((Math.abs(qualityGapEdge) - 42) / 135, 0, 1);
+  const evidenceConfidence = mean([rateEvidenceConfidence(homeStats), rateEvidenceConfidence(awayStats)]);
+  const qualityGapPressure = evidenceConfidence >= 0.45
+    ? rawQualityGapPressure * clamp(0.3 + evidenceConfidence * 0.7, 0.3, 1)
+    : 0;
+
+  if (qualityGapPressure <= 0) {
+    return {
+      homeExpectedGoals,
+      awayExpectedGoals,
+      qualityGapEdge,
+      qualityGapPressure: 0,
+      homeQualityGoalAdjustment: 0,
+      awayQualityGoalAdjustment: 0
+    };
+  }
+
+  const homeFavoured = qualityGapEdge > 0;
+  const weakStats = homeFavoured ? awayStats : homeStats;
+  const strongStats = homeFavoured ? homeStats : awayStats;
+  const weakExpectedGoals = homeFavoured ? awayExpectedGoals : homeExpectedGoals;
+  const strongExpectedGoals = homeFavoured ? homeExpectedGoals : awayExpectedGoals;
+  const weakScoringRate = scoringReliabilityAgainstStrongerTeam(weakStats, strongStats, qualityGapPressure);
+  const weakScoringGoalCap = clamp(-Math.log(Math.max(0.08, 1 - weakScoringRate)) + 0.12, 0.42, 2.05);
+  const capReduction = Math.max(0, weakExpectedGoals - weakScoringGoalCap);
+  const capWeight = clamp(0.5 + qualityGapPressure * 0.3, 0.5, 0.82);
+  const weakReliance = clamp((weakExpectedGoals - 0.82) / 1.15, 0, 1);
+  const percentageReduction = weakExpectedGoals * qualityGapPressure * weakReliance * 0.12;
+  const weakReduction = clamp(capReduction * capWeight + percentageReduction, 0, weakExpectedGoals - 0.32);
+  const strongRebound = clamp(weakReduction * (0.22 + qualityGapPressure * 0.12), 0, 0.18);
+  const adjustedWeak = clamp(weakExpectedGoals - weakReduction, 0.28, 2.95);
+  const adjustedStrong = clamp(strongExpectedGoals + strongRebound, 0.28, 3.08);
+
+  if (homeFavoured) {
+    return {
+      homeExpectedGoals: adjustedStrong,
+      awayExpectedGoals: adjustedWeak,
+      qualityGapEdge,
+      qualityGapPressure,
+      homeQualityGoalAdjustment: adjustedStrong - homeExpectedGoals,
+      awayQualityGoalAdjustment: adjustedWeak - awayExpectedGoals
+    };
+  }
+
+  return {
+    homeExpectedGoals: adjustedWeak,
+    awayExpectedGoals: adjustedStrong,
+    qualityGapEdge,
+    qualityGapPressure,
+    homeQualityGoalAdjustment: adjustedWeak - homeExpectedGoals,
+    awayQualityGoalAdjustment: adjustedStrong - awayExpectedGoals
+  };
+}
+
+function scoringReliabilityAgainstStrongerTeam(weakStats, strongStats, pressure) {
+  const weakScoringRate = rateFromStats(weakStats, "scoringGameRate", 1 - rateFromStats(weakStats, "failedToScoreRate", 0.5));
+  const strongConcedeRate = rateFromStats(strongStats, "concedeGameRate", 1 - rateFromStats(strongStats, "cleanSheetRate", 0.5));
+  const baseReliability = mean([weakScoringRate, strongConcedeRate]);
+
+  return clamp(baseReliability - Number(pressure || 0) * 0.14, 0.22, 0.9);
+}
+
+function rateFromStats(stats, key, fallback) {
+  const marketValue = Number(stats?.marketAngles?.[key]);
+  const longFormValue = Number(stats?.longForm?.[key]);
+
+  if (Number.isFinite(marketValue)) {
+    return clamp(marketValue, 0, 1);
+  }
+
+  if (Number.isFinite(longFormValue)) {
+    return clamp(longFormValue, 0, 1);
+  }
+
+  return clamp(Number(fallback ?? 0.5), 0, 1);
+}
+
+function rateEvidenceConfidence(stats) {
+  const hasMarketAngles = Number.isFinite(Number(stats?.marketAngles?.scoringGameRate))
+    || Number.isFinite(Number(stats?.marketAngles?.failedToScoreRate))
+    || Number.isFinite(Number(stats?.marketAngles?.cleanSheetRate))
+    || Number.isFinite(Number(stats?.marketAngles?.concedeGameRate));
+  const hasLongFormAngles = Number.isFinite(Number(stats?.longForm?.scoringGameRate))
+    || Number.isFinite(Number(stats?.longForm?.failedToScoreRate))
+    || Number.isFinite(Number(stats?.longForm?.cleanSheetRate))
+    || Number.isFinite(Number(stats?.longForm?.concedeGameRate));
+  const matchCount = Number(stats?.longForm?.matchCount || stats?.sourceMatchCount || stats?.matchCount || 0);
+
+  if (hasMarketAngles || hasLongFormAngles) {
+    return clamp(0.45 + Math.min(matchCount, 20) / 20 * 0.55, 0.45, 1);
+  }
+
+  return clamp(matchCount / 20, 0, 0.35);
+}
+
+function squadDepthValue(record) {
+  const value = Number(record?.depthScore ?? record?.score);
+
+  return Number.isFinite(value) ? clamp(value, 0.25, 0.94) : 0.5;
 }
 
 function doubleChanceProbabilities({ fixture, homeWin, draw, awayWin }) {

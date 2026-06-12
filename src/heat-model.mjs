@@ -1,5 +1,6 @@
 import climateProfiles from "../config/team-climate-profiles.json" with { type: "json" };
 import climateHistory from "../config/world-cup-climate-history.json" with { type: "json" };
+import weatherSources from "../config/weather-sources.json" with { type: "json" };
 import { clamp, mean, normalizeName, round } from "./utils.mjs";
 
 const DEFAULT_PROFILE = climateProfiles.default || {
@@ -14,6 +15,25 @@ const DEFAULT_PROFILE = climateProfiles.default || {
 const CLIMATE_PROFILE_BY_TEAM = normalizedObject(climateProfiles.teams || {});
 const TEAM_MEMORY_BY_TEAM = normalizedObject(climateHistory.teamMemory || {});
 const CONFEDERATION_MEMORY = climateHistory.confederationMemory || {};
+const WEATHER_SOURCES = Array.isArray(weatherSources) ? weatherSources : [];
+const HOST_CLIMATE_BASELINES = {
+  mexico_city: { temperatureC: 25.5, humidityPct: 58, confidence: 0.42 },
+  guadalajara: { temperatureC: 29, humidityPct: 55, confidence: 0.42 },
+  monterrey: { temperatureC: 32.5, humidityPct: 62, confidence: 0.44 },
+  toronto: { temperatureC: 24, humidityPct: 58, confidence: 0.38 },
+  vancouver: { temperatureC: 20.5, humidityPct: 62, confidence: 0.36 },
+  los_angeles: { temperatureC: 25.5, humidityPct: 55, confidence: 0.38 },
+  san_francisco_bay_area: { temperatureC: 21.5, humidityPct: 60, confidence: 0.36 },
+  new_york_new_jersey: { temperatureC: 27, humidityPct: 58, confidence: 0.4 },
+  boston: { temperatureC: 25.5, humidityPct: 56, confidence: 0.38 },
+  houston: { temperatureC: 32, humidityPct: 70, confidence: 0.46 },
+  dallas: { temperatureC: 32.5, humidityPct: 58, confidence: 0.44 },
+  philadelphia: { temperatureC: 28, humidityPct: 58, confidence: 0.4 },
+  atlanta: { temperatureC: 29.5, humidityPct: 64, confidence: 0.42 },
+  seattle: { temperatureC: 22, humidityPct: 58, confidence: 0.36 },
+  miami: { temperatureC: 30.5, humidityPct: 73, confidence: 0.48 },
+  kansas_city: { temperatureC: 29, humidityPct: 60, confidence: 0.4 }
+};
 
 export function teamClimateProfile(team) {
   return CLIMATE_PROFILE_BY_TEAM.get(normalizeName(team)) || DEFAULT_PROFILE;
@@ -52,29 +72,31 @@ export function historicalClimateMemory(team, climateBand = "hotMixed") {
 }
 
 export function buildHeatImpact({ fixture, heatRecord = null, homeSquadDepth = null, awaySquadDepth = null } = {}) {
-  if (!fixture || !heatRecord) {
+  const effectiveHeatRecord = heatRecord || hostClimateFallbackRecord(fixture);
+
+  if (!fixture || !effectiveHeatRecord) {
     return neutralHeatImpact();
   }
 
-  const confidence = clamp(Number(heatRecord.confidence || 0), 0, 1);
-  const heatStress = clamp(Number(heatRecord.heatStress ?? heatStressFromWeather(heatRecord)), 0, 1);
+  const confidence = clamp(Number(effectiveHeatRecord.confidence || 0), 0, 1);
+  const heatStress = clamp(Number(effectiveHeatRecord.heatStress ?? heatStressFromWeather(effectiveHeatRecord)), 0, 1);
   const climateBand = climateBandForWeather({
-    ...heatRecord,
-    venue: heatRecord.venue || fixture.venue
+    ...effectiveHeatRecord,
+    venue: effectiveHeatRecord.venue || fixture.venue
   });
 
   if (confidence <= 0 || heatStress <= 0) {
     return {
       ...neutralHeatImpact(),
-      source: heatRecord.source || "",
-      venue: heatRecord.venue || fixture.venue || "",
-      location: heatRecord.location || "",
-      temperatureC: nullableNumber(heatRecord.temperatureC),
-      heatIndexC: nullableNumber(heatRecord.heatIndexC),
-      humidityPct: nullableNumber(heatRecord.humidityPct),
+      source: effectiveHeatRecord.source || "",
+      venue: effectiveHeatRecord.venue || fixture.venue || "",
+      location: effectiveHeatRecord.location || "",
+      temperatureC: nullableNumber(effectiveHeatRecord.temperatureC),
+      heatIndexC: nullableNumber(effectiveHeatRecord.heatIndexC),
+      humidityPct: nullableNumber(effectiveHeatRecord.humidityPct),
       confidence,
       climateBand,
-      notes: heatRecord.notes || "Weather found, but heat stress was neutral."
+      notes: effectiveHeatRecord.notes || "Weather found, but heat stress was neutral."
     };
   }
 
@@ -106,12 +128,12 @@ export function buildHeatImpact({ fixture, heatRecord = null, homeSquadDepth = n
   const drawLift = clamp(0.012 * weightedStress, 0, 0.012);
 
   return {
-    source: heatRecord.source || "",
-    venue: heatRecord.venue || fixture.venue || "",
-    location: heatRecord.location || "",
-    temperatureC: nullableNumber(heatRecord.temperatureC),
-    heatIndexC: nullableNumber(heatRecord.heatIndexC),
-    humidityPct: nullableNumber(heatRecord.humidityPct),
+    source: effectiveHeatRecord.source || "",
+    venue: effectiveHeatRecord.venue || fixture.venue || "",
+    location: effectiveHeatRecord.location || "",
+    temperatureC: nullableNumber(effectiveHeatRecord.temperatureC),
+    heatIndexC: nullableNumber(effectiveHeatRecord.heatIndexC),
+    humidityPct: nullableNumber(effectiveHeatRecord.humidityPct),
     heatStress: round(heatStress, 4),
     confidence: round(confidence, 4),
     climateBand,
@@ -135,7 +157,7 @@ export function buildHeatImpact({ fixture, heatRecord = null, homeSquadDepth = n
     goalShareAdjustment: round(goalShareAdjustment, 3),
     bttsAdjustment: round(bttsAdjustment, 4),
     drawLift: round(drawLift, 4),
-    notes: heatRecord.notes || heatImpactNote({
+    notes: effectiveHeatRecord.notes || heatImpactNote({
       heatStress,
       confidence,
       climateBand,
@@ -145,6 +167,96 @@ export function buildHeatImpact({ fixture, heatRecord = null, homeSquadDepth = n
       squadDepthDifferential
     })
   };
+}
+
+function hostClimateFallbackRecord(fixture = {}) {
+  if (!fixture) {
+    return null;
+  }
+
+  const source = resolveWeatherSource(fixture);
+  const baseline = source ? HOST_CLIMATE_BASELINES[source.key] : null;
+
+  if (!source || !baseline) {
+    return null;
+  }
+
+  const localHour = fixtureLocalHour(fixture.date, source.utcOffsetHours);
+  const temperatureC = kickoffTemperatureBaseline(Number(baseline.temperatureC), localHour);
+  const humidityPct = Number(source.averageHumidityPct || baseline.humidityPct || 58);
+  const heatIndexC = calculatedHeatIndexC(temperatureC, humidityPct);
+  const roofFactor = Number(source.roofFactor ?? 1);
+  const heatStress = heatStressFromWeather({ temperatureC, heatIndexC, humidityPct, roofFactor });
+
+  return {
+    provider: "host-climate-fallback",
+    sourceType: "host-climate-fallback",
+    source: `${source.location || source.name} host-climate fallback`,
+    sourceUrl: source.url || "",
+    fixtureId: fixture.id || "",
+    fixtureDate: fixture.date || "",
+    homeTeam: fixture.homeTeam || "",
+    awayTeam: fixture.awayTeam || "",
+    venue: fixture.venue || source.location || "",
+    location: source.location || source.name || "",
+    localKickoffHour: localHour,
+    temperatureC: round(temperatureC, 1),
+    humidityPct: round(humidityPct, 1),
+    heatIndexC: round(heatIndexC, 1),
+    roofFactor: round(roofFactor, 2),
+    heatStress,
+    confidence: clamp(Number(baseline.confidence || 0.38) * Number(source.reliability || 0.62) / 0.66, 0.22, 0.52),
+    notes: `No fresh venue forecast yet; using low-confidence ${source.location || source.name} host-climate baseline until public weather refreshes.`
+  };
+}
+
+function resolveWeatherSource(fixture = {}) {
+  const venueText = normalizeName([
+    fixture.venue,
+    fixture.hostCity,
+    fixture.location,
+    fixture.source
+  ].filter(Boolean).join(" "));
+
+  if (!venueText) {
+    return null;
+  }
+
+  return WEATHER_SOURCES.find((source) => {
+    const aliases = [source.key, source.name, source.location, ...(source.aliases || [])]
+      .map(normalizeName)
+      .filter(Boolean);
+    return aliases.some((alias) => venueText.includes(alias) || alias.includes(venueText));
+  }) || null;
+}
+
+function fixtureLocalHour(date, utcOffsetHours = 0) {
+  const parsed = new Date(date);
+
+  if (Number.isNaN(parsed.getTime())) {
+    return 15;
+  }
+
+  return (parsed.getUTCHours() + Number(utcOffsetHours || 0) + 24) % 24;
+}
+
+function kickoffTemperatureBaseline(baseTemperatureC, localHour) {
+  const base = Number.isFinite(baseTemperatureC) ? baseTemperatureC : 26;
+  const hour = Number(localHour);
+
+  if (hour >= 12 && hour <= 16) {
+    return base + 1.2;
+  }
+
+  if (hour >= 17 && hour <= 20) {
+    return base + 0.4;
+  }
+
+  if (hour <= 7 || hour >= 22) {
+    return base - 1.4;
+  }
+
+  return base;
 }
 
 export function neutralHeatImpact() {
@@ -244,7 +356,7 @@ function climateMemorySignal(team, climateBand) {
   const teamValue = climateValue(teamMemory, climateBand);
   const confederationValue = climateValue(confederationMemory, climateBand);
 
-  if (Number.isFinite(Number(teamValue))) {
+  if (teamValue !== null && teamValue !== undefined && Number.isFinite(Number(teamValue))) {
     return {
       value: clamp(Number(teamValue), -0.08, 0.08),
       confidence: clamp(Number(teamMemory.confidence || 0.45), 0.2, 0.75)

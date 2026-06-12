@@ -1,6 +1,23 @@
 import { appendJsonRecords, readJson, upsertJsonRecords, writeJson } from "./db.mjs";
 import { clamp, decimalToImpliedProbability, makeId, mean, normalizeName, round } from "./utils.mjs";
 
+const TEAM_NAME_ALIASES = {
+  usa: ["united states", "united states men s"],
+  "united states": ["usa", "united states men s"],
+  "united states men s": ["usa", "united states"],
+  czechia: ["czech republic"],
+  "czech republic": ["czechia"],
+  turkiye: ["turkey"],
+  turkey: ["turkiye"],
+  "dr congo": ["congo dr", "democratic republic of the congo"],
+  "congo dr": ["dr congo", "democratic republic of the congo"],
+  "ivory coast": ["cote d ivoire"],
+  "cote d ivoire": ["ivory coast"],
+  "south korea": ["korea republic", "republic of korea"],
+  "korea republic": ["south korea"],
+  "bosnia and herzegovina": ["bosnia"]
+};
+
 export async function loadIntelligenceState() {
   const [matchHistory, teamIntelligence, observations] = await Promise.all([
     readJson(["data", "team-match-history.json"], []),
@@ -279,10 +296,10 @@ export async function persistScanIntelligence(intelligence) {
 }
 
 export function deriveTeamForm(matchHistory, team, now = new Date(), limit = 20) {
-  const teamKey = normalizeName(team);
+  const teamKeys = teamIdentityKeys(team);
   const matches = matchHistory
     .filter((match) => new Date(match.date) < now)
-    .filter((match) => normalizeName(match.homeTeam) === teamKey || normalizeName(match.awayTeam) === teamKey)
+    .filter((match) => teamNameMatchesAny(match.homeTeam, teamKeys) || teamNameMatchesAny(match.awayTeam, teamKeys))
     .sort((left, right) => new Date(right.date) - new Date(left.date))
     .slice(0, limit);
 
@@ -315,7 +332,7 @@ export function deriveTeamForm(matchHistory, team, now = new Date(), limit = 20)
   }
 
   const rows = matches.map((match) => {
-    const isHome = normalizeName(match.homeTeam) === teamKey;
+    const isHome = teamNameMatchesAny(match.homeTeam, teamKeys);
     const goalsFor = Number(isHome ? match.homeGoals : match.awayGoals);
     const goalsAgainst = Number(isHome ? match.awayGoals : match.homeGoals);
     const points = goalsFor > goalsAgainst ? 3 : goalsFor === goalsAgainst ? 1 : 0;
@@ -394,6 +411,28 @@ export function deriveTeamForm(matchHistory, team, now = new Date(), limit = 20)
       scorers: row.scorers
     }))
   };
+}
+
+function teamIdentityKeys(team) {
+  const key = normalizeName(team);
+  const keys = new Set([key]);
+  const aliases = TEAM_NAME_ALIASES[key] || [];
+
+  for (const alias of aliases) {
+    keys.add(normalizeName(alias));
+  }
+
+  return [...keys].filter(Boolean);
+}
+
+function teamNameMatchesAny(value, keys) {
+  const normalized = normalizeName(value);
+
+  if (!normalized) {
+    return false;
+  }
+
+  return keys.some((key) => normalized === key || normalized.includes(key) || key.includes(normalized));
 }
 
 function summarizeFormRows(rows) {
