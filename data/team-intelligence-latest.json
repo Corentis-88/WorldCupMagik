@@ -1,8 +1,8 @@
 [
   {
     "team": "South Korea",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.0841,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.0856,
     "dataConfidence": 0.8353,
     "form": {
       "matchCount": 20,
@@ -720,8 +720,8 @@
   },
   {
     "team": "Czechia",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.0138,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.015,
     "dataConfidence": 0.6431,
     "form": {
       "matchCount": 0,
@@ -802,17 +802,16 @@
     },
     "manager": "Miroslav Koubek",
     "tacticalProfile": {
-      "likelyFormation": "4-3-3 / 4-2-3-1",
-      "styleOfPlay": "front-foot pressing and fast regains",
+      "likelyFormation": "4-2-3-1 / 4-3-3",
+      "styleOfPlay": "balanced mid-block with mixed build-up",
       "styleTags": [
-        "pressing",
-        "front-foot",
-        "regains",
+        "balanced",
+        "mixed build-up",
         "set-piece threat",
         "positive xG balance"
       ],
       "possessionTier": "medium",
-      "pressingTier": "high",
+      "pressingTier": "medium",
       "transitionTier": "high",
       "source": "derived from 20-match public result sample and score-derived event estimates"
     },
@@ -843,11 +842,6 @@
         "goalsPerTwentyTeamMatches": 1
       },
       {
-        "playerName": "Kalvach",
-        "goals": 1,
-        "goalsPerTwentyTeamMatches": 1
-      },
-      {
         "playerName": "Kuchta",
         "goals": 1,
         "goalsPerTwentyTeamMatches": 1
@@ -856,12 +850,17 @@
         "playerName": "Ladra",
         "goals": 1,
         "goalsPerTwentyTeamMatches": 1
+      },
+      {
+        "playerName": "Zima",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
       }
     ],
     "passing": {
-      "attempted": 647.9,
-      "completed": 502.4,
-      "completion": 0.775,
+      "attempted": 642.9,
+      "completed": 496.7,
+      "completion": 0.773,
       "source": "score-and-possession-derived estimate"
     },
     "intelligenceCoverage": {
@@ -882,8 +881,8 @@
   },
   {
     "team": "Canada",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": -0.0285,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": -0.0298,
     "dataConfidence": 0.8525,
     "form": {
       "matchCount": 20,
@@ -1546,14 +1545,14 @@
       ]
     },
     "news": {
-      "articleCount": 37,
+      "articleCount": 39,
       "sourceDiversity": 2,
-      "sentiment": 0.0162,
-      "injury": 0.0243,
-      "tacticalFit": 0.4695,
-      "lineupClarity": 0.4673,
-      "rotationRisk": 0.2246,
-      "impact": 0.0952,
+      "sentiment": 0.0103,
+      "injury": 0.0277,
+      "tacticalFit": 0.4685,
+      "lineupClarity": 0.4664,
+      "rotationRisk": 0.2236,
+      "impact": 0.091,
       "confidence": 0.8316,
       "topSignals": [
         "availability risk",
@@ -1683,15 +1682,15 @@
     "reasons": [
       "20-match form 1.8 PPG, xG 2.103-1.27",
       "recent form cooling",
-      "37 news item(s), news impact 0.0952",
+      "39 news item(s), news impact 0.091",
       "market intelligence 0% movement, consensus 1.344 across 5 bookie(s)",
       "26 scorer record(s), top scorer signal 0.1215"
     ]
   },
   {
     "team": "Bosnia and Herzegovina",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": -0.1027,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": -0.1026,
     "dataConfidence": 0.6565,
     "form": {
       "matchCount": 20,
@@ -2145,8 +2144,8 @@
   },
   {
     "team": "USA",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.1057,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.1077,
     "dataConfidence": 0.7467,
     "form": {
       "matchCount": 2,
@@ -2250,14 +2249,14 @@
       ]
     },
     "news": {
-      "articleCount": 25,
+      "articleCount": 26,
       "sourceDiversity": 2,
-      "sentiment": -0.008,
-      "injury": 0.036,
-      "tacticalFit": 0.4752,
-      "lineupClarity": 0.4548,
-      "rotationRisk": 0.238,
-      "impact": 0.077,
+      "sentiment": -0.0077,
+      "injury": 0.0346,
+      "tacticalFit": 0.4742,
+      "lineupClarity": 0.4546,
+      "rotationRisk": 0.2358,
+      "impact": 0.0777,
       "confidence": 0.8316,
       "topSignals": [
         "positive availability",
@@ -2276,17 +2275,17 @@
       "trackedPlayers": 26,
       "topScorers": [
         {
+          "playerName": "Pulisic",
+          "goals": 4,
+          "matchesSampled": 20
+        },
+        {
           "playerName": "Aaronson",
           "goals": 3,
           "matchesSampled": 20
         },
         {
           "playerName": "Ferreira",
-          "goals": 3,
-          "matchesSampled": 20
-        },
-        {
-          "playerName": "Pulisic",
           "goals": 3,
           "matchesSampled": 20
         },
@@ -2301,7 +2300,7 @@
           "matchesSampled": 20
         }
       ],
-      "threat": 0.0585,
+      "threat": 0.063,
       "confidence": 0.78
     },
     "manager": "Mauricio Pochettino",
@@ -2320,17 +2319,17 @@
     },
     "topScorers": [
       {
+        "playerName": "Pulisic",
+        "goals": 4,
+        "goalsPerTwentyTeamMatches": 4
+      },
+      {
         "playerName": "Aaronson",
         "goals": 3,
         "goalsPerTwentyTeamMatches": 3
       },
       {
         "playerName": "Ferreira",
-        "goals": 3,
-        "goalsPerTwentyTeamMatches": 3
-      },
-      {
-        "playerName": "Pulisic",
         "goals": 3,
         "goalsPerTwentyTeamMatches": 3
       },
@@ -2361,9 +2360,9 @@
       }
     ],
     "passing": {
-      "attempted": 631.6,
-      "completed": 483.8,
-      "completion": 0.765,
+      "attempted": 633.2,
+      "completed": 485.4,
+      "completion": 0.766,
       "source": "score-and-possession-derived estimate"
     },
     "intelligenceCoverage": {
@@ -2378,16 +2377,16 @@
     },
     "reasons": [
       "20-match form 3 PPG, xG 1.99-1.27",
-      "25 news item(s), news impact 0.077",
+      "26 news item(s), news impact 0.0777",
       "market intelligence 0% movement, consensus 2.153 across 9 bookie(s)",
-      "26 scorer record(s), top scorer signal 0.0585",
+      "26 scorer record(s), top scorer signal 0.063",
       "memory currently leans positive"
     ]
   },
   {
     "team": "Paraguay",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.1702,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.1877,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -2934,14 +2933,14 @@
       ]
     },
     "news": {
-      "articleCount": 6,
+      "articleCount": 7,
       "sourceDiversity": 2,
-      "sentiment": -0.0067,
-      "injury": 0.03,
-      "tacticalFit": 0.495,
-      "lineupClarity": 0.43,
-      "rotationRisk": 0.2883,
-      "impact": 0.0734,
+      "sentiment": -0.0057,
+      "injury": 0.0257,
+      "tacticalFit": 0.4886,
+      "lineupClarity": 0.4329,
+      "rotationRisk": 0.2729,
+      "impact": 0.0765,
       "confidence": 0.8316,
       "topSignals": [
         "positive availability"
@@ -3071,7 +3070,7 @@
     "reasons": [
       "20-match form 1.45 PPG, xG 1.738-1.486",
       "recent form improving",
-      "6 news item(s), news impact 0.0734",
+      "7 news item(s), news impact 0.0765",
       "market intelligence 0% movement, consensus 3.013 across 9 bookie(s)",
       "15 scorer record(s), top scorer signal 0.081",
       "memory currently leans positive"
@@ -3079,8 +3078,8 @@
   },
   {
     "team": "Australia",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.2413,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.2418,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -3795,7 +3794,7 @@
   },
   {
     "team": "Turkiye",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
+    "updatedAt": "2026-06-12T12:18:16.543Z",
     "learnedEdge": 0.0256,
     "dataConfidence": 0.5808,
     "form": {
@@ -3955,8 +3954,8 @@
   },
   {
     "team": "Qatar",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": -0.0503,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": -0.0525,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -4613,8 +4612,8 @@
   },
   {
     "team": "Switzerland",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.1508,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.1516,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -5316,23 +5315,23 @@
   },
   {
     "team": "Brazil",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.2017,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.1444,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
-      "pointsPerGame": 2.6,
+      "pointsPerGame": 2.65,
       "goalsFor": 3.5,
-      "goalsAgainst": 1.45,
+      "goalsAgainst": 1.4,
       "xgFor": 2.903,
-      "xgAgainst": 1.594,
+      "xgAgainst": 1.558,
       "shotsFor": 18.2,
-      "shotsAgainst": 12.49,
+      "shotsAgainst": 12.34,
       "shotsOnTargetFor": 7.15,
-      "shotsOnTargetAgainst": 4.39,
-      "possession": 54.4,
-      "passesAttempted": 665.2,
-      "completedPasses": 514,
+      "shotsOnTargetAgainst": 4.32,
+      "possession": 54.6,
+      "passesAttempted": 666,
+      "completedPasses": 514.9,
       "passCompletion": 0.773,
       "topScorers": [
         {
@@ -5384,49 +5383,49 @@
           "goalsPerTwentyTeamMatches": 4
         }
       ],
-      "formMomentum": 0.1578,
+      "formMomentum": -0.0984,
       "confidence": 0.9,
       "shortForm": {
         "matchCount": 6,
-        "pointsPerGame": 3,
-        "goalsFor": 2.5,
+        "pointsPerGame": 2.667,
+        "goalsFor": 1.833,
         "goalsAgainst": 1,
-        "xgFor": 2.35,
+        "xgFor": 1.87,
         "xgAgainst": 1.27,
-        "shotsFor": 15.75,
+        "shotsFor": 13.68,
         "shotsAgainst": 11.1,
-        "shotsOnTargetFor": 5.78,
+        "shotsOnTargetFor": 4.88,
         "shotsOnTargetAgainst": 3.8,
-        "possession": 53.4,
-        "passesAttempted": 657.2,
-        "completedPasses": 511.7,
+        "possession": 52.1,
+        "passesAttempted": 649.7,
+        "completedPasses": 506,
         "passCompletion": 0.778,
         "cleanSheetRate": 0,
         "failedToScoreRate": 0,
         "bttsRate": 1,
-        "over25Rate": 1,
+        "over25Rate": 0.833,
         "scoringGameRate": 1,
         "concedeGameRate": 1
       },
       "longForm": {
         "matchCount": 20,
-        "pointsPerGame": 2.6,
+        "pointsPerGame": 2.65,
         "goalsFor": 3.5,
-        "goalsAgainst": 1.45,
+        "goalsAgainst": 1.4,
         "xgFor": 2.903,
-        "xgAgainst": 1.594,
+        "xgAgainst": 1.558,
         "shotsFor": 18.2,
-        "shotsAgainst": 12.49,
+        "shotsAgainst": 12.34,
         "shotsOnTargetFor": 7.15,
-        "shotsOnTargetAgainst": 4.39,
-        "possession": 54.4,
-        "passesAttempted": 665.2,
-        "completedPasses": 514,
+        "shotsOnTargetAgainst": 4.32,
+        "possession": 54.6,
+        "passesAttempted": 666,
+        "completedPasses": 514.9,
         "passCompletion": 0.773,
         "cleanSheetRate": 0,
         "failedToScoreRate": 0,
         "bttsRate": 1,
-        "over25Rate": 1,
+        "over25Rate": 0.95,
         "scoringGameRate": 1,
         "concedeGameRate": 1
       },
@@ -5434,11 +5433,30 @@
         "cleanSheetRate": 0,
         "failedToScoreRate": 0,
         "bttsRate": 1,
-        "over25Rate": 1,
+        "over25Rate": 0.95,
         "scoringGameRate": 1,
         "concedeGameRate": 1
       },
       "recentMatches": [
+        {
+          "points": 1,
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "xgFor": 1.27,
+          "xgAgainst": 1.27,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 50,
+          "passesAttempted": 638,
+          "completedPasses": 491,
+          "passCompletion": 0.77,
+          "scorers": [
+            {
+              "name": "Rodrygo",
+              "goals": 1
+            }
+          ]
+        },
         {
           "points": 3,
           "goalsFor": 2,
@@ -5963,25 +5981,6 @@
               "goals": 1
             }
           ]
-        },
-        {
-          "points": 0,
-          "goalsFor": 1,
-          "goalsAgainst": 2,
-          "xgFor": 1.27,
-          "xgAgainst": 1.99,
-          "shotsFor": 11.1,
-          "shotsOnTargetFor": 3.8,
-          "possession": 47.5,
-          "passesAttempted": 621,
-          "completedPasses": 472,
-          "passCompletion": 0.76,
-          "scorers": [
-            {
-              "name": "Bremer",
-              "goals": 1
-            }
-          ]
         }
       ]
     },
@@ -6013,17 +6012,17 @@
       "trackedPlayers": 26,
       "topScorers": [
         {
+          "playerName": "Rodrygo",
+          "goals": 5,
+          "matchesSampled": 20
+        },
+        {
           "playerName": "Endrick",
           "goals": 4,
           "matchesSampled": 20
         },
         {
           "playerName": "Raphinha",
-          "goals": 4,
-          "matchesSampled": 20
-        },
-        {
-          "playerName": "Rodrygo",
           "goals": 4,
           "matchesSampled": 20
         },
@@ -6038,7 +6037,7 @@
           "matchesSampled": 20
         }
       ],
-      "threat": 0.081,
+      "threat": 0.0855,
       "confidence": 0.78
     },
     "manager": "Carlo Ancelotti",
@@ -6108,9 +6107,9 @@
       }
     ],
     "passing": {
-      "attempted": 663.8,
-      "completed": 513,
-      "completion": 0.773,
+      "attempted": 661.9,
+      "completed": 510.9,
+      "completion": 0.772,
       "source": "score-and-possession-derived estimate"
     },
     "intelligenceCoverage": {
@@ -6124,33 +6123,33 @@
       "topScorerCount": 8
     },
     "reasons": [
-      "20-match form 2.6 PPG, xG 2.903-1.594",
-      "recent form improving",
+      "20-match form 2.65 PPG, xG 2.903-1.558",
+      "recent form cooling",
       "32 news item(s), news impact 0.0405",
       "market intelligence 0% movement, consensus 1.244 across 9 bookie(s)",
-      "26 scorer record(s), top scorer signal 0.081",
+      "26 scorer record(s), top scorer signal 0.0855",
       "memory currently leans positive"
     ]
   },
   {
     "team": "Morocco",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.1147,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.0759,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 2.2,
-      "goalsFor": 1.95,
-      "goalsAgainst": 0.8,
-      "xgFor": 1.954,
-      "xgAgainst": 1.126,
-      "shotsFor": 14.04,
-      "shotsAgainst": 10.48,
-      "shotsOnTargetFor": 5.05,
-      "shotsOnTargetAgainst": 3.51,
+      "goalsFor": 1.9,
+      "goalsAgainst": 0.75,
+      "xgFor": 1.918,
+      "xgAgainst": 1.09,
+      "shotsFor": 13.89,
+      "shotsAgainst": 10.33,
+      "shotsOnTargetFor": 4.98,
+      "shotsOnTargetAgainst": 3.44,
       "possession": 52.2,
-      "passesAttempted": 641.6,
-      "completedPasses": 496.4,
+      "passesAttempted": 640.8,
+      "completedPasses": 495.8,
       "passCompletion": 0.773,
       "topScorers": [
         {
@@ -6202,62 +6201,76 @@
           "goalsPerTwentyTeamMatches": 2
         }
       ],
-      "formMomentum": 0.0481,
+      "formMomentum": -0.145,
       "confidence": 0.9,
       "shortForm": {
         "matchCount": 6,
-        "pointsPerGame": 2.333,
-        "goalsFor": 1.333,
+        "pointsPerGame": 2,
+        "goalsFor": 1,
         "goalsAgainst": 0.333,
-        "xgFor": 1.51,
+        "xgFor": 1.27,
         "xgAgainst": 0.79,
-        "shotsFor": 12.13,
+        "shotsFor": 11.1,
         "shotsAgainst": 9.03,
-        "shotsOnTargetFor": 4.23,
+        "shotsOnTargetFor": 3.78,
         "shotsOnTargetAgainst": 2.87,
-        "possession": 52.5,
-        "passesAttempted": 641.7,
-        "completedPasses": 500.3,
-        "passCompletion": 0.78,
+        "possession": 51.7,
+        "passesAttempted": 636.8,
+        "completedPasses": 494.5,
+        "passCompletion": 0.777,
         "cleanSheetRate": 0.667,
-        "failedToScoreRate": 0,
+        "failedToScoreRate": 0.167,
         "bttsRate": 0.333,
         "over25Rate": 0,
-        "scoringGameRate": 1,
+        "scoringGameRate": 0.833,
         "concedeGameRate": 0.333
       },
       "longForm": {
         "matchCount": 20,
         "pointsPerGame": 2.2,
-        "goalsFor": 1.95,
-        "goalsAgainst": 0.8,
-        "xgFor": 1.954,
-        "xgAgainst": 1.126,
-        "shotsFor": 14.04,
-        "shotsAgainst": 10.48,
-        "shotsOnTargetFor": 5.05,
-        "shotsOnTargetAgainst": 3.51,
+        "goalsFor": 1.9,
+        "goalsAgainst": 0.75,
+        "xgFor": 1.918,
+        "xgAgainst": 1.09,
+        "shotsFor": 13.89,
+        "shotsAgainst": 10.33,
+        "shotsOnTargetFor": 4.98,
+        "shotsOnTargetAgainst": 3.44,
         "possession": 52.2,
-        "passesAttempted": 641.6,
-        "completedPasses": 496.4,
+        "passesAttempted": 640.8,
+        "completedPasses": 495.8,
         "passCompletion": 0.773,
-        "cleanSheetRate": 0.4,
-        "failedToScoreRate": 0.1,
-        "bttsRate": 0.5,
+        "cleanSheetRate": 0.45,
+        "failedToScoreRate": 0.15,
+        "bttsRate": 0.45,
         "over25Rate": 0.55,
-        "scoringGameRate": 0.9,
-        "concedeGameRate": 0.6
+        "scoringGameRate": 0.85,
+        "concedeGameRate": 0.55
       },
       "marketAngles": {
-        "cleanSheetRate": 0.4,
-        "failedToScoreRate": 0.1,
-        "bttsRate": 0.5,
+        "cleanSheetRate": 0.45,
+        "failedToScoreRate": 0.15,
+        "bttsRate": 0.45,
         "over25Rate": 0.55,
-        "scoringGameRate": 0.9,
-        "concedeGameRate": 0.6
+        "scoringGameRate": 0.85,
+        "concedeGameRate": 0.55
       },
       "recentMatches": [
         {
+          "points": 1,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "xgFor": 0.55,
+          "xgAgainst": 0.55,
+          "shotsFor": 8,
+          "shotsOnTargetFor": 2.4,
+          "possession": 50,
+          "passesAttempted": 622,
+          "completedPasses": 479,
+          "passCompletion": 0.77,
+          "scorers": []
+        },
+        {
           "points": 3,
           "goalsFor": 1,
           "goalsAgainst": 0,
@@ -6632,20 +6645,6 @@
               "goals": 1
             }
           ]
-        },
-        {
-          "points": 1,
-          "goalsFor": 1,
-          "goalsAgainst": 1,
-          "xgFor": 1.27,
-          "xgAgainst": 1.27,
-          "shotsFor": 11.1,
-          "shotsOnTargetFor": 3.8,
-          "possession": 50,
-          "passesAttempted": 638,
-          "completedPasses": 491,
-          "passCompletion": 0.77,
-          "scorers": []
         }
       ]
     },
@@ -6707,17 +6706,17 @@
     },
     "manager": "Mohamed Ouahbi",
     "tacticalProfile": {
-      "likelyFormation": "4-3-3 / 4-2-3-1",
-      "styleOfPlay": "front-foot pressing and fast regains",
+      "likelyFormation": "5-4-1 / 4-4-2",
+      "styleOfPlay": "compact defensive block with selective counters",
       "styleTags": [
-        "pressing",
-        "front-foot",
-        "regains",
+        "compact",
+        "defensive",
+        "counter",
         "set-piece threat",
         "positive xG balance"
       ],
       "possessionTier": "medium",
-      "pressingTier": "high",
+      "pressingTier": "medium",
       "transitionTier": "high",
       "source": "derived from 20-match public result sample and score-derived event estimates"
     },
@@ -6772,8 +6771,8 @@
       }
     ],
     "passing": {
-      "attempted": 640.5,
-      "completed": 495.7,
+      "attempted": 636.2,
+      "completed": 492.4,
       "completion": 0.774,
       "source": "score-and-possession-derived estimate"
     },
@@ -6788,17 +6787,17 @@
       "topScorerCount": 8
     },
     "reasons": [
-      "20-match form 2.2 PPG, xG 1.954-1.126",
+      "20-match form 2.2 PPG, xG 1.918-1.09",
+      "recent form cooling",
       "14 news item(s), news impact 0.0989",
       "market intelligence 0% movement, consensus 2.663 across 9 bookie(s)",
-      "19 scorer record(s), top scorer signal 0.072",
-      "memory currently leans positive"
+      "19 scorer record(s), top scorer signal 0.072"
     ]
   },
   {
     "team": "Haiti",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.2181,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.2142,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -7333,8 +7332,8 @@
   },
   {
     "team": "Scotland",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.3217,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.3181,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -8001,8 +8000,8 @@
   },
   {
     "team": "Germany",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.1456,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.1462,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -8729,7 +8728,7 @@
   },
   {
     "team": "Curaçao",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
+    "updatedAt": "2026-06-12T12:18:16.543Z",
     "learnedEdge": 0.2773,
     "dataConfidence": 0.8397,
     "form": {
@@ -9327,8 +9326,8 @@
   },
   {
     "team": "Netherlands",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.3047,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.3051,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -10065,8 +10064,8 @@
   },
   {
     "team": "Japan",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": -0.0718,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": -0.0713,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -10569,14 +10568,14 @@
       ]
     },
     "news": {
-      "articleCount": 6,
+      "articleCount": 7,
       "sourceDiversity": 2,
-      "sentiment": -0.0067,
-      "injury": 0.03,
-      "tacticalFit": 0.48,
-      "lineupClarity": 0.4567,
-      "rotationRisk": 0.2217,
-      "impact": 0.0825,
+      "sentiment": -0.0057,
+      "injury": 0.0257,
+      "tacticalFit": 0.4757,
+      "lineupClarity": 0.4557,
+      "rotationRisk": 0.2157,
+      "impact": 0.0843,
       "confidence": 0.8316,
       "topSignals": [
         "availability risk"
@@ -10591,7 +10590,7 @@
       "bookmakerCount": 8
     },
     "scorer": {
-      "trackedPlayers": 20,
+      "trackedPlayers": 19,
       "topScorers": [
         {
           "playerName": "Kamada",
@@ -10706,30 +10705,30 @@
     "reasons": [
       "20-match form 2.5 PPG, xG 1.63-0.766",
       "recent form cooling",
-      "6 news item(s), news impact 0.0825",
+      "7 news item(s), news impact 0.0843",
       "market intelligence 0% movement, consensus 2.438 across 8 bookie(s)",
-      "20 scorer record(s), top scorer signal 0.0675"
+      "19 scorer record(s), top scorer signal 0.0675"
     ]
   },
   {
     "team": "Ivory Coast",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": -0.1384,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": -0.1082,
     "dataConfidence": 0.8397,
     "form": {
       "matchCount": 20,
-      "pointsPerGame": 2.2,
-      "goalsFor": 1.3,
-      "goalsAgainst": 0.55,
-      "xgFor": 1.486,
-      "xgAgainst": 0.946,
-      "shotsFor": 12.03,
-      "shotsAgainst": 9.71,
-      "shotsOnTargetFor": 4.18,
-      "shotsOnTargetAgainst": 3.16,
-      "possession": 51.6,
-      "passesAttempted": 632.2,
-      "completedPasses": 488.6,
+      "pointsPerGame": 2.1,
+      "goalsFor": 1.05,
+      "goalsAgainst": 0.5,
+      "xgFor": 1.306,
+      "xgAgainst": 0.91,
+      "shotsFor": 11.26,
+      "shotsAgainst": 9.55,
+      "shotsOnTargetFor": 3.84,
+      "shotsOnTargetAgainst": 3.09,
+      "possession": 51.2,
+      "passesAttempted": 629.1,
+      "completedPasses": 486.3,
       "passCompletion": 0.772,
       "topScorers": [
         {
@@ -10773,67 +10772,61 @@
           "goals": 2,
           "scoringMatches": 2,
           "goalsPerTwentyTeamMatches": 2
-        },
-        {
-          "playerName": "Bamba",
-          "goals": 1,
-          "scoringMatches": 1,
-          "goalsPerTwentyTeamMatches": 1
         }
       ],
-      "formMomentum": -0.4898,
+      "formMomentum": -0.3251,
       "confidence": 0.9,
       "shortForm": {
         "matchCount": 6,
-        "pointsPerGame": 1.333,
+        "pointsPerGame": 1.5,
         "goalsFor": 0.333,
-        "goalsAgainst": 0.333,
+        "goalsAgainst": 0.167,
         "xgFor": 0.79,
-        "xgAgainst": 0.79,
+        "xgAgainst": 0.67,
         "shotsFor": 9.03,
-        "shotsAgainst": 9.03,
+        "shotsAgainst": 8.52,
         "shotsOnTargetFor": 2.87,
-        "shotsOnTargetAgainst": 2.87,
-        "possession": 50,
-        "passesAttempted": 621,
-        "completedPasses": 478.3,
-        "passCompletion": 0.77,
-        "cleanSheetRate": 0.667,
+        "shotsOnTargetAgainst": 2.63,
+        "possession": 50.4,
+        "passesAttempted": 623.8,
+        "completedPasses": 481.5,
+        "passCompletion": 0.772,
+        "cleanSheetRate": 0.833,
         "failedToScoreRate": 0.667,
         "bttsRate": 0,
         "over25Rate": 0,
         "scoringGameRate": 0.333,
-        "concedeGameRate": 0.333
+        "concedeGameRate": 0.167
       },
       "longForm": {
         "matchCount": 20,
-        "pointsPerGame": 2.2,
-        "goalsFor": 1.3,
-        "goalsAgainst": 0.55,
-        "xgFor": 1.486,
-        "xgAgainst": 0.946,
-        "shotsFor": 12.03,
-        "shotsAgainst": 9.71,
-        "shotsOnTargetFor": 4.18,
-        "shotsOnTargetAgainst": 3.16,
-        "possession": 51.6,
-        "passesAttempted": 632.2,
-        "completedPasses": 488.6,
+        "pointsPerGame": 2.1,
+        "goalsFor": 1.05,
+        "goalsAgainst": 0.5,
+        "xgFor": 1.306,
+        "xgAgainst": 0.91,
+        "shotsFor": 11.26,
+        "shotsAgainst": 9.55,
+        "shotsOnTargetFor": 3.84,
+        "shotsOnTargetAgainst": 3.09,
+        "possession": 51.2,
+        "passesAttempted": 629.1,
+        "completedPasses": 486.3,
         "passCompletion": 0.772,
-        "cleanSheetRate": 0.65,
-        "failedToScoreRate": 0.3,
-        "bttsRate": 0.15,
-        "over25Rate": 0.35,
-        "scoringGameRate": 0.7,
-        "concedeGameRate": 0.35
+        "cleanSheetRate": 0.7,
+        "failedToScoreRate": 0.35,
+        "bttsRate": 0.1,
+        "over25Rate": 0.3,
+        "scoringGameRate": 0.65,
+        "concedeGameRate": 0.3
       },
       "marketAngles": {
-        "cleanSheetRate": 0.65,
-        "failedToScoreRate": 0.3,
-        "bttsRate": 0.15,
-        "over25Rate": 0.35,
-        "scoringGameRate": 0.7,
-        "concedeGameRate": 0.35
+        "cleanSheetRate": 0.7,
+        "failedToScoreRate": 0.35,
+        "bttsRate": 0.1,
+        "over25Rate": 0.3,
+        "scoringGameRate": 0.65,
+        "concedeGameRate": 0.3
       },
       "recentMatches": [
         {
@@ -10865,6 +10858,20 @@
           "scorers": []
         },
         {
+          "points": 1,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "xgFor": 0.55,
+          "xgAgainst": 0.55,
+          "shotsFor": 8,
+          "shotsOnTargetFor": 2.4,
+          "possession": 50,
+          "passesAttempted": 622,
+          "completedPasses": 479,
+          "passCompletion": 0.77,
+          "scorers": []
+        },
+        {
           "points": 3,
           "goalsFor": 1,
           "goalsAgainst": 0,
@@ -11174,41 +11181,6 @@
           "scorers": [
             {
               "name": "Guessand",
-              "goals": 1
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 5,
-          "goalsAgainst": 1,
-          "xgFor": 4.15,
-          "xgAgainst": 1.27,
-          "shotsFor": 23.5,
-          "shotsOnTargetFor": 9.2,
-          "possession": 58,
-          "passesAttempted": 683,
-          "completedPasses": 525,
-          "passCompletion": 0.768,
-          "scorers": [
-            {
-              "name": "Diomande",
-              "goals": 1
-            },
-            {
-              "name": "Kessié",
-              "goals": 1
-            },
-            {
-              "name": "Bamba",
-              "goals": 1
-            },
-            {
-              "name": "Boga",
-              "goals": 1
-            },
-            {
-              "name": "Lazare",
               "goals": 1
             }
           ]
@@ -11272,15 +11244,17 @@
     },
     "manager": "Emerse Faé",
     "tacticalProfile": {
-      "likelyFormation": "4-2-3-1 / 4-3-3",
-      "styleOfPlay": "balanced mid-block with mixed build-up",
+      "likelyFormation": "5-4-1 / 4-4-2",
+      "styleOfPlay": "compact defensive block with selective counters",
       "styleTags": [
-        "balanced",
-        "mixed build-up"
+        "compact",
+        "defensive",
+        "counter",
+        "positive xG balance"
       ],
       "possessionTier": "medium",
       "pressingTier": "medium",
-      "transitionTier": "medium",
+      "transitionTier": "high",
       "source": "derived from 20-match public result sample and score-derived event estimates"
     },
     "topScorers": [
@@ -11325,18 +11299,12 @@
         "goals": 2,
         "scoringMatches": 2,
         "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Bamba",
-        "goals": 1,
-        "scoringMatches": 1,
-        "goalsPerTwentyTeamMatches": 1
       }
     ],
     "passing": {
-      "attempted": 628,
-      "completed": 484.3,
-      "completion": 0.771,
+      "attempted": 631.5,
+      "completed": 488.5,
+      "completion": 0.774,
       "source": "score-and-possession-derived estimate"
     },
     "intelligenceCoverage": {
@@ -11347,10 +11315,10 @@
       "profileConfidence": 0.72,
       "eventDataMode": "score-derived-estimates",
       "equalSchemaForAllTeams": true,
-      "topScorerCount": 8
+      "topScorerCount": 7
     },
     "reasons": [
-      "20-match form 2.2 PPG, xG 1.486-0.946",
+      "20-match form 2.1 PPG, xG 1.306-0.91",
       "recent form cooling",
       "2 news item(s), news impact 0.1321",
       "market intelligence 0% movement, consensus 4.422 across 8 bookie(s)",
@@ -11360,8 +11328,8 @@
   },
   {
     "team": "Ecuador",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.0804,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.0736,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -12014,14 +11982,13 @@
       "recent form cooling",
       "2 news item(s), news impact 0.0954",
       "market intelligence 0% movement, consensus 1.79 across 8 bookie(s)",
-      "12 scorer record(s), top scorer signal 0.072",
-      "memory currently leans positive"
+      "12 scorer record(s), top scorer signal 0.072"
     ]
   },
   {
     "team": "Sweden",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.2595,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.2594,
     "dataConfidence": 0.7514,
     "form": {
       "matchCount": 20,
@@ -12677,7 +12644,7 @@
   },
   {
     "team": "Tunisia",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
+    "updatedAt": "2026-06-12T12:18:16.543Z",
     "learnedEdge": -0.4048,
     "dataConfidence": 0.8397,
     "form": {
@@ -13258,24 +13225,24 @@
   },
   {
     "team": "Spain",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.3454,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.3286,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
-      "pointsPerGame": 2.2,
-      "goalsFor": 2.7,
-      "goalsAgainst": 1,
-      "xgFor": 2.494,
-      "xgAgainst": 1.27,
-      "shotsFor": 16.37,
-      "shotsAgainst": 11.1,
-      "shotsOnTargetFor": 6.08,
-      "shotsOnTargetAgainst": 3.77,
-      "possession": 53.4,
-      "passesAttempted": 656,
-      "completedPasses": 505.3,
-      "passCompletion": 0.77,
+      "pointsPerGame": 2.3,
+      "goalsFor": 2.75,
+      "goalsAgainst": 0.95,
+      "xgFor": 2.53,
+      "xgAgainst": 1.234,
+      "shotsFor": 16.53,
+      "shotsAgainst": 10.94,
+      "shotsOnTargetFor": 6.15,
+      "shotsOnTargetAgainst": 3.7,
+      "possession": 53.7,
+      "passesAttempted": 656.7,
+      "completedPasses": 506.5,
+      "passCompletion": 0.771,
       "topScorers": [
         {
           "playerName": "Oyarzabal",
@@ -13291,9 +13258,15 @@
         },
         {
           "playerName": "Morata",
-          "goals": 4,
-          "scoringMatches": 4,
-          "goalsPerTwentyTeamMatches": 4
+          "goals": 3,
+          "scoringMatches": 3,
+          "goalsPerTwentyTeamMatches": 3
+        },
+        {
+          "playerName": "Sarabia",
+          "goals": 3,
+          "scoringMatches": 3,
+          "goalsPerTwentyTeamMatches": 3
         },
         {
           "playerName": "Brahim",
@@ -13318,71 +13291,88 @@
           "goals": 2,
           "scoringMatches": 2,
           "goalsPerTwentyTeamMatches": 2
-        },
-        {
-          "playerName": "Guillamón",
-          "goals": 2,
-          "scoringMatches": 2,
-          "goalsPerTwentyTeamMatches": 2
         }
       ],
-      "formMomentum": 0.4804,
+      "formMomentum": 0.3882,
       "confidence": 0.9,
       "shortForm": {
         "matchCount": 6,
         "pointsPerGame": 3,
-        "goalsFor": 3,
+        "goalsFor": 2.667,
         "goalsAgainst": 0.333,
-        "xgFor": 2.71,
+        "xgFor": 2.47,
         "xgAgainst": 0.79,
-        "shotsFor": 17.3,
+        "shotsFor": 16.27,
         "shotsAgainst": 9.03,
-        "shotsOnTargetFor": 6.48,
+        "shotsOnTargetFor": 6.03,
         "shotsOnTargetAgainst": 2.87,
-        "possession": 55.7,
-        "passesAttempted": 659.3,
-        "completedPasses": 513,
-        "passCompletion": 0.778,
+        "possession": 55.2,
+        "passesAttempted": 656.7,
+        "completedPasses": 512,
+        "passCompletion": 0.78,
         "cleanSheetRate": 0.667,
         "failedToScoreRate": 0,
         "bttsRate": 0.333,
-        "over25Rate": 0.667,
+        "over25Rate": 0.5,
         "scoringGameRate": 1,
         "concedeGameRate": 0.333
       },
       "longForm": {
         "matchCount": 20,
-        "pointsPerGame": 2.2,
-        "goalsFor": 2.7,
-        "goalsAgainst": 1,
-        "xgFor": 2.494,
-        "xgAgainst": 1.27,
-        "shotsFor": 16.37,
-        "shotsAgainst": 11.1,
-        "shotsOnTargetFor": 6.08,
-        "shotsOnTargetAgainst": 3.77,
-        "possession": 53.4,
-        "passesAttempted": 656,
-        "completedPasses": 505.3,
-        "passCompletion": 0.77,
-        "cleanSheetRate": 0.4,
+        "pointsPerGame": 2.3,
+        "goalsFor": 2.75,
+        "goalsAgainst": 0.95,
+        "xgFor": 2.53,
+        "xgAgainst": 1.234,
+        "shotsFor": 16.53,
+        "shotsAgainst": 10.94,
+        "shotsOnTargetFor": 6.15,
+        "shotsOnTargetAgainst": 3.7,
+        "possession": 53.7,
+        "passesAttempted": 656.7,
+        "completedPasses": 506.5,
+        "passCompletion": 0.771,
+        "cleanSheetRate": 0.45,
         "failedToScoreRate": 0.1,
-        "bttsRate": 0.6,
+        "bttsRate": 0.55,
         "over25Rate": 0.6,
         "scoringGameRate": 0.9,
-        "concedeGameRate": 0.6
+        "concedeGameRate": 0.55
       },
       "marketAngles": {
-        "cleanSheetRate": 0.4,
+        "cleanSheetRate": 0.45,
         "failedToScoreRate": 0.1,
-        "bttsRate": 0.6,
+        "bttsRate": 0.55,
         "over25Rate": 0.6,
         "scoringGameRate": 0.9,
-        "concedeGameRate": 0.6
+        "concedeGameRate": 0.55
       },
       "recentMatches": [
         {
           "points": 3,
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "xgFor": 1.99,
+          "xgAgainst": 0.55,
+          "shotsFor": 14.2,
+          "shotsOnTargetFor": 5.1,
+          "possession": 55,
+          "passesAttempted": 651,
+          "completedPasses": 514,
+          "passCompletion": 0.79,
+          "scorers": [
+            {
+              "name": "Soler",
+              "goals": 1
+            },
+            {
+              "name": "Sarabia",
+              "goals": 1
+            }
+          ]
+        },
+        {
+          "points": 3,
           "goalsFor": 1,
           "goalsAgainst": 0,
           "xgFor": 1.27,
@@ -13813,25 +13803,6 @@
           "scorers": [
             {
               "name": "Torres",
-              "goals": 1
-            }
-          ]
-        },
-        {
-          "points": 1,
-          "goalsFor": 1,
-          "goalsAgainst": 1,
-          "xgFor": 1.27,
-          "xgAgainst": 1.27,
-          "shotsFor": 11.1,
-          "shotsOnTargetFor": 3.8,
-          "possession": 50,
-          "passesAttempted": 638,
-          "completedPasses": 491,
-          "passCompletion": 0.77,
-          "scorers": [
-            {
-              "name": "Morata",
               "goals": 1
             }
           ]
@@ -13881,13 +13852,8 @@
       "bookmakerCount": 7
     },
     "scorer": {
-      "trackedPlayers": 24,
+      "trackedPlayers": 25,
       "topScorers": [
-        {
-          "playerName": "Morata",
-          "goals": 5,
-          "matchesSampled": 20
-        },
         {
           "playerName": "Olmo",
           "goals": 5,
@@ -13904,12 +13870,17 @@
           "matchesSampled": 20
         },
         {
+          "playerName": "Morata",
+          "goals": 4,
+          "matchesSampled": 20
+        },
+        {
           "playerName": "F. Torres",
           "goals": 3,
           "matchesSampled": 20
         }
       ],
-      "threat": 0.1035,
+      "threat": 0.099,
       "confidence": 0.78
     },
     "manager": "Luis de la Fuente",
@@ -13943,9 +13914,15 @@
       },
       {
         "playerName": "Morata",
-        "goals": 4,
-        "scoringMatches": 4,
-        "goalsPerTwentyTeamMatches": 4
+        "goals": 3,
+        "scoringMatches": 3,
+        "goalsPerTwentyTeamMatches": 3
+      },
+      {
+        "playerName": "Sarabia",
+        "goals": 3,
+        "scoringMatches": 3,
+        "goalsPerTwentyTeamMatches": 3
       },
       {
         "playerName": "Brahim",
@@ -13970,18 +13947,12 @@
         "goals": 2,
         "scoringMatches": 2,
         "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Guillamón",
-        "goals": 2,
-        "scoringMatches": 2,
-        "goalsPerTwentyTeamMatches": 2
       }
     ],
     "passing": {
-      "attempted": 657.3,
-      "completed": 507.8,
-      "completion": 0.772,
+      "attempted": 656.3,
+      "completed": 508.5,
+      "completion": 0.775,
       "source": "score-and-possession-derived estimate"
     },
     "intelligenceCoverage": {
@@ -13995,46 +13966,46 @@
       "topScorerCount": 8
     },
     "reasons": [
-      "20-match form 2.2 PPG, xG 2.494-1.27",
+      "20-match form 2.3 PPG, xG 2.53-1.234",
       "recent form improving",
       "21 news item(s), news impact 0.0682",
       "market intelligence 0% movement, consensus 1.114 across 7 bookie(s)",
-      "24 scorer record(s), top scorer signal 0.1035",
+      "25 scorer record(s), top scorer signal 0.099",
       "memory currently leans positive"
     ]
   },
   {
     "team": "Cape Verde",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.1581,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.121,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 2,
-      "goalsFor": 1.7,
-      "goalsAgainst": 0.9,
-      "xgFor": 1.774,
-      "xgAgainst": 1.198,
-      "shotsFor": 13.27,
-      "shotsAgainst": 10.79,
-      "shotsOnTargetFor": 4.73,
-      "shotsOnTargetAgainst": 3.63,
+      "goalsFor": 1.65,
+      "goalsAgainst": 0.85,
+      "xgFor": 1.738,
+      "xgAgainst": 1.162,
+      "shotsFor": 13.11,
+      "shotsAgainst": 10.63,
+      "shotsOnTargetFor": 4.66,
+      "shotsOnTargetAgainst": 3.56,
       "possession": 52,
-      "passesAttempted": 640.5,
-      "completedPasses": 496.9,
+      "passesAttempted": 639.7,
+      "completedPasses": 496.3,
       "passCompletion": 0.775,
       "topScorers": [
-        {
-          "playerName": "Mendes",
-          "goals": 4,
-          "scoringMatches": 4,
-          "goalsPerTwentyTeamMatches": 4
-        },
         {
           "playerName": "Semedo",
           "goals": 4,
           "scoringMatches": 4,
           "goalsPerTwentyTeamMatches": 4
+        },
+        {
+          "playerName": "Mendes",
+          "goals": 3,
+          "scoringMatches": 3,
+          "goalsPerTwentyTeamMatches": 3
         },
         {
           "playerName": "Benchimol",
@@ -14073,63 +14044,77 @@
           "goalsPerTwentyTeamMatches": 2
         }
       ],
-      "formMomentum": 0.2822,
+      "formMomentum": 0.072,
       "confidence": 0.9,
       "shortForm": {
         "matchCount": 6,
-        "pointsPerGame": 2.333,
-        "goalsFor": 2.333,
+        "pointsPerGame": 2,
+        "goalsFor": 1.833,
         "goalsAgainst": 0.333,
-        "xgFor": 2.23,
+        "xgFor": 1.87,
         "xgAgainst": 0.79,
-        "shotsFor": 15.23,
+        "shotsFor": 13.68,
         "shotsAgainst": 9.03,
-        "shotsOnTargetFor": 5.6,
+        "shotsOnTargetFor": 4.92,
         "shotsOnTargetAgainst": 2.87,
-        "possession": 55,
-        "passesAttempted": 656,
-        "completedPasses": 514.3,
-        "passCompletion": 0.784,
+        "possession": 53.8,
+        "passesAttempted": 648.8,
+        "completedPasses": 506.5,
+        "passCompletion": 0.781,
         "cleanSheetRate": 0.667,
-        "failedToScoreRate": 0,
+        "failedToScoreRate": 0.167,
         "bttsRate": 0.333,
-        "over25Rate": 0.667,
-        "scoringGameRate": 1,
+        "over25Rate": 0.5,
+        "scoringGameRate": 0.833,
         "concedeGameRate": 0.333
       },
       "longForm": {
         "matchCount": 20,
         "pointsPerGame": 2,
-        "goalsFor": 1.7,
-        "goalsAgainst": 0.9,
-        "xgFor": 1.774,
-        "xgAgainst": 1.198,
-        "shotsFor": 13.27,
-        "shotsAgainst": 10.79,
-        "shotsOnTargetFor": 4.73,
-        "shotsOnTargetAgainst": 3.63,
+        "goalsFor": 1.65,
+        "goalsAgainst": 0.85,
+        "xgFor": 1.738,
+        "xgAgainst": 1.162,
+        "shotsFor": 13.11,
+        "shotsAgainst": 10.63,
+        "shotsOnTargetFor": 4.66,
+        "shotsOnTargetAgainst": 3.56,
         "possession": 52,
-        "passesAttempted": 640.5,
-        "completedPasses": 496.9,
+        "passesAttempted": 639.7,
+        "completedPasses": 496.3,
         "passCompletion": 0.775,
-        "cleanSheetRate": 0.5,
-        "failedToScoreRate": 0.1,
-        "bttsRate": 0.4,
+        "cleanSheetRate": 0.55,
+        "failedToScoreRate": 0.15,
+        "bttsRate": 0.35,
         "over25Rate": 0.5,
-        "scoringGameRate": 0.9,
-        "concedeGameRate": 0.5
+        "scoringGameRate": 0.85,
+        "concedeGameRate": 0.45
       },
       "marketAngles": {
-        "cleanSheetRate": 0.5,
-        "failedToScoreRate": 0.1,
-        "bttsRate": 0.4,
+        "cleanSheetRate": 0.55,
+        "failedToScoreRate": 0.15,
+        "bttsRate": 0.35,
         "over25Rate": 0.5,
-        "scoringGameRate": 0.9,
-        "concedeGameRate": 0.5
+        "scoringGameRate": 0.85,
+        "concedeGameRate": 0.45
       },
       "recentMatches": [
         {
           "points": 1,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "xgFor": 0.55,
+          "xgAgainst": 0.55,
+          "shotsFor": 8,
+          "shotsOnTargetFor": 2.4,
+          "possession": 50,
+          "passesAttempted": 622,
+          "completedPasses": 479,
+          "passCompletion": 0.77,
+          "scorers": []
+        },
+        {
+          "points": 1,
           "goalsFor": 1,
           "goalsAgainst": 1,
           "xgFor": 1.27,
@@ -14489,25 +14474,6 @@
           "completedPasses": 442,
           "passCompletion": 0.75,
           "scorers": []
-        },
-        {
-          "points": 1,
-          "goalsFor": 1,
-          "goalsAgainst": 1,
-          "xgFor": 1.27,
-          "xgAgainst": 1.27,
-          "shotsFor": 11.1,
-          "shotsOnTargetFor": 3.8,
-          "possession": 50,
-          "passesAttempted": 638,
-          "completedPasses": 491,
-          "passCompletion": 0.77,
-          "scorers": [
-            {
-              "name": "Mendes",
-              "goals": 1
-            }
-          ]
         },
         {
           "points": 1,
@@ -14551,7 +14517,7 @@
       "bookmakerCount": 7
     },
     "scorer": {
-      "trackedPlayers": 16,
+      "trackedPlayers": 15,
       "topScorers": [
         {
           "playerName": "Mendes",
@@ -14598,16 +14564,16 @@
     },
     "topScorers": [
       {
-        "playerName": "Mendes",
+        "playerName": "Semedo",
         "goals": 4,
         "scoringMatches": 4,
         "goalsPerTwentyTeamMatches": 4
       },
       {
-        "playerName": "Semedo",
-        "goals": 4,
-        "scoringMatches": 4,
-        "goalsPerTwentyTeamMatches": 4
+        "playerName": "Mendes",
+        "goals": 3,
+        "scoringMatches": 3,
+        "goalsPerTwentyTeamMatches": 3
       },
       {
         "playerName": "Benchimol",
@@ -14647,9 +14613,9 @@
       }
     ],
     "passing": {
-      "attempted": 642.9,
-      "completed": 499.1,
-      "completion": 0.777,
+      "attempted": 640.1,
+      "completed": 496.5,
+      "completion": 0.776,
       "source": "score-and-possession-derived estimate"
     },
     "intelligenceCoverage": {
@@ -14663,17 +14629,16 @@
       "topScorerCount": 8
     },
     "reasons": [
-      "20-match form 2 PPG, xG 1.774-1.198",
-      "recent form improving",
+      "20-match form 2 PPG, xG 1.738-1.162",
       "5 news item(s), news impact 0.0895",
       "market intelligence 0% movement, consensus 17.357 across 7 bookie(s)",
-      "16 scorer record(s), top scorer signal 0.0495",
+      "15 scorer record(s), top scorer signal 0.0495",
       "memory currently leans positive"
     ]
   },
   {
     "team": "Belgium",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
+    "updatedAt": "2026-06-12T12:18:16.543Z",
     "learnedEdge": 0.1214,
     "dataConfidence": 0.8611,
     "form": {
@@ -15440,8 +15405,8 @@
   },
   {
     "team": "Egypt",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": -0.1117,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": -0.1126,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -16074,8 +16039,8 @@
   },
   {
     "team": "Saudi Arabia",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": -0.0735,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": -0.0744,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -16726,8 +16691,8 @@
   },
   {
     "team": "Uruguay",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.1672,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.1675,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -17355,7 +17320,7 @@
   },
   {
     "team": "Iran",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
+    "updatedAt": "2026-06-12T12:18:16.543Z",
     "learnedEdge": 0.1971,
     "dataConfidence": 0.8611,
     "form": {
@@ -18024,8 +17989,8 @@
   },
   {
     "team": "New Zealand",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.1622,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.1591,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -18589,7 +18554,7 @@
   },
   {
     "team": "France",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
+    "updatedAt": "2026-06-12T12:18:16.543Z",
     "learnedEdge": -0.1231,
     "dataConfidence": 0.8611,
     "form": {
@@ -19310,8 +19275,8 @@
   },
   {
     "team": "Senegal",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.049,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.0507,
     "dataConfidence": 0.8397,
     "form": {
       "matchCount": 20,
@@ -19953,8 +19918,8 @@
   },
   {
     "team": "Iraq",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": -0.1032,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": -0.1035,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -20511,7 +20476,7 @@
   },
   {
     "team": "Norway",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
+    "updatedAt": "2026-06-12T12:18:16.543Z",
     "learnedEdge": -0.0264,
     "dataConfidence": 0.8611,
     "form": {
@@ -21191,8 +21156,8 @@
   },
   {
     "team": "Argentina",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.105,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.0939,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -21975,8 +21940,8 @@
   },
   {
     "team": "Algeria",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": -0.0087,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": -0.007,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -22710,8 +22675,8 @@
   },
   {
     "team": "Austria",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": -0.222,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": -0.2221,
     "dataConfidence": 0.8397,
     "form": {
       "matchCount": 20,
@@ -23382,8 +23347,8 @@
   },
   {
     "team": "Jordan",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.0281,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.0299,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -23952,7 +23917,7 @@
   },
   {
     "team": "Portugal",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
+    "updatedAt": "2026-06-12T12:18:16.543Z",
     "learnedEdge": 0.0078,
     "dataConfidence": 0.8611,
     "form": {
@@ -24618,7 +24583,7 @@
   },
   {
     "team": "DR Congo",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
+    "updatedAt": "2026-06-12T12:18:16.543Z",
     "learnedEdge": 0.1623,
     "dataConfidence": 0.8611,
     "form": {
@@ -25221,8 +25186,8 @@
   },
   {
     "team": "England",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": -0.0599,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": -0.0624,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -25719,14 +25684,14 @@
       ]
     },
     "news": {
-      "articleCount": 92,
+      "articleCount": 93,
       "sourceDiversity": 2,
-      "sentiment": 0.007,
-      "injury": 0.047,
-      "tacticalFit": 0.4862,
-      "lineupClarity": 0.4787,
-      "rotationRisk": 0.2322,
-      "impact": 0.0861,
+      "sentiment": 0.0069,
+      "injury": 0.0465,
+      "tacticalFit": 0.4858,
+      "lineupClarity": 0.4784,
+      "rotationRisk": 0.2316,
+      "impact": 0.0862,
       "confidence": 0.8316,
       "topSignals": [
         "availability risk",
@@ -25860,14 +25825,14 @@
     "reasons": [
       "20-match form 2.25 PPG, xG 1.45-0.874",
       "recent form cooling",
-      "92 news item(s), news impact 0.0861",
+      "93 news item(s), news impact 0.0862",
       "market intelligence 0% movement, consensus 1.499 across 8 bookie(s)",
       "20 scorer record(s), top scorer signal 0.0855"
     ]
   },
   {
     "team": "Croatia",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
+    "updatedAt": "2026-06-12T12:18:16.543Z",
     "learnedEdge": -0.166,
     "dataConfidence": 0.8611,
     "form": {
@@ -26430,23 +26395,23 @@
   },
   {
     "team": "Ghana",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.2962,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.2595,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
-      "pointsPerGame": 1.1,
-      "goalsFor": 1.5,
-      "goalsAgainst": 1.9,
-      "xgFor": 1.63,
-      "xgAgainst": 1.918,
-      "shotsFor": 12.65,
-      "shotsAgainst": 13.89,
-      "shotsOnTargetFor": 4.45,
-      "shotsOnTargetAgainst": 4.99,
-      "possession": 49.2,
-      "passesAttempted": 631.5,
-      "completedPasses": 482.7,
+      "pointsPerGame": 1.15,
+      "goalsFor": 1.45,
+      "goalsAgainst": 1.8,
+      "xgFor": 1.594,
+      "xgAgainst": 1.846,
+      "shotsFor": 12.49,
+      "shotsAgainst": 13.58,
+      "shotsOnTargetFor": 4.38,
+      "shotsOnTargetAgainst": 4.85,
+      "possession": 49.3,
+      "passesAttempted": 631.6,
+      "completedPasses": 483.1,
       "passCompletion": 0.764,
       "topScorers": [
         {
@@ -26492,62 +26457,76 @@
           "goalsPerTwentyTeamMatches": 2
         }
       ],
-      "formMomentum": 0.504,
+      "formMomentum": 0.2992,
       "confidence": 0.9,
       "shortForm": {
         "matchCount": 6,
-        "pointsPerGame": 2,
-        "goalsFor": 2,
-        "goalsAgainst": 1.667,
-        "xgFor": 1.99,
-        "xgAgainst": 1.75,
-        "shotsFor": 14.2,
-        "shotsAgainst": 13.17,
-        "shotsOnTargetFor": 5.1,
-        "shotsOnTargetAgainst": 4.7,
-        "possession": 50.8,
-        "passesAttempted": 647.3,
-        "completedPasses": 496,
-        "passCompletion": 0.766,
-        "cleanSheetRate": 0,
-        "failedToScoreRate": 0.333,
-        "bttsRate": 0.667,
-        "over25Rate": 0.667,
-        "scoringGameRate": 0.667,
-        "concedeGameRate": 1
+        "pointsPerGame": 1.667,
+        "goalsFor": 1.667,
+        "goalsAgainst": 1.5,
+        "xgFor": 1.75,
+        "xgAgainst": 1.63,
+        "shotsFor": 13.17,
+        "shotsAgainst": 12.65,
+        "shotsOnTargetFor": 4.65,
+        "shotsOnTargetAgainst": 4.47,
+        "possession": 50.4,
+        "passesAttempted": 642.3,
+        "completedPasses": 491,
+        "passCompletion": 0.764,
+        "cleanSheetRate": 0.167,
+        "failedToScoreRate": 0.5,
+        "bttsRate": 0.5,
+        "over25Rate": 0.5,
+        "scoringGameRate": 0.5,
+        "concedeGameRate": 0.833
       },
       "longForm": {
         "matchCount": 20,
-        "pointsPerGame": 1.1,
-        "goalsFor": 1.5,
-        "goalsAgainst": 1.9,
-        "xgFor": 1.63,
-        "xgAgainst": 1.918,
-        "shotsFor": 12.65,
-        "shotsAgainst": 13.89,
-        "shotsOnTargetFor": 4.45,
-        "shotsOnTargetAgainst": 4.99,
-        "possession": 49.2,
-        "passesAttempted": 631.5,
-        "completedPasses": 482.7,
+        "pointsPerGame": 1.15,
+        "goalsFor": 1.45,
+        "goalsAgainst": 1.8,
+        "xgFor": 1.594,
+        "xgAgainst": 1.846,
+        "shotsFor": 12.49,
+        "shotsAgainst": 13.58,
+        "shotsOnTargetFor": 4.38,
+        "shotsOnTargetAgainst": 4.85,
+        "possession": 49.3,
+        "passesAttempted": 631.6,
+        "completedPasses": 483.1,
         "passCompletion": 0.764,
-        "cleanSheetRate": 0.1,
-        "failedToScoreRate": 0.2,
-        "bttsRate": 0.7,
-        "over25Rate": 0.7,
-        "scoringGameRate": 0.8,
-        "concedeGameRate": 0.9
+        "cleanSheetRate": 0.15,
+        "failedToScoreRate": 0.25,
+        "bttsRate": 0.65,
+        "over25Rate": 0.65,
+        "scoringGameRate": 0.75,
+        "concedeGameRate": 0.85
       },
       "marketAngles": {
-        "cleanSheetRate": 0.1,
-        "failedToScoreRate": 0.2,
-        "bttsRate": 0.7,
-        "over25Rate": 0.7,
-        "scoringGameRate": 0.8,
-        "concedeGameRate": 0.9
+        "cleanSheetRate": 0.15,
+        "failedToScoreRate": 0.25,
+        "bttsRate": 0.65,
+        "over25Rate": 0.65,
+        "scoringGameRate": 0.75,
+        "concedeGameRate": 0.85
       },
       "recentMatches": [
         {
+          "points": 1,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "xgFor": 0.55,
+          "xgAgainst": 0.55,
+          "shotsFor": 8,
+          "shotsOnTargetFor": 2.4,
+          "possession": 50,
+          "passesAttempted": 622,
+          "completedPasses": 479,
+          "passCompletion": 0.77,
+          "scorers": []
+        },
+        {
           "points": 3,
           "goalsFor": 4,
           "goalsAgainst": 3,
@@ -26892,20 +26871,6 @@
               "goals": 1
             }
           ]
-        },
-        {
-          "points": 0,
-          "goalsFor": 1,
-          "goalsAgainst": 2,
-          "xgFor": 1.27,
-          "xgAgainst": 1.99,
-          "shotsFor": 11.1,
-          "shotsOnTargetFor": 3.8,
-          "possession": 47.5,
-          "passesAttempted": 621,
-          "completedPasses": 472,
-          "passCompletion": 0.76,
-          "scorers": []
         },
         {
           "points": 0,
@@ -27036,9 +27001,9 @@
       }
     ],
     "passing": {
-      "attempted": 629.5,
-      "completed": 480.6,
-      "completion": 0.763,
+      "attempted": 629.8,
+      "completed": 481.5,
+      "completion": 0.764,
       "source": "score-and-possession-derived estimate"
     },
     "intelligenceCoverage": {
@@ -27052,7 +27017,7 @@
       "topScorerCount": 7
     },
     "reasons": [
-      "20-match form 1.1 PPG, xG 1.63-1.918",
+      "20-match form 1.15 PPG, xG 1.594-1.846",
       "recent form improving",
       "4 news item(s), news impact 0.1232",
       "market intelligence 0% movement, consensus 5.427 across 8 bookie(s)",
@@ -27062,8 +27027,8 @@
   },
   {
     "team": "Panama",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.1396,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.1381,
     "dataConfidence": 0.8397,
     "form": {
       "matchCount": 20,
@@ -27761,7 +27726,7 @@
   },
   {
     "team": "Uzbekistan",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
+    "updatedAt": "2026-06-12T12:18:16.543Z",
     "learnedEdge": -0.1773,
     "dataConfidence": 0.8397,
     "form": {
@@ -28434,7 +28399,7 @@
   },
   {
     "team": "Colombia",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
+    "updatedAt": "2026-06-12T12:18:16.543Z",
     "learnedEdge": 0.3483,
     "dataConfidence": 0.8397,
     "form": {
@@ -29147,8 +29112,8 @@
   },
   {
     "team": "South Africa",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.2151,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.2154,
     "dataConfidence": 0.8053,
     "form": {
       "matchCount": 20,
@@ -29629,14 +29594,14 @@
       ]
     },
     "news": {
-      "articleCount": 34,
+      "articleCount": 35,
       "sourceDiversity": 2,
-      "sentiment": -0.0141,
-      "injury": 0.0424,
-      "tacticalFit": 0.4685,
-      "lineupClarity": 0.4676,
-      "rotationRisk": 0.2094,
-      "impact": 0.076,
+      "sentiment": -0.0194,
+      "injury": 0.0463,
+      "tacticalFit": 0.468,
+      "lineupClarity": 0.4671,
+      "rotationRisk": 0.21,
+      "impact": 0.0719,
       "confidence": 0.8316,
       "topSignals": [
         "availability risk",
@@ -29766,7 +29731,7 @@
     "reasons": [
       "20-match form 1.3 PPG, xG 1.27-1.126",
       "recent form improving",
-      "34 news item(s), news impact 0.076",
+      "35 news item(s), news impact 0.0719",
       "market intelligence 0% movement, consensus 3.917 across 3 bookie(s)",
       "19 scorer record(s), top scorer signal 0.054",
       "memory currently leans positive"
@@ -29774,24 +29739,24 @@
   },
   {
     "team": "Mexico",
-    "updatedAt": "2026-06-12T11:55:07.518Z",
-    "learnedEdge": 0.3326,
+    "updatedAt": "2026-06-12T12:18:16.543Z",
+    "learnedEdge": 0.3266,
     "dataConfidence": 0.8225,
     "form": {
       "matchCount": 20,
-      "pointsPerGame": 2.05,
-      "goalsFor": 1.7,
+      "pointsPerGame": 2.15,
+      "goalsFor": 1.75,
       "goalsAgainst": 0.4,
-      "xgFor": 1.774,
+      "xgFor": 1.81,
       "xgAgainst": 0.838,
-      "shotsFor": 13.27,
+      "shotsFor": 13.43,
       "shotsAgainst": 9.24,
-      "shotsOnTargetFor": 4.72,
+      "shotsOnTargetFor": 4.78,
       "shotsOnTargetAgainst": 2.95,
-      "possession": 52.9,
-      "passesAttempted": 631.3,
-      "completedPasses": 490.1,
-      "passCompletion": 0.777,
+      "possession": 53,
+      "passesAttempted": 632,
+      "completedPasses": 491,
+      "passCompletion": 0.778,
       "topScorers": [
         {
           "playerName": "Jiménez",
@@ -29842,7 +29807,7 @@
           "goalsPerTwentyTeamMatches": 2
         }
       ],
-      "formMomentum": 0.55,
+      "formMomentum": 0.5059,
       "confidence": 0.9,
       "shortForm": {
         "matchCount": 6,
@@ -29868,32 +29833,32 @@
       },
       "longForm": {
         "matchCount": 20,
-        "pointsPerGame": 2.05,
-        "goalsFor": 1.7,
+        "pointsPerGame": 2.15,
+        "goalsFor": 1.75,
         "goalsAgainst": 0.4,
-        "xgFor": 1.774,
+        "xgFor": 1.81,
         "xgAgainst": 0.838,
-        "shotsFor": 13.27,
+        "shotsFor": 13.43,
         "shotsAgainst": 9.24,
-        "shotsOnTargetFor": 4.72,
+        "shotsOnTargetFor": 4.78,
         "shotsOnTargetAgainst": 2.95,
-        "possession": 52.9,
-        "passesAttempted": 631.3,
-        "completedPasses": 490.1,
-        "passCompletion": 0.777,
+        "possession": 53,
+        "passesAttempted": 632,
+        "completedPasses": 491,
+        "passCompletion": 0.778,
         "cleanSheetRate": 0.65,
-        "failedToScoreRate": 0.25,
+        "failedToScoreRate": 0.2,
         "bttsRate": 0.3,
         "over25Rate": 0.2,
-        "scoringGameRate": 0.75,
+        "scoringGameRate": 0.8,
         "concedeGameRate": 0.35
       },
       "marketAngles": {
         "cleanSheetRate": 0.65,
-        "failedToScoreRate": 0.25,
+        "failedToScoreRate": 0.2,
         "bttsRate": 0.3,
         "over25Rate": 0.2,
-        "scoringGameRate": 0.75,
+        "scoringGameRate": 0.8,
         "concedeGameRate": 0.35
       },
       "recentMatches": [
@@ -30164,20 +30129,6 @@
           "scorers": []
         },
         {
-          "points": 1,
-          "goalsFor": 0,
-          "goalsAgainst": 0,
-          "xgFor": 0.55,
-          "xgAgainst": 0.55,
-          "shotsFor": 8,
-          "shotsOnTargetFor": 2.4,
-          "possession": 50,
-          "passesAttempted": 622,
-          "completedPasses": 479,
-          "passCompletion": 0.77,
-          "scorers": []
-        },
-        {
           "points": 0,
           "goalsFor": 0,
           "goalsAgainst": 2,
@@ -30275,18 +30226,37 @@
               "goals": 1
             }
           ]
+        },
+        {
+          "points": 3,
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "xgFor": 1.27,
+          "xgAgainst": 0.55,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 52.5,
+          "passesAttempted": 636,
+          "completedPasses": 496,
+          "passCompletion": 0.78,
+          "scorers": [
+            {
+              "name": "Berterame",
+              "goals": 1
+            }
+          ]
         }
       ]
     },
     "news": {
-      "articleCount": 81,
+      "articleCount": 83,
       "sourceDiversity": 2,
-      "sentiment": -0.0025,
-      "injury": 0.0289,
-      "tacticalFit": 0.4722,
-      "lineupClarity": 0.4614,
-      "rotationRisk": 0.2152,
-      "impact": 0.0852,
+      "sentiment": -0.0048,
+      "injury": 0.0304,
+      "tacticalFit": 0.4717,
+      "lineupClarity": 0.4611,
+      "rotationRisk": 0.2149,
+      "impact": 0.0834,
       "confidence": 0.8316,
       "topSignals": [
         "availability risk",
@@ -30400,9 +30370,9 @@
       }
     ],
     "passing": {
-      "attempted": 640.3,
-      "completed": 496.5,
-      "completion": 0.775,
+      "attempted": 640.8,
+      "completed": 497.1,
+      "completion": 0.776,
       "source": "score-and-possession-derived estimate"
     },
     "intelligenceCoverage": {
@@ -30416,9 +30386,9 @@
       "topScorerCount": 8
     },
     "reasons": [
-      "20-match form 2.05 PPG, xG 1.774-0.838",
+      "20-match form 2.15 PPG, xG 1.81-0.838",
       "recent form improving",
-      "81 news item(s), news impact 0.0852",
+      "83 news item(s), news impact 0.0834",
       "market intelligence 0% movement, consensus 1.873 across 4 bookie(s)",
       "21 scorer record(s), top scorer signal 0.054",
       "memory currently leans positive"

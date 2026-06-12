@@ -54,27 +54,73 @@ test("betslip selection returns the fixed category set it can support", () => {
   assert.ok(betslip[0].potentialReturn > 10);
 });
 
-test("single selection shifts from steady to riskier value as risk rises", () => {
-  const steady = combo("single", 1.53, 84, 1);
-  steady.averageEdge = 0.044;
-  steady.expectedValue = 0.07;
-  steady.legs[0].edge = 0.044;
-  steady.legs[0].confidence = 0.81;
-  steady.legs[0].riskTag = "steady_edge";
-  steady.legs[0].selectionLabel = "Mexico vs South Africa: Mexico to win";
+test("risk-zero single selection starts from the most likely survival pick", () => {
+  const likely = combo("single", 1.53, 82, 1);
+  likely.combinedProbability = 0.71;
+  likely.survivalCombinedProbability = 0.72;
+  likely.averageSurvivalProbability = 0.72;
+  likely.averageConfidence = 0.82;
+  likely.displayRating = 0.86;
+  likely.averageIndependentEdge = 0.05;
+  likely.expectedValue = 0.08;
+  likely.legs[0].edge = 0.05;
+  likely.legs[0].independentEdge = 0.05;
+  likely.legs[0].confidence = 0.82;
+  likely.legs[0].riskTag = "steady_edge";
+  likely.legs[0].selectionLabel = "Mexico vs South Africa: Over 2.5 goals";
 
-  const spicy = combo("single", 2.13, 86, 1);
-  spicy.averageEdge = 0.226;
-  spicy.expectedValue = 0.45;
-  spicy.legs[0].edge = 0.226;
-  spicy.legs[0].confidence = 0.81;
-  spicy.legs[0].riskTag = "calculated_risk";
-  spicy.legs[0].selectionLabel = "Mexico vs South Africa: Both teams to score: Yes";
+  const value = combo("single", 2.13, 98, 1);
+  value.combinedProbability = 0.62;
+  value.survivalCombinedProbability = 0.62;
+  value.averageSurvivalProbability = 0.62;
+  value.averageConfidence = 0.8;
+  value.displayRating = 0.82;
+  value.averageIndependentEdge = 0.22;
+  value.expectedValue = 0.45;
+  value.legs[0].edge = 0.22;
+  value.legs[0].independentEdge = 0.22;
+  value.legs[0].confidence = 0.8;
+  value.legs[0].riskTag = "calculated_risk";
+  value.legs[0].selectionLabel = "Mexico vs South Africa: Both teams to score: Yes";
 
-  const recommendations = { singles: [steady, spicy], doubles: [], trixies: [], accumulatorsByLegCount: {}, accumulators: [] };
+  const recommendations = { singles: [likely, value], doubles: [], trixies: [], accumulatorsByLegCount: {}, accumulators: [] };
 
-  assert.equal(selectBetslip({ recommendations, stake: 10, risk: 5 })[0].legs[0].selectionLabel, "Mexico vs South Africa: Mexico to win");
-  assert.equal(selectBetslip({ recommendations, stake: 10, risk: 90 })[0].legs[0].selectionLabel, "Mexico vs South Africa: Both teams to score: Yes");
+  assert.equal(selectBetslip({ recommendations, stake: 10, risk: 0 })[0].legs[0].selectionLabel, "Mexico vs South Africa: Over 2.5 goals");
+  assert.equal(selectBetslip({ recommendations, stake: 10, risk: 100 })[0].legs[0].selectionLabel, "Mexico vs South Africa: Both teams to score: Yes");
+});
+
+test("high risk still rejects thin survival when only price edge is better", () => {
+  const likely = combo("single", 1.62, 82, 1);
+  likely.combinedProbability = 0.69;
+  likely.survivalCombinedProbability = 0.7;
+  likely.averageSurvivalProbability = 0.7;
+  likely.averageConfidence = 0.82;
+  likely.displayRating = 0.86;
+  likely.averageIndependentEdge = 0.05;
+  likely.expectedValue = 0.08;
+  likely.legs[0].edge = 0.05;
+  likely.legs[0].independentEdge = 0.05;
+  likely.legs[0].confidence = 0.82;
+  likely.legs[0].riskTag = "steady_edge";
+  likely.legs[0].selectionLabel = "Mexico vs South Africa: Over 1.5 goals";
+
+  const thinLongshot = combo("single", 7.5, 100, 1);
+  thinLongshot.combinedProbability = 0.31;
+  thinLongshot.survivalCombinedProbability = 0.31;
+  thinLongshot.averageSurvivalProbability = 0.31;
+  thinLongshot.averageConfidence = 0.62;
+  thinLongshot.displayRating = 0.66;
+  thinLongshot.averageIndependentEdge = 0.38;
+  thinLongshot.expectedValue = 1.32;
+  thinLongshot.legs[0].edge = 0.38;
+  thinLongshot.legs[0].independentEdge = 0.38;
+  thinLongshot.legs[0].confidence = 0.62;
+  thinLongshot.legs[0].riskTag = "longshot_value";
+  thinLongshot.legs[0].selectionLabel = "Mexico vs South Africa: exact-value longshot";
+
+  const recommendations = { singles: [likely, thinLongshot], doubles: [], trixies: [], accumulatorsByLegCount: {}, accumulators: [] };
+
+  assert.equal(selectBetslip({ recommendations, stake: 10, risk: 100 })[0].legs[0].selectionLabel, "Mexico vs South Africa: Over 1.5 goals");
 });
 
 test("most likely picks ignore risk score and choose highest model probability legs", () => {

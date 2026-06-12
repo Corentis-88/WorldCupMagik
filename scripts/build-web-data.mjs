@@ -71,19 +71,21 @@ const mostLikelyRangeLegCandidates = buildLegCandidates({
 });
 
 for (const risk of riskBuckets) {
-  const policy = buildRiskPolicy(engineState.policy, risk);
-  const legCandidates = buildLegCandidates({
-    fixtures: maxRangeFixtures,
-    oddsSnapshots: liveOddsSnapshots,
-    newsArticles: liveNewsArticles,
-    teamStats,
-    policy,
-    now,
-    outcomeLearning,
-    heatSnapshots: liveHeatSnapshots,
-    squadDepthRecords: liveSquadDepthRecords,
-    playerStats: livePlayerStats
-  });
+  const policy = risk === 0 ? mostLikelyPolicy : buildRiskPolicy(engineState.policy, risk);
+  const legCandidates = risk === 0
+    ? mostLikelyRangeLegCandidates
+    : buildLegCandidates({
+      fixtures: maxRangeFixtures,
+      oddsSnapshots: liveOddsSnapshots,
+      newsArticles: liveNewsArticles,
+      teamStats,
+      policy,
+      now,
+      outcomeLearning,
+      heatSnapshots: liveHeatSnapshots,
+      squadDepthRecords: liveSquadDepthRecords,
+      playerStats: livePlayerStats
+    });
 
   riskProfiles[risk] = policy.riskProfile;
   fullLegCandidatesByRisk[risk] = legCandidates;
@@ -112,6 +114,22 @@ for (const daysAhead of dayBuckets) {
   for (const risk of riskBuckets) {
     const policy = buildRiskPolicy(engineState.policy, risk);
     const legCandidates = filterLegCandidatesForFixtures(fullLegCandidatesByRisk[risk], scanFixtures);
+
+    if (risk === 0) {
+      profiles[profileKey(daysAhead, risk)] = {
+        daysAhead,
+        risk,
+        mode: "most_likely",
+        riskProfile: describeRisk(risk),
+        policyMarkers: summarizePolicy(mostLikelyPolicy),
+        dataQuality: centralScan.dataQuality,
+        fixtureCount: scanFixtures.length,
+        eligibleLegCount: mostLikelyLegCandidates.filter((leg) => !leg.hardBlocks?.length).length,
+        betslip: mostLikelyPicks.map(summarizeBet)
+      };
+      continue;
+    }
+
     const recommendationLegCandidates = trimRecommendationLegPool(legCandidates, scanFixtures);
     const recommendations = buildBetRecommendations(recommendationLegCandidates, policy);
     const betslip = selectBetslip({ recommendations, stake: 10, risk });

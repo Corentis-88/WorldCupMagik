@@ -295,6 +295,15 @@ function fallbackDateRange() {
 }
 
 function buildRangeProfile({ data, riskBucket, dateRange }) {
+  if (Number(riskBucket || 0) <= 0) {
+    const pickProfile = buildPickOfDayRangeProfile({ data, dateRange });
+    return rememberCache(state.profileCache, rangeCacheKey(data, riskBucket, dateRange), {
+      ...pickProfile,
+      risk: riskBucket,
+      riskProfile: data.riskProfiles?.[riskBucket] || { mode: "most_likely" }
+    });
+  }
+
   const cacheKey = rangeCacheKey(data, riskBucket, dateRange);
 
   if (state.profileCache.has(cacheKey)) {
@@ -1180,19 +1189,24 @@ function pickCategoryCombo(recommendations, category, risk = 50) {
   }
 
   if (key === "double") {
-    return bestCombo(recommendations.doubles || []);
+    return bestCombo(recommendations.doubles || [], risk);
   }
 
   if (key === "trixie") {
-    return bestCombo(recommendations.trixies || []);
+    return bestCombo(recommendations.trixies || [], risk);
   }
 
   const legCount = Number(key.replace("accumulator_", ""));
-  return bestCombo(recommendations.accumulatorsByLegCount?.[legCount] || []);
+  return bestCombo(recommendations.accumulatorsByLegCount?.[legCount] || [], risk);
 }
 
 function bestSingleForRisk(combos, risk) {
   const appetite = clamp(Number(risk || 0), 0, 100) / 100;
+
+  if (appetite <= 0) {
+    return bestCombo(combos, 0);
+  }
+
   const targetOdds = 1.48 + appetite * 2.35;
   const targetRisk = appetite * 3;
 
@@ -1210,14 +1224,16 @@ function singleRiskFit(combo, targetOdds, targetRisk, appetite) {
   const oddsFit = Math.max(0, 1 - Math.abs(Math.log(Math.max(1.01, odds) / targetOdds)) / 0.78);
   const tagFit = Math.max(0, 1 - Math.abs(riskTagLevel(leg.riskTag) - targetRisk) / 3);
   const lowRiskStability = appetite < 0.38 && ["steady_edge", "value_favourite", "market_confirmed_edge"].includes(leg.riskTag) ? 9 : 0;
-  const highRiskPrice = appetite > 0.55 && ["calculated_risk", "longshot_value", "contrarian_value"].includes(leg.riskTag) ? 6 : 0;
+  const edgeBlend = clamp((appetite - 0.8) / 0.2, 0, 1);
+  const highRiskPrice = edgeBlend > 0 && ["calculated_risk", "longshot_value", "contrarian_value"].includes(leg.riskTag) ? 4 * edgeBlend : 0;
 
   return (Number(combo.score || 0) * 0.1)
-    + oddsFit * 42
+    + oddsFit * (34 - edgeBlend * 10)
     + tagFit * 14
-    + confidence * (30 - appetite * 8)
-    + edge * (18 + appetite * 40)
-    + clamp(expectedValue * 8, -6, 12) * appetite
+    + comboSurvivalFit(combo, appetite) * 0.62
+    + confidence * (28 - appetite * 4)
+    + edge * (14 + edgeBlend * 24)
+    + clamp(expectedValue * 6, -4, 8) * edgeBlend
     + lowRiskStability
     + highRiskPrice;
 }
@@ -1242,12 +1258,45 @@ function riskTagLevel(tag) {
   return 0;
 }
 
-function bestCombo(combos) {
+function bestCombo(combos, risk = 50) {
+  const appetite = clamp(Number(risk || 0), 0, 100) / 100;
+
   return [...combos].sort((left, right) => {
-    const leftScore = Number(left.score || 0) + Number(left.expectedValue || 0) * 8 + Number(left.averageConfidence || 0) * 5;
-    const rightScore = Number(right.score || 0) + Number(right.expectedValue || 0) * 8 + Number(right.averageConfidence || 0) * 5;
-    return rightScore - leftScore;
+    return comboFit(right, appetite) - comboFit(left, appetite);
   })[0] || null;
+}
+
+function comboFit(combo, appetite) {
+  const edgeBlend = clamp((appetite - 0.8) / 0.2, 0, 1);
+  const survivalFit = comboSurvivalFit(combo, appetite);
+  const expectedValue = Number(combo.expectedValue || 0);
+  const independentEdge = Number(combo.averageIndependentEdge ?? combo.averageEdge ?? combo.legs?.[0]?.independentEdge ?? combo.legs?.[0]?.edge ?? 0);
+  const odds = Number(combo.combinedDecimalOdds || 1);
+  const legCount = Number(combo.legCount || combo.legs?.length || 1);
+  const longOddsPenalty = legCount === 1
+    ? Math.max(0, odds - (2.15 + appetite * 0.75 + edgeBlend * 0.45)) * (7 - edgeBlend * 2)
+    : Math.max(0, Math.log(Math.max(1, odds)) - (1.2 + legCount * 0.38 + appetite * 0.35)) * (5 - edgeBlend * 1.5);
+
+  return survivalFit
+    + Number(combo.score || 0) * (0.18 - edgeBlend * 0.06)
+    + independentEdge * (18 + edgeBlend * 28)
+    + clamp(expectedValue * 5, -4, 8) * edgeBlend
+    - longOddsPenalty;
+}
+
+function comboSurvivalFit(combo, appetite) {
+  const survival = Number(combo.survivalCombinedProbability || combo.combinedProbability || 0);
+  const averageSurvival = Number(combo.averageSurvivalProbability || combo.combinedProbability || 0);
+  const confidence = Number(combo.averageConfidence || combo.legs?.[0]?.confidence || 0);
+  const displayRating = Number(combo.displayRating || 0);
+  const probability = Number(combo.combinedProbability || 0);
+  const edgeBlend = clamp((appetite - 0.8) / 0.2, 0, 1);
+
+  return survival * (110 - edgeBlend * 22)
+    + averageSurvival * (34 - edgeBlend * 7)
+    + probability * (24 - edgeBlend * 6)
+    + confidence * 22
+    + displayRating * 18;
 }
 
 function buildMostLikelyPicks(legs, { fixtureCount = null } = {}) {

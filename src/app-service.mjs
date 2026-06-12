@@ -1,7 +1,7 @@
 import { appendJsonRecords, loadEngineState, readJson, upsertJsonRecords, writeJson } from "./db.mjs";
 import { buildScanIntelligence, buildTeamStatsWithIntelligence, loadIntelligenceState, loadOutcomeLearning, persistScanIntelligence } from "./intelligence-memory.mjs";
 import { rankBookmakerOffers } from "./offer-engine.mjs";
-import { buildBetRecommendations } from "./portfolio-builder.mjs";
+import { buildBetRecommendations, buildMostLikelyPicks } from "./portfolio-builder.mjs";
 import { fetchFixturesWithDiagnostics } from "./providers/fixtures-provider.mjs";
 import { fetchNewsArticlesWithDiagnostics } from "./providers/news-provider.mjs";
 import { fetchOddsSnapshotWithDiagnostics } from "./providers/odds-provider.mjs";
@@ -87,7 +87,8 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
   const intelligenceState = await loadIntelligenceState();
   let outcomeLearning = await loadOutcomeLearning();
   const appSettings = await saveAppSettings(settings);
-  const policy = buildRiskPolicy(engineState.policy, appSettings.risk);
+  const useMostLikelyMode = Number(appSettings.risk || 0) <= 0;
+  const policy = useMostLikelyMode ? buildMostLikelyPolicy(engineState.policy) : buildRiskPolicy(engineState.policy, appSettings.risk);
   const sourceDiagnostics = [];
   const fixtureResult = await fetchFixturesWithDiagnostics({
     providerConfig: engineState.providers.fixtures,
@@ -249,8 +250,14 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
     playerStats: allPlayerStats
   });
   const recommendations = buildBetRecommendations(legCandidates, policy);
+  const mostLikelyBetslip = useMostLikelyMode
+    ? selectMostLikelyBetslip({
+      picks: buildMostLikelyPicks(legCandidates, policy, { fixtureCount: scanFixtures.length }),
+      stake: appSettings.stake
+    })
+    : [];
   const offerRanking = rankBookmakerOffers(latestState.bookmakerOffers, policy, now);
-  const betslip = selectBetslip({
+  const betslip = useMostLikelyMode ? mostLikelyBetslip : selectBetslip({
     recommendations,
     stake: appSettings.stake,
     risk: appSettings.risk
@@ -407,31 +414,37 @@ function summarizeSourceHealth(sourceDiagnostics) {
 
 export function buildRiskPolicy(basePolicy, riskValue) {
   const risk = clampNumber(riskValue, 0, 100);
+
+  if (risk <= 0) {
+    return buildMostLikelyPolicy(basePolicy);
+  }
+
   const appetite = risk / 100;
-  const preferredDoubleMin = 2 + appetite * 0.95;
-  const preferredDoubleMax = 4.6 + appetite * 10.4;
-  const preferredTrixieMin = 3.2 + appetite * 3.8;
-  const preferredTrixieMax = 10 + appetite * 42;
+  const edgeAppetite = clampNumber((risk - 80) / 20, 0, 1);
+  const preferredDoubleMin = 1.8 + appetite * 0.75 + edgeAppetite * 0.25;
+  const preferredDoubleMax = 4.2 + appetite * 3.9 + edgeAppetite * 1.2;
+  const preferredTrixieMin = 3 + appetite * 2.6 + edgeAppetite * 0.8;
+  const preferredTrixieMax = 10 + appetite * 11 + edgeAppetite * 5;
   const accumulatorRanges = {
     3: {
-      min: round(4.2 + appetite * 4.8, 2),
-      max: round(14 + appetite * 56, 2)
+      min: round(4 + appetite * 3 + edgeAppetite * 1, 2),
+      max: round(14 + appetite * 24 + edgeAppetite * 12, 2)
     },
     4: {
-      min: round(6.5 + appetite * 8.5, 2),
-      max: round(26 + appetite * 96, 2)
+      min: round(6 + appetite * 4.5 + edgeAppetite * 1.5, 2),
+      max: round(24 + appetite * 42 + edgeAppetite * 24, 2)
     },
     5: {
-      min: round(9 + appetite * 13, 2),
-      max: round(42 + appetite * 155, 2)
+      min: round(8 + appetite * 7 + edgeAppetite * 2, 2),
+      max: round(38 + appetite * 64 + edgeAppetite * 36, 2)
     },
     6: {
-      min: round(12 + appetite * 20, 2),
-      max: round(68 + appetite * 245, 2)
+      min: round(11 + appetite * 9 + edgeAppetite * 3, 2),
+      max: round(58 + appetite * 92 + edgeAppetite * 50, 2)
     },
     8: {
-      min: round(22 + appetite * 38, 2),
-      max: round(140 + appetite * 520, 2)
+      min: round(20 + appetite * 18 + edgeAppetite * 6, 2),
+      max: round(105 + appetite * 160 + edgeAppetite * 85, 2)
     }
   };
 
@@ -440,28 +453,31 @@ export function buildRiskPolicy(basePolicy, riskValue) {
     riskProfile: {
       ...(basePolicy.riskProfile || {}),
       mode: describeRisk(risk).key,
-      minLegEdge: round(0.03 - appetite * 0.03, 4),
-      minIndependentEdge: round(0.018 - appetite * 0.018, 4),
-      minLegConfidence: round(0.72 - appetite * 0.34, 4),
-      minIntelligenceConfidence: round(0.64 - appetite * 0.3, 4),
-      minNonMarketSignals: appetite < 0.3 ? 3 : 2,
-      minLongshotModelProbability: round(0.22 - appetite * 0.055, 4),
+      sliderRisk: risk,
+      survivabilityFirst: true,
+      edgeBlend: round(edgeAppetite, 3),
+      minLegEdge: round(0.03 - appetite * 0.022, 4),
+      minIndependentEdge: round(0.018 - appetite * 0.012, 4),
+      minLegConfidence: round(0.72 - appetite * 0.1, 4),
+      minIntelligenceConfidence: round(0.64 - appetite * 0.12, 4),
+      minNonMarketSignals: appetite < 0.35 ? 3 : 2,
+      minLongshotModelProbability: round(0.24 - appetite * 0.035, 4),
       minLongshotSignals: appetite >= 0.72 ? 2 : 3,
-      minLongshotResultEdgeForce: round(58 - appetite * 18, 2),
-      maxResultLongshotDecimalOdds: round(8 + appetite * 10, 2),
-      minDrawModelProbability: round(0.25 - appetite * 0.035, 4),
-      maxDrawIndependentResultEdge: round(42 + appetite * 22, 2),
-      minBttsYesRawProbability: round(0.5 - appetite * 0.035, 4),
-      minBttsLowerTeamExpectedGoals: round(0.86 - appetite * 0.1, 4),
-      maxFavoriteImpliedProbability: round(0.82 - appetite * 0.22, 4),
-      minDecimalOddsForRiskLeg: round(1.75 + appetite * 1.55, 2),
+      minLongshotResultEdgeForce: round(60 - appetite * 10, 2),
+      maxResultLongshotDecimalOdds: round(5.5 + appetite * 1.5 + edgeAppetite * 1, 2),
+      minDrawModelProbability: round(0.25 - appetite * 0.02, 4),
+      maxDrawIndependentResultEdge: round(42 + appetite * 12, 2),
+      minBttsYesRawProbability: round(0.51 - appetite * 0.025, 4),
+      minBttsLowerTeamExpectedGoals: round(0.88 - appetite * 0.06, 4),
+      maxFavoriteImpliedProbability: round(0.82 - appetite * 0.12, 4),
+      minDecimalOddsForRiskLeg: round(1.62 + appetite * 0.58 + edgeAppetite * 0.35, 2),
       minBookmakerCount: appetite < 0.22 ? 2 : 1,
-      marketConfirmationWeight: round(0.36 - appetite * 0.16, 4),
-      valueHuntingWeight: round(0.14 + appetite * 0.34, 4),
-      contrarianWeight: round(0.02 + appetite * 0.38, 4),
-      minRiskLegsForTrixie: appetite >= 0.42 ? 1 : 0,
+      marketConfirmationWeight: round(0.34 - appetite * 0.08, 4),
+      valueHuntingWeight: round(0.1 + appetite * 0.16 + edgeAppetite * 0.12, 4),
+      contrarianWeight: round(0.015 + appetite * 0.08 + edgeAppetite * 0.1, 4),
+      minRiskLegsForTrixie: appetite >= 0.82 ? 1 : 0,
       maxLegs: 8,
-      maxCombinedOdds: round(38 + appetite * 560, 2),
+      maxCombinedOdds: round(32 + appetite * 165 + edgeAppetite * 60, 2),
       preferredCombinedOdds: {
         double: {
           min: round(preferredDoubleMin, 2),
@@ -614,6 +630,22 @@ export function selectBetslip({ recommendations, stake, risk }) {
   });
 }
 
+function selectMostLikelyBetslip({ picks, stake }) {
+  const stakePerBet = round(clampNumber(stake, 1, 100000), 2);
+
+  return (picks || []).map((combo, index) => {
+    const potentialReturn = calculatePotentialReturn(combo, stakePerBet);
+
+    return {
+      ...combo,
+      rank: index + 1,
+      stake: stakePerBet,
+      potentialReturn,
+      potentialProfit: round(Math.max(0, potentialReturn - stakePerBet), 2)
+    };
+  });
+}
+
 function sanitizeSettings(settings) {
   return {
     stake: round(clampNumber(settings.stake, 1, 100000), 2),
@@ -632,20 +664,25 @@ function pickCategoryCombo(recommendations, category, risk = 50) {
   }
 
   if (category.type === "double") {
-    return bestCombo(recommendations.doubles || []);
+    return bestCombo(recommendations.doubles || [], risk);
   }
 
   if (category.type === "trixie") {
-    return bestCombo(recommendations.trixies || []);
+    return bestCombo(recommendations.trixies || [], risk);
   }
 
   const byLegCount = recommendations.accumulatorsByLegCount?.[category.legCount] || [];
   const fallback = (recommendations.accumulators || []).filter((combo) => Number(combo.legCount) === category.legCount);
-  return bestCombo(byLegCount.length ? byLegCount : fallback);
+  return bestCombo(byLegCount.length ? byLegCount : fallback, risk);
 }
 
 function bestSingleForRisk(combos, risk) {
   const appetite = clampNumber(risk, 0, 100) / 100;
+
+  if (appetite <= 0) {
+    return bestCombo(combos, 0);
+  }
+
   const targetOdds = 1.48 + appetite * 2.35;
   const targetRisk = appetite * 3;
 
@@ -663,14 +700,16 @@ function singleRiskFit(combo, targetOdds, targetRisk, appetite) {
   const oddsFit = Math.max(0, 1 - Math.abs(Math.log(Math.max(1.01, odds) / targetOdds)) / 0.78);
   const tagFit = Math.max(0, 1 - Math.abs(riskTagLevel(leg.riskTag) - targetRisk) / 3);
   const lowRiskStability = appetite < 0.38 && ["steady_edge", "value_favourite", "market_confirmed_edge"].includes(leg.riskTag) ? 9 : 0;
-  const highRiskPrice = appetite > 0.55 && ["calculated_risk", "longshot_value", "contrarian_value"].includes(leg.riskTag) ? 6 : 0;
+  const edgeBlend = clampNumber((appetite - 0.8) / 0.2, 0, 1);
+  const highRiskPrice = edgeBlend > 0 && ["calculated_risk", "longshot_value", "contrarian_value"].includes(leg.riskTag) ? 4 * edgeBlend : 0;
 
   return (Number(combo.score || 0) * 0.1)
-    + oddsFit * 42
+    + oddsFit * (34 - edgeBlend * 10)
     + tagFit * 14
-    + confidence * (30 - appetite * 8)
-    + edge * (18 + appetite * 40)
-    + Math.min(12, Math.max(-6, expectedValue * 8)) * appetite
+    + comboSurvivalFit(combo, appetite) * 0.62
+    + confidence * (28 - appetite * 4)
+    + edge * (14 + edgeBlend * 24)
+    + Math.min(8, Math.max(-4, expectedValue * 6)) * edgeBlend
     + lowRiskStability
     + highRiskPrice;
 }
@@ -695,12 +734,45 @@ function riskTagLevel(tag) {
   return 0;
 }
 
-function bestCombo(combos) {
+function bestCombo(combos, risk = 50) {
+  const appetite = clampNumber(risk, 0, 100) / 100;
+
   return [...combos].sort((left, right) => {
-    const leftScore = Number(left.score || 0) + Number(left.expectedValue || 0) * 8 + Number(left.averageConfidence || 0) * 5;
-    const rightScore = Number(right.score || 0) + Number(right.expectedValue || 0) * 8 + Number(right.averageConfidence || 0) * 5;
-    return rightScore - leftScore;
+    return comboFit(right, appetite) - comboFit(left, appetite);
   })[0] || null;
+}
+
+function comboFit(combo, appetite) {
+  const edgeBlend = clampNumber((appetite - 0.8) / 0.2, 0, 1);
+  const survivalFit = comboSurvivalFit(combo, appetite);
+  const expectedValue = Number(combo.expectedValue || 0);
+  const independentEdge = Number(combo.averageIndependentEdge ?? combo.averageEdge ?? combo.legs?.[0]?.independentEdge ?? combo.legs?.[0]?.edge ?? 0);
+  const odds = Number(combo.combinedDecimalOdds || 1);
+  const legCount = Number(combo.legCount || combo.legs?.length || 1);
+  const longOddsPenalty = legCount === 1
+    ? Math.max(0, odds - (2.15 + appetite * 0.75 + edgeBlend * 0.45)) * (7 - edgeBlend * 2)
+    : Math.max(0, Math.log(Math.max(1, odds)) - (1.2 + legCount * 0.38 + appetite * 0.35)) * (5 - edgeBlend * 1.5);
+
+  return survivalFit
+    + Number(combo.score || 0) * (0.18 - edgeBlend * 0.06)
+    + independentEdge * (18 + edgeBlend * 28)
+    + Math.max(-4, Math.min(8, expectedValue * 5)) * edgeBlend
+    - longOddsPenalty;
+}
+
+function comboSurvivalFit(combo, appetite) {
+  const survival = Number(combo.survivalCombinedProbability || combo.combinedProbability || 0);
+  const averageSurvival = Number(combo.averageSurvivalProbability || combo.combinedProbability || 0);
+  const confidence = Number(combo.averageConfidence || combo.legs?.[0]?.confidence || 0);
+  const displayRating = Number(combo.displayRating || 0);
+  const probability = Number(combo.combinedProbability || 0);
+  const edgeBlend = clampNumber((appetite - 0.8) / 0.2, 0, 1);
+
+  return survival * (110 - edgeBlend * 22)
+    + averageSurvival * (34 - edgeBlend * 7)
+    + probability * (24 - edgeBlend * 6)
+    + confidence * 22
+    + displayRating * 18;
 }
 
 function calculatePotentialReturn(combo, stake) {
