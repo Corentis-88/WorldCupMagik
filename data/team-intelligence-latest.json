@@ -1,8 +1,8 @@
 [
   {
     "team": "South Korea",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.0893,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.0901,
     "dataConfidence": 0.8353,
     "form": {
       "matchCount": 20,
@@ -577,14 +577,14 @@
       ]
     },
     "news": {
-      "articleCount": 14,
+      "articleCount": 15,
       "sourceDiversity": 2,
-      "sentiment": -0.0314,
-      "injury": 0.0386,
-      "tacticalFit": 0.4757,
-      "lineupClarity": 0.4414,
-      "rotationRisk": 0.2336,
-      "impact": 0.0635,
+      "sentiment": -0.0293,
+      "injury": 0.036,
+      "tacticalFit": 0.474,
+      "lineupClarity": 0.442,
+      "rotationRisk": 0.23,
+      "impact": 0.0656,
       "confidence": 0.8316,
       "topSignals": []
     },
@@ -712,7 +712,7 @@
     },
     "reasons": [
       "20-match form 2.2 PPG, xG 2.211-1.126",
-      "14 news item(s), news impact 0.0635",
+      "15 news item(s), news impact 0.0656",
       "market intelligence 0% movement, consensus 3.31 across 4 bookie(s)",
       "17 scorer record(s), top scorer signal 0.099",
       "memory currently leans positive"
@@ -720,9 +720,9 @@
   },
   {
     "team": "Czechia",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": -0.0888,
-    "dataConfidence": 0.7965,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": -0.095,
+    "dataConfidence": 0.7967,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 1.8,
@@ -1371,30 +1371,30 @@
   },
   {
     "team": "Canada",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": -0.0286,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": -0.0305,
     "dataConfidence": 0.8525,
     "form": {
       "matchCount": 20,
-      "pointsPerGame": 1.8,
-      "goalsFor": 2.55,
+      "pointsPerGame": 1.85,
+      "goalsFor": 2.6,
       "goalsAgainst": 1,
-      "xgFor": 2.103,
+      "xgFor": 2.139,
       "xgAgainst": 1.27,
-      "shotsFor": 14.71,
+      "shotsFor": 14.87,
       "shotsAgainst": 11.1,
-      "shotsOnTargetFor": 5.59,
+      "shotsOnTargetFor": 5.66,
       "shotsOnTargetAgainst": 3.76,
-      "possession": 52.3,
-      "passesAttempted": 523.4,
-      "completedPasses": 411.8,
-      "passCompletion": 0.791,
+      "possession": 52.5,
+      "passesAttempted": 534.3,
+      "completedPasses": 419.3,
+      "passCompletion": 0.789,
       "topScorers": [
         {
           "playerName": "Larin",
-          "goals": 8,
-          "scoringMatches": 8,
-          "goalsPerTwentyTeamMatches": 8
+          "goals": 9,
+          "scoringMatches": 9,
+          "goalsPerTwentyTeamMatches": 9
         },
         {
           "playerName": "J. David",
@@ -1439,7 +1439,7 @@
           "goalsPerTwentyTeamMatches": 3
         }
       ],
-      "formMomentum": -0.3755,
+      "formMomentum": -0.4045,
       "confidence": 0.9,
       "shortForm": {
         "matchCount": 6,
@@ -1465,35 +1465,54 @@
       },
       "longForm": {
         "matchCount": 20,
-        "pointsPerGame": 1.8,
-        "goalsFor": 2.55,
+        "pointsPerGame": 1.85,
+        "goalsFor": 2.6,
         "goalsAgainst": 1,
-        "xgFor": 2.103,
+        "xgFor": 2.139,
         "xgAgainst": 1.27,
-        "shotsFor": 14.71,
+        "shotsFor": 14.87,
         "shotsAgainst": 11.1,
-        "shotsOnTargetFor": 5.59,
+        "shotsOnTargetFor": 5.66,
         "shotsOnTargetAgainst": 3.76,
-        "possession": 52.3,
-        "passesAttempted": 523.4,
-        "completedPasses": 411.8,
-        "passCompletion": 0.791,
+        "possession": 52.5,
+        "passesAttempted": 534.3,
+        "completedPasses": 419.3,
+        "passCompletion": 0.789,
         "cleanSheetRate": 0.45,
-        "failedToScoreRate": 0.3,
-        "bttsRate": 0.35,
+        "failedToScoreRate": 0.25,
+        "bttsRate": 0.4,
         "over25Rate": 0.55,
-        "scoringGameRate": 0.7,
+        "scoringGameRate": 0.75,
         "concedeGameRate": 0.55
       },
       "marketAngles": {
         "cleanSheetRate": 0.45,
-        "failedToScoreRate": 0.3,
-        "bttsRate": 0.35,
+        "failedToScoreRate": 0.25,
+        "bttsRate": 0.4,
         "over25Rate": 0.55,
-        "scoringGameRate": 0.7,
+        "scoringGameRate": 0.75,
         "concedeGameRate": 0.55
       },
       "recentMatches": [
+        {
+          "points": 1,
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "xgFor": 1.27,
+          "xgAgainst": 1.27,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 50,
+          "passesAttempted": 638,
+          "completedPasses": 491,
+          "passCompletion": 0.77,
+          "scorers": [
+            {
+              "name": "Larin",
+              "goals": 1
+            }
+          ]
+        },
         {
           "points": 3,
           "goalsFor": 4,
@@ -2012,37 +2031,18 @@
               "goals": 1
             }
           ]
-        },
-        {
-          "points": 0,
-          "goalsFor": 0,
-          "goalsAgainst": 1,
-          "xgFor": 0.55,
-          "xgAgainst": 1.27,
-          "shotsFor": 8,
-          "shotsOnTargetFor": 2.4,
-          "possession": 47.5,
-          "passesAttempted": 420,
-          "completedPasses": 342,
-          "passCompletion": 0.815,
-          "scorers": [
-            {
-              "name": "Kaye",
-              "goals": 1
-            }
-          ]
         }
       ]
     },
     "news": {
-      "articleCount": 46,
+      "articleCount": 50,
       "sourceDiversity": 2,
-      "sentiment": 0.0183,
-      "injury": 0.0274,
-      "tacticalFit": 0.4754,
-      "lineupClarity": 0.4726,
-      "rotationRisk": 0.2224,
-      "impact": 0.097,
+      "sentiment": 0.0328,
+      "injury": 0.0252,
+      "tacticalFit": 0.477,
+      "lineupClarity": 0.4812,
+      "rotationRisk": 0.223,
+      "impact": 0.1061,
       "confidence": 0.8316,
       "topSignals": [
         "availability risk",
@@ -2078,7 +2078,7 @@
         },
         {
           "playerName": "Larin",
-          "goals": 4,
+          "goals": 5,
           "matchesSampled": 20
         },
         {
@@ -2087,7 +2087,7 @@
           "matchesSampled": 20
         }
       ],
-      "threat": 0.1215,
+      "threat": 0.126,
       "confidence": 0.78
     },
     "manager": "Jesse Marsch",
@@ -2106,9 +2106,9 @@
     "topScorers": [
       {
         "playerName": "Larin",
-        "goals": 8,
-        "scoringMatches": 8,
-        "goalsPerTwentyTeamMatches": 8
+        "goals": 9,
+        "scoringMatches": 9,
+        "goalsPerTwentyTeamMatches": 9
       },
       {
         "playerName": "J. David",
@@ -2154,9 +2154,9 @@
       }
     ],
     "passing": {
-      "attempted": 605.9,
-      "completed": 469.7,
-      "completion": 0.776,
+      "attempted": 607.5,
+      "completed": 469.6,
+      "completion": 0.774,
       "source": "score-and-possession-derived estimate"
     },
     "intelligenceCoverage": {
@@ -2170,32 +2170,32 @@
       "topScorerCount": 8
     },
     "reasons": [
-      "20-match form 1.8 PPG, xG 2.103-1.27",
+      "20-match form 1.85 PPG, xG 2.139-1.27",
       "recent form cooling",
-      "46 news item(s), news impact 0.097",
+      "50 news item(s), news impact 0.1061",
       "market intelligence 0% movement, consensus 1.344 across 5 bookie(s)",
-      "26 scorer record(s), top scorer signal 0.1215"
+      "26 scorer record(s), top scorer signal 0.126"
     ]
   },
   {
     "team": "Bosnia and Herzegovina",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": -0.1232,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": -0.1263,
     "dataConfidence": 0.6565,
     "form": {
       "matchCount": 20,
-      "pointsPerGame": 1.3,
+      "pointsPerGame": 1.35,
       "goalsFor": 1.9,
-      "goalsAgainst": 1.3,
+      "goalsAgainst": 1.25,
       "xgFor": 1.851,
-      "xgAgainst": 1.486,
+      "xgAgainst": 1.45,
       "shotsFor": 13.63,
-      "shotsAgainst": 12.03,
+      "shotsAgainst": 11.87,
       "shotsOnTargetFor": 4.99,
-      "shotsOnTargetAgainst": 4.18,
-      "possession": 50.8,
-      "passesAttempted": 636.5,
-      "completedPasses": 488.2,
+      "shotsOnTargetAgainst": 4.11,
+      "possession": 50.9,
+      "passesAttempted": 637.4,
+      "completedPasses": 489.2,
       "passCompletion": 0.767,
       "topScorers": [
         {
@@ -2205,49 +2205,49 @@
           "goalsPerTwentyTeamMatches": 2
         }
       ],
-      "formMomentum": -0.4566,
+      "formMomentum": -0.4855,
       "confidence": 0.9,
       "shortForm": {
         "matchCount": 6,
         "pointsPerGame": 0.667,
-        "goalsFor": 0.333,
-        "goalsAgainst": 1.333,
-        "xgFor": 0.79,
-        "xgAgainst": 1.51,
-        "shotsFor": 9.03,
-        "shotsAgainst": 12.13,
-        "shotsOnTargetFor": 2.87,
-        "shotsOnTargetAgainst": 4.23,
+        "goalsFor": 0.5,
+        "goalsAgainst": 1.5,
+        "xgFor": 0.91,
+        "xgAgainst": 1.63,
+        "shotsFor": 9.55,
+        "shotsAgainst": 12.65,
+        "shotsOnTargetFor": 3.1,
+        "shotsOnTargetAgainst": 4.47,
         "possession": 47.5,
-        "passesAttempted": 610.7,
-        "completedPasses": 464.3,
+        "passesAttempted": 613.3,
+        "completedPasses": 466.3,
         "passCompletion": 0.76,
-        "cleanSheetRate": 0.333,
-        "failedToScoreRate": 0.667,
-        "bttsRate": 0.333,
+        "cleanSheetRate": 0.167,
+        "failedToScoreRate": 0.5,
+        "bttsRate": 0.5,
         "over25Rate": 0.333,
-        "scoringGameRate": 0.333,
-        "concedeGameRate": 0.667
+        "scoringGameRate": 0.5,
+        "concedeGameRate": 0.833
       },
       "longForm": {
         "matchCount": 20,
-        "pointsPerGame": 1.3,
+        "pointsPerGame": 1.35,
         "goalsFor": 1.9,
-        "goalsAgainst": 1.3,
+        "goalsAgainst": 1.25,
         "xgFor": 1.851,
-        "xgAgainst": 1.486,
+        "xgAgainst": 1.45,
         "shotsFor": 13.63,
-        "shotsAgainst": 12.03,
+        "shotsAgainst": 11.87,
         "shotsOnTargetFor": 4.99,
-        "shotsOnTargetAgainst": 4.18,
-        "possession": 50.8,
-        "passesAttempted": 636.5,
-        "completedPasses": 488.2,
+        "shotsOnTargetAgainst": 4.11,
+        "possession": 50.9,
+        "passesAttempted": 637.4,
+        "completedPasses": 489.2,
         "passCompletion": 0.767,
         "cleanSheetRate": 0.2,
         "failedToScoreRate": 0.2,
         "bttsRate": 0.7,
-        "over25Rate": 0.7,
+        "over25Rate": 0.65,
         "scoringGameRate": 0.8,
         "concedeGameRate": 0.8
       },
@@ -2255,7 +2255,7 @@
         "cleanSheetRate": 0.2,
         "failedToScoreRate": 0.2,
         "bttsRate": 0.7,
-        "over25Rate": 0.7,
+        "over25Rate": 0.65,
         "scoringGameRate": 0.8,
         "concedeGameRate": 0.8
       },
@@ -2289,6 +2289,20 @@
           "scorers": []
         },
         {
+          "points": 1,
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "xgFor": 1.27,
+          "xgAgainst": 1.27,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 50,
+          "passesAttempted": 638,
+          "completedPasses": 491,
+          "passCompletion": 0.77,
+          "scorers": []
+        },
+        {
           "points": 0,
           "goalsFor": 0,
           "goalsAgainst": 3,
@@ -2520,20 +2534,6 @@
           "passesAttempted": 650,
           "completedPasses": 498,
           "passCompletion": 0.766,
-          "scorers": []
-        },
-        {
-          "points": 0,
-          "goalsFor": 1,
-          "goalsAgainst": 2,
-          "xgFor": 1.27,
-          "xgAgainst": 1.99,
-          "shotsFor": 11.1,
-          "shotsOnTargetFor": 3.8,
-          "possession": 47.5,
-          "passesAttempted": 621,
-          "completedPasses": 472,
-          "passCompletion": 0.76,
           "scorers": []
         },
         {
@@ -2553,14 +2553,14 @@
       ]
     },
     "news": {
-      "articleCount": 8,
+      "articleCount": 9,
       "sourceDiversity": 1,
-      "sentiment": 0.015,
-      "injury": 0.0225,
-      "tacticalFit": 0.5063,
-      "lineupClarity": 0.47,
-      "rotationRisk": 0.2112,
-      "impact": 0.1022,
+      "sentiment": 0.0489,
+      "injury": 0.02,
+      "tacticalFit": 0.5,
+      "lineupClarity": 0.4856,
+      "rotationRisk": 0.23,
+      "impact": 0.1187,
       "confidence": 0.7316,
       "topSignals": [
         "availability risk",
@@ -2609,8 +2609,8 @@
       }
     ],
     "passing": {
-      "attempted": 633.8,
-      "completed": 486.4,
+      "attempted": 630.9,
+      "completed": 483.9,
       "completion": 0.767,
       "source": "score-and-possession-derived estimate"
     },
@@ -2625,18 +2625,18 @@
       "topScorerCount": 1
     },
     "reasons": [
-      "20-match form 1.3 PPG, xG 1.851-1.486",
+      "20-match form 1.35 PPG, xG 1.851-1.45",
       "recent form cooling",
-      "8 news item(s), news impact 0.1022",
+      "9 news item(s), news impact 0.1187",
       "1 scorer record(s), top scorer signal 0.0225",
       "memory currently leans negative"
     ]
   },
   {
     "team": "USA",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.0731,
-    "dataConfidence": 0.8607,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.0711,
+    "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 1.4,
@@ -3311,8 +3311,8 @@
   },
   {
     "team": "Paraguay",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.2166,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.2177,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -4004,8 +4004,8 @@
   },
   {
     "team": "Australia",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.2324,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.2318,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -4720,9 +4720,9 @@
   },
   {
     "team": "Turkiye",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.1869,
-    "dataConfidence": 0.7339,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.1965,
+    "dataConfidence": 0.7342,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 2.2,
@@ -5360,8 +5360,8 @@
   },
   {
     "team": "Qatar",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": -0.0549,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": -0.0517,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -5874,14 +5874,14 @@
       ]
     },
     "news": {
-      "articleCount": 16,
+      "articleCount": 17,
       "sourceDiversity": 2,
-      "sentiment": -0.0425,
-      "injury": 0.0562,
-      "tacticalFit": 0.5062,
-      "lineupClarity": 0.445,
-      "rotationRisk": 0.2456,
-      "impact": 0.0556,
+      "sentiment": -0.0212,
+      "injury": 0.0529,
+      "tacticalFit": 0.5029,
+      "lineupClarity": 0.4547,
+      "rotationRisk": 0.2535,
+      "impact": 0.067,
       "confidence": 0.8316,
       "topSignals": [
         "availability risk",
@@ -6011,15 +6011,15 @@
     "reasons": [
       "20-match form 1.6 PPG, xG 1.558-1.63",
       "recent form cooling",
-      "16 news item(s), news impact 0.0556",
+      "17 news item(s), news impact 0.067",
       "market intelligence 0% movement, consensus 6.716 across 9 bookie(s)",
       "15 scorer record(s), top scorer signal 0.1035"
     ]
   },
   {
     "team": "Switzerland",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.1491,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.1488,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -6721,8 +6721,8 @@
   },
   {
     "team": "Brazil",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": -0.0197,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": -0.0251,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -7538,8 +7538,8 @@
   },
   {
     "team": "Morocco",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": -0.059,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": -0.0633,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -8196,8 +8196,8 @@
   },
   {
     "team": "Haiti",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": -0.0238,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": -0.0338,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -8612,14 +8612,14 @@
       ]
     },
     "news": {
-      "articleCount": 17,
+      "articleCount": 18,
       "sourceDiversity": 2,
-      "sentiment": 0.0659,
-      "injury": 0.0424,
-      "tacticalFit": 0.5135,
-      "lineupClarity": 0.5206,
-      "rotationRisk": 0.2271,
-      "impact": 0.1265,
+      "sentiment": 0.0711,
+      "injury": 0.04,
+      "tacticalFit": 0.51,
+      "lineupClarity": 0.5233,
+      "rotationRisk": 0.2244,
+      "impact": 0.13,
       "confidence": 0.8316,
       "topSignals": [
         "positive availability"
@@ -8724,15 +8724,15 @@
     "reasons": [
       "20-match form 1.45 PPG, xG 1.702-1.378",
       "recent form cooling",
-      "17 news item(s), news impact 0.1265",
+      "18 news item(s), news impact 0.13",
       "market intelligence 0% movement, consensus 16.765 across 9 bookie(s)",
       "17 scorer record(s), top scorer signal 0.162"
     ]
   },
   {
     "team": "Scotland",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.3135,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.3144,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -9252,14 +9252,14 @@
       ]
     },
     "news": {
-      "articleCount": 66,
+      "articleCount": 69,
       "sourceDiversity": 2,
-      "sentiment": -0.0018,
-      "injury": 0.0518,
-      "tacticalFit": 0.4923,
-      "lineupClarity": 0.4809,
-      "rotationRisk": 0.2217,
-      "impact": 0.0825,
+      "sentiment": 0.0029,
+      "injury": 0.0496,
+      "tacticalFit": 0.4904,
+      "lineupClarity": 0.483,
+      "rotationRisk": 0.2199,
+      "impact": 0.0858,
       "confidence": 0.8316,
       "topSignals": [
         "availability risk",
@@ -9391,7 +9391,7 @@
     "reasons": [
       "20-match form 1.45 PPG, xG 1.846-1.414",
       "recent form improving",
-      "66 news item(s), news impact 0.0825",
+      "69 news item(s), news impact 0.0858",
       "market intelligence 0% movement, consensus 3.47 across 9 bookie(s)",
       "19 scorer record(s), top scorer signal 0.1035",
       "memory currently leans positive"
@@ -9399,8 +9399,8 @@
   },
   {
     "team": "Germany",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.1436,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.1437,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -10127,8 +10127,8 @@
   },
   {
     "team": "Curaçao",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.2808,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.2809,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -10725,7 +10725,7 @@
   },
   {
     "team": "Netherlands",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
+    "updatedAt": "2026-06-12T22:02:09.184Z",
     "learnedEdge": 0.3055,
     "dataConfidence": 0.8611,
     "form": {
@@ -11463,8 +11463,8 @@
   },
   {
     "team": "Japan",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": -0.0698,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": -0.0697,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -12111,8 +12111,8 @@
   },
   {
     "team": "Ivory Coast",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": -0.1175,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": -0.1178,
     "dataConfidence": 0.8397,
     "form": {
       "matchCount": 20,
@@ -12722,8 +12722,8 @@
   },
   {
     "team": "Ecuador",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.0642,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.0639,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -13381,7 +13381,7 @@
   },
   {
     "team": "Sweden",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
+    "updatedAt": "2026-06-12T22:02:09.184Z",
     "learnedEdge": 0.2593,
     "dataConfidence": 0.7514,
     "form": {
@@ -14038,7 +14038,7 @@
   },
   {
     "team": "Tunisia",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
+    "updatedAt": "2026-06-12T22:02:09.184Z",
     "learnedEdge": -0.4048,
     "dataConfidence": 0.8397,
     "form": {
@@ -14619,8 +14619,8 @@
   },
   {
     "team": "Spain",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.2776,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.2758,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -15374,8 +15374,8 @@
   },
   {
     "team": "Cape Verde",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": -0.0524,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": -0.0618,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -16031,8 +16031,8 @@
   },
   {
     "team": "Belgium",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.1227,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.1229,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -16798,7 +16798,7 @@
   },
   {
     "team": "Egypt",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
+    "updatedAt": "2026-06-12T22:02:09.184Z",
     "learnedEdge": -0.1139,
     "dataConfidence": 0.8611,
     "form": {
@@ -17432,7 +17432,7 @@
   },
   {
     "team": "Saudi Arabia",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
+    "updatedAt": "2026-06-12T22:02:09.184Z",
     "learnedEdge": -0.0756,
     "dataConfidence": 0.8611,
     "form": {
@@ -18084,7 +18084,7 @@
   },
   {
     "team": "Uruguay",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
+    "updatedAt": "2026-06-12T22:02:09.184Z",
     "learnedEdge": 0.168,
     "dataConfidence": 0.8611,
     "form": {
@@ -18713,7 +18713,7 @@
   },
   {
     "team": "Iran",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
+    "updatedAt": "2026-06-12T22:02:09.184Z",
     "learnedEdge": 0.1971,
     "dataConfidence": 0.8611,
     "form": {
@@ -19382,8 +19382,8 @@
   },
   {
     "team": "New Zealand",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.1548,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.1547,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -19947,7 +19947,7 @@
   },
   {
     "team": "France",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
+    "updatedAt": "2026-06-12T22:02:09.184Z",
     "learnedEdge": -0.1227,
     "dataConfidence": 0.8611,
     "form": {
@@ -20668,8 +20668,8 @@
   },
   {
     "team": "Senegal",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.0529,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.053,
     "dataConfidence": 0.8397,
     "form": {
       "matchCount": 20,
@@ -21311,7 +21311,7 @@
   },
   {
     "team": "Iraq",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
+    "updatedAt": "2026-06-12T22:02:09.184Z",
     "learnedEdge": -0.104,
     "dataConfidence": 0.8611,
     "form": {
@@ -21869,7 +21869,7 @@
   },
   {
     "team": "Norway",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
+    "updatedAt": "2026-06-12T22:02:09.184Z",
     "learnedEdge": -0.0264,
     "dataConfidence": 0.8611,
     "form": {
@@ -22549,8 +22549,8 @@
   },
   {
     "team": "Argentina",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.0752,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.0745,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -23332,8 +23332,8 @@
   },
   {
     "team": "Algeria",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": -0.0047,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": -0.0046,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -24067,8 +24067,8 @@
   },
   {
     "team": "Austria",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": -0.1248,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": -0.1215,
     "dataConfidence": 0.8397,
     "form": {
       "matchCount": 20,
@@ -24739,8 +24739,8 @@
   },
   {
     "team": "Jordan",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.0323,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.0324,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -25309,8 +25309,8 @@
   },
   {
     "team": "Portugal",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.0074,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.0075,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -25975,7 +25975,7 @@
   },
   {
     "team": "DR Congo",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
+    "updatedAt": "2026-06-12T22:02:09.184Z",
     "learnedEdge": 0.1623,
     "dataConfidence": 0.8611,
     "form": {
@@ -26578,8 +26578,8 @@
   },
   {
     "team": "England",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": -0.0635,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": -0.0632,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -27076,14 +27076,14 @@
       ]
     },
     "news": {
-      "articleCount": 102,
+      "articleCount": 105,
       "sourceDiversity": 2,
-      "sentiment": 0.0125,
-      "injury": 0.0424,
-      "tacticalFit": 0.4853,
-      "lineupClarity": 0.4782,
-      "rotationRisk": 0.2329,
-      "impact": 0.0901,
+      "sentiment": 0.0152,
+      "injury": 0.0411,
+      "tacticalFit": 0.4851,
+      "lineupClarity": 0.4797,
+      "rotationRisk": 0.2314,
+      "impact": 0.0922,
       "confidence": 0.8316,
       "topSignals": [
         "availability risk",
@@ -27105,7 +27105,7 @@
       "topScorers": [
         {
           "playerName": "Kane",
-          "goals": 10,
+          "goals": 9,
           "matchesSampled": 20
         },
         {
@@ -27114,22 +27114,22 @@
           "matchesSampled": 20
         },
         {
-          "playerName": "Alexander-Arnold",
-          "goals": 2,
-          "matchesSampled": 20
-        },
-        {
           "playerName": "Gordon",
           "goals": 2,
           "matchesSampled": 20
         },
         {
-          "playerName": "Palmer",
+          "playerName": "Rice",
+          "goals": 2,
+          "matchesSampled": 20
+        },
+        {
+          "playerName": "Saka",
           "goals": 2,
           "matchesSampled": 20
         }
       ],
-      "threat": 0.0855,
+      "threat": 0.081,
       "confidence": 0.78
     },
     "manager": "Thomas Tuchel",
@@ -27217,15 +27217,15 @@
     "reasons": [
       "20-match form 2.25 PPG, xG 1.45-0.874",
       "recent form cooling",
-      "102 news item(s), news impact 0.0901",
+      "105 news item(s), news impact 0.0922",
       "market intelligence 0% movement, consensus 1.499 across 8 bookie(s)",
-      "20 scorer record(s), top scorer signal 0.0855"
+      "20 scorer record(s), top scorer signal 0.081"
     ]
   },
   {
     "team": "Croatia",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": -0.1657,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": -0.1663,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -27787,8 +27787,8 @@
   },
   {
     "team": "Ghana",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.136,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.1351,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -28281,14 +28281,14 @@
       ]
     },
     "news": {
-      "articleCount": 8,
+      "articleCount": 9,
       "sourceDiversity": 2,
-      "sentiment": 0.08,
+      "sentiment": 0.0889,
       "injury": 0,
-      "tacticalFit": 0.5175,
-      "lineupClarity": 0.5,
-      "rotationRisk": 0.205,
-      "impact": 0.1479,
+      "tacticalFit": 0.52,
+      "lineupClarity": 0.5078,
+      "rotationRisk": 0.2022,
+      "impact": 0.1539,
       "confidence": 0.8316,
       "topSignals": [
         "positive availability",
@@ -28411,7 +28411,7 @@
     "reasons": [
       "20-match form 1.2 PPG, xG 1.558-1.774",
       "recent form improving",
-      "8 news item(s), news impact 0.1479",
+      "9 news item(s), news impact 0.1539",
       "market intelligence 0% movement, consensus 5.427 across 8 bookie(s)",
       "12 scorer record(s), top scorer signal 0.0495",
       "memory currently leans positive"
@@ -28419,8 +28419,8 @@
   },
   {
     "team": "Panama",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.1113,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.1126,
     "dataConfidence": 0.8611,
     "form": {
       "matchCount": 20,
@@ -28975,14 +28975,14 @@
       ]
     },
     "news": {
-      "articleCount": 5,
+      "articleCount": 6,
       "sourceDiversity": 2,
-      "sentiment": 0.128,
+      "sentiment": 0.1333,
       "injury": 0,
-      "tacticalFit": 0.522,
-      "lineupClarity": 0.546,
+      "tacticalFit": 0.525,
+      "lineupClarity": 0.55,
       "rotationRisk": 0.18,
-      "impact": 0.181,
+      "impact": 0.1846,
       "confidence": 0.8316,
       "topSignals": [
         "positive availability",
@@ -29111,7 +29111,7 @@
     },
     "reasons": [
       "20-match form 1.9 PPG, xG 2.134-2.072",
-      "5 news item(s), news impact 0.181",
+      "6 news item(s), news impact 0.1846",
       "market intelligence 0% movement, consensus 5.443 across 8 bookie(s)",
       "24 scorer record(s), top scorer signal 0.0495",
       "memory currently leans positive"
@@ -29119,7 +29119,7 @@
   },
   {
     "team": "Uzbekistan",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
+    "updatedAt": "2026-06-12T22:02:09.184Z",
     "learnedEdge": -0.1773,
     "dataConfidence": 0.8397,
     "form": {
@@ -29792,8 +29792,8 @@
   },
   {
     "team": "Colombia",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.3465,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.3472,
     "dataConfidence": 0.8397,
     "form": {
       "matchCount": 20,
@@ -30505,8 +30505,8 @@
   },
   {
     "team": "South Africa",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.2146,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.2147,
     "dataConfidence": 0.8053,
     "form": {
       "matchCount": 20,
@@ -30987,14 +30987,14 @@
       ]
     },
     "news": {
-      "articleCount": 40,
+      "articleCount": 41,
       "sourceDiversity": 2,
-      "sentiment": -0.022,
-      "injury": 0.045,
-      "tacticalFit": 0.4725,
-      "lineupClarity": 0.461,
-      "rotationRisk": 0.2175,
-      "impact": 0.07,
+      "sentiment": -0.0215,
+      "injury": 0.0439,
+      "tacticalFit": 0.472,
+      "lineupClarity": 0.4607,
+      "rotationRisk": 0.2166,
+      "impact": 0.0706,
       "confidence": 0.8316,
       "topSignals": [
         "availability risk",
@@ -31124,7 +31124,7 @@
     "reasons": [
       "20-match form 1.3 PPG, xG 1.27-1.126",
       "recent form improving",
-      "40 news item(s), news impact 0.07",
+      "41 news item(s), news impact 0.0706",
       "market intelligence 0% movement, consensus 3.917 across 3 bookie(s)",
       "19 scorer record(s), top scorer signal 0.054",
       "memory currently leans positive"
@@ -31132,8 +31132,8 @@
   },
   {
     "team": "Mexico",
-    "updatedAt": "2026-06-12T19:24:34.745Z",
-    "learnedEdge": 0.3203,
+    "updatedAt": "2026-06-12T22:02:09.184Z",
+    "learnedEdge": 0.3202,
     "dataConfidence": 0.8225,
     "form": {
       "matchCount": 20,
@@ -31642,14 +31642,14 @@
       ]
     },
     "news": {
-      "articleCount": 88,
+      "articleCount": 89,
       "sourceDiversity": 2,
       "sentiment": -0.0009,
-      "injury": 0.0286,
-      "tacticalFit": 0.4725,
-      "lineupClarity": 0.4632,
-      "rotationRisk": 0.213,
-      "impact": 0.0866,
+      "injury": 0.0283,
+      "tacticalFit": 0.4722,
+      "lineupClarity": 0.463,
+      "rotationRisk": 0.2126,
+      "impact": 0.0867,
       "confidence": 0.8316,
       "topSignals": [
         "availability risk",
@@ -31781,7 +31781,7 @@
     "reasons": [
       "20-match form 2.15 PPG, xG 1.81-0.838",
       "recent form improving",
-      "88 news item(s), news impact 0.0866",
+      "89 news item(s), news impact 0.0867",
       "market intelligence 0% movement, consensus 1.873 across 4 bookie(s)",
       "21 scorer record(s), top scorer signal 0.054",
       "memory currently leans positive"
