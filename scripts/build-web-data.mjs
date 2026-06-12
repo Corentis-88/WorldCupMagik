@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { getDashboardState, scanForBets, buildMostLikelyPolicy, buildRiskPolicy, describeRisk, selectBetslip, selectFixturesForWindow } from "../src/app-service.mjs";
 import { loadEngineState } from "../src/db.mjs";
 import { buildTeamStatsWithIntelligence, loadIntelligenceState, loadOutcomeLearning } from "../src/intelligence-memory.mjs";
+import { buildMobilePayload } from "../src/mobile-web-data.mjs";
 import { buildBetRecommendations, buildMostLikelyPicks } from "../src/portfolio-builder.mjs";
 import { buildLegCandidates } from "../src/scoring.mjs";
 
@@ -193,7 +194,9 @@ const payload = {
 };
 
 await writeFile(join(outputDir, "latest.json"), `${JSON.stringify(payload, null, 2)}\n`, "utf8");
+await writeFile(join(outputDir, "mobile-latest.json"), `${JSON.stringify(buildMobilePayload(payload))}\n`, "utf8");
 console.log(`Wrote ${join(outputDir, "latest.json")}`);
+console.log(`Wrote ${join(outputDir, "mobile-latest.json")}`);
 
 function profileKey(daysAhead, risk) {
   return `d${daysAhead}_r${risk}`;

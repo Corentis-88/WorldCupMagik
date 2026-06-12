@@ -37,6 +37,8 @@ jobs:
         run: |
           mkdir -p web/data
           curl --fail --location --silent --show-error https://corentis-88.github.io/WorldCupMagik/data/latest.json --output web/data/latest.json || echo "Using repository database fallback."
+          curl --fail --location --silent --show-error https://corentis-88.github.io/WorldCupMagik/data/mobile-latest.json --output web/data/mobile-latest.json || echo "Using repository mobile database fallback."
+          if [ ! -f web/data/mobile-latest.json ] && [ -f web/data/latest.json ]; then npm run web:build-mobile-data; fi
       - run: npm run lineups:build
       - uses: actions/configure-pages@v5
         with:

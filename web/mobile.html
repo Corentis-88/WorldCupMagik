@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>World Cup Magik Mobile</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" type="image/png" href="./assets/icon.png" />
+    <link rel="stylesheet" href="./mobile.css" />
+  </head>
+  <body>
+    <main class="mobile-page">
+      <header class="mobile-hero">
+        <div>
+          <p>World Cup Magik</p>
+          <h1>Top Picks</h1>
+          <span id="scanStamp">Loading...</span>
+        </div>
+        <a href="./index.html?desktop=1">Desktop</a>
+      </header>
+
+      <div id="gatheringNotice" class="gathering-notice" hidden>Data Gathering: Come back in 5</div>
+
+      <section class="mobile-controls">
+        <label>
+          <span>Stake</span>
+          <input id="stakeInput" type="number" min="1" value="10" inputmode="decimal" />
+        </label>
+        <label>
+          <span>From</span>
+          <input id="dateFromInput" type="date" />
+        </label>
+        <label>
+          <span>To</span>
+          <input id="dateToInput" type="date" />
+        </label>
+        <div class="control-card">
+          <span id="riskLabel">Risk <strong id="riskValue">65</strong></span>
+          <div class="risk-row">
+            <button class="risk-step" type="button" data-risk-step="-5" aria-label="Reduce risk">-</button>
+            <input id="riskInput" type="range" min="0" max="100" step="5" value="65" aria-labelledby="riskLabel" />
+            <button class="risk-step" type="button" data-risk-step="5" aria-label="Increase risk">+</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="mobile-summary">
+        <div><span>Games</span><strong id="fixtureCount">0</strong></div>
+        <div><span>Edges</span><strong id="edgeCount">0</strong></div>
+        <div><span>Memory</span><strong id="memoryCount">0</strong></div>
+        <div><span>Return</span><strong id="returnTotal">&pound;0.00</strong></div>
+      </section>
+
+      <section class="mobile-section">
+        <div class="section-title">
+          <h2>Top Picks</h2>
+          <p id="marketLine">Markets loading...</p>
+        </div>
+        <div id="betslipList" class="mobile-list"></div>
+      </section>
+
+      <section class="mobile-section pick-section">
+        <div class="section-title">
+          <h2>Picks Of The Day</h2>
+        </div>
+        <div id="pickOfDayList" class="mobile-list"></div>
+      </section>
+
+      <section class="mobile-section scorer-section">
+        <div class="section-title">
+          <h2>Likely Goalscorers Today</h2>
+        </div>
+        <div id="likelyScorersList" class="mobile-list"></div>
+      </section>
+    </main>
+
+    <script src="./mobile-app.js"></script>
+  </body>
+</html>

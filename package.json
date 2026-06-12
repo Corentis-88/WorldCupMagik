@@ -12,6 +12,7 @@
     "offers": "node src/cli.mjs offers",
     "status": "node src/cli.mjs status",
     "web:build-data": "node scripts/build-web-data.mjs",
+    "web:build-mobile-data": "node scripts/build-mobile-data.mjs",
     "lineups:build": "node scripts/build-lineup-data.mjs",
     "test": "node --test tests/**/*.test.mjs"
   }

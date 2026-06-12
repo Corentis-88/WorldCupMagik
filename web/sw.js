@@ -1,10 +1,13 @@
-const CACHE_NAME = "worldcupmagik-v11";
+const CACHE_NAME = "worldcupmagik-v12";
 const STATIC_ASSETS = [
   "./",
   "./index.html",
+  "./mobile.html",
   "./how-to-use.html",
   "./styles.css",
+  "./mobile.css",
   "./app.js",
+  "./mobile-app.js",
   "./manifest.webmanifest",
   "./assets/icon.png",
   "./assets/world-cup-magik-splash.png"
@@ -27,6 +30,11 @@ self.addEventListener("fetch", (event) => {
 
   if (url.pathname.endsWith("/data/latest.json")) {
     event.respondWith(networkFirst(event.request, "./data/latest.json"));
+    return;
+  }
+
+  if (url.pathname.endsWith("/data/mobile-latest.json")) {
+    event.respondWith(networkFirst(event.request, "./data/mobile-latest.json"));
     return;
   }
 

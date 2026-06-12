@@ -4,6 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>World Cup Magik V1.0</title>
+    <script>
+      (() => {
+        const params = new URLSearchParams(window.location.search);
+        const forcedDesktop = params.get("desktop") === "1";
+        const mobileLike = window.matchMedia("(max-width: 760px), (pointer: coarse)").matches;
+
+        if (!forcedDesktop && mobileLike && !window.location.pathname.endsWith("/mobile.html")) {
+          window.location.replace(new URL("./mobile.html", window.location.href));
+        }
+      })();
+    </script>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" type="image/png" href="./assets/icon.png" />
     <link rel="stylesheet" href="./styles.css" />
