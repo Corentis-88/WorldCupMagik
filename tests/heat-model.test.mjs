@@ -1,6 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { buildHeatImpact, climateBandForWeather } from "../src/heat-model.mjs";
+import fixtures from "../data/fixtures.json" with { type: "json" };
+import climateHistory from "../config/world-cup-climate-history.json" with { type: "json" };
+import { normalizeName } from "../src/utils.mjs";
 
 test("heat model includes climate history and squad depth while staying capped", () => {
   const fixture = {
@@ -112,4 +115,12 @@ test("host-climate fallback activates Miami heat before a live forecast exists",
   assert.ok(impact.combinedHeatDifferential < 0);
   assert.ok(impact.resultEdgeAdjustment < 0);
   assert.match(impact.notes, /host-climate baseline/);
+});
+
+test("historical climate memory covers every fixture team", () => {
+  const fixtureTeams = [...new Set(fixtures.flatMap((item) => [item.homeTeam, item.awayTeam]).filter(Boolean))];
+  const memoryTeams = new Set(Object.keys(climateHistory.teamMemory || {}).map(normalizeName));
+  const missing = fixtureTeams.filter((team) => !memoryTeams.has(normalizeName(team)));
+
+  assert.deepEqual(missing, []);
 });

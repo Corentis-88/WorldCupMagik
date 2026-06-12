@@ -69,7 +69,7 @@ The heat layer also reads:
 
 Those signals are combined when either a fresh venue weather record or a low-confidence host-climate fallback exists. Squad depth can slightly cushion the expected-goals drag in heat, but it cannot turn heat into a goal boost.
 
-Every scan reports 20-match team-sample coverage and historical heat-memory coverage in `dataQuality`. A scan is not marked ready unless every selected team has a full 20-match sample.
+Every scan reports 20-match team-sample coverage and historical heat-memory coverage in `dataQuality`. A scan is not marked ready unless every selected team has a full 20-match sample. The 2026 fixture list is also covered by team-specific historical climate memory, with tests preventing future fixture teams from falling back silently to only confederation-level memory.
 
 ## Squad Depth
 
