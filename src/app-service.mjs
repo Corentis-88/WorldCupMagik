@@ -9,6 +9,7 @@ import { fetchSquadDepthWithDiagnostics } from "./providers/squad-provider.mjs";
 import { fetchTeamStatsWithDiagnostics } from "./providers/stats-provider.mjs";
 import { fetchHeatSnapshotsWithDiagnostics } from "./providers/weather-provider.mjs";
 import { settleStoredBetOutcomes } from "./outcome-settler.mjs";
+import { refreshPredictionReflections } from "./prediction-reflection.mjs";
 import { buildLegCandidates } from "./scoring.mjs";
 import { buildSurvivabilityMarketCoverage, isSurvivabilityMarketRecord } from "./survivability-market-coverage.mjs";
 import { isoDate, makeId, normalizeName, round } from "./utils.mjs";
@@ -124,8 +125,12 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
     matchHistory: liveMatchHistory,
     now
   });
+  const reflectionRefresh = await refreshPredictionReflections({
+    matchHistory: liveMatchHistory,
+    now
+  });
 
-  if (outcomeSettlement.insertedCount) {
+  if (outcomeSettlement.insertedCount || reflectionRefresh.upsertedCount) {
     outcomeLearning = await loadOutcomeLearning();
   }
 
@@ -300,6 +305,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
       teamStats: teamStats.length,
       matchHistoryRecords: statsResult.matchHistory?.length || 0,
       outcomeRecordsSettled: outcomeSettlement.insertedCount,
+      predictionReflectionsSettled: reflectionRefresh.insertedCount,
       intelligenceObservations: intelligence.observations.length,
       sourceDiagnostics: sourceDiagnostics.length
     },
@@ -311,10 +317,18 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
       observationCount: intelligence.observations.length,
       outcomeLearningCount: outcomeLearning.outcomeCount,
       outcomeCalibration: outcomeLearning.calibration,
+      predictionReflectionCount: outcomeLearning.reflection?.count || 0,
+      predictionReflection: outcomeLearning.reflection,
       lastOutcomeSettlement: {
         examinedLegCount: outcomeSettlement.examinedLegCount,
         insertedCount: outcomeSettlement.insertedCount,
         skipped: outcomeSettlement.skipped
+      },
+      lastPredictionReflection: {
+        examinedPredictionCount: reflectionRefresh.examinedPredictionCount,
+        insertedCount: reflectionRefresh.insertedCount,
+        updatedCount: reflectionRefresh.updatedCount,
+        upsertedCount: reflectionRefresh.upsertedCount
       },
       topTeams: intelligence.teamIntelligence
         .sort((left, right) => Math.abs(right.learnedEdge) - Math.abs(left.learnedEdge))

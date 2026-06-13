@@ -196,6 +196,8 @@ const payload = {
     teamCount: intelligenceState.teamIntelligence.length,
     outcomeLearningCount: outcomeLearning.outcomeCount,
     outcomeCalibration: summarizeOutcomeCalibration(outcomeLearning.calibration),
+    predictionReflectionCount: outcomeLearning.reflection?.count || 0,
+    predictionReflection: summarizePredictionReflection(outcomeLearning.reflection),
     teams: intelligenceState.teamIntelligence
   },
   profiles
@@ -409,6 +411,10 @@ function summarizeLeg(leg) {
       expectedGoals: leg.components?.expectedGoals,
       homeExpectedGoals: leg.components?.homeExpectedGoals,
       awayExpectedGoals: leg.components?.awayExpectedGoals,
+      projectedShotTotal: leg.components?.projectedShotTotal,
+      homeProjectedShots: leg.components?.homeProjectedShots,
+      awayProjectedShots: leg.components?.awayProjectedShots,
+      projectedShotsOnTargetTotal: leg.components?.projectedShotsOnTargetTotal,
       over15ShapeProbability: leg.components?.over15ShapeProbability,
       under35ShapeProbability: leg.components?.under35ShapeProbability,
       under45ShapeProbability: leg.components?.under45ShapeProbability,
@@ -449,7 +455,10 @@ function summarizeLeg(leg) {
       starterLikelihood: leg.components?.starterLikelihood,
       projectedMinutes: leg.components?.projectedMinutes,
       scorerGoalsPerTwentyTeamMatches: leg.components?.scorerGoalsPerTwentyTeamMatches,
-      scorerConfidence: leg.components?.scorerConfidence
+      scorerConfidence: leg.components?.scorerConfidence,
+      predictionReflectionAdjustment: leg.components?.predictionReflectionAdjustment,
+      predictionReflectionConfidence: leg.components?.predictionReflectionConfidence,
+      predictionReflectionReasons: leg.components?.predictionReflectionReasons
     }
   };
 }
@@ -509,6 +518,10 @@ function summarizeLegCandidate(leg) {
       expectedGoals: leg.components?.expectedGoals,
       homeExpectedGoals: leg.components?.homeExpectedGoals,
       awayExpectedGoals: leg.components?.awayExpectedGoals,
+      projectedShotTotal: leg.components?.projectedShotTotal,
+      homeProjectedShots: leg.components?.homeProjectedShots,
+      awayProjectedShots: leg.components?.awayProjectedShots,
+      projectedShotsOnTargetTotal: leg.components?.projectedShotsOnTargetTotal,
       over15ShapeProbability: leg.components?.over15ShapeProbability,
       under35ShapeProbability: leg.components?.under35ShapeProbability,
       under45ShapeProbability: leg.components?.under45ShapeProbability,
@@ -547,7 +560,10 @@ function summarizeLegCandidate(leg) {
       starterLikelihood: leg.components?.starterLikelihood,
       projectedMinutes: leg.components?.projectedMinutes,
       scorerGoalsPerTwentyTeamMatches: leg.components?.scorerGoalsPerTwentyTeamMatches,
-      scorerConfidence: leg.components?.scorerConfidence
+      scorerConfidence: leg.components?.scorerConfidence,
+      predictionReflectionAdjustment: leg.components?.predictionReflectionAdjustment,
+      predictionReflectionConfidence: leg.components?.predictionReflectionConfidence,
+      predictionReflectionReasons: leg.components?.predictionReflectionReasons
     },
     thesis: leg.thesis
   };
@@ -566,6 +582,24 @@ function summarizeOutcomeCalibration(calibration = {}) {
     probabilityBand: compactMap(calibration.probabilityBand),
     market: compactMap(calibration.market),
     riskTag: compactMap(calibration.riskTag)
+  };
+}
+
+function summarizePredictionReflection(reflection = {}) {
+  const compactMap = (items = {}) => Object.fromEntries(
+    Object.entries(items)
+      .filter(([, value]) => Number(value?.count || 0) > 0)
+      .sort((left, right) => Number(right[1].count || 0) - Number(left[1].count || 0))
+      .slice(0, 12)
+  );
+
+  return {
+    count: reflection.count || 0,
+    overall: reflection.overall || null,
+    market: compactMap(reflection.market),
+    riskTag: compactMap(reflection.riskTag),
+    heat: compactMap(reflection.heat),
+    lineup: compactMap(reflection.lineup)
   };
 }
 

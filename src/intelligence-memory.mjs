@@ -1,4 +1,5 @@
 import { appendJsonRecords, readJson, upsertJsonRecords, writeJson } from "./db.mjs";
+import { buildPredictionReflectionLearning, predictionReflectionAdjustment } from "./prediction-reflection.mjs";
 import { clamp, decimalToImpliedProbability, makeId, mean, normalizeName, round } from "./utils.mjs";
 
 const TEAM_NAME_ALIASES = {
@@ -33,11 +34,14 @@ export async function loadIntelligenceState() {
 }
 
 export async function loadOutcomeLearning() {
-  const outcomes = await readJson(["data", "bet-outcomes.json"], []);
-  return buildOutcomeLearning(outcomes);
+  const [outcomes, reflections] = await Promise.all([
+    readJson(["data", "bet-outcomes.json"], []),
+    readJson(["data", "prediction-reflections.json"], [])
+  ]);
+  return buildOutcomeLearning(outcomes, { reflections });
 }
 
-export function buildOutcomeLearning(outcomes = []) {
+export function buildOutcomeLearning(outcomes = [], { reflections = [] } = {}) {
   const settled = outcomes.filter((outcome) => outcome.status === "won" || outcome.status === "lost");
   const byMarket = new Map();
   const byRiskTag = new Map();
@@ -66,16 +70,21 @@ export function buildOutcomeLearning(outcomes = []) {
       probabilityBand: Object.fromEntries([...byProbabilityBand.entries()].map(([key, value]) => [key, finalizeCalibration(value)])),
       market: Object.fromEntries([...calibrationByMarket.entries()].map(([key, value]) => [key, finalizeCalibration(value)])),
       riskTag: Object.fromEntries([...calibrationByRiskTag.entries()].map(([key, value]) => [key, finalizeCalibration(value)]))
-    }
+    },
+    reflection: buildPredictionReflectionLearning(reflections)
   };
 }
 
-export function outcomeLearningAdjustment({ market, riskTag, outcomeLearning }) {
+export function outcomeLearningAdjustment({ market, riskTag, outcomeLearning, model = null }) {
   if (!outcomeLearning || outcomeLearning.outcomeCount < 8) {
     return {
       adjustment: 0,
       confidence: 0,
-      reasons: []
+      reasons: [],
+      outcomeAdjustment: 0,
+      reflectionAdjustment: 0,
+      reflectionConfidence: 0,
+      reflectionReasons: []
     };
   }
 
@@ -86,13 +95,16 @@ export function outcomeLearningAdjustment({ market, riskTag, outcomeLearning }) 
   const marketAdjustment = marketLearning ? learningToAdjustment(marketLearning) : 0;
   const tagAdjustment = tagLearning ? learningToAdjustment(tagLearning) : 0;
   const calibrationAdjustment = calibrationToAdjustment(marketCalibration) * 0.62 + calibrationToAdjustment(tagCalibration) * 0.38;
-  const adjustment = clamp(marketAdjustment * 0.5 + tagAdjustment * 0.26 + calibrationAdjustment * 0.24, -0.08, 0.08);
-  const confidence = clamp(mean([
+  const baseAdjustment = clamp(marketAdjustment * 0.5 + tagAdjustment * 0.26 + calibrationAdjustment * 0.24, -0.08, 0.08);
+  const baseConfidence = clamp(mean([
     marketLearning ? Math.min(1, marketLearning.count / 20) : 0,
     tagLearning ? Math.min(1, tagLearning.count / 20) : 0,
     marketCalibration ? Math.min(1, marketCalibration.count / 24) : 0,
     tagCalibration ? Math.min(1, tagCalibration.count / 24) : 0
   ]), 0, 1);
+  const reflection = predictionReflectionAdjustment({ market, riskTag, model, outcomeLearning });
+  const adjustment = clamp(baseAdjustment * 0.74 + Number(reflection.adjustment || 0) * 0.62, -0.09, 0.09);
+  const confidence = clamp(Math.max(baseConfidence, Number(reflection.confidence || 0) * 0.86), 0, 1);
   const reasons = [];
 
   if (marketLearning) {
@@ -114,7 +126,11 @@ export function outcomeLearningAdjustment({ market, riskTag, outcomeLearning }) 
   return {
     adjustment: round(adjustment, 4),
     confidence: round(confidence, 4),
-    reasons
+    reasons,
+    outcomeAdjustment: round(baseAdjustment, 4),
+    reflectionAdjustment: round(Number(reflection.adjustment || 0), 4),
+    reflectionConfidence: round(Number(reflection.confidence || 0), 4),
+    reflectionReasons: reflection.reasons || []
   };
 }
 

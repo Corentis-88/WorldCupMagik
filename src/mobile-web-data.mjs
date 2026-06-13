@@ -24,6 +24,11 @@ export function buildMobilePayload(payload) {
     dateRange: payload.dateRange || {},
     fixtures: (payload.fixtures || []).map(mobileFixture),
     markets: payload.markets || {},
+    intelligence: {
+      outcomeLearningCount: payload.intelligence?.outcomeLearningCount || 0,
+      predictionReflectionCount: payload.intelligence?.predictionReflectionCount || 0,
+      predictionReflection: payload.intelligence?.predictionReflection || null
+    },
     summary: {
       fixtureCount: (payload.fixtures || []).length,
       memoryTeamCount: payload.intelligence?.teamCount || 0,
@@ -100,7 +105,10 @@ function mobileLeg(leg = {}) {
       oddsFreshness: leg.components?.oddsFreshness,
       scorerMarketType: leg.components?.scorerMarketType,
       starterLikelihood: leg.components?.starterLikelihood,
-      projectedMinutes: leg.components?.projectedMinutes
+      projectedMinutes: leg.components?.projectedMinutes,
+      projectedShotTotal: leg.components?.projectedShotTotal,
+      predictionReflectionAdjustment: leg.components?.predictionReflectionAdjustment,
+      predictionReflectionConfidence: leg.components?.predictionReflectionConfidence
     }
   };
 }

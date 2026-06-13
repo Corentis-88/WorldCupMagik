@@ -530,6 +530,7 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
   const normalizedTotal = homeWin + awayWin + drawProbability;
   const goalShape = applyTournamentPressureToGoalShape(baseGoalShape, tournamentPressure);
   const expectedGoals = goalShape.expectedGoals;
+  const shotShape = projectedShotShapeForFixture({ homeStats, awayStats, goalShape, heat });
   const rawOver15 = poissonOver(expectedGoals, 1.5);
   const rawOver25 = poissonOver25(expectedGoals);
   const rawUnder35 = poissonUnder(expectedGoals, 3.5);
@@ -600,6 +601,12 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
       expectedGoals: round(expectedGoals, 2),
       homeExpectedGoals: round(goalShape.homeExpectedGoals, 2),
       awayExpectedGoals: round(goalShape.awayExpectedGoals, 2),
+      projectedShotTotal: round(shotShape.totalShots, 2),
+      homeProjectedShots: round(shotShape.homeShots, 2),
+      awayProjectedShots: round(shotShape.awayShots, 2),
+      projectedShotsOnTargetTotal: round(shotShape.totalShotsOnTarget, 2),
+      homeProjectedShotsOnTarget: round(shotShape.homeShotsOnTarget, 2),
+      awayProjectedShotsOnTarget: round(shotShape.awayShotsOnTarget, 2),
       bttsShapeProbability: round(bttsYes, 4),
       over15ShapeProbability: round(rawOver15, 4),
       over25ShapeProbability: round(over25, 4),
@@ -775,7 +782,7 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     movement,
     contrarianValue
   });
-  const learning = outcomeLearningAdjustment({ market, riskTag: preliminaryRiskTag, outcomeLearning });
+  const learning = outcomeLearningAdjustment({ market, riskTag: preliminaryRiskTag, outcomeLearning, model: legModel });
   const marketFocus = evaluateMarketFocus({ market, outcome, model: legModel, modelProbability: adjustedModelProbability, edge, odds, policy });
   const learnedModelProbability = clamp(adjustedModelProbability + learning.adjustment * learning.confidence, 0.03, 0.92);
   const learnedIndependentProbability = clamp(independentModelProbability + learning.adjustment * learning.confidence * 0.55, 0.03, 0.92);
@@ -959,6 +966,10 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
       outcomeLearningAdjustment: learning.adjustment,
       outcomeLearningConfidence: learning.confidence,
       outcomeLearningReasons: learning.reasons,
+      outcomeLearningBaseAdjustment: learning.outcomeAdjustment,
+      predictionReflectionAdjustment: learning.reflectionAdjustment,
+      predictionReflectionConfidence: learning.reflectionConfidence,
+      predictionReflectionReasons: learning.reflectionReasons,
       confidenceReasons: buildConfidenceReasons({
         confidence,
         dataCompleteness,
@@ -1055,6 +1066,10 @@ function buildConfidenceReasons({ confidence, dataCompleteness, intelligenceConf
 
   if (Number(learning?.confidence || 0) > 0.2) {
     reasons.push("settled-outcome learning active");
+  }
+
+  if (Number(learning?.reflectionConfidence || 0) > 0.2) {
+    reasons.push("post-match xG/shot reflection active");
   }
 
   if (Number(marketFocus?.score || 0) >= 6) {
@@ -1220,6 +1235,41 @@ function goalShapeForFixture(homeStats, awayStats, homeNews, awayNews, heat, mat
   return {
     ...adjusted,
     expectedGoals: clamp(adjusted.homeExpectedGoals + adjusted.awayExpectedGoals, 1.25, 4.1)
+  };
+}
+
+function projectedShotShapeForFixture({ homeStats, awayStats, goalShape, heat }) {
+  const homeBaseShots = mean([
+    Number(homeStats.shotsFor || homeStats.longForm?.shotsFor || 10.5),
+    Number(awayStats.shotsAgainst || awayStats.longForm?.shotsAgainst || 10.5)
+  ]);
+  const awayBaseShots = mean([
+    Number(awayStats.shotsFor || awayStats.longForm?.shotsFor || 10.5),
+    Number(homeStats.shotsAgainst || homeStats.longForm?.shotsAgainst || 10.5)
+  ]);
+  const homeBaseSot = mean([
+    Number(homeStats.shotsOnTargetFor || homeStats.longForm?.shotsOnTargetFor || 3.6),
+    Number(awayStats.shotsOnTargetAgainst || awayStats.longForm?.shotsOnTargetAgainst || 3.6)
+  ]);
+  const awayBaseSot = mean([
+    Number(awayStats.shotsOnTargetFor || awayStats.longForm?.shotsOnTargetFor || 3.6),
+    Number(homeStats.shotsOnTargetAgainst || homeStats.longForm?.shotsOnTargetAgainst || 3.6)
+  ]);
+  const heatTempo = Number(heat.expectedGoalsAdjustment || 0) * 1.35;
+  const homeXgLift = (Number(goalShape.homeExpectedGoals || 1.2) - 1.25) * 2.15;
+  const awayXgLift = (Number(goalShape.awayExpectedGoals || 1.2) - 1.25) * 2.15;
+  const homeShots = clamp(homeBaseShots + homeXgLift + heatTempo / 2, 5.2, 23.5);
+  const awayShots = clamp(awayBaseShots + awayXgLift + heatTempo / 2, 5.2, 23.5);
+  const homeShotsOnTarget = clamp(homeBaseSot + homeXgLift * 0.48 + heatTempo * 0.18, 1.2, 9.5);
+  const awayShotsOnTarget = clamp(awayBaseSot + awayXgLift * 0.48 + heatTempo * 0.18, 1.2, 9.5);
+
+  return {
+    homeShots,
+    awayShots,
+    totalShots: homeShots + awayShots,
+    homeShotsOnTarget,
+    awayShotsOnTarget,
+    totalShotsOnTarget: homeShotsOnTarget + awayShotsOnTarget
   };
 }
 
@@ -1594,6 +1644,9 @@ function buildLegThesis({ fixture, market, outcome, edge, independentEdge, rawMo
   const tournamentText = model.components.tournamentPhase
     ? `Tournament context: ${model.components.tournamentContextNote || model.components.tournamentPhase}; group-game numbers ${model.components.homeGroupGameNumber ?? "?"}-${model.components.awayGroupGameNumber ?? "?"}; xG adjustment ${model.components.tournamentExpectedGoalsAdjustment}, BTTS adjustment ${model.components.tournamentBttsAdjustment}, draw lift ${model.components.tournamentDrawLift}.`
     : "";
+  const reflectionText = learning.reflectionReasons?.length
+    ? `Post-match reflection: ${learning.reflectionReasons.join("; ")}.`
+    : "";
   const notes = [
     `${selectionLabel({ fixture, market, outcome })} is priced at ${odds.decimalOdds}; raw AI probability ${round(rawModelProbability * 100, 1)}%, market-adjusted probability ${round(modelProbability * 100, 1)}%, market view ${round(marketImpliedProbability * 100, 1)}%.`,
     `Independent edge ${round(independentEdge * 100, 2)}%, final value edge ${round(edge * 100, 2)}%, backed by ${independentEvidence.count} non-market signal(s): ${independentEvidence.signals.join(", ") || "none yet"}.`,
@@ -1606,6 +1659,7 @@ function buildLegThesis({ fixture, market, outcome, edge, independentEdge, rawMo
     tournamentText,
     `Market focus: ${marketFocus.reasons.join("; ") || "general value check"}.`,
     learning.reasons.length ? `Outcome learning: ${learning.reasons.join("; ")}.` : "Outcome learning: waiting for enough settled bets before adjusting.",
+    reflectionText,
     movementText,
     `Confidence ${round(confidence * 100, 1)}% after odds freshness and data completeness checks.`
   ].filter(Boolean);

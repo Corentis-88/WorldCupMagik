@@ -8,6 +8,11 @@ import {
   deriveTeamForm,
   outcomeLearningAdjustment
 } from "../src/intelligence-memory.mjs";
+import {
+  buildPredictionReflectionLearning,
+  buildPredictionReflections,
+  predictionReflectionAdjustment
+} from "../src/prediction-reflection.mjs";
 
 const baseStats = [
   teamStats("Japan", 1710),
@@ -251,6 +256,100 @@ test("outcome learning builds calibration buckets from settled probabilities", (
   assert.ok(Number.isFinite(learning.calibration.overall.brierScore));
 });
 
+test("prediction reflections compare expected shape with actual xG shots heat and lineups", () => {
+  const now = new Date("2026-06-06T23:00:00.000Z");
+  const kickoff = "2026-06-06T19:00:00.000Z";
+  const leg = reflectionLeg({
+    fixtureDate: kickoff,
+    createdAt: "2026-06-06T12:00:00.000Z",
+    market: "over_2_5_goals",
+    outcome: "Over",
+    modelProbability: 0.64,
+    components: {
+      expectedGoals: 3.1,
+      homeExpectedGoals: 1.9,
+      awayExpectedGoals: 1.2,
+      projectedShotTotal: 27,
+      homeProjectedShots: 15,
+      awayProjectedShots: 12,
+      heatStress: 0.72,
+      heatExpectedGoalsAdjustment: -0.08,
+      heatClimateBand: "hotHumid"
+    }
+  });
+  const settledMatch = match(kickoff, "Japan", "Canada", 1, 0, {
+    homeXg: 1.05,
+    awayXg: 0.55,
+    homeShots: 9,
+    awayShots: 7,
+    capturedMetricFields: ["xg", "shots"]
+  });
+  const reflections = buildPredictionReflections({
+    appScans: [{ betslip: [{ legs: [leg] }] }],
+    matchHistory: [settledMatch],
+    lineups: [{
+      fixtureId: "fixture-1",
+      capturedAt: "2026-06-06T18:15:00.000Z",
+      status: "confirmed",
+      teams: {
+        Japan: { status: "confirmed", starters: ["Japan scorer", "J1", "J2", "J3", "J4", "J5", "J6"] },
+        Canada: { status: "confirmed", starters: ["Canada scorer", "C1", "C2", "C3", "C4", "C5", "C6"] }
+      }
+    }],
+    now
+  });
+  const record = reflections.newRecords[0];
+
+  assert.equal(reflections.insertedCount, 1);
+  assert.equal(record.status, "lost");
+  assert.equal(record.heatBucket, "high_heat");
+  assert.equal(record.heat.weatherSignal, "heat_drag_understated");
+  assert.equal(record.lineupBucket, "both_xi_confirmed");
+  assert.ok(record.errors.xgTotal < 0);
+  assert.ok(record.errors.shotTotal < 0);
+});
+
+test("prediction reflection learning can nudge hot goal markets downward", () => {
+  const reflections = Array.from({ length: 8 }, (_item, index) => ({
+    status: index < 2 ? "won" : "lost",
+    market: "over_2_5_goals",
+    riskTag: "calculated_risk",
+    modelProbability: 0.62,
+    probabilityError: (index < 2 ? 1 : 0) - 0.62,
+    brierError: (0.62 - (index < 2 ? 1 : 0)) ** 2,
+    errors: {
+      xgTotal: -0.55,
+      shotTotal: -6,
+      goalTotal: -1.1
+    },
+    heatBucket: "high_heat",
+    lineupBucket: "both_xi_confirmed",
+    heat: {
+      weatherSignal: "heat_drag_understated"
+    },
+    learningWeight: 0.85
+  }));
+  const reflectionLearning = buildPredictionReflectionLearning(reflections);
+  const adjustment = predictionReflectionAdjustment({
+    market: "over_2_5_goals",
+    riskTag: "calculated_risk",
+    model: {
+      components: {
+        heatStress: 0.72
+      }
+    },
+    outcomeLearning: {
+      outcomeCount: 8,
+      reflection: reflectionLearning
+    }
+  });
+
+  assert.equal(reflectionLearning.market.over_2_5_goals.count, 8);
+  assert.ok(adjustment.adjustment < 0);
+  assert.ok(adjustment.confidence > 0);
+  assert.ok(adjustment.reasons.some((reason) => reason.includes("xG environment")));
+});
+
 function odds(capturedAt, decimalOdds, bookmaker) {
   return {
     id: `${capturedAt}-${bookmaker}`,
@@ -260,6 +359,33 @@ function odds(capturedAt, decimalOdds, bookmaker) {
     market: "match_winner",
     outcome: "Japan",
     decimalOdds
+  };
+}
+
+function reflectionLeg(overrides = {}) {
+  return {
+    id: "leg-reflection-1",
+    createdAt: overrides.createdAt || "2026-06-06T12:00:00.000Z",
+    fixtureId: "fixture-1",
+    fixtureDate: overrides.fixtureDate || "2026-06-06T19:00:00.000Z",
+    homeTeam: "Japan",
+    awayTeam: "Canada",
+    market: overrides.market || "over_2_5_goals",
+    outcome: overrides.outcome || "Over",
+    selectionLabel: "Japan vs Canada: Over 2.5 goals",
+    bookmaker: "Public Test Book",
+    decimalOdds: 1.9,
+    modelProbability: overrides.modelProbability || 0.58,
+    rawModelProbability: overrides.rawModelProbability || overrides.modelProbability || 0.58,
+    impliedProbability: 0.5263,
+    marketImpliedProbability: 0.5263,
+    confidence: 0.81,
+    riskTag: "calculated_risk",
+    components: overrides.components || {
+      expectedGoals: 2.8,
+      homeExpectedGoals: 1.5,
+      awayExpectedGoals: 1.3
+    }
   };
 }
 

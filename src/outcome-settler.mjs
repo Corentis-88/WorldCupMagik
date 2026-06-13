@@ -361,7 +361,25 @@ function buildOutcomeRecord({ leg, match, result, now }) {
     riskTag: leg.riskTag || "",
     riskTags: [leg.riskTag].filter(Boolean),
     nonMarketSignalCount: Number(leg.components?.nonMarketSignalCount || 0),
-    dataConfidence: round(Number(leg.components?.dataCompleteness || leg.components?.intelligenceConfidence || leg.confidence || 0), 4)
+    dataConfidence: round(Number(leg.components?.dataCompleteness || leg.components?.intelligenceConfidence || leg.confidence || 0), 4),
+    predictionShape: compactPredictionShape(leg.components || {})
+  };
+}
+
+function compactPredictionShape(components = {}) {
+  return {
+    expectedGoals: round(Number(components.expectedGoals || 0), 4),
+    homeExpectedGoals: round(Number(components.homeExpectedGoals || 0), 4),
+    awayExpectedGoals: round(Number(components.awayExpectedGoals || 0), 4),
+    projectedShotTotal: round(Number(components.projectedShotTotal || 0), 4),
+    homeProjectedShots: round(Number(components.homeProjectedShots || 0), 4),
+    awayProjectedShots: round(Number(components.awayProjectedShots || 0), 4),
+    heatStress: round(Number(components.heatStress || 0), 4),
+    heatExpectedGoalsAdjustment: round(Number(components.heatExpectedGoalsAdjustment || 0), 4),
+    heatClimateBand: components.heatClimateBand || "",
+    openingGameCaution: round(Number(components.openingGameCaution || 0), 4),
+    tournamentExpectedGoalsAdjustment: round(Number(components.tournamentExpectedGoalsAdjustment || 0), 4),
+    starterLikelihood: round(Number(components.starterLikelihood || 0), 4)
   };
 }
 
