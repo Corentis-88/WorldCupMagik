@@ -1,0 +1,130 @@
+{
+  "generatedAt": "2026-06-13T18:40:00.000Z",
+  "edition": "github-pages-lineup-quick-check",
+  "source": "GitHub Actions lightweight public-web lineup scanner",
+  "targetWindow": {
+    "minMinutesBeforeKickoff": -10,
+    "maxMinutesBeforeKickoff": 125
+  },
+  "targetFixtureCount": 1,
+  "targetFixtures": [
+    {
+      "id": "fixture_a89ee8da",
+      "date": "2026-06-13T19:00:00.000Z",
+      "homeTeam": "Qatar",
+      "awayTeam": "Switzerland",
+      "minutesUntilKickoff": 20
+    }
+  ],
+  "lineups": [
+    {
+      "id": "lineup_61c52740",
+      "fixtureId": "fixture_a89ee8da",
+      "fixtureDate": "2026-06-13T19:00:00.000Z",
+      "fixtureDateKey": "2026-06-13",
+      "homeTeam": "Qatar",
+      "awayTeam": "Switzerland",
+      "capturedAt": "2026-06-13T18:40:00.000Z",
+      "provider": "public-web",
+      "source": "SportsGambler public lineup pages: Qatar v Switzerland",
+      "sourceUrl": "https://www.sportsgambler.com/betting-tips/football/qatar-vs-switzerland-prediction-lineups-odds-2026-06-13/",
+      "status": "confirmed",
+      "teams": {
+        "Qatar": {
+          "status": "confirmed",
+          "formation": "4-3-3",
+          "starters": [
+            "Mahmud Abunada",
+            "Ayoub Al Oui",
+            "Pedro Miguel",
+            "Boualem Khoukhi",
+            "Homam Elamin",
+            "Issa Laye",
+            "Jassem Gaber",
+            "Assim Madibo",
+            "Edmilson Junior",
+            "Yusuf Abdurisag",
+            "Akram Afif"
+          ],
+          "normalizedStarters": [
+            "mahmud abunada",
+            "ayoub al oui",
+            "pedro miguel",
+            "boualem khoukhi",
+            "homam elamin",
+            "issa laye",
+            "jassem gaber",
+            "assim madibo",
+            "edmilson junior",
+            "yusuf abdurisag",
+            "akram afif"
+          ],
+          "sourceText": "Qatar confirmed lineup (4-3-3): Mahmud Abunada (GK), Ayoub Al Oui, Pedro Miguel, Boualem Khoukhi, Homam Elamin, Issa Laye, Jassem Gaber, Assim Madibo, Edmilson Junior, Yusuf Abdurisag, Akram Afif."
+        },
+        "Switzerland": {
+          "status": "confirmed",
+          "formation": "3-4-2-1",
+          "starters": [
+            "Gregor Kobel",
+            "Denis Zakaria",
+            "Nico Elvedi",
+            "Manuel Akanji",
+            "Michel Aebischer",
+            "Remo Freuler",
+            "Granit Xhaka",
+            "Ricardo Rodriguez",
+            "Dan Ndoye",
+            "Ruben Vargas",
+            "Breel Embolo"
+          ],
+          "normalizedStarters": [
+            "gregor kobel",
+            "denis zakaria",
+            "nico elvedi",
+            "manuel akanji",
+            "michel aebischer",
+            "remo freuler",
+            "granit xhaka",
+            "ricardo rodriguez",
+            "dan ndoye",
+            "ruben vargas",
+            "breel embolo"
+          ],
+          "sourceText": "Switzerland confirmed lineup (3-4-2-1): Gregor Kobel (GK), Denis Zakaria, Nico Elvedi, Manuel Akanji, Michel Aebischer, Remo Freuler, Granit Xhaka, Ricardo Rodriguez, Dan Ndoye, Ruben Vargas, Breel Embolo."
+        }
+      }
+    }
+  ],
+  "diagnostics": [
+    {
+      "id": "source_ece41f14",
+      "createdAt": "2026-06-13T18:40:00.000Z",
+      "kind": "lineups",
+      "source": "SportsGambler public lineup pages: Qatar v Switzerland",
+      "url": "https://www.sportsgambler.com/betting-tips/football/qatar-vs-switzerland-prediction-lineups-odds-2026-06-13/",
+      "status": "ok",
+      "records": 1,
+      "reason": ""
+    },
+    {
+      "id": "source_20bae322",
+      "createdAt": "2026-06-13T18:40:00.000Z",
+      "kind": "lineups",
+      "source": "Public web team-sheet search: Qatar v Switzerland",
+      "url": "https://duckduckgo.com/html/?q=Qatar%20vs%20Switzerland%20confirmed%20lineups",
+      "status": "ok",
+      "records": 5,
+      "reason": ""
+    },
+    {
+      "id": "source_6a5870bc",
+      "createdAt": "2026-06-13T18:40:00.000Z",
+      "kind": "lineups",
+      "source": "Public web team-sheet search result: Qatar v Switzerland",
+      "url": "https://www.101greatgoals.com/football/world-cup-news/qatar-vs-switzerland-line-ups-confirmed-world-cup/",
+      "status": "ok",
+      "records": 1,
+      "reason": ""
+    }
+  ]
+}

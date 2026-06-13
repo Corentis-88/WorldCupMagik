@@ -50,7 +50,28 @@ jobs:
       - name: Preserve current published lineup feed
         run: |
           mkdir -p web/data
-          curl --fail --location --silent --show-error https://corentis-88.github.io/WorldCupMagik/data/lineups-latest.json --output web/data/lineups-latest.json || echo "No published lineup feed to preserve."
+          curl --fail --location --silent --show-error https://corentis-88.github.io/WorldCupMagik/data/lineups-latest.json --output /tmp/published-lineups.json || echo "No published lineup feed to preserve."
+          if [ -f /tmp/published-lineups.json ]; then
+            node <<'NODE'
+          const fs = require("fs");
+          const localPath = "web/data/lineups-latest.json";
+          const publishedPath = "/tmp/published-lineups.json";
+          const readJson = (path) => {
+            if (!fs.existsSync(path)) return null;
+            try { return JSON.parse(fs.readFileSync(path, "utf8")); } catch { return null; }
+          };
+          const local = readJson(localPath);
+          const published = readJson(publishedPath);
+          const localTime = Date.parse(local?.generatedAt || 0);
+          const publishedTime = Date.parse(published?.generatedAt || 0);
+          if (!local || publishedTime > localTime) {
+            fs.copyFileSync(publishedPath, localPath);
+            console.log("Using newer published lineup feed.");
+          } else {
+            console.log("Keeping repository lineup feed because it is newer.");
+          }
+          NODE
+          fi
       - uses: actions/configure-pages@v5
         with:
           enablement: true

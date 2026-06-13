@@ -111,6 +111,112 @@ test("lineup fetcher tries alternate public page date keys", async () => {
   }
 });
 
+test("public lineup parser accepts common starting XI and team-sheet wording", () => {
+  const fixture = {
+    id: "qat-sui",
+    date: "2026-06-13T19:00:00.000Z",
+    homeTeam: "Qatar",
+    awayTeam: "Switzerland"
+  };
+  const html = `
+    <h2>Official team sheets</h2>
+    <p>Qatar: Mahmud Abunada, Ayoub Al Oui, Pedro Miguel, Boualem Khoukhi, Homam Elamin, Issa Laye, Ahmed Fathi, Jassem Gaber, Edmilson Junior, Almoez Ali, Akram Afif.</p>
+    <p>Switzerland starting XI: Gregor Kobel, Silvan Widmer, Nico Elvedi, Manuel Akanji, Ricardo Rodriguez, Remo Freuler, Granit Xhaka, Dan Ndoye, Fabian Rieder, Ruben Vargas, Breel Embolo.</p>
+  `;
+
+  const [record] = extractLineupsFromPage({
+    html,
+    fixture,
+    source: { name: "Team-sheet wording test", url: "https://example.test/qatar-switzerland-lineups" },
+    now: new Date("2026-06-13T18:40:00.000Z")
+  });
+
+  assert.equal(record.status, "confirmed");
+  assert.equal(record.teams.Qatar.starters.at(-1), "Akram Afif");
+  assert.ok(record.teams.Switzerland.starters.includes("Breel Embolo"));
+});
+
+test("public lineup parser keeps expected lineups as predicted", () => {
+  const fixture = {
+    id: "qat-sui",
+    date: "2026-06-13T19:00:00.000Z",
+    homeTeam: "Qatar",
+    awayTeam: "Switzerland"
+  };
+  const html = `
+    <p>Qatar expected lineup: Mahmud Abunada, Ayoub Al Oui, Pedro Miguel, Boualem Khoukhi, Homam Elamin, Issa Laye, Ahmed Fathi, Jassem Gaber, Edmilson Junior, Almoez Ali, Akram Afif.</p>
+    <p>Switzerland predicted XI: Gregor Kobel, Silvan Widmer, Nico Elvedi, Manuel Akanji, Ricardo Rodriguez, Remo Freuler, Granit Xhaka, Dan Ndoye, Fabian Rieder, Ruben Vargas, Breel Embolo.</p>
+  `;
+
+  const [record] = extractLineupsFromPage({
+    html,
+    fixture,
+    source: { name: "Expected XI wording test", url: "https://example.test/qatar-switzerland-predicted-lineups" },
+    now: new Date("2026-06-13T17:40:00.000Z")
+  });
+
+  assert.equal(record.status, "predicted");
+  assert.equal(record.teams.Qatar.status, "predicted");
+  assert.equal(record.teams.Switzerland.status, "predicted");
+});
+
+test("lineup fetcher can follow public search result pages for confirmed sheets", async () => {
+  const originalFetch = globalThis.fetch;
+  const requestedUrls = [];
+
+  globalThis.fetch = async (url) => {
+    const textUrl = String(url);
+    requestedUrls.push(textUrl);
+
+    if (textUrl.includes("duckduckgo.com")) {
+      return {
+        ok: true,
+        text: async () => `
+          <a class="result__a" href="/l/?uddg=${encodeURIComponent("https://example.test/qatar-switzerland-team-sheets")}">Qatar Switzerland team sheets</a>
+        `
+      };
+    }
+
+    return {
+      ok: true,
+      text: async () => `
+        <h1>Qatar v Switzerland confirmed lineups</h1>
+        <p>Qatar XI: Mahmud Abunada, Ayoub Al Oui, Pedro Miguel, Boualem Khoukhi, Homam Elamin, Issa Laye, Ahmed Fathi, Jassem Gaber, Edmilson Junior, Almoez Ali, Akram Afif.</p>
+        <p>Switzerland XI: Gregor Kobel, Silvan Widmer, Nico Elvedi, Manuel Akanji, Ricardo Rodriguez, Remo Freuler, Granit Xhaka, Dan Ndoye, Fabian Rieder, Ruben Vargas, Breel Embolo.</p>
+      `
+    };
+  };
+
+  try {
+    const result = await fetchLineupSnapshotWithDiagnostics({
+      fixtures: [{
+        id: "qat-sui",
+        date: "2026-06-13T19:00:00.000Z",
+        homeTeam: "Qatar",
+        awayTeam: "Switzerland"
+      }],
+      providerConfig: {
+        mode: "self-gather",
+        sources: [{
+          name: "Search test",
+          type: "search",
+          urlTemplate: "https://duckduckgo.com/html/?q={query}",
+          queries: ["{homeTeam} {awayTeam} team sheets"],
+          maxResultPages: 3
+        }]
+      },
+      now: new Date("2026-06-13T18:40:00.000Z")
+    });
+
+    assert.equal(result.lineups.length, 1);
+    assert.equal(result.lineups[0].status, "confirmed");
+    assert.equal(result.lineups[0].teams.Qatar.starters.includes("Akram Afif"), true);
+    assert.equal(requestedUrls.some((url) => url.includes("qatar-switzerland-team-sheets")), true);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
 test("lineup player matcher connects full-name and surname variants", () => {
   assert.equal(lineupPlayerMatches("Raul Jimenez", "Jimenez"), true);
   assert.equal(lineupPlayerMatches("Oswin Appollis", "Appollis"), true);

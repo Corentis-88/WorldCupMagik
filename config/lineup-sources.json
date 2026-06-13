@@ -7,5 +7,29 @@
     "fixtureUrlFromFixtures": true,
     "fullPageFixtureBlock": true,
     "reliability": 0.68
+  },
+  {
+    "name": "Public web team-sheet search",
+    "type": "search",
+    "urlTemplate": "https://duckduckgo.com/html/?q={query}",
+    "queries": [
+      "{homeTeam} vs {awayTeam} confirmed lineups",
+      "{homeTeam} {awayTeam} starting XI",
+      "{homeTeam} v {awayTeam} team sheets",
+      "{homeTeam} vs {awayTeam} official lineup {dateKey}"
+    ],
+    "maxQueries": 4,
+    "maxResultPages": 5,
+    "excludedDomains": [
+      "facebook.com",
+      "instagram.com",
+      "linkedin.com",
+      "pinterest.com",
+      "tiktok.com",
+      "twitter.com",
+      "x.com",
+      "youtube.com"
+    ],
+    "reliability": 0.62
   }
 ]

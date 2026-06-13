@@ -413,33 +413,45 @@ function applyLineupAdjustments(players, fixture) {
   const lineupRequired = isLineupRequiredForFixture(fixture);
 
   if (!lineup) {
-    return lineupRequired ? [] : players;
+    return lineupRequired
+      ? players.map((player) => ({
+        ...player,
+        lineupStatus: "lineup_unavailable",
+        reason: `${player.reason} | team sheets not found yet`
+      }))
+      : players;
   }
 
   const adjusted = [];
 
   for (const player of players) {
     const team = teamLineupFromRecord(lineup, player.team);
-    const teamConfirmed = isConfirmedTeamLineup(team);
+    const teamUsable = isUsableTeamLineup(team);
 
-    if (!teamConfirmed) {
-      if (!lineupRequired) {
-        adjusted.push(player);
-      }
+    if (!teamUsable) {
+      adjusted.push(lineupRequired
+        ? {
+          ...player,
+          lineupStatus: "lineup_unavailable",
+          reason: `${player.reason} | ${player.team || "team"} XI not found yet`
+        }
+        : player);
       continue;
     }
 
     const starterName = team.starters.find((starter) => playerNamesMatch(starter, player.playerName));
+    const status = team.status === "confirmed" ? "confirmed_starter" : "predicted_starter";
+    const statusText = team.status === "confirmed" ? "confirmed starter" : "predicted starter";
 
     if (!starterName) {
       if (!lineupRequired) {
         adjusted.push({
           ...player,
-          lineupStatus: "not_starting",
+          lineupStatus: team.status === "confirmed" ? "not_starting" : "not_predicted_starter",
           probability: clamp(Number(player.probability || 0) * 0.08, 0.01, 0.08),
           confidence: clamp(Number(player.confidence || 0) * 0.55, 0, 1),
           sourceWeight: Number(player.sourceWeight || 0) * 0.35,
-          reason: `${player.reason} | not in confirmed XI`
+          reason: `${player.reason} | not in ${team.status === "confirmed" ? "confirmed" : "predicted"} XI`
         });
       }
       continue;
@@ -448,16 +460,21 @@ function applyLineupAdjustments(players, fixture) {
     adjusted.push({
       ...player,
       playerName: betterDisplayPlayerName(starterName, player.playerName),
-      lineupStatus: "confirmed_starter",
-      reason: `${player.reason} | confirmed starter`
+      lineupStatus: status,
+      reason: `${player.reason} | ${statusText}`
     });
   }
 
   if (lineupRequired) {
-    return adjusted.filter((player) => player.lineupStatus === "confirmed_starter");
+    const starters = adjusted.filter((player) => ["confirmed_starter", "predicted_starter", "lineup_unavailable"].includes(player.lineupStatus));
+    return starters.length ? starters : players.map((player) => ({
+      ...player,
+      lineupStatus: "lineup_inconclusive",
+      reason: `${player.reason} | lineup check inconclusive`
+    }));
   }
 
-  const starterOnly = adjusted.filter((player) => player.lineupStatus !== "not_starting");
+  const starterOnly = adjusted.filter((player) => !["not_starting", "not_predicted_starter"].includes(player.lineupStatus));
   return starterOnly.length ? starterOnly : adjusted;
 }
 
@@ -489,22 +506,30 @@ function scorerLineupNotice(fixture, players) {
   const lineup = lineupForFixture(fixture);
 
   if (!lineup) {
-    return "Confirmed lineups are not available yet; scorer picks are hidden until the XI check lands.";
+    return players.length
+      ? "Team sheets are not available yet; showing model scorer picks until the lineup check lands."
+      : "Team sheets are not available yet and scorer data is still building.";
   }
 
   const missingTeams = [fixture.homeTeam, fixture.awayTeam]
     .filter((team) => !isConfirmedTeamLineup(teamLineupFromRecord(lineup, team)));
+  const predictedTeams = missingTeams
+    .filter((team) => isPredictedTeamLineup(teamLineupFromRecord(lineup, team)));
 
   if (!players.length && missingTeams.length) {
-    return `Waiting for confirmed ${missingTeams.join(" and ")} XI; scorer picks are hidden for now.`;
+    return `Lineup check is still incomplete for ${missingTeams.join(" and ")}; showing no scorer candidate would be unsafe.`;
   }
 
   if (!players.length) {
     return "Confirmed lineups were found, but no scorer candidate matched the starting XIs.";
   }
 
+  if (predictedTeams.length) {
+    return `Confirmed XI not published yet for ${predictedTeams.join(" and ")}; showing predicted starters from the lineup check.`;
+  }
+
   if (missingTeams.length) {
-    return `Only confirmed starters are shown; waiting for confirmed ${missingTeams.join(" and ")} XI.`;
+    return `Showing available scorer picks while waiting for confirmed ${missingTeams.join(" and ")} XI.`;
   }
 
   return "";
@@ -512,6 +537,14 @@ function scorerLineupNotice(fixture, players) {
 
 function isConfirmedTeamLineup(team) {
   return team?.status === "confirmed" && Array.isArray(team.starters) && team.starters.length >= 7;
+}
+
+function isPredictedTeamLineup(team) {
+  return team?.status === "predicted" && Array.isArray(team.starters) && team.starters.length >= 7;
+}
+
+function isUsableTeamLineup(team) {
+  return ["confirmed", "predicted"].includes(team?.status) && Array.isArray(team.starters) && team.starters.length >= 7;
 }
 
 function isLineupRequiredForFixture(fixture, now = new Date()) {
