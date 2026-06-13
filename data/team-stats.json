@@ -1,1589 +1,7 @@
 [
   {
-    "team": "Qatar",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
-    "provider": "public-web",
-    "recentPointsPerGame": 1.807,
-    "xgFor": 1.485,
-    "xgAgainst": 1.516,
-    "shotsFor": 12.03,
-    "shotsAgainst": 12.15,
-    "shotsOnTargetFor": 4.18,
-    "shotsOnTargetAgainst": 4.24,
-    "possession": 49.7,
-    "passesAttempted": 626.9,
-    "completedPasses": 481.6,
-    "passCompletion": 0.768,
-    "highPressIndex": 49.7,
-    "setPieceThreat": 58,
-    "transitionThreat": 49.9,
-    "keeperForm": 45.9,
-    "rating": 1707.1,
-    "statsCompleteness": 0.92,
-    "sourceMatchCount": 20,
-    "sourceMatchTarget": 20,
-    "sourceReliability": 0.75,
-    "manager": "Julen Lopetegui",
-    "captain": "",
-    "profileSource": "Qatar public profile 1",
-    "profileSourceUrl": "https://en.wikipedia.org/wiki/Qatar_national_football_team",
-    "profileConfidence": 0.72,
-    "metricSource": "score-derived-estimates",
-    "capturedMetricFields": [
-      "date",
-      "homeTeam",
-      "awayTeam",
-      "homeGoals",
-      "awayGoals"
-    ],
-    "derivedMetricFields": [
-      "xgFor",
-      "xgAgainst",
-      "shotsFor",
-      "shotsAgainst",
-      "shotsOnTargetFor",
-      "shotsOnTargetAgainst",
-      "possession",
-      "passesAttempted",
-      "completedPasses",
-      "passCompletion",
-      "formation",
-      "styleOfPlay"
-    ],
-    "tacticalProfile": {
-      "likelyFormation": "4-2-3-1 / 4-3-3",
-      "styleOfPlay": "balanced mid-block with mixed build-up",
-      "styleTags": [
-        "balanced",
-        "mixed build-up",
-        "set-piece threat"
-      ],
-      "possessionTier": "medium",
-      "pressingTier": "medium",
-      "transitionTier": "medium",
-      "source": "derived from 20-match public result sample and score-derived event estimates"
-    },
-    "passing": {
-      "attempted": 626.9,
-      "completed": 481.6,
-      "completion": 0.768,
-      "source": "score-and-possession-derived estimate"
-    },
-    "recentForm": {
-      "matchCount": 6,
-      "pointsPerGame": 1.667,
-      "goalsFor": 1,
-      "goalsAgainst": 1.333,
-      "goalDifference": -0.333,
-      "xgFor": 1.27,
-      "xgAgainst": 1.51,
-      "xgDifference": -0.24,
-      "shotsFor": 11.1,
-      "shotsAgainst": 12.13,
-      "shotsOnTargetFor": 3.77,
-      "shotsOnTargetAgainst": 4.23,
-      "possession": 49.2,
-      "passesAttempted": 623.2,
-      "completedPasses": 478.3,
-      "passCompletion": 0.767,
-      "cleanSheetRate": 0.333,
-      "failedToScoreRate": 0.333,
-      "bttsRate": 0.5,
-      "over25Rate": 0.667,
-      "scoringGameRate": 0.667,
-      "concedeGameRate": 0.667,
-      "window": 6
-    },
-    "longForm": {
-      "matchCount": 20,
-      "pointsPerGame": 2,
-      "goalsFor": 1.65,
-      "goalsAgainst": 1.35,
-      "goalDifference": 0.3,
-      "xgFor": 1.738,
-      "xgAgainst": 1.522,
-      "xgDifference": 0.216,
-      "shotsFor": 13.12,
-      "shotsAgainst": 12.18,
-      "shotsOnTargetFor": 4.66,
-      "shotsOnTargetAgainst": 4.25,
-      "possession": 50.7,
-      "passesAttempted": 633.4,
-      "completedPasses": 487.4,
-      "passCompletion": 0.769,
-      "cleanSheetRate": 0.35,
-      "failedToScoreRate": 0.2,
-      "bttsRate": 0.5,
-      "over25Rate": 0.75,
-      "scoringGameRate": 0.8,
-      "concedeGameRate": 0.65,
-      "window": 20
-    },
-    "formTrend": -0.1197,
-    "marketAngles": {
-      "cleanSheetRate": 0.35,
-      "failedToScoreRate": 0.2,
-      "bttsRate": 0.5,
-      "over25Rate": 0.75,
-      "scoringGameRate": 0.8,
-      "concedeGameRate": 0.65
-    },
-    "scorerSummary": [
-      {
-        "playerName": "Afif",
-        "goals": 8,
-        "goalsPerTwentyTeamMatches": 8
-      },
-      {
-        "playerName": "Ali",
-        "goals": 4,
-        "goalsPerTwentyTeamMatches": 4
-      },
-      {
-        "playerName": "Al-Rawi",
-        "goals": 3,
-        "goalsPerTwentyTeamMatches": 3
-      },
-      {
-        "playerName": "Al Ganehi",
-        "goals": 1,
-        "goalsPerTwentyTeamMatches": 1
-      },
-      {
-        "playerName": "Al-Haydos",
-        "goals": 1,
-        "goalsPerTwentyTeamMatches": 1
-      },
-      {
-        "playerName": "Alaaeldin",
-        "goals": 1,
-        "goalsPerTwentyTeamMatches": 1
-      },
-      {
-        "playerName": "Almoez",
-        "goals": 1,
-        "goalsPerTwentyTeamMatches": 1
-      },
-      {
-        "playerName": "Ayman",
-        "goals": 1,
-        "goalsPerTwentyTeamMatches": 1
-      }
-    ],
-    "topScorers": [
-      {
-        "playerName": "Afif",
-        "goals": 8,
-        "goalsPerTwentyTeamMatches": 8
-      },
-      {
-        "playerName": "Ali",
-        "goals": 4,
-        "goalsPerTwentyTeamMatches": 4
-      },
-      {
-        "playerName": "Al-Rawi",
-        "goals": 3,
-        "goalsPerTwentyTeamMatches": 3
-      },
-      {
-        "playerName": "Al Ganehi",
-        "goals": 1,
-        "goalsPerTwentyTeamMatches": 1
-      },
-      {
-        "playerName": "Al-Haydos",
-        "goals": 1,
-        "goalsPerTwentyTeamMatches": 1
-      },
-      {
-        "playerName": "Alaaeldin",
-        "goals": 1,
-        "goalsPerTwentyTeamMatches": 1
-      },
-      {
-        "playerName": "Almoez",
-        "goals": 1,
-        "goalsPerTwentyTeamMatches": 1
-      },
-      {
-        "playerName": "Ayman",
-        "goals": 1,
-        "goalsPerTwentyTeamMatches": 1
-      }
-    ],
-    "intelligenceCoverage": {
-      "matchWindowTarget": 20,
-      "matchWindowAvailable": 20,
-      "hasFullTwentyMatchWindow": true,
-      "managerKnown": true,
-      "profileConfidence": 0.72,
-      "eventDataMode": "score-derived-estimates",
-      "equalSchemaForAllTeams": true
-    },
-    "recentMatches": [
-      {
-        "date": "2026-06-11T12:00:00.000Z",
-        "homeTeam": "Qatar",
-        "awayTeam": "India",
-        "score": "2-1",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 52.5,
-        "passesAttempted": 652,
-        "completedPasses": 509,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Ayman",
-            "goals": 1
-          },
-          {
-            "name": "Al-Rawi",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Chhangte",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Qatar public results 1"
-      },
-      {
-        "date": "2026-06-10T12:00:00.000Z",
-        "homeTeam": "Uzbekistan",
-        "awayTeam": "Qatar",
-        "score": "3-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 42.5,
-        "passesAttempted": 572,
-        "completedPasses": 423,
-        "passCompletion": 0.74,
-        "homeScorers": [
-          {
-            "name": "Turgunboev",
-            "goals": 1
-          },
-          {
-            "name": "Shomurodov",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Qatar public results 1"
-      },
-      {
-        "date": "2026-06-06T12:00:00.000Z",
-        "homeTeam": "Afghanistan",
-        "awayTeam": "Qatar",
-        "score": "0-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 50,
-        "passesAttempted": 622,
-        "completedPasses": 479,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Qatar public results 1"
-      },
-      {
-        "date": "2026-06-05T12:00:00.000Z",
-        "homeTeam": "Qatar",
-        "awayTeam": "Iran",
-        "score": "1-0",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Pedro Miguel",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Qatar public results 1"
-      },
-      {
-        "date": "2026-03-26T12:00:00.000Z",
-        "homeTeam": "Kuwait",
-        "awayTeam": "Qatar",
-        "score": "1-2",
-        "teamPerspective": "away",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 52.5,
-        "passesAttempted": 652,
-        "completedPasses": 509,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Daham",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Ali",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Qatar public results 1"
-      },
-      {
-        "date": "2026-03-25T12:00:00.000Z",
-        "homeTeam": "Kyrgyzstan",
-        "awayTeam": "Qatar",
-        "score": "3-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 45,
-        "passesAttempted": 605,
-        "completedPasses": 454,
-        "passCompletion": 0.75,
-        "homeScorers": [
-          {
-            "name": "Mishchenko",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Mendes",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Qatar public results 1"
-      },
-      {
-        "date": "2026-03-21T12:00:00.000Z",
-        "homeTeam": "Qatar",
-        "awayTeam": "Kuwait",
-        "score": "3-0",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 57.5,
-        "passesAttempted": 665,
-        "completedPasses": 526,
-        "passCompletion": 0.791,
-        "homeScorers": [
-          {
-            "name": "Afif",
-            "goals": 1
-          },
-          {
-            "name": "Al-Rawi",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Qatar public results 1"
-      },
-      {
-        "date": "2026-03-20T12:00:00.000Z",
-        "homeTeam": "Qatar",
-        "awayTeam": "North Korea",
-        "score": "5-1",
-        "teamPerspective": "home",
-        "shotsFor": 23.5,
-        "shotsOnTargetFor": 9.2,
-        "possession": 58,
-        "passesAttempted": 683,
-        "completedPasses": 525,
-        "passCompletion": 0.768,
-        "homeScorers": [
-          {
-            "name": "Afif",
-            "goals": 1
-          },
-          {
-            "name": "Al Ganehi",
-            "goals": 1
-          },
-          {
-            "name": "Yu-Song Kim",
-            "goals": 1
-          },
-          {
-            "name": "Al-Rawi",
-            "goals": 1
-          },
-          {
-            "name": "Alaaeldin",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Pak Kwang-hun",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Qatar public results 1"
-      },
-      {
-        "date": "2025-12-07T12:00:00.000Z",
-        "homeTeam": "Qatar",
-        "awayTeam": "Tunisia",
-        "score": "0-3",
-        "teamPerspective": "home",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 42.5,
-        "passesAttempted": 572,
-        "completedPasses": 423,
-        "passCompletion": 0.74,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Ben Romdhane",
-            "goals": 1
-          },
-          {
-            "name": "Meriah",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2025-06-10T12:00:00.000Z",
-        "homeTeam": "Uzbekistan",
-        "awayTeam": "Qatar",
-        "score": "3-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 42.5,
-        "passesAttempted": 572,
-        "completedPasses": 423,
-        "passCompletion": 0.74,
-        "homeScorers": [
-          {
-            "name": "Turgunboev",
-            "goals": 1
-          },
-          {
-            "name": "Shomurodov",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Uzbekistan public results 1"
-      },
-      {
-        "date": "2025-06-05T21:15:00.000Z",
-        "homeTeam": "Qatar",
-        "awayTeam": "Iran",
-        "score": "1-0",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Ró-Ró",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Iran public results 1"
-      },
-      {
-        "date": "2024-11-14T12:00:00.000Z",
-        "homeTeam": "Qatar",
-        "awayTeam": "Uzbekistan",
-        "score": "3-2",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 52.5,
-        "passesAttempted": 668,
-        "completedPasses": 515,
-        "passCompletion": 0.771,
-        "homeScorers": [
-          {
-            "name": "Ali",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Fayzullaev",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Uzbekistan public results 1"
-      },
-      {
-        "date": "2024-10-15T20:00:00.000Z",
-        "homeTeam": "Iran",
-        "awayTeam": "Qatar",
-        "score": "4-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 42.5,
-        "passesAttempted": 588,
-        "completedPasses": 435,
-        "passCompletion": 0.74,
-        "homeScorers": [
-          {
-            "name": "Azmoun",
-            "goals": 1
-          },
-          {
-            "name": "Mohebbi",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Ali",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Iran public results 1"
-      },
-      {
-        "date": "2024-02-10T12:00:00.000Z",
-        "homeTeam": "Jordan",
-        "awayTeam": "Qatar",
-        "score": "1-3",
-        "teamPerspective": "away",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 55,
-        "passesAttempted": 667,
-        "completedPasses": 521,
-        "passCompletion": 0.781,
-        "homeScorers": [
-          {
-            "name": "Al-Naimat",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Afif",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Qatar public results 1"
-      },
-      {
-        "date": "2024-02-07T12:00:00.000Z",
-        "homeTeam": "Iran",
-        "awayTeam": "Qatar",
-        "score": "2-3",
-        "teamPerspective": "away",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 52.5,
-        "passesAttempted": 668,
-        "completedPasses": 515,
-        "passCompletion": 0.771,
-        "homeScorers": [
-          {
-            "name": "Azmoun",
-            "goals": 1
-          },
-          {
-            "name": "Jahanbakhsh",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Gaber",
-            "goals": 1
-          },
-          {
-            "name": "Afif",
-            "goals": 1
-          },
-          {
-            "name": "Almoez",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Qatar public results 1"
-      },
-      {
-        "date": "2024-01-29T12:00:00.000Z",
-        "homeTeam": "Qatar",
-        "awayTeam": "Palestine",
-        "score": "2-1",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 52.5,
-        "passesAttempted": 652,
-        "completedPasses": 509,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Afif",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Dabbagh",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Qatar public results 1"
-      },
-      {
-        "date": "2024-01-22T12:00:00.000Z",
-        "homeTeam": "Qatar",
-        "awayTeam": "China",
-        "score": "1-0",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Al-Haydos",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Qatar public results 1"
-      },
-      {
-        "date": "2024-01-17T12:00:00.000Z",
-        "homeTeam": "Tajikistan",
-        "awayTeam": "Qatar",
-        "score": "0-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Afif",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Qatar public results 1"
-      },
-      {
-        "date": "2024-01-12T12:00:00.000Z",
-        "homeTeam": "Qatar",
-        "awayTeam": "Lebanon",
-        "score": "3-0",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 57.5,
-        "passesAttempted": 665,
-        "completedPasses": 526,
-        "passCompletion": 0.791,
-        "homeScorers": [
-          {
-            "name": "Afif",
-            "goals": 1
-          },
-          {
-            "name": "Ali",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Qatar public results 1"
-      },
-      {
-        "date": "2024-01-05T12:00:00.000Z",
-        "homeTeam": "Qatar",
-        "awayTeam": "Jordan",
-        "score": "1-2",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 47.5,
-        "passesAttempted": 621,
-        "completedPasses": 472,
-        "passCompletion": 0.76,
-        "homeScorers": [
-          {
-            "name": "Afif",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Al-Naimat",
-            "goals": 1
-          },
-          {
-            "name": "Olwan",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Qatar public results 1"
-      }
-    ]
-  },
-  {
-    "team": "Switzerland",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
-    "provider": "public-web",
-    "recentPointsPerGame": 1.819,
-    "xgFor": 1.991,
-    "xgAgainst": 1.14,
-    "shotsFor": 14.2,
-    "shotsAgainst": 10.54,
-    "shotsOnTargetFor": 5.11,
-    "shotsOnTargetAgainst": 3.53,
-    "possession": 52.6,
-    "passesAttempted": 646.3,
-    "completedPasses": 499.7,
-    "passCompletion": 0.773,
-    "highPressIndex": 58.5,
-    "setPieceThreat": 62,
-    "transitionThreat": 65.1,
-    "keeperForm": 48.2,
-    "rating": 1756.1,
-    "statsCompleteness": 0.92,
-    "sourceMatchCount": 20,
-    "sourceMatchTarget": 20,
-    "sourceReliability": 0.75,
-    "manager": "Murat Yakin",
-    "captain": "",
-    "profileSource": "Switzerland public profile 1",
-    "profileSourceUrl": "https://en.wikipedia.org/wiki/Switzerland_national_football_team",
-    "profileConfidence": 0.72,
-    "metricSource": "score-derived-estimates",
-    "capturedMetricFields": [
-      "date",
-      "homeTeam",
-      "awayTeam",
-      "homeGoals",
-      "awayGoals"
-    ],
-    "derivedMetricFields": [
-      "xgFor",
-      "xgAgainst",
-      "shotsFor",
-      "shotsAgainst",
-      "shotsOnTargetFor",
-      "shotsOnTargetAgainst",
-      "possession",
-      "passesAttempted",
-      "completedPasses",
-      "passCompletion",
-      "formation",
-      "styleOfPlay"
-    ],
-    "tacticalProfile": {
-      "likelyFormation": "4-3-3 / 4-2-3-1",
-      "styleOfPlay": "front-foot pressing and fast regains",
-      "styleTags": [
-        "pressing",
-        "front-foot",
-        "regains",
-        "set-piece threat",
-        "positive xG balance"
-      ],
-      "possessionTier": "medium",
-      "pressingTier": "high",
-      "transitionTier": "high",
-      "source": "derived from 20-match public result sample and score-derived event estimates"
-    },
-    "passing": {
-      "attempted": 646.3,
-      "completed": 499.7,
-      "completion": 0.773,
-      "source": "score-and-possession-derived estimate"
-    },
-    "recentForm": {
-      "matchCount": 6,
-      "pointsPerGame": 1.833,
-      "goalsFor": 1.833,
-      "goalsAgainst": 0.667,
-      "goalDifference": 1.167,
-      "xgFor": 1.87,
-      "xgAgainst": 1.03,
-      "xgDifference": 0.84,
-      "shotsFor": 13.68,
-      "shotsAgainst": 10.07,
-      "shotsOnTargetFor": 4.88,
-      "shotsOnTargetAgainst": 3.33,
-      "possession": 52.6,
-      "passesAttempted": 644.3,
-      "completedPasses": 498.3,
-      "passCompletion": 0.773,
-      "cleanSheetRate": 0.333,
-      "failedToScoreRate": 0.333,
-      "bttsRate": 0.5,
-      "over25Rate": 0.5,
-      "scoringGameRate": 0.667,
-      "concedeGameRate": 0.667,
-      "window": 6
-    },
-    "longForm": {
-      "matchCount": 20,
-      "pointsPerGame": 1.8,
-      "goalsFor": 2.2,
-      "goalsAgainst": 1,
-      "goalDifference": 1.2,
-      "xgFor": 2.134,
-      "xgAgainst": 1.27,
-      "xgDifference": 0.864,
-      "shotsFor": 14.82,
-      "shotsAgainst": 11.1,
-      "shotsOnTargetFor": 5.39,
-      "shotsOnTargetAgainst": 3.77,
-      "possession": 52.7,
-      "passesAttempted": 649.8,
-      "completedPasses": 502.3,
-      "passCompletion": 0.773,
-      "cleanSheetRate": 0.35,
-      "failedToScoreRate": 0.15,
-      "bttsRate": 0.6,
-      "over25Rate": 0.6,
-      "scoringGameRate": 0.85,
-      "concedeGameRate": 0.65,
-      "window": 20
-    },
-    "formTrend": 0.0205,
-    "marketAngles": {
-      "cleanSheetRate": 0.35,
-      "failedToScoreRate": 0.15,
-      "bttsRate": 0.6,
-      "over25Rate": 0.6,
-      "scoringGameRate": 0.85,
-      "concedeGameRate": 0.65
-    },
-    "scorerSummary": [
-      {
-        "playerName": "Embolo",
-        "goals": 10,
-        "goalsPerTwentyTeamMatches": 10
-      },
-      {
-        "playerName": "Ndoye",
-        "goals": 8,
-        "goalsPerTwentyTeamMatches": 8
-      },
-      {
-        "playerName": "Aebischer",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Amdouni",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Manzambi",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Monteiro",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Vargas",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Xhaka",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      }
-    ],
-    "topScorers": [
-      {
-        "playerName": "Embolo",
-        "goals": 10,
-        "goalsPerTwentyTeamMatches": 10
-      },
-      {
-        "playerName": "Ndoye",
-        "goals": 8,
-        "goalsPerTwentyTeamMatches": 8
-      },
-      {
-        "playerName": "Aebischer",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Amdouni",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Manzambi",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Monteiro",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Vargas",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Xhaka",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      }
-    ],
-    "intelligenceCoverage": {
-      "matchWindowTarget": 20,
-      "matchWindowAvailable": 20,
-      "hasFullTwentyMatchWindow": true,
-      "managerKnown": true,
-      "profileConfidence": 0.72,
-      "eventDataMode": "score-derived-estimates",
-      "equalSchemaForAllTeams": true
-    },
-    "recentMatches": [
-      {
-        "date": "2026-06-10T12:00:00.000Z",
-        "homeTeam": "United States",
-        "awayTeam": "Switzerland",
-        "score": "0-4",
-        "teamPerspective": "away",
-        "shotsFor": 20.4,
-        "shotsOnTargetFor": 7.8,
-        "possession": 58,
-        "passesAttempted": 667,
-        "completedPasses": 520,
-        "passCompletion": 0.78,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Ndoye",
-            "goals": 1
-          },
-          {
-            "name": "Aebischer",
-            "goals": 1
-          },
-          {
-            "name": "Embolo",
-            "goals": 1
-          },
-          {
-            "name": "Manzambi",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "USA public results 2"
-      },
-      {
-        "date": "2026-06-09T12:00:00.000Z",
-        "homeTeam": "Switzerland",
-        "awayTeam": "Spain",
-        "score": "0-1",
-        "teamPerspective": "home",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 47.5,
-        "passesAttempted": 605,
-        "completedPasses": 460,
-        "passCompletion": 0.76,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Sarabia",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Spain public results 1"
-      },
-      {
-        "date": "2026-06-06T12:00:00.000Z",
-        "homeTeam": "Switzerland",
-        "awayTeam": "Australia",
-        "score": "1-1",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 50,
-        "passesAttempted": 638,
-        "completedPasses": 491,
-        "passCompletion": 0.77,
-        "homeScorers": [
-          {
-            "name": "Ndoye",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Yengi",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
-      },
-      {
-        "date": "2026-05-31T12:00:00.000Z",
-        "homeTeam": "Switzerland",
-        "awayTeam": "Jordan",
-        "score": "4-1",
-        "teamPerspective": "home",
-        "shotsFor": 20.4,
-        "shotsOnTargetFor": 7.8,
-        "possession": 57.5,
-        "passesAttempted": 682,
-        "completedPasses": 531,
-        "passCompletion": 0.778,
-        "homeScorers": [
-          {
-            "name": "Embolo",
-            "goals": 1
-          },
-          {
-            "name": "Ndoye",
-            "goals": 1
-          },
-          {
-            "name": "Fassnacht",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Al-Fakhouri",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
-      },
-      {
-        "date": "2026-05-30T12:00:00.000Z",
-        "homeTeam": "Switzerland",
-        "awayTeam": "United States",
-        "score": "2-1",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 52.5,
-        "passesAttempted": 652,
-        "completedPasses": 509,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Rodríguez",
-            "goals": 1
-          },
-          {
-            "name": "Zuber",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Lletget",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "USA public results 2"
-      },
-      {
-        "date": "2026-03-31T12:00:00.000Z",
-        "homeTeam": "Norway",
-        "awayTeam": "Switzerland",
-        "score": "0-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 50,
-        "passesAttempted": 622,
-        "completedPasses": 479,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
-      },
-      {
-        "date": "2026-03-27T12:00:00.000Z",
-        "homeTeam": "Switzerland",
-        "awayTeam": "Germany",
-        "score": "3-4",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 47.5,
-        "passesAttempted": 653,
-        "completedPasses": 490,
-        "passCompletion": 0.751,
-        "homeScorers": [
-          {
-            "name": "Ndoye",
-            "goals": 1
-          },
-          {
-            "name": "Embolo",
-            "goals": 1
-          },
-          {
-            "name": "Monteiro",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Tah",
-            "goals": 1
-          },
-          {
-            "name": "Wirtz",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
-      },
-      {
-        "date": "2026-03-26T12:00:00.000Z",
-        "homeTeam": "England",
-        "awayTeam": "Switzerland",
-        "score": "2-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 47.5,
-        "passesAttempted": 621,
-        "completedPasses": 472,
-        "passCompletion": 0.76,
-        "homeScorers": [
-          {
-            "name": "Kane",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Embolo",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "England public results 1"
-      },
-      {
-        "date": "2025-11-18T12:00:00.000Z",
-        "homeTeam": "Kosovo",
-        "awayTeam": "Switzerland",
-        "score": "1-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 50,
-        "passesAttempted": 638,
-        "completedPasses": 491,
-        "passCompletion": 0.77,
-        "homeScorers": [
-          {
-            "name": "Muslija",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Vargas",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
-      },
-      {
-        "date": "2025-11-15T12:00:00.000Z",
-        "homeTeam": "Switzerland",
-        "awayTeam": "Sweden",
-        "score": "4-1",
-        "teamPerspective": "home",
-        "shotsFor": 20.4,
-        "shotsOnTargetFor": 7.8,
-        "possession": 57.5,
-        "passesAttempted": 682,
-        "completedPasses": 531,
-        "passCompletion": 0.778,
-        "homeScorers": [
-          {
-            "name": "Embolo",
-            "goals": 1
-          },
-          {
-            "name": "Xhaka",
-            "goals": 1
-          },
-          {
-            "name": "Ndoye",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Nygren",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
-      },
-      {
-        "date": "2025-10-13T12:00:00.000Z",
-        "homeTeam": "Slovenia",
-        "awayTeam": "Switzerland",
-        "score": "0-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 50,
-        "passesAttempted": 622,
-        "completedPasses": 479,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
-      },
-      {
-        "date": "2025-10-10T12:00:00.000Z",
-        "homeTeam": "Sweden",
-        "awayTeam": "Switzerland",
-        "score": "0-2",
-        "teamPerspective": "away",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 55,
-        "passesAttempted": 651,
-        "completedPasses": 514,
-        "passCompletion": 0.79,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Xhaka",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
-      },
-      {
-        "date": "2025-09-08T12:00:00.000Z",
-        "homeTeam": "Switzerland",
-        "awayTeam": "Slovenia",
-        "score": "3-0",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 57.5,
-        "passesAttempted": 665,
-        "completedPasses": 526,
-        "passCompletion": 0.791,
-        "homeScorers": [
-          {
-            "name": "Elvedi",
-            "goals": 1
-          },
-          {
-            "name": "Embolo",
-            "goals": 1
-          },
-          {
-            "name": "Ndoye",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
-      },
-      {
-        "date": "2025-09-05T12:00:00.000Z",
-        "homeTeam": "Switzerland",
-        "awayTeam": "Kosovo",
-        "score": "4-0",
-        "teamPerspective": "home",
-        "shotsFor": 20.4,
-        "shotsOnTargetFor": 7.8,
-        "possession": 58,
-        "passesAttempted": 667,
-        "completedPasses": 520,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Akanji",
-            "goals": 1
-          },
-          {
-            "name": "Embolo",
-            "goals": 1
-          },
-          {
-            "name": "Widmer",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
-      },
-      {
-        "date": "2025-06-10T12:00:00.000Z",
-        "homeTeam": "United States",
-        "awayTeam": "Switzerland",
-        "score": "0-4",
-        "teamPerspective": "away",
-        "shotsFor": 20.4,
-        "shotsOnTargetFor": 7.8,
-        "possession": 58,
-        "passesAttempted": 667,
-        "completedPasses": 520,
-        "passCompletion": 0.78,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Ndoye",
-            "goals": 1
-          },
-          {
-            "name": "Aebischer",
-            "goals": 1
-          },
-          {
-            "name": "Embolo",
-            "goals": 1
-          },
-          {
-            "name": "Manzambi",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
-      },
-      {
-        "date": "2025-06-07T12:00:00.000Z",
-        "homeTeam": "Mexico",
-        "awayTeam": "Switzerland",
-        "score": "2-4",
-        "teamPerspective": "away",
-        "shotsFor": 20.4,
-        "shotsOnTargetFor": 7.8,
-        "possession": 55,
-        "passesAttempted": 683,
-        "completedPasses": 525,
-        "passCompletion": 0.768,
-        "homeScorers": [
-          {
-            "name": "Giménez",
-            "goals": 1
-          },
-          {
-            "name": "Sepúlveda",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Embolo",
-            "goals": 1
-          },
-          {
-            "name": "Amdouni",
-            "goals": 1
-          },
-          {
-            "name": "Ndoye",
-            "goals": 1
-          },
-          {
-            "name": "Rieder",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
-      },
-      {
-        "date": "2025-03-25T12:00:00.000Z",
-        "homeTeam": "Switzerland",
-        "awayTeam": "Luxembourg",
-        "score": "3-1",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 55,
-        "passesAttempted": 667,
-        "completedPasses": 521,
-        "passCompletion": 0.781,
-        "homeScorers": [
-          {
-            "name": "Vargas",
-            "goals": 1
-          },
-          {
-            "name": "Embolo",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Sinani",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
-      },
-      {
-        "date": "2025-03-21T12:00:00.000Z",
-        "homeTeam": "Northern Ireland",
-        "awayTeam": "Switzerland",
-        "score": "1-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 50,
-        "passesAttempted": 638,
-        "completedPasses": 491,
-        "passCompletion": 0.77,
-        "homeScorers": [
-          {
-            "name": "Price",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Sierro",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
-      },
-      {
-        "date": "2024-11-18T12:00:00.000Z",
-        "homeTeam": "Spain",
-        "awayTeam": "Switzerland",
-        "score": "3-2",
-        "teamPerspective": "away",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 47.5,
-        "passesAttempted": 637,
-        "completedPasses": 484,
-        "passCompletion": 0.76,
-        "homeScorers": [
-          {
-            "name": "Pino",
-            "goals": 1
-          },
-          {
-            "name": "Gil",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Monteiro",
-            "goals": 1
-          },
-          {
-            "name": "Zeqiri",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
-      },
-      {
-        "date": "2024-11-15T12:00:00.000Z",
-        "homeTeam": "Switzerland",
-        "awayTeam": "Serbia",
-        "score": "1-1",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 50,
-        "passesAttempted": 638,
-        "completedPasses": 491,
-        "passCompletion": 0.77,
-        "homeScorers": [
-          {
-            "name": "Amdouni",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
-      }
-    ]
-  },
-  {
     "team": "Brazil",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.366,
     "xgFor": 2.652,
@@ -2401,7 +819,7 @@
   },
   {
     "team": "Morocco",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.008,
     "xgFor": 1.615,
@@ -3117,7 +1535,7 @@
   },
   {
     "team": "Haiti",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.202,
     "xgFor": 1.776,
@@ -3669,7 +2087,7 @@
   },
   {
     "team": "Scotland",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.702,
     "xgFor": 1.891,
@@ -4383,7 +2801,7 @@
   },
   {
     "team": "Australia",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.576,
     "xgFor": 2.121,
@@ -4673,6 +3091,32 @@
       },
       {
         "date": "2026-06-06T12:00:00.000Z",
+        "homeTeam": "Bangladesh",
+        "awayTeam": "Australia",
+        "score": "0-2",
+        "teamPerspective": "away",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 55,
+        "passesAttempted": 651,
+        "completedPasses": 514,
+        "passCompletion": 0.79,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Hrustic",
+            "goals": 1
+          },
+          {
+            "name": "Yengi",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Australia public results 2"
+      },
+      {
+        "date": "2026-06-06T12:00:00.000Z",
         "homeTeam": "Switzerland",
         "awayTeam": "Australia",
         "score": "1-1",
@@ -4697,32 +3141,6 @@
         ],
         "metricSource": "score-derived-estimates",
         "source": "Switzerland public results 1"
-      },
-      {
-        "date": "2026-06-06T12:00:00.000Z",
-        "homeTeam": "Bangladesh",
-        "awayTeam": "Australia",
-        "score": "0-2",
-        "teamPerspective": "away",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 55,
-        "passesAttempted": 651,
-        "completedPasses": 514,
-        "passCompletion": 0.79,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Hrustic",
-            "goals": 1
-          },
-          {
-            "name": "Yengi",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Australia public results 2"
       },
       {
         "date": "2026-06-05T12:00:00.000Z",
@@ -5176,7 +3594,7 @@
   },
   {
     "team": "Turkiye",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.429,
     "xgFor": 1.942,
@@ -5906,7 +4324,7 @@
   },
   {
     "team": "Germany",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.492,
     "xgFor": 2.253,
@@ -6276,7 +4694,7 @@
           }
         ],
         "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
+        "source": "Germany public results 1"
       },
       {
         "date": "2026-03-26T12:00:00.000Z",
@@ -6709,7 +5127,7 @@
   },
   {
     "team": "Curaçao",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.874,
     "xgFor": 2.347,
@@ -7428,7 +5846,7 @@
   },
   {
     "team": "Netherlands",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.559,
     "xgFor": 2.532,
@@ -8250,7 +6668,7 @@
   },
   {
     "team": "Japan",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.16,
     "xgFor": 1.391,
@@ -8975,7 +7393,7 @@
   },
   {
     "team": "Ivory Coast",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.945,
     "xgFor": 1.339,
@@ -9708,7 +8126,7 @@
   },
   {
     "team": "Ecuador",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.328,
     "xgFor": 1.302,
@@ -10396,7 +8814,7 @@
   },
   {
     "team": "Sweden",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.723,
     "xgFor": 2.041,
@@ -10773,7 +9191,7 @@
           }
         ],
         "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
+        "source": "Sweden public results 1"
       },
       {
         "date": "2025-10-13T12:00:00.000Z",
@@ -10817,7 +9235,7 @@
           }
         ],
         "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
+        "source": "Sweden public results 1"
       },
       {
         "date": "2025-09-08T12:00:00.000Z",
@@ -11193,7 +9611,7 @@
   },
   {
     "team": "Tunisia",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.412,
     "xgFor": 1.044,
@@ -11904,7 +10322,7 @@
   },
   {
     "team": "Spain",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.387,
     "xgFor": 2.43,
@@ -12706,7 +11124,7 @@
   },
   {
     "team": "Cape Verde",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.735,
     "xgFor": 1.692,
@@ -13411,7 +11829,7 @@
   },
   {
     "team": "Belgium",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.046,
     "xgFor": 2.632,
@@ -14260,7 +12678,7 @@
   },
   {
     "team": "Egypt",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.445,
     "xgFor": 1.336,
@@ -14999,7 +13417,7 @@
   },
   {
     "team": "Saudi Arabia",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.5,
     "xgFor": 1.431,
@@ -15704,7 +14122,7 @@
   },
   {
     "team": "Uruguay",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.479,
     "xgFor": 1.498,
@@ -16419,7 +14837,7 @@
   },
   {
     "team": "Iran",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.702,
     "xgFor": 1.876,
@@ -17196,7 +15614,7 @@
   },
   {
     "team": "New Zealand",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 0.979,
     "xgFor": 1.274,
@@ -17884,7 +16302,7 @@
   },
   {
     "team": "France",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.084,
     "xgFor": 2.35,
@@ -18715,7 +17133,7 @@
   },
   {
     "team": "Senegal",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.987,
     "xgFor": 1.63,
@@ -19419,7 +17837,7 @@
   },
   {
     "team": "Iraq",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.681,
     "xgFor": 1.205,
@@ -20108,7 +18526,7 @@
   },
   {
     "team": "Norway",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.702,
     "xgFor": 1.878,
@@ -20529,7 +18947,7 @@
         "homeScorers": [],
         "awayScorers": [],
         "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
+        "source": "Norway public results 1"
       },
       {
         "date": "2026-03-29T12:00:00.000Z",
@@ -20904,7 +19322,7 @@
   },
   {
     "team": "Argentina",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.727,
     "xgFor": 2.285,
@@ -21645,7 +20063,7 @@
   },
   {
     "team": "Algeria",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.21,
     "xgFor": 2.142,
@@ -22395,7 +20813,7 @@
   },
   {
     "team": "Austria",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.097,
     "xgFor": 1.862,
@@ -23140,7 +21558,7 @@
   },
   {
     "team": "Jordan",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.521,
     "xgFor": 1.632,
@@ -23530,6 +21948,33 @@
       },
       {
         "date": "2026-05-31T12:00:00.000Z",
+        "homeTeam": "Jordan",
+        "awayTeam": "Vietnam",
+        "score": "1-1",
+        "teamPerspective": "home",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 50,
+        "passesAttempted": 638,
+        "completedPasses": 491,
+        "passCompletion": 0.77,
+        "homeScorers": [
+          {
+            "name": "Faisal",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Al-Rawabdeh",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Jordan public results 1"
+      },
+      {
+        "date": "2026-05-31T12:00:00.000Z",
         "homeTeam": "Switzerland",
         "awayTeam": "Jordan",
         "score": "4-1",
@@ -23557,33 +22002,6 @@
         "awayScorers": [
           {
             "name": "Al-Fakhouri",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Switzerland public results 1"
-      },
-      {
-        "date": "2026-05-31T12:00:00.000Z",
-        "homeTeam": "Jordan",
-        "awayTeam": "Vietnam",
-        "score": "1-1",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 50,
-        "passesAttempted": 638,
-        "completedPasses": 491,
-        "passCompletion": 0.77,
-        "homeScorers": [
-          {
-            "name": "Faisal",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Al-Rawabdeh",
             "goals": 1
           }
         ],
@@ -23917,7 +22335,7 @@
   },
   {
     "team": "Portugal",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.71,
     "xgFor": 1.67,
@@ -24667,7 +23085,7 @@
   },
   {
     "team": "DR Congo",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.992,
     "xgFor": 1.433,
@@ -25357,7 +23775,7 @@
   },
   {
     "team": "England",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.084,
     "xgFor": 1.5,
@@ -26081,12 +24499,12 @@
   },
   {
     "team": "Croatia",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.336,
     "xgFor": 1.569,
     "xgAgainst": 1.627,
-    "shotsFor": 12.39,
+    "shotsFor": 12.4,
     "shotsAgainst": 12.64,
     "shotsOnTargetFor": 4.4,
     "shotsOnTargetAgainst": 4.46,
@@ -26183,7 +24601,7 @@
       "xgFor": 1.92,
       "xgAgainst": 1.342,
       "xgDifference": 0.578,
-      "shotsFor": 13.91,
+      "shotsFor": 13.92,
       "shotsAgainst": 11.41,
       "shotsOnTargetFor": 5.13,
       "shotsOnTargetAgainst": 3.91,
@@ -26323,6 +24741,23 @@
         "awayScorers": [],
         "metricSource": "score-derived-estimates",
         "source": "England public results 1"
+      },
+      {
+        "date": "2026-06-07T12:00:00.000Z",
+        "homeTeam": "Croatia",
+        "awayTeam": "Slovenia",
+        "score": "2-1",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 52.5,
+        "passesAttempted": 652,
+        "completedPasses": 509,
+        "passCompletion": 0.78,
+        "homeScorers": [],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Croatia public results 1"
       },
       {
         "date": "2026-06-02T12:00:00.000Z",
@@ -26739,34 +25174,12 @@
         ],
         "metricSource": "score-derived-estimates",
         "source": "Croatia public results 1"
-      },
-      {
-        "date": "2024-10-12T12:00:00.000Z",
-        "homeTeam": "Croatia",
-        "awayTeam": "Scotland",
-        "score": "2-1",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 52.5,
-        "passesAttempted": 652,
-        "completedPasses": 509,
-        "passCompletion": 0.78,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Christie",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Croatia public results 1"
       }
     ]
   },
   {
     "team": "Ghana",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.172,
     "xgFor": 1.384,
@@ -27514,7 +25927,7 @@
   },
   {
     "team": "Panama",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.059,
     "xgFor": 1.889,
@@ -28336,7 +26749,7 @@
   },
   {
     "team": "Uzbekistan",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.723,
     "xgFor": 1.647,
@@ -29058,7 +27471,7 @@
   },
   {
     "team": "Colombia",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 2,
     "xgFor": 2.171,
@@ -29826,7 +28239,7 @@
   },
   {
     "team": "Czechia",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.765,
     "xgFor": 1.762,
@@ -30529,7 +28942,7 @@
   },
   {
     "team": "South Africa",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.626,
     "xgFor": 1.484,
@@ -31283,8 +29696,820 @@
     ]
   },
   {
+    "team": "Switzerland",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
+    "provider": "public-web",
+    "recentPointsPerGame": 1.819,
+    "xgFor": 1.991,
+    "xgAgainst": 1.14,
+    "shotsFor": 14.2,
+    "shotsAgainst": 10.54,
+    "shotsOnTargetFor": 5.11,
+    "shotsOnTargetAgainst": 3.53,
+    "possession": 52.6,
+    "passesAttempted": 646.3,
+    "completedPasses": 499.7,
+    "passCompletion": 0.773,
+    "highPressIndex": 58.5,
+    "setPieceThreat": 62,
+    "transitionThreat": 65.1,
+    "keeperForm": 48.2,
+    "rating": 1756.1,
+    "statsCompleteness": 0.92,
+    "sourceMatchCount": 20,
+    "sourceMatchTarget": 20,
+    "sourceReliability": 0.75,
+    "manager": "Murat Yakin",
+    "captain": "",
+    "profileSource": "Switzerland public profile 1",
+    "profileSourceUrl": "https://en.wikipedia.org/wiki/Switzerland_national_football_team",
+    "profileConfidence": 0.72,
+    "metricSource": "score-derived-estimates",
+    "capturedMetricFields": [
+      "date",
+      "homeTeam",
+      "awayTeam",
+      "homeGoals",
+      "awayGoals"
+    ],
+    "derivedMetricFields": [
+      "xgFor",
+      "xgAgainst",
+      "shotsFor",
+      "shotsAgainst",
+      "shotsOnTargetFor",
+      "shotsOnTargetAgainst",
+      "possession",
+      "passesAttempted",
+      "completedPasses",
+      "passCompletion",
+      "formation",
+      "styleOfPlay"
+    ],
+    "tacticalProfile": {
+      "likelyFormation": "4-3-3 / 4-2-3-1",
+      "styleOfPlay": "front-foot pressing and fast regains",
+      "styleTags": [
+        "pressing",
+        "front-foot",
+        "regains",
+        "set-piece threat",
+        "positive xG balance"
+      ],
+      "possessionTier": "medium",
+      "pressingTier": "high",
+      "transitionTier": "high",
+      "source": "derived from 20-match public result sample and score-derived event estimates"
+    },
+    "passing": {
+      "attempted": 646.3,
+      "completed": 499.7,
+      "completion": 0.773,
+      "source": "score-and-possession-derived estimate"
+    },
+    "recentForm": {
+      "matchCount": 6,
+      "pointsPerGame": 1.833,
+      "goalsFor": 1.833,
+      "goalsAgainst": 0.667,
+      "goalDifference": 1.167,
+      "xgFor": 1.87,
+      "xgAgainst": 1.03,
+      "xgDifference": 0.84,
+      "shotsFor": 13.68,
+      "shotsAgainst": 10.07,
+      "shotsOnTargetFor": 4.88,
+      "shotsOnTargetAgainst": 3.33,
+      "possession": 52.6,
+      "passesAttempted": 644.3,
+      "completedPasses": 498.3,
+      "passCompletion": 0.773,
+      "cleanSheetRate": 0.333,
+      "failedToScoreRate": 0.333,
+      "bttsRate": 0.5,
+      "over25Rate": 0.5,
+      "scoringGameRate": 0.667,
+      "concedeGameRate": 0.667,
+      "window": 6
+    },
+    "longForm": {
+      "matchCount": 20,
+      "pointsPerGame": 1.8,
+      "goalsFor": 2.2,
+      "goalsAgainst": 1,
+      "goalDifference": 1.2,
+      "xgFor": 2.134,
+      "xgAgainst": 1.27,
+      "xgDifference": 0.864,
+      "shotsFor": 14.82,
+      "shotsAgainst": 11.1,
+      "shotsOnTargetFor": 5.39,
+      "shotsOnTargetAgainst": 3.77,
+      "possession": 52.7,
+      "passesAttempted": 649.8,
+      "completedPasses": 502.3,
+      "passCompletion": 0.773,
+      "cleanSheetRate": 0.35,
+      "failedToScoreRate": 0.15,
+      "bttsRate": 0.6,
+      "over25Rate": 0.6,
+      "scoringGameRate": 0.85,
+      "concedeGameRate": 0.65,
+      "window": 20
+    },
+    "formTrend": 0.0205,
+    "marketAngles": {
+      "cleanSheetRate": 0.35,
+      "failedToScoreRate": 0.15,
+      "bttsRate": 0.6,
+      "over25Rate": 0.6,
+      "scoringGameRate": 0.85,
+      "concedeGameRate": 0.65
+    },
+    "scorerSummary": [
+      {
+        "playerName": "Embolo",
+        "goals": 10,
+        "goalsPerTwentyTeamMatches": 10
+      },
+      {
+        "playerName": "Ndoye",
+        "goals": 8,
+        "goalsPerTwentyTeamMatches": 8
+      },
+      {
+        "playerName": "Aebischer",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Amdouni",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Manzambi",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Monteiro",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Vargas",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Xhaka",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      }
+    ],
+    "topScorers": [
+      {
+        "playerName": "Embolo",
+        "goals": 10,
+        "goalsPerTwentyTeamMatches": 10
+      },
+      {
+        "playerName": "Ndoye",
+        "goals": 8,
+        "goalsPerTwentyTeamMatches": 8
+      },
+      {
+        "playerName": "Aebischer",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Amdouni",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Manzambi",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Monteiro",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Vargas",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Xhaka",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      }
+    ],
+    "intelligenceCoverage": {
+      "matchWindowTarget": 20,
+      "matchWindowAvailable": 20,
+      "hasFullTwentyMatchWindow": true,
+      "managerKnown": true,
+      "profileConfidence": 0.72,
+      "eventDataMode": "score-derived-estimates",
+      "equalSchemaForAllTeams": true
+    },
+    "recentMatches": [
+      {
+        "date": "2026-06-10T12:00:00.000Z",
+        "homeTeam": "United States",
+        "awayTeam": "Switzerland",
+        "score": "0-4",
+        "teamPerspective": "away",
+        "shotsFor": 20.4,
+        "shotsOnTargetFor": 7.8,
+        "possession": 58,
+        "passesAttempted": 667,
+        "completedPasses": 520,
+        "passCompletion": 0.78,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Ndoye",
+            "goals": 1
+          },
+          {
+            "name": "Aebischer",
+            "goals": 1
+          },
+          {
+            "name": "Embolo",
+            "goals": 1
+          },
+          {
+            "name": "Manzambi",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "USA public results 2"
+      },
+      {
+        "date": "2026-06-09T12:00:00.000Z",
+        "homeTeam": "Switzerland",
+        "awayTeam": "Spain",
+        "score": "0-1",
+        "teamPerspective": "home",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 47.5,
+        "passesAttempted": 605,
+        "completedPasses": 460,
+        "passCompletion": 0.76,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Sarabia",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Spain public results 1"
+      },
+      {
+        "date": "2026-06-06T12:00:00.000Z",
+        "homeTeam": "Switzerland",
+        "awayTeam": "Australia",
+        "score": "1-1",
+        "teamPerspective": "home",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 50,
+        "passesAttempted": 638,
+        "completedPasses": 491,
+        "passCompletion": 0.77,
+        "homeScorers": [
+          {
+            "name": "Ndoye",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Yengi",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Switzerland public results 1"
+      },
+      {
+        "date": "2026-05-31T12:00:00.000Z",
+        "homeTeam": "Switzerland",
+        "awayTeam": "Jordan",
+        "score": "4-1",
+        "teamPerspective": "home",
+        "shotsFor": 20.4,
+        "shotsOnTargetFor": 7.8,
+        "possession": 57.5,
+        "passesAttempted": 682,
+        "completedPasses": 531,
+        "passCompletion": 0.778,
+        "homeScorers": [
+          {
+            "name": "Embolo",
+            "goals": 1
+          },
+          {
+            "name": "Ndoye",
+            "goals": 1
+          },
+          {
+            "name": "Fassnacht",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Al-Fakhouri",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Jordan public results 1"
+      },
+      {
+        "date": "2026-05-30T12:00:00.000Z",
+        "homeTeam": "Switzerland",
+        "awayTeam": "United States",
+        "score": "2-1",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 52.5,
+        "passesAttempted": 652,
+        "completedPasses": 509,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Rodríguez",
+            "goals": 1
+          },
+          {
+            "name": "Zuber",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Lletget",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "USA public results 2"
+      },
+      {
+        "date": "2026-03-31T12:00:00.000Z",
+        "homeTeam": "Norway",
+        "awayTeam": "Switzerland",
+        "score": "0-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 50,
+        "passesAttempted": 622,
+        "completedPasses": 479,
+        "passCompletion": 0.77,
+        "homeScorers": [],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Norway public results 1"
+      },
+      {
+        "date": "2026-03-27T12:00:00.000Z",
+        "homeTeam": "Switzerland",
+        "awayTeam": "Germany",
+        "score": "3-4",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 47.5,
+        "passesAttempted": 653,
+        "completedPasses": 490,
+        "passCompletion": 0.751,
+        "homeScorers": [
+          {
+            "name": "Ndoye",
+            "goals": 1
+          },
+          {
+            "name": "Embolo",
+            "goals": 1
+          },
+          {
+            "name": "Monteiro",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Tah",
+            "goals": 1
+          },
+          {
+            "name": "Wirtz",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Germany public results 1"
+      },
+      {
+        "date": "2026-03-26T12:00:00.000Z",
+        "homeTeam": "England",
+        "awayTeam": "Switzerland",
+        "score": "2-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 47.5,
+        "passesAttempted": 621,
+        "completedPasses": 472,
+        "passCompletion": 0.76,
+        "homeScorers": [
+          {
+            "name": "Kane",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Embolo",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "England public results 1"
+      },
+      {
+        "date": "2025-11-18T12:00:00.000Z",
+        "homeTeam": "Kosovo",
+        "awayTeam": "Switzerland",
+        "score": "1-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 50,
+        "passesAttempted": 638,
+        "completedPasses": 491,
+        "passCompletion": 0.77,
+        "homeScorers": [
+          {
+            "name": "Muslija",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Vargas",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Switzerland public results 1"
+      },
+      {
+        "date": "2025-11-15T12:00:00.000Z",
+        "homeTeam": "Switzerland",
+        "awayTeam": "Sweden",
+        "score": "4-1",
+        "teamPerspective": "home",
+        "shotsFor": 20.4,
+        "shotsOnTargetFor": 7.8,
+        "possession": 57.5,
+        "passesAttempted": 682,
+        "completedPasses": 531,
+        "passCompletion": 0.778,
+        "homeScorers": [
+          {
+            "name": "Embolo",
+            "goals": 1
+          },
+          {
+            "name": "Xhaka",
+            "goals": 1
+          },
+          {
+            "name": "Ndoye",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Nygren",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Sweden public results 1"
+      },
+      {
+        "date": "2025-10-13T12:00:00.000Z",
+        "homeTeam": "Slovenia",
+        "awayTeam": "Switzerland",
+        "score": "0-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 50,
+        "passesAttempted": 622,
+        "completedPasses": 479,
+        "passCompletion": 0.77,
+        "homeScorers": [],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Switzerland public results 1"
+      },
+      {
+        "date": "2025-10-10T12:00:00.000Z",
+        "homeTeam": "Sweden",
+        "awayTeam": "Switzerland",
+        "score": "0-2",
+        "teamPerspective": "away",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 55,
+        "passesAttempted": 651,
+        "completedPasses": 514,
+        "passCompletion": 0.79,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Xhaka",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Sweden public results 1"
+      },
+      {
+        "date": "2025-09-08T12:00:00.000Z",
+        "homeTeam": "Switzerland",
+        "awayTeam": "Slovenia",
+        "score": "3-0",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 57.5,
+        "passesAttempted": 665,
+        "completedPasses": 526,
+        "passCompletion": 0.791,
+        "homeScorers": [
+          {
+            "name": "Elvedi",
+            "goals": 1
+          },
+          {
+            "name": "Embolo",
+            "goals": 1
+          },
+          {
+            "name": "Ndoye",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Switzerland public results 1"
+      },
+      {
+        "date": "2025-09-05T12:00:00.000Z",
+        "homeTeam": "Switzerland",
+        "awayTeam": "Kosovo",
+        "score": "4-0",
+        "teamPerspective": "home",
+        "shotsFor": 20.4,
+        "shotsOnTargetFor": 7.8,
+        "possession": 58,
+        "passesAttempted": 667,
+        "completedPasses": 520,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Akanji",
+            "goals": 1
+          },
+          {
+            "name": "Embolo",
+            "goals": 1
+          },
+          {
+            "name": "Widmer",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Switzerland public results 1"
+      },
+      {
+        "date": "2025-06-10T12:00:00.000Z",
+        "homeTeam": "United States",
+        "awayTeam": "Switzerland",
+        "score": "0-4",
+        "teamPerspective": "away",
+        "shotsFor": 20.4,
+        "shotsOnTargetFor": 7.8,
+        "possession": 58,
+        "passesAttempted": 667,
+        "completedPasses": 520,
+        "passCompletion": 0.78,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Ndoye",
+            "goals": 1
+          },
+          {
+            "name": "Aebischer",
+            "goals": 1
+          },
+          {
+            "name": "Embolo",
+            "goals": 1
+          },
+          {
+            "name": "Manzambi",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Switzerland public results 1"
+      },
+      {
+        "date": "2025-06-07T12:00:00.000Z",
+        "homeTeam": "Mexico",
+        "awayTeam": "Switzerland",
+        "score": "2-4",
+        "teamPerspective": "away",
+        "shotsFor": 20.4,
+        "shotsOnTargetFor": 7.8,
+        "possession": 55,
+        "passesAttempted": 683,
+        "completedPasses": 525,
+        "passCompletion": 0.768,
+        "homeScorers": [
+          {
+            "name": "Giménez",
+            "goals": 1
+          },
+          {
+            "name": "Sepúlveda",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Embolo",
+            "goals": 1
+          },
+          {
+            "name": "Amdouni",
+            "goals": 1
+          },
+          {
+            "name": "Ndoye",
+            "goals": 1
+          },
+          {
+            "name": "Rieder",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Switzerland public results 1"
+      },
+      {
+        "date": "2025-03-25T12:00:00.000Z",
+        "homeTeam": "Switzerland",
+        "awayTeam": "Luxembourg",
+        "score": "3-1",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 55,
+        "passesAttempted": 667,
+        "completedPasses": 521,
+        "passCompletion": 0.781,
+        "homeScorers": [
+          {
+            "name": "Vargas",
+            "goals": 1
+          },
+          {
+            "name": "Embolo",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Sinani",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Switzerland public results 1"
+      },
+      {
+        "date": "2025-03-21T12:00:00.000Z",
+        "homeTeam": "Northern Ireland",
+        "awayTeam": "Switzerland",
+        "score": "1-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 50,
+        "passesAttempted": 638,
+        "completedPasses": 491,
+        "passCompletion": 0.77,
+        "homeScorers": [
+          {
+            "name": "Price",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Sierro",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Switzerland public results 1"
+      },
+      {
+        "date": "2024-11-18T12:00:00.000Z",
+        "homeTeam": "Spain",
+        "awayTeam": "Switzerland",
+        "score": "3-2",
+        "teamPerspective": "away",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 47.5,
+        "passesAttempted": 637,
+        "completedPasses": 484,
+        "passCompletion": 0.76,
+        "homeScorers": [
+          {
+            "name": "Pino",
+            "goals": 1
+          },
+          {
+            "name": "Gil",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Monteiro",
+            "goals": 1
+          },
+          {
+            "name": "Zeqiri",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Switzerland public results 1"
+      },
+      {
+        "date": "2024-11-15T12:00:00.000Z",
+        "homeTeam": "Switzerland",
+        "awayTeam": "Serbia",
+        "score": "1-1",
+        "teamPerspective": "home",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 50,
+        "passesAttempted": 638,
+        "completedPasses": 491,
+        "passCompletion": 0.77,
+        "homeScorers": [
+          {
+            "name": "Amdouni",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Switzerland public results 1"
+      }
+    ]
+  },
+  {
     "team": "Bosnia and Herzegovina",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.202,
     "xgFor": 1.387,
@@ -31879,7 +31104,7 @@
   },
   {
     "team": "Canada",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.37,
     "xgFor": 1.371,
@@ -32773,8 +31998,778 @@
     ]
   },
   {
+    "team": "Qatar",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
+    "provider": "public-web",
+    "recentPointsPerGame": 1.807,
+    "xgFor": 1.485,
+    "xgAgainst": 1.516,
+    "shotsFor": 12.03,
+    "shotsAgainst": 12.15,
+    "shotsOnTargetFor": 4.18,
+    "shotsOnTargetAgainst": 4.24,
+    "possession": 49.7,
+    "passesAttempted": 626.9,
+    "completedPasses": 481.6,
+    "passCompletion": 0.768,
+    "highPressIndex": 49.7,
+    "setPieceThreat": 58,
+    "transitionThreat": 49.9,
+    "keeperForm": 45.9,
+    "rating": 1707.1,
+    "statsCompleteness": 0.92,
+    "sourceMatchCount": 20,
+    "sourceMatchTarget": 20,
+    "sourceReliability": 0.75,
+    "manager": "Julen Lopetegui",
+    "captain": "",
+    "profileSource": "Qatar public profile 1",
+    "profileSourceUrl": "https://en.wikipedia.org/wiki/Qatar_national_football_team",
+    "profileConfidence": 0.72,
+    "metricSource": "score-derived-estimates",
+    "capturedMetricFields": [
+      "date",
+      "homeTeam",
+      "awayTeam",
+      "homeGoals",
+      "awayGoals"
+    ],
+    "derivedMetricFields": [
+      "xgFor",
+      "xgAgainst",
+      "shotsFor",
+      "shotsAgainst",
+      "shotsOnTargetFor",
+      "shotsOnTargetAgainst",
+      "possession",
+      "passesAttempted",
+      "completedPasses",
+      "passCompletion",
+      "formation",
+      "styleOfPlay"
+    ],
+    "tacticalProfile": {
+      "likelyFormation": "4-2-3-1 / 4-3-3",
+      "styleOfPlay": "balanced mid-block with mixed build-up",
+      "styleTags": [
+        "balanced",
+        "mixed build-up",
+        "set-piece threat"
+      ],
+      "possessionTier": "medium",
+      "pressingTier": "medium",
+      "transitionTier": "medium",
+      "source": "derived from 20-match public result sample and score-derived event estimates"
+    },
+    "passing": {
+      "attempted": 626.9,
+      "completed": 481.6,
+      "completion": 0.768,
+      "source": "score-and-possession-derived estimate"
+    },
+    "recentForm": {
+      "matchCount": 6,
+      "pointsPerGame": 1.667,
+      "goalsFor": 1,
+      "goalsAgainst": 1.333,
+      "goalDifference": -0.333,
+      "xgFor": 1.27,
+      "xgAgainst": 1.51,
+      "xgDifference": -0.24,
+      "shotsFor": 11.1,
+      "shotsAgainst": 12.13,
+      "shotsOnTargetFor": 3.77,
+      "shotsOnTargetAgainst": 4.23,
+      "possession": 49.2,
+      "passesAttempted": 623.2,
+      "completedPasses": 478.3,
+      "passCompletion": 0.767,
+      "cleanSheetRate": 0.333,
+      "failedToScoreRate": 0.333,
+      "bttsRate": 0.5,
+      "over25Rate": 0.667,
+      "scoringGameRate": 0.667,
+      "concedeGameRate": 0.667,
+      "window": 6
+    },
+    "longForm": {
+      "matchCount": 20,
+      "pointsPerGame": 2,
+      "goalsFor": 1.65,
+      "goalsAgainst": 1.35,
+      "goalDifference": 0.3,
+      "xgFor": 1.738,
+      "xgAgainst": 1.522,
+      "xgDifference": 0.216,
+      "shotsFor": 13.12,
+      "shotsAgainst": 12.18,
+      "shotsOnTargetFor": 4.66,
+      "shotsOnTargetAgainst": 4.25,
+      "possession": 50.7,
+      "passesAttempted": 633.4,
+      "completedPasses": 487.4,
+      "passCompletion": 0.769,
+      "cleanSheetRate": 0.35,
+      "failedToScoreRate": 0.2,
+      "bttsRate": 0.5,
+      "over25Rate": 0.75,
+      "scoringGameRate": 0.8,
+      "concedeGameRate": 0.65,
+      "window": 20
+    },
+    "formTrend": -0.1197,
+    "marketAngles": {
+      "cleanSheetRate": 0.35,
+      "failedToScoreRate": 0.2,
+      "bttsRate": 0.5,
+      "over25Rate": 0.75,
+      "scoringGameRate": 0.8,
+      "concedeGameRate": 0.65
+    },
+    "scorerSummary": [
+      {
+        "playerName": "Afif",
+        "goals": 8,
+        "goalsPerTwentyTeamMatches": 8
+      },
+      {
+        "playerName": "Ali",
+        "goals": 4,
+        "goalsPerTwentyTeamMatches": 4
+      },
+      {
+        "playerName": "Al-Rawi",
+        "goals": 3,
+        "goalsPerTwentyTeamMatches": 3
+      },
+      {
+        "playerName": "Al Ganehi",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
+        "playerName": "Al-Haydos",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
+        "playerName": "Alaaeldin",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
+        "playerName": "Almoez",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
+        "playerName": "Ayman",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
+      }
+    ],
+    "topScorers": [
+      {
+        "playerName": "Afif",
+        "goals": 8,
+        "goalsPerTwentyTeamMatches": 8
+      },
+      {
+        "playerName": "Ali",
+        "goals": 4,
+        "goalsPerTwentyTeamMatches": 4
+      },
+      {
+        "playerName": "Al-Rawi",
+        "goals": 3,
+        "goalsPerTwentyTeamMatches": 3
+      },
+      {
+        "playerName": "Al Ganehi",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
+        "playerName": "Al-Haydos",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
+        "playerName": "Alaaeldin",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
+        "playerName": "Almoez",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
+        "playerName": "Ayman",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
+      }
+    ],
+    "intelligenceCoverage": {
+      "matchWindowTarget": 20,
+      "matchWindowAvailable": 20,
+      "hasFullTwentyMatchWindow": true,
+      "managerKnown": true,
+      "profileConfidence": 0.72,
+      "eventDataMode": "score-derived-estimates",
+      "equalSchemaForAllTeams": true
+    },
+    "recentMatches": [
+      {
+        "date": "2026-06-11T12:00:00.000Z",
+        "homeTeam": "Qatar",
+        "awayTeam": "India",
+        "score": "2-1",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 52.5,
+        "passesAttempted": 652,
+        "completedPasses": 509,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Ayman",
+            "goals": 1
+          },
+          {
+            "name": "Al-Rawi",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Chhangte",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Qatar public results 1"
+      },
+      {
+        "date": "2026-06-10T12:00:00.000Z",
+        "homeTeam": "Uzbekistan",
+        "awayTeam": "Qatar",
+        "score": "3-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 42.5,
+        "passesAttempted": 572,
+        "completedPasses": 423,
+        "passCompletion": 0.74,
+        "homeScorers": [
+          {
+            "name": "Turgunboev",
+            "goals": 1
+          },
+          {
+            "name": "Shomurodov",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Qatar public results 1"
+      },
+      {
+        "date": "2026-06-06T12:00:00.000Z",
+        "homeTeam": "Afghanistan",
+        "awayTeam": "Qatar",
+        "score": "0-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 50,
+        "passesAttempted": 622,
+        "completedPasses": 479,
+        "passCompletion": 0.77,
+        "homeScorers": [],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Qatar public results 1"
+      },
+      {
+        "date": "2026-06-05T12:00:00.000Z",
+        "homeTeam": "Qatar",
+        "awayTeam": "Iran",
+        "score": "1-0",
+        "teamPerspective": "home",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Pedro Miguel",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Qatar public results 1"
+      },
+      {
+        "date": "2026-03-26T12:00:00.000Z",
+        "homeTeam": "Kuwait",
+        "awayTeam": "Qatar",
+        "score": "1-2",
+        "teamPerspective": "away",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 52.5,
+        "passesAttempted": 652,
+        "completedPasses": 509,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Daham",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Ali",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Qatar public results 1"
+      },
+      {
+        "date": "2026-03-25T12:00:00.000Z",
+        "homeTeam": "Kyrgyzstan",
+        "awayTeam": "Qatar",
+        "score": "3-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 45,
+        "passesAttempted": 605,
+        "completedPasses": 454,
+        "passCompletion": 0.75,
+        "homeScorers": [
+          {
+            "name": "Mishchenko",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Mendes",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Qatar public results 1"
+      },
+      {
+        "date": "2026-03-21T12:00:00.000Z",
+        "homeTeam": "Qatar",
+        "awayTeam": "Kuwait",
+        "score": "3-0",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 57.5,
+        "passesAttempted": 665,
+        "completedPasses": 526,
+        "passCompletion": 0.791,
+        "homeScorers": [
+          {
+            "name": "Afif",
+            "goals": 1
+          },
+          {
+            "name": "Al-Rawi",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Qatar public results 1"
+      },
+      {
+        "date": "2026-03-20T12:00:00.000Z",
+        "homeTeam": "Qatar",
+        "awayTeam": "North Korea",
+        "score": "5-1",
+        "teamPerspective": "home",
+        "shotsFor": 23.5,
+        "shotsOnTargetFor": 9.2,
+        "possession": 58,
+        "passesAttempted": 683,
+        "completedPasses": 525,
+        "passCompletion": 0.768,
+        "homeScorers": [
+          {
+            "name": "Afif",
+            "goals": 1
+          },
+          {
+            "name": "Al Ganehi",
+            "goals": 1
+          },
+          {
+            "name": "Yu-Song Kim",
+            "goals": 1
+          },
+          {
+            "name": "Al-Rawi",
+            "goals": 1
+          },
+          {
+            "name": "Alaaeldin",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Pak Kwang-hun",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Qatar public results 1"
+      },
+      {
+        "date": "2025-12-07T12:00:00.000Z",
+        "homeTeam": "Qatar",
+        "awayTeam": "Tunisia",
+        "score": "0-3",
+        "teamPerspective": "home",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 42.5,
+        "passesAttempted": 572,
+        "completedPasses": 423,
+        "passCompletion": 0.74,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Ben Romdhane",
+            "goals": 1
+          },
+          {
+            "name": "Meriah",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Tunisia public results 1"
+      },
+      {
+        "date": "2025-06-10T12:00:00.000Z",
+        "homeTeam": "Uzbekistan",
+        "awayTeam": "Qatar",
+        "score": "3-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 42.5,
+        "passesAttempted": 572,
+        "completedPasses": 423,
+        "passCompletion": 0.74,
+        "homeScorers": [
+          {
+            "name": "Turgunboev",
+            "goals": 1
+          },
+          {
+            "name": "Shomurodov",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Uzbekistan public results 1"
+      },
+      {
+        "date": "2025-06-05T21:15:00.000Z",
+        "homeTeam": "Qatar",
+        "awayTeam": "Iran",
+        "score": "1-0",
+        "teamPerspective": "home",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Ró-Ró",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Iran public results 1"
+      },
+      {
+        "date": "2024-11-14T12:00:00.000Z",
+        "homeTeam": "Qatar",
+        "awayTeam": "Uzbekistan",
+        "score": "3-2",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 52.5,
+        "passesAttempted": 668,
+        "completedPasses": 515,
+        "passCompletion": 0.771,
+        "homeScorers": [
+          {
+            "name": "Ali",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Fayzullaev",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Uzbekistan public results 1"
+      },
+      {
+        "date": "2024-10-15T20:00:00.000Z",
+        "homeTeam": "Iran",
+        "awayTeam": "Qatar",
+        "score": "4-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 42.5,
+        "passesAttempted": 588,
+        "completedPasses": 435,
+        "passCompletion": 0.74,
+        "homeScorers": [
+          {
+            "name": "Azmoun",
+            "goals": 1
+          },
+          {
+            "name": "Mohebbi",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Ali",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Iran public results 1"
+      },
+      {
+        "date": "2024-02-10T12:00:00.000Z",
+        "homeTeam": "Jordan",
+        "awayTeam": "Qatar",
+        "score": "1-3",
+        "teamPerspective": "away",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 55,
+        "passesAttempted": 667,
+        "completedPasses": 521,
+        "passCompletion": 0.781,
+        "homeScorers": [
+          {
+            "name": "Al-Naimat",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Afif",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Qatar public results 1"
+      },
+      {
+        "date": "2024-02-07T12:00:00.000Z",
+        "homeTeam": "Iran",
+        "awayTeam": "Qatar",
+        "score": "2-3",
+        "teamPerspective": "away",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 52.5,
+        "passesAttempted": 668,
+        "completedPasses": 515,
+        "passCompletion": 0.771,
+        "homeScorers": [
+          {
+            "name": "Azmoun",
+            "goals": 1
+          },
+          {
+            "name": "Jahanbakhsh",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Gaber",
+            "goals": 1
+          },
+          {
+            "name": "Afif",
+            "goals": 1
+          },
+          {
+            "name": "Almoez",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Qatar public results 1"
+      },
+      {
+        "date": "2024-01-29T12:00:00.000Z",
+        "homeTeam": "Qatar",
+        "awayTeam": "Palestine",
+        "score": "2-1",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 52.5,
+        "passesAttempted": 652,
+        "completedPasses": 509,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Afif",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Dabbagh",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Qatar public results 1"
+      },
+      {
+        "date": "2024-01-22T12:00:00.000Z",
+        "homeTeam": "Qatar",
+        "awayTeam": "China",
+        "score": "1-0",
+        "teamPerspective": "home",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Al-Haydos",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Qatar public results 1"
+      },
+      {
+        "date": "2024-01-17T12:00:00.000Z",
+        "homeTeam": "Tajikistan",
+        "awayTeam": "Qatar",
+        "score": "0-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Afif",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Qatar public results 1"
+      },
+      {
+        "date": "2024-01-12T12:00:00.000Z",
+        "homeTeam": "Qatar",
+        "awayTeam": "Lebanon",
+        "score": "3-0",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 57.5,
+        "passesAttempted": 665,
+        "completedPasses": 526,
+        "passCompletion": 0.791,
+        "homeScorers": [
+          {
+            "name": "Afif",
+            "goals": 1
+          },
+          {
+            "name": "Ali",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Qatar public results 1"
+      },
+      {
+        "date": "2024-01-05T12:00:00.000Z",
+        "homeTeam": "Qatar",
+        "awayTeam": "Jordan",
+        "score": "1-2",
+        "teamPerspective": "home",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 47.5,
+        "passesAttempted": 621,
+        "completedPasses": 472,
+        "passCompletion": 0.76,
+        "homeScorers": [
+          {
+            "name": "Afif",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Al-Naimat",
+            "goals": 1
+          },
+          {
+            "name": "Olwan",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Qatar public results 1"
+      }
+    ]
+  },
+  {
     "team": "Mexico",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.025,
     "xgFor": 1.758,
@@ -33500,7 +33495,7 @@
   },
   {
     "team": "South Korea",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.282,
     "xgFor": 2.222,
@@ -34290,7 +34285,7 @@
   },
   {
     "team": "Paraguay",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.307,
     "xgFor": 1.678,
@@ -35021,7 +35016,7 @@
   },
   {
     "team": "USA",
-    "updatedAt": "2026-06-13T18:47:19.811Z",
+    "updatedAt": "2026-06-13T21:40:38.184Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.597,
     "xgFor": 2.118,
