@@ -22,9 +22,15 @@ export async function fetchLineupSnapshotWithDiagnostics({ fixtures, providerCon
 
   for (const source of sources.filter((item) => item.enabled !== false)) {
     for (const fixture of fixtures) {
-      const url = buildFixtureUrl(source, fixture) || fixture.sourceUrl;
+      const urls = buildFixtureUrls(source, fixture);
 
-      if (!url) {
+      if (fixture.sourceUrl) {
+        urls.push(fixture.sourceUrl);
+      }
+
+      const uniqueUrls = [...new Set(urls.filter(Boolean))];
+
+      if (!uniqueUrls.length) {
         diagnostics.push(sourceDiagnostic({
           kind: "lineups",
           source,
@@ -35,34 +41,40 @@ export async function fetchLineupSnapshotWithDiagnostics({ fixtures, providerCon
         continue;
       }
 
-      const fixtureSource = { ...source, url, name: `${source.name}: ${fixture.homeTeam} v ${fixture.awayTeam}` };
+      for (const url of uniqueUrls) {
+        const fixtureSource = { ...source, url, name: `${source.name}: ${fixture.homeTeam} v ${fixture.awayTeam}` };
 
-      try {
-        const html = await fetchPublicText(url, providerConfig);
-        const extracted = extractLineupsFromPage({
-          html,
-          fixture,
-          source: fixtureSource,
-          now
-        });
+        try {
+          const html = await fetchPublicText(url, providerConfig);
+          const extracted = extractLineupsFromPage({
+            html,
+            fixture,
+            source: fixtureSource,
+            now
+          });
 
-        lineups.push(...extracted);
-        diagnostics.push(sourceDiagnostic({
-          kind: "lineups",
-          source: fixtureSource,
-          status: extracted.length ? "ok" : "empty",
-          records: extracted.length,
-          reason: extracted.length ? "" : "Fetched public match page but found no confirmed or predicted lineup block.",
-          now
-        }));
-      } catch (error) {
-        diagnostics.push(sourceDiagnostic({
-          kind: "lineups",
-          source: fixtureSource,
-          status: "error",
-          reason: error instanceof Error ? error.message : String(error),
-          now
-        }));
+          lineups.push(...extracted);
+          diagnostics.push(sourceDiagnostic({
+            kind: "lineups",
+            source: fixtureSource,
+            status: extracted.length ? "ok" : "empty",
+            records: extracted.length,
+            reason: extracted.length ? "" : "Fetched public match page but found no confirmed or predicted lineup block.",
+            now
+          }));
+
+          if (extracted.length) {
+            break;
+          }
+        } catch (error) {
+          diagnostics.push(sourceDiagnostic({
+            kind: "lineups",
+            source: fixtureSource,
+            status: "error",
+            reason: error instanceof Error ? error.message : String(error),
+            now
+          }));
+        }
       }
     }
   }
@@ -123,21 +135,33 @@ async function loadSources(providerConfig) {
   return readJson((providerConfig?.sourcesFile || "config/lineup-sources.json").split(/[\\/]/), []);
 }
 
-function buildFixtureUrl(source, fixture) {
+function buildFixtureUrls(source, fixture) {
   if (!source.urlTemplate) {
-    return "";
+    return [];
   }
 
   const homeSlug = normalizeName(fixture.homeTeam).replace(/\s+/g, "-");
   const awaySlug = normalizeName(fixture.awayTeam).replace(/\s+/g, "-");
-  const dateKey = String(fixture.date || "").slice(0, 10);
+  const offsets = Array.isArray(source.dateOffsets) && source.dateOffsets.length
+    ? source.dateOffsets
+    : [0, 1, -1];
 
-  return source.urlTemplate
-    .replace(/\{homeSlug\}/g, homeSlug)
-    .replace(/\{awaySlug\}/g, awaySlug)
-    .replace(/\{dateKey\}/g, dateKey)
-    .replace(/\{home\}/g, encodeURIComponent(fixture.homeTeam))
-    .replace(/\{away\}/g, encodeURIComponent(fixture.awayTeam));
+  return offsets.map((offset) => {
+    const dateKey = fixtureDateKey(fixture, offset);
+
+    return source.urlTemplate
+      .replace(/\{homeSlug\}/g, homeSlug)
+      .replace(/\{awaySlug\}/g, awaySlug)
+      .replace(/\{dateKey\}/g, dateKey)
+      .replace(/\{home\}/g, encodeURIComponent(fixture.homeTeam))
+      .replace(/\{away\}/g, encodeURIComponent(fixture.awayTeam));
+  });
+}
+
+function fixtureDateKey(fixture, offsetDays = 0) {
+  const date = new Date(fixture.date || Date.now());
+  date.setUTCDate(date.getUTCDate() + Number(offsetDays || 0));
+  return date.toISOString().slice(0, 10);
 }
 
 function parseTeamLineup(lines, team) {

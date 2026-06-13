@@ -47,6 +47,10 @@ jobs:
             git commit -m "Update WorldCupMagik public-web database [skip ci]"
             git push
           fi
+      - name: Preserve current published lineup feed
+        run: |
+          mkdir -p web/data
+          curl --fail --location --silent --show-error https://corentis-88.github.io/WorldCupMagik/data/lineups-latest.json --output web/data/lineups-latest.json || echo "No published lineup feed to preserve."
       - uses: actions/configure-pages@v5
         with:
           enablement: true

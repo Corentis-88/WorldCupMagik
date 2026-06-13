@@ -66,6 +66,51 @@ test("lineup fetcher records source diagnostics and confirmed lineups", async ()
   }
 });
 
+test("lineup fetcher tries alternate public page date keys", async () => {
+  const originalFetch = globalThis.fetch;
+  const requestedUrls = [];
+
+  globalThis.fetch = async (url) => {
+    requestedUrls.push(String(url));
+
+    return {
+      ok: true,
+      text: async () => String(url).includes("2026-06-14")
+        ? `
+          <p>Brazil confirmed lineup (4-2-3-1): Alisson, Danilo, Marquinhos, Gabriel Magalhaes, Wendell, Bruno Guimaraes, Casemiro, Raphinha, Rodrygo, Vinicius Junior, Richarlison.</p>
+          <p>Morocco confirmed lineup (4-3-3): Yassine Bounou, Achraf Hakimi, Nayef Aguerd, Romain Saiss, Noussair Mazraoui, Sofyan Amrabat, Azzedine Ounahi, Bilal El Khannouss, Hakim Ziyech, Youssef En-Nesyri, Sofiane Boufal.</p>
+        `
+        : "<html><body>No football lineup block here.</body></html>"
+    };
+  };
+
+  try {
+    const result = await fetchLineupSnapshotWithDiagnostics({
+      fixtures: [{
+        id: "bra-mar",
+        date: "2026-06-13T22:00:00.000Z",
+        homeTeam: "Brazil",
+        awayTeam: "Morocco"
+      }],
+      providerConfig: {
+        mode: "self-gather",
+        sources: [{
+          name: "Lineup article test",
+          urlTemplate: "https://example.test/{homeSlug}-vs-{awaySlug}-{dateKey}/"
+        }]
+      },
+      now: new Date("2026-06-13T21:15:00.000Z")
+    });
+
+    assert.equal(result.lineups.length, 1);
+    assert.equal(requestedUrls[0].includes("2026-06-13"), true);
+    assert.equal(requestedUrls[1].includes("2026-06-14"), true);
+    assert.equal(result.diagnostics.at(-1).status, "ok");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
 test("lineup player matcher connects full-name and surname variants", () => {
   assert.equal(lineupPlayerMatches("Raul Jimenez", "Jimenez"), true);
   assert.equal(lineupPlayerMatches("Oswin Appollis", "Appollis"), true);

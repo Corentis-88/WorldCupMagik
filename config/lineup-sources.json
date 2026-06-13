@@ -3,6 +3,7 @@
     "name": "SportsGambler public lineup pages",
     "type": "html",
     "urlTemplate": "https://www.sportsgambler.com/betting-tips/football/{homeSlug}-vs-{awaySlug}-prediction-lineups-odds-{dateKey}/",
+    "dateOffsets": [0, 1, -1],
     "fixtureUrlFromFixtures": true,
     "fullPageFixtureBlock": true,
     "reliability": 0.68

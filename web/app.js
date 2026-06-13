@@ -6,6 +6,7 @@ const state = {
   renderPending: false,
   riskInteracting: false,
   isScrolling: false,
+  lineupRefreshTimer: null,
   profileCache: new Map(),
   pickProfileCache: new Map(),
   scorerCache: new Map()
@@ -31,6 +32,11 @@ const defaultGatheringSchedule = {
   automaticRunMinutesUtc: [323, 503, 683, 863, 1043, 1223, 1283, 1403],
   gatheringWindowMinutes: 5,
   gatheringMessage: "Data Gathering: Come back in 5"
+};
+const scorerLineupGate = {
+  maxMinutesBeforeKickoff: 75,
+  minMinutesBeforeKickoff: -10,
+  refreshMs: 120000
 };
 const usageInstructions = "1. Input stake per bet 2. Choose Date From 3. Choose Date To 4. Adjust risk slider 5. We add our secret sauce and some luck, we don't just go by the bookies! Enjoy!";
 
@@ -88,6 +94,7 @@ async function loadData() {
     clearRenderCaches();
     initialiseDateInputs();
     render();
+    startLineupRefresh();
   } catch (error) {
     el.scanStamp.textContent = `No generated database yet: ${error.message}`;
     el.betslip.innerHTML = `<article class="bet-card">Run <strong>npm run web:build-data</strong> locally or let GitHub Actions publish the latest database.</article>`;
@@ -116,6 +123,48 @@ async function fetchOptionalJson(path) {
   } catch {
     return null;
   }
+}
+
+function startLineupRefresh() {
+  if (state.lineupRefreshTimer) {
+    clearInterval(state.lineupRefreshTimer);
+  }
+
+  state.lineupRefreshTimer = setInterval(refreshLineupAdjustments, scorerLineupGate.refreshMs);
+}
+
+async function refreshLineupAdjustments() {
+  if (!state.data || !hasLineupSensitiveFixture(state.data)) {
+    return;
+  }
+
+  const lineups = await fetchOptionalJson("./data/lineups-latest.json");
+
+  if (!lineups) {
+    return;
+  }
+
+  const previousKey = lineupFeedKey(state.data.lineupAdjustments);
+  const nextKey = lineupFeedKey(lineups);
+
+  if (nextKey === previousKey) {
+    return;
+  }
+
+  state.data.lineupAdjustments = lineups;
+  clearRenderCaches();
+  render();
+}
+
+function lineupFeedKey(lineups) {
+  return `${lineups?.generatedAt || ""}|${lineups?.lineups?.length || 0}|${lineups?.diagnostics?.length || 0}`;
+}
+
+function hasLineupSensitiveFixture(data) {
+  return (data?.fixtures || []).some((fixture) => {
+    const minutes = minutesUntilKickoff(fixture);
+    return minutes >= -15 && minutes <= 130;
+  });
 }
 
 function handleControlInput(input) {
@@ -480,6 +529,7 @@ function renderLikelyGoalscorers(groups) {
   }
 
   el.likelyScorers.innerHTML = groups.map((group) => {
+    const emptyText = group.lineupNotice || "Scorer data is still building for this game.";
     const players = group.players.length
       ? group.players.map((player, index) => `
         <li>
@@ -491,7 +541,10 @@ function renderLikelyGoalscorers(groups) {
           <em>${percent(player.probability)}</em>
         </li>
       `).join("")
-      : `<li class="empty-scorers">Scorer data is still building for this game.</li>`;
+      : `<li class="empty-scorers">${escapeHtml(emptyText)}</li>`;
+    const notice = group.lineupNotice && group.players.length
+      ? `<p class="why">${escapeHtml(group.lineupNotice)}</p>`
+      : "";
 
     return `
       <article class="scorer-card">
@@ -502,6 +555,7 @@ function renderLikelyGoalscorers(groups) {
         <ol class="scorers">
           ${players}
         </ol>
+        ${notice}
       </article>
     `;
   }).join("");
@@ -518,11 +572,16 @@ function buildLikelyGoalscorersToday(data, today = localDateKey(new Date())) {
     .filter((fixture) => (fixture.dateKey || dateKey(fixture.date)) === today)
     .sort((left, right) => new Date(left.date) - new Date(right.date));
 
-  return rememberCache(state.scorerCache, cacheKey, fixtures.map((fixture) => ({
-    fixture,
-    fixtureLabel: `${fixture.homeTeam} vs ${fixture.awayTeam}`,
-    players: likelyGoalscorersForFixture(data, fixture).slice(0, 4)
-  })));
+  return rememberCache(state.scorerCache, cacheKey, fixtures.map((fixture) => {
+    const players = likelyGoalscorersForFixture(data, fixture).slice(0, 4);
+
+    return {
+      fixture,
+      fixtureLabel: `${fixture.homeTeam} vs ${fixture.awayTeam}`,
+      players,
+      lineupNotice: scorerLineupNotice(data, fixture, players)
+    };
+  }));
 }
 
 function likelyGoalscorersForFixture(data, fixture) {
@@ -807,40 +866,54 @@ function playerNamesMatch(left, right) {
 
 function applyLineupAdjustments(players, data, fixture) {
   const lineup = lineupForFixture(data, fixture);
+  const lineupRequired = isLineupRequiredForFixture(fixture);
 
   if (!lineup) {
-    return players;
+    return lineupRequired ? [] : players;
   }
 
-  const adjusted = players.map((player) => {
-    const team = teamLineupFromRecord(lineup, player.team);
+  const adjusted = [];
 
-    if (!team || team.status !== "confirmed" || !Array.isArray(team.starters) || team.starters.length < 7) {
-      return player;
+  for (const player of players) {
+    const team = teamLineupFromRecord(lineup, player.team);
+    const teamConfirmed = isConfirmedTeamLineup(team);
+
+    if (!teamConfirmed) {
+      if (!lineupRequired) {
+        adjusted.push(player);
+      }
+      continue;
     }
 
     const starterName = team.starters.find((starter) => playerNamesMatch(starter, player.playerName));
 
     if (!starterName) {
-      return {
-        ...player,
-        lineupStatus: "not_starting",
-        probability: clamp(Number(player.probability || 0) * 0.08, 0.01, 0.08),
-        confidence: clamp(Number(player.confidence || 0) * 0.55, 0, 1),
-        sourceWeight: Number(player.sourceWeight || 0) * 0.35,
-        reason: `${player.reason} | not in confirmed XI`
-      };
+      if (!lineupRequired) {
+        adjusted.push({
+          ...player,
+          lineupStatus: "not_starting",
+          probability: clamp(Number(player.probability || 0) * 0.08, 0.01, 0.08),
+          confidence: clamp(Number(player.confidence || 0) * 0.55, 0, 1),
+          sourceWeight: Number(player.sourceWeight || 0) * 0.35,
+          reason: `${player.reason} | not in confirmed XI`
+        });
+      }
+      continue;
     }
 
-    return {
+    adjusted.push({
       ...player,
       playerName: betterDisplayPlayerName(starterName, player.playerName),
       lineupStatus: "confirmed_starter",
       reason: `${player.reason} | confirmed starter`
-    };
-  });
-  const starterOnly = adjusted.filter((player) => player.lineupStatus !== "not_starting");
+    });
+  }
 
+  if (lineupRequired) {
+    return adjusted.filter((player) => player.lineupStatus === "confirmed_starter");
+  }
+
+  const starterOnly = adjusted.filter((player) => player.lineupStatus !== "not_starting");
   return starterOnly.length ? starterOnly : adjusted;
 }
 
@@ -872,6 +945,49 @@ function teamLineupFromRecord(lineup, teamName) {
 
   const entry = Object.entries(lineup.teams).find(([team]) => sameTeam(team, teamName));
   return entry?.[1] || null;
+}
+
+function scorerLineupNotice(data, fixture, players) {
+  if (!isLineupRequiredForFixture(fixture)) {
+    return "";
+  }
+
+  const lineup = lineupForFixture(data, fixture);
+
+  if (!lineup) {
+    return "Confirmed lineups are not available yet; scorer picks are hidden until the XI check lands.";
+  }
+
+  const missingTeams = [fixture.homeTeam, fixture.awayTeam]
+    .filter((team) => !isConfirmedTeamLineup(teamLineupFromRecord(lineup, team)));
+
+  if (!players.length && missingTeams.length) {
+    return `Waiting for confirmed ${missingTeams.join(" and ")} XI; scorer picks are hidden for now.`;
+  }
+
+  if (!players.length) {
+    return "Confirmed lineups were found, but no scorer candidate matched the starting XIs.";
+  }
+
+  if (missingTeams.length) {
+    return `Only confirmed starters are shown; waiting for confirmed ${missingTeams.join(" and ")} XI.`;
+  }
+
+  return "";
+}
+
+function isConfirmedTeamLineup(team) {
+  return team?.status === "confirmed" && Array.isArray(team.starters) && team.starters.length >= 7;
+}
+
+function isLineupRequiredForFixture(fixture, now = new Date()) {
+  const minutes = minutesUntilKickoff(fixture, now);
+  return minutes >= scorerLineupGate.minMinutesBeforeKickoff
+    && minutes <= scorerLineupGate.maxMinutesBeforeKickoff;
+}
+
+function minutesUntilKickoff(fixture, now = new Date()) {
+  return (new Date(fixture.date).getTime() - now.getTime()) / 60000;
 }
 
 function sameTeam(left, right) {

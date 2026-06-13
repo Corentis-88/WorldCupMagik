@@ -2,13 +2,13 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadEngineState, readJson } from "../src/db.mjs";
+import { isInsideLineupWindow, lineupWindowFromEnv, minutesUntilKickoff } from "../src/lineup-window.mjs";
 import { fetchLineupSnapshotWithDiagnostics } from "../src/providers/lineup-provider.mjs";
 
 const rootDir = dirname(dirname(fileURLToPath(import.meta.url)));
 const outputPath = join(rootDir, "web", "data", "lineups-latest.json");
 const now = new Date(process.env.LINEUP_NOW || Date.now());
-const minMinutesBefore = Number(process.env.LINEUP_MIN_MINUTES_BEFORE || 35);
-const maxMinutesBefore = Number(process.env.LINEUP_MAX_MINUTES_BEFORE || 70);
+const lineupWindow = lineupWindowFromEnv();
 const forceAllUpcoming = process.argv.includes("--all-upcoming");
 
 const engineState = await loadEngineState();
@@ -17,7 +17,7 @@ const fixtures = (latestWebData?.fixtures?.length ? latestWebData.fixtures : eng
   .filter(isPublicFixture)
   .filter(isGroupFixture);
 const targetFixtures = fixtures
-  .filter((fixture) => forceAllUpcoming ? minutesUntilKickoff(fixture, now) >= -15 && minutesUntilKickoff(fixture, now) <= 24 * 60 : isInsideLineupWindow(fixture, now))
+  .filter((fixture) => forceAllUpcoming ? minutesUntilKickoff(fixture, now) >= -15 && minutesUntilKickoff(fixture, now) <= 24 * 60 : isInsideLineupWindow(fixture, now, lineupWindow))
   .sort((left, right) => new Date(left.date) - new Date(right.date));
 const existing = await readExistingLineups();
 const providerConfig = engineState.providers.lineups || {
@@ -35,8 +35,8 @@ const payload = {
   edition: "github-pages-lineup-quick-check",
   source: "GitHub Actions lightweight public-web lineup scanner",
   targetWindow: {
-    minMinutesBeforeKickoff: minMinutesBefore,
-    maxMinutesBeforeKickoff: maxMinutesBefore
+    minMinutesBeforeKickoff: lineupWindow.minMinutesBefore,
+    maxMinutesBeforeKickoff: lineupWindow.maxMinutesBefore
   },
   targetFixtureCount: targetFixtures.length,
   targetFixtures: targetFixtures.map((fixture) => ({
@@ -69,15 +69,6 @@ function isPublicFixture(fixture) {
 
 function isGroupFixture(fixture) {
   return !fixture.stage || /\bgroup\b/i.test(String(fixture.stage));
-}
-
-function isInsideLineupWindow(fixture, currentTime) {
-  const minutes = minutesUntilKickoff(fixture, currentTime);
-  return minutes >= minMinutesBefore && minutes <= maxMinutesBefore;
-}
-
-function minutesUntilKickoff(fixture, currentTime) {
-  return (new Date(fixture.date).getTime() - currentTime.getTime()) / 60000;
 }
 
 function mergeLineups(existingLineups, freshLineups, currentTime) {
