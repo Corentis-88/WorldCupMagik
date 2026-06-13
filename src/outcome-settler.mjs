@@ -2,15 +2,18 @@ import { readJson, upsertJsonRecords } from "./db.mjs";
 import { makeId, normalizeName, round } from "./utils.mjs";
 
 export async function settleStoredBetOutcomes({ matchHistory = null, now = new Date() } = {}) {
-  const [legCandidates, recommendations, existingOutcomes, storedMatchHistory] = await Promise.all([
+  const [legCandidates, recommendations, appScanLatest, appScans, existingOutcomes, storedMatchHistory] = await Promise.all([
     readJson(["data", "leg-candidates-latest.json"], []),
     readJson(["data", "recommendations-latest.json"], null),
+    readJson(["data", "app-scan-latest.json"], null),
+    readJson(["data", "app-scans.json"], []),
     readJson(["data", "bet-outcomes.json"], []),
     matchHistory ? Promise.resolve(matchHistory) : readJson(["data", "team-match-history.json"], [])
   ]);
   const settlement = settleBetOutcomes({
     legCandidates,
     recommendations,
+    appScans: [appScanLatest, ...appScans].filter(Boolean),
     matchHistory: storedMatchHistory,
     existingOutcomes,
     now
@@ -23,12 +26,12 @@ export async function settleStoredBetOutcomes({ matchHistory = null, now = new D
   return settlement;
 }
 
-export function settleBetOutcomes({ legCandidates = [], recommendations = null, matchHistory = [], existingOutcomes = [], now = new Date() } = {}) {
-  const fullLegs = recommendedFullLegs({ legCandidates, recommendations });
+export function settleBetOutcomes({ legCandidates = [], recommendations = null, appScans = [], matchHistory = [], existingOutcomes = [], now = new Date() } = {}) {
+  const fullLegs = recommendedFullLegs({ legCandidates, recommendations, appScans });
   const existingKeys = new Set(existingOutcomes.map(outcomeRecordKey));
   const newRecords = [];
   const skipped = {
-    noRecommendations: recommendations ? 0 : 1,
+    noRecommendations: recommendations || appScans.length ? 0 : 1,
     noMatch: 0,
     unknownMarket: 0,
     alreadySettled: 0
@@ -164,20 +167,25 @@ export function gradeLegAgainstMatch(leg, match) {
   return { status: "unknown", reason: "unsupported_market" };
 }
 
-function recommendedFullLegs({ legCandidates, recommendations }) {
+function recommendedFullLegs({ legCandidates, recommendations, appScans = [] }) {
   const candidateById = new Map(legCandidates.map((leg) => [baseLegId(leg.id), leg]));
-  const selectedIds = new Set();
+  const selectedKeys = new Set();
   const selected = [];
 
-  for (const leg of flattenRecommendedLegs(recommendations)) {
+  for (const leg of [
+    ...flattenRecommendedLegs(recommendations),
+    ...flattenAppScanLegs(appScans)
+  ]) {
     const id = baseLegId(leg.id);
+    const fullLeg = candidateById.get(id) || leg;
+    const key = predictionLegKey(fullLeg);
 
-    if (!id || selectedIds.has(id)) {
+    if (!key || selectedKeys.has(key)) {
       continue;
     }
 
-    selectedIds.add(id);
-    selected.push(candidateById.get(id) || leg);
+    selectedKeys.add(key);
+    selected.push(fullLeg);
   }
 
   return selected;
@@ -199,6 +207,14 @@ function flattenRecommendedLegs(recommendations) {
   return combos.flatMap((combo) => combo.legs || []);
 }
 
+function flattenAppScanLegs(appScans = []) {
+  return appScans.flatMap((scan) => {
+    const betslipLegs = (scan?.betslip || []).flatMap((combo) => combo.legs || []);
+    const strongestLegs = scan?.strongestLegs || [];
+    return [...betslipLegs, ...strongestLegs];
+  });
+}
+
 function findSettledMatchForLeg(leg, matchHistory, now) {
   const fixtureDate = new Date(leg.fixtureDate || leg.date || 0);
   const nowTime = new Date(now).getTime();
@@ -218,17 +234,17 @@ function findSettledMatchForLeg(leg, matchHistory, now) {
 }
 
 function teamsMatchLeg(leg, match) {
-  const legHome = normalizeName(leg.homeTeam);
-  const legAway = normalizeName(leg.awayTeam);
-  const matchHome = normalizeName(match.homeTeam);
-  const matchAway = normalizeName(match.awayTeam);
+  const legHome = teamIdentityKeys(leg.homeTeam);
+  const legAway = teamIdentityKeys(leg.awayTeam);
+  const matchHome = teamIdentityKeys(match.homeTeam);
+  const matchAway = teamIdentityKeys(match.awayTeam);
 
-  if (!legHome || !legAway || !matchHome || !matchAway) {
+  if (!legHome.length || !legAway.length || !matchHome.length || !matchAway.length) {
     return false;
   }
 
-  return (legHome === matchHome && legAway === matchAway)
-    || (legHome === matchAway && legAway === matchHome);
+  return (teamKeySetsMatch(legHome, matchHome) && teamKeySetsMatch(legAway, matchAway))
+    || (teamKeySetsMatch(legHome, matchAway) && teamKeySetsMatch(legAway, matchHome));
 }
 
 function gradeAnytimeScorer(leg, match, totalGoals) {
@@ -365,6 +381,20 @@ function baseLegId(id) {
   return String(id || "").replace(/_short_window_repeat_\d+$/, "");
 }
 
+function predictionLegKey(leg) {
+  const fixtureKey = leg.fixtureId
+    || [leg.fixtureDate || leg.date || "", normalizeName(leg.homeTeam), normalizeName(leg.awayTeam)].filter(Boolean).join("|");
+
+  return [
+    fixtureKey,
+    leg.market || "",
+    normalizeName(leg.outcome || inferredOutcomeFromLabel(leg)),
+    normalizeName(leg.playerName || ""),
+    normalizeName(leg.playerTeam || ""),
+    normalizeName(leg.bookmaker || "")
+  ].join("|");
+}
+
 function inferredOutcomeFromLabel(leg) {
   const label = String(leg.selectionLabel || "");
 
@@ -398,7 +428,38 @@ function inferredOutcomeFromLabel(leg) {
 }
 
 function teamMatches(left, right) {
-  const a = normalizeName(left);
-  const b = normalizeName(right);
-  return Boolean(a && b && (a === b || a.includes(b) || b.includes(a)));
+  return teamKeySetsMatch(teamIdentityKeys(left), teamIdentityKeys(right));
+}
+
+const TEAM_ALIASES = {
+  usa: ["united states", "united states mens", "united states men s", "usmnt"],
+  "united states": ["usa", "united states mens", "united states men s", "usmnt"],
+  "united states mens": ["usa", "united states", "united states men s", "usmnt"],
+  "united states men s": ["usa", "united states", "united states mens", "usmnt"],
+  czechia: ["czech republic"],
+  "czech republic": ["czechia"],
+  turkiye: ["turkey"],
+  turkey: ["turkiye"],
+  "dr congo": ["congo dr", "democratic republic of the congo"],
+  "congo dr": ["dr congo", "democratic republic of the congo"],
+  "democratic republic of the congo": ["dr congo", "congo dr"],
+  "ivory coast": ["cote d ivoire"],
+  "cote d ivoire": ["ivory coast"],
+  "south korea": ["korea republic", "republic of korea"],
+  "korea republic": ["south korea", "republic of korea"],
+  "republic of korea": ["south korea", "korea republic"],
+  "bosnia and herzegovina": ["bosnia"],
+  bosnia: ["bosnia and herzegovina"]
+};
+
+function teamIdentityKeys(team) {
+  const key = normalizeName(team);
+  const keys = new Set([key, ...(TEAM_ALIASES[key] || []).map(normalizeName)]);
+  return [...keys].filter(Boolean);
+}
+
+function teamKeySetsMatch(leftKeys, rightKeys) {
+  return leftKeys.some((left) => rightKeys.some((right) => {
+    return left === right || left.includes(right) || right.includes(left);
+  }));
 }

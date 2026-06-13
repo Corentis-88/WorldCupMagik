@@ -101,25 +101,7 @@ function selectMostLikelyLegsForTarget({ fixtureSeparatedLegs, eligibleLegs, leg
   addMostLikelyLegs({ selected, selectedIds, pool: eligibleLegs, legCount, mode: "fallback" });
   addLeastCorrelatedLegs({ selected, selectedIds, pool: fixtureSeparatedLegs, legCount });
 
-  if (!selected.length) {
-    return [];
-  }
-
-  const fillPool = [...selected];
-  let repeatIndex = 1;
-
-  while (selected.length < legCount) {
-    const leg = fillPool[(repeatIndex - 1) % fillPool.length];
-    selected.push({
-      ...leg,
-      id: `${leg.id}_short_window_repeat_${repeatIndex}`,
-      shortWindowFallback: true,
-      reusedSignal: true
-    });
-    repeatIndex += 1;
-  }
-
-  return selected;
+  return selected.length === legCount ? selected : [];
 }
 
 function addMostLikelyLegs({ selected, selectedIds, pool, legCount, mode }) {

@@ -28,6 +28,16 @@ test("days ahead selects fixtures in the intended local window", () => {
   assert.equal(selected[0].id, "mex-rsa");
 });
 
+test("fixture window excludes same-day matches that already kicked off", () => {
+  const selected = selectFixturesForWindow([
+    { id: "past-today", date: "2026-06-13T01:00:00.000Z", homeTeam: "USA", awayTeam: "Paraguay", sourceType: "public-web" },
+    { id: "future-today", date: "2026-06-13T19:00:00.000Z", homeTeam: "Canada", awayTeam: "Bosnia", sourceType: "public-web" },
+    { id: "future-tomorrow", date: "2026-06-14T17:00:00.000Z", homeTeam: "Germany", awayTeam: "Curacao", sourceType: "public-web" }
+  ], 1, new Date("2026-06-13T14:30:00.000Z"));
+
+  assert.deepEqual(selected.map((fixture) => fixture.id), ["future-today", "future-tomorrow"]);
+});
+
 test("betslip selection returns the fixed category set it can support", () => {
   const recommendations = {
     singles: [
@@ -352,9 +362,9 @@ test("most likely picks only show categories the fixture window can support", ()
     }
   }, { fixtureCount: 3 });
 
-  assert.deepEqual(picks.map((pick) => pick.category), ["single", "double", "trixie"]);
-  assert.equal(picks.find((pick) => pick.category === "trixie").legs.length, 3);
-  assert.equal(picks.find((pick) => pick.category === "trixie").shortWindowFallback, true);
+  assert.deepEqual(picks.map((pick) => pick.category), ["single", "double"]);
+  assert.equal(picks.find((pick) => pick.category === "trixie"), undefined);
+  assert.equal(picks.some((pick) => pick.legs.some((leg) => leg.reusedSignal)), false);
 });
 
 function combo(type, odds, score, legCount) {

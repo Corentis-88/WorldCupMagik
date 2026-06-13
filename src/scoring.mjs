@@ -1012,7 +1012,7 @@ function buildNewsByTeam(newsArticles, policy, now) {
   const aggregates = new Map();
 
   for (const [team, articles] of byTeam.entries()) {
-    aggregates.set(team, aggregateNews(articles));
+    aggregates.set(team, aggregateNews(articles, team));
   }
 
   return aggregates;
@@ -1064,25 +1064,66 @@ function buildConfidenceReasons({ confidence, dataCompleteness, intelligenceConf
   return reasons.slice(0, 7);
 }
 
-function aggregateNews(articles) {
+function aggregateNews(articles, team) {
   const accepted = articles.filter((article) => article.acceptedSource !== false);
-  const usable = accepted.length ? accepted : articles;
-  const reliabilityWeighted = usable.reduce((total, article) => total + Number(article.sourceReliability || 0.5), 0) || 1;
-  const weightedSentiment = usable.reduce((total, article) => total + Number(article.sentiment || 0) * Number(article.sourceReliability || 0.5), 0) / reliabilityWeighted;
-  const injuryDrag = usable.reduce((total, article) => total + Number(article.signals?.injury || 0) * Number(article.sourceReliability || 0.5), 0) / reliabilityWeighted;
-  const tacticalLift = usable.reduce((total, article) => total + Number(article.signals?.tacticalFit || 0.45) * Number(article.sourceReliability || 0.5), 0) / reliabilityWeighted;
-  const lineupLift = usable.reduce((total, article) => total + Number(article.signals?.lineupClarity || 0.45) * Number(article.sourceReliability || 0.5), 0) / reliabilityWeighted;
-  const rotationDrag = usable.reduce((total, article) => total + Number(article.signals?.rotationRisk || 0.2) * Number(article.sourceReliability || 0.5), 0) / reliabilityWeighted;
-  const sourceDiversity = new Set(usable.map((article) => article.source || article.provider)).size;
-  const confidence = clamp(0.38 + sourceDiversity * 0.11 + mean(usable.map((article) => article.sourceReliability || 0.5)) * 0.35, 0, 1);
+  const usable = accepted
+    .map((article) => ({ article, weight: newsRelevanceWeight(article, team) }))
+    .filter((item) => item.weight >= 0.5);
+
+  if (!usable.length) {
+    return {
+      ...neutralNews(),
+      contextArticleCount: accepted.length,
+      rejectedArticleCount: articles.length - accepted.length
+    };
+  }
+
+  const reliabilityWeighted = usable.reduce((total, item) => total + weightedNewsReliability(item), 0) || 1;
+  const weightedSentiment = usable.reduce((total, item) => total + Number(item.article.sentiment || 0) * weightedNewsReliability(item), 0) / reliabilityWeighted;
+  const injuryDrag = usable.reduce((total, item) => total + Number(item.article.signals?.injury || 0) * weightedNewsReliability(item), 0) / reliabilityWeighted;
+  const tacticalLift = usable.reduce((total, item) => total + Number(item.article.signals?.tacticalFit || 0.45) * weightedNewsReliability(item), 0) / reliabilityWeighted;
+  const lineupLift = usable.reduce((total, item) => total + Number(item.article.signals?.lineupClarity || 0.45) * weightedNewsReliability(item), 0) / reliabilityWeighted;
+  const rotationDrag = usable.reduce((total, item) => total + Number(item.article.signals?.rotationRisk || 0.2) * weightedNewsReliability(item), 0) / reliabilityWeighted;
+  const sourceDiversity = new Set(usable.map((item) => item.article.source || item.article.provider)).size;
+  const confidence = clamp(0.34 + sourceDiversity * 0.11 + mean(usable.map((item) => Number(item.article.sourceReliability || 0.5) * item.weight)) * 0.35, 0, 1);
   const netImpact = clamp(weightedSentiment * 0.5 + tacticalLift * 0.18 + lineupLift * 0.16 - injuryDrag * 0.3 - rotationDrag * 0.15, -0.6, 0.6);
 
   return {
     articleCount: usable.length,
+    contextArticleCount: accepted.length - usable.length,
+    rejectedArticleCount: articles.length - accepted.length,
     sourceDiversity,
     confidence,
     netImpact
   };
+}
+
+function weightedNewsReliability(item) {
+  return Number(item.article.sourceReliability || 0.5) * Number(item.weight || 0);
+}
+
+function newsRelevanceWeight(article, team) {
+  const keys = teamIdentityKeys(team);
+  const headline = normalizeName(`${article.title || ""} ${article.description || ""}`);
+  const body = normalizeName(article.bodySnippet || "");
+  const tags = article.teamTags || [];
+  const taggedTeamCount = tags.length;
+  const headlineMatch = keys.some((key) => headline.includes(key));
+  const bodyMatch = keys.some((key) => body.includes(key));
+
+  if (!headline && !body && tags.some((tag) => normalizeName(tag) === normalizeName(team))) {
+    return 0.65;
+  }
+
+  if (headlineMatch) {
+    return taggedTeamCount > 5 ? 0.72 : 1;
+  }
+
+  if (bodyMatch) {
+    return taggedTeamCount > 5 ? 0.28 : 0.42;
+  }
+
+  return 0;
 }
 
 function neutralNews() {
@@ -1092,6 +1133,26 @@ function neutralNews() {
     confidence: 0.35,
     netImpact: 0
   };
+}
+
+function teamIdentityKeys(team) {
+  const key = normalizeName(team);
+  const aliases = {
+    usa: ["united states", "united states mens", "united states men s", "usmnt"],
+    "united states": ["usa", "united states mens", "united states men s", "usmnt"],
+    czechia: ["czech republic"],
+    "czech republic": ["czechia"],
+    turkiye: ["turkey"],
+    turkey: ["turkiye"],
+    "bosnia and herzegovina": ["bosnia"],
+    bosnia: ["bosnia and herzegovina"],
+    "south korea": ["korea republic", "republic of korea"],
+    "korea republic": ["south korea", "republic of korea"],
+    "ivory coast": ["cote d ivoire"],
+    "cote d ivoire": ["ivory coast"]
+  };
+
+  return [...new Set([key, ...(aliases[key] || []).map(normalizeName)])].filter(Boolean);
 }
 
 function styleMatchupDetails(homeStats, awayStats) {

@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-06-13T12:59:26.365Z",
+  "createdAt": "2026-06-13T14:32:43.094Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -11,8 +11,6 @@
   "fixtureWindow": {
     "fixtureCount": 71,
     "fixtureIds": [
-      "fixture_b2dffeda",
-      "fixture_cb53f4c1",
       "fixture_a89ee8da",
       "fixture_b5106f3a",
       "fixture_fc94e491",
@@ -81,15 +79,17 @@
       "fixture_b92a453b",
       "fixture_a9fd100c",
       "fixture_caf59d83",
-      "fixture_a590e1d"
+      "fixture_a590e1d",
+      "fixture_2dd8fc22",
+      "fixture_31edf0a7"
     ]
   },
   "summary": {
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 46,
-    "freshRecordCount": 46,
+    "totalRecords": 56,
+    "freshRecordCount": 56,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -110,30 +110,21 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 13 more fixtures for coverage",
+        "needs 1 more covered fixtures",
+        "needs 14 more fixtures for coverage",
         "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 46,
-      "freshRecordCount": 46,
-      "fixtureCount": 5,
+      "recordCount": 56,
+      "freshRecordCount": 56,
+      "fixtureCount": 4,
       "totalFixtureCount": 71,
-      "fixtureCoverage": 0.07,
-      "bookmakerCount": 5,
+      "fixtureCoverage": 0.056,
+      "bookmakerCount": 4,
       "averageBookmakersPerFixture": 1,
-      "lineCount": 5,
-      "outcomeCount": 5,
-      "latestCapturedAt": "2026-06-13T12:59:26.365Z",
+      "lineCount": 4,
+      "outcomeCount": 4,
+      "latestCapturedAt": "2026-06-13T14:32:43.094Z",
       "sampleOutcomes": [
-        {
-          "fixtureId": "fixture_b2dffeda",
-          "fixture": "USA v Paraguay",
-          "bookmaker": "SportsGambler public prop pages: USA v Paraguay",
-          "outcome": "Paraguay +0.5",
-          "line": "+0.5",
-          "team": "Paraguay",
-          "decimalOdds": 1.86,
-          "capturedAt": "2026-06-13T12:59:26.365Z"
-        },
         {
           "fixtureId": "fixture_a89ee8da",
           "fixture": "Qatar v Switzerland",
@@ -142,7 +133,7 @@
           "line": "-1.75",
           "team": "Switzerland",
           "decimalOdds": 1.88,
-          "capturedAt": "2026-06-13T12:59:26.365Z"
+          "capturedAt": "2026-06-13T14:32:43.094Z"
         },
         {
           "fixtureId": "fixture_fc94e491",
@@ -152,7 +143,7 @@
           "line": "-1",
           "team": "Scotland",
           "decimalOdds": 1.92,
-          "capturedAt": "2026-06-13T12:59:26.365Z"
+          "capturedAt": "2026-06-13T14:32:43.094Z"
         },
         {
           "fixtureId": "fixture_33147663",
@@ -162,7 +153,7 @@
           "line": "+0.5",
           "team": "Japan",
           "decimalOdds": 1.88,
-          "capturedAt": "2026-06-13T12:59:26.365Z"
+          "capturedAt": "2026-06-13T14:32:43.094Z"
         },
         {
           "fixtureId": "fixture_a3e16539",
@@ -172,7 +163,7 @@
           "line": "+0.5",
           "team": "Tunisia",
           "decimalOdds": 1.96,
-          "capturedAt": "2026-06-13T12:59:26.365Z"
+          "capturedAt": "2026-06-13T14:32:43.094Z"
         }
       ]
     },

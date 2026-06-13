@@ -171,6 +171,40 @@ test("scan intelligence feeds learned edge back into team stats", () => {
   assert.ok(Number.isFinite(japan.learnedEdge));
 });
 
+test("rejected news sources do not become fallback team evidence", () => {
+  const now = new Date("2026-06-06T15:00:00.000Z");
+  const fixtures = [{ id: "fixture-1", homeTeam: "Japan", awayTeam: "Canada", date: now.toISOString() }];
+  const intelligence = buildScanIntelligence({
+    fixtures,
+    oddsRecords: [],
+    allOddsSnapshots: [],
+    newsArticles: [{
+      id: "news-noisy",
+      publishedAt: now.toISOString(),
+      source: "Noisy sample",
+      sourceReliability: 0.8,
+      acceptedSource: false,
+      teamTags: ["Japan"],
+      sentiment: 0.6,
+      signals: {
+        injury: 0,
+        tacticalFit: 1,
+        lineupClarity: 1,
+        rotationRisk: 0.05
+      }
+    }],
+    teamStats: baseStats,
+    matchHistory,
+    previousTeamIntelligence: [],
+    now
+  });
+  const japan = intelligence.teamIntelligence.find((team) => team.team === "Japan");
+
+  assert.equal(japan.news.articleCount, 0);
+  assert.equal(japan.news.rejectedArticleCount, 1);
+  assert.equal(japan.news.impact, 0);
+});
+
 test("outcome learning waits for sample size then adjusts market/risk patterns", () => {
   const outcomes = Array.from({ length: 10 }, (_, index) => ({
     status: index < 7 ? "won" : "lost",

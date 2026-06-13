@@ -627,30 +627,53 @@ function aggregateNewsByTeam(newsArticles, teams, now) {
   const result = new Map();
 
   for (const team of teams) {
-    result.set(team, aggregateNews(byTeam.get(team) || [], now));
+    result.set(team, aggregateNews(byTeam.get(team) || [], team));
   }
 
   return result;
 }
 
-function aggregateNews(articles) {
+function aggregateNews(articles, team) {
   if (!articles.length) {
     return neutralNews();
   }
 
-  const usable = articles.filter((article) => article.acceptedSource !== false);
-  const weighted = usable.length ? usable : articles;
-  const totalReliability = weighted.reduce((total, article) => total + Number(article.sourceReliability || 0.5), 0) || 1;
-  const sentiment = weighted.reduce((total, article) => total + Number(article.sentiment || 0) * Number(article.sourceReliability || 0.5), 0) / totalReliability;
-  const injury = weighted.reduce((total, article) => total + Number(article.signals?.injury || 0) * Number(article.sourceReliability || 0.5), 0) / totalReliability;
-  const tacticalFit = weighted.reduce((total, article) => total + Number(article.signals?.tacticalFit || 0.45) * Number(article.sourceReliability || 0.5), 0) / totalReliability;
-  const lineupClarity = weighted.reduce((total, article) => total + Number(article.signals?.lineupClarity || 0.45) * Number(article.sourceReliability || 0.5), 0) / totalReliability;
-  const rotationRisk = weighted.reduce((total, article) => total + Number(article.signals?.rotationRisk || 0.18) * Number(article.sourceReliability || 0.5), 0) / totalReliability;
-  const sourceDiversity = new Set(weighted.map((article) => article.source || article.provider)).size;
+  const accepted = articles.filter((article) => article.acceptedSource !== false);
+  if (!accepted.length) {
+    return {
+      ...neutralNews(),
+      rejectedArticleCount: articles.length
+    };
+  }
+
+  const articleWeights = accepted
+    .map((article) => ({ article, weight: newsRelevanceWeight(article, team) }))
+    .filter((item) => item.weight > 0);
+  const directional = articleWeights.filter((item) => item.weight >= 0.5);
+
+  if (!directional.length) {
+    return {
+      ...neutralNews(),
+      contextArticleCount: accepted.length,
+      rejectedArticleCount: articles.length - accepted.length
+    };
+  }
+
+  const totalReliability = directional.reduce((total, item) => total + weightedReliability(item), 0) || 1;
+  const sentiment = directional.reduce((total, item) => total + Number(item.article.sentiment || 0) * weightedReliability(item), 0) / totalReliability;
+  const injury = directional.reduce((total, item) => total + Number(item.article.signals?.injury || 0) * weightedReliability(item), 0) / totalReliability;
+  const tacticalFit = directional.reduce((total, item) => total + Number(item.article.signals?.tacticalFit || 0.45) * weightedReliability(item), 0) / totalReliability;
+  const lineupClarity = directional.reduce((total, item) => total + Number(item.article.signals?.lineupClarity || 0.45) * weightedReliability(item), 0) / totalReliability;
+  const rotationRisk = directional.reduce((total, item) => total + Number(item.article.signals?.rotationRisk || 0.18) * weightedReliability(item), 0) / totalReliability;
+  const sourceDiversity = new Set(directional.map((item) => item.article.source || item.article.provider)).size;
+  const relevance = mean(directional.map((item) => item.weight));
   const impact = clamp(sentiment * 0.5 + tacticalFit * 0.14 + lineupClarity * 0.12 - injury * 0.32 - rotationRisk * 0.12, -0.6, 0.6);
 
   return {
-    articleCount: weighted.length,
+    articleCount: directional.length,
+    contextArticleCount: accepted.length - directional.length,
+    rejectedArticleCount: articles.length - accepted.length,
+    relevance: round(relevance, 4),
     sourceDiversity,
     sentiment: round(sentiment, 4),
     injury: round(injury, 4),
@@ -658,9 +681,37 @@ function aggregateNews(articles) {
     lineupClarity: round(lineupClarity, 4),
     rotationRisk: round(rotationRisk, 4),
     impact: round(impact, 4),
-    confidence: round(clamp(0.32 + sourceDiversity * 0.1 + mean(weighted.map((article) => article.sourceReliability || 0.5)) * 0.38, 0, 0.92), 4),
-    topSignals: topNewsSignals(weighted)
+    confidence: round(clamp(0.3 + sourceDiversity * 0.1 + mean(directional.map((item) => Number(item.article.sourceReliability || 0.5) * item.weight)) * 0.38, 0, 0.92), 4),
+    topSignals: topNewsSignals(directional.map((item) => item.article))
   };
+}
+
+function weightedReliability(item) {
+  return Number(item.article.sourceReliability || 0.5) * Number(item.weight || 0);
+}
+
+function newsRelevanceWeight(article, team) {
+  const keys = teamIdentityKeys(team);
+  const headline = normalizeName(`${article.title || ""} ${article.description || ""}`);
+  const body = normalizeName(article.bodySnippet || "");
+  const tags = article.teamTags || [];
+  const taggedTeamCount = tags.length;
+  const headlineMatch = keys.some((key) => headline.includes(key));
+  const bodyMatch = keys.some((key) => body.includes(key));
+
+  if (!headline && !body && tags.some((tag) => normalizeName(tag) === normalizeName(team))) {
+    return 0.65;
+  }
+
+  if (headlineMatch) {
+    return taggedTeamCount > 5 ? 0.72 : 1;
+  }
+
+  if (bodyMatch) {
+    return taggedTeamCount > 5 ? 0.28 : 0.42;
+  }
+
+  return 0;
 }
 
 function marketPressureForTeam({ team, fixtures, movementByOutcome }) {

@@ -625,7 +625,7 @@ export function describeRisk(riskValue) {
 }
 
 export function selectFixturesForWindow(fixtures, daysAhead, now = new Date()) {
-  const start = startOfDay(now);
+  const start = new Date(now);
   const end = new Date(start);
   end.setDate(end.getDate() + clampNumber(daysAhead, 0, 30) + 1);
 
@@ -638,7 +638,7 @@ export function selectFixturesForWindow(fixtures, daysAhead, now = new Date()) {
 }
 
 export function selectNextFixtures(fixtures, count, now = new Date()) {
-  const start = startOfDay(now);
+  const start = new Date(now);
 
   return fixtures
     .filter((fixture) => new Date(fixture.date) >= start)
@@ -882,12 +882,6 @@ async function persistPlayerStats(statsResult) {
 
 function matchHistoryKey(match) {
   return `${match.date}|${normalizeName(match.homeTeam)}|${normalizeName(match.awayTeam)}|${match.homeGoals}-${match.awayGoals}`;
-}
-
-function startOfDay(value) {
-  const date = new Date(value);
-  date.setHours(0, 0, 0, 0);
-  return date;
 }
 
 function clampNumber(value, min, max) {

@@ -50,6 +50,34 @@ test("settles draw-no-bet pushes as void and leaves them out of learning", () =>
   assert.equal(result.reason, "draw_no_bet_push");
 });
 
+test("settles historical app scan legs and team aliases", () => {
+  const now = new Date("2026-06-13T16:00:00.000Z");
+  const appLeg = {
+    ...leg("leg-usa-over", "over_2_5_goals", "Over", 2.05),
+    fixtureId: "usa-par",
+    fixtureDate: "2026-06-13T01:00:00.000Z",
+    homeTeam: "USA",
+    awayTeam: "Paraguay",
+    selectionLabel: "USA vs Paraguay: Over 2.5 goals"
+  };
+  const settlement = settleBetOutcomes({
+    legCandidates: [],
+    recommendations: null,
+    appScans: [{ betslip: [{ legs: [appLeg] }] }],
+    matchHistory: [{
+      ...match("United States", "Paraguay", 4, 1),
+      fixtureId: "usa-par",
+      date: "2026-06-12T12:00:00.000Z"
+    }],
+    existingOutcomes: [],
+    now
+  });
+
+  assert.equal(settlement.insertedCount, 1);
+  assert.equal(settlement.newRecords[0].status, "won");
+  assert.equal(settlement.skipped.noRecommendations, 0);
+});
+
 test("does not settle scorer bets when public scorer rows are missing for a goal game", () => {
   const result = gradeLegAgainstMatch(
     { ...leg("leg-scorer", "anytime_scorer", "Raul Jimenez", 3.4), playerName: "Raul Jimenez", playerTeam: "Mexico" },
