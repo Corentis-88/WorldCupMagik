@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-06-13T01:35:24.432Z",
+  "createdAt": "2026-06-13T08:33:13.679Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -88,8 +88,8 @@
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 36,
-    "freshRecordCount": 36,
+    "totalRecords": 41,
+    "freshRecordCount": 41,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -110,20 +110,19 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 2 more covered fixtures",
-        "needs 15 more fixtures for coverage",
+        "needs 13 more fixtures for coverage",
         "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 36,
-      "freshRecordCount": 36,
-      "fixtureCount": 3,
+      "recordCount": 41,
+      "freshRecordCount": 41,
+      "fixtureCount": 5,
       "totalFixtureCount": 71,
-      "fixtureCoverage": 0.042,
-      "bookmakerCount": 3,
+      "fixtureCoverage": 0.07,
+      "bookmakerCount": 5,
       "averageBookmakersPerFixture": 1,
-      "lineCount": 3,
-      "outcomeCount": 3,
-      "latestCapturedAt": "2026-06-13T01:35:24.432Z",
+      "lineCount": 5,
+      "outcomeCount": 5,
+      "latestCapturedAt": "2026-06-13T08:33:13.679Z",
       "sampleOutcomes": [
         {
           "fixtureId": "fixture_b2dffeda",
@@ -133,7 +132,7 @@
           "line": "+0.5",
           "team": "Paraguay",
           "decimalOdds": 1.86,
-          "capturedAt": "2026-06-13T01:35:24.432Z"
+          "capturedAt": "2026-06-13T08:33:13.679Z"
         },
         {
           "fixtureId": "fixture_a89ee8da",
@@ -143,7 +142,7 @@
           "line": "-1.75",
           "team": "Switzerland",
           "decimalOdds": 1.88,
-          "capturedAt": "2026-06-13T01:35:24.432Z"
+          "capturedAt": "2026-06-13T08:33:13.679Z"
         },
         {
           "fixtureId": "fixture_fc94e491",
@@ -153,7 +152,27 @@
           "line": "-1",
           "team": "Scotland",
           "decimalOdds": 1.92,
-          "capturedAt": "2026-06-13T01:35:24.432Z"
+          "capturedAt": "2026-06-13T08:33:13.679Z"
+        },
+        {
+          "fixtureId": "fixture_33147663",
+          "fixture": "Netherlands v Japan",
+          "bookmaker": "SportsGambler public prop pages: Netherlands v Japan",
+          "outcome": "Japan +0.5",
+          "line": "+0.5",
+          "team": "Japan",
+          "decimalOdds": 1.88,
+          "capturedAt": "2026-06-13T08:33:13.679Z"
+        },
+        {
+          "fixtureId": "fixture_a3e16539",
+          "fixture": "Sweden v Tunisia",
+          "bookmaker": "SportsGambler public prop pages: Sweden v Tunisia",
+          "outcome": "Tunisia +0.5",
+          "line": "+0.5",
+          "team": "Tunisia",
+          "decimalOdds": 1.94,
+          "capturedAt": "2026-06-13T08:33:13.679Z"
         }
       ]
     },
