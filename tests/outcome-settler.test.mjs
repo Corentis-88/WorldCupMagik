@@ -88,6 +88,38 @@ test("does not settle scorer bets when public scorer rows are missing for a goal
   assert.equal(result.reason, "scorer_list_missing");
 });
 
+test("matches scorer surnames and corrects stale settled scorer status", () => {
+  const now = new Date("2026-06-12T12:00:00.000Z");
+  const scorerLeg = { ...leg("leg-scorer", "anytime_scorer", "Raul Jimenez", 3.4), playerName: "Raul Jimenez", playerTeam: "Mexico" };
+  const playedMatch = {
+    ...match("Mexico", "South Africa", 2, 0),
+    homeScorers: [{ name: "Jimenez", goals: 1 }, { name: "Quinones", goals: 1 }]
+  };
+  const result = gradeLegAgainstMatch(scorerLeg, playedMatch);
+  const settlement = settleBetOutcomes({
+    legCandidates: [scorerLeg],
+    recommendations: { singles: [{ legs: [scorerLeg] }] },
+    matchHistory: [playedMatch],
+    existingOutcomes: [{
+      ...scorerLeg,
+      legId: scorerLeg.id,
+      matchDate: playedMatch.date,
+      status: "lost",
+      resultReason: "anytime_scorer"
+    }],
+    now
+  });
+
+  assert.equal(result.status, "won");
+  assert.equal(settlement.insertedCount, 1);
+  assert.equal(settlement.newRecords[0].status, "won");
+
+  assert.equal(gradeLegAgainstMatch(
+    { ...leg("leg-usa-scorer", "anytime_scorer", "Folarin Balogun", 5.3), homeTeam: "USA", awayTeam: "Paraguay", playerName: "Folarin Balogun", playerTeam: "USA" },
+    { ...match("United States", "Paraguay", 4, 1), homeScorers: [{ name: "Balogun", goals: 1 }] }
+  ).status, "won");
+});
+
 test("settles first-goalscorer only when scorer order is available", () => {
   const selected = { ...leg("leg-first", "first_goalscorer", "Raul Jimenez", 4.2), playerName: "Raul Jimenez", playerTeam: "Mexico" };
   const orderedMatch = {

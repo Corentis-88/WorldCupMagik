@@ -27,8 +27,8 @@ export async function settleStoredBetOutcomes({ matchHistory = null, now = new D
 }
 
 export function settleBetOutcomes({ legCandidates = [], recommendations = null, appScans = [], matchHistory = [], existingOutcomes = [], now = new Date() } = {}) {
-  const fullLegs = recommendedFullLegs({ legCandidates, recommendations, appScans });
-  const existingKeys = new Set(existingOutcomes.map(outcomeRecordKey));
+  const fullLegs = recommendedFullLegs({ legCandidates, recommendations, appScans, existingOutcomes });
+  const existingByKey = new Map(existingOutcomes.map((outcome) => [outcomeRecordKey(outcome), outcome]));
   const newRecords = [];
   const skipped = {
     noRecommendations: recommendations || appScans.length ? 0 : 1,
@@ -54,13 +54,14 @@ export function settleBetOutcomes({ legCandidates = [], recommendations = null, 
 
     const record = buildOutcomeRecord({ leg, match, result, now });
     const key = outcomeRecordKey(record);
+    const existing = existingByKey.get(key);
 
-    if (existingKeys.has(key)) {
+    if (existing && !outcomeRecordChanged(existing, record)) {
       skipped.alreadySettled += 1;
       continue;
     }
 
-    existingKeys.add(key);
+    existingByKey.set(key, record);
     newRecords.push(record);
   }
 
@@ -167,14 +168,15 @@ export function gradeLegAgainstMatch(leg, match) {
   return { status: "unknown", reason: "unsupported_market" };
 }
 
-function recommendedFullLegs({ legCandidates, recommendations, appScans = [] }) {
+function recommendedFullLegs({ legCandidates, recommendations, appScans = [], existingOutcomes = [] }) {
   const candidateById = new Map(legCandidates.map((leg) => [baseLegId(leg.id), leg]));
   const selectedKeys = new Set();
   const selected = [];
 
   for (const leg of [
     ...flattenRecommendedLegs(recommendations),
-    ...flattenAppScanLegs(appScans)
+    ...flattenAppScanLegs(appScans),
+    ...existingOutcomes.map(outcomeToLeg)
   ]) {
     const id = baseLegId(leg.id);
     const fullLeg = candidateById.get(id) || leg;
@@ -189,6 +191,16 @@ function recommendedFullLegs({ legCandidates, recommendations, appScans = [] }) 
   }
 
   return selected;
+}
+
+function outcomeToLeg(outcome) {
+  return {
+    ...outcome,
+    id: outcome.legId || outcome.id,
+    fixtureDate: outcome.fixtureDate || outcome.matchDate,
+    createdAt: outcome.createdAt || outcome.settledAt,
+    components: outcome.predictionShape || {}
+  };
 }
 
 function flattenRecommendedLegs(recommendations) {
@@ -264,8 +276,8 @@ function gradeAnytimeScorer(leg, match, totalGoals) {
   }
 
   const landed = allScorers.some((scorer) => {
-    const samePlayer = normalizeName(scorer.name || scorer.playerName) === scorerName;
-    const sameTeam = !scorerTeam || normalizeName(scorer.team) === scorerTeam;
+    const samePlayer = playerNameMatches(scorer.name || scorer.playerName, scorerName);
+    const sameTeam = !scorerTeam || teamMatches(scorer.team, scorerTeam);
     return samePlayer && sameTeam;
   });
 
@@ -312,10 +324,41 @@ function gradeFirstGoalscorer(leg, match, totalGoals) {
   });
 
   const first = ordered[0];
-  const samePlayer = normalizeName(first.name || first.playerName) === scorerName;
-  const sameTeam = !scorerTeam || normalizeName(first.team) === scorerTeam;
+  const samePlayer = playerNameMatches(first.name || first.playerName, scorerName);
+  const sameTeam = !scorerTeam || teamMatches(first.team, scorerTeam);
 
   return { status: samePlayer && sameTeam ? "won" : "lost", reason: "first_goalscorer" };
+}
+
+function playerNameMatches(left, right) {
+  const leftKey = normalizeName(left);
+  const rightKey = normalizeName(right);
+
+  if (!leftKey || !rightKey) {
+    return false;
+  }
+
+  if (leftKey === rightKey) {
+    return true;
+  }
+
+  const leftTokens = leftKey.split(/\s+/).filter(Boolean);
+  const rightTokens = rightKey.split(/\s+/).filter(Boolean);
+  const leftSurname = leftTokens.at(-1);
+  const rightSurname = rightTokens.at(-1);
+
+  if (!leftSurname || !rightSurname) {
+    return false;
+  }
+
+  if (leftSurname !== rightSurname) {
+    return false;
+  }
+
+  return leftTokens.length > 1
+    || rightTokens.length > 1
+    || leftKey.length >= 5
+    || rightKey.length >= 5;
 }
 
 function buildOutcomeRecord({ leg, match, result, now }) {
@@ -391,8 +434,14 @@ function outcomeRecordKey(record) {
     record.market || "",
     record.outcome || "",
     record.bookmaker || "",
-    record.status || ""
   ].join("|");
+}
+
+function outcomeRecordChanged(existing, next) {
+  return existing.status !== next.status
+    || existing.resultReason !== next.resultReason
+    || Number(existing.homeGoals) !== Number(next.homeGoals)
+    || Number(existing.awayGoals) !== Number(next.awayGoals);
 }
 
 function baseLegId(id) {
