@@ -291,7 +291,7 @@ function betCard(bet, { pick = false } = {}) {
         ${(bet.legs || []).map((leg) => `
           <li>
             ${escapeHtml(leg.selectionLabel)} <strong>@ ${Number(leg.decimalOdds || 0).toFixed(2)}</strong>
-            <span class="leg-note">${escapeHtml(formatLegNote(leg, pick))}</span>
+            <span class="leg-note">${escapeHtml(formatLegNoteWithKickoff(leg, pick))}</span>
           </li>
         `).join("")}
       </ul>
@@ -673,6 +673,31 @@ function formatKickoff(value) {
   }
 
   return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+}
+
+function formatLegNoteWithKickoff(leg, pick = false) {
+  const note = formatLegNote(leg, pick);
+  const kickoff = formatLegKickoff(leg);
+
+  return kickoff ? `${kickoff} | ${note}` : note;
+}
+
+function formatLegKickoff(leg) {
+  const date = new Date(leg.fixtureDate || "");
+
+  if (!Number.isFinite(date.getTime())) {
+    return "";
+  }
+
+  const formatted = new Intl.DateTimeFormat("en-GB", {
+    weekday: "short",
+    day: "2-digit",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit"
+  }).format(date);
+
+  return `Kickoff ${formatted}`;
 }
 
 function money(value) {

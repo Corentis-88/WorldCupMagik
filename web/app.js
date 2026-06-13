@@ -454,7 +454,7 @@ function renderSlip(slip, profile) {
         ${bet.legs.map((leg) => `
           <li>
             ${escapeHtml(leg.selectionLabel)} <strong>@ ${Number(leg.decimalOdds || 0).toFixed(2)}</strong>
-            <span class="leg-note">${escapeHtml(formatLegNote(leg))}</span>
+            <span class="leg-note">${escapeHtml(formatLegNoteWithKickoff(leg, false))}</span>
           </li>
         `).join("")}
       </ul>
@@ -496,7 +496,7 @@ function renderPickOfDay(slip, profile) {
         ${bet.legs.map((leg) => `
           <li>
             ${escapeHtml(leg.selectionLabel)} <strong>@ ${Number(leg.decimalOdds || 0).toFixed(2)}</strong>
-            <span class="leg-note">${escapeHtml(formatLikelyLegNote(leg))}</span>
+            <span class="leg-note">${escapeHtml(formatLegNoteWithKickoff(leg, true))}</span>
           </li>
         `).join("")}
       </ul>
@@ -1014,6 +1014,31 @@ function formatKickoff(value) {
     hour: "2-digit",
     minute: "2-digit"
   }).format(new Date(value));
+}
+
+function formatLegNoteWithKickoff(leg, likely = false) {
+  const note = likely ? formatLikelyLegNote(leg) : formatLegNote(leg);
+  const kickoff = formatLegKickoff(leg);
+
+  return kickoff ? `${kickoff} | ${note}` : note;
+}
+
+function formatLegKickoff(leg) {
+  const date = new Date(leg.fixtureDate || "");
+
+  if (!Number.isFinite(date.getTime())) {
+    return "";
+  }
+
+  const formatted = new Intl.DateTimeFormat("en-GB", {
+    weekday: "short",
+    day: "2-digit",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit"
+  }).format(date);
+
+  return `Kickoff ${formatted}`;
 }
 
 function unavailableCard(label, profile, prefix = "No real-data pick passed this date/risk profile yet.") {
