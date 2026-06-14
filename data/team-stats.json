@@ -1,1549 +1,7 @@
 [
   {
-    "team": "Netherlands",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
-    "provider": "public-web",
-    "recentPointsPerGame": 2.601,
-    "xgFor": 2.565,
-    "xgAgainst": 1.059,
-    "shotsFor": 16.71,
-    "shotsAgainst": 10.19,
-    "shotsOnTargetFor": 6.51,
-    "shotsOnTargetAgainst": 3.37,
-    "possession": 54.7,
-    "passesAttempted": 650.4,
-    "completedPasses": 505.7,
-    "passCompletion": 0.778,
-    "highPressIndex": 65.2,
-    "setPieceThreat": 65.2,
-    "transitionThreat": 78.6,
-    "keeperForm": 48.9,
-    "rating": 1837.5,
-    "statsCompleteness": 0.92,
-    "sourceMatchCount": 20,
-    "sourceMatchTarget": 20,
-    "sourceReliability": 0.75,
-    "manager": "Ronald Koeman",
-    "captain": "",
-    "profileSource": "Netherlands public profile 1",
-    "profileSourceUrl": "https://en.wikipedia.org/wiki/Netherlands_national_football_team",
-    "profileConfidence": 0.72,
-    "metricSource": "score-derived-estimates",
-    "capturedMetricFields": [
-      "date",
-      "homeTeam",
-      "awayTeam",
-      "homeGoals",
-      "awayGoals"
-    ],
-    "derivedMetricFields": [
-      "xgFor",
-      "xgAgainst",
-      "shotsFor",
-      "shotsAgainst",
-      "shotsOnTargetFor",
-      "shotsOnTargetAgainst",
-      "possession",
-      "passesAttempted",
-      "completedPasses",
-      "passCompletion",
-      "formation",
-      "styleOfPlay"
-    ],
-    "tacticalProfile": {
-      "likelyFormation": "4-3-3 / 4-2-3-1",
-      "styleOfPlay": "front-foot pressing and fast regains",
-      "styleTags": [
-        "pressing",
-        "front-foot",
-        "regains",
-        "set-piece threat",
-        "positive xG balance"
-      ],
-      "possessionTier": "medium",
-      "pressingTier": "high",
-      "transitionTier": "high",
-      "source": "derived from 20-match public result sample and score-derived event estimates"
-    },
-    "passing": {
-      "attempted": 650.4,
-      "completed": 505.7,
-      "completion": 0.778,
-      "source": "score-and-possession-derived estimate"
-    },
-    "recentForm": {
-      "matchCount": 6,
-      "pointsPerGame": 3,
-      "goalsFor": 3.667,
-      "goalsAgainst": 0.5,
-      "goalDifference": 3.167,
-      "xgFor": 2.838,
-      "xgAgainst": 0.91,
-      "xgDifference": 1.928,
-      "shotsFor": 17.9,
-      "shotsAgainst": 9.55,
-      "shotsOnTargetFor": 7.17,
-      "shotsOnTargetAgainst": 3.08,
-      "possession": 55.6,
-      "passesAttempted": 652.8,
-      "completedPasses": 509,
-      "passCompletion": 0.78,
-      "cleanSheetRate": 0.667,
-      "failedToScoreRate": 0,
-      "bttsRate": 0.333,
-      "over25Rate": 0.833,
-      "scoringGameRate": 1,
-      "concedeGameRate": 0.333,
-      "window": 6
-    },
-    "longForm": {
-      "matchCount": 20,
-      "pointsPerGame": 2.05,
-      "goalsFor": 2.5,
-      "goalsAgainst": 0.95,
-      "goalDifference": 1.55,
-      "xgFor": 2.245,
-      "xgAgainst": 1.234,
-      "xgDifference": 1.011,
-      "shotsFor": 15.31,
-      "shotsAgainst": 10.94,
-      "shotsOnTargetFor": 5.73,
-      "shotsOnTargetAgainst": 3.7,
-      "possession": 53,
-      "passesAttempted": 646,
-      "completedPasses": 499.7,
-      "passCompletion": 0.773,
-      "cleanSheetRate": 0.4,
-      "failedToScoreRate": 0.1,
-      "bttsRate": 0.5,
-      "over25Rate": 0.7,
-      "scoringGameRate": 0.9,
-      "concedeGameRate": 0.6,
-      "window": 20
-    },
-    "formTrend": 0.55,
-    "marketAngles": {
-      "cleanSheetRate": 0.4,
-      "failedToScoreRate": 0.1,
-      "bttsRate": 0.5,
-      "over25Rate": 0.7,
-      "scoringGameRate": 0.9,
-      "concedeGameRate": 0.6
-    },
-    "scorerSummary": [
-      {
-        "playerName": "Depay",
-        "goals": 6,
-        "goalsPerTwentyTeamMatches": 6
-      },
-      {
-        "playerName": "Weghorst",
-        "goals": 5,
-        "goalsPerTwentyTeamMatches": 5
-      },
-      {
-        "playerName": "Dumfries",
-        "goals": 3,
-        "goalsPerTwentyTeamMatches": 3
-      },
-      {
-        "playerName": "Malen",
-        "goals": 3,
-        "goalsPerTwentyTeamMatches": 3
-      },
-      {
-        "playerName": "Aké",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Bergwijn",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Dijk",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Reijnders",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      }
-    ],
-    "topScorers": [
-      {
-        "playerName": "Depay",
-        "goals": 6,
-        "goalsPerTwentyTeamMatches": 6
-      },
-      {
-        "playerName": "Weghorst",
-        "goals": 5,
-        "goalsPerTwentyTeamMatches": 5
-      },
-      {
-        "playerName": "Dumfries",
-        "goals": 3,
-        "goalsPerTwentyTeamMatches": 3
-      },
-      {
-        "playerName": "Malen",
-        "goals": 3,
-        "goalsPerTwentyTeamMatches": 3
-      },
-      {
-        "playerName": "Aké",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Bergwijn",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Dijk",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Reijnders",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      }
-    ],
-    "intelligenceCoverage": {
-      "matchWindowTarget": 20,
-      "matchWindowAvailable": 20,
-      "hasFullTwentyMatchWindow": true,
-      "managerKnown": true,
-      "profileConfidence": 0.72,
-      "eventDataMode": "score-derived-estimates",
-      "equalSchemaForAllTeams": true
-    },
-    "recentMatches": [
-      {
-        "date": "2026-06-13T12:00:00.000Z",
-        "homeTeam": "Netherlands",
-        "awayTeam": "Ukraine",
-        "score": "3-2",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 52.5,
-        "passesAttempted": 668,
-        "completedPasses": 515,
-        "passCompletion": 0.771,
-        "homeScorers": [
-          {
-            "name": "Wijnaldum",
-            "goals": 1
-          },
-          {
-            "name": "Weghorst",
-            "goals": 1
-          },
-          {
-            "name": "Dumfries",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Yarmolenko",
-            "goals": 1
-          },
-          {
-            "name": "Yaremchuk",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
-      },
-      {
-        "date": "2026-06-10T12:00:00.000Z",
-        "homeTeam": "Netherlands",
-        "awayTeam": "Iceland",
-        "score": "4-0",
-        "teamPerspective": "home",
-        "shotsFor": 20.4,
-        "shotsOnTargetFor": 7.8,
-        "possession": 58,
-        "passesAttempted": 667,
-        "completedPasses": 520,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Simons",
-            "goals": 1
-          },
-          {
-            "name": "Dijk",
-            "goals": 1
-          },
-          {
-            "name": "Malen",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
-      },
-      {
-        "date": "2026-06-10T12:00:00.000Z",
-        "homeTeam": "Netherlands",
-        "awayTeam": "Malta",
-        "score": "8-0",
-        "teamPerspective": "home",
-        "shotsFor": 24,
-        "shotsOnTargetFor": 12,
-        "possession": 58,
-        "passesAttempted": 614,
-        "completedPasses": 470,
-        "passCompletion": 0.766,
-        "homeScorers": [
-          {
-            "name": "Depay",
-            "goals": 1
-          },
-          {
-            "name": "Van Dijk",
-            "goals": 1
-          },
-          {
-            "name": "Simons",
-            "goals": 1
-          },
-          {
-            "name": "Malen",
-            "goals": 1
-          },
-          {
-            "name": "Lang",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
-      },
-      {
-        "date": "2026-06-08T12:00:00.000Z",
-        "homeTeam": "Netherlands",
-        "awayTeam": "Uzbekistan",
-        "score": "2-1",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 52.5,
-        "passesAttempted": 652,
-        "completedPasses": 509,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Cody Gakpo",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
-      },
-      {
-        "date": "2026-06-07T12:00:00.000Z",
-        "homeTeam": "Finland",
-        "awayTeam": "Netherlands",
-        "score": "0-2",
-        "teamPerspective": "away",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 55,
-        "passesAttempted": 651,
-        "completedPasses": 514,
-        "passCompletion": 0.79,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Depay",
-            "goals": 1
-          },
-          {
-            "name": "Dumfries",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
-      },
-      {
-        "date": "2026-06-06T12:00:00.000Z",
-        "homeTeam": "Netherlands",
-        "awayTeam": "Georgia",
-        "score": "3-0",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 57.5,
-        "passesAttempted": 665,
-        "completedPasses": 526,
-        "passCompletion": 0.791,
-        "homeScorers": [
-          {
-            "name": "Depay",
-            "goals": 1
-          },
-          {
-            "name": "Weghorst",
-            "goals": 1
-          },
-          {
-            "name": "Gravenberch",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
-      },
-      {
-        "date": "2026-06-06T12:00:00.000Z",
-        "homeTeam": "Netherlands",
-        "awayTeam": "Canada",
-        "score": "4-0",
-        "teamPerspective": "home",
-        "shotsFor": 20.4,
-        "shotsOnTargetFor": 7.8,
-        "possession": 58,
-        "passesAttempted": 667,
-        "completedPasses": 520,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Depay",
-            "goals": 1
-          },
-          {
-            "name": "Frimpong",
-            "goals": 1
-          },
-          {
-            "name": "Weghorst",
-            "goals": 1
-          },
-          {
-            "name": "Dijk",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
-      },
-      {
-        "date": "2026-06-03T12:00:00.000Z",
-        "homeTeam": "Netherlands",
-        "awayTeam": "Algeria",
-        "score": "0-1",
-        "teamPerspective": "home",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 47.5,
-        "passesAttempted": 605,
-        "completedPasses": 460,
-        "passCompletion": 0.76,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Hadj Moussa",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
-      },
-      {
-        "date": "2026-06-02T12:00:00.000Z",
-        "homeTeam": "Netherlands",
-        "awayTeam": "Scotland",
-        "score": "2-2",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 50,
-        "passesAttempted": 654,
-        "completedPasses": 504,
-        "passCompletion": 0.77,
-        "homeScorers": [
-          {
-            "name": "Hendry",
-            "goals": 1
-          },
-          {
-            "name": "Nisbet",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Depay",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
-      },
-      {
-        "date": "2026-03-31T12:00:00.000Z",
-        "homeTeam": "Netherlands",
-        "awayTeam": "Ecuador",
-        "score": "1-1",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 50,
-        "passesAttempted": 638,
-        "completedPasses": 491,
-        "passCompletion": 0.77,
-        "homeScorers": [
-          {
-            "name": "Pacho",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Valencia",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
-      },
-      {
-        "date": "2026-03-31T00:00:00.000Z",
-        "homeTeam": "Netherlands",
-        "awayTeam": "Ecuador",
-        "score": "1-1",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 50,
-        "passesAttempted": 638,
-        "completedPasses": 491,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Pacho",
-            "goals": 1
-          },
-          {
-            "name": "Valencia",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Ecuador public results 1"
-      },
-      {
-        "date": "2026-03-29T12:00:00.000Z",
-        "homeTeam": "Netherlands",
-        "awayTeam": "Germany",
-        "score": "1-1",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 50,
-        "passesAttempted": 638,
-        "completedPasses": 491,
-        "passCompletion": 0.77,
-        "homeScorers": [
-          {
-            "name": "Bergwijn",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
-      },
-      {
-        "date": "2026-03-27T12:00:00.000Z",
-        "homeTeam": "Netherlands",
-        "awayTeam": "Gibraltar",
-        "score": "3-0",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 57.5,
-        "passesAttempted": 665,
-        "completedPasses": 526,
-        "passCompletion": 0.791,
-        "homeScorers": [
-          {
-            "name": "Depay",
-            "goals": 1
-          },
-          {
-            "name": "Aké",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
-      },
-      {
-        "date": "2026-03-27T12:00:00.000Z",
-        "homeTeam": "Netherlands",
-        "awayTeam": "Norway",
-        "score": "2-1",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 52.5,
-        "passesAttempted": 652,
-        "completedPasses": 509,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Van Dijk",
-            "goals": 1
-          },
-          {
-            "name": "Reijnders",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Schjelderup",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
-      },
-      {
-        "date": "2026-03-26T12:00:00.000Z",
-        "homeTeam": "Netherlands",
-        "awayTeam": "Denmark",
-        "score": "4-2",
-        "teamPerspective": "home",
-        "shotsFor": 20.4,
-        "shotsOnTargetFor": 7.8,
-        "possession": 55,
-        "passesAttempted": 683,
-        "completedPasses": 525,
-        "passCompletion": 0.768,
-        "homeScorers": [
-          {
-            "name": "Bergwijn",
-            "goals": 1
-          },
-          {
-            "name": "Aké",
-            "goals": 1
-          },
-          {
-            "name": "Depay",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Vestergaard",
-            "goals": 1
-          },
-          {
-            "name": "Eriksen",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
-      },
-      {
-        "date": "2026-03-26T12:00:00.000Z",
-        "homeTeam": "Germany",
-        "awayTeam": "Netherlands",
-        "score": "2-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 47.5,
-        "passesAttempted": 621,
-        "completedPasses": 472,
-        "passCompletion": 0.76,
-        "homeScorers": [
-          {
-            "name": "Mittelstädt",
-            "goals": 1
-          },
-          {
-            "name": "Füllkrug",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Veerman",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
-      },
-      {
-        "date": "2026-03-24T12:00:00.000Z",
-        "homeTeam": "France",
-        "awayTeam": "Netherlands",
-        "score": "4-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 42,
-        "passesAttempted": 569,
-        "completedPasses": 420,
-        "passCompletion": 0.738,
-        "homeScorers": [
-          {
-            "name": "Griezmann",
-            "goals": 1
-          },
-          {
-            "name": "Upamecano",
-            "goals": 1
-          },
-          {
-            "name": "Mbappé",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
-      },
-      {
-        "date": "2026-03-22T12:00:00.000Z",
-        "homeTeam": "Netherlands",
-        "awayTeam": "Scotland",
-        "score": "4-0",
-        "teamPerspective": "home",
-        "shotsFor": 20.4,
-        "shotsOnTargetFor": 7.8,
-        "possession": 58,
-        "passesAttempted": 667,
-        "completedPasses": 520,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Reijnders",
-            "goals": 1
-          },
-          {
-            "name": "Wijnaldum",
-            "goals": 1
-          },
-          {
-            "name": "Weghorst",
-            "goals": 1
-          },
-          {
-            "name": "Malen",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
-      },
-      {
-        "date": "2024-11-19T12:00:00.000Z",
-        "homeTeam": "Bosnia and Herzegovina",
-        "awayTeam": "Netherlands",
-        "score": "1-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 50,
-        "passesAttempted": 638,
-        "completedPasses": 491,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Brobbey",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
-      },
-      {
-        "date": "2024-11-16T12:00:00.000Z",
-        "homeTeam": "Netherlands",
-        "awayTeam": "Hungary",
-        "score": "4-0",
-        "teamPerspective": "home",
-        "shotsFor": 20.4,
-        "shotsOnTargetFor": 7.8,
-        "possession": 58,
-        "passesAttempted": 667,
-        "completedPasses": 520,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Weghorst",
-            "goals": 1
-          },
-          {
-            "name": "Dumfries",
-            "goals": 1
-          },
-          {
-            "name": "Koopmeiners",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
-      }
-    ]
-  },
-  {
-    "team": "Japan",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
-    "provider": "public-web",
-    "recentPointsPerGame": 2.16,
-    "xgFor": 1.391,
-    "xgAgainst": 0.83,
-    "shotsFor": 11.64,
-    "shotsAgainst": 9.21,
-    "shotsOnTargetFor": 4.06,
-    "shotsOnTargetAgainst": 2.93,
-    "possession": 51.7,
-    "passesAttempted": 633,
-    "completedPasses": 490.5,
-    "passCompletion": 0.775,
-    "highPressIndex": 55.7,
-    "setPieceThreat": 58.5,
-    "transitionThreat": 60.4,
-    "keeperForm": 51.8,
-    "rating": 1753.1,
-    "statsCompleteness": 0.92,
-    "sourceMatchCount": 20,
-    "sourceMatchTarget": 20,
-    "sourceReliability": 0.75,
-    "manager": "Hajime Moriyasu",
-    "captain": "",
-    "profileSource": "Japan public profile 1",
-    "profileSourceUrl": "https://en.wikipedia.org/wiki/Japan_national_football_team",
-    "profileConfidence": 0.72,
-    "metricSource": "score-derived-estimates",
-    "capturedMetricFields": [
-      "date",
-      "homeTeam",
-      "awayTeam",
-      "homeGoals",
-      "awayGoals"
-    ],
-    "derivedMetricFields": [
-      "xgFor",
-      "xgAgainst",
-      "shotsFor",
-      "shotsAgainst",
-      "shotsOnTargetFor",
-      "shotsOnTargetAgainst",
-      "possession",
-      "passesAttempted",
-      "completedPasses",
-      "passCompletion",
-      "formation",
-      "styleOfPlay"
-    ],
-    "tacticalProfile": {
-      "likelyFormation": "5-4-1 / 4-4-2",
-      "styleOfPlay": "compact defensive block with selective counters",
-      "styleTags": [
-        "compact",
-        "defensive",
-        "counter",
-        "set-piece threat",
-        "positive xG balance"
-      ],
-      "possessionTier": "medium",
-      "pressingTier": "medium",
-      "transitionTier": "high",
-      "source": "derived from 20-match public result sample and score-derived event estimates"
-    },
-    "passing": {
-      "attempted": 633,
-      "completed": 490.5,
-      "completion": 0.775,
-      "source": "score-and-possession-derived estimate"
-    },
-    "recentForm": {
-      "matchCount": 6,
-      "pointsPerGame": 2.167,
-      "goalsFor": 0.667,
-      "goalsAgainst": 0.167,
-      "goalDifference": 0.5,
-      "xgFor": 1.03,
-      "xgAgainst": 0.67,
-      "xgDifference": 0.36,
-      "shotsFor": 10.07,
-      "shotsAgainst": 8.52,
-      "shotsOnTargetFor": 3.33,
-      "shotsOnTargetAgainst": 2.63,
-      "possession": 51.3,
-      "passesAttempted": 628.5,
-      "completedPasses": 487.2,
-      "passCompletion": 0.775,
-      "cleanSheetRate": 0.833,
-      "failedToScoreRate": 0.333,
-      "bttsRate": 0,
-      "over25Rate": 0,
-      "scoringGameRate": 0.667,
-      "concedeGameRate": 0.167,
-      "window": 6
-    },
-    "longForm": {
-      "matchCount": 20,
-      "pointsPerGame": 2.15,
-      "goalsFor": 1.85,
-      "goalsAgainst": 0.65,
-      "goalDifference": 1.2,
-      "xgFor": 1.815,
-      "xgAgainst": 1.018,
-      "xgDifference": 0.797,
-      "shotsFor": 13.48,
-      "shotsAgainst": 10.01,
-      "shotsOnTargetFor": 4.92,
-      "shotsOnTargetAgainst": 3.28,
-      "possession": 52.4,
-      "passesAttempted": 640.9,
-      "completedPasses": 496.4,
-      "passCompletion": 0.774,
-      "cleanSheetRate": 0.6,
-      "failedToScoreRate": 0.25,
-      "bttsRate": 0.25,
-      "over25Rate": 0.4,
-      "scoringGameRate": 0.75,
-      "concedeGameRate": 0.4,
-      "window": 20
-    },
-    "formTrend": -0.0292,
-    "marketAngles": {
-      "cleanSheetRate": 0.6,
-      "failedToScoreRate": 0.25,
-      "bttsRate": 0.25,
-      "over25Rate": 0.4,
-      "scoringGameRate": 0.75,
-      "concedeGameRate": 0.4
-    },
-    "scorerSummary": [
-      {
-        "playerName": "Kamada",
-        "goals": 3,
-        "goalsPerTwentyTeamMatches": 3
-      },
-      {
-        "playerName": "Germain",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Hosoya",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Machino",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Minamino",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Nakamura",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Endo",
-        "goals": 1,
-        "goalsPerTwentyTeamMatches": 1
-      },
-      {
-        "playerName": "Inagaki",
-        "goals": 1,
-        "goalsPerTwentyTeamMatches": 1
-      }
-    ],
-    "topScorers": [
-      {
-        "playerName": "Kamada",
-        "goals": 3,
-        "goalsPerTwentyTeamMatches": 3
-      },
-      {
-        "playerName": "Germain",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Hosoya",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Machino",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Minamino",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Nakamura",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Endo",
-        "goals": 1,
-        "goalsPerTwentyTeamMatches": 1
-      },
-      {
-        "playerName": "Inagaki",
-        "goals": 1,
-        "goalsPerTwentyTeamMatches": 1
-      }
-    ],
-    "intelligenceCoverage": {
-      "matchWindowTarget": 20,
-      "matchWindowAvailable": 20,
-      "hasFullTwentyMatchWindow": true,
-      "managerKnown": true,
-      "profileConfidence": 0.72,
-      "eventDataMode": "score-derived-estimates",
-      "equalSchemaForAllTeams": true
-    },
-    "recentMatches": [
-      {
-        "date": "2026-06-05T12:00:00.000Z",
-        "homeTeam": "Australia",
-        "awayTeam": "Japan",
-        "score": "1-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 47.5,
-        "passesAttempted": 605,
-        "completedPasses": 460,
-        "passCompletion": 0.76,
-        "homeScorers": [
-          {
-            "name": "Behich",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Australia public results 2"
-      },
-      {
-        "date": "2026-05-31T12:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "Iceland",
-        "score": "1-0",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2026-03-31T12:00:00.000Z",
-        "homeTeam": "England",
-        "awayTeam": "Japan",
-        "score": "0-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Mitoma",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2026-03-28T12:00:00.000Z",
-        "homeTeam": "Scotland",
-        "awayTeam": "Japan",
-        "score": "0-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2026-03-28T00:00:00.000Z",
-        "homeTeam": "Scotland",
-        "awayTeam": "Japan",
-        "score": "0-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Scotland public results 1"
-      },
-      {
-        "date": "2026-03-25T12:00:00.000Z",
-        "homeTeam": "Saudi Arabia",
-        "awayTeam": "Japan",
-        "score": "0-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 50,
-        "passesAttempted": 622,
-        "completedPasses": 479,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Saudi Arabia public results 1"
-      },
-      {
-        "date": "2026-03-25T12:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "South Korea",
-        "score": "3-0",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 57.5,
-        "passesAttempted": 665,
-        "completedPasses": 526,
-        "passCompletion": 0.791,
-        "homeScorers": [
-          {
-            "name": "Yamane",
-            "goals": 1
-          },
-          {
-            "name": "Kamada",
-            "goals": 1
-          },
-          {
-            "name": "Endo",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "South Korea public results 1"
-      },
-      {
-        "date": "2025-11-18T12:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "Bolivia",
-        "score": "3-0",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 57.5,
-        "passesAttempted": 665,
-        "completedPasses": 526,
-        "passCompletion": 0.791,
-        "homeScorers": [
-          {
-            "name": "Kamada",
-            "goals": 1
-          },
-          {
-            "name": "Machino",
-            "goals": 1
-          },
-          {
-            "name": "Nakamura",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2025-11-14T12:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "Ghana",
-        "score": "2-0",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 55,
-        "passesAttempted": 651,
-        "completedPasses": 514,
-        "passCompletion": 0.79,
-        "homeScorers": [
-          {
-            "name": "Minamino",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2025-10-14T12:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "Brazil",
-        "score": "3-2",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 52.5,
-        "passesAttempted": 668,
-        "completedPasses": 515,
-        "passCompletion": 0.771,
-        "homeScorers": [
-          {
-            "name": "Minamino",
-            "goals": 1
-          },
-          {
-            "name": "Nakamura",
-            "goals": 1
-          },
-          {
-            "name": "Ueda",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Paulo Henrique",
-            "goals": 1
-          },
-          {
-            "name": "Martinelli",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2025-10-14T00:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "Brazil",
-        "score": "3-2",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 52.5,
-        "passesAttempted": 668,
-        "completedPasses": 515,
-        "passCompletion": 0.771,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Paulo Henrique",
-            "goals": 1
-          },
-          {
-            "name": "Martinelli",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Brazil public results 1"
-      },
-      {
-        "date": "2025-10-10T12:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "Paraguay",
-        "score": "2-2",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 50,
-        "passesAttempted": 654,
-        "completedPasses": 504,
-        "passCompletion": 0.77,
-        "homeScorers": [
-          {
-            "name": "Ogawa",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Almirón",
-            "goals": 1
-          },
-          {
-            "name": "D. Gómez",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2025-10-10T00:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "Paraguay",
-        "score": "2-2",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 50,
-        "passesAttempted": 654,
-        "completedPasses": 504,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Almirón",
-            "goals": 1
-          },
-          {
-            "name": "Gómez",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Paraguay public results 1"
-      },
-      {
-        "date": "2025-09-09T12:00:00.000Z",
-        "homeTeam": "United States",
-        "awayTeam": "Japan",
-        "score": "2-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 45,
-        "passesAttempted": 589,
-        "completedPasses": 442,
-        "passCompletion": 0.75,
-        "homeScorers": [
-          {
-            "name": "Zendejas",
-            "goals": 1
-          },
-          {
-            "name": "Balogun",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2025-09-06T12:00:00.000Z",
-        "homeTeam": "Mexico",
-        "awayTeam": "Japan",
-        "score": "0-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 50,
-        "passesAttempted": 622,
-        "completedPasses": 479,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2025-07-15T12:00:00.000Z",
-        "homeTeam": "South Korea",
-        "awayTeam": "Japan",
-        "score": "0-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Germain",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2025-07-12T12:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "China",
-        "score": "2-0",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 55,
-        "passesAttempted": 651,
-        "completedPasses": 514,
-        "passCompletion": 0.79,
-        "homeScorers": [
-          {
-            "name": "Hosoya",
-            "goals": 1
-          },
-          {
-            "name": "Mochizuki",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2025-07-08T12:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "Hong Kong",
-        "score": "6-1",
-        "teamPerspective": "home",
-        "shotsFor": 24,
-        "shotsOnTargetFor": 10.5,
-        "possession": 58,
-        "passesAttempted": 668,
-        "completedPasses": 512,
-        "passCompletion": 0.766,
-        "homeScorers": [
-          {
-            "name": "Germain",
-            "goals": 1
-          },
-          {
-            "name": "Inagaki",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Orr",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2025-06-10T12:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "Indonesia",
-        "score": "6-0",
-        "teamPerspective": "home",
-        "shotsFor": 24,
-        "shotsOnTargetFor": 10.5,
-        "possession": 58,
-        "passesAttempted": 650,
-        "completedPasses": 498,
-        "passCompletion": 0.766,
-        "homeScorers": [
-          {
-            "name": "Kamada",
-            "goals": 1
-          },
-          {
-            "name": "Kubo",
-            "goals": 1
-          },
-          {
-            "name": "Morishita",
-            "goals": 1
-          },
-          {
-            "name": "Machino",
-            "goals": 1
-          },
-          {
-            "name": "Hosoya",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2025-06-05T12:00:00.000Z",
-        "homeTeam": "Australia",
-        "awayTeam": "Japan",
-        "score": "1-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 47.5,
-        "passesAttempted": 605,
-        "completedPasses": 460,
-        "passCompletion": 0.76,
-        "homeScorers": [
-          {
-            "name": "Behich",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      }
-    ]
-  },
-  {
     "team": "Ivory Coast",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.945,
     "xgFor": 1.339,
@@ -2276,7 +734,7 @@
   },
   {
     "team": "Ecuador",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.328,
     "xgFor": 1.302,
@@ -2964,7 +1422,7 @@
   },
   {
     "team": "Sweden",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.84,
     "xgFor": 2.041,
@@ -3766,7 +2224,7 @@
   },
   {
     "team": "Tunisia",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.412,
     "xgFor": 1.044,
@@ -4477,7 +2935,7 @@
   },
   {
     "team": "Spain",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.387,
     "xgFor": 2.267,
@@ -5266,7 +3724,7 @@
   },
   {
     "team": "Cape Verde",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.735,
     "xgFor": 1.692,
@@ -5971,7 +4429,7 @@
   },
   {
     "team": "Belgium",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.046,
     "xgFor": 2.632,
@@ -6820,7 +5278,7 @@
   },
   {
     "team": "Egypt",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.328,
     "xgFor": 1.401,
@@ -7567,7 +6025,7 @@
   },
   {
     "team": "Saudi Arabia",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.5,
     "xgFor": 1.431,
@@ -8272,7 +6730,7 @@
   },
   {
     "team": "Uruguay",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.479,
     "xgFor": 1.498,
@@ -8987,7 +7445,7 @@
   },
   {
     "team": "Iran",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.702,
     "xgFor": 1.876,
@@ -9764,7 +8222,7 @@
   },
   {
     "team": "New Zealand",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 0.979,
     "xgFor": 1.274,
@@ -10452,7 +8910,7 @@
   },
   {
     "team": "France",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.084,
     "xgFor": 2.35,
@@ -11283,7 +9741,7 @@
   },
   {
     "team": "Senegal",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.987,
     "xgFor": 1.63,
@@ -11987,7 +10445,7 @@
   },
   {
     "team": "Iraq",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.681,
     "xgFor": 1.205,
@@ -12676,7 +11134,7 @@
   },
   {
     "team": "Norway",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.702,
     "xgFor": 1.878,
@@ -13193,7 +11651,7 @@
           }
         ],
         "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
+        "source": "Norway public results 1"
       },
       {
         "date": "2026-03-26T12:00:00.000Z",
@@ -13472,7 +11930,7 @@
   },
   {
     "team": "Argentina",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.727,
     "xgFor": 2.285,
@@ -14225,7 +12683,7 @@
   },
   {
     "team": "Algeria",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.21,
     "xgFor": 2.142,
@@ -14975,7 +13433,7 @@
   },
   {
     "team": "Austria",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.097,
     "xgFor": 1.862,
@@ -15720,7 +14178,7 @@
   },
   {
     "team": "Jordan",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.521,
     "xgFor": 1.632,
@@ -16497,7 +14955,7 @@
   },
   {
     "team": "Portugal",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.71,
     "xgFor": 1.67,
@@ -17247,7 +15705,7 @@
   },
   {
     "team": "DR Congo",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.992,
     "xgFor": 1.433,
@@ -17937,7 +16395,7 @@
   },
   {
     "team": "England",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.084,
     "xgFor": 1.5,
@@ -18409,7 +16867,7 @@
           }
         ],
         "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
+        "source": "England public results 1"
       },
       {
         "date": "2026-03-29T12:00:00.000Z",
@@ -18661,7 +17119,7 @@
   },
   {
     "team": "Croatia",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.336,
     "xgFor": 1.569,
@@ -19341,7 +17799,7 @@
   },
   {
     "team": "Ghana",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.172,
     "xgFor": 1.384,
@@ -20013,7 +18471,7 @@
         ],
         "awayScorers": [],
         "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
+        "source": "Ghana public results 1"
       },
       {
         "date": "2025-10-15T12:00:00.000Z",
@@ -20089,7 +18547,7 @@
   },
   {
     "team": "Panama",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.059,
     "xgFor": 1.889,
@@ -20911,7 +19369,7 @@
   },
   {
     "team": "Uzbekistan",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.723,
     "xgFor": 1.647,
@@ -21173,13 +19631,13 @@
         "passCompletion": 0.76,
         "homeScorers": [
           {
-            "name": "Cody Gakpo",
+            "name": "Gakpo",
             "goals": 1
           }
         ],
         "awayScorers": [],
         "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
+        "source": "Uzbekistan public results 1"
       },
       {
         "date": "2026-06-01T12:00:00.000Z",
@@ -21633,7 +20091,7 @@
   },
   {
     "team": "Colombia",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 2,
     "xgFor": 2.171,
@@ -22401,7 +20859,7 @@
   },
   {
     "team": "Czechia",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.765,
     "xgFor": 1.762,
@@ -23104,7 +21562,7 @@
   },
   {
     "team": "South Africa",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.626,
     "xgFor": 1.484,
@@ -23859,7 +22317,7 @@
   },
   {
     "team": "Switzerland",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.819,
     "xgFor": 2.056,
@@ -24671,7 +23129,7 @@
   },
   {
     "team": "Bosnia and Herzegovina",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.202,
     "xgFor": 1.387,
@@ -25131,7 +23589,7 @@
           }
         ],
         "metricSource": "score-derived-estimates",
-        "source": "Netherlands public results 1"
+        "source": "Bosnia and Herzegovina public results 1"
       },
       {
         "date": "2024-11-16T12:00:00.000Z",
@@ -25266,7 +23724,7 @@
   },
   {
     "team": "Canada",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.37,
     "xgFor": 1.371,
@@ -26183,7 +24641,7 @@
   },
   {
     "team": "Qatar",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.924,
     "xgFor": 1.485,
@@ -26944,7 +25402,7 @@
   },
   {
     "team": "Mexico",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.025,
     "xgFor": 1.758,
@@ -27630,10 +26088,15 @@
         "passesAttempted": 622,
         "completedPasses": 479,
         "passCompletion": 0.77,
-        "homeScorers": [],
+        "homeScorers": [
+          {
+            "name": "Montes",
+            "goals": 1
+          }
+        ],
         "awayScorers": [],
         "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
+        "source": "Mexico public results 1"
       },
       {
         "date": "2025-07-06T12:00:00.000Z",
@@ -27670,7 +26133,7 @@
   },
   {
     "team": "South Korea",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.282,
     "xgFor": 2.153,
@@ -28465,7 +26928,7 @@
   },
   {
     "team": "USA",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.651,
     "xgFor": 2.118,
@@ -29298,7 +27761,7 @@
   },
   {
     "team": "Australia",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.576,
     "xgFor": 2.121,
@@ -30091,24 +28554,24 @@
   },
   {
     "team": "Scotland",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
-    "recentPointsPerGame": 1.702,
-    "xgFor": 1.826,
-    "xgAgainst": 1.271,
-    "shotsFor": 13.49,
-    "shotsAgainst": 11.1,
-    "shotsOnTargetFor": 4.8,
-    "shotsOnTargetAgainst": 3.78,
-    "possession": 51.8,
-    "passesAttempted": 639.5,
-    "completedPasses": 493.3,
-    "passCompletion": 0.771,
-    "highPressIndex": 55.6,
+    "recentPointsPerGame": 1.992,
+    "xgFor": 1.874,
+    "xgAgainst": 1.19,
+    "shotsFor": 13.7,
+    "shotsAgainst": 10.76,
+    "shotsOnTargetFor": 4.9,
+    "shotsOnTargetAgainst": 3.62,
+    "possession": 52.4,
+    "passesAttempted": 642.5,
+    "completedPasses": 496.9,
+    "passCompletion": 0.773,
+    "highPressIndex": 56.9,
     "setPieceThreat": 59.4,
-    "transitionThreat": 59.7,
-    "keeperForm": 46.6,
-    "rating": 1735.4,
+    "transitionThreat": 61.9,
+    "keeperForm": 47.2,
+    "rating": 1761.5,
     "statsCompleteness": 0.92,
     "sourceMatchCount": 20,
     "sourceMatchTarget": 20,
@@ -30155,69 +28618,69 @@
       "source": "derived from 20-match public result sample and score-derived event estimates"
     },
     "passing": {
-      "attempted": 639.5,
-      "completed": 493.3,
-      "completion": 0.771,
+      "attempted": 642.5,
+      "completed": 496.9,
+      "completion": 0.773,
       "source": "score-and-possession-derived estimate"
     },
     "recentForm": {
       "matchCount": 6,
-      "pointsPerGame": 1.667,
-      "goalsFor": 1.833,
-      "goalsAgainst": 0.833,
-      "goalDifference": 1,
-      "xgFor": 1.87,
-      "xgAgainst": 1.15,
-      "xgDifference": 0.72,
-      "shotsFor": 13.68,
-      "shotsAgainst": 10.58,
-      "shotsOnTargetFor": 4.88,
-      "shotsOnTargetAgainst": 3.55,
-      "possession": 52.2,
-      "passesAttempted": 641.5,
-      "completedPasses": 495.2,
-      "passCompletion": 0.771,
-      "cleanSheetRate": 0.333,
-      "failedToScoreRate": 0.333,
+      "pointsPerGame": 2.167,
+      "goalsFor": 2,
+      "goalsAgainst": 0.667,
+      "goalDifference": 1.333,
+      "xgFor": 1.99,
+      "xgAgainst": 1.03,
+      "xgDifference": 0.96,
+      "shotsFor": 14.2,
+      "shotsAgainst": 10.07,
+      "shotsOnTargetFor": 5.12,
+      "shotsOnTargetAgainst": 3.32,
+      "possession": 53,
+      "passesAttempted": 646.7,
+      "completedPasses": 501.2,
+      "passCompletion": 0.775,
+      "cleanSheetRate": 0.5,
+      "failedToScoreRate": 0.167,
       "bttsRate": 0.333,
       "over25Rate": 0.5,
-      "scoringGameRate": 0.667,
-      "concedeGameRate": 0.667,
+      "scoringGameRate": 0.833,
+      "concedeGameRate": 0.5,
       "window": 6
     },
     "longForm": {
       "matchCount": 20,
       "pointsPerGame": 1.75,
-      "goalsFor": 1.7,
-      "goalsAgainst": 1.2,
+      "goalsFor": 1.65,
+      "goalsAgainst": 1.15,
       "goalDifference": 0.5,
-      "xgFor": 1.774,
-      "xgAgainst": 1.414,
+      "xgFor": 1.738,
+      "xgAgainst": 1.378,
       "xgDifference": 0.36,
-      "shotsFor": 13.27,
-      "shotsAgainst": 11.72,
-      "shotsOnTargetFor": 4.71,
-      "shotsOnTargetAgainst": 4.05,
+      "shotsFor": 13.11,
+      "shotsAgainst": 11.57,
+      "shotsOnTargetFor": 4.64,
+      "shotsOnTargetAgainst": 3.98,
       "possession": 51.2,
-      "passesAttempted": 635.9,
-      "completedPasses": 490,
+      "passesAttempted": 635.1,
+      "completedPasses": 489.3,
       "passCompletion": 0.77,
-      "cleanSheetRate": 0.35,
+      "cleanSheetRate": 0.4,
       "failedToScoreRate": 0.3,
-      "bttsRate": 0.4,
-      "over25Rate": 0.6,
+      "bttsRate": 0.35,
+      "over25Rate": 0.55,
       "scoringGameRate": 0.7,
-      "concedeGameRate": 0.65,
+      "concedeGameRate": 0.6,
       "window": 20
     },
-    "formTrend": -0.0153,
+    "formTrend": 0.3375,
     "marketAngles": {
-      "cleanSheetRate": 0.35,
+      "cleanSheetRate": 0.4,
       "failedToScoreRate": 0.3,
-      "bttsRate": 0.4,
-      "over25Rate": 0.6,
+      "bttsRate": 0.35,
+      "over25Rate": 0.55,
       "scoringGameRate": 0.7,
-      "concedeGameRate": 0.65
+      "concedeGameRate": 0.6
     },
     "scorerSummary": [
       {
@@ -30241,22 +28704,22 @@
         "goalsPerTwentyTeamMatches": 3
       },
       {
-        "playerName": "John McGinn",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Andy Robertson",
-        "goals": 1,
-        "goalsPerTwentyTeamMatches": 1
-      },
-      {
         "playerName": "Ben Gannon Doak",
         "goals": 1,
         "goalsPerTwentyTeamMatches": 1
       },
       {
         "playerName": "Depay",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
+        "playerName": "Findlay Curtis",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
+        "playerName": "George Hirst",
         "goals": 1,
         "goalsPerTwentyTeamMatches": 1
       }
@@ -30283,22 +28746,22 @@
         "goalsPerTwentyTeamMatches": 3
       },
       {
-        "playerName": "John McGinn",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Andy Robertson",
-        "goals": 1,
-        "goalsPerTwentyTeamMatches": 1
-      },
-      {
         "playerName": "Ben Gannon Doak",
         "goals": 1,
         "goalsPerTwentyTeamMatches": 1
       },
       {
         "playerName": "Depay",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
+        "playerName": "Findlay Curtis",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
+        "playerName": "George Hirst",
         "goals": 1,
         "goalsPerTwentyTeamMatches": 1
       }
@@ -30334,6 +28797,23 @@
         "awayScorers": [],
         "metricSource": "score-derived-estimates",
         "source": "Scotland public results 1"
+      },
+      {
+        "date": "2026-06-13T00:00:00.000Z",
+        "homeTeam": "Haiti",
+        "awayTeam": "Scotland",
+        "score": "0-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Haiti National Football Teams 1"
       },
       {
         "date": "2026-06-06T00:00:00.000Z",
@@ -30446,23 +28926,6 @@
       {
         "date": "2026-03-28T12:00:00.000Z",
         "homeTeam": "Scotland",
-        "awayTeam": "Japan",
-        "score": "0-1",
-        "teamPerspective": "home",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 47.5,
-        "passesAttempted": 605,
-        "completedPasses": 460,
-        "passCompletion": 0.76,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2026-03-28T12:00:00.000Z",
-        "homeTeam": "Scotland",
         "awayTeam": "Spain",
         "score": "2-0",
         "teamPerspective": "home",
@@ -30481,6 +28944,23 @@
         "awayScorers": [],
         "metricSource": "score-derived-estimates",
         "source": "Spain public results 1"
+      },
+      {
+        "date": "2026-03-28T12:00:00.000Z",
+        "homeTeam": "Scotland",
+        "awayTeam": "Japan",
+        "score": "0-1",
+        "teamPerspective": "home",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 47.5,
+        "passesAttempted": 605,
+        "completedPasses": 460,
+        "passCompletion": 0.76,
+        "homeScorers": [],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
       },
       {
         "date": "2026-03-28T00:00:00.000Z",
@@ -30774,38 +29254,12 @@
         ],
         "metricSource": "score-derived-estimates",
         "source": "Scotland public results 1"
-      },
-      {
-        "date": "2024-11-18T00:00:00.000Z",
-        "homeTeam": "Poland",
-        "awayTeam": "Scotland",
-        "score": "1-2",
-        "teamPerspective": "away",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 52.5,
-        "passesAttempted": 652,
-        "completedPasses": 509,
-        "passCompletion": 0.78,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "John McGinn",
-            "goals": 1
-          },
-          {
-            "name": "Andy Robertson",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Scotland public results 1"
       }
     ]
   },
   {
     "team": "Morocco",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.008,
     "xgFor": 1.615,
@@ -31521,7 +29975,7 @@
   },
   {
     "team": "Brazil",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.366,
     "xgFor": 2.652,
@@ -32339,24 +30793,24 @@
   },
   {
     "team": "Haiti",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
-    "recentPointsPerGame": 1.139,
-    "xgFor": 1.726,
-    "xgAgainst": 1.58,
-    "shotsFor": 13.06,
-    "shotsAgainst": 12.43,
-    "shotsOnTargetFor": 4.63,
-    "shotsOnTargetAgainst": 4.36,
-    "possession": 50.3,
-    "passesAttempted": 629,
-    "completedPasses": 481.4,
-    "passCompletion": 0.765,
-    "highPressIndex": 51.4,
-    "setPieceThreat": 57.9,
-    "transitionThreat": 52.5,
-    "keeperForm": 45.9,
-    "rating": 1694.5,
+    "recentPointsPerGame": 0.979,
+    "xgFor": 1.579,
+    "xgAgainst": 1.597,
+    "shotsFor": 12.43,
+    "shotsAgainst": 12.51,
+    "shotsOnTargetFor": 4.35,
+    "shotsOnTargetAgainst": 4.39,
+    "possession": 49.8,
+    "passesAttempted": 624.4,
+    "completedPasses": 477.2,
+    "passCompletion": 0.764,
+    "highPressIndex": 49.8,
+    "setPieceThreat": 56.3,
+    "transitionThreat": 49.7,
+    "keeperForm": 45.7,
+    "rating": 1678.6,
     "statsCompleteness": 0.92,
     "sourceMatchCount": 20,
     "sourceMatchTarget": 20,
@@ -32401,69 +30855,69 @@
       "source": "derived from 20-match public result sample and score-derived event estimates"
     },
     "passing": {
-      "attempted": 629,
-      "completed": 481.4,
-      "completion": 0.765,
+      "attempted": 624.4,
+      "completed": 477.2,
+      "completion": 0.764,
       "source": "score-and-possession-derived estimate"
     },
     "recentForm": {
       "matchCount": 6,
-      "pointsPerGame": 1.167,
-      "goalsFor": 1.833,
+      "pointsPerGame": 1,
+      "goalsFor": 1.667,
       "goalsAgainst": 1.5,
-      "goalDifference": 0.333,
-      "xgFor": 1.87,
+      "goalDifference": 0.167,
+      "xgFor": 1.75,
       "xgAgainst": 1.63,
-      "xgDifference": 0.24,
-      "shotsFor": 13.68,
+      "xgDifference": 0.12,
+      "shotsFor": 13.17,
       "shotsAgainst": 12.65,
-      "shotsOnTargetFor": 4.9,
+      "shotsOnTargetFor": 4.67,
       "shotsOnTargetAgainst": 4.45,
-      "possession": 50.5,
-      "passesAttempted": 630.5,
-      "completedPasses": 482.5,
-      "passCompletion": 0.765,
+      "possession": 50.1,
+      "passesAttempted": 625,
+      "completedPasses": 477.3,
+      "passCompletion": 0.763,
       "cleanSheetRate": 0.333,
-      "failedToScoreRate": 0.167,
-      "bttsRate": 0.5,
+      "failedToScoreRate": 0.333,
+      "bttsRate": 0.333,
       "over25Rate": 0.667,
-      "scoringGameRate": 0.833,
+      "scoringGameRate": 0.667,
       "concedeGameRate": 0.667,
       "window": 6
     },
     "longForm": {
       "matchCount": 20,
-      "pointsPerGame": 1.1,
-      "goalsFor": 1.4,
-      "goalsAgainst": 1.35,
-      "goalDifference": 0.05,
-      "xgFor": 1.558,
-      "xgAgainst": 1.522,
-      "xgDifference": 0.036,
-      "shotsFor": 12.34,
-      "shotsAgainst": 12.18,
-      "shotsOnTargetFor": 4.32,
-      "shotsOnTargetAgainst": 4.25,
-      "possession": 49.9,
-      "passesAttempted": 626.4,
-      "completedPasses": 479.5,
-      "passCompletion": 0.765,
-      "cleanSheetRate": 0.35,
-      "failedToScoreRate": 0.35,
+      "pointsPerGame": 0.95,
+      "goalsFor": 1.15,
+      "goalsAgainst": 1.4,
+      "goalDifference": -0.25,
+      "xgFor": 1.378,
+      "xgAgainst": 1.558,
+      "xgDifference": -0.18,
+      "shotsFor": 11.57,
+      "shotsAgainst": 12.34,
+      "shotsOnTargetFor": 3.98,
+      "shotsOnTargetAgainst": 4.32,
+      "possession": 49.4,
+      "passesAttempted": 623.4,
+      "completedPasses": 476.9,
+      "passCompletion": 0.764,
+      "cleanSheetRate": 0.3,
+      "failedToScoreRate": 0.4,
       "bttsRate": 0.35,
-      "over25Rate": 0.5,
-      "scoringGameRate": 0.65,
-      "concedeGameRate": 0.65,
+      "over25Rate": 0.45,
+      "scoringGameRate": 0.6,
+      "concedeGameRate": 0.7,
       "window": 20
     },
-    "formTrend": -0.0513,
+    "formTrend": -0.1214,
     "marketAngles": {
-      "cleanSheetRate": 0.35,
-      "failedToScoreRate": 0.35,
+      "cleanSheetRate": 0.3,
+      "failedToScoreRate": 0.4,
       "bttsRate": 0.35,
-      "over25Rate": 0.5,
-      "scoringGameRate": 0.65,
-      "concedeGameRate": 0.65
+      "over25Rate": 0.45,
+      "scoringGameRate": 0.6,
+      "concedeGameRate": 0.7
     },
     "scorerSummary": [
       {
@@ -32540,6 +30994,23 @@
         "awayScorers": [],
         "metricSource": "score-derived-estimates",
         "source": "Scotland public results 1"
+      },
+      {
+        "date": "2026-06-13T00:00:00.000Z",
+        "homeTeam": "Haiti",
+        "awayTeam": "Scotland",
+        "score": "0-1",
+        "teamPerspective": "home",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 47.5,
+        "passesAttempted": 605,
+        "completedPasses": 460,
+        "passCompletion": 0.76,
+        "homeScorers": [],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Haiti National Football Teams 1"
       },
       {
         "date": "2026-06-10T12:00:00.000Z",
@@ -32873,29 +31344,12 @@
         "awayScorers": [],
         "metricSource": "score-derived-estimates",
         "source": "Haiti National Football Teams 2"
-      },
-      {
-        "date": "2025-06-07T00:00:00.000Z",
-        "homeTeam": "Aruba",
-        "awayTeam": "Haiti",
-        "score": "0-5",
-        "teamPerspective": "away",
-        "shotsFor": 23.5,
-        "shotsOnTargetFor": 9.2,
-        "possession": 58,
-        "passesAttempted": 665,
-        "completedPasses": 511,
-        "passCompletion": 0.768,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Haiti National Football Teams 2"
       }
     ]
   },
   {
     "team": "Turkiye",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.429,
     "xgFor": 1.942,
@@ -33625,7 +32079,7 @@
   },
   {
     "team": "Paraguay",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.307,
     "xgFor": 1.678,
@@ -34355,25 +32809,842 @@
     ]
   },
   {
-    "team": "Germany",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "team": "Netherlands",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
-    "recentPointsPerGame": 2.492,
-    "xgFor": 2.253,
-    "xgAgainst": 1.318,
-    "shotsFor": 15.35,
-    "shotsAgainst": 11.31,
-    "shotsOnTargetFor": 5.69,
-    "shotsOnTargetAgainst": 3.87,
-    "possession": 52.8,
-    "passesAttempted": 652.8,
-    "completedPasses": 505.3,
-    "passCompletion": 0.774,
-    "highPressIndex": 59.4,
-    "setPieceThreat": 63.5,
-    "transitionThreat": 67,
-    "keeperForm": 47.7,
-    "rating": 1792.2,
+    "recentPointsPerGame": 2.601,
+    "xgFor": 2.565,
+    "xgAgainst": 1.059,
+    "shotsFor": 16.71,
+    "shotsAgainst": 10.19,
+    "shotsOnTargetFor": 6.51,
+    "shotsOnTargetAgainst": 3.37,
+    "possession": 54.7,
+    "passesAttempted": 650.4,
+    "completedPasses": 505.7,
+    "passCompletion": 0.778,
+    "highPressIndex": 65.2,
+    "setPieceThreat": 65.2,
+    "transitionThreat": 78.6,
+    "keeperForm": 48.9,
+    "rating": 1837.5,
+    "statsCompleteness": 0.92,
+    "sourceMatchCount": 20,
+    "sourceMatchTarget": 20,
+    "sourceReliability": 0.75,
+    "manager": "Ronald Koeman",
+    "captain": "",
+    "profileSource": "Netherlands public profile 1",
+    "profileSourceUrl": "https://en.wikipedia.org/wiki/Netherlands_national_football_team",
+    "profileConfidence": 0.72,
+    "metricSource": "score-derived-estimates",
+    "capturedMetricFields": [
+      "date",
+      "homeTeam",
+      "awayTeam",
+      "homeGoals",
+      "awayGoals"
+    ],
+    "derivedMetricFields": [
+      "xgFor",
+      "xgAgainst",
+      "shotsFor",
+      "shotsAgainst",
+      "shotsOnTargetFor",
+      "shotsOnTargetAgainst",
+      "possession",
+      "passesAttempted",
+      "completedPasses",
+      "passCompletion",
+      "formation",
+      "styleOfPlay"
+    ],
+    "tacticalProfile": {
+      "likelyFormation": "4-3-3 / 4-2-3-1",
+      "styleOfPlay": "front-foot pressing and fast regains",
+      "styleTags": [
+        "pressing",
+        "front-foot",
+        "regains",
+        "set-piece threat",
+        "positive xG balance"
+      ],
+      "possessionTier": "medium",
+      "pressingTier": "high",
+      "transitionTier": "high",
+      "source": "derived from 20-match public result sample and score-derived event estimates"
+    },
+    "passing": {
+      "attempted": 650.4,
+      "completed": 505.7,
+      "completion": 0.778,
+      "source": "score-and-possession-derived estimate"
+    },
+    "recentForm": {
+      "matchCount": 6,
+      "pointsPerGame": 3,
+      "goalsFor": 3.667,
+      "goalsAgainst": 0.5,
+      "goalDifference": 3.167,
+      "xgFor": 2.838,
+      "xgAgainst": 0.91,
+      "xgDifference": 1.928,
+      "shotsFor": 17.9,
+      "shotsAgainst": 9.55,
+      "shotsOnTargetFor": 7.17,
+      "shotsOnTargetAgainst": 3.08,
+      "possession": 55.6,
+      "passesAttempted": 652.8,
+      "completedPasses": 509,
+      "passCompletion": 0.78,
+      "cleanSheetRate": 0.667,
+      "failedToScoreRate": 0,
+      "bttsRate": 0.333,
+      "over25Rate": 0.833,
+      "scoringGameRate": 1,
+      "concedeGameRate": 0.333,
+      "window": 6
+    },
+    "longForm": {
+      "matchCount": 20,
+      "pointsPerGame": 2.05,
+      "goalsFor": 2.5,
+      "goalsAgainst": 0.95,
+      "goalDifference": 1.55,
+      "xgFor": 2.245,
+      "xgAgainst": 1.234,
+      "xgDifference": 1.011,
+      "shotsFor": 15.31,
+      "shotsAgainst": 10.94,
+      "shotsOnTargetFor": 5.73,
+      "shotsOnTargetAgainst": 3.7,
+      "possession": 53,
+      "passesAttempted": 646,
+      "completedPasses": 499.7,
+      "passCompletion": 0.773,
+      "cleanSheetRate": 0.4,
+      "failedToScoreRate": 0.1,
+      "bttsRate": 0.5,
+      "over25Rate": 0.7,
+      "scoringGameRate": 0.9,
+      "concedeGameRate": 0.6,
+      "window": 20
+    },
+    "formTrend": 0.55,
+    "marketAngles": {
+      "cleanSheetRate": 0.4,
+      "failedToScoreRate": 0.1,
+      "bttsRate": 0.5,
+      "over25Rate": 0.7,
+      "scoringGameRate": 0.9,
+      "concedeGameRate": 0.6
+    },
+    "scorerSummary": [
+      {
+        "playerName": "Depay",
+        "goals": 6,
+        "goalsPerTwentyTeamMatches": 6
+      },
+      {
+        "playerName": "Weghorst",
+        "goals": 5,
+        "goalsPerTwentyTeamMatches": 5
+      },
+      {
+        "playerName": "Dumfries",
+        "goals": 3,
+        "goalsPerTwentyTeamMatches": 3
+      },
+      {
+        "playerName": "Malen",
+        "goals": 3,
+        "goalsPerTwentyTeamMatches": 3
+      },
+      {
+        "playerName": "Aké",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Bergwijn",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Dijk",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Reijnders",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      }
+    ],
+    "topScorers": [
+      {
+        "playerName": "Depay",
+        "goals": 6,
+        "goalsPerTwentyTeamMatches": 6
+      },
+      {
+        "playerName": "Weghorst",
+        "goals": 5,
+        "goalsPerTwentyTeamMatches": 5
+      },
+      {
+        "playerName": "Dumfries",
+        "goals": 3,
+        "goalsPerTwentyTeamMatches": 3
+      },
+      {
+        "playerName": "Malen",
+        "goals": 3,
+        "goalsPerTwentyTeamMatches": 3
+      },
+      {
+        "playerName": "Aké",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Bergwijn",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Dijk",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Reijnders",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      }
+    ],
+    "intelligenceCoverage": {
+      "matchWindowTarget": 20,
+      "matchWindowAvailable": 20,
+      "hasFullTwentyMatchWindow": true,
+      "managerKnown": true,
+      "profileConfidence": 0.72,
+      "eventDataMode": "score-derived-estimates",
+      "equalSchemaForAllTeams": true
+    },
+    "recentMatches": [
+      {
+        "date": "2026-06-13T12:00:00.000Z",
+        "homeTeam": "Netherlands",
+        "awayTeam": "Ukraine",
+        "score": "3-2",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 52.5,
+        "passesAttempted": 668,
+        "completedPasses": 515,
+        "passCompletion": 0.771,
+        "homeScorers": [
+          {
+            "name": "Wijnaldum",
+            "goals": 1
+          },
+          {
+            "name": "Weghorst",
+            "goals": 1
+          },
+          {
+            "name": "Dumfries",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Yarmolenko",
+            "goals": 1
+          },
+          {
+            "name": "Yaremchuk",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Netherlands public results 1"
+      },
+      {
+        "date": "2026-06-10T12:00:00.000Z",
+        "homeTeam": "Netherlands",
+        "awayTeam": "Iceland",
+        "score": "4-0",
+        "teamPerspective": "home",
+        "shotsFor": 20.4,
+        "shotsOnTargetFor": 7.8,
+        "possession": 58,
+        "passesAttempted": 667,
+        "completedPasses": 520,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Simons",
+            "goals": 1
+          },
+          {
+            "name": "Dijk",
+            "goals": 1
+          },
+          {
+            "name": "Malen",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Netherlands public results 1"
+      },
+      {
+        "date": "2026-06-10T12:00:00.000Z",
+        "homeTeam": "Netherlands",
+        "awayTeam": "Malta",
+        "score": "8-0",
+        "teamPerspective": "home",
+        "shotsFor": 24,
+        "shotsOnTargetFor": 12,
+        "possession": 58,
+        "passesAttempted": 614,
+        "completedPasses": 470,
+        "passCompletion": 0.766,
+        "homeScorers": [
+          {
+            "name": "Depay",
+            "goals": 1
+          },
+          {
+            "name": "Van Dijk",
+            "goals": 1
+          },
+          {
+            "name": "Simons",
+            "goals": 1
+          },
+          {
+            "name": "Malen",
+            "goals": 1
+          },
+          {
+            "name": "Lang",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Netherlands public results 1"
+      },
+      {
+        "date": "2026-06-08T12:00:00.000Z",
+        "homeTeam": "Netherlands",
+        "awayTeam": "Uzbekistan",
+        "score": "2-1",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 52.5,
+        "passesAttempted": 652,
+        "completedPasses": 509,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Gakpo",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Uzbekistan public results 1"
+      },
+      {
+        "date": "2026-06-07T12:00:00.000Z",
+        "homeTeam": "Finland",
+        "awayTeam": "Netherlands",
+        "score": "0-2",
+        "teamPerspective": "away",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 55,
+        "passesAttempted": 651,
+        "completedPasses": 514,
+        "passCompletion": 0.79,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Depay",
+            "goals": 1
+          },
+          {
+            "name": "Dumfries",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Netherlands public results 1"
+      },
+      {
+        "date": "2026-06-06T12:00:00.000Z",
+        "homeTeam": "Netherlands",
+        "awayTeam": "Georgia",
+        "score": "3-0",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 57.5,
+        "passesAttempted": 665,
+        "completedPasses": 526,
+        "passCompletion": 0.791,
+        "homeScorers": [
+          {
+            "name": "Depay",
+            "goals": 1
+          },
+          {
+            "name": "Weghorst",
+            "goals": 1
+          },
+          {
+            "name": "Gravenberch",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Netherlands public results 1"
+      },
+      {
+        "date": "2026-06-06T12:00:00.000Z",
+        "homeTeam": "Netherlands",
+        "awayTeam": "Canada",
+        "score": "4-0",
+        "teamPerspective": "home",
+        "shotsFor": 20.4,
+        "shotsOnTargetFor": 7.8,
+        "possession": 58,
+        "passesAttempted": 667,
+        "completedPasses": 520,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Depay",
+            "goals": 1
+          },
+          {
+            "name": "Frimpong",
+            "goals": 1
+          },
+          {
+            "name": "Weghorst",
+            "goals": 1
+          },
+          {
+            "name": "Dijk",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Netherlands public results 1"
+      },
+      {
+        "date": "2026-06-03T12:00:00.000Z",
+        "homeTeam": "Netherlands",
+        "awayTeam": "Algeria",
+        "score": "0-1",
+        "teamPerspective": "home",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 47.5,
+        "passesAttempted": 605,
+        "completedPasses": 460,
+        "passCompletion": 0.76,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Hadj Moussa",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Netherlands public results 1"
+      },
+      {
+        "date": "2026-06-02T12:00:00.000Z",
+        "homeTeam": "Netherlands",
+        "awayTeam": "Scotland",
+        "score": "2-2",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 50,
+        "passesAttempted": 654,
+        "completedPasses": 504,
+        "passCompletion": 0.77,
+        "homeScorers": [
+          {
+            "name": "Hendry",
+            "goals": 1
+          },
+          {
+            "name": "Nisbet",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Depay",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Netherlands public results 1"
+      },
+      {
+        "date": "2026-03-31T12:00:00.000Z",
+        "homeTeam": "Netherlands",
+        "awayTeam": "Ecuador",
+        "score": "1-1",
+        "teamPerspective": "home",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 50,
+        "passesAttempted": 638,
+        "completedPasses": 491,
+        "passCompletion": 0.77,
+        "homeScorers": [
+          {
+            "name": "Pacho",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Valencia",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Netherlands public results 1"
+      },
+      {
+        "date": "2026-03-31T00:00:00.000Z",
+        "homeTeam": "Netherlands",
+        "awayTeam": "Ecuador",
+        "score": "1-1",
+        "teamPerspective": "home",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 50,
+        "passesAttempted": 638,
+        "completedPasses": 491,
+        "passCompletion": 0.77,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Pacho",
+            "goals": 1
+          },
+          {
+            "name": "Valencia",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Ecuador public results 1"
+      },
+      {
+        "date": "2026-03-29T12:00:00.000Z",
+        "homeTeam": "Netherlands",
+        "awayTeam": "Germany",
+        "score": "1-1",
+        "teamPerspective": "home",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 50,
+        "passesAttempted": 638,
+        "completedPasses": 491,
+        "passCompletion": 0.77,
+        "homeScorers": [
+          {
+            "name": "Bergwijn",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Netherlands public results 1"
+      },
+      {
+        "date": "2026-03-27T12:00:00.000Z",
+        "homeTeam": "Netherlands",
+        "awayTeam": "Norway",
+        "score": "2-1",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 52.5,
+        "passesAttempted": 652,
+        "completedPasses": 509,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Van Dijk",
+            "goals": 1
+          },
+          {
+            "name": "Reijnders",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Schjelderup",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Norway public results 1"
+      },
+      {
+        "date": "2026-03-27T12:00:00.000Z",
+        "homeTeam": "Netherlands",
+        "awayTeam": "Gibraltar",
+        "score": "3-0",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 57.5,
+        "passesAttempted": 665,
+        "completedPasses": 526,
+        "passCompletion": 0.791,
+        "homeScorers": [
+          {
+            "name": "Depay",
+            "goals": 1
+          },
+          {
+            "name": "Aké",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Netherlands public results 1"
+      },
+      {
+        "date": "2026-03-26T12:00:00.000Z",
+        "homeTeam": "Netherlands",
+        "awayTeam": "Denmark",
+        "score": "4-2",
+        "teamPerspective": "home",
+        "shotsFor": 20.4,
+        "shotsOnTargetFor": 7.8,
+        "possession": 55,
+        "passesAttempted": 683,
+        "completedPasses": 525,
+        "passCompletion": 0.768,
+        "homeScorers": [
+          {
+            "name": "Bergwijn",
+            "goals": 1
+          },
+          {
+            "name": "Aké",
+            "goals": 1
+          },
+          {
+            "name": "Depay",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Vestergaard",
+            "goals": 1
+          },
+          {
+            "name": "Eriksen",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Netherlands public results 1"
+      },
+      {
+        "date": "2026-03-26T12:00:00.000Z",
+        "homeTeam": "Germany",
+        "awayTeam": "Netherlands",
+        "score": "2-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 47.5,
+        "passesAttempted": 621,
+        "completedPasses": 472,
+        "passCompletion": 0.76,
+        "homeScorers": [
+          {
+            "name": "Mittelstädt",
+            "goals": 1
+          },
+          {
+            "name": "Füllkrug",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Veerman",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Netherlands public results 1"
+      },
+      {
+        "date": "2026-03-24T12:00:00.000Z",
+        "homeTeam": "France",
+        "awayTeam": "Netherlands",
+        "score": "4-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 42,
+        "passesAttempted": 569,
+        "completedPasses": 420,
+        "passCompletion": 0.738,
+        "homeScorers": [
+          {
+            "name": "Griezmann",
+            "goals": 1
+          },
+          {
+            "name": "Upamecano",
+            "goals": 1
+          },
+          {
+            "name": "Mbappé",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Netherlands public results 1"
+      },
+      {
+        "date": "2026-03-22T12:00:00.000Z",
+        "homeTeam": "Netherlands",
+        "awayTeam": "Scotland",
+        "score": "4-0",
+        "teamPerspective": "home",
+        "shotsFor": 20.4,
+        "shotsOnTargetFor": 7.8,
+        "possession": 58,
+        "passesAttempted": 667,
+        "completedPasses": 520,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Reijnders",
+            "goals": 1
+          },
+          {
+            "name": "Wijnaldum",
+            "goals": 1
+          },
+          {
+            "name": "Weghorst",
+            "goals": 1
+          },
+          {
+            "name": "Malen",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Netherlands public results 1"
+      },
+      {
+        "date": "2024-11-19T12:00:00.000Z",
+        "homeTeam": "Bosnia and Herzegovina",
+        "awayTeam": "Netherlands",
+        "score": "1-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 50,
+        "passesAttempted": 638,
+        "completedPasses": 491,
+        "passCompletion": 0.77,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Brobbey",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Bosnia and Herzegovina public results 1"
+      },
+      {
+        "date": "2024-11-16T12:00:00.000Z",
+        "homeTeam": "Netherlands",
+        "awayTeam": "Hungary",
+        "score": "4-0",
+        "teamPerspective": "home",
+        "shotsFor": 20.4,
+        "shotsOnTargetFor": 7.8,
+        "possession": 58,
+        "passesAttempted": 667,
+        "completedPasses": 520,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Weghorst",
+            "goals": 1
+          },
+          {
+            "name": "Dumfries",
+            "goals": 1
+          },
+          {
+            "name": "Koopmeiners",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Netherlands public results 1"
+      }
+    ]
+  },
+  {
+    "team": "Germany",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
+    "provider": "public-web",
+    "recentPointsPerGame": 2.534,
+    "xgFor": 2.503,
+    "xgAgainst": 1.302,
+    "shotsFor": 16.45,
+    "shotsAgainst": 11.24,
+    "shotsOnTargetFor": 6.46,
+    "shotsOnTargetAgainst": 3.85,
+    "possession": 53.5,
+    "passesAttempted": 652.4,
+    "completedPasses": 504,
+    "passCompletion": 0.773,
+    "highPressIndex": 62.1,
+    "setPieceThreat": 65.4,
+    "transitionThreat": 73.1,
+    "keeperForm": 48,
+    "rating": 1809.2,
     "statsCompleteness": 0.92,
     "sourceMatchCount": 20,
     "sourceMatchTarget": 20,
@@ -34421,28 +33692,28 @@
       "source": "derived from 20-match public result sample and score-derived event estimates"
     },
     "passing": {
-      "attempted": 652.8,
-      "completed": 505.3,
-      "completion": 0.774,
+      "attempted": 652.4,
+      "completed": 504,
+      "completion": 0.773,
       "source": "score-and-possession-derived estimate"
     },
     "recentForm": {
       "matchCount": 6,
       "pointsPerGame": 2.667,
-      "goalsFor": 2.5,
+      "goalsFor": 3.333,
       "goalsAgainst": 1.167,
-      "goalDifference": 1.333,
-      "xgFor": 2.35,
+      "goalDifference": 2.167,
+      "xgFor": 2.718,
       "xgAgainst": 1.39,
-      "xgDifference": 0.96,
-      "shotsFor": 15.75,
+      "xgDifference": 1.328,
+      "shotsFor": 17.38,
       "shotsAgainst": 11.62,
-      "shotsOnTargetFor": 5.78,
+      "shotsOnTargetFor": 6.92,
       "shotsOnTargetAgainst": 4.02,
-      "possession": 53,
-      "passesAttempted": 657.7,
-      "completedPasses": 509.5,
-      "passCompletion": 0.775,
+      "possession": 53.9,
+      "passesAttempted": 657.3,
+      "completedPasses": 507.7,
+      "passCompletion": 0.772,
       "cleanSheetRate": 0.167,
       "failedToScoreRate": 0,
       "bttsRate": 0.833,
@@ -34453,21 +33724,21 @@
     },
     "longForm": {
       "matchCount": 20,
-      "pointsPerGame": 2.25,
-      "goalsFor": 2.35,
-      "goalsAgainst": 0.95,
-      "goalDifference": 1.4,
-      "xgFor": 2.139,
-      "xgAgainst": 1.234,
-      "xgDifference": 0.905,
-      "shotsFor": 14.87,
-      "shotsAgainst": 10.94,
-      "shotsOnTargetFor": 5.59,
-      "shotsOnTargetAgainst": 3.7,
-      "possession": 52.5,
-      "passesAttempted": 644,
-      "completedPasses": 497.8,
-      "passCompletion": 0.773,
+      "pointsPerGame": 2.35,
+      "goalsFor": 2.6,
+      "goalsAgainst": 0.9,
+      "goalDifference": 1.7,
+      "xgFor": 2.25,
+      "xgAgainst": 1.198,
+      "xgDifference": 1.052,
+      "shotsFor": 15.36,
+      "shotsAgainst": 10.79,
+      "shotsOnTargetFor": 5.93,
+      "shotsOnTargetAgainst": 3.64,
+      "possession": 52.9,
+      "passesAttempted": 643.8,
+      "completedPasses": 497.5,
+      "passCompletion": 0.772,
       "cleanSheetRate": 0.35,
       "failedToScoreRate": 0.1,
       "bttsRate": 0.55,
@@ -34476,7 +33747,7 @@
       "concedeGameRate": 0.65,
       "window": 20
     },
-    "formTrend": 0.2813,
+    "formTrend": 0.1788,
     "marketAngles": {
       "cleanSheetRate": 0.35,
       "failedToScoreRate": 0.1,
@@ -34502,6 +33773,11 @@
         "goalsPerTwentyTeamMatches": 3
       },
       {
+        "playerName": "Musiala",
+        "goals": 3,
+        "goalsPerTwentyTeamMatches": 3
+      },
+      {
         "playerName": "Sané",
         "goals": 3,
         "goalsPerTwentyTeamMatches": 3
@@ -34518,11 +33794,6 @@
       },
       {
         "playerName": "Kleindienst",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Musiala",
         "goals": 2,
         "goalsPerTwentyTeamMatches": 2
       }
@@ -34544,6 +33815,11 @@
         "goalsPerTwentyTeamMatches": 3
       },
       {
+        "playerName": "Musiala",
+        "goals": 3,
+        "goalsPerTwentyTeamMatches": 3
+      },
+      {
         "playerName": "Sané",
         "goals": 3,
         "goalsPerTwentyTeamMatches": 3
@@ -34562,11 +33838,6 @@
         "playerName": "Kleindienst",
         "goals": 2,
         "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Musiala",
-        "goals": 2,
-        "goalsPerTwentyTeamMatches": 2
       }
     ],
     "intelligenceCoverage": {
@@ -34579,6 +33850,49 @@
       "equalSchemaForAllTeams": true
     },
     "recentMatches": [
+      {
+        "date": "2026-06-14T12:00:00.000Z",
+        "homeTeam": "Germany",
+        "awayTeam": "Curaçao",
+        "score": "7-1",
+        "teamPerspective": "home",
+        "shotsFor": 24,
+        "shotsOnTargetFor": 11.9,
+        "possession": 58,
+        "passesAttempted": 650,
+        "completedPasses": 498,
+        "passCompletion": 0.766,
+        "homeScorers": [
+          {
+            "name": "Nmecha",
+            "goals": 1
+          },
+          {
+            "name": "Schlotterbeck",
+            "goals": 1
+          },
+          {
+            "name": "Musiala",
+            "goals": 1
+          },
+          {
+            "name": "Brown",
+            "goals": 1
+          },
+          {
+            "name": "Undav",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Comenencia",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Germany public results 1"
+      },
       {
         "date": "2026-06-06T12:00:00.000Z",
         "homeTeam": "United States",
@@ -35123,60 +34437,29 @@
         ],
         "metricSource": "score-derived-estimates",
         "source": "Bosnia and Herzegovina public results 1"
-      },
-      {
-        "date": "2024-09-10T12:00:00.000Z",
-        "homeTeam": "Netherlands",
-        "awayTeam": "Germany",
-        "score": "2-2",
-        "teamPerspective": "away",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 50,
-        "passesAttempted": 654,
-        "completedPasses": 504,
-        "passCompletion": 0.77,
-        "homeScorers": [
-          {
-            "name": "Reijnders",
-            "goals": 1
-          },
-          {
-            "name": "Dumfries",
-            "goals": 1
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Undav",
-            "goals": 1
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Germany public results 1"
       }
     ]
   },
   {
     "team": "Curaçao",
-    "updatedAt": "2026-06-14T18:46:22.330Z",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.874,
     "xgFor": 2.347,
-    "xgAgainst": 1.66,
+    "xgAgainst": 1.716,
     "shotsFor": 15.74,
-    "shotsAgainst": 12.78,
+    "shotsAgainst": 13.05,
     "shotsOnTargetFor": 5.79,
-    "shotsOnTargetAgainst": 4.5,
-    "possession": 52,
-    "passesAttempted": 641.4,
-    "completedPasses": 492.1,
+    "shotsOnTargetAgainst": 4.9,
+    "possession": 51.9,
+    "passesAttempted": 640.8,
+    "completedPasses": 491.4,
     "passCompletion": 0.767,
-    "highPressIndex": 56.9,
+    "highPressIndex": 56.3,
     "setPieceThreat": 62.8,
-    "transitionThreat": 62.1,
-    "keeperForm": 46.6,
-    "rating": 1759.5,
+    "transitionThreat": 59.7,
+    "keeperForm": 45.5,
+    "rating": 1756.3,
     "statsCompleteness": 0.92,
     "sourceMatchCount": 20,
     "sourceMatchTarget": 20,
@@ -35223,8 +34506,8 @@
       "source": "derived from 20-match public result sample and score-derived event estimates"
     },
     "passing": {
-      "attempted": 641.4,
-      "completed": 492.1,
+      "attempted": 640.8,
+      "completed": 491.4,
       "completion": 0.767,
       "source": "score-and-possession-derived estimate"
     },
@@ -35232,15 +34515,15 @@
       "matchCount": 6,
       "pointsPerGame": 2,
       "goalsFor": 2.833,
-      "goalsAgainst": 1.833,
-      "goalDifference": 1,
+      "goalsAgainst": 2.167,
+      "goalDifference": 0.667,
       "xgFor": 2.59,
-      "xgAgainst": 1.87,
-      "xgDifference": 0.72,
+      "xgAgainst": 1.878,
+      "xgDifference": 0.712,
       "shotsFor": 16.78,
-      "shotsAgainst": 13.68,
+      "shotsAgainst": 13.77,
       "shotsOnTargetFor": 6.25,
-      "shotsOnTargetAgainst": 4.9,
+      "shotsOnTargetAgainst": 5.35,
       "possession": 52.2,
       "passesAttempted": 642.7,
       "completedPasses": 492.8,
@@ -35257,19 +34540,19 @@
       "matchCount": 20,
       "pointsPerGame": 1.7,
       "goalsFor": 2.1,
-      "goalsAgainst": 1.2,
-      "goalDifference": 0.9,
+      "goalsAgainst": 1.45,
+      "goalDifference": 0.65,
       "xgFor": 2.062,
-      "xgAgainst": 1.414,
-      "xgDifference": 0.648,
+      "xgAgainst": 1.525,
+      "xgDifference": 0.537,
       "shotsFor": 14.51,
-      "shotsAgainst": 11.72,
+      "shotsAgainst": 12.21,
       "shotsOnTargetFor": 5.26,
-      "shotsOnTargetAgainst": 4.04,
-      "possession": 51.7,
-      "passesAttempted": 639.1,
-      "completedPasses": 490.9,
-      "passCompletion": 0.767,
+      "shotsOnTargetAgainst": 4.38,
+      "possession": 51.5,
+      "passesAttempted": 637.3,
+      "completedPasses": 488.9,
+      "passCompletion": 0.766,
       "cleanSheetRate": 0.4,
       "failedToScoreRate": 0.2,
       "bttsRate": 0.5,
@@ -35278,7 +34561,7 @@
       "concedeGameRate": 0.6,
       "window": 20
     },
-    "formTrend": 0.3781,
+    "formTrend": 0.55,
     "marketAngles": {
       "cleanSheetRate": 0.4,
       "failedToScoreRate": 0.2,
@@ -35309,6 +34592,11 @@
         "goalsPerTwentyTeamMatches": 1
       },
       {
+        "playerName": "Comenencia",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
         "playerName": "Floranus",
         "goals": 1,
         "goalsPerTwentyTeamMatches": 1
@@ -35320,11 +34608,6 @@
       },
       {
         "playerName": "Janga",
-        "goals": 1,
-        "goalsPerTwentyTeamMatches": 1
-      },
-      {
-        "playerName": "Joshua Brenet",
         "goals": 1,
         "goalsPerTwentyTeamMatches": 1
       }
@@ -35351,6 +34634,11 @@
         "goalsPerTwentyTeamMatches": 1
       },
       {
+        "playerName": "Comenencia",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
         "playerName": "Floranus",
         "goals": 1,
         "goalsPerTwentyTeamMatches": 1
@@ -35362,11 +34650,6 @@
       },
       {
         "playerName": "Janga",
-        "goals": 1,
-        "goalsPerTwentyTeamMatches": 1
-      },
-      {
-        "playerName": "Joshua Brenet",
         "goals": 1,
         "goalsPerTwentyTeamMatches": 1
       }
@@ -35381,6 +34664,49 @@
       "equalSchemaForAllTeams": true
     },
     "recentMatches": [
+      {
+        "date": "2026-06-14T12:00:00.000Z",
+        "homeTeam": "Germany",
+        "awayTeam": "Curaçao",
+        "score": "7-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 42,
+        "passesAttempted": 585,
+        "completedPasses": 432,
+        "passCompletion": 0.738,
+        "homeScorers": [
+          {
+            "name": "Nmecha",
+            "goals": 1
+          },
+          {
+            "name": "Schlotterbeck",
+            "goals": 1
+          },
+          {
+            "name": "Musiala",
+            "goals": 1
+          },
+          {
+            "name": "Brown",
+            "goals": 1
+          },
+          {
+            "name": "Undav",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Comenencia",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Germany public results 1"
+      },
       {
         "date": "2026-06-10T12:00:00.000Z",
         "homeTeam": "Haiti",
@@ -35864,37 +35190,736 @@
         "awayScorers": [],
         "metricSource": "score-derived-estimates",
         "source": "Curaçao public results 1"
+      }
+    ]
+  },
+  {
+    "team": "Japan",
+    "updatedAt": "2026-06-14T21:44:02.929Z",
+    "provider": "public-web",
+    "recentPointsPerGame": 2.16,
+    "xgFor": 1.391,
+    "xgAgainst": 0.83,
+    "shotsFor": 11.64,
+    "shotsAgainst": 9.21,
+    "shotsOnTargetFor": 4.06,
+    "shotsOnTargetAgainst": 2.93,
+    "possession": 51.7,
+    "passesAttempted": 633,
+    "completedPasses": 490.5,
+    "passCompletion": 0.775,
+    "highPressIndex": 55.7,
+    "setPieceThreat": 58.5,
+    "transitionThreat": 60.4,
+    "keeperForm": 51.8,
+    "rating": 1753.1,
+    "statsCompleteness": 0.92,
+    "sourceMatchCount": 20,
+    "sourceMatchTarget": 20,
+    "sourceReliability": 0.75,
+    "manager": "Hajime Moriyasu",
+    "captain": "",
+    "profileSource": "Japan public profile 1",
+    "profileSourceUrl": "https://en.wikipedia.org/wiki/Japan_national_football_team",
+    "profileConfidence": 0.72,
+    "metricSource": "score-derived-estimates",
+    "capturedMetricFields": [
+      "date",
+      "homeTeam",
+      "awayTeam",
+      "homeGoals",
+      "awayGoals"
+    ],
+    "derivedMetricFields": [
+      "xgFor",
+      "xgAgainst",
+      "shotsFor",
+      "shotsAgainst",
+      "shotsOnTargetFor",
+      "shotsOnTargetAgainst",
+      "possession",
+      "passesAttempted",
+      "completedPasses",
+      "passCompletion",
+      "formation",
+      "styleOfPlay"
+    ],
+    "tacticalProfile": {
+      "likelyFormation": "5-4-1 / 4-4-2",
+      "styleOfPlay": "compact defensive block with selective counters",
+      "styleTags": [
+        "compact",
+        "defensive",
+        "counter",
+        "set-piece threat",
+        "positive xG balance"
+      ],
+      "possessionTier": "medium",
+      "pressingTier": "medium",
+      "transitionTier": "high",
+      "source": "derived from 20-match public result sample and score-derived event estimates"
+    },
+    "passing": {
+      "attempted": 633,
+      "completed": 490.5,
+      "completion": 0.775,
+      "source": "score-and-possession-derived estimate"
+    },
+    "recentForm": {
+      "matchCount": 6,
+      "pointsPerGame": 2.167,
+      "goalsFor": 0.667,
+      "goalsAgainst": 0.167,
+      "goalDifference": 0.5,
+      "xgFor": 1.03,
+      "xgAgainst": 0.67,
+      "xgDifference": 0.36,
+      "shotsFor": 10.07,
+      "shotsAgainst": 8.52,
+      "shotsOnTargetFor": 3.33,
+      "shotsOnTargetAgainst": 2.63,
+      "possession": 51.3,
+      "passesAttempted": 628.5,
+      "completedPasses": 487.2,
+      "passCompletion": 0.775,
+      "cleanSheetRate": 0.833,
+      "failedToScoreRate": 0.333,
+      "bttsRate": 0,
+      "over25Rate": 0,
+      "scoringGameRate": 0.667,
+      "concedeGameRate": 0.167,
+      "window": 6
+    },
+    "longForm": {
+      "matchCount": 20,
+      "pointsPerGame": 2.15,
+      "goalsFor": 1.85,
+      "goalsAgainst": 0.65,
+      "goalDifference": 1.2,
+      "xgFor": 1.815,
+      "xgAgainst": 1.018,
+      "xgDifference": 0.797,
+      "shotsFor": 13.48,
+      "shotsAgainst": 10.01,
+      "shotsOnTargetFor": 4.92,
+      "shotsOnTargetAgainst": 3.28,
+      "possession": 52.4,
+      "passesAttempted": 640.9,
+      "completedPasses": 496.4,
+      "passCompletion": 0.774,
+      "cleanSheetRate": 0.6,
+      "failedToScoreRate": 0.25,
+      "bttsRate": 0.25,
+      "over25Rate": 0.4,
+      "scoringGameRate": 0.75,
+      "concedeGameRate": 0.4,
+      "window": 20
+    },
+    "formTrend": -0.0292,
+    "marketAngles": {
+      "cleanSheetRate": 0.6,
+      "failedToScoreRate": 0.25,
+      "bttsRate": 0.25,
+      "over25Rate": 0.4,
+      "scoringGameRate": 0.75,
+      "concedeGameRate": 0.4
+    },
+    "scorerSummary": [
+      {
+        "playerName": "Kamada",
+        "goals": 3,
+        "goalsPerTwentyTeamMatches": 3
       },
       {
-        "date": "2024-09-06T12:00:00.000Z",
-        "homeTeam": "Saint Lucia",
-        "awayTeam": "Curaçao",
-        "score": "2-1",
+        "playerName": "Germain",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Hosoya",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Machino",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Minamino",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Nakamura",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Endo",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
+        "playerName": "Inagaki",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
+      }
+    ],
+    "topScorers": [
+      {
+        "playerName": "Kamada",
+        "goals": 3,
+        "goalsPerTwentyTeamMatches": 3
+      },
+      {
+        "playerName": "Germain",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Hosoya",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Machino",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Minamino",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Nakamura",
+        "goals": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Endo",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
+        "playerName": "Inagaki",
+        "goals": 1,
+        "goalsPerTwentyTeamMatches": 1
+      }
+    ],
+    "intelligenceCoverage": {
+      "matchWindowTarget": 20,
+      "matchWindowAvailable": 20,
+      "hasFullTwentyMatchWindow": true,
+      "managerKnown": true,
+      "profileConfidence": 0.72,
+      "eventDataMode": "score-derived-estimates",
+      "equalSchemaForAllTeams": true
+    },
+    "recentMatches": [
+      {
+        "date": "2026-06-05T12:00:00.000Z",
+        "homeTeam": "Australia",
+        "awayTeam": "Japan",
+        "score": "1-0",
         "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
         "possession": 47.5,
-        "passesAttempted": 621,
-        "completedPasses": 472,
+        "passesAttempted": 605,
+        "completedPasses": 460,
         "passCompletion": 0.76,
         "homeScorers": [
           {
-            "name": "Arkell Jude-Boyd",
+            "name": "Behich",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Australia public results 2"
+      },
+      {
+        "date": "2026-05-31T12:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "Iceland",
+        "score": "1-0",
+        "teamPerspective": "home",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
+      },
+      {
+        "date": "2026-03-31T12:00:00.000Z",
+        "homeTeam": "England",
+        "awayTeam": "Japan",
+        "score": "0-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Mitoma",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "England public results 1"
+      },
+      {
+        "date": "2026-03-28T12:00:00.000Z",
+        "homeTeam": "Scotland",
+        "awayTeam": "Japan",
+        "score": "0-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
+      },
+      {
+        "date": "2026-03-28T00:00:00.000Z",
+        "homeTeam": "Scotland",
+        "awayTeam": "Japan",
+        "score": "0-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Scotland public results 1"
+      },
+      {
+        "date": "2026-03-25T12:00:00.000Z",
+        "homeTeam": "Saudi Arabia",
+        "awayTeam": "Japan",
+        "score": "0-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 50,
+        "passesAttempted": 622,
+        "completedPasses": 479,
+        "passCompletion": 0.77,
+        "homeScorers": [],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Saudi Arabia public results 1"
+      },
+      {
+        "date": "2026-03-25T12:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "South Korea",
+        "score": "3-0",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 57.5,
+        "passesAttempted": 665,
+        "completedPasses": 526,
+        "passCompletion": 0.791,
+        "homeScorers": [
+          {
+            "name": "Yamane",
             "goals": 1
           },
           {
-            "name": "Caniggia Elva",
+            "name": "Kamada",
+            "goals": 1
+          },
+          {
+            "name": "Endo",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "South Korea public results 1"
+      },
+      {
+        "date": "2025-11-18T12:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "Bolivia",
+        "score": "3-0",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 57.5,
+        "passesAttempted": 665,
+        "completedPasses": 526,
+        "passCompletion": 0.791,
+        "homeScorers": [
+          {
+            "name": "Kamada",
+            "goals": 1
+          },
+          {
+            "name": "Machino",
+            "goals": 1
+          },
+          {
+            "name": "Nakamura",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
+      },
+      {
+        "date": "2025-11-14T12:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "Ghana",
+        "score": "2-0",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 55,
+        "passesAttempted": 651,
+        "completedPasses": 514,
+        "passCompletion": 0.79,
+        "homeScorers": [
+          {
+            "name": "Minamino",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Ghana public results 1"
+      },
+      {
+        "date": "2025-10-14T12:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "Brazil",
+        "score": "3-2",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 52.5,
+        "passesAttempted": 668,
+        "completedPasses": 515,
+        "passCompletion": 0.771,
+        "homeScorers": [
+          {
+            "name": "Minamino",
+            "goals": 1
+          },
+          {
+            "name": "Nakamura",
+            "goals": 1
+          },
+          {
+            "name": "Ueda",
             "goals": 1
           }
         ],
         "awayScorers": [
           {
-            "name": "Joshua Brenet",
+            "name": "Paulo Henrique",
+            "goals": 1
+          },
+          {
+            "name": "Martinelli",
             "goals": 1
           }
         ],
         "metricSource": "score-derived-estimates",
-        "source": "Curaçao public results 1"
+        "source": "Japan public results 1"
+      },
+      {
+        "date": "2025-10-14T00:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "Brazil",
+        "score": "3-2",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 52.5,
+        "passesAttempted": 668,
+        "completedPasses": 515,
+        "passCompletion": 0.771,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Paulo Henrique",
+            "goals": 1
+          },
+          {
+            "name": "Martinelli",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Brazil public results 1"
+      },
+      {
+        "date": "2025-10-10T12:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "Paraguay",
+        "score": "2-2",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 50,
+        "passesAttempted": 654,
+        "completedPasses": 504,
+        "passCompletion": 0.77,
+        "homeScorers": [
+          {
+            "name": "Ogawa",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Almirón",
+            "goals": 1
+          },
+          {
+            "name": "D. Gómez",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
+      },
+      {
+        "date": "2025-10-10T00:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "Paraguay",
+        "score": "2-2",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 50,
+        "passesAttempted": 654,
+        "completedPasses": 504,
+        "passCompletion": 0.77,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Almirón",
+            "goals": 1
+          },
+          {
+            "name": "Gómez",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Paraguay public results 1"
+      },
+      {
+        "date": "2025-09-09T12:00:00.000Z",
+        "homeTeam": "United States",
+        "awayTeam": "Japan",
+        "score": "2-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 45,
+        "passesAttempted": 589,
+        "completedPasses": 442,
+        "passCompletion": 0.75,
+        "homeScorers": [
+          {
+            "name": "Zendejas",
+            "goals": 1
+          },
+          {
+            "name": "Balogun",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
+      },
+      {
+        "date": "2025-09-06T12:00:00.000Z",
+        "homeTeam": "Mexico",
+        "awayTeam": "Japan",
+        "score": "0-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 50,
+        "passesAttempted": 622,
+        "completedPasses": 479,
+        "passCompletion": 0.77,
+        "homeScorers": [
+          {
+            "name": "Montes",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Mexico public results 1"
+      },
+      {
+        "date": "2025-07-15T12:00:00.000Z",
+        "homeTeam": "South Korea",
+        "awayTeam": "Japan",
+        "score": "0-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Germain",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
+      },
+      {
+        "date": "2025-07-12T12:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "China",
+        "score": "2-0",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 55,
+        "passesAttempted": 651,
+        "completedPasses": 514,
+        "passCompletion": 0.79,
+        "homeScorers": [
+          {
+            "name": "Hosoya",
+            "goals": 1
+          },
+          {
+            "name": "Mochizuki",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
+      },
+      {
+        "date": "2025-07-08T12:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "Hong Kong",
+        "score": "6-1",
+        "teamPerspective": "home",
+        "shotsFor": 24,
+        "shotsOnTargetFor": 10.5,
+        "possession": 58,
+        "passesAttempted": 668,
+        "completedPasses": 512,
+        "passCompletion": 0.766,
+        "homeScorers": [
+          {
+            "name": "Germain",
+            "goals": 1
+          },
+          {
+            "name": "Inagaki",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Orr",
+            "goals": 1
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
+      },
+      {
+        "date": "2025-06-10T12:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "Indonesia",
+        "score": "6-0",
+        "teamPerspective": "home",
+        "shotsFor": 24,
+        "shotsOnTargetFor": 10.5,
+        "possession": 58,
+        "passesAttempted": 650,
+        "completedPasses": 498,
+        "passCompletion": 0.766,
+        "homeScorers": [
+          {
+            "name": "Kamada",
+            "goals": 1
+          },
+          {
+            "name": "Kubo",
+            "goals": 1
+          },
+          {
+            "name": "Morishita",
+            "goals": 1
+          },
+          {
+            "name": "Machino",
+            "goals": 1
+          },
+          {
+            "name": "Hosoya",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
+      },
+      {
+        "date": "2025-06-05T12:00:00.000Z",
+        "homeTeam": "Australia",
+        "awayTeam": "Japan",
+        "score": "1-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 47.5,
+        "passesAttempted": 605,
+        "completedPasses": 460,
+        "passCompletion": 0.76,
+        "homeScorers": [
+          {
+            "name": "Behich",
+            "goals": 1
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
       }
     ]
   }
