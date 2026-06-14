@@ -79,6 +79,25 @@ test("20-match intelligence treats common country aliases as the same team", () 
   assert.equal(form.marketAngles.concedeGameRate, 1);
 });
 
+test("20-match intelligence ignores impossible stale score rows", () => {
+  const now = new Date("2026-06-06T10:00:00.000Z");
+  const cleanHistory = Array.from({ length: 20 }, (_item, index) => {
+    const day = String(25 - index).padStart(2, "0");
+    return match(`2026-05-${day}T19:00:00.000Z`, "Mexico", "Turkey", 1, index % 2);
+  });
+  const impossibleRow = match("2026-06-01T19:00:00.000Z", "Mexico", "Turkey", 100000000000000, 0, {
+    id: "stale-corrupt-score-row",
+    homeXg: 4.2,
+    homeShots: 24,
+    homeShotsOnTarget: 12
+  });
+  const form = deriveTeamForm([impossibleRow, ...cleanHistory], "Turkiye", now);
+
+  assert.equal(form.matchCount, 20);
+  assert.ok(form.goalsAgainst < 2);
+  assert.ok(!form.recentMatches.some((row) => row.goalsAgainst > 15));
+});
+
 test("enriched team stats expose a consistent 20-match tactical and scorer profile", () => {
   const now = new Date("2026-06-06T10:00:00.000Z");
   const longHistory = Array.from({ length: 20 }, (_item, index) => {

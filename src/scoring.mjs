@@ -623,6 +623,10 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
   const homeNews = newsByTeam.get(fixture.homeTeam) || neutralNews();
   const awayNews = newsByTeam.get(fixture.awayTeam) || neutralNews();
   const heat = buildHeatImpact({ fixture, heatRecord, homeSquadDepth, awaySquadDepth });
+  const homeSquadDepthScore = squadDepthValue(homeSquadDepth);
+  const awaySquadDepthScore = squadDepthValue(awaySquadDepth);
+  const squadDepthConfidence = squadDepthEvidenceConfidence(homeSquadDepth, awaySquadDepth);
+  const squadDepthEdge = squadDepthResultEdge(homeSquadDepth, awaySquadDepth);
   const ratingEdge = clamp(Number(homeStats.rating || 1700) - Number(awayStats.rating || 1700), -180, 180);
   const formEdge = clamp((Number(homeStats.recentPointsPerGame || 1.4) - Number(awayStats.recentPointsPerGame || 1.4)) * 42, -75, 75);
   const xgEdge = clamp(((Number(homeStats.xgFor || 1.3) - Number(awayStats.xgAgainst || 1.2)) - (Number(awayStats.xgFor || 1.3) - Number(homeStats.xgAgainst || 1.2))) * 48, -90, 90);
@@ -635,7 +639,7 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
     ? clamp((Number(marketSnapshot.matchWinner.homeWin || 0.37) - Number(marketSnapshot.matchWinner.awayWin || 0.37)) * 74 * Number(marketSnapshot.matchWinner.confidence || 0.5), -50, 50)
     : 0;
   const heatEdge = Number(heat.resultEdgeAdjustment || 0);
-  const independentResultEdge = clamp(ratingEdge + formEdge + xgEdge + styleEdge + newsEdge + memoryEdge + heatEdge, -220, 220);
+  const independentResultEdge = clamp(ratingEdge + formEdge + xgEdge + styleEdge + newsEdge + memoryEdge + squadDepthEdge + heatEdge, -220, 220);
   const totalEdge = clamp(independentResultEdge + marketMemoryEdge + marketResultEdge, -240, 240);
   const baseGoalShape = goalShapeForFixture(homeStats, awayStats, homeNews, awayNews, heat, {
     ratingEdge,
@@ -697,6 +701,7 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
       formEdge: round(formEdge, 2),
       xgEdge: round(xgEdge, 2),
       styleEdge: round(styleEdge, 2),
+      squadDepthEdge: round(squadDepthEdge, 2),
       buildUpEdge: round(styleDetails.buildUpEdge, 2),
       pressBuildEdge: round(styleDetails.pressBuildEdge, 2),
       homeManager: homeStats.manager || "",
@@ -789,9 +794,9 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
       awayClimateAdaptation: nullableComponent(heat.awayClimateAdaptation),
       homeHistoricalHeatMemory: round(Number(heat.homeHistoricalHeatMemory || 0), 4),
       awayHistoricalHeatMemory: round(Number(heat.awayHistoricalHeatMemory || 0), 4),
-      homeSquadDepth: nullableComponent(heat.homeSquadDepth),
-      awaySquadDepth: nullableComponent(heat.awaySquadDepth),
-      squadDepthConfidence: round(Number(heat.squadDepthConfidence || 0), 4),
+      homeSquadDepth: nullableComponent(homeSquadDepth?.depthScore ?? heat.homeSquadDepth ?? homeSquadDepthScore),
+      awaySquadDepth: nullableComponent(awaySquadDepth?.depthScore ?? heat.awaySquadDepth ?? awaySquadDepthScore),
+      squadDepthConfidence: round(Math.max(squadDepthConfidence, Number(heat.squadDepthConfidence || 0)), 4),
       heatHistoryDifferential: round(Number(heat.historyDifferential || 0), 4),
       heatSquadDepthDifferential: round(Number(heat.squadDepthDifferential || 0), 4),
       combinedHeatDifferential: round(Number(heat.combinedHeatDifferential || 0), 4),
@@ -1048,8 +1053,36 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     hardBlocks.push("result_longshot_above_risk_price_cap");
   }
 
+  if (market === "match_winner" && outcome !== "Draw") {
+    const resultDirection = outcome === fixture.homeTeam ? 1 : outcome === fixture.awayTeam ? -1 : 0;
+    const qualityGapForSelection = Number(legModel.components.qualityGapEdge || 0) * resultDirection;
+    const heatEdgeForSelection = Number(legModel.components.heatEdge || 0) * resultDirection;
+    const squadDepthForSelection = Number(legModel.components.squadDepthEdge || 0) * resultDirection;
+
+    if (
+      resultDirection
+      && Number(odds.decimalOdds) >= 3.6
+      && qualityGapForSelection < -55
+      && Number(legModel.components.qualityGapPressure || 0) >= 0.12
+      && heatEdgeForSelection < 8
+    ) {
+      hardBlocks.push("result_longshot_against_quality_gap");
+    }
+
+    if (
+      resultDirection
+      && Number(odds.decimalOdds) >= 4.2
+      && qualityGapForSelection < -12
+      && squadDepthForSelection < -3
+      && heatEdgeForSelection < 5
+    ) {
+      hardBlocks.push("result_longshot_lacks_tournament_depth_edge");
+    }
+  }
+
   if (market === "both_teams_to_score" && outcome === "Yes") {
     const lowerTeamExpectedGoals = Math.min(Number(legModel.components.homeExpectedGoals || 0), Number(legModel.components.awayExpectedGoals || 0));
+    const marketDominancePressure = Number(legModel.components.marketDominancePressure || 0);
 
     if (independentModelProbability < Number(policy.riskProfile.minBttsYesRawProbability || 0.46)) {
       hardBlocks.push("btts_yes_raw_probability_below_floor");
@@ -1059,8 +1092,16 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
       hardBlocks.push("btts_yes_one_team_goal_threat_too_low");
     }
 
-    if (Number(legModel.components.marketDominancePressure || 0) >= 0.55 && lowerTeamExpectedGoals < 0.94) {
+    if (marketDominancePressure >= 0.55 && lowerTeamExpectedGoals < 0.94) {
       hardBlocks.push("btts_yes_underdog_goal_share_suppressed_by_result_market");
+    }
+
+    if (
+      (marketDominancePressure >= 0.4 || Number(legModel.components.qualityGapPressure || 0) >= 0.45)
+      && lowerTeamExpectedGoals < 0.98
+      && independentModelProbability < 0.54
+    ) {
+      hardBlocks.push("btts_yes_weak_side_goal_threat_under_pressure");
     }
   }
 
@@ -1084,6 +1125,16 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     if (!strongOpeningTotal && (independentEdge < 0.075 || openingPenalty >= 0.04)) {
       hardBlocks.push("opening_group_over25_requires_stronger_total_edge");
     }
+  }
+
+  if (
+    market === "over_2_5_goals"
+    && Number(legModel.components.heatStress || 0) >= 0.75
+    && Number(legModel.components.heatConfidence || 0) >= 0.45
+    && Number(legModel.components.heatExpectedGoalsAdjustment || 0) <= -0.06
+    && Number(legModel.components.expectedGoals || 0) < 3.35
+  ) {
+    hardBlocks.push("heat_suppresses_marginal_over25");
   }
 
   if (oddsAgeHours > (policy.sourceRequirements?.maxOddsAgeHours || 30)) {
@@ -1571,6 +1622,28 @@ function squadDepthValue(record) {
   return Number.isFinite(value) ? clamp(value, 0.25, 0.94) : 0.5;
 }
 
+function squadDepthEvidenceConfidence(homeRecord, awayRecord) {
+  const values = [homeRecord, awayRecord]
+    .map((record) => Number(record?.confidence))
+    .filter((value) => Number.isFinite(value));
+
+  return values.length ? clamp(mean(values), 0, 1) : 0;
+}
+
+function squadDepthResultEdge(homeRecord, awayRecord) {
+  const confidence = squadDepthEvidenceConfidence(homeRecord, awayRecord);
+
+  if (confidence <= 0) {
+    return 0;
+  }
+
+  return clamp(
+    (squadDepthValue(homeRecord) - squadDepthValue(awayRecord)) * 64 * clamp(confidence, 0.25, 0.78),
+    -18,
+    18
+  );
+}
+
 function doubleChanceProbabilities({ fixture, homeWin, draw, awayWin }) {
   return {
     [`${fixture.homeTeam} or Draw`]: round(homeWin + draw, 4),
@@ -1684,6 +1757,7 @@ function evaluateIndependentEvidence({ fixture, market, outcome, model, rawModel
       add(directional(components.styleEdge) >= 10, "style matchup edge", clamp(Math.abs(Number(components.styleEdge || 0)) / 45, 0.25, 1));
       add(directional(components.newsEdge) >= 8, "team news edge", clamp(Math.abs(Number(components.newsEdge || 0)) / 55, 0.22, 1));
       add(directional(components.memoryEdge) >= 7, "local intelligence memory edge", clamp(Math.abs(Number(components.memoryEdge || 0)) / 40, 0.22, 1));
+      add(directional(components.squadDepthEdge) >= 3, "squad depth and tournament experience edge", clamp(Math.abs(Number(components.squadDepthEdge || 0)) / 14, 0.22, 0.8));
       add(directional(components.heatEdge) >= 3, "heat and squad-depth edge", clamp(Math.abs(Number(components.heatEdge || 0)) / 20, 0.2, 0.8));
     }
 
@@ -1895,6 +1969,7 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
   const lowerTeamExpectedGoals = Math.min(homeExpectedGoals, awayExpectedGoals);
   const styleEdge = Math.abs(Number(model.components.styleEdge || 0));
   const memoryEdge = Math.abs(Number(model.components.memoryEdge || 0));
+  const qualityGapPressure = Number(model.components.qualityGapPressure || 0);
   const dataCompleteness = Number(model.components.dataCompleteness || 0);
   const heatStress = Number(model.components.heatStress || 0);
   const heatConfidence = Number(model.components.heatConfidence || 0);
@@ -1918,6 +1993,11 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
       reasons.push("opening group-game caution cools marginal over-2.5 bets");
     } else if (openingCaution > 0 && expectedGoals >= 3.05) {
       reasons.push("goal case remains strong after opening-game caution");
+    }
+
+    if (heatStress >= 0.75 && heatConfidence >= 0.45 && Number(model.components.heatExpectedGoalsAdjustment || 0) <= -0.06 && expectedGoals < 3.35) {
+      score -= 9;
+      reasons.push("severe heat makes this over-2.5 profile less durable");
     }
   }
 
@@ -1969,6 +2049,9 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
     if (marketDominancePressure >= 0.55 && lowerTeamExpectedGoals < 0.94) {
       score -= 10;
       reasons.push(`match-winner market treats ${model.components.marketUnderdogTeam || "one side"} as a heavy outsider`);
+    } else if ((marketDominancePressure >= 0.4 || qualityGapPressure >= 0.45) && lowerTeamExpectedGoals < 0.98) {
+      score -= 7;
+      reasons.push("weaker-side scoring threat is under result-market pressure");
     }
   }
 
@@ -2024,19 +2107,46 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
   }
 
   if (market === "match_winner") {
+    const resultDirection = outcome === model.homeTeam ? 1 : outcome === model.awayTeam ? -1 : 0;
+    const qualityGapForSelection = Number(model.components.qualityGapEdge || 0) * resultDirection;
+    const heatEdgeForSelection = Number(model.components.heatEdge || 0) * resultDirection;
+    const squadDepthForSelection = Number(model.components.squadDepthEdge || 0) * resultDirection;
+
     if (outcome === "Draw" && openingCaution > 0 && Math.abs(Number(model.components.independentResultEdge || 0)) <= 42) {
       score += bothOpeningGroupGame ? 3 : 1.5;
       reasons.push("opening group-game caution gives the draw a small tournament-pressure lift");
     }
 
-    if (styleEdge >= 18 || memoryEdge >= 10) {
+    if (styleEdge >= 18 || memoryEdge >= 10 || Math.abs(Number(model.components.squadDepthEdge || 0)) >= 4) {
       score += 4;
-      reasons.push("team/result market backed by style or memory edge");
+      reasons.push("team/result market backed by style, memory, or squad-depth edge");
     }
 
     if (heatStress >= 0.45 && heatConfidence >= 0.35 && Math.abs(Number(model.components.heatEdge || 0)) >= 4) {
       score += 2;
       reasons.push("heat layer gives a small adaptation edge");
+    }
+
+    if (
+      resultDirection
+      && Number(odds.decimalOdds) >= 3.6
+      && qualityGapForSelection < -55
+      && qualityGapPressure >= 0.12
+      && heatEdgeForSelection < 8
+    ) {
+      score -= 11;
+      reasons.push("quality gap makes this outsider win price fragile");
+    }
+
+    if (
+      resultDirection
+      && Number(odds.decimalOdds) >= 4.2
+      && qualityGapForSelection < -12
+      && squadDepthForSelection < -3
+      && heatEdgeForSelection < 5
+    ) {
+      score -= 9;
+      reasons.push("outsider lacks the squad-depth edge for a tournament win bet");
     }
 
     if (Number(odds.decimalOdds) < 1.55 && appetite > 0.45) {

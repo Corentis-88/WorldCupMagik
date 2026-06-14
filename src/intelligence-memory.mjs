@@ -316,6 +316,7 @@ export async function persistScanIntelligence(intelligence) {
 export function deriveTeamForm(matchHistory, team, now = new Date(), limit = 20) {
   const teamKeys = teamIdentityKeys(team);
   const matches = matchHistory
+    .filter(isSaneMatchRecord)
     .filter((match) => new Date(match.date) < now)
     .filter((match) => teamNameMatchesAny(match.homeTeam, teamKeys) || teamNameMatchesAny(match.awayTeam, teamKeys))
     .sort((left, right) => new Date(right.date) - new Date(left.date))
@@ -429,6 +430,27 @@ export function deriveTeamForm(matchHistory, team, now = new Date(), limit = 20)
       scorers: row.scorers
     }))
   };
+}
+
+function isSaneMatchRecord(match = {}) {
+  return isSaneGoalCount(match.homeGoals)
+    && isSaneGoalCount(match.awayGoals)
+    && isSaneEventValue(match.homeXg, 0, 6)
+    && isSaneEventValue(match.awayXg, 0, 6)
+    && isSaneEventValue(match.homeShots, 0, 40)
+    && isSaneEventValue(match.awayShots, 0, 40)
+    && isSaneEventValue(match.homeShotsOnTarget, 0, 18)
+    && isSaneEventValue(match.awayShotsOnTarget, 0, 18);
+}
+
+function isSaneGoalCount(value) {
+  const goals = Number(value);
+  return Number.isInteger(goals) && goals >= 0 && goals <= 15;
+}
+
+function isSaneEventValue(value, min, max) {
+  const number = Number(value);
+  return !Number.isFinite(number) || (number >= min && number <= max);
 }
 
 function teamIdentityKeys(team) {

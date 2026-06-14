@@ -79,7 +79,7 @@ export async function fetchTeamStatsWithDiagnostics({ providerConfig, fixtures =
       }
     }
 
-    teamMatches = uniqueBy(teamMatches, matchHistoryKey)
+    teamMatches = uniqueBy(teamMatches.filter(isSaneMatchRecord), matchHistoryKey)
       .sort((left, right) => new Date(right.date) - new Date(left.date))
       .slice(0, Number(providerConfig?.maxRecentMatches || 20));
     matchHistory.push(...teamMatches);
@@ -87,7 +87,7 @@ export async function fetchTeamStatsWithDiagnostics({ providerConfig, fixtures =
     profilesByTeam.set(team, profile);
   }
 
-  const dedupedMatchHistory = uniqueBy(matchHistory, matchHistoryKey);
+  const dedupedMatchHistory = uniqueBy(matchHistory.filter(isSaneMatchRecord), matchHistoryKey);
   const supplementalScorers = aggregateSupplementalPlayerStats(supplementalPlayerStats, teams, dedupedMatchHistory, now, providerConfig);
   const scorerByTeam = new Map();
 
@@ -620,6 +620,10 @@ function cleanNationalFootballTeamsPlayerName(value) {
 }
 
 function buildEstimatedMatchRecord({ date, homeTeam, awayTeam, homeGoals, awayGoals, homeScorers = [], awayScorers = [], competition = "", source, now }) {
+  if (!isSaneGoalCount(homeGoals) || !isSaneGoalCount(awayGoals)) {
+    return null;
+  }
+
   const homePossession = 50 + possessionNudge(homeGoals, awayGoals);
   const awayPossession = 50 - possessionNudge(homeGoals, awayGoals);
   const homeShots = estimateShots(homeGoals);
@@ -663,12 +667,34 @@ function buildEstimatedMatchRecord({ date, homeTeam, awayTeam, homeGoals, awayGo
   };
 }
 
+function isSaneGoalCount(value) {
+  const goals = Number(value);
+  return Number.isInteger(goals) && goals >= 0 && goals <= 15;
+}
+
+function isSaneMatchRecord(match = {}) {
+  return isSaneGoalCount(match.homeGoals)
+    && isSaneGoalCount(match.awayGoals)
+    && isSaneEventValue(match.homeXg, 0, 6)
+    && isSaneEventValue(match.awayXg, 0, 6)
+    && isSaneEventValue(match.homeShots, 0, 40)
+    && isSaneEventValue(match.awayShots, 0, 40)
+    && isSaneEventValue(match.homeShotsOnTarget, 0, 18)
+    && isSaneEventValue(match.awayShotsOnTarget, 0, 18);
+}
+
+function isSaneEventValue(value, min, max) {
+  const number = Number(value);
+  return !Number.isFinite(number) || (number >= min && number <= max);
+}
+
 function deriveTeamStats(team, matchHistory, now, providerConfig = {}, profile = null) {
   const maxMatches = Number(providerConfig?.maxRecentMatches || 20);
   const shortWindowSize = Number(providerConfig?.formWindows?.short || 6);
   const longWindowSize = Number(providerConfig?.formWindows?.long || maxMatches);
   const matchNames = teamMatchNames(team, providerConfig);
   const matches = matchHistory
+    .filter(isSaneMatchRecord)
     .filter((match) => new Date(match.date) < now)
     .filter((match) => teamMatchesAny(match.homeTeam, matchNames) || teamMatchesAny(match.awayTeam, matchNames))
     .sort((left, right) => new Date(right.date) - new Date(left.date))

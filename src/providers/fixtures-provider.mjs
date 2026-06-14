@@ -11,8 +11,7 @@ import {
   parseDate,
   sourceDiagnostic,
   stripTags,
-  teamNameMatches,
-  uniqueBy
+  teamNameMatches
 } from "./public-source.mjs";
 
 export async function fetchFixtures({ providerConfig, now = new Date() }) {
@@ -59,8 +58,7 @@ export async function fetchFixturesWithDiagnostics({ providerConfig, now = new D
   }
 
   return {
-    records: uniqueBy(records, (fixture) => `${fixture.date}|${normalizeName(fixture.homeTeam)}|${normalizeName(fixture.awayTeam)}`)
-      .sort((left, right) => new Date(left.date) - new Date(right.date)),
+    records: dedupeFixtures(records),
     diagnostics
   };
 }
@@ -276,6 +274,77 @@ function cleanVenue(value) {
 function cleanStage(value) {
   const text = decodeEntities(String(value || "")).replace(/\s+/g, " ").trim();
   return text || "";
+}
+
+function dedupeFixtures(records) {
+  const exactDeduped = [];
+  const seenExact = new Set();
+
+  for (const fixture of records.filter(Boolean)) {
+    const exactKey = fixtureExactKey(fixture);
+
+    if (seenExact.has(exactKey)) {
+      const index = exactDeduped.findIndex((item) => fixtureExactKey(item) === exactKey);
+
+      if (index >= 0 && fixtureRecordQuality(fixture) > fixtureRecordQuality(exactDeduped[index])) {
+        exactDeduped[index] = fixture;
+      }
+
+      continue;
+    }
+
+    seenExact.add(exactKey);
+    exactDeduped.push(fixture);
+  }
+
+  const nearbyDeduped = [];
+  const ordered = [...exactDeduped].sort((left, right) => new Date(left.date) - new Date(right.date));
+
+  for (const fixture of ordered) {
+    const duplicateIndex = nearbyDeduped.findIndex((item) => isNearbySameFixture(item, fixture));
+
+    if (duplicateIndex < 0) {
+      nearbyDeduped.push(fixture);
+      continue;
+    }
+
+    if (fixtureRecordQuality(fixture) > fixtureRecordQuality(nearbyDeduped[duplicateIndex])) {
+      nearbyDeduped[duplicateIndex] = fixture;
+    }
+  }
+
+  return nearbyDeduped.sort((left, right) => new Date(left.date) - new Date(right.date));
+}
+
+function fixtureExactKey(fixture) {
+  return `${fixture.date}|${normalizeName(fixture.homeTeam)}|${normalizeName(fixture.awayTeam)}`;
+}
+
+function isNearbySameFixture(left, right) {
+  if (!left || !right) {
+    return false;
+  }
+
+  const leftTeams = [normalizeName(left.homeTeam), normalizeName(left.awayTeam)].sort().join("|");
+  const rightTeams = [normalizeName(right.homeTeam), normalizeName(right.awayTeam)].sort().join("|");
+  const hoursApart = Math.abs(new Date(left.date) - new Date(right.date)) / 36e5;
+
+  return leftTeams === rightTeams && Number.isFinite(hoursApart) && hoursApart <= 36;
+}
+
+function fixtureRecordQuality(fixture) {
+  return Number(fixture.sourceReliability || 0)
+    + (isSpecificVenue(fixture.venue) ? 0.3 : 0)
+    + (fixture.stage && fixture.stage !== "group" ? 0.04 : 0)
+    + (fixture.group ? 0.03 : 0);
+}
+
+function isSpecificVenue(value) {
+  const normalized = normalizeName(value);
+
+  return Boolean(normalized)
+    && !/^(fifa world cup 2026|world cup|group|fixtures?|schedule)$/.test(normalized)
+    && !/(world cup fixtures?|fifa world cup)/.test(normalized);
 }
 
 function teamVersusRegex() {

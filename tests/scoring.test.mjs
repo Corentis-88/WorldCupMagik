@@ -527,6 +527,158 @@ test("fixture model reins in weaker-team goal share when quality gap and Miami h
   assert.ok(model.rawMarketProbabilities.over_2_5_goals.Over < 0.67);
 });
 
+test("result longshots are blocked when the quality gap points strongly against the selection", () => {
+  const now = new Date("2026-06-14T09:00:00.000Z");
+  const fixtureRecord = fixture("eng-cro-quality", "England", "Croatia", "2026-06-17T20:00:00.000Z");
+  const policy = buildRiskPolicy(basePolicy, 90);
+  const legs = buildLegCandidates({
+    fixtures: [fixtureRecord],
+    oddsSnapshots: [
+      odds(fixtureRecord, "match_winner", "England", 1.55, now),
+      odds(fixtureRecord, "match_winner", "Draw", 4.4, now),
+      odds(fixtureRecord, "match_winner", "Croatia", 5, now)
+    ],
+    newsArticles: [],
+    teamStats: [
+      {
+        ...stats("England", 1855, 2.35, 2.0, 0.82, 59),
+        sourceMatchCount: 20,
+        longForm: { matchCount: 20, scoringGameRate: 0.9, concedeGameRate: 0.45, cleanSheetRate: 0.55, failedToScoreRate: 0.1, bttsRate: 0.35, over25Rate: 0.5 }
+      },
+      {
+        ...stats("Croatia", 1665, 1.25, 1.05, 1.55, 47),
+        sourceMatchCount: 20,
+        longForm: { matchCount: 20, scoringGameRate: 0.65, concedeGameRate: 0.75, cleanSheetRate: 0.2, failedToScoreRate: 0.35, bttsRate: 0.45, over25Rate: 0.45 }
+      }
+    ],
+    policy,
+    now
+  });
+  const croatiaWin = legs.find((leg) => leg.market === "match_winner" && leg.outcome === "Croatia");
+
+  assert.ok(croatiaWin);
+  assert.ok(croatiaWin.components.qualityGapEdge > 55);
+  assert.ok(croatiaWin.hardBlocks.includes("result_longshot_against_quality_gap"));
+  assert.ok(croatiaWin.components.marketFocusReasons.some((reason) => /quality gap/.test(reason)));
+});
+
+test("result longshots need a tournament-depth case when team quality is against them", () => {
+  const now = new Date("2026-06-14T09:00:00.000Z");
+  const fixtureRecord = fixture("nzl-egy-depth", "New Zealand", "Egypt", "2026-06-18T20:00:00.000Z");
+  const policy = buildRiskPolicy(basePolicy, 90);
+  const legs = buildLegCandidates({
+    fixtures: [fixtureRecord],
+    oddsSnapshots: [
+      odds(fixtureRecord, "match_winner", "New Zealand", 5, now),
+      odds(fixtureRecord, "match_winner", "Draw", 3.8, now),
+      odds(fixtureRecord, "match_winner", "Egypt", 1.85, now)
+    ],
+    newsArticles: [],
+    teamStats: [
+      {
+        ...stats("New Zealand", 1660, 1.45, 1.35, 1.2, 48),
+        sourceMatchCount: 20,
+        longForm: { matchCount: 20, scoringGameRate: 0.75, concedeGameRate: 0.65, cleanSheetRate: 0.25, failedToScoreRate: 0.25, bttsRate: 0.5, over25Rate: 0.45 }
+      },
+      {
+        ...stats("Egypt", 1685, 1.75, 1.38, 1.1, 52),
+        sourceMatchCount: 20,
+        longForm: { matchCount: 20, scoringGameRate: 0.8, concedeGameRate: 0.55, cleanSheetRate: 0.35, failedToScoreRate: 0.2, bttsRate: 0.45, over25Rate: 0.45 }
+      }
+    ],
+    squadDepthRecords: [
+      { team: "New Zealand", depthScore: 0.45, confidence: 0.48 },
+      { team: "Egypt", depthScore: 0.55, confidence: 0.58 }
+    ],
+    policy,
+    now
+  });
+  const newZealandWin = legs.find((leg) => leg.market === "match_winner" && leg.outcome === "New Zealand");
+
+  assert.ok(newZealandWin);
+  assert.ok(newZealandWin.components.qualityGapEdge < -12);
+  assert.ok(newZealandWin.components.squadDepthEdge < -3);
+  assert.ok(newZealandWin.hardBlocks.includes("result_longshot_lacks_tournament_depth_edge"));
+});
+
+test("BTTS yes is blocked when the weak side is under result-market pressure", () => {
+  const now = new Date("2026-06-14T09:00:00.000Z");
+  const fixtureRecord = fixture("fra-irq-btts", "France", "Iraq", "2026-06-18T20:00:00.000Z");
+  const policy = buildRiskPolicy(basePolicy, 72);
+  const legs = buildLegCandidates({
+    fixtures: [fixtureRecord],
+    oddsSnapshots: [
+      odds(fixtureRecord, "match_winner", "France", 1.28, now),
+      odds(fixtureRecord, "match_winner", "Draw", 5.8, now),
+      odds(fixtureRecord, "match_winner", "Iraq", 12, now),
+      odds(fixtureRecord, "both_teams_to_score", "Yes", 2.75, now),
+      odds(fixtureRecord, "both_teams_to_score", "No", 1.5, now)
+    ],
+    newsArticles: [],
+    teamStats: [
+      {
+        ...stats("France", 1845, 2.35, 2.05, 0.78, 61),
+        sourceMatchCount: 20,
+        longForm: { matchCount: 20, scoringGameRate: 0.9, concedeGameRate: 0.45, cleanSheetRate: 0.5, failedToScoreRate: 0.1, bttsRate: 0.35, over25Rate: 0.55 }
+      },
+      {
+        ...stats("Iraq", 1540, 1.35, 1.18, 1.52, 44),
+        sourceMatchCount: 20,
+        longForm: { matchCount: 20, scoringGameRate: 0.62, concedeGameRate: 0.78, cleanSheetRate: 0.18, failedToScoreRate: 0.38, bttsRate: 0.48, over25Rate: 0.5 }
+      }
+    ],
+    policy,
+    now
+  });
+  const bttsYes = legs.find((leg) => leg.market === "both_teams_to_score" && leg.outcome === "Yes");
+
+  assert.ok(bttsYes);
+  assert.ok(bttsYes.components.marketDominancePressure >= 0.4 || bttsYes.components.qualityGapPressure >= 0.45);
+  assert.ok(Math.min(bttsYes.components.homeExpectedGoals, bttsYes.components.awayExpectedGoals) < 0.98);
+  assert.ok(bttsYes.hardBlocks.includes("btts_yes_weak_side_goal_threat_under_pressure"));
+});
+
+test("severe heat blocks marginal over 2.5 bets even when the stronger hot-climate team is favoured", () => {
+  const now = new Date("2026-06-14T09:00:00.000Z");
+  const fixtureRecord = {
+    ...fixture("sco-bra-over-heat", "Scotland", "Brazil", "2026-06-24T22:00:00.000Z"),
+    venue: "Hard Rock Stadium, Miami"
+  };
+  const policy = buildMostLikelyPolicy(basePolicy);
+  const legs = buildLegCandidates({
+    fixtures: [fixtureRecord],
+    oddsSnapshots: [
+      odds(fixtureRecord, "over_2_5_goals", "Over", 1.63, now),
+      odds(fixtureRecord, "under_2_5_goals", "Under", 2.35, now)
+    ],
+    newsArticles: [],
+    teamStats: [
+      {
+        ...stats("Scotland", 1741.9, 1.702, 1.891, 1.271, 51),
+        sourceMatchCount: 20,
+        longForm: { matchCount: 20, scoringGameRate: 0.7, concedeGameRate: 0.65, cleanSheetRate: 0.35, failedToScoreRate: 0.3, bttsRate: 0.4, over25Rate: 0.6 }
+      },
+      {
+        ...stats("Brazil", 1806.4, 2.366, 2.652, 1.482, 53),
+        sourceMatchCount: 20,
+        longForm: { matchCount: 20, scoringGameRate: 0.95, concedeGameRate: 0.75, cleanSheetRate: 0.25, failedToScoreRate: 0.05, bttsRate: 0.7, over25Rate: 0.7 }
+      }
+    ],
+    squadDepthRecords: [
+      { team: "Scotland", depthScore: 0.54, confidence: 0.44 },
+      { team: "Brazil", depthScore: 0.9, confidence: 0.7 }
+    ],
+    policy,
+    now
+  });
+  const over25 = legs.find((leg) => leg.market === "over_2_5_goals");
+
+  assert.ok(over25);
+  assert.ok(over25.components.heatStress >= 0.75);
+  assert.ok(over25.components.heatExpectedGoalsAdjustment <= -0.06);
+  assert.ok(over25.hardBlocks.includes("heat_suppresses_marginal_over25"));
+});
+
 function fixture(id, homeTeam, awayTeam, date) {
   return {
     id,

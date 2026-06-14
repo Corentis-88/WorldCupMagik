@@ -86,6 +86,56 @@ test("stats provider can use National Football Teams style public tables as a fa
   assert.equal(scorer.goalsPerTwentyTeamMatches, 7);
 });
 
+test("stats provider rejects impossible score rows before aggregation", async () => {
+  const corruptRow = `
+    <tr>
+      <td>1</td>
+      <td>01 Jun 2026</td>
+      <td>Test Stadium (N)</td>
+      <td>Opponent corrupt</td>
+      <td>100000000000000-0</td>
+      <td>Friendly</td>
+      <td>Alpha Striker</td>
+      <td>1,000</td>
+      <td>Ref</td>
+    </tr>
+  `;
+  const rows = Array.from({ length: 20 }, (_item, index) => `
+    <tr>
+      <td>${index + 2}</td>
+      <td>${String(index + 1).padStart(2, "0")} May 2026</td>
+      <td>Test Stadium (N)</td>
+      <td>Opponent ${index}</td>
+      <td>1-0</td>
+      <td>Friendly</td>
+      <td>Alpha Striker</td>
+      <td>1,000</td>
+      <td>Ref</td>
+    </tr>
+  `).join("");
+  const html = `<table>
+    <tr><th>No.</th><th>Date</th><th>Venue</th><th>Opponents</th><th>Score</th><th>Competition</th><th>Sampleland scorers</th><th>Att.</th><th>Ref.</th></tr>
+    ${corruptRow}
+    ${rows}
+  </table>`;
+  const result = await fetchTeamStatsWithDiagnostics({
+    providerConfig: {
+      mode: "self-gather",
+      sourceTemplates: [dataUrl(html)],
+      profileSourceTemplates: [],
+      targetRecentMatches: 20,
+      maxRecentMatches: 20
+    },
+    fixtures: [{ homeTeam: "Sampleland", awayTeam: "Otherland" }],
+    now: new Date("2026-06-09T10:00:00.000Z")
+  });
+  const sampleland = result.records.find((team) => team.team === "Sampleland");
+
+  assert.equal(sampleland.sourceMatchCount, 20);
+  assert.equal(sampleland.longForm.goalsFor, 1);
+  assert.ok(result.matchHistory.every((matchRow) => matchRow.homeGoals <= 15 && matchRow.awayGoals <= 15));
+});
+
 function dataUrl(html) {
   return `data:text/html;charset=utf-8,${encodeURIComponent(html)}`;
 }
