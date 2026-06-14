@@ -10,6 +10,7 @@ import { fetchTeamStatsWithDiagnostics } from "./providers/stats-provider.mjs";
 import { fetchHeatSnapshotsWithDiagnostics } from "./providers/weather-provider.mjs";
 import { settleStoredBetOutcomes } from "./outcome-settler.mjs";
 import { refreshPredictionReflections } from "./prediction-reflection.mjs";
+import { loadPostMatchStats, mergePostMatchStats } from "./post-match-stats.mjs";
 import { buildLegCandidates } from "./scoring.mjs";
 import { buildSurvivabilityMarketCoverage, isSurvivabilityMarketRecord } from "./survivability-market-coverage.mjs";
 import { isoDate, makeId, normalizeName, round } from "./utils.mjs";
@@ -111,10 +112,12 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
     now
   });
   sourceDiagnostics.push(...statsResult.diagnostics);
+  const postMatchStats = await loadPostMatchStats();
   const liveMatchHistory = [
     ...(statsResult.matchHistory || []),
     ...intelligenceState.matchHistory.filter(isPublicMatchRecord)
   ];
+  const enrichedMatchHistory = mergePostMatchStats(liveMatchHistory, postMatchStats);
   const baseTeamStats = statsResult.records;
 
   if (statsResult.matchHistory?.length) {
@@ -122,11 +125,13 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
   }
 
   const outcomeSettlement = await settleStoredBetOutcomes({
-    matchHistory: liveMatchHistory,
+    matchHistory: enrichedMatchHistory,
+    postMatchStats,
     now
   });
   const reflectionRefresh = await refreshPredictionReflections({
-    matchHistory: liveMatchHistory,
+    matchHistory: enrichedMatchHistory,
+    postMatchStats,
     now
   });
 
@@ -144,7 +149,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
 
   const preScanTeamStats = buildTeamStatsWithIntelligence({
     baseStats: baseTeamStats,
-    matchHistory: liveMatchHistory,
+    matchHistory: enrichedMatchHistory,
     teamIntelligence: intelligenceState.teamIntelligence,
     now
   });
@@ -232,7 +237,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
     allOddsSnapshots,
     newsArticles: allNewsArticles,
     teamStats: preScanTeamStats,
-    matchHistory: liveMatchHistory,
+    matchHistory: enrichedMatchHistory,
     playerStats: allPlayerStats,
     previousTeamIntelligence: intelligenceState.teamIntelligence,
     now
@@ -240,7 +245,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
   await persistScanIntelligence(intelligence);
   const teamStats = buildTeamStatsWithIntelligence({
     baseStats: baseTeamStats,
-    matchHistory: liveMatchHistory,
+    matchHistory: enrichedMatchHistory,
     teamIntelligence: intelligence.teamIntelligence,
     now
   });

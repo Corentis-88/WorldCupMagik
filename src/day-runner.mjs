@@ -9,6 +9,7 @@ import { rankBookmakerOffers } from "./offer-engine.mjs";
 import { buildDailyReport } from "./reporting.mjs";
 import { loadOutcomeLearning } from "./intelligence-memory.mjs";
 import { settleStoredBetOutcomes } from "./outcome-settler.mjs";
+import { refreshPredictionReflections } from "./prediction-reflection.mjs";
 import { buildLegCandidates } from "./scoring.mjs";
 import { buildSurvivabilityMarketCoverage, isSurvivabilityMarketRecord } from "./survivability-market-coverage.mjs";
 import { isoDate, makeId, normalizeName } from "./utils.mjs";
@@ -127,6 +128,7 @@ export async function runSnapshotCycle({ state, now = new Date(), forceSnapshot 
 export async function runAnalysisCycle({ state, now = new Date() } = {}) {
   const engineState = state || await loadEngineState();
   const outcomeSettlement = await settleStoredBetOutcomes({ now });
+  const reflectionRefresh = await refreshPredictionReflections({ now });
   const outcomeLearning = await loadOutcomeLearning();
   const legCandidates = buildLegCandidates({
     fixtures: engineState.fixtures,
@@ -156,6 +158,7 @@ export async function runAnalysisCycle({ state, now = new Date() } = {}) {
     legCandidateCount: legCandidates.length,
     eligibleLegCount: recommendations.eligibleLegCount,
     outcomeRecordsSettled: outcomeSettlement.insertedCount,
+    predictionReflectionsSettled: reflectionRefresh.insertedCount,
     outcomeLearningCount: outcomeLearning.outcomeCount,
     recommendationCounts: {
       doubles: recommendations.doubles.length,

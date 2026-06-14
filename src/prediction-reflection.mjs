@@ -1,5 +1,6 @@
 import { readJson, upsertJsonRecords } from "./db.mjs";
 import { gradeLegAgainstMatch } from "./outcome-settler.mjs";
+import { loadPostMatchStats, mergePostMatchStats } from "./post-match-stats.mjs";
 import { clamp, makeId, mean, normalizeName, round } from "./utils.mjs";
 
 const SCORER_MARKETS = new Set(["anytime_scorer", "first_goalscorer"]);
@@ -12,7 +13,7 @@ const GOAL_ENVIRONMENT_MARKETS = new Set([
   "under_4_5_goals"
 ]);
 
-export async function refreshPredictionReflections({ matchHistory = null, heatSnapshots = null, lineups = null, now = new Date() } = {}) {
+export async function refreshPredictionReflections({ matchHistory = null, postMatchStats = null, heatSnapshots = null, lineups = null, fixtures = null, now = new Date() } = {}) {
   const [
     appScanLatest,
     appScans,
@@ -20,7 +21,9 @@ export async function refreshPredictionReflections({ matchHistory = null, heatSn
     outcomes,
     existingReflections,
     storedMatchHistory,
+    storedPostMatchStats,
     storedHeatSnapshots,
+    storedFixtures,
     lineupPayload
   ] = await Promise.all([
     readJson(["data", "app-scan-latest.json"], null),
@@ -29,17 +32,21 @@ export async function refreshPredictionReflections({ matchHistory = null, heatSn
     readJson(["data", "bet-outcomes.json"], []),
     readJson(["data", "prediction-reflections.json"], []),
     matchHistory ? Promise.resolve(matchHistory) : readJson(["data", "team-match-history.json"], []),
+    postMatchStats ? Promise.resolve(postMatchStats) : loadPostMatchStats(),
     heatSnapshots ? Promise.resolve(heatSnapshots) : readJson(["data", "heat-snapshots.json"], []),
+    fixtures ? Promise.resolve(fixtures) : readJson(["data", "fixtures.json"], []),
     lineups ? Promise.resolve({ lineups }) : readJson(["web", "data", "lineups-latest.json"], { lineups: [] }).catch(() => ({ lineups: [] }))
   ]);
+  const mergedMatchHistory = mergePostMatchStats(storedMatchHistory, storedPostMatchStats);
   const reflection = buildPredictionReflections({
     appScans: [appScanLatest, ...appScans].filter(Boolean),
     legCandidates,
     outcomes,
-    matchHistory: storedMatchHistory,
+    matchHistory: mergedMatchHistory,
     heatSnapshots: storedHeatSnapshots,
     lineups: lineupPayload?.lineups || lineups || [],
     existingReflections,
+    fixtures: storedFixtures,
     now
   });
 
@@ -50,11 +57,12 @@ export async function refreshPredictionReflections({ matchHistory = null, heatSn
   return reflection;
 }
 
-export function buildPredictionReflections({ appScans = [], legCandidates = [], outcomes = [], matchHistory = [], heatSnapshots = [], lineups = [], existingReflections = [], now = new Date() } = {}) {
+export function buildPredictionReflections({ appScans = [], legCandidates = [], outcomes = [], matchHistory = [], heatSnapshots = [], lineups = [], existingReflections = [], fixtures = [], now = new Date() } = {}) {
   const existingKeys = new Set(existingReflections.map(reflectionRecordKey));
   const outcomeByLeg = new Map(outcomes.map((outcome) => [outcomeLegKey(outcome), outcome]));
   const latestHeatByFixture = latestPreKickoffHeatByFixture(heatSnapshots);
   const lineupByFixture = latestLineupByFixture(lineups);
+  const fixtureContextById = reflectionTournamentContextByFixture(fixtures);
   const predictionLegs = collectPredictionLegs({ appScans, legCandidates, outcomes });
   const selectedByKey = new Map();
 
@@ -103,6 +111,7 @@ export function buildPredictionReflections({ appScans = [], legCandidates = [], 
       outcome,
       heatRecord: latestHeatByFixture.get(leg.fixtureId),
       lineup: lineupByFixture.get(leg.fixtureId),
+      fixtureContext: fixtureContextById.get(leg.fixtureId),
       now
     });
     const key = reflectionRecordKey(record);
@@ -130,13 +139,14 @@ export function buildPredictionReflections({ appScans = [], legCandidates = [], 
 }
 
 export function buildPredictionReflectionLearning(reflections = []) {
-  const settled = reflections.filter((record) => record.status === "won" || record.status === "lost");
+  const settled = dedupeReflectionLearningRecords(reflections.filter((record) => record.status === "won" || record.status === "lost"));
   const buckets = {
     overall: finalizeReflectionBucket(buildReflectionBucket(settled)),
     market: bucketBy(settled, (record) => record.market || "unknown"),
     riskTag: bucketBy(settled, (record) => record.riskTag || "unknown"),
     heat: bucketBy(settled, (record) => record.heatBucket || "unknown"),
-    lineup: bucketBy(settled, (record) => record.lineupBucket || "unknown")
+    lineup: bucketBy(settled, (record) => record.lineupBucket || "unknown"),
+    tournamentPhase: bucketBy(settled, (record) => record.tournamentPhase || "unknown")
   };
 
   return {
@@ -159,15 +169,18 @@ export function predictionReflectionAdjustment({ market, riskTag, model = null, 
   const components = model?.components || {};
   const heatBucket = heatBucketForStress(components.heatStress);
   const lineupBucket = lineupBucketForModel(components);
+  const tournamentPhase = tournamentPhaseForModel(components);
   const marketBucket = reflection.market?.[market];
   const riskBucket = reflection.riskTag?.[riskTag];
   const heatLearning = heatBucket ? reflection.heat?.[heatBucket] : null;
   const lineupLearning = lineupBucket ? reflection.lineup?.[lineupBucket] : null;
+  const phaseLearning = tournamentPhase ? reflection.tournamentPhase?.[tournamentPhase] : null;
   const weighted = [
-    [marketBucket, 0.5],
-    [riskBucket, 0.22],
-    [heatLearning, 0.18],
-    [lineupLearning, 0.1]
+    [marketBucket, 0.42],
+    [riskBucket, 0.18],
+    [heatLearning, 0.14],
+    [lineupLearning, 0.08],
+    [phaseLearning, 0.18]
   ].filter(([bucket]) => bucket && bucket.count >= 3);
 
   if (!weighted.length) {
@@ -183,9 +196,10 @@ export function predictionReflectionAdjustment({ market, riskTag, model = null, 
   const probabilityBias = weighted.reduce((total, [bucket, weight]) => total + Number(bucket.probabilityError || 0) * weight, 0) / totalWeight;
   const goalShapeBias = GOAL_ENVIRONMENT_MARKETS.has(market)
     ? weighted.reduce((total, [bucket, weight]) => {
-      const xgBias = Number(bucket.averageXgTotalError || 0) * 0.018;
-      const shotBias = Number(bucket.averageShotTotalError || 0) * 0.0022;
-      return total + clamp(xgBias + shotBias, -0.04, 0.04) * weight;
+      const goalConversionBias = Number(bucket.averageGoalTotalError || 0) * 0.018;
+      const xgBias = Number(bucket.averageXgTotalError || 0) * 0.01;
+      const shotBias = Number(bucket.averageShotTotalError || 0) * 0.0012;
+      return total + clamp(goalConversionBias + xgBias + shotBias, -0.045, 0.045) * weight;
     }, 0) / totalWeight
     : 0;
   const adjustment = clamp(probabilityBias * 0.34 + goalShapeBias * 0.66, -0.045, 0.045);
@@ -199,12 +213,20 @@ export function predictionReflectionAdjustment({ market, riskTag, model = null, 
     reasons.push(`xG environment ${marketBucket.averageXgTotalError > 0 ? "ran hotter" : "ran cooler"} than model by ${round(Math.abs(marketBucket.averageXgTotalError), 2)}`);
   }
 
+  if (GOAL_ENVIRONMENT_MARKETS.has(market) && marketBucket && Number(marketBucket.averageGoalTotalError || 0) <= -0.18) {
+    reasons.push(`actual goals finished ${round(Math.abs(marketBucket.averageGoalTotalError), 2)} below expected goal shape`);
+  }
+
   if (heatLearning && heatLearning.count >= 3 && heatBucket !== "low_heat" && Math.abs(Number(heatLearning.averageXgTotalError || 0)) >= 0.18) {
     reasons.push(`${heatBucket.replace(/_/g, " ")} matches ${heatLearning.averageXgTotalError > 0 ? "beat" : "undershot"} expected xG`);
   }
 
   if (lineupLearning && lineupLearning.count >= 3 && lineupBucket !== "lineup_unknown") {
     reasons.push(`${lineupBucket.replace(/_/g, " ")} reflection sample ${lineupLearning.count}`);
+  }
+
+  if (phaseLearning && phaseLearning.count >= 3 && tournamentPhase !== "unknown") {
+    reasons.push(`${tournamentPhase.replace(/_/g, " ")} reflection ${round(phaseLearning.winRate * 100, 1)}% actual over ${phaseLearning.count}`);
   }
 
   return {
@@ -265,11 +287,12 @@ function predictionSnapshotRank(leg = {}) {
   return hasComponents * 100 + shapeFields * 8 + timingScore;
 }
 
-function buildReflectionRecord({ leg, match, result, outcome, heatRecord, lineup, now }) {
+function buildReflectionRecord({ leg, match, result, outcome, heatRecord, lineup, fixtureContext, now }) {
   const components = leg.components || {};
   const actual = actualMatchShape(match);
-  const predicted = predictedMatchShape(components);
+  const predicted = predictedMatchShape(components, fixtureContext);
   const lineupReflection = lineupShapeForLeg({ leg, lineup });
+  const tournamentPhase = tournamentPhaseForModel(components, fixtureContext);
   const heatStress = Number.isFinite(Number(components.heatStress))
     ? Number(components.heatStress)
     : Number(heatRecord?.heatStress || 0);
@@ -315,6 +338,7 @@ function buildReflectionRecord({ leg, match, result, outcome, heatRecord, lineup
     impliedProbability: round(Number(leg.impliedProbability || 0), 4),
     confidence: round(Number(leg.confidence || 0), 4),
     riskTag: leg.riskTag || "",
+    tournamentPhase,
     actualWin,
     probabilityError: round(actualWin - modelProbability, 4),
     brierError: round((modelProbability - actualWin) ** 2, 4),
@@ -365,7 +389,7 @@ function actualMatchShape(match = {}) {
   };
 }
 
-function predictedMatchShape(components = {}) {
+function predictedMatchShape(components = {}, fixtureContext = null) {
   const homeXg = numberOrNull(components.homeExpectedGoals);
   const awayXg = numberOrNull(components.awayExpectedGoals);
   const totalXg = numberOrNull(components.expectedGoals ?? (isFiniteNumber(homeXg) && isFiniteNumber(awayXg) ? Number(homeXg) + Number(awayXg) : null));
@@ -382,8 +406,46 @@ function predictedMatchShape(components = {}) {
     totalShots,
     heatExpectedGoalsAdjustment: numberOrNull(components.heatExpectedGoalsAdjustment),
     tournamentExpectedGoalsAdjustment: numberOrNull(components.tournamentExpectedGoalsAdjustment),
-    openingGameCaution: numberOrNull(components.openingGameCaution)
+    openingGameCaution: numberOrNull(components.openingGameCaution ?? openingCautionForFixtureContext(fixtureContext))
   };
+}
+
+function dedupeReflectionLearningRecords(records = []) {
+  const byKey = new Map();
+
+  for (const record of records) {
+    const key = reflectionLearningKey(record);
+    const existing = byKey.get(key);
+
+    if (!existing || reflectionLearningRank(record) > reflectionLearningRank(existing)) {
+      byKey.set(key, record);
+    }
+  }
+
+  return [...byKey.values()];
+}
+
+function reflectionLearningKey(record = {}) {
+  return [
+    record.fixtureId || [record.fixtureDate || record.matchDate || "", normalizeName(record.homeTeam), normalizeName(record.awayTeam)].join("|"),
+    record.market || "",
+    normalizeName(record.outcome || record.selectionLabel || ""),
+    normalizeName(record.playerName || ""),
+    normalizeName(record.bookmaker || "")
+  ].join("|");
+}
+
+function reflectionLearningRank(record = {}) {
+  const captured = new Set(record.actual?.capturedMetricFields || []);
+  const realMetricSource = record.actual?.metricSource && record.actual.metricSource !== "score-derived-estimates" ? 1 : 0;
+  const richMetrics = (captured.has("xg") || captured.has("homeXg") ? 2 : 0)
+    + (captured.has("shots") || captured.has("homeShots") ? 1.5 : 0)
+    + (captured.has("shotsOnTarget") || captured.has("homeShotsOnTarget") ? 0.5 : 0);
+  const metricQuality = Number(record.metricQuality || 0);
+  const created = new Date(record.createdAt || 0).getTime();
+  const recency = Number.isFinite(created) ? Math.min(1, created / 4102444800000) : 0;
+
+  return realMetricSource * 10 + richMetrics + metricQuality + recency;
 }
 
 function lineupShapeForLeg({ leg, lineup }) {
@@ -586,6 +648,62 @@ function latestLineupByFixture(records = []) {
   return byFixture;
 }
 
+function reflectionTournamentContextByFixture(fixtures = []) {
+  const groupFixtures = [...(fixtures || [])]
+    .filter(isGroupStageFixture)
+    .sort((left, right) => new Date(left.date || 0) - new Date(right.date || 0));
+  const canonicalByPair = new Map();
+
+  for (const fixture of groupFixtures) {
+    const key = fixturePairKey(fixture);
+
+    if (key && !canonicalByPair.has(key)) {
+      canonicalByPair.set(key, fixture);
+    }
+  }
+
+  const appearances = new Map();
+  const contextByFixture = new Map();
+
+  for (const fixture of [...canonicalByPair.values()].sort((left, right) => new Date(left.date || 0) - new Date(right.date || 0))) {
+    const homeKey = normalizeName(fixture.homeTeam);
+    const awayKey = normalizeName(fixture.awayTeam);
+    const homeGame = (appearances.get(homeKey) || 0) + 1;
+    const awayGame = (appearances.get(awayKey) || 0) + 1;
+    const phase = homeGame === 1 && awayGame === 1
+      ? "opening_group_game"
+      : homeGame === 1 || awayGame === 1
+        ? "mixed_opening_group_game"
+        : Math.max(homeGame, awayGame) >= 3
+          ? "final_group_game"
+          : "middle_group_game";
+
+    contextByFixture.set(fixture.id, { phase, homeGroupGameNumber: homeGame, awayGroupGameNumber: awayGame });
+    appearances.set(homeKey, homeGame);
+    appearances.set(awayKey, awayGame);
+  }
+
+  return contextByFixture;
+}
+
+function isGroupStageFixture(fixture = {}) {
+  const stage = String(fixture.stage || fixture.round || "").toLowerCase();
+
+  if (/round of|quarter|semi|final|play[- ]?off|knockout/.test(stage)) {
+    return false;
+  }
+
+  return !stage || /group|first stage|stage 1/.test(stage);
+}
+
+function fixturePairKey(fixture = {}) {
+  const teams = [normalizeName(fixture.homeTeam), normalizeName(fixture.awayTeam)]
+    .filter(Boolean)
+    .sort();
+
+  return teams.length === 2 ? teams.join("|") : "";
+}
+
 function lineupRank(record = {}) {
   if (record.status === "confirmed") {
     return 3;
@@ -731,6 +849,38 @@ function lineupBucketForModel(components = {}) {
   }
 
   return "lineup_unknown";
+}
+
+function tournamentPhaseForModel(components = {}, fixtureContext = null) {
+  if (components.tournamentPhase) {
+    return components.tournamentPhase;
+  }
+
+  if (Number(components.openingGameCaution || 0) >= 0.75) {
+    return "opening_group_game";
+  }
+
+  if (Number(components.openingGameCaution || 0) > 0) {
+    return "mixed_opening_group_game";
+  }
+
+  if (fixtureContext?.phase) {
+    return fixtureContext.phase;
+  }
+
+  return "unknown";
+}
+
+function openingCautionForFixtureContext(fixtureContext = null) {
+  if (fixtureContext?.phase === "opening_group_game") {
+    return 1;
+  }
+
+  if (fixtureContext?.phase === "mixed_opening_group_game") {
+    return 0.58;
+  }
+
+  return null;
 }
 
 function finiteError(actual, predicted) {

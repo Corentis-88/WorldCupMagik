@@ -326,11 +326,38 @@ test("tournament context applies a capped opening-game caution to goal markets",
   });
 
   assert.ok(opening.components.expectedGoals < middle.components.expectedGoals);
+  assert.ok(opening.components.openingOver25Adjustment < 0);
+  assert.ok(opening.components.preOpeningOver25ShapeProbability > opening.rawMarketProbabilities.over_2_5_goals.Over);
   assert.ok(opening.rawMarketProbabilities.over_2_5_goals.Over < middle.rawMarketProbabilities.over_2_5_goals.Over);
   assert.ok(opening.rawMarketProbabilities.both_teams_to_score.Yes < middle.rawMarketProbabilities.both_teams_to_score.Yes);
   assert.ok(opening.rawMarketProbabilities.match_winner.Draw > middle.rawMarketProbabilities.match_winner.Draw);
   assert.equal(opening.components.bothOpeningGroupGame, true);
   assert.ok(opening.components.tournamentContextNote.includes("don't-lose-first"));
+});
+
+test("opening group over 2.5 needs stronger two-sided evidence before eligibility", () => {
+  const now = new Date("2026-06-12T09:00:00.000Z");
+  const fixtureRecord = fixture("one-sided-opener", "Favourite", "Underdog", "2026-06-13T19:00:00.000Z");
+  const policy = buildRiskPolicy(basePolicy, 65);
+  const legs = buildLegCandidates({
+    fixtures: [fixtureRecord],
+    oddsSnapshots: [
+      odds(fixtureRecord, "over_2_5_goals", "Over", 2.05, now),
+      odds(fixtureRecord, "under_2_5_goals", "Under", 1.82, now)
+    ],
+    newsArticles: [],
+    teamStats: [
+      stats("Favourite", 1790, 1.8, 1.48, 0.95, 58),
+      stats("Underdog", 1540, 1.1, 0.72, 1.45, 42)
+    ],
+    policy,
+    now
+  });
+  const over25 = legs.find((leg) => leg.market === "over_2_5_goals");
+
+  assert.ok(over25);
+  assert.ok(over25.components.openingOver25Adjustment < -0.02);
+  assert.ok(over25.hardBlocks.includes("opening_group_over25_requires_stronger_total_edge"));
 });
 
 test("tournament context counts group-game order from the known fixture list and ignores duplicate pair rows", () => {

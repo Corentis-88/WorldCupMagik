@@ -468,6 +468,28 @@ function applyTournamentPressureToGoalShape(goalShape, tournamentPressure) {
   };
 }
 
+function openingOver25CautionAdjustment({ tournamentPressure, goalShape, shotShape }) {
+  const openingCaution = Number(tournamentPressure?.openingCaution || 0);
+
+  if (openingCaution <= 0) {
+    return 0;
+  }
+
+  const expectedGoals = Number(goalShape?.expectedGoals || 0);
+  const lowerGoalThreat = Math.min(Number(goalShape?.homeExpectedGoals || 0), Number(goalShape?.awayExpectedGoals || 0));
+  const goalImbalance = Math.abs(Number(goalShape?.homeExpectedGoals || 0) - Number(goalShape?.awayExpectedGoals || 0));
+  const totalShots = Math.max(1, Number(shotShape?.totalShots || 0));
+  const shotImbalance = Math.abs(Number(shotShape?.homeShots || 0) - Number(shotShape?.awayShots || 0)) / totalShots;
+  const baseCaution = 0.028;
+  const totalGoalDrag = clamp((3.05 - expectedGoals) * 0.028, 0, 0.04);
+  const lowerThreatDrag = clamp((1.06 - lowerGoalThreat) * 0.055, 0, 0.038);
+  const imbalanceDrag = clamp((goalImbalance - 0.48) * 0.018 + (shotImbalance - 0.22) * 0.045, 0, 0.032);
+  const strongTwoSidedRelief = clamp((expectedGoals - 3.18) * 0.02 + (lowerGoalThreat - 1.18) * 0.045, 0, 0.028);
+  const penalty = clamp((baseCaution + totalGoalDrag + lowerThreatDrag + imbalanceDrag - strongTwoSidedRelief) * openingCaution, 0.012, 0.088);
+
+  return round(-penalty, 4);
+}
+
 function isGroupStageFixture(fixture = {}) {
   const stage = String(fixture.stage || fixture.round || "").toLowerCase();
 
@@ -532,7 +554,9 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
   const expectedGoals = goalShape.expectedGoals;
   const shotShape = projectedShotShapeForFixture({ homeStats, awayStats, goalShape, heat });
   const rawOver15 = poissonOver(expectedGoals, 1.5);
-  const rawOver25 = poissonOver25(expectedGoals);
+  const baseRawOver25 = poissonOver25(expectedGoals);
+  const openingOver25Adjustment = openingOver25CautionAdjustment({ tournamentPressure, goalShape, shotShape });
+  const rawOver25 = clamp(baseRawOver25 + openingOver25Adjustment, 0.08, 0.78);
   const rawUnder35 = poissonUnder(expectedGoals, 3.5);
   const rawUnder45 = poissonUnder(expectedGoals, 4.5);
   const rawBttsYes = round(clamp(
@@ -593,6 +617,7 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
       tournamentExpectedGoalsAdjustment: round(Number(tournamentPressure.expectedGoalsAdjustment || 0), 3),
       tournamentBttsAdjustment: round(Number(tournamentPressure.bttsAdjustment || 0), 4),
       tournamentDrawLift: round(Number(tournamentPressure.drawLift || 0), 4),
+      openingOver25Adjustment: round(openingOver25Adjustment, 4),
       tournamentContextNote: tournamentPressure.note,
       qualityGapEdge: round(Number(goalShape.qualityGapEdge || 0), 2),
       qualityGapPressure: round(Number(goalShape.qualityGapPressure || 0), 4),
@@ -609,6 +634,7 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
       awayProjectedShotsOnTarget: round(shotShape.awayShotsOnTarget, 2),
       bttsShapeProbability: round(bttsYes, 4),
       over15ShapeProbability: round(rawOver15, 4),
+      preOpeningOver25ShapeProbability: round(baseRawOver25, 4),
       over25ShapeProbability: round(over25, 4),
       under35ShapeProbability: round(rawUnder35, 4),
       under45ShapeProbability: round(rawUnder45, 4),
@@ -909,6 +935,19 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     && independentEdge < 0.04
   ) {
     hardBlocks.push("opening_group_game_goal_market_edge_not_strong_enough");
+  }
+
+  if (Number(legModel.components.openingGameCaution || 0) >= 0.75 && market === "over_2_5_goals") {
+    const lowerTeamExpectedGoals = Math.min(Number(legModel.components.homeExpectedGoals || 0), Number(legModel.components.awayExpectedGoals || 0));
+    const projectedShotTotal = Number(legModel.components.projectedShotTotal || 0);
+    const openingPenalty = Math.abs(Number(legModel.components.openingOver25Adjustment || 0));
+    const strongOpeningTotal = Number(legModel.components.expectedGoals || 0) >= 3.12
+      && lowerTeamExpectedGoals >= 1.08
+      && projectedShotTotal >= 24.5;
+
+    if (!strongOpeningTotal && (independentEdge < 0.075 || openingPenalty >= 0.04)) {
+      hardBlocks.push("opening_group_over25_requires_stronger_total_edge");
+    }
   }
 
   if (oddsAgeHours > (policy.sourceRequirements?.maxOddsAgeHours || 30)) {

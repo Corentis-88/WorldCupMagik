@@ -1,5 +1,6 @@
 import { appendJsonRecords, readJson, upsertJsonRecords, writeJson } from "./db.mjs";
 import { buildPredictionReflectionLearning, predictionReflectionAdjustment } from "./prediction-reflection.mjs";
+import { loadPostMatchStats, mergePostMatchStats } from "./post-match-stats.mjs";
 import { clamp, decimalToImpliedProbability, makeId, mean, normalizeName, round } from "./utils.mjs";
 
 const TEAM_NAME_ALIASES = {
@@ -20,14 +21,15 @@ const TEAM_NAME_ALIASES = {
 };
 
 export async function loadIntelligenceState() {
-  const [matchHistory, teamIntelligence, observations] = await Promise.all([
+  const [matchHistory, postMatchStats, teamIntelligence, observations] = await Promise.all([
     readJson(["data", "team-match-history.json"], []),
+    loadPostMatchStats(),
     readJson(["data", "team-intelligence-latest.json"], []),
     readJson(["data", "intelligence-observations.json"], [])
   ]);
 
   return {
-    matchHistory,
+    matchHistory: mergePostMatchStats(matchHistory, postMatchStats),
     teamIntelligence,
     observations
   };

@@ -1,20 +1,23 @@
 import { readJson, upsertJsonRecords } from "./db.mjs";
+import { loadPostMatchStats, mergePostMatchStats } from "./post-match-stats.mjs";
 import { makeId, normalizeName, round } from "./utils.mjs";
 
-export async function settleStoredBetOutcomes({ matchHistory = null, now = new Date() } = {}) {
-  const [legCandidates, recommendations, appScanLatest, appScans, existingOutcomes, storedMatchHistory] = await Promise.all([
+export async function settleStoredBetOutcomes({ matchHistory = null, postMatchStats = null, now = new Date() } = {}) {
+  const [legCandidates, recommendations, appScanLatest, appScans, existingOutcomes, storedMatchHistory, storedPostMatchStats] = await Promise.all([
     readJson(["data", "leg-candidates-latest.json"], []),
     readJson(["data", "recommendations-latest.json"], null),
     readJson(["data", "app-scan-latest.json"], null),
     readJson(["data", "app-scans.json"], []),
     readJson(["data", "bet-outcomes.json"], []),
-    matchHistory ? Promise.resolve(matchHistory) : readJson(["data", "team-match-history.json"], [])
+    matchHistory ? Promise.resolve(matchHistory) : readJson(["data", "team-match-history.json"], []),
+    postMatchStats ? Promise.resolve(postMatchStats) : loadPostMatchStats()
   ]);
+  const mergedMatchHistory = mergePostMatchStats(storedMatchHistory, storedPostMatchStats);
   const settlement = settleBetOutcomes({
     legCandidates,
     recommendations,
     appScans: [appScanLatest, ...appScans].filter(Boolean),
-    matchHistory: storedMatchHistory,
+    matchHistory: mergedMatchHistory,
     existingOutcomes,
     now
   });

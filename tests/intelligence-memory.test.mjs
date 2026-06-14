@@ -13,6 +13,7 @@ import {
   buildPredictionReflections,
   predictionReflectionAdjustment
 } from "../src/prediction-reflection.mjs";
+import { mergePostMatchStats } from "../src/post-match-stats.mjs";
 
 const baseStats = [
   teamStats("Japan", 1710),
@@ -309,8 +310,78 @@ test("prediction reflections compare expected shape with actual xG shots heat an
   assert.ok(record.errors.shotTotal < 0);
 });
 
+test("post-match stats override score-derived match rows before reflection", () => {
+  const estimated = match("2026-06-13T19:00:00.000Z", "Qatar", "Switzerland", 1, 1, {
+    id: "estimated-qatar-switzerland",
+    metricSource: "score-derived-estimates",
+    homeXg: 1.4,
+    awayXg: 1.35,
+    homeShots: 11,
+    awayShots: 10,
+    capturedMetricFields: ["score"]
+  });
+  const actual = {
+    id: "actual-qatar-switzerland",
+    fixtureId: "fixture-a",
+    date: "2026-06-13T19:00:00.000Z",
+    homeTeam: "Qatar",
+    awayTeam: "Switzerland",
+    homeGoals: 1,
+    awayGoals: 1,
+    homeXg: 0.56,
+    awayXg: 3.09,
+    homeShots: 5,
+    awayShots: 27,
+    homeShotsOnTarget: 3,
+    awayShotsOnTarget: 10,
+    metricSource: "fox-sports-boxscore",
+    capturedMetricFields: ["xg", "shots", "shotsOnTarget"]
+  };
+  const merged = mergePostMatchStats([estimated], [actual]);
+  const row = merged.find((item) => item.homeTeam === "Qatar" && item.awayTeam === "Switzerland");
+
+  assert.equal(row.id, "actual-qatar-switzerland");
+  assert.equal(row.metricSource, "fox-sports-boxscore");
+  assert.equal(row.homeXg, 0.56);
+  assert.equal(row.awayShots, 27);
+  assert.ok(row.capturedMetricFields.includes("xg"));
+});
+
+test("prediction reflection infers opening phase from fixture order when old snapshots lack it", () => {
+  const kickoff = "2026-06-13T19:00:00.000Z";
+  const leg = reflectionLeg({
+    fixtureDate: kickoff,
+    createdAt: "2026-06-13T12:00:00.000Z",
+    market: "over_2_5_goals",
+    outcome: "Over",
+    modelProbability: 0.61,
+    components: {
+      expectedGoals: 2.9,
+      homeExpectedGoals: 1.4,
+      awayExpectedGoals: 1.5
+    }
+  });
+  const reflections = buildPredictionReflections({
+    appScans: [{ betslip: [{ legs: [leg] }] }],
+    matchHistory: [match(kickoff, "Japan", "Canada", 1, 1, {
+      homeXg: 0.9,
+      awayXg: 1.1,
+      capturedMetricFields: ["xg"]
+    })],
+    fixtures: [
+      { id: "fixture-1", homeTeam: "Japan", awayTeam: "Canada", date: kickoff, stage: "Group A" }
+    ],
+    now: new Date("2026-06-13T23:00:00.000Z")
+  });
+  const record = reflections.newRecords[0];
+
+  assert.equal(record.tournamentPhase, "opening_group_game");
+  assert.equal(record.predicted.openingGameCaution, 1);
+});
+
 test("prediction reflection learning can nudge hot goal markets downward", () => {
   const reflections = Array.from({ length: 8 }, (_item, index) => ({
+    fixtureId: `hot-fixture-${index}`,
     status: index < 2 ? "won" : "lost",
     market: "over_2_5_goals",
     riskTag: "calculated_risk",
@@ -348,6 +419,93 @@ test("prediction reflection learning can nudge hot goal markets downward", () =>
   assert.ok(adjustment.adjustment < 0);
   assert.ok(adjustment.confidence > 0);
   assert.ok(adjustment.reasons.some((reason) => reason.includes("xG environment")));
+});
+
+test("opening group reflection learns low conversion from goal-market misses", () => {
+  const reflections = Array.from({ length: 4 }, (_item, index) => ({
+    fixtureId: `opening-fixture-${index}`,
+    status: "lost",
+    market: "over_2_5_goals",
+    riskTag: "steady_edge",
+    modelProbability: 0.6,
+    probabilityError: -0.6,
+    brierError: 0.36,
+    tournamentPhase: "opening_group_game",
+    errors: {
+      goalTotal: -0.7,
+      xgTotal: 0.25,
+      shotTotal: 4
+    },
+    heatBucket: "low_heat",
+    lineupBucket: "both_xi_confirmed",
+    learningWeight: 0.9
+  }));
+  const reflectionLearning = buildPredictionReflectionLearning(reflections);
+  const adjustment = predictionReflectionAdjustment({
+    market: "over_2_5_goals",
+    riskTag: "steady_edge",
+    model: {
+      components: {
+        tournamentPhase: "opening_group_game",
+        openingGameCaution: 1
+      }
+    },
+    outcomeLearning: {
+      outcomeCount: 12,
+      reflection: reflectionLearning
+    }
+  });
+
+  assert.equal(reflectionLearning.tournamentPhase.opening_group_game.count, 4);
+  assert.ok(adjustment.adjustment < 0);
+  assert.ok(adjustment.reasons.some((reason) => reason.includes("actual goals finished")));
+  assert.ok(adjustment.reasons.some((reason) => reason.includes("opening group game reflection")));
+});
+
+test("prediction reflection learning ignores older score-derived duplicates", () => {
+  const base = {
+    fixtureId: "fixture-a",
+    fixtureDate: "2026-06-13T19:00:00.000Z",
+    market: "over_2_5_goals",
+    outcome: "Over",
+    bookmaker: "Public Test Book",
+    status: "lost",
+    riskTag: "steady_edge",
+    modelProbability: 0.62,
+    probabilityError: -0.62,
+    brierError: 0.3844,
+    errors: {
+      goalTotal: -1,
+      xgTotal: -0.2,
+      shotTotal: -2
+    },
+    heatBucket: "low_heat",
+    lineupBucket: "lineup_unknown",
+    learningWeight: 0.5
+  };
+  const learning = buildPredictionReflectionLearning([
+    {
+      ...base,
+      matchDate: "2026-06-13T12:00:00.000Z",
+      metricQuality: 0.55,
+      actual: {
+        metricSource: "score-derived-estimates",
+        capturedMetricFields: ["score"]
+      }
+    },
+    {
+      ...base,
+      matchDate: "2026-06-13T19:00:00.000Z",
+      metricQuality: 1,
+      actual: {
+        metricSource: "fox-sports-boxscore",
+        capturedMetricFields: ["xg", "shots", "shotsOnTarget"]
+      }
+    }
+  ]);
+
+  assert.equal(learning.count, 1);
+  assert.equal(learning.market.over_2_5_goals.averageMetricQuality, 1);
 });
 
 function odds(capturedAt, decimalOdds, bookmaker) {
