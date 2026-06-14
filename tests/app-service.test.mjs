@@ -141,10 +141,10 @@ test("short date windows still populate long risk slips from real legs", () => {
     likelyLeg("f4", "Fixture 4: favourite to win", 0.6, 79, 1.86)
   ];
   const extraLegs = [
-    likelyLeg("f1-s1", "Fixture 1: main striker anytime scorer", 0.34, 88, 3.2, { fixtureId: "f1", market: "anytime_scorer", playerName: "Main Striker" }),
-    likelyLeg("f2-s1", "Fixture 2: main striker anytime scorer", 0.32, 87, 3.6, { fixtureId: "f2", market: "anytime_scorer", playerName: "Second Striker" }),
-    likelyLeg("f3-s1", "Fixture 3: main striker anytime scorer", 0.3, 86, 4.1, { fixtureId: "f3", market: "anytime_scorer", playerName: "Third Striker" }),
-    likelyLeg("f4-s1", "Fixture 4: main striker anytime scorer", 0.29, 85, 4.4, { fixtureId: "f4", market: "anytime_scorer", playerName: "Fourth Striker" })
+    likelyLeg("f1-u35", "Fixture 1: under 3.5 goals", 0.71, 88, 1.54, { fixtureId: "f1", market: "under_3_5_goals", outcome: "Under" }),
+    likelyLeg("f2-u35", "Fixture 2: under 3.5 goals", 0.69, 87, 1.58, { fixtureId: "f2", market: "under_3_5_goals", outcome: "Under" }),
+    likelyLeg("f3-u35", "Fixture 3: under 3.5 goals", 0.67, 86, 1.62, { fixtureId: "f3", market: "under_3_5_goals", outcome: "Under" }),
+    likelyLeg("f4-u35", "Fixture 4: under 3.5 goals", 0.65, 85, 1.66, { fixtureId: "f4", market: "under_3_5_goals", outcome: "Under" })
   ];
   const recommendations = buildBetRecommendations([...baseLegs, ...extraLegs], buildRiskPolicy(policy, 100));
   const betslip = selectBetslip({ recommendations, stake: 10, risk: 100 });
@@ -153,6 +153,7 @@ test("short date windows still populate long risk slips from real legs", () => {
 
   assert.deepEqual(categories, ["single", "double", "trixie", "accumulator_3", "accumulator_4", "accumulator_5", "accumulator_6", "accumulator_8"]);
   assert.equal(eightLeg.legs.length, 8);
+  assert.equal(new Set(eightLeg.legs.map((leg) => leg.id)).size, 8);
   assert.ok(new Set(eightLeg.legs.map((leg) => leg.fixtureId)).size < eightLeg.legs.length);
   assert.match(eightLeg.thesis, /Short-window fallback active/);
 });
@@ -160,8 +161,13 @@ test("short date windows still populate long risk slips from real legs", () => {
 test("short date fallback caps extreme accumulator returns", () => {
   const legs = [
     likelyLeg("f1", "Fixture 1: under 2.5 goals", 0.57, 96, 4, { market: "under_2_5_goals", outcome: "Under" }),
-    likelyLeg("f2", "Fixture 2: favourite to win", 0.55, 93, 2.33),
-    likelyLeg("f3", "Fixture 3: home value win", 0.41, 92, 3.4),
+    likelyLeg("f1-btts-no", "Fixture 1: BTTS No", 0.49, 94, 3.8, { fixtureId: "f1", market: "both_teams_to_score", outcome: "No" }),
+    likelyLeg("f1-home", "Fixture 1: home value win", 0.5, 92, 2.8, { fixtureId: "f1", market: "match_winner", outcome: "Home" }),
+    likelyLeg("f2", "Fixture 2: favourite to win", 0.55, 93, 3.2),
+    likelyLeg("f2-u35", "Fixture 2: under 3.5 goals", 0.54, 92, 2.9, { fixtureId: "f2", market: "under_3_5_goals", outcome: "Under" }),
+    likelyLeg("f2-dc", "Fixture 2: double chance", 0.61, 90, 2.2, { fixtureId: "f2", market: "double_chance", outcome: "Home or Draw" }),
+    likelyLeg("f3", "Fixture 3: home value win", 0.51, 92, 3.4),
+    likelyLeg("f3-u45", "Fixture 3: under 4.5 goals", 0.62, 89, 2.1, { fixtureId: "f3", market: "under_4_5_goals", outcome: "Under" }),
     likelyLeg("f1-draw", "Fixture 1: draw to win", 0.26, 99, 17, {
       fixtureId: "f1",
       market: "match_winner",
@@ -177,6 +183,7 @@ test("short date fallback caps extreme accumulator returns", () => {
 
   assert.ok(eightLeg);
   assert.ok(eightLeg.shortWindowFallback);
+  assert.equal(new Set(eightLeg.legs.map((leg) => leg.id)).size, 8);
   assert.ok(Number(eightLeg.uncappedCombinedDecimalOdds) > Number(eightLeg.combinedDecimalOdds));
   assert.ok(eightLeg.combinedDecimalOdds < 600, `combined odds were ${eightLeg.combinedDecimalOdds}`);
   assert.ok(eightLeg.potentialReturn < 6000, `return was ${eightLeg.potentialReturn}`);
@@ -462,7 +469,7 @@ test("most likely picks downgrade stale drifting legs close to kickoff", () => {
   assert.ok(picks.find((pick) => pick.category === "double").thesis.includes("Late-kickoff guard"));
 });
 
-test("most likely picks fill short fixture windows with transparent fallback repeats", () => {
+test("most likely picks do not repeat exact legs in short fixture windows", () => {
   const legs = [
     likelyLeg("p1", "safe one", 0.74, 71, 1.45),
     likelyLeg("p1", "same match backup", 0.71, 70, 1.52),
@@ -475,10 +482,9 @@ test("most likely picks fill short fixture windows with transparent fallback rep
     }
   }, { fixtureCount: 3 });
 
-  assert.deepEqual(picks.map((pick) => pick.category), ["single", "double", "trixie", "accumulator_3", "accumulator_4", "accumulator_5", "accumulator_6", "accumulator_8"]);
-  assert.ok(picks.find((pick) => pick.category === "accumulator_8")?.shortWindowFallback);
-  assert.ok(picks.some((pick) => pick.legs.some((leg) => leg.reusedSignal)));
-  assert.match(picks.find((pick) => pick.category === "accumulator_8")?.thesis || "", /Short-window fallback/);
+  assert.deepEqual(picks.map((pick) => pick.category), ["single", "double"]);
+  assert.ok(picks.every((pick) => new Set(pick.legs.map((leg) => leg.id)).size === pick.legs.length));
+  assert.ok(picks.every((pick) => !pick.legs.some((leg) => leg.reusedSignal)));
 });
 
 function combo(type, odds, score, legCount) {
@@ -502,13 +508,15 @@ function combo(type, odds, score, legCount) {
 }
 
 function likelyLeg(fixtureId, label, modelProbability, score, decimalOdds, overrides = {}) {
+  const resolvedFixtureId = overrides.fixtureId || fixtureId;
+
   return {
     id: overrides.id || `leg-${fixtureId}`,
-    fixtureId: overrides.fixtureId || fixtureId,
+    fixtureId: resolvedFixtureId,
     fixtureDate: overrides.fixtureDate || "2026-06-13T19:00:00.000Z",
     createdAt: overrides.createdAt || "2026-06-13T10:00:00.000Z",
-    homeTeam: overrides.homeTeam || `Home ${fixtureId}`,
-    awayTeam: overrides.awayTeam || `Away ${fixtureId}`,
+    homeTeam: overrides.homeTeam || `Home ${resolvedFixtureId}`,
+    awayTeam: overrides.awayTeam || `Away ${resolvedFixtureId}`,
     market: overrides.market || "match_winner",
     outcome: overrides.outcome,
     playerName: overrides.playerName,

@@ -217,9 +217,9 @@ function likelyScorersForFixture({ payload, fixture, scorerLegs }) {
   const anytimeScorerLegs = fixtureLegs.filter((leg) => leg.market === "anytime_scorer");
 
   if (firstScorerLegs.length) {
-    addScorerOddsCandidates({ byPlayer, fixture, legs: firstScorerLegs, preferredMarket: "first_goalscorer" });
+    addScorerOddsCandidates({ byPlayer, payload, fixture, legs: firstScorerLegs, preferredMarket: "first_goalscorer" });
   } else if (anytimeScorerLegs.length) {
-    addScorerOddsCandidates({ byPlayer, fixture, legs: anytimeScorerLegs, preferredMarket: "anytime_scorer" });
+    addScorerOddsCandidates({ byPlayer, payload, fixture, legs: anytimeScorerLegs, preferredMarket: "anytime_scorer" });
   }
 
   if (byPlayer.size < MOBILE_SCORER_LIMIT) {
@@ -230,7 +230,7 @@ function likelyScorersForFixture({ payload, fixture, scorerLegs }) {
     .sort((left, right) => scorerRankScore(right) - scorerRankScore(left));
 }
 
-function addScorerOddsCandidates({ byPlayer, fixture, legs, preferredMarket }) {
+function addScorerOddsCandidates({ byPlayer, payload, fixture, legs, preferredMarket }) {
   for (const leg of legs) {
     const playerName = leg.playerName || leg.outcome || leg.selectionLabel;
 
@@ -256,7 +256,7 @@ function addScorerOddsCandidates({ byPlayer, fixture, legs, preferredMarket }) {
       starterLikelihood: Number(leg.components?.starterLikelihood || 0),
       projectedMinutes: Number(leg.components?.projectedMinutes || 0),
       reason: `${label}${bookmaker}${oddsText}`
-    });
+    }, payload, fixture);
   }
 }
 
@@ -313,18 +313,23 @@ function addScorerMemoryCandidates({ byPlayer, payload, fixture, mode }) {
         reason: firstScorerMode
           ? `first-scorer fallback from ${round(playerGoals, 1)} goals in last ${Number(player.matchesSampled || 20)} team games`
           : `${round(playerGoals, 1)} goals in last ${Number(player.matchesSampled || 20)} team games`
-      });
+      }, payload, fixture);
     }
   }
 }
 
-function upsertScorerCandidate(byPlayer, candidate) {
-  const key = normalizeName(candidate.playerName);
-  const existing = byPlayer.get(key);
+function upsertScorerCandidate(byPlayer, candidate, payload, fixture) {
+  const canonical = canonicalScorerIdentity(candidate, payload, fixture);
+  const existingEntry = byPlayer.get(canonical.key)
+    ? [canonical.key, byPlayer.get(canonical.key)]
+    : [...byPlayer.entries()].find(([, player]) => sameTeam(player.team, candidate.team) && playerNamesMatch(player.playerName, canonical.playerName));
+  const key = existingEntry?.[0] || canonical.key;
+  const existing = existingEntry?.[1];
+  const displayName = betterDisplayPlayerName(canonical.playerName, existing?.playerName || candidate.playerName);
 
   if (!existing || scorerRankScore(candidate) > scorerRankScore(existing)) {
     byPlayer.set(key, {
-      playerName: candidate.playerName,
+      playerName: displayName,
       team: candidate.team,
       probability: round(candidate.probability, 4),
       confidence: round(candidate.confidence, 4),
@@ -334,7 +339,44 @@ function upsertScorerCandidate(byPlayer, candidate) {
       projectedMinutes: candidate.projectedMinutes,
       reason: trimText(candidate.reason, 180)
     });
+  } else if (displayName !== existing.playerName) {
+    byPlayer.set(key, { ...existing, playerName: displayName });
   }
+}
+
+function canonicalScorerIdentity(candidate, payload, fixture) {
+  const team = candidate.team || "";
+  const directName = candidate.playerName || "";
+  const matched = knownPlayerNamesForTeam(payload, fixture, team)
+    .filter((name) => playerNamesMatch(name, directName))
+    .sort((left, right) => normalizeName(right).split(/\s+/).filter(Boolean).length - normalizeName(left).split(/\s+/).filter(Boolean).length)[0];
+  const playerName = matched ? betterDisplayPlayerName(matched, directName) : directName;
+
+  return {
+    key: `${normalizeName(team)}:${normalizeName(playerName)}`,
+    playerName
+  };
+}
+
+function knownPlayerNamesForTeam(payload, fixture, team) {
+  const teams = payload?.playerStats?.teams || {};
+  const names = [];
+
+  for (const teamName of [team, fixture.homeTeam, fixture.awayTeam]) {
+    if (!sameTeam(teamName, team)) {
+      continue;
+    }
+
+    for (const player of teams[teamName] || []) {
+      if (player.playerName) {
+        names.push(player.playerName);
+      }
+    }
+  }
+
+  return names
+    .filter(Boolean)
+    .filter((name, index, items) => items.findIndex((other) => normalizeName(other) === normalizeName(name)) === index);
 }
 
 function dedupePlayers(players) {
@@ -411,6 +453,45 @@ function normalizeName(value) {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, " ")
     .trim();
+}
+
+function sameTeam(left, right) {
+  return normalizeName(left) === normalizeName(right);
+}
+
+function playerNamesMatch(left, right) {
+  const a = normalizeName(left);
+  const b = normalizeName(right);
+
+  if (!a || !b) {
+    return false;
+  }
+
+  if (a === b || a.endsWith(` ${b}`) || b.endsWith(` ${a}`)) {
+    return true;
+  }
+
+  const aSurname = a.split(/\s+/).filter(Boolean).at(-1);
+  const bSurname = b.split(/\s+/).filter(Boolean).at(-1);
+
+  return Boolean(aSurname && bSurname && aSurname.length > 3 && aSurname === bSurname);
+}
+
+function betterDisplayPlayerName(left, right) {
+  const a = String(left || "");
+  const b = String(right || "");
+  const aWords = normalizeName(a).split(/\s+/).filter(Boolean).length;
+  const bWords = normalizeName(b).split(/\s+/).filter(Boolean).length;
+
+  if (!a) {
+    return b;
+  }
+
+  if (!b) {
+    return a;
+  }
+
+  return bWords > aWords ? b : a;
 }
 
 function dateKey(value) {

@@ -29,7 +29,7 @@ The scheduled job currently runs at:
 05:23, 08:23, 11:23, 14:23, 17:23, 20:23, 21:23, and 23:23 UTC
 ```
 
-A separate lightweight lineup check runs every 10 minutes. It only targets group fixtures around the pre-kickoff lineup window, updates `web/data/lineups-latest.json`, and redeploys the static app so the goalscorer panel can visually drop confirmed non-starters without rebuilding the full database.
+A separate lightweight lineup check runs every 5 minutes. It only targets group fixtures around the pre-kickoff lineup window, including the 45-minute and 30-minute pre-kickoff checks, updates `web/data/lineups-latest.json`, and redeploys the static app so the goalscorer panel can visually drop confirmed non-starters without rebuilding the full database.
 
 Each run writes `web/data/latest.json` with:
 

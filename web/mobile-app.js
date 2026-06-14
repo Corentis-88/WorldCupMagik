@@ -425,7 +425,6 @@ function selectMobileMostLikelyLegs(candidates, legCount) {
   }
 
   addMobileSameFixtureFallbackLegs({ selected, selectedIds, ranked, legCount, likely: true });
-  repeatMobileFallbackSignals({ selected, ranked, legCount, likely: true });
 
   return selected;
 }
@@ -457,7 +456,6 @@ function selectMobileLegs({ candidates, legCount, risk, profile }) {
   });
 
   upgradeMobilePayout({ selected, selectedIds, pool, legCount, risk });
-  repeatMobileFallbackSignals({ selected, ranked: pool, legCount, risk });
 
   return selected;
 }
@@ -532,35 +530,6 @@ function addMobileSameFixtureFallbackLegs({ selected, selectedIds, ranked, legCo
       shortWindowFallback: true
     });
     selectedIds.add(candidate.id);
-  }
-}
-
-function repeatMobileFallbackSignals({ selected, ranked, legCount, likely = false, risk = 0 }) {
-  const appetite = clamp(Number(risk || 0) / 100, 0, 1);
-  const basePool = [...ranked]
-    .filter((leg) => likely ? mobileMostLikelyLegAllowed(leg, selected, legCount, { repeat: true }) : mobileRepeatCandidateAllowed(leg, selected, legCount, appetite))
-    .sort((left, right) => {
-      const leftScore = likely ? mobileMostLikelyLegScore(left, legCount) : mobileLegScore(left, legCount, appetite);
-      const rightScore = likely ? mobileMostLikelyLegScore(right, legCount) : mobileLegScore(right, legCount, appetite);
-      return rightScore - leftScore;
-    });
-  let repeatIndex = 0;
-
-  while (selected.length < legCount && basePool.length) {
-    const source = basePool[repeatIndex % basePool.length];
-    const clone = {
-      ...source,
-      id: `${source.id}_mobile_repeat_${repeatIndex + 1}`,
-      shortWindowFallback: true,
-      reusedSignal: true
-    };
-
-    selected.push(clone);
-    repeatIndex += 1;
-
-    if (repeatIndex > legCount * 3) {
-      break;
-    }
   }
 }
 
@@ -726,10 +695,10 @@ function mobileComboThesis({ type, legs, combinedDecimalOdds, uncappedCombinedDe
   const uniqueFixtureCount = new Set(legs.map(fixtureKeyForLeg)).size;
   const reusedSignalCount = legs.filter((leg) => leg.reusedSignal).length;
   const oddsCapText = oddsCapped
-    ? ` Displayed fallback odds are capped from raw ${round(uncappedCombinedDecimalOdds, 2)} to ${round(combinedDecimalOdds, 2)} so repeated/same-day signals cannot overstate the take-home.`
+    ? ` Displayed fallback odds are capped from raw ${round(uncappedCombinedDecimalOdds, 2)} to ${round(combinedDecimalOdds, 2)} so same-day signals cannot overstate the take-home.`
     : "";
   const fallbackText = shortWindowFallback
-    ? `Short-window fallback active: ${uniqueFixtureCount} distinct fixture(s) for ${legs.length} leg(s), so the card stays populated with real candidates and repeats fixtures only when unavoidable.${oddsCapText} ${reusedSignalCount ? `${reusedSignalCount} strongest signal(s) were repeated. ` : ""}`
+    ? `Short-window fallback active: ${uniqueFixtureCount} distinct fixture(s) for ${legs.length} unique leg(s), so the card stays populated with real candidates without repeating exact legs.${oddsCapText} `
     : "";
   const heatCount = legs.filter((leg) => Number(leg.components?.heatConfidence || 0) > 0.18 && Number(leg.components?.heatStress || 0) > 0.2).length;
   const heatText = heatCount ? `Heat layer active on ${heatCount} leg(s). ` : "";
@@ -883,6 +852,14 @@ function mobileCandidateAllowed(leg, selected, legCount, appetite) {
     return false;
   }
 
+  if (hasSelectedLegSignal(selected, leg)) {
+    return false;
+  }
+
+  if (selected.some((item) => fixtureKeyForLeg(item) === fixtureKeyForLeg(leg) && item.market === leg.market)) {
+    return false;
+  }
+
   if (leg.market === "first_goalscorer" && appetite < 0.82) {
     return false;
   }
@@ -905,30 +882,16 @@ function mobileCandidateAllowed(leg, selected, legCount, appetite) {
   return true;
 }
 
-function mobileRepeatCandidateAllowed(leg, selected, legCount, appetite) {
-  if (!mobileFallbackLegOddsAllowed(leg, legCount, appetite)) {
-    return false;
-  }
-
-  if (leg.market === "first_goalscorer" && appetite < 0.95) {
-    return false;
-  }
-
-  if (isScorerLeg(leg) && legCount >= 4) {
-    const scorerCount = selected.filter(isScorerLeg).length;
-    if (scorerCount >= Math.max(1, maxMobileScorerLegs(legCount, appetite))) {
-      return false;
-    }
-    if (leg.market === "anytime_scorer" && !isMobileLongSlipAnytimeScorerLeg(leg)) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-function mobileMostLikelyLegAllowed(leg, selected, legCount, { repeat = false } = {}) {
+function mobileMostLikelyLegAllowed(leg, selected, legCount) {
   if (legCount >= 4 && !mobileFallbackLegOddsAllowed(leg, legCount, 0)) {
+    return false;
+  }
+
+  if (hasSelectedLegSignal(selected, leg)) {
+    return false;
+  }
+
+  if (selected.some((item) => fixtureKeyForLeg(item) === fixtureKeyForLeg(leg) && item.market === leg.market)) {
     return false;
   }
 
@@ -944,10 +907,6 @@ function mobileMostLikelyLegAllowed(leg, selected, legCount, { repeat = false } 
     if (!isMobileLongSlipAnytimeScorerLeg(leg)) {
       return false;
     }
-  }
-
-  if (repeat && isScorerLeg(leg)) {
-    return false;
   }
 
   return true;
@@ -1131,6 +1090,21 @@ function fixtureKeyForLeg(leg) {
   }
 
   return leg.fixtureId || leg.id;
+}
+
+function legSignalKey(leg) {
+  return [
+    fixtureKeyForLeg(leg),
+    normalizeFixtureName(leg.market),
+    normalizeFixtureName(leg.outcome || ""),
+    normalizeFixtureName(leg.playerName || ""),
+    normalizeFixtureName(leg.selectionLabel || "")
+  ].join("|");
+}
+
+function hasSelectedLegSignal(selected, leg) {
+  const key = legSignalKey(leg);
+  return selected.some((item) => item.id === leg.id || legSignalKey(item) === key);
 }
 
 function normalizeFixtureName(value) {

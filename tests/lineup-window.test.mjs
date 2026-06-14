@@ -14,8 +14,14 @@ test("lineup window includes delayed scheduled checks close to kickoff", () => {
     homeTeam: "Canada",
     awayTeam: "Bosnia and Herzegovina"
   };
+  const fortyFiveMinuteRun = new Date("2026-06-12T18:15:00.000Z");
+  const thirtyMinuteRun = new Date("2026-06-12T18:30:00.000Z");
   const delayedRun = new Date("2026-06-12T18:32:00.000Z");
 
+  assert.equal(Math.round(minutesUntilKickoff(fixture, fortyFiveMinuteRun)), 45);
+  assert.equal(isInsideLineupWindow(fixture, fortyFiveMinuteRun), true);
+  assert.equal(Math.round(minutesUntilKickoff(fixture, thirtyMinuteRun)), 30);
+  assert.equal(isInsideLineupWindow(fixture, thirtyMinuteRun), true);
   assert.equal(Math.round(minutesUntilKickoff(fixture, delayedRun)), 28);
   assert.equal(isInsideLineupWindow(fixture, delayedRun), true);
 });
