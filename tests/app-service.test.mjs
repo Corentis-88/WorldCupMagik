@@ -345,15 +345,18 @@ test("most likely long accumulators blend a survival result and one filtered any
       }
     }
   ));
-  const survivalResult = likelyLeg("survival-result", "Germany vs Curaçao: Germany to win", 0.46, 58, 1.05, {
+  const survivalResult = likelyLeg("survival-result", "Germany vs Curaçao: Germany to win", 0.62, 78, 1.36, {
     market: "match_winner",
     outcome: "Germany",
-    marketImpliedProbability: 0.86,
-    impliedProbability: 1 / 1.05,
-    edge: -0.49,
-    independentEdge: -0.4,
+    rawModelProbability: 0.62,
+    marketImpliedProbability: 0.735,
+    impliedProbability: 1 / 1.36,
+    edge: -0.115,
+    independentEdge: -0.115,
+    confidence: 0.78,
     components: {
-      highCertaintySurvivalFavorite: true
+      highCertaintySurvivalFavorite: true,
+      nonMarketSignalCount: 5
     }
   });
   const anytimeScorer = likelyLeg("anytime-scorer", "Germany vs Curaçao: Florian Wirtz anytime scorer", 0.31, 57, 4.2, {
@@ -365,6 +368,7 @@ test("most likely long accumulators blend a survival result and one filtered any
     independentEdge: 0.1,
     components: {
       starterLikelihood: 0.68,
+      projectedMinutes: 72,
       scorerGoalsPerTwentyTeamMatches: 5,
       scorerConfidence: 0.72,
       expectedGoals: 3.05
@@ -431,7 +435,7 @@ test("most likely picks downgrade stale drifting legs close to kickoff", () => {
   assert.ok(picks.find((pick) => pick.category === "double").thesis.includes("Late-kickoff guard"));
 });
 
-test("most likely picks only show categories the fixture window can support", () => {
+test("most likely picks fill short fixture windows with transparent fallback repeats", () => {
   const legs = [
     likelyLeg("p1", "safe one", 0.74, 71, 1.45),
     likelyLeg("p1", "same match backup", 0.71, 70, 1.52),
@@ -444,9 +448,10 @@ test("most likely picks only show categories the fixture window can support", ()
     }
   }, { fixtureCount: 3 });
 
-  assert.deepEqual(picks.map((pick) => pick.category), ["single", "double"]);
-  assert.equal(picks.find((pick) => pick.category === "trixie"), undefined);
-  assert.equal(picks.some((pick) => pick.legs.some((leg) => leg.reusedSignal)), false);
+  assert.deepEqual(picks.map((pick) => pick.category), ["single", "double", "trixie", "accumulator_3", "accumulator_4", "accumulator_5", "accumulator_6", "accumulator_8"]);
+  assert.ok(picks.find((pick) => pick.category === "accumulator_8")?.shortWindowFallback);
+  assert.ok(picks.some((pick) => pick.legs.some((leg) => leg.reusedSignal)));
+  assert.match(picks.find((pick) => pick.category === "accumulator_8")?.thesis || "", /Short-window fallback/);
 });
 
 function combo(type, odds, score, legCount) {

@@ -184,7 +184,7 @@ test("BTTS model requires balanced scoring threat, not just high total goals", (
   assert.ok(bttsYes.components.marketFocusReasons.some((reason) => /one-sided/.test(reason)));
 });
 
-test("heavy result-market favourite suppresses underdog BTTS and ignores isolated winner outliers", () => {
+test("heavy result-market favourite suppresses underdog BTTS and rejects isolated winner outliers", () => {
   const now = new Date("2026-06-14T09:00:00.000Z");
   const fixtureRecord = fixture("ger-cur", "Germany", "Curaçao", "2026-06-14T17:00:00.000Z");
   const consensusTime = new Date("2026-06-14T08:00:00.000Z");
@@ -221,8 +221,9 @@ test("heavy result-market favourite suppresses underdog BTTS and ignores isolate
   assert.equal(latest.get("ger-cur|match_winner|Germany")?.decimalOdds, 1.05);
   assert.ok(germanyWin);
   assert.equal(germanyWin.decimalOdds, 1.05);
-  assert.equal(germanyWin.components.highCertaintySurvivalFavorite, true);
-  assert.ok(!germanyWin.hardBlocks.includes("edge_below_policy_minimum"));
+  assert.equal(germanyWin.components.highCertaintySurvivalFavorite, false);
+  assert.ok(germanyWin.hardBlocks.includes("edge_below_policy_minimum"));
+  assert.ok(germanyWin.hardBlocks.includes("market_does_not_match_evidence"));
   assert.ok(bttsYes);
   assert.ok(bttsYes.components.marketDominancePressure > 0.55);
   assert.ok(bttsYes.components.awayExpectedGoals < 0.94);

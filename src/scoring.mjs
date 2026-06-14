@@ -127,6 +127,8 @@ function estimateScorerProbability({ fixture, odds, market, homeStats, awayStats
   const scorerLift = playerRecord
     ? clamp(scorerSampleRate * Number(playerRecord.scorerConfidence || 0.35) * 0.16, 0, 0.075)
     : 0;
+  const scorerConfidence = Number(playerRecord?.scorerConfidence || 0);
+  const scorerGoalsPerTwenty = scorerSampleRate * 20;
   const rawRoleLikelihood = playerRecord
     ? clamp(0.11 + scorerSampleRate * 0.85 + teamAttack * 0.035 + expectedGoals * 0.012, 0.07, 0.46)
     : clamp(0.08 + teamAttack * 0.032 + expectedGoals * 0.01, 0.06, 0.2);
@@ -135,8 +137,21 @@ function estimateScorerProbability({ fixture, odds, market, homeStats, awayStats
     : playerTeam === fixture.awayTeam
       ? Number(model.components.awayNewsImpact || 0) * 0.035
       : 0;
-  const rawModelProbability = clamp(teamGoalLikelihood * rawRoleLikelihood + scorerLift + newsLift, 0.035, 0.48);
-  const marketAdjustedProbability = blendProbability(rawModelProbability, implied, playerRecord ? 0.28 : 0.42);
+  const starterLikelihood = clamp(0.26 + implied * 1.04 + scorerSampleRate * 0.32 + Number(playerRecord?.scorerConfidence || 0.28) * 0.08, 0.22, 0.9);
+  const projectedMinutes = round(28 + starterLikelihood * 64, 1);
+  const uncappedRawModelProbability = clamp(teamGoalLikelihood * rawRoleLikelihood + scorerLift + newsLift, 0.035, 0.48);
+  const anytimeLiftCap = scorerMarketLiftCap({
+    market: "anytime_scorer",
+    implied,
+    starterLikelihood,
+    scorerGoalsPerTwenty,
+    scorerConfidence,
+    teamGoalLikelihood,
+    expectedGoals,
+    hasPlayerRecord: Boolean(playerRecord)
+  });
+  const rawModelProbability = clamp(Math.min(uncappedRawModelProbability, implied + anytimeLiftCap), 0.035, 0.48);
+  const marketAdjustedProbability = blendProbability(rawModelProbability, implied, playerRecord ? 0.3 : 0.46);
   const firstGoalRawProbability = clamp(
     (teamGoalLikelihood * teamFirstGoalShare * rawRoleLikelihood * 0.78)
     + scorerLift * 0.42
@@ -144,16 +159,28 @@ function estimateScorerProbability({ fixture, odds, market, homeStats, awayStats
     0.018,
     0.28
   );
-  const firstGoalAdjustedProbability = blendProbability(firstGoalRawProbability, implied, playerRecord ? 0.24 : 0.38);
-  const starterLikelihood = clamp(0.26 + implied * 1.04 + scorerSampleRate * 0.32 + Number(playerRecord?.scorerConfidence || 0.28) * 0.08, 0.22, 0.9);
-  const projectedMinutes = round(28 + starterLikelihood * 64, 1);
+  const firstGoalLiftCap = scorerMarketLiftCap({
+    market: "first_goalscorer",
+    implied,
+    starterLikelihood,
+    scorerGoalsPerTwenty,
+    scorerConfidence,
+    teamGoalLikelihood,
+    expectedGoals,
+    hasPlayerRecord: Boolean(playerRecord)
+  });
+  const calibratedFirstGoalRawProbability = clamp(Math.min(firstGoalRawProbability, implied + firstGoalLiftCap), 0.018, 0.28);
+  const firstGoalAdjustedProbability = blendProbability(calibratedFirstGoalRawProbability, implied, playerRecord ? 0.27 : 0.42);
   const isFirstScorer = market === "first_goalscorer";
+  const uncappedAnytimeModelProbability = clamp((marketAdjustedProbability * 0.74) + (teamGoalLikelihood * roleLikelihood * 0.26), 0.04, 0.58);
+  const anytimeModelProbability = clamp(Math.min(uncappedAnytimeModelProbability, implied + anytimeLiftCap * 0.9), 0.04, 0.58);
+  const uncappedFirstGoalModelProbability = clamp((firstGoalAdjustedProbability * 0.82) + (teamGoalLikelihood * teamFirstGoalShare * roleLikelihood * 0.18), 0.018, 0.34);
+  const firstGoalModelProbability = clamp(Math.min(uncappedFirstGoalModelProbability, implied + firstGoalLiftCap * 0.9), 0.018, 0.34);
+  const activeLiftCap = isFirstScorer ? firstGoalLiftCap : anytimeLiftCap;
 
   return {
-    rawModelProbability: round(isFirstScorer ? firstGoalRawProbability : rawModelProbability, 4),
-    modelProbability: round(isFirstScorer
-      ? clamp((firstGoalAdjustedProbability * 0.82) + (teamGoalLikelihood * teamFirstGoalShare * roleLikelihood * 0.18), 0.018, 0.34)
-      : clamp((marketAdjustedProbability * 0.74) + (teamGoalLikelihood * roleLikelihood * 0.26), 0.04, 0.58), 4),
+    rawModelProbability: round(isFirstScorer ? calibratedFirstGoalRawProbability : rawModelProbability, 4),
+    modelProbability: round(isFirstScorer ? firstGoalModelProbability : anytimeModelProbability, 4),
     components: {
       playerTeam,
       starterLikelihood: round(starterLikelihood, 4),
@@ -162,14 +189,31 @@ function estimateScorerProbability({ fixture, odds, market, homeStats, awayStats
       teamGoalLikelihood: round(teamGoalLikelihood, 4),
       teamFirstGoalShare: round(teamFirstGoalShare, 4),
       scorerSampleRate: round(scorerSampleRate, 4),
-      scorerGoalsPerTwentyTeamMatches: round(scorerSampleRate * 20, 3),
-      scorerConfidence: round(Number(playerRecord?.scorerConfidence || 0), 4),
+      scorerGoalsPerTwentyTeamMatches: round(scorerGoalsPerTwenty, 3),
+      scorerConfidence: round(scorerConfidence, 4),
       scorerMatchesSampled: Number(playerRecord?.matchesSampled || 0),
+      scorerMarketLiftCap: round(activeLiftCap, 4),
+      rawScorerProbabilityUncapped: round(isFirstScorer ? firstGoalRawProbability : uncappedRawModelProbability, 4),
+      scorerProbabilityCalibrated: true,
       playerMinutesSource: playerRecord
         ? "public scorer sample plus market role estimate"
         : "market role estimate until public scorer sample improves"
     }
   };
+}
+
+function scorerMarketLiftCap({ market, implied, starterLikelihood, scorerGoalsPerTwenty, scorerConfidence, teamGoalLikelihood, expectedGoals, hasPlayerRecord }) {
+  const isFirstScorer = market === "first_goalscorer";
+  const base = isFirstScorer ? 0.018 : 0.038;
+  const starterLift = clamp((Number(starterLikelihood || 0) - 0.56) * 0.11, 0, isFirstScorer ? 0.026 : 0.038);
+  const goalsLift = clamp((Number(scorerGoalsPerTwenty || 0) - 2.5) * 0.01, 0, isFirstScorer ? 0.024 : 0.042);
+  const confidenceLift = clamp((Number(scorerConfidence || 0) - 0.5) * 0.045, 0, isFirstScorer ? 0.018 : 0.026);
+  const teamLift = clamp((Number(teamGoalLikelihood || 0) - 0.54) * 0.045 + (Number(expectedGoals || 0) - 2.35) * 0.012, 0, isFirstScorer ? 0.018 : 0.03);
+  const sampleLift = hasPlayerRecord ? (isFirstScorer ? 0.012 : 0.018) : 0;
+  const longshotDrag = Number(implied || 0) < (isFirstScorer ? 0.09 : 0.13) ? (isFirstScorer ? 0.01 : 0.018) : 0;
+  const cap = base + starterLift + goalsLift + confidenceLift + teamLift + sampleLift - longshotDrag;
+
+  return clamp(cap, isFirstScorer ? 0.018 : 0.032, isFirstScorer ? 0.09 : 0.135);
 }
 
 function findPlayerRecord({ playerStatsByKey, team, playerName }) {
@@ -963,6 +1007,9 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     confidence,
     policy
   });
+  const marketOnlyGap = marketImpliedProbability - independentModelProbability;
+  const maxMarketOnlySurvivalGap = Number(policy.riskProfile.maxMarketOnlySurvivalGap ?? 0.22);
+  const maxNegativeIndependentEdge = Number(policy.riskProfile.maxNegativeIndependentEdge ?? 0.06);
   const favoriteCrowdingPenalty = impliedProbability > policy.riskProfile.maxFavoriteImpliedProbability ? (impliedProbability - policy.riskProfile.maxFavoriteImpliedProbability) * 42 : 0;
   const valueOddsBonus = Number(odds.decimalOdds) >= policy.riskProfile.minDecimalOddsForRiskLeg ? 3.5 : 0;
   const oddsMovementBonus = clamp(
@@ -990,6 +1037,10 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
 
   if (independentEdge < Number(policy.riskProfile.minIndependentEdge ?? 0) && !highCertaintySurvivalFavorite) {
     hardBlocks.push("independent_edge_below_policy_minimum");
+  }
+
+  if (marketOnlyGap > maxMarketOnlySurvivalGap && independentEdge < -maxNegativeIndependentEdge) {
+    hardBlocks.push("market_only_probability_without_model_agreement");
   }
 
   if (Number(independentEvidence.count || 0) < Number(policy.riskProfile.minNonMarketSignals || 2)) {
@@ -1051,6 +1102,37 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     && Number(odds.decimalOdds) > Number(policy.riskProfile.maxResultLongshotDecimalOdds || 16)
   ) {
     hardBlocks.push("result_longshot_above_risk_price_cap");
+  }
+
+  if (isScorerMarket(market)) {
+    const appetite = riskAppetite(policy);
+    const starterLikelihood = Number(legModel.components.starterLikelihood || 0);
+    const projectedMinutes = Number(legModel.components.projectedMinutes || 0);
+    const scorerGoalsPerTwenty = Number(legModel.components.scorerGoalsPerTwentyTeamMatches || 0);
+    const scorerConfidence = Number(legModel.components.scorerConfidence || 0);
+    const scorerLiftCap = Number(legModel.components.scorerMarketLiftCap || (market === "first_goalscorer" ? 0.07 : 0.11));
+    const scorerMarketGap = adjustedModelProbability - marketImpliedProbability;
+    const decimalOdds = Number(odds.decimalOdds || 99);
+
+    if (market === "first_goalscorer" && !policy.riskProfile.allowFirstGoalscorerBets) {
+      hardBlocks.push("first_goalscorer_reserved_for_bold_mode");
+    }
+
+    if (scorerMarketGap > scorerLiftCap + 0.018) {
+      hardBlocks.push("scorer_probability_above_calibration_cap");
+    }
+
+    if (decimalOdds >= (appetite >= 0.8 ? 5.8 : 4.8) && starterLikelihood < (market === "first_goalscorer" ? 0.66 : 0.6)) {
+      hardBlocks.push("scorer_minutes_not_strong_enough_for_price");
+    }
+
+    if (decimalOdds >= 4 && projectedMinutes < (market === "first_goalscorer" ? 66 : 58)) {
+      hardBlocks.push("scorer_projected_minutes_too_low");
+    }
+
+    if (decimalOdds >= 6 && scorerGoalsPerTwenty < 2.5 && scorerConfidence < 0.6) {
+      hardBlocks.push("scorer_twenty_match_record_too_thin");
+    }
   }
 
   if (market === "match_winner" && outcome !== "Draw") {
@@ -1241,11 +1323,14 @@ function isHighCertaintySurvivalFavorite({ market, outcome, odds, modelProbabili
   }
 
   const strongestPriceSignal = Math.max(decimalToImpliedProbability(odds.decimalOdds), Number(marketImpliedProbability || 0));
+  const maxMarketOnlyGap = Number(policy.riskProfile.maxMarketOnlySurvivalGap ?? 0.22);
+  const marketOnlyGap = strongestPriceSignal - Number(rawModelProbability || 0);
 
   return Number(odds.decimalOdds || 99) <= 1.38
     && strongestPriceSignal >= 0.72
-    && Number(modelProbability || 0) >= 0.38
-    && Number(rawModelProbability || 0) >= 0.34
+    && Number(modelProbability || 0) >= 0.5
+    && Number(rawModelProbability || 0) >= 0.48
+    && marketOnlyGap <= maxMarketOnlyGap
     && Number(confidence || 0) >= 0.55;
 }
 

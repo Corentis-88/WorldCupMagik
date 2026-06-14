@@ -76,6 +76,12 @@ function mobileBet(bet = {}) {
     averageNonMarketSignalCount: bet.averageNonMarketSignalCount,
     displayRating: bet.displayRating,
     riskLegCount: bet.riskLegCount,
+    bttsLegCount: bet.bttsLegCount,
+    scorerLegCount: bet.scorerLegCount,
+    firstScorerLegCount: bet.firstScorerLegCount,
+    fragileLegCount: bet.fragileLegCount,
+    shortWindowFallback: bet.shortWindowFallback,
+    reusedSignalCount: bet.reusedSignalCount,
     thesis: trimText(bet.thesis, 360),
     legs: (bet.legs || []).map(mobileLeg)
   };
@@ -111,6 +117,8 @@ function mobileLeg(leg = {}) {
     confidence: leg.confidence,
     score: leg.score,
     riskTag: leg.riskTag,
+    shortWindowFallback: leg.shortWindowFallback,
+    reusedSignal: leg.reusedSignal,
     hardBlocks: leg.hardBlocks,
     components: {
       intelligenceConfidence: leg.components?.intelligenceConfidence,
@@ -128,6 +136,8 @@ function mobileLeg(leg = {}) {
       scorerMarketType: leg.components?.scorerMarketType,
       starterLikelihood: leg.components?.starterLikelihood,
       projectedMinutes: leg.components?.projectedMinutes,
+      scorerGoalsPerTwentyTeamMatches: leg.components?.scorerGoalsPerTwentyTeamMatches,
+      scorerConfidence: leg.components?.scorerConfidence,
       projectedShotTotal: leg.components?.projectedShotTotal,
       predictionReflectionAdjustment: leg.components?.predictionReflectionAdjustment,
       predictionReflectionConfidence: leg.components?.predictionReflectionConfidence
