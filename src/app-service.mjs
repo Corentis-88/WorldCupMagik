@@ -584,6 +584,7 @@ export function buildMostLikelyPolicy(basePolicy) {
       maxDrawIndependentResultEdge: 42,
       minBttsYesRawProbability: 0.47,
       minBttsLowerTeamExpectedGoals: 0.78,
+      allowHighCertaintySurvivalFavorites: true,
       maxFavoriteImpliedProbability: 0.94,
       minDecimalOddsForRiskLeg: 1.01,
       minBookmakerCount: 1,

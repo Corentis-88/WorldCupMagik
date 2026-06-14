@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { buildMostLikelyPolicy, buildRiskPolicy, selectBetslip } from "../src/app-service.mjs";
 import { buildBetRecommendations } from "../src/portfolio-builder.mjs";
-import { buildLegCandidates, buildTournamentContextByFixture, fixtureModel } from "../src/scoring.mjs";
+import { bestLatestOddsByOutcome, buildLegCandidates, buildTournamentContextByFixture, fixtureModel } from "../src/scoring.mjs";
 import basePolicy from "../config/engine-policy.json" with { type: "json" };
 
 const fixtures = [
@@ -182,6 +182,51 @@ test("BTTS model requires balanced scoring threat, not just high total goals", (
   assert.ok(bttsYes.modelProbability < 0.46, `BTTS was too high: ${bttsYes.modelProbability}`);
   assert.ok(over25.modelProbability > bttsYes.modelProbability, "one-sided goal shape should favour totals over BTTS");
   assert.ok(bttsYes.components.marketFocusReasons.some((reason) => /one-sided/.test(reason)));
+});
+
+test("heavy result-market favourite suppresses underdog BTTS and ignores isolated winner outliers", () => {
+  const now = new Date("2026-06-14T09:00:00.000Z");
+  const fixtureRecord = fixture("ger-cur", "Germany", "Curaçao", "2026-06-14T17:00:00.000Z");
+  const consensusTime = new Date("2026-06-14T08:00:00.000Z");
+  const laterOutlier = new Date("2026-06-14T08:30:00.000Z");
+  const policy = buildMostLikelyPolicy(basePolicy);
+  const oddsRecords = [
+    odds(fixtureRecord, "match_winner", "Germany", 1.05, consensusTime, { bookmaker: "Coral" }),
+    odds(fixtureRecord, "match_winner", "Germany", 1.04, consensusTime, { bookmaker: "Ladbrokes" }),
+    odds(fixtureRecord, "match_winner", "Germany", 1.03, consensusTime, { bookmaker: "BetVictor" }),
+    odds(fixtureRecord, "match_winner", "Germany", 1.03, consensusTime, { bookmaker: "William Hill" }),
+    odds(fixtureRecord, "match_winner", "Germany", 2, laterOutlier, { bookmaker: "Noisy preview page" }),
+    odds(fixtureRecord, "match_winner", "Draw", 17, consensusTime, { bookmaker: "Coral" }),
+    odds(fixtureRecord, "match_winner", "Draw", 15, consensusTime, { bookmaker: "Ladbrokes" }),
+    odds(fixtureRecord, "match_winner", "Curaçao", 71, consensusTime, { bookmaker: "Coral" }),
+    odds(fixtureRecord, "match_winner", "Curaçao", 51, consensusTime, { bookmaker: "Ladbrokes" }),
+    odds(fixtureRecord, "both_teams_to_score", "Yes", 3.4, consensusTime, { bookmaker: "Coral" }),
+    odds(fixtureRecord, "both_teams_to_score", "No", 1.45, consensusTime, { bookmaker: "Coral" })
+  ];
+  const latest = bestLatestOddsByOutcome(oddsRecords);
+  const legs = buildLegCandidates({
+    fixtures: [fixtureRecord],
+    oddsSnapshots: oddsRecords,
+    newsArticles: [],
+    teamStats: [
+      stats("Germany", 1792, 2.49, 2.25, 1.32, 53),
+      stats("Curaçao", 1760, 1.87, 2.35, 1.66, 52)
+    ],
+    policy,
+    now
+  });
+  const germanyWin = legs.find((leg) => leg.market === "match_winner" && leg.outcome === "Germany");
+  const bttsYes = legs.find((leg) => leg.market === "both_teams_to_score" && leg.outcome === "Yes");
+
+  assert.equal(latest.get("ger-cur|match_winner|Germany")?.decimalOdds, 1.05);
+  assert.ok(germanyWin);
+  assert.equal(germanyWin.decimalOdds, 1.05);
+  assert.equal(germanyWin.components.highCertaintySurvivalFavorite, true);
+  assert.ok(!germanyWin.hardBlocks.includes("edge_below_policy_minimum"));
+  assert.ok(bttsYes);
+  assert.ok(bttsYes.components.marketDominancePressure > 0.55);
+  assert.ok(bttsYes.components.awayExpectedGoals < 0.94);
+  assert.ok(bttsYes.hardBlocks.includes("btts_yes_underdog_goal_share_suppressed_by_result_market"));
 });
 
 test("survival markets become scored candidates when public prices are captured", () => {

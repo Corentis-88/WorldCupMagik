@@ -152,7 +152,7 @@ test("most likely picks ignore risk score and choose highest model probability l
     }
   });
 
-  assert.deepEqual(picks.map((pick) => pick.category), ["single", "double", "trixie", "accumulator_4", "accumulator_8"]);
+  assert.deepEqual(picks.map((pick) => pick.category), ["single", "double", "trixie", "accumulator_3", "accumulator_4", "accumulator_5", "accumulator_6", "accumulator_8"]);
   assert.deepEqual(picks.find((pick) => pick.category === "trixie").legs.map((leg) => leg.fixtureId), ["p1", "p2", "p3"]);
   assert.ok(!picks.find((pick) => pick.category === "accumulator_8").legs.some((leg) => leg.fixtureId === "flashy-longshot"));
 });
@@ -301,6 +301,64 @@ test("most likely long accumulators limit repeated team correlation when alterna
   assert.equal(eightLeg.marketFamilyMix.result >= 1, true);
 });
 
+test("most likely long accumulators blend a survival result and one filtered anytime scorer", () => {
+  const goalLegs = Array.from({ length: 8 }, (_, index) => likelyLeg(
+    `goal-${index + 1}`,
+    `Goal option ${index + 1}: over 2.5`,
+    0.68 - index * 0.006,
+    82 - index,
+    1.62 + index * 0.025,
+    {
+      market: "over_2_5_goals",
+      outcome: "Over",
+      fixtureDate: `2026-06-${String(14 + index).padStart(2, "0")}T19:00:00.000Z`,
+      components: {
+        expectedGoals: 2.95,
+        homeExpectedGoals: 1.55,
+        awayExpectedGoals: 1.4,
+        homeOver25Rate: 0.54,
+        awayOver25Rate: 0.52
+      }
+    }
+  ));
+  const survivalResult = likelyLeg("survival-result", "Germany vs Curaçao: Germany to win", 0.46, 58, 1.05, {
+    market: "match_winner",
+    outcome: "Germany",
+    marketImpliedProbability: 0.86,
+    impliedProbability: 1 / 1.05,
+    edge: -0.49,
+    independentEdge: -0.4,
+    components: {
+      highCertaintySurvivalFavorite: true
+    }
+  });
+  const anytimeScorer = likelyLeg("anytime-scorer", "Germany vs Curaçao: Florian Wirtz anytime scorer", 0.31, 57, 4.2, {
+    market: "anytime_scorer",
+    outcome: "Florian Wirtz",
+    playerName: "Florian Wirtz",
+    rawModelProbability: 0.34,
+    marketImpliedProbability: 1 / 4.2,
+    independentEdge: 0.1,
+    components: {
+      starterLikelihood: 0.68,
+      scorerGoalsPerTwentyTeamMatches: 5,
+      scorerConfidence: 0.72,
+      expectedGoals: 3.05
+    }
+  });
+  const picks = buildMostLikelyPicks([...goalLegs, survivalResult, anytimeScorer], {
+    riskProfile: {
+      minLegEdge: 0,
+      minLegConfidence: 0.5
+    }
+  });
+  const eightLeg = picks.find((pick) => pick.category === "accumulator_8");
+
+  assert.ok(eightLeg);
+  assert.ok(eightLeg.legs.some((leg) => leg.id === survivalResult.id), "survival result leg was not blended in");
+  assert.ok(eightLeg.legs.some((leg) => leg.id === anytimeScorer.id), "anytime scorer leg was not blended in");
+});
+
 test("most likely picks downgrade stale drifting legs close to kickoff", () => {
   const staleDrifter = likelyLeg(
     "late-stale-drifter",
@@ -395,14 +453,19 @@ function likelyLeg(fixtureId, label, modelProbability, score, decimalOdds, overr
     createdAt: overrides.createdAt || "2026-06-13T10:00:00.000Z",
     homeTeam: overrides.homeTeam || `Home ${fixtureId}`,
     awayTeam: overrides.awayTeam || `Away ${fixtureId}`,
-    market: "match_winner",
+    market: overrides.market || "match_winner",
+    outcome: overrides.outcome,
+    playerName: overrides.playerName,
     selectionLabel: label,
     bookmaker: "Public Test Book",
     decimalOdds,
     modelProbability,
-    impliedProbability: 1 / decimalOdds,
-    edge: Math.max(0.01, modelProbability - (1 / decimalOdds)),
-    confidence: 0.76,
+    rawModelProbability: overrides.rawModelProbability ?? modelProbability,
+    impliedProbability: overrides.impliedProbability ?? 1 / decimalOdds,
+    marketImpliedProbability: overrides.marketImpliedProbability ?? overrides.impliedProbability ?? 1 / decimalOdds,
+    edge: overrides.edge ?? Math.max(0.01, modelProbability - (1 / decimalOdds)),
+    independentEdge: overrides.independentEdge ?? Math.max(0.01, (overrides.rawModelProbability ?? modelProbability) - (overrides.marketImpliedProbability ?? overrides.impliedProbability ?? 1 / decimalOdds)),
+    confidence: overrides.confidence ?? 0.76,
     score,
     riskTag: score > 90 ? "longshot_value" : "steady_edge",
     hardBlocks: [],

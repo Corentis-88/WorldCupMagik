@@ -217,19 +217,68 @@ function inferPlayerTeam(odds, fixture) {
 }
 
 export function bestLatestOddsByOutcome(oddsSnapshots) {
-  const latest = latestBy(oddsSnapshots, (record) => outcomeKey(record.fixtureId, record.market, record.outcome), "capturedAt");
   const best = new Map();
+  const grouped = new Map();
 
-  for (const [key, latestRecord] of latest.entries()) {
-    const sameMoment = oddsSnapshots.filter((record) => {
-      return outcomeKey(record.fixtureId, record.market, record.outcome) === key
-        && record.capturedAt === latestRecord.capturedAt;
-    });
-    const bestRecord = sameMoment.reduce((winner, record) => Number(record.decimalOdds) > Number(winner.decimalOdds) ? record : winner, latestRecord);
+  for (const record of oddsSnapshots || []) {
+    const key = outcomeKey(record.fixtureId, record.market, record.outcome);
+    const records = grouped.get(key) || [];
+    records.push(record);
+    grouped.set(key, records);
+  }
+
+  for (const [key, records] of grouped.entries()) {
+    const usableRecords = consensusOddsRecords(records);
+
+    if (!usableRecords.length) {
+      continue;
+    }
+
+    const bestRecord = usableRecords.reduce((winner, record) => {
+      if (Number(record.decimalOdds) !== Number(winner.decimalOdds)) {
+        return Number(record.decimalOdds) > Number(winner.decimalOdds) ? record : winner;
+      }
+
+      if (Number(record.sourceReliability || 0) !== Number(winner.sourceReliability || 0)) {
+        return Number(record.sourceReliability || 0) > Number(winner.sourceReliability || 0) ? record : winner;
+      }
+
+      return new Date(record.capturedAt || 0) > new Date(winner.capturedAt || 0) ? record : winner;
+    }, usableRecords[0]);
     best.set(key, bestRecord);
   }
 
   return best;
+}
+
+function consensusOddsRecords(records = []) {
+  const clean = records
+    .filter((record) => Number(record.decimalOdds) > 1)
+    .sort((left, right) => new Date(right.capturedAt || 0) - new Date(left.capturedAt || 0));
+
+  if (clean.length <= 3) {
+    return clean;
+  }
+
+  const latestTime = new Date(clean[0].capturedAt || 0).getTime();
+  const freshnessWindowMs = 72 * 3600000;
+  const recent = clean.filter((record) => latestTime - new Date(record.capturedAt || 0).getTime() <= freshnessWindowMs);
+  const pool = recent.length >= 3 ? recent : clean.slice(0, Math.min(clean.length, 8));
+
+  if (pool[0]?.market !== "match_winner" || pool.length < 4) {
+    return pool;
+  }
+
+  const sortedOdds = pool.map((record) => Number(record.decimalOdds)).sort((left, right) => left - right);
+  const median = sortedOdds[Math.floor(sortedOdds.length / 2)];
+  const highCap = median < 1.6
+    ? median * 1.35
+    : median < 4
+      ? median * 1.75
+      : median * 2.4;
+  const filtered = pool.filter((record) => Number(record.decimalOdds) <= highCap);
+
+  return filtered.length >= 3 ? filtered : pool;
 }
 
 function latestHeatByFixture(heatSnapshots) {
@@ -490,6 +539,68 @@ function openingOver25CautionAdjustment({ tournamentPressure, goalShape, shotSha
   return round(-penalty, 4);
 }
 
+function applyMarketDominanceGoalAdjustment({ goalShape, fixture, marketSnapshot }) {
+  const matchWinner = marketSnapshot?.matchWinner;
+
+  if (!matchWinner) {
+    return { goalShape, pressure: 0 };
+  }
+
+  const homeWin = Number(matchWinner.homeWin || 0);
+  const awayWin = Number(matchWinner.awayWin || 0);
+  const draw = Number(matchWinner.draw || 0);
+  const confidence = Number(matchWinner.confidence || 0);
+  const homeDominant = homeWin >= awayWin;
+  const favouriteProbability = Math.max(homeWin, awayWin);
+  const underdogProbability = Math.min(homeWin, awayWin);
+  const pressure = clamp(
+    clamp((favouriteProbability - 0.72) / 0.2, 0, 1)
+    * clamp((0.14 - underdogProbability) / 0.12, 0, 1)
+    * clamp((confidence - 0.42) / 0.32, 0, 1),
+    0,
+    1
+  );
+
+  if (pressure <= 0) {
+    return { goalShape, pressure: 0 };
+  }
+
+  const strongExpectedGoals = homeDominant ? Number(goalShape.homeExpectedGoals || 0) : Number(goalShape.awayExpectedGoals || 0);
+  const weakExpectedGoals = homeDominant ? Number(goalShape.awayExpectedGoals || 0) : Number(goalShape.homeExpectedGoals || 0);
+  const underdogGoalCap = clamp(0.52 + underdogProbability * 3.8 + draw * 0.32 + (1 - pressure) * 0.22, 0.5, 1.18);
+  const weakReduction = clamp((weakExpectedGoals - underdogGoalCap) * (0.72 + pressure * 0.2), 0, Math.max(0, weakExpectedGoals - 0.24));
+  const strongRebound = clamp(weakReduction * (0.28 + pressure * 0.14), 0, 0.28);
+  const adjustedWeak = clamp(weakExpectedGoals - weakReduction, 0.24, 2.95);
+  const adjustedStrong = clamp(strongExpectedGoals + strongRebound, 0.28, 3.25);
+  const adjusted = homeDominant
+    ? {
+      homeExpectedGoals: adjustedStrong,
+      awayExpectedGoals: adjustedWeak,
+      homeGoalAdjustment: adjustedStrong - strongExpectedGoals,
+      awayGoalAdjustment: adjustedWeak - weakExpectedGoals
+    }
+    : {
+      homeExpectedGoals: adjustedWeak,
+      awayExpectedGoals: adjustedStrong,
+      homeGoalAdjustment: adjustedWeak - weakExpectedGoals,
+      awayGoalAdjustment: adjustedStrong - strongExpectedGoals
+    };
+
+  return {
+    goalShape: {
+      ...goalShape,
+      homeExpectedGoals: adjusted.homeExpectedGoals,
+      awayExpectedGoals: adjusted.awayExpectedGoals,
+      expectedGoals: clamp(adjusted.homeExpectedGoals + adjusted.awayExpectedGoals, 1.25, 4.1)
+    },
+    pressure,
+    dominantTeam: homeDominant ? fixture.homeTeam : fixture.awayTeam,
+    underdogTeam: homeDominant ? fixture.awayTeam : fixture.homeTeam,
+    homeGoalAdjustment: adjusted.homeGoalAdjustment,
+    awayGoalAdjustment: adjusted.awayGoalAdjustment
+  };
+}
+
 function isGroupStageFixture(fixture = {}) {
   const stage = String(fixture.stage || fixture.round || "").toLowerCase();
 
@@ -550,7 +661,13 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
   const awayWin = clamp((1 - drawProbability) * (1 - homeShare), 0.05, 0.82);
   const rawNormalizedTotal = rawHomeWin + rawAwayWin + rawDrawProbability;
   const normalizedTotal = homeWin + awayWin + drawProbability;
-  const goalShape = applyTournamentPressureToGoalShape(baseGoalShape, tournamentPressure);
+  const tournamentGoalShape = applyTournamentPressureToGoalShape(baseGoalShape, tournamentPressure);
+  const marketDominance = applyMarketDominanceGoalAdjustment({
+    goalShape: tournamentGoalShape,
+    fixture,
+    marketSnapshot
+  });
+  const goalShape = marketDominance.goalShape;
   const expectedGoals = goalShape.expectedGoals;
   const shotShape = projectedShotShapeForFixture({ homeStats, awayStats, goalShape, heat });
   const rawOver15 = poissonOver(expectedGoals, 1.5);
@@ -618,6 +735,11 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
       tournamentBttsAdjustment: round(Number(tournamentPressure.bttsAdjustment || 0), 4),
       tournamentDrawLift: round(Number(tournamentPressure.drawLift || 0), 4),
       openingOver25Adjustment: round(openingOver25Adjustment, 4),
+      marketDominancePressure: round(Number(marketDominance.pressure || 0), 4),
+      marketDominantTeam: marketDominance.dominantTeam || "",
+      marketUnderdogTeam: marketDominance.underdogTeam || "",
+      homeMarketDominanceGoalAdjustment: round(Number(marketDominance.homeGoalAdjustment || 0), 4),
+      awayMarketDominanceGoalAdjustment: round(Number(marketDominance.awayGoalAdjustment || 0), 4),
       tournamentContextNote: tournamentPressure.note,
       qualityGapEdge: round(Number(goalShape.qualityGapEdge || 0), 2),
       qualityGapPressure: round(Number(goalShape.qualityGapPressure || 0), 4),
@@ -826,6 +948,16 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     0,
     1
   );
+  const highCertaintySurvivalFavorite = isHighCertaintySurvivalFavorite({
+    market,
+    outcome,
+    odds,
+    modelProbability: adjustedModelProbability,
+    rawModelProbability: independentModelProbability,
+    marketImpliedProbability,
+    confidence,
+    policy
+  });
   const favoriteCrowdingPenalty = impliedProbability > policy.riskProfile.maxFavoriteImpliedProbability ? (impliedProbability - policy.riskProfile.maxFavoriteImpliedProbability) * 42 : 0;
   const valueOddsBonus = Number(odds.decimalOdds) >= policy.riskProfile.minDecimalOddsForRiskLeg ? 3.5 : 0;
   const oddsMovementBonus = clamp(
@@ -847,11 +979,11 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
   const score = clamp(compressTopScore(rawScore), 0, 100);
   const hardBlocks = [];
 
-  if (edge < policy.riskProfile.minLegEdge) {
+  if (edge < policy.riskProfile.minLegEdge && !highCertaintySurvivalFavorite) {
     hardBlocks.push("edge_below_policy_minimum");
   }
 
-  if (independentEdge < Number(policy.riskProfile.minIndependentEdge ?? 0)) {
+  if (independentEdge < Number(policy.riskProfile.minIndependentEdge ?? 0) && !highCertaintySurvivalFavorite) {
     hardBlocks.push("independent_edge_below_policy_minimum");
   }
 
@@ -871,7 +1003,7 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     hardBlocks.push("not_enough_bookie_coverage");
   }
 
-  if (marketFocus.score < -6 && confidence < 0.76) {
+  if (marketFocus.score < -6 && confidence < 0.76 && !highCertaintySurvivalFavorite) {
     hardBlocks.push("market_does_not_match_evidence");
   }
 
@@ -925,6 +1057,10 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
 
     if (lowerTeamExpectedGoals < Number(policy.riskProfile.minBttsLowerTeamExpectedGoals || 0.78)) {
       hardBlocks.push("btts_yes_one_team_goal_threat_too_low");
+    }
+
+    if (Number(legModel.components.marketDominancePressure || 0) >= 0.55 && lowerTeamExpectedGoals < 0.94) {
+      hardBlocks.push("btts_yes_underdog_goal_share_suppressed_by_result_market");
     }
   }
 
@@ -1009,6 +1145,7 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
       predictionReflectionAdjustment: learning.reflectionAdjustment,
       predictionReflectionConfidence: learning.reflectionConfidence,
       predictionReflectionReasons: learning.reflectionReasons,
+      highCertaintySurvivalFavorite,
       confidenceReasons: buildConfidenceReasons({
         confidence,
         dataCompleteness,
@@ -1041,6 +1178,24 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
       learning
     })
   };
+}
+
+function isHighCertaintySurvivalFavorite({ market, outcome, odds, modelProbability, rawModelProbability, marketImpliedProbability, confidence, policy }) {
+  if (!policy?.riskProfile?.allowHighCertaintySurvivalFavorites) {
+    return false;
+  }
+
+  if (market !== "match_winner" || outcome === "Draw") {
+    return false;
+  }
+
+  const strongestPriceSignal = Math.max(decimalToImpliedProbability(odds.decimalOdds), Number(marketImpliedProbability || 0));
+
+  return Number(odds.decimalOdds || 99) <= 1.38
+    && strongestPriceSignal >= 0.72
+    && Number(modelProbability || 0) >= 0.38
+    && Number(rawModelProbability || 0) >= 0.34
+    && Number(confidence || 0) >= 0.55;
 }
 
 function buildNewsByTeam(newsArticles, policy, now) {
@@ -1783,6 +1938,7 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
 
   if (market === "both_teams_to_score" && outcome === "Yes") {
     const bttsHistory = mean([Number(model.components.homeBttsRate || 0.48), Number(model.components.awayBttsRate || 0.48)]);
+    const marketDominancePressure = Number(model.components.marketDominancePressure || 0);
 
     if (expectedGoals >= 2.55 && lowerTeamExpectedGoals >= 0.9) {
       score += 6;
@@ -1808,6 +1964,11 @@ function evaluateMarketFocus({ market, outcome, model, modelProbability, edge, o
       reasons.push("opening group-game caution asks BTTS to clear a higher bar");
     } else if (openingCaution > 0 && lowerTeamExpectedGoals >= 1 && expectedGoals >= 2.95) {
       reasons.push("BTTS survives opening-game caution because both sides still project scoring threat");
+    }
+
+    if (marketDominancePressure >= 0.55 && lowerTeamExpectedGoals < 0.94) {
+      score -= 10;
+      reasons.push(`match-winner market treats ${model.components.marketUnderdogTeam || "one side"} as a heavy outsider`);
     }
   }
 

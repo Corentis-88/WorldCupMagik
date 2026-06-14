@@ -4,7 +4,10 @@ const MOST_LIKELY_TARGETS = [
   { category: "single", label: "Single", type: "single", legCount: 1 },
   { category: "double", label: "Double", type: "double", legCount: 2 },
   { category: "trixie", label: "Trixie", type: "trixie", legCount: 3 },
+  { category: "accumulator_3", label: "3-leg accumulator", type: "accumulator", legCount: 3 },
   { category: "accumulator_4", label: "4-leg accumulator", type: "accumulator", legCount: 4 },
+  { category: "accumulator_5", label: "5-leg accumulator", type: "accumulator", legCount: 5 },
+  { category: "accumulator_6", label: "6-leg accumulator", type: "accumulator", legCount: 6 },
   { category: "accumulator_8", label: "8-leg accumulator", type: "accumulator", legCount: 8 }
 ];
 
@@ -32,7 +35,7 @@ export function buildMostLikelyPicks(legs, policy, { fixtureCount = null } = {})
   const riskProfile = policy.riskProfile || {};
   const eligibleLegs = legs
     .filter((leg) => !leg.hardBlocks?.length)
-    .filter((leg) => Number(leg.edge) >= Number(riskProfile.minLegEdge ?? 0))
+    .filter((leg) => Number(leg.edge) >= Number(riskProfile.minLegEdge ?? 0) || isSurvivalResultLeg(leg))
     .filter((leg) => Number(leg.confidence) >= Number(riskProfile.minLegConfidence ?? 0))
     .filter((leg) => Number(leg.modelProbability) > 0)
     .sort((left, right) => likelyLegScore(right) - likelyLegScore(left));
@@ -100,6 +103,7 @@ function selectMostLikelyLegsForTarget({ fixtureSeparatedLegs, eligibleLegs, leg
   addMostLikelyLegs({ selected, selectedIds, pool: fixtureSeparatedLegs, legCount, mode: "balanced" });
   addMostLikelyLegs({ selected, selectedIds, pool: eligibleLegs, legCount, mode: "fallback" });
   addLeastCorrelatedLegs({ selected, selectedIds, pool: fixtureSeparatedLegs, legCount });
+  blendLongSlipSurvivalMarkets({ selected, selectedIds, pool: eligibleLegs, legCount });
 
   return selected.length === legCount ? selected : [];
 }
@@ -149,6 +153,87 @@ function addLeastCorrelatedLegs({ selected, selectedIds, pool, legCount }) {
 
     selected.push(candidates[0].leg);
     selectedIds.add(candidates[0].leg.id);
+  }
+}
+
+function blendLongSlipSurvivalMarkets({ selected, selectedIds, pool, legCount }) {
+  if (legCount < 6 || selected.length !== legCount) {
+    return;
+  }
+
+  if (!selected.some(isSurvivalResultLeg)) {
+    replaceWeakestLongSlipLeg({
+      selected,
+      selectedIds,
+      pool,
+      legCount,
+      predicate: isSurvivalResultLeg
+    });
+  }
+
+  if (!selected.some(isLongSlipAnytimeScorerLeg)) {
+    replaceWeakestLongSlipLeg({
+      selected,
+      selectedIds,
+      pool,
+      legCount,
+      predicate: isLongSlipAnytimeScorerLeg,
+      minimumProbability: 0.23,
+      maximumTotalGoals: maximumTotalGoalsLegs(legCount) + 2,
+      preserveResultLeg: true
+    });
+  }
+}
+
+function replaceWeakestLongSlipLeg({
+  selected,
+  selectedIds,
+  pool,
+  legCount,
+  predicate,
+  minimumProbability = minimumSurvivalProbability(legCount) - 0.095,
+  maximumTotalGoals = null,
+  preserveResultLeg = false
+}) {
+  const resultLegCount = selected.filter(isSurvivalResultLeg).length;
+  const candidates = pool
+    .filter(predicate)
+    .filter((leg) => !selectedIds.has(leg.id))
+    .filter((leg) => likelyWinProbability(leg, { legCount }) >= minimumProbability)
+    .sort((left, right) => likelyLegScore(right, legCount) - likelyLegScore(left, legCount));
+
+  for (const candidate of candidates) {
+    const replacementOptions = selected
+      .map((leg, index) => ({ leg, index, score: likelyLegScore(leg, legCount) }))
+      .filter(({ leg }) => !predicate(leg))
+      .filter(({ leg }) => !(preserveResultLeg && resultLegCount <= 1 && isSurvivalResultLeg(leg)))
+      .sort((left, right) => left.score - right.score);
+
+    for (const { leg: outgoing, index } of replacementOptions) {
+      const withoutOutgoing = selected.filter((_item, selectedIndex) => selectedIndex !== index);
+
+      if (withoutOutgoing.some((item) => fixtureKeyForLeg(item) === fixtureKeyForLeg(candidate))) {
+        continue;
+      }
+
+      if (!mostLikelyLegPassesPortfolioShape(candidate, withoutOutgoing, legCount, "balanced", {
+        minimumProbability,
+        maximumTotalGoals
+      })) {
+        continue;
+      }
+
+      const correlation = portfolioCorrelationProfile([...withoutOutgoing, candidate], { legCount, appetite: 0 });
+
+      if (correlation.penalty > maximumPortfolioCorrelationPenalty(legCount, "balanced") + 1.2) {
+        continue;
+      }
+
+      selected[index] = candidate;
+      selectedIds.delete(outgoing.id);
+      selectedIds.add(candidate.id);
+      return;
+    }
   }
 }
 
@@ -376,7 +461,7 @@ function buildMostLikelyThesis({ target, legs, combinedDecimalOdds, combinedProb
   return `${target.label} chosen by the Pick of the Day engine, ignoring the risk slider and prioritising estimated win chance, data confidence, fixture separation, and only then price edge. Combined odds ${round(combinedDecimalOdds, 2)}, average data confidence ${round(averageConfidence * 100, 1)}%, independent edge ${round(averageIndependentEdge * 100, 2)}%, non-market signals ${round(averageNonMarketSignalCount, 1)} per leg.${portfolioText}${correlationText}${heatText}${lateText}${fallbackText} Legs: ${selections}.`;
 }
 
-function mostLikelyLegPassesPortfolioShape(leg, selected, legCount, mode) {
+function mostLikelyLegPassesPortfolioShape(leg, selected, legCount, mode, options = {}) {
   if (legCount < 4) {
     return true;
   }
@@ -424,7 +509,10 @@ function mostLikelyLegPassesPortfolioShape(leg, selected, legCount, mode) {
   }
 
   if (mode === "balanced") {
-    if (probability < minimumSurvivalProbability(legCount) - 0.035) {
+    const minimumProbability = options.minimumProbability ?? minimumSurvivalProbability(legCount) - 0.035;
+    const maximumTotalGoals = options.maximumTotalGoals ?? maximumTotalGoalsLegs(legCount) + 1;
+
+    if (probability < minimumProbability) {
       return false;
     }
     if (bttsCount > maximumBttsLegs(legCount) + 1) {
@@ -436,7 +524,7 @@ function mostLikelyLegPassesPortfolioShape(leg, selected, legCount, mode) {
     if (sameMarketCount > maximumSameMarketLegs(legCount, leg.market) + 1) {
       return false;
     }
-    if (totalGoalsCount > maximumTotalGoalsLegs(legCount) + 1) {
+    if (totalGoalsCount > maximumTotalGoals) {
       return false;
     }
     if (correlation.penalty > maximumPortfolioCorrelationPenalty(legCount, "balanced")) {
@@ -876,6 +964,30 @@ function isBttsYesLeg(leg) {
 
 function isTotalGoalsLeg(leg) {
   return ["over_1_5_goals", "over_2_5_goals", "under_2_5_goals", "under_3_5_goals", "under_4_5_goals"].includes(leg.market);
+}
+
+function isSurvivalResultLeg(leg) {
+  if (leg.market !== "match_winner" || leg.outcome === "Draw") {
+    return false;
+  }
+
+  return Number(leg.marketImpliedProbability || leg.impliedProbability || 0) >= 0.72
+    && Number(leg.decimalOdds || 99) <= 1.55
+    && Number(leg.confidence || 0) >= 0.58
+    && Number(leg.modelProbability || 0) >= 0.38;
+}
+
+function isLongSlipAnytimeScorerLeg(leg) {
+  if (leg.market !== "anytime_scorer") {
+    return false;
+  }
+
+  return Number(leg.decimalOdds || 99) <= 6.2
+    && Number(leg.modelProbability || 0) >= 0.26
+    && Number(leg.rawModelProbability || leg.modelProbability || 0) >= 0.28
+    && Number(leg.confidence || 0) >= 0.66
+    && Number(leg.components?.starterLikelihood || 0) >= 0.58
+    && Number(leg.components?.scorerGoalsPerTwentyTeamMatches || 0) >= 3;
 }
 
 function isScorerLeg(leg) {
