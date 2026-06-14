@@ -2,7 +2,9 @@ const state = {
   data: null,
   lineups: null,
   lineupRefreshTimer: null,
-  renderFrame: null
+  renderFrame: null,
+  profileCache: new Map(),
+  pickProfileCache: new Map()
 };
 
 const standardSlip = [
@@ -170,9 +172,9 @@ function scheduleRender() {
 function render() {
   const risk = Number(el.risk.value);
   const riskBucket = nearest(state.data.riskBuckets || [risk], risk);
-  const dayBucket = selectedDayBucket();
-  const profile = state.data.profiles?.[`d${dayBucket}_r${riskBucket}`] || null;
-  const pickProfile = state.data.pickOfTheDay?.[`d${dayBucket}`] || null;
+  const dateRange = selectedDateRange();
+  const profile = buildRangeProfile({ data: state.data, riskBucket, dateRange });
+  const pickProfile = buildPickOfDayRangeProfile({ data: state.data, dateRange }) || profile;
   const stakePerBet = round(Number(el.stake.value || 10), 2);
   const slip = recalculateSlip(profile?.betslip || [], stakePerBet);
   const pickSlip = recalculateSlip(pickProfile?.betslip || [], stakePerBet);
@@ -228,6 +230,634 @@ function selectedDateRange() {
   }
 
   return { from, to };
+}
+
+function buildRangeProfile({ data, riskBucket, dateRange }) {
+  const cacheKey = rangeCacheKey(data, riskBucket, dateRange);
+
+  if (state.profileCache.has(cacheKey)) {
+    return state.profileCache.get(cacheKey);
+  }
+
+  if (Number(riskBucket || 0) <= 0) {
+    const pickProfile = buildPickOfDayRangeProfile({ data, dateRange, slipTypes: standardSlip });
+    return rememberCache(state.profileCache, cacheKey, {
+      ...pickProfile,
+      risk: riskBucket,
+      riskProfile: data.riskProfiles?.[riskBucket] || { mode: "most_likely" }
+    });
+  }
+
+  if (!data.legCandidatesByRisk || !data.riskProfiles) {
+    return rememberCache(state.profileCache, cacheKey, prebuiltRangeProfile(data, riskBucket) || null);
+  }
+
+  const fixtures = fixturesInRange(data.fixtures || [], dateRange);
+  const fixtureIds = new Set(fixtures.map((fixture) => fixture.id));
+  const candidates = (data.legCandidatesByRisk[riskBucket] || [])
+    .filter((leg) => fixtureIds.has(leg.fixtureId));
+  const betslip = buildMobileRiskBetslip({
+    candidates,
+    risk: Number(riskBucket || 0),
+    profile: data.riskProfiles?.[riskBucket] || {}
+  });
+
+  return rememberCache(state.profileCache, cacheKey, {
+    dateFrom: dateRange.from,
+    dateTo: dateRange.to,
+    risk: riskBucket,
+    dataQuality: data.collection?.dataQuality,
+    fixtureCount: fixtures.length,
+    eligibleLegCount: candidates.filter((leg) => !leg.hardBlocks?.length).length,
+    betslip
+  });
+}
+
+function buildPickOfDayRangeProfile({ data, dateRange, slipTypes = pickOfDaySlip }) {
+  const cacheKey = rangeCacheKey(data, `pick_${slipTypes.length}`, dateRange);
+
+  if (state.pickProfileCache.has(cacheKey)) {
+    return state.pickProfileCache.get(cacheKey);
+  }
+
+  if (!data.mostLikelyLegCandidates) {
+    return rememberCache(state.pickProfileCache, cacheKey, prebuiltPickProfile(data) || null);
+  }
+
+  const fixtures = fixturesInRange(data.fixtures || [], dateRange);
+  const fixtureIds = new Set(fixtures.map((fixture) => fixture.id));
+  const candidates = (data.mostLikelyLegCandidates || [])
+    .filter((leg) => fixtureIds.has(leg.fixtureId));
+
+  return rememberCache(state.pickProfileCache, cacheKey, {
+    dateFrom: dateRange.from,
+    dateTo: dateRange.to,
+    mode: "most_likely",
+    dataQuality: data.collection?.dataQuality,
+    fixtureCount: fixtures.length,
+    eligibleLegCount: candidates.length,
+    betslip: buildMobileMostLikelyPicks(candidates, {
+      fixtureCount: fixtures.length,
+      slipTypes
+    })
+  });
+}
+
+function prebuiltRangeProfile(data, riskBucket) {
+  const dayBucket = selectedDayBucket();
+  return data.profiles?.[`d${dayBucket}_r${riskBucket}`] || null;
+}
+
+function prebuiltPickProfile(data) {
+  const dayBucket = selectedDayBucket();
+  return data.pickOfTheDay?.[`d${dayBucket}`] || null;
+}
+
+function rangeCacheKey(data, bucket, dateRange) {
+  return [
+    data?.generatedAt || "database",
+    bucket,
+    dateRange.from,
+    dateRange.to
+  ].join("|");
+}
+
+function rememberCache(cache, key, value) {
+  cache.set(key, value);
+
+  if (cache.size > 36) {
+    cache.delete(cache.keys().next().value);
+  }
+
+  return value;
+}
+
+function fixturesInRange(fixtures, dateRange) {
+  return (fixtures || []).filter((fixture) => {
+    const key = fixture.dateKey || dateKey(fixture.date);
+    return key >= dateRange.from && key <= dateRange.to;
+  });
+}
+
+function buildMobileRiskBetslip({ candidates, risk, profile }) {
+  const eligible = (candidates || [])
+    .filter((leg) => !leg.hardBlocks?.length)
+    .filter((leg) => Number(leg.modelProbability || 0) > 0)
+    .filter((leg) => Number(leg.decimalOdds || 0) > 1)
+    .sort((left, right) => Number(right.score || 0) - Number(left.score || 0));
+
+  return standardSlip
+    .map(([key, label]) => {
+      const legCount = legCountForKey(key);
+      const type = key === "trixie" ? "trixie" : key.startsWith("accumulator_") ? "accumulator" : key;
+      const selected = selectMobileLegs({
+        candidates: eligible,
+        legCount,
+        risk,
+        profile,
+        type
+      });
+
+      return selected.length === legCount
+        ? scoreMobileCombo({
+          key,
+          label,
+          type,
+          legs: selected,
+          risk,
+          shortWindowFallback: new Set(selected.map(fixtureKeyForLeg)).size < selected.length
+        })
+        : null;
+    })
+    .filter(Boolean);
+}
+
+function buildMobileMostLikelyPicks(candidates, { fixtureCount, slipTypes }) {
+  const eligible = (candidates || [])
+    .filter((leg) => !leg.hardBlocks?.length)
+    .filter((leg) => Number(leg.modelProbability || leg.likelyProbability || 0) > 0)
+    .sort((left, right) => mobileMostLikelyLegScore(right, 1) - mobileMostLikelyLegScore(left, 1));
+
+  return slipTypes
+    .map(([key, label], index) => {
+      const legCount = legCountForKey(key);
+
+      if (Number(fixtureCount || 0) < legCount) {
+        return null;
+      }
+
+      const selected = selectMobileMostLikelyLegs(eligible, legCount);
+      const type = key === "trixie" ? "trixie" : key.startsWith("accumulator_") ? "accumulator" : key;
+
+      return selected.length === legCount
+        ? scoreMobileCombo({
+          key,
+          label,
+          type,
+          legs: selected,
+          risk: 0,
+          likely: true,
+          rank: index + 1,
+          shortWindowFallback: false
+        })
+        : null;
+    })
+    .filter(Boolean);
+}
+
+function selectMobileMostLikelyLegs(candidates, legCount) {
+  const selected = [];
+  const selectedIds = new Set();
+  const ranked = [...candidates].sort((left, right) => mobileMostLikelyLegScore(right, legCount) - mobileMostLikelyLegScore(left, legCount));
+
+  for (const leg of ranked) {
+    if (selected.length >= legCount) {
+      break;
+    }
+
+    if (selectedIds.has(leg.id) || selected.some((item) => fixtureKeyForLeg(item) === fixtureKeyForLeg(leg))) {
+      continue;
+    }
+
+    selected.push(leg);
+    selectedIds.add(leg.id);
+  }
+
+  return selected;
+}
+
+function selectMobileLegs({ candidates, legCount, risk, profile }) {
+  const appetite = clamp(Number(risk || 0) / 100, 0, 1);
+  const selected = [];
+  const selectedIds = new Set();
+  const pool = mobileCandidatePool(candidates, legCount, appetite, profile);
+  const uniqueFixtureCount = new Set(pool.map(fixtureKeyForLeg)).size;
+  const uniqueTarget = Math.min(legCount, uniqueFixtureCount);
+
+  addMobileLegs({
+    selected,
+    selectedIds,
+    pool,
+    legCount: uniqueTarget,
+    risk,
+    allowSameFixture: false
+  });
+
+  addMobileLegs({
+    selected,
+    selectedIds,
+    pool,
+    legCount,
+    risk,
+    allowSameFixture: true
+  });
+
+  upgradeMobilePayout({ selected, selectedIds, pool, legCount, risk });
+
+  return selected;
+}
+
+function mobileCandidatePool(candidates, legCount, appetite, profile) {
+  const maxCombinedOdds = Number(profile?.maxCombinedOdds || 50);
+  const perLegCombinedCap = legCount > 1 && maxCombinedOdds > 1
+    ? Math.pow(maxCombinedOdds, 1 / legCount) * (1.04 + appetite * 0.42)
+    : Infinity;
+  const marketCap = mobileMaxLegOdds(legCount, appetite);
+  const primaryCap = Math.max(1.18, Math.min(perLegCombinedCap || Infinity, marketCap));
+  const sorted = [...(candidates || [])]
+    .sort((left, right) => mobileLegScore(right, legCount, appetite) - mobileLegScore(left, legCount, appetite));
+  const capped = sorted.filter((leg) => Number(leg.decimalOdds || 99) <= primaryCap);
+
+  if (capped.length >= legCount) {
+    return capped;
+  }
+
+  const relaxedMultiplier = legCount >= 6
+    ? 1.05 + appetite * 0.45
+    : 1.15 + appetite * 0.7;
+  const relaxedCap = Math.max(primaryCap, marketCap * relaxedMultiplier);
+  const relaxed = sorted.filter((leg) => Number(leg.decimalOdds || 99) <= relaxedCap);
+
+  return relaxed.length >= legCount ? relaxed : sorted;
+}
+
+function addMobileLegs({ selected, selectedIds, pool, legCount, risk, allowSameFixture }) {
+  const appetite = clamp(Number(risk || 0) / 100, 0, 1);
+
+  while (selected.length < legCount) {
+    const candidate = pool
+      .filter((leg) => !selectedIds.has(leg.id))
+      .filter((leg) => allowSameFixture || !selected.some((item) => fixtureKeyForLeg(item) === fixtureKeyForLeg(leg)))
+      .map((leg) => ({
+        leg,
+        fit: mobilePortfolioFit(leg, selected, legCount, appetite)
+      }))
+      .sort((left, right) => right.fit - left.fit)[0]?.leg;
+
+    if (!candidate) {
+      break;
+    }
+
+    selected.push(candidate);
+    selectedIds.add(candidate.id);
+  }
+}
+
+function upgradeMobilePayout({ selected, selectedIds, pool, legCount, risk }) {
+  const appetite = clamp(Number(risk || 0) / 100, 0, 1);
+  const edgeBlend = clamp((appetite - 0.8) / 0.2, 0, 1);
+
+  if (edgeBlend <= 0 || selected.length < Math.min(5, legCount)) {
+    return;
+  }
+
+  const maxCandidateOdds = mobileMaxLegOdds(legCount, appetite) * (legCount >= 6 ? 1.45 : 1.7);
+  const attempts = legCount >= 8 ? 2 : 1;
+
+  for (let attempt = 0; attempt < attempts; attempt += 1) {
+    let bestSwap = null;
+
+    for (const candidate of pool) {
+      if (selectedIds.has(candidate.id)) {
+        continue;
+      }
+
+      const candidateOdds = Number(candidate.decimalOdds || 1);
+
+      if (candidateOdds <= 1 || candidateOdds > maxCandidateOdds) {
+        continue;
+      }
+
+      for (let index = 0; index < selected.length; index += 1) {
+        const outgoing = selected[index];
+        const outgoingOdds = Number(outgoing.decimalOdds || 1);
+        const sameFixtureSwap = fixtureKeyForLeg(candidate) === fixtureKeyForLeg(outgoing);
+
+        if (legCount >= 6 && !sameFixtureSwap) {
+          continue;
+        }
+
+        if (candidateOdds < outgoingOdds * (1.08 + (1 - edgeBlend) * 0.08)) {
+          continue;
+        }
+
+        const fit = (candidateOdds / outgoingOdds - 1) * 100
+          + mobileLegScore(candidate, legCount, appetite)
+          - mobileLegScore(outgoing, legCount, appetite);
+
+        if (!bestSwap || fit > bestSwap.fit) {
+          bestSwap = { candidate, outgoing, index, fit };
+        }
+      }
+    }
+
+    if (!bestSwap) {
+      break;
+    }
+
+    selected[bestSwap.index] = bestSwap.candidate;
+    selectedIds.delete(bestSwap.outgoing.id);
+    selectedIds.add(bestSwap.candidate.id);
+  }
+}
+
+function scoreMobileCombo({ key, label, type, legs, risk, likely = false, rank = null, shortWindowFallback = false }) {
+  const legCount = legs.length;
+  const probabilities = legs.map((leg) => mobileLikelyWinProbability(leg, { legCount }));
+  const combinedDecimalOdds = product(legs.map((leg) => leg.decimalOdds));
+  const combinedProbability = product(likely ? probabilities : legs.map((leg) => leg.modelProbability || mobileLikelyWinProbability(leg, { legCount })));
+  const survivalCombinedProbability = product(probabilities);
+  const averageSurvivalProbability = mean(probabilities);
+  const averageConfidence = mean(legs.map((leg) => leg.confidence));
+  const averageEdge = mean(legs.map((leg) => leg.edge));
+  const averageIndependentEdge = mean(legs.map((leg) => leg.independentEdge ?? leg.edge));
+  const averageNonMarketSignalCount = mean(legs.map((leg) => leg.components?.nonMarketSignalCount || 0));
+  const expectedValue = combinedProbability * combinedDecimalOdds - 1;
+  const riskLegCount = legs.filter((leg) => ["calculated_risk", "longshot_value", "contrarian_value"].includes(leg.riskTag)).length;
+  const bttsLegCount = legs.filter(isBttsYesLeg).length;
+  const fragileLegCount = legs.filter((leg) => mobilePortfolioLegPenalty(leg, legCount, Number(risk || 0) / 100) >= 0.025).length;
+  const score = clamp(
+    survivalCombinedProbability * (type === "single" ? 70 : type === "double" ? 90 : 130)
+      + averageSurvivalProbability * 34
+      + averageConfidence * 18
+      + averageIndependentEdge * (24 + Number(risk || 0) * 0.22)
+      + Math.min(8, Math.max(-4, expectedValue * 4)),
+    0,
+    100
+  );
+
+  return {
+    id: `mobile_${key}_${legs.map((leg) => leg.id).join("_").slice(0, 42)}`,
+    rank,
+    category: key,
+    label,
+    type,
+    score: round(score, 2),
+    legCount,
+    combinedDecimalOdds: round(combinedDecimalOdds, 2),
+    combinedProbability: round(combinedProbability, 4),
+    expectedValue: round(expectedValue, 4),
+    averageConfidence: round(averageConfidence, 4),
+    averageIndependentEdge: round(averageIndependentEdge, 4),
+    survivalCombinedProbability: round(survivalCombinedProbability, 4),
+    averageSurvivalProbability: round(averageSurvivalProbability, 4),
+    averageNonMarketSignalCount: round(averageNonMarketSignalCount, 2),
+    displayRating: mobileDisplayRating(legs, { likely }),
+    riskLegCount,
+    bttsLegCount,
+    fragileLegCount,
+    shortWindowFallback,
+    legs,
+    thesis: mobileComboThesis({
+      type,
+      legs,
+      combinedDecimalOdds,
+      expectedValue,
+      averageIndependentEdge,
+      averageNonMarketSignalCount,
+      survivalCombinedProbability,
+      averageSurvivalProbability,
+      riskLegCount,
+      bttsLegCount,
+      fragileLegCount,
+      shortWindowFallback
+    })
+  };
+}
+
+function mobileComboThesis({ type, legs, combinedDecimalOdds, expectedValue, averageIndependentEdge, averageNonMarketSignalCount, survivalCombinedProbability, averageSurvivalProbability, riskLegCount, bttsLegCount, fragileLegCount, shortWindowFallback }) {
+  const uniqueFixtureCount = new Set(legs.map(fixtureKeyForLeg)).size;
+  const fallbackText = shortWindowFallback
+    ? `Short-window fallback active: ${uniqueFixtureCount} distinct fixture(s) for ${legs.length} leg(s), so the card stays populated with real candidates and repeats fixtures only when unavoidable. `
+    : "";
+  const heatCount = legs.filter((leg) => Number(leg.components?.heatConfidence || 0) > 0.18 && Number(leg.components?.heatStress || 0) > 0.2).length;
+  const heatText = heatCount ? `Heat layer active on ${heatCount} leg(s). ` : "";
+  const selections = legs.map((leg) => leg.selectionLabel).join(" | ");
+
+  return `${type} at combined odds ${round(combinedDecimalOdds, 2)} with estimated slip chance ${round(survivalCombinedProbability * 100, 2)}% and average leg survival ${round(averageSurvivalProbability * 100, 1)}%. ${fallbackText}Expected value is ${round(expectedValue * 100, 2)}%, independent edge averages ${round(averageIndependentEdge * 100, 2)}%, and the model has ${round(averageNonMarketSignalCount, 1)} non-market signals per leg. ${legs.length >= 4 ? `Long-slip controls: ${bttsLegCount} BTTS leg(s), ${fragileLegCount} fragile-value leg(s). ` : ""}${riskLegCount} calculated-risk/value leg(s). ${heatText}Legs: ${selections}.`;
+}
+
+function mobileLegScore(leg, legCount, appetite) {
+  const probability = mobileLikelyWinProbability(leg, { legCount });
+  const confidence = Number(leg.confidence || 0);
+  const edge = Number(leg.edge || 0);
+  const independentEdge = Number(leg.independentEdge ?? edge);
+  const odds = Number(leg.decimalOdds || 1);
+  const signalScore = clamp(Number(leg.components?.nonMarketSignalCount || 0) / 4, 0, 1);
+  const intelligence = Number(leg.components?.intelligenceConfidence || 0.45);
+  const targetOdds = mobileTargetLegOdds(legCount, appetite);
+  const oddsFit = clamp(1 - Math.abs(Math.log(Math.max(1.01, odds) / targetOdds)) / 1.1, 0, 1);
+  const edgeBlend = clamp((appetite - 0.8) / 0.2, 0, 1);
+  const maxSurvivalOdds = mobileMaxLegOdds(legCount, appetite);
+  const cappedPriceLift = clamp(Math.log(Math.max(1.01, Math.min(odds, maxSurvivalOdds * 1.4))), 0, 2.2);
+  const longPricePenalty = Math.max(0, odds - maxSurvivalOdds)
+    * (legCount >= 8 ? 9 : legCount >= 6 ? 6.8 : legCount >= 4 ? 4.2 : 1.8)
+    * (1 - appetite * 0.28 - edgeBlend * 0.24);
+
+  return probability * (78 - appetite * 30)
+    + confidence * (18 - appetite * 2)
+    + intelligence * 7
+    + signalScore * 5
+    + clamp(edge, -0.03, 0.24) * (22 + appetite * 44 + edgeBlend * 20)
+    + clamp(independentEdge, -0.04, 0.26) * (28 + appetite * 54 + edgeBlend * 24)
+    + oddsFit * (12 + appetite * 6)
+    + cappedPriceLift * ((4 + appetite * 22) * (1 - mobileSurvivalPressure(legCount) * 0.72))
+    - longPricePenalty
+    - mobilePortfolioLegPenalty(leg, legCount, appetite) * 55;
+}
+
+function mobileMostLikelyLegScore(leg, legCount) {
+  const probability = mobileLikelyWinProbability(leg, { legCount });
+  const confidence = Number(leg.confidence || 0);
+  const edge = Number(leg.edge || 0);
+  const independentEdge = Number(leg.independentEdge ?? edge);
+  const signalScore = clamp(Number(leg.components?.nonMarketSignalCount || 0) / 4, 0, 1);
+
+  return probability * 92
+    + confidence * 24
+    + signalScore * 6
+    + clamp(edge, 0, 0.12) * 18
+    + clamp(independentEdge, -0.03, 0.12) * 24
+    - mobilePortfolioLegPenalty(leg, legCount, 0) * 48;
+}
+
+function mobilePortfolioFit(leg, selected, legCount, appetite) {
+  const repeatedFixture = selected.some((item) => fixtureKeyForLeg(item) === fixtureKeyForLeg(leg)) ? 1 : 0;
+  const sameMarketCount = selected.filter((item) => item.market === leg.market).length;
+  const scorerRepeat = isScorerLeg(leg) && selected.some(isScorerLeg) ? 1 : 0;
+  const goalsRepeat = isTotalGoalsLeg(leg) && selected.some(isTotalGoalsLeg) ? 1 : 0;
+
+  return mobileLegScore(leg, legCount, appetite)
+    - repeatedFixture * (18 - appetite * 7)
+    - Math.max(0, sameMarketCount - 1) * (7 - appetite * 2.5)
+    - scorerRepeat * (5 - appetite * 1.5)
+    - goalsRepeat * (3.5 - appetite);
+}
+
+function mobileLikelyWinProbability(leg, { legCount = 1 } = {}) {
+  const model = Number(leg.modelProbability || leg.likelyProbability || 0);
+  const rawModel = Number(leg.rawModelProbability || model);
+  const market = Number(leg.marketImpliedProbability || leg.impliedProbability || 0);
+  const confidence = Number(leg.confidence || 0);
+  const independentEdge = Number(leg.independentEdge ?? (rawModel - market));
+  const signalScore = clamp(Number(leg.components?.nonMarketSignalCount || 0) / 4, 0, 1);
+  const pressure = mobileSurvivalPressure(legCount);
+
+  if (!market) {
+    return clamp(model * (0.68 - pressure * 0.1) + rawModel * (0.24 - pressure * 0.06) + confidence * (0.08 + pressure * 0.16), 0.03, 0.92);
+  }
+
+  const modelLiftCap = 0.1
+    - pressure * 0.032
+    + confidence * (0.035 - pressure * 0.012)
+    + clamp(independentEdge, 0, 0.1) * (0.42 - pressure * 0.27)
+    + signalScore * (0.025 - pressure * 0.011);
+  const marketSaneModel = Math.min(model, market + modelLiftCap);
+  const modelWeight = 0.55 - pressure * 0.15;
+  const rawWeight = 0.25 - pressure * 0.09;
+  const marketWeight = 0.1 + pressure * 0.24;
+  const confidenceWeight = 1 - modelWeight - rawWeight - marketWeight;
+
+  return clamp(
+    marketSaneModel * modelWeight
+      + rawModel * rawWeight
+      + market * marketWeight
+      + confidence * confidenceWeight
+      - mobilePortfolioLegPenalty(leg, legCount, 0),
+    0.03,
+    0.92
+  );
+}
+
+function mobilePortfolioLegPenalty(leg, legCount, appetite) {
+  const pressure = mobileSurvivalPressure(legCount);
+  const decimalOdds = Number(leg.decimalOdds || 1);
+  let penalty = 0;
+
+  if (isScorerLeg(leg) && legCount >= 3) {
+    penalty += (0.018 + pressure * 0.028) * (1 - appetite * 0.25);
+  }
+
+  if (isBttsYesLeg(leg) && fragileBttsHistory(leg)) {
+    penalty += (0.018 + pressure * 0.032) * (1 - appetite * 0.35);
+  }
+
+  const longPriceLine = 2.5 + appetite * 1.2;
+  if (legCount >= 4 && decimalOdds > longPriceLine) {
+    penalty += Math.min(0.045, (decimalOdds - longPriceLine) * 0.03) * (1 - appetite * 0.3);
+  }
+
+  return clamp(penalty * (1 - appetite * 0.35), 0, 0.16);
+}
+
+function mobileDisplayRating(legs, { likely = false } = {}) {
+  const ratings = legs.map((leg) => {
+    const probability = Number(likely ? (leg.likelyProbability || mobileLikelyWinProbability(leg)) : (leg.modelProbability || leg.likelyProbability || 0));
+    const confidence = Number(leg.confidence || 0);
+    const intelligence = Number(leg.components?.intelligenceConfidence || 0.5);
+    const edgeLift = clamp(Number(leg.edge || 0), 0, 0.18) / 0.18;
+    return clamp(0.48 + ((probability * 0.42) + (confidence * 0.24) + (intelligence * 0.14) + (edgeLift * 0.1)) * 0.5, 0.55, likely ? 0.97 : 0.95);
+  });
+
+  return round(clamp(mean(ratings), 0.58, likely ? 0.97 : 0.95), 4);
+}
+
+function mobileMaxLegOdds(legCount, appetite) {
+  if (legCount >= 8) {
+    return 2.25 + appetite * 2.2;
+  }
+  if (legCount >= 6) {
+    return 2.65 + appetite * 3.15;
+  }
+  if (legCount >= 4) {
+    return 3.3 + appetite * 3.2;
+  }
+  if (legCount >= 3) {
+    return 3.4 + appetite * 3.2;
+  }
+  return 3 + appetite * 4;
+}
+
+function mobileTargetLegOdds(legCount, appetite) {
+  if (legCount >= 8) {
+    return 1.35 + appetite * 0.62;
+  }
+  if (legCount >= 6) {
+    return 1.42 + appetite * 0.82;
+  }
+  if (legCount >= 4) {
+    return 1.55 + appetite * 1.15;
+  }
+  if (legCount >= 3) {
+    return 1.7 + appetite * 1.65;
+  }
+  return 1.8 + appetite * 2.2;
+}
+
+function mobileSurvivalPressure(legCount) {
+  return clamp((Number(legCount || 1) - 2) / 6, 0, 1);
+}
+
+function legCountForKey(key) {
+  if (key === "single") {
+    return 1;
+  }
+  if (key === "double") {
+    return 2;
+  }
+  if (key === "trixie") {
+    return 3;
+  }
+  return Number(String(key).match(/\d+/)?.[0] || 1);
+}
+
+function fixtureKeyForLeg(leg) {
+  const home = normalizeFixtureName(leg.homeTeam);
+  const away = normalizeFixtureName(leg.awayTeam);
+
+  if (home && away) {
+    return `${home}_vs_${away}`;
+  }
+
+  const labelFixture = String(leg.selectionLabel || "").split(":")[0].trim();
+  if (labelFixture.toLowerCase().includes(" vs ")) {
+    return normalizeFixtureName(labelFixture);
+  }
+
+  return leg.fixtureId || leg.id;
+}
+
+function normalizeFixtureName(value) {
+  return String(value || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim().replace(/\s+/g, "_");
+}
+
+function isBttsYesLeg(leg) {
+  return leg.market === "both_teams_to_score" && String(leg.outcome || leg.selectionLabel || "").toLowerCase().includes("yes");
+}
+
+function isTotalGoalsLeg(leg) {
+  return ["over_1_5_goals", "over_2_5_goals", "under_2_5_goals", "under_3_5_goals", "under_4_5_goals"].includes(leg.market);
+}
+
+function isScorerLeg(leg) {
+  return leg.market === "anytime_scorer" || leg.market === "first_goalscorer";
+}
+
+function fragileBttsHistory(leg) {
+  if (!isBttsYesLeg(leg)) {
+    return false;
+  }
+
+  const minBttsHistory = Math.min(
+    Number(leg.components?.homeBttsRate || 0.48),
+    Number(leg.components?.awayBttsRate || 0.48)
+  );
+  const overHistory = mean([
+    Number(leg.components?.homeOver25Rate || 0.48),
+    Number(leg.components?.awayOver25Rate || 0.48)
+  ]);
+
+  return minBttsHistory < 0.3 || overHistory < 0.34;
 }
 
 function fallbackDateRange() {
@@ -677,6 +1307,15 @@ function recalculateReturn(bet, stake) {
 
 function nearest(values, value) {
   return values.reduce((winner, item) => Math.abs(item - value) < Math.abs(winner - value) ? item : winner, values[0]);
+}
+
+function product(values) {
+  return values.reduce((total, value) => total * Number(value || 1), 1);
+}
+
+function mean(values) {
+  const valid = values.map(Number).filter((value) => Number.isFinite(value));
+  return valid.length ? valid.reduce((total, value) => total + value, 0) / valid.length : 0;
 }
 
 function parseDateKey(value) {

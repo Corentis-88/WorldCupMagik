@@ -23,6 +23,9 @@ export function buildMobilePayload(payload) {
     dayBuckets: payload.dayBuckets || [],
     dateRange: payload.dateRange || {},
     fixtures: (payload.fixtures || []).map(mobileFixture),
+    riskProfiles: payload.riskProfiles || {},
+    legCandidatesByRisk: mobileLegCandidatesByRisk(payload.legCandidatesByRisk || {}),
+    mostLikelyLegCandidates: (payload.mostLikelyLegCandidates || []).map(mobileLeg),
     markets: payload.markets || {},
     intelligence: {
       outcomeLearningCount: payload.intelligence?.outcomeLearningCount || 0,
@@ -78,6 +81,12 @@ function mobileBet(bet = {}) {
   };
 }
 
+function mobileLegCandidatesByRisk(groups = {}) {
+  return Object.fromEntries(
+    Object.entries(groups).map(([risk, legs]) => [risk, (legs || []).map(mobileLeg)])
+  );
+}
+
 function mobileLeg(leg = {}) {
   return {
     id: leg.id,
@@ -86,6 +95,7 @@ function mobileLeg(leg = {}) {
     homeTeam: leg.homeTeam,
     awayTeam: leg.awayTeam,
     market: leg.market,
+    outcome: leg.outcome,
     selectionLabel: leg.selectionLabel,
     playerName: leg.playerName,
     playerTeam: leg.playerTeam,
@@ -99,10 +109,22 @@ function mobileLeg(leg = {}) {
     independentEdge: leg.independentEdge,
     edge: leg.edge,
     confidence: leg.confidence,
+    score: leg.score,
     riskTag: leg.riskTag,
+    hardBlocks: leg.hardBlocks,
     components: {
+      intelligenceConfidence: leg.components?.intelligenceConfidence,
       nonMarketSignalCount: leg.components?.nonMarketSignalCount,
       oddsFreshness: leg.components?.oddsFreshness,
+      expectedGoals: leg.components?.expectedGoals,
+      homeExpectedGoals: leg.components?.homeExpectedGoals,
+      awayExpectedGoals: leg.components?.awayExpectedGoals,
+      heatStress: leg.components?.heatStress,
+      heatConfidence: leg.components?.heatConfidence,
+      homeBttsRate: leg.components?.homeBttsRate,
+      awayBttsRate: leg.components?.awayBttsRate,
+      homeOver25Rate: leg.components?.homeOver25Rate,
+      awayOver25Rate: leg.components?.awayOver25Rate,
       scorerMarketType: leg.components?.scorerMarketType,
       starterLikelihood: leg.components?.starterLikelihood,
       projectedMinutes: leg.components?.projectedMinutes,

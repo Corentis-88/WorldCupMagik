@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { buildRiskPolicy, selectBetslip, selectFixturesForWindow } from "../src/app-service.mjs";
-import { buildMostLikelyPicks } from "../src/portfolio-builder.mjs";
+import { buildBetRecommendations, buildMostLikelyPicks } from "../src/portfolio-builder.mjs";
 import policy from "../config/engine-policy.json" with { type: "json" };
 
 const fixtures = [
@@ -131,6 +131,30 @@ test("high risk still rejects thin survival when only price edge is better", () 
   const recommendations = { singles: [likely, thinLongshot], doubles: [], trixies: [], accumulatorsByLegCount: {}, accumulators: [] };
 
   assert.equal(selectBetslip({ recommendations, stake: 10, risk: 100 })[0].legs[0].selectionLabel, "Mexico vs South Africa: Over 1.5 goals");
+});
+
+test("short date windows still populate long risk slips from real legs", () => {
+  const baseLegs = [
+    likelyLeg("f1", "Fixture 1: favourite to win", 0.66, 82, 1.62),
+    likelyLeg("f2", "Fixture 2: favourite to win", 0.64, 81, 1.7),
+    likelyLeg("f3", "Fixture 3: favourite to win", 0.62, 80, 1.78),
+    likelyLeg("f4", "Fixture 4: favourite to win", 0.6, 79, 1.86)
+  ];
+  const extraLegs = [
+    likelyLeg("f1-s1", "Fixture 1: main striker anytime scorer", 0.34, 88, 3.2, { fixtureId: "f1", market: "anytime_scorer", playerName: "Main Striker" }),
+    likelyLeg("f2-s1", "Fixture 2: main striker anytime scorer", 0.32, 87, 3.6, { fixtureId: "f2", market: "anytime_scorer", playerName: "Second Striker" }),
+    likelyLeg("f3-s1", "Fixture 3: main striker anytime scorer", 0.3, 86, 4.1, { fixtureId: "f3", market: "anytime_scorer", playerName: "Third Striker" }),
+    likelyLeg("f4-s1", "Fixture 4: main striker anytime scorer", 0.29, 85, 4.4, { fixtureId: "f4", market: "anytime_scorer", playerName: "Fourth Striker" })
+  ];
+  const recommendations = buildBetRecommendations([...baseLegs, ...extraLegs], buildRiskPolicy(policy, 100));
+  const betslip = selectBetslip({ recommendations, stake: 10, risk: 100 });
+  const categories = betslip.map((bet) => bet.category);
+  const eightLeg = betslip.find((bet) => bet.category === "accumulator_8");
+
+  assert.deepEqual(categories, ["single", "double", "trixie", "accumulator_3", "accumulator_4", "accumulator_5", "accumulator_6", "accumulator_8"]);
+  assert.equal(eightLeg.legs.length, 8);
+  assert.ok(new Set(eightLeg.legs.map((leg) => leg.fixtureId)).size < eightLeg.legs.length);
+  assert.match(eightLeg.thesis, /Short-window fallback active/);
 });
 
 test("most likely picks ignore risk score and choose highest model probability legs", () => {
@@ -447,8 +471,8 @@ function combo(type, odds, score, legCount) {
 
 function likelyLeg(fixtureId, label, modelProbability, score, decimalOdds, overrides = {}) {
   return {
-    id: `leg-${fixtureId}`,
-    fixtureId,
+    id: overrides.id || `leg-${fixtureId}`,
+    fixtureId: overrides.fixtureId || fixtureId,
     fixtureDate: overrides.fixtureDate || "2026-06-13T19:00:00.000Z",
     createdAt: overrides.createdAt || "2026-06-13T10:00:00.000Z",
     homeTeam: overrides.homeTeam || `Home ${fixtureId}`,

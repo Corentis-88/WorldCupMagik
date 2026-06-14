@@ -1134,12 +1134,27 @@ function buildBetRecommendations(legs, policy) {
     .filter((leg) => Number(leg.modelProbability || 0) > 0)
     .sort((left, right) => Number(right.score || 0) - Number(left.score || 0));
   const accumulatorsByLegCount = buildAccumulatorRecommendationsByLegCount(eligibleLegs, policy);
+  const singles = rankCombos(eligibleLegs.map((leg) => [leg]), "single", policy);
+  const doubles = rankCombosWithFallback(
+    combinations(eligibleLegs.slice(0, 30), 2, 10000),
+    "double",
+    policy,
+    eligibleLegs,
+    2
+  ).slice(0, 8);
+  const trixies = rankCombosWithFallback(
+    combinations(eligibleLegs.slice(0, 28), 3, 12000),
+    "trixie",
+    policy,
+    eligibleLegs,
+    3
+  ).slice(0, 8);
 
   return {
     eligibleLegCount: eligibleLegs.length,
-    singles: rankCombos(eligibleLegs.map((leg) => [leg]), "single", policy),
-    doubles: rankCombos(combinations(eligibleLegs.slice(0, 30), 2, 10000), "double", policy).slice(0, 8),
-    trixies: rankCombos(combinations(eligibleLegs.slice(0, 28), 3, 12000), "trixie", policy).slice(0, 8),
+    singles,
+    doubles,
+    trixies,
     accumulatorsByLegCount,
     accumulators: Object.values(accumulatorsByLegCount).flat().sort((left, right) => right.score - left.score).slice(0, 16)
   };
@@ -1150,7 +1165,13 @@ function buildAccumulatorRecommendationsByLegCount(eligibleLegs, policy) {
 
   for (const size of [3, 4, 5, 6, 8]) {
     const pool = eligibleLegs.slice(0, accumulatorPoolSize(size));
-    byLegCount[size] = rankCombos(combinations(pool, size, accumulatorCombinationLimit(size)), "accumulator", policy).slice(0, 8);
+    byLegCount[size] = rankCombosWithFallback(
+      combinations(pool, size, accumulatorCombinationLimit(size)),
+      "accumulator",
+      policy,
+      eligibleLegs,
+      size
+    ).slice(0, 8);
   }
 
   return byLegCount;
@@ -1216,7 +1237,284 @@ function rankCombos(combos, type, policy) {
     .sort((left, right) => right.score - left.score);
 }
 
-function scoreCombo(legs, type, policy) {
+function rankCombosWithFallback(combos, type, policy, eligibleLegs, legCount) {
+  const ranked = rankCombos(combos, type, policy);
+
+  if (ranked.length) {
+    return ranked;
+  }
+
+  const fallback = buildShortWindowFallbackCombo(eligibleLegs, type, policy, legCount);
+  return fallback ? [fallback] : [];
+}
+
+function buildShortWindowFallbackCombo(eligibleLegs, type, policy, legCount) {
+  const selected = selectShortWindowFallbackLegs(eligibleLegs, policy, legCount);
+
+  if (selected.length !== legCount) {
+    return null;
+  }
+
+  const uniqueFixtureCount = new Set(selected.map(fixtureKeyForLeg)).size;
+  const combo = scoreCombo(selected, type, policy, {
+    allowSameFixture: uniqueFixtureCount < selected.length,
+    relaxPreferredOdds: true,
+    relaxAbsoluteOdds: true,
+    relaxTrixieRiskLeg: true,
+    relaxFavouriteOnly: true,
+    shortWindowFallback: true
+  });
+
+  if (!combo || combo.hardBlocks.length) {
+    return null;
+  }
+
+  return combo;
+}
+
+function selectShortWindowFallbackLegs(eligibleLegs, policy, legCount) {
+  const selected = [];
+  const selectedIds = new Set();
+  const uniqueFixtures = new Set((eligibleLegs || []).map(fixtureKeyForLeg));
+  const targetUniqueFixtures = Math.min(legCount, uniqueFixtures.size);
+  const cappedPool = shortWindowFallbackPool(eligibleLegs, policy, legCount);
+  const ranked = cappedPool
+    .map((leg) => ({ leg, score: shortWindowLegScore(leg, policy, legCount) }))
+    .sort((left, right) => right.score - left.score)
+    .map((item) => item.leg);
+
+  addShortWindowLegs({
+    selected,
+    selectedIds,
+    pool: ranked,
+    legCount: targetUniqueFixtures,
+    allowSameFixture: false,
+    policy
+  });
+
+  addShortWindowLegs({
+    selected,
+    selectedIds,
+    pool: ranked,
+    legCount,
+    allowSameFixture: true,
+    policy
+  });
+
+  upgradeShortWindowPayout({ selected, selectedIds, pool: ranked, policy, legCount });
+
+  return selected;
+}
+
+function shortWindowFallbackPool(eligibleLegs, policy, legCount) {
+  const appetite = riskAppetiteFromPolicy(policy);
+  const riskProfile = policy.riskProfile || {};
+  const maxCombinedOdds = Number(riskProfile.maxCombinedOdds || 50);
+  const perLegCombinedCap = legCount > 1 && maxCombinedOdds > 1
+    ? Math.pow(maxCombinedOdds, 1 / legCount) * (1.04 + appetite * 0.42)
+    : Infinity;
+  const marketAwareCap = shortWindowMaxLegOdds(legCount, appetite);
+  const primaryCap = Math.max(1.18, Math.min(perLegCombinedCap || Infinity, marketAwareCap));
+  const sorted = [...(eligibleLegs || [])]
+    .filter((leg) => Number(leg.modelProbability || 0) > 0)
+    .filter((leg) => Number(leg.decimalOdds || 0) > 1)
+    .sort((left, right) => shortWindowLegScore(right, policy, legCount) - shortWindowLegScore(left, policy, legCount));
+  const capped = sorted.filter((leg) => Number(leg.decimalOdds || 99) <= primaryCap);
+
+  if (capped.length >= legCount) {
+    return capped;
+  }
+
+  const relaxedMultiplier = legCount >= 6
+    ? 1.05 + appetite * 0.45
+    : 1.15 + appetite * 0.7;
+  const relaxedCap = Math.max(primaryCap, marketAwareCap * relaxedMultiplier);
+  const relaxed = sorted.filter((leg) => Number(leg.decimalOdds || 99) <= relaxedCap);
+
+  return relaxed.length >= legCount ? relaxed : sorted;
+}
+
+function shortWindowMaxLegOdds(legCount, appetite) {
+  if (legCount >= 8) {
+    return 2.25 + appetite * 2.2;
+  }
+
+  if (legCount >= 6) {
+    return 2.65 + appetite * 3.15;
+  }
+
+  if (legCount >= 4) {
+    return 3.3 + appetite * 3.2;
+  }
+
+  if (legCount >= 3) {
+    return 3.4 + appetite * 3.2;
+  }
+
+  return 3 + appetite * 4;
+}
+
+function addShortWindowLegs({ selected, selectedIds, pool, legCount, allowSameFixture, policy }) {
+  while (selected.length < legCount) {
+    const candidate = pool
+      .filter((leg) => !selectedIds.has(leg.id))
+      .filter((leg) => allowSameFixture || !selected.some((item) => fixtureKeyForLeg(item) === fixtureKeyForLeg(leg)))
+      .map((leg) => ({
+        leg,
+        fit: shortWindowPortfolioFit(leg, selected, policy)
+      }))
+      .sort((left, right) => right.fit - left.fit)[0]?.leg;
+
+    if (!candidate) {
+      break;
+    }
+
+    selected.push(candidate);
+    selectedIds.add(candidate.id);
+  }
+}
+
+function shortWindowPortfolioFit(leg, selected, policy) {
+  const appetite = riskAppetiteFromPolicy(policy);
+  const repeatedFixture = selected.some((item) => fixtureKeyForLeg(item) === fixtureKeyForLeg(leg)) ? 1 : 0;
+  const sameMarketCount = selected.filter((item) => item.market === leg.market).length;
+  const scorerRepeat = isScorerLeg(leg) && selected.some(isScorerLeg) ? 1 : 0;
+  const goalsRepeat = isTotalGoalsLeg(leg) && selected.some(isTotalGoalsLeg) ? 1 : 0;
+  const correlationPenalty = repeatedFixture * (18 - appetite * 7)
+    + Math.max(0, sameMarketCount - 1) * (7 - appetite * 2.5)
+    + scorerRepeat * (5 - appetite * 1.5)
+    + goalsRepeat * (3.5 - appetite);
+
+  return shortWindowLegScore(leg, policy, selected.length + 1)
+    - correlationPenalty;
+}
+
+function upgradeShortWindowPayout({ selected, selectedIds, pool, policy, legCount }) {
+  const appetite = riskAppetiteFromPolicy(policy);
+  const edgeBlend = clamp((appetite - 0.8) / 0.2, 0, 1);
+
+  if (edgeBlend <= 0 || selected.length < Math.min(5, legCount)) {
+    return;
+  }
+
+  const maxCandidateOdds = shortWindowMaxLegOdds(legCount, appetite) * (legCount >= 6 ? 1.45 : 1.7);
+  const attempts = legCount >= 8 ? 2 : 1;
+
+  for (let attempt = 0; attempt < attempts; attempt += 1) {
+    let bestSwap = null;
+
+    for (const candidate of pool) {
+      if (selectedIds.has(candidate.id)) {
+        continue;
+      }
+
+      const candidateOdds = Number(candidate.decimalOdds || 1);
+
+      if (candidateOdds <= 1 || candidateOdds > maxCandidateOdds) {
+        continue;
+      }
+
+      for (let index = 0; index < selected.length; index += 1) {
+        const outgoing = selected[index];
+        const outgoingOdds = Number(outgoing.decimalOdds || 1);
+        const sameFixtureSwap = fixtureKeyForLeg(candidate) === fixtureKeyForLeg(outgoing);
+
+        if (legCount >= 6 && !sameFixtureSwap) {
+          continue;
+        }
+
+        if (candidateOdds < outgoingOdds * (1.08 + (1 - edgeBlend) * 0.08)) {
+          continue;
+        }
+
+        const candidateScore = shortWindowLegScore(candidate, policy, legCount);
+        const outgoingScore = shortWindowLegScore(outgoing, policy, legCount);
+        const toleratedScoreDrop = sameFixtureSwap ? 12 + edgeBlend * 18 : 5 + edgeBlend * 9;
+
+        if (!sameFixtureSwap && candidateScore < outgoingScore - toleratedScoreDrop) {
+          continue;
+        }
+
+        const replacement = selected.map((leg, selectedIndex) => selectedIndex === index ? candidate : leg);
+        const correlation = portfolioCorrelationProfile(replacement, { legCount, appetite });
+        const fit = (candidateOdds / outgoingOdds - 1) * 100
+          + (candidateScore - outgoingScore)
+          - correlation.penalty * 0.55;
+
+        if (!bestSwap || fit > bestSwap.fit) {
+          bestSwap = { candidate, outgoing, index, fit };
+        }
+      }
+    }
+
+    if (!bestSwap) {
+      break;
+    }
+
+    selected[bestSwap.index] = bestSwap.candidate;
+    selectedIds.delete(bestSwap.outgoing.id);
+    selectedIds.add(bestSwap.candidate.id);
+  }
+}
+
+function shortWindowLegScore(leg, policy, legCount) {
+  const appetite = riskAppetiteFromPolicy(policy);
+  const probability = likelyWinProbability(leg, { legCount });
+  const confidence = Number(leg.confidence || 0);
+  const edge = Number(leg.edge || 0);
+  const independentEdge = Number(leg.independentEdge ?? edge);
+  const odds = Number(leg.decimalOdds || 1);
+  const signalScore = clamp(Number(leg.components?.nonMarketSignalCount || 0) / 4, 0, 1);
+  const intelligence = Number(leg.components?.intelligenceConfidence || 0.45);
+  const targetOdds = shortWindowTargetLegOdds(legCount, appetite);
+  const oddsFit = clamp(1 - Math.abs(Math.log(Math.max(1.01, odds) / targetOdds)) / 1.1, 0, 1);
+  const edgeBlend = clamp((appetite - 0.8) / 0.2, 0, 1);
+  const riskTagLift = ["calculated_risk", "longshot_value", "contrarian_value"].includes(leg.riskTag) ? appetite * 5 + edgeBlend * 4 : 0;
+  const survivalPressure = survivalPressureForLegCount(legCount);
+  const maxSurvivalOdds = shortWindowMaxLegOdds(legCount, appetite);
+  const cappedPriceLift = clamp(Math.log(Math.max(1.01, Math.min(odds, maxSurvivalOdds * 1.4))), 0, 2.2);
+  const boldSweetSpotLift = edgeBlend * clamp(odds - targetOdds, 0, maxSurvivalOdds * 0.75) * (legCount >= 6 ? 3.2 : 2.1);
+  const longPricePenalty = Math.max(0, odds - maxSurvivalOdds)
+    * (legCount >= 8 ? 9 : legCount >= 6 ? 6.8 : legCount >= 4 ? 4.2 : 1.8)
+    * (1 - appetite * 0.28 - edgeBlend * 0.24);
+  const priceWeight = (4 + appetite * 22) * (1 - survivalPressure * 0.72)
+    + edgeBlend * (legCount >= 6 ? 13 : legCount >= 4 ? 8 : 4);
+
+  return probability * (78 - appetite * 30)
+    + confidence * (18 - appetite * 2)
+    + intelligence * 7
+    + signalScore * 5
+    + clamp(edge, -0.03, 0.24) * (22 + appetite * 44 + edgeBlend * 20)
+    + clamp(independentEdge, -0.04, 0.26) * (28 + appetite * 54 + edgeBlend * 24)
+    + oddsFit * (12 + appetite * 6)
+    + cappedPriceLift * priceWeight
+    + boldSweetSpotLift
+    + riskTagLift
+    - longPricePenalty
+    - riskPortfolioLegPenalty(leg, legCount, appetite) * 55;
+}
+
+function shortWindowTargetLegOdds(legCount, appetite) {
+  if (legCount >= 8) {
+    return 1.35 + appetite * 0.62;
+  }
+
+  if (legCount >= 6) {
+    return 1.42 + appetite * 0.82;
+  }
+
+  if (legCount >= 4) {
+    return 1.55 + appetite * 1.15;
+  }
+
+  if (legCount >= 3) {
+    return 1.7 + appetite * 1.65;
+  }
+
+  return 1.8 + appetite * 2.2;
+}
+
+function scoreCombo(legs, type, policy, options = {}) {
   const hardBlocks = [];
   const riskProfile = policy.riskProfile || {};
   const appetite = riskAppetiteFromPolicy(policy);
@@ -1240,24 +1538,32 @@ function scoreCombo(legs, type, policy) {
   const fragileLegCount = legs.filter((leg) => riskPortfolioLegPenalty(leg, legs.length, appetite) >= 0.025).length;
   const preferred = preferredOddsRange(type, legs.length, policy);
   const correlation = portfolioCorrelationProfile(legs, { legCount: legs.length, appetite });
+  const {
+    allowSameFixture = false,
+    relaxPreferredOdds = false,
+    relaxAbsoluteOdds = false,
+    relaxTrixieRiskLeg = false,
+    relaxFavouriteOnly = false,
+    shortWindowFallback = false
+  } = options;
 
-  if (fixtureIds.size !== legs.length) {
+  if (!allowSameFixture && fixtureIds.size !== legs.length) {
     hardBlocks.push("same_fixture_correlation");
   }
 
-  if (combinedDecimalOdds < preferred.min || combinedDecimalOdds > preferred.max) {
+  if (!relaxPreferredOdds && (combinedDecimalOdds < preferred.min || combinedDecimalOdds > preferred.max)) {
     hardBlocks.push("combined_odds_outside_policy_range");
   }
 
-  if (combinedDecimalOdds > Number(riskProfile.maxCombinedOdds || 50)) {
+  if (!relaxAbsoluteOdds && combinedDecimalOdds > Number(riskProfile.maxCombinedOdds || 50)) {
     hardBlocks.push("combined_odds_above_absolute_cap");
   }
 
-  if (type === "trixie" && riskLegs.length < Number(riskProfile.minRiskLegsForTrixie ?? 0)) {
+  if (!relaxTrixieRiskLeg && type === "trixie" && riskLegs.length < Number(riskProfile.minRiskLegsForTrixie ?? 0)) {
     hardBlocks.push("trixie_missing_calculated_risk_leg");
   }
 
-  if ((type === "trixie" || type === "accumulator") && favouriteLegs.length === legs.length) {
+  if (!relaxFavouriteOnly && (type === "trixie" || type === "accumulator") && favouriteLegs.length === legs.length) {
     hardBlocks.push("all_legs_are_high_implied_probability_favourites");
   }
 
@@ -1317,9 +1623,10 @@ function scoreCombo(legs, type, policy) {
     marketFamilyMix: correlation.familyCounts,
     repeatedTeamCount: correlation.repeatedTeamCount,
     sameDateCluster: correlation.sameDateCluster,
+    shortWindowFallback,
     score: round(score, 2),
     hardBlocks,
-    thesis: buildComboThesis({ type, legs, combinedDecimalOdds, expectedValue, averageIndependentEdge, averageNonMarketSignalCount, riskLegs, favouriteLegs, survivalCombinedProbability, averageSurvivalProbability, bttsLegCount, fragileLegCount, correlation })
+    thesis: buildComboThesis({ type, legs, combinedDecimalOdds, expectedValue, averageIndependentEdge, averageNonMarketSignalCount, riskLegs, favouriteLegs, survivalCombinedProbability, averageSurvivalProbability, bttsLegCount, fragileLegCount, correlation, shortWindowFallback })
   };
 }
 
@@ -2329,6 +2636,12 @@ function fragileBttsHistory(leg) {
 
 function riskAppetiteFromPolicy(policy) {
   const riskProfile = policy.riskProfile || {};
+  const sliderRisk = Number(riskProfile.sliderRisk);
+
+  if (Number.isFinite(sliderRisk)) {
+    return clamp(sliderRisk / 100, 0, 1);
+  }
+
   const valueWeight = Number(riskProfile.valueHuntingWeight);
   const contrarianWeight = Number(riskProfile.contrarianWeight);
 
@@ -2449,13 +2762,17 @@ function oddsFitScore(value, min, max) {
   return 10 * (1 - Math.min(1, Math.abs(value - midpoint) / spread));
 }
 
-function buildComboThesis({ type, legs, combinedDecimalOdds, expectedValue, averageIndependentEdge, averageNonMarketSignalCount, riskLegs, favouriteLegs, survivalCombinedProbability, averageSurvivalProbability, bttsLegCount, fragileLegCount, correlation }) {
+function buildComboThesis({ type, legs, combinedDecimalOdds, expectedValue, averageIndependentEdge, averageNonMarketSignalCount, riskLegs, favouriteLegs, survivalCombinedProbability, averageSurvivalProbability, bttsLegCount, fragileLegCount, correlation, shortWindowFallback = false }) {
   const selections = legs.map((leg) => leg.selectionLabel).join(" | ");
   const riskText = riskLegs.length
     ? `${riskLegs.length} calculated-risk/value leg(s) stop this from being a favourite-only ${type}.`
     : "No calculated-risk leg; this should only survive if the edge is exceptional.";
   const favouriteText = favouriteLegs.length ? `${favouriteLegs.length} high-implied-probability favourite leg(s).` : "No high-implied-probability favourite crowding.";
   const survivalText = `${type} at combined odds ${round(combinedDecimalOdds, 2)} with estimated slip chance ${round(survivalCombinedProbability * 100, 2)}% and average leg survival ${round(averageSurvivalProbability * 100, 1)}%.`;
+  const uniqueFixtureCount = new Set(legs.map(fixtureKeyForLeg)).size;
+  const fallbackText = shortWindowFallback
+    ? `Short-window fallback active: the selected date range only offers ${uniqueFixtureCount} distinct fixture(s) for ${legs.length} leg(s), so the engine keeps the card populated with the best available real legs and only repeats a fixture when unavoidable.`
+    : "";
   const clusterText = legs.length >= 4
     ? `Long-slip controls: ${bttsLegCount} BTTS leg(s), ${fragileLegCount} fragile-value leg(s), so edge cannot outrank survivability.`
     : "Short-slip controls keep model chance ahead of price hunting.";
@@ -2467,7 +2784,7 @@ function buildComboThesis({ type, legs, combinedDecimalOdds, expectedValue, aver
     ? `Heat layer active on ${heatLegs.length} leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth.`
     : "Heat layer neutral or low impact on this slip.";
 
-  return `${survivalText} Expected value is ${round(expectedValue * 100, 2)}%, independent edge averages ${round(averageIndependentEdge * 100, 2)}%, and the model has ${round(averageNonMarketSignalCount, 1)} non-market signals per leg. ${clusterText} ${correlationText} ${riskText} ${favouriteText} ${heatText} Legs: ${selections}.`;
+  return `${survivalText} Expected value is ${round(expectedValue * 100, 2)}%, independent edge averages ${round(averageIndependentEdge * 100, 2)}%, and the model has ${round(averageNonMarketSignalCount, 1)} non-market signals per leg. ${fallbackText} ${clusterText} ${correlationText} ${riskText} ${favouriteText} ${heatText} Legs: ${selections}.`;
 }
 
 function nearest(values, value) {

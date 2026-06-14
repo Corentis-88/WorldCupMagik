@@ -231,7 +231,9 @@ function filterLegCandidatesForFixtures(legCandidates, fixtures) {
 }
 
 function trimRecommendationLegPool(legCandidates, fixtures) {
-  const fixtureTarget = Math.max(8, Math.min(14, Math.max(1, fixtures.length) * 2));
+  const fixtureCount = Math.max(1, fixtures.length);
+  const fixtureTarget = Math.max(10, Math.min(16, fixtureCount * 3));
+  const maxPerFixture = fixtureCount <= 4 ? 5 : 3;
   const byId = new Map();
   const fixtureCounts = new Map();
 
@@ -240,14 +242,14 @@ function trimRecommendationLegPool(legCandidates, fixtures) {
       break;
     }
 
-    const fixtureCount = fixtureCounts.get(leg.fixtureId) || 0;
+    const currentFixtureCount = fixtureCounts.get(leg.fixtureId) || 0;
 
-    if (fixtureCount >= 3) {
+    if (currentFixtureCount >= maxPerFixture) {
       continue;
     }
 
     byId.set(leg.id, leg);
-    fixtureCounts.set(leg.fixtureId, fixtureCount + 1);
+    fixtureCounts.set(leg.fixtureId, currentFixtureCount + 1);
   }
 
   for (const leg of legCandidates || []) {
