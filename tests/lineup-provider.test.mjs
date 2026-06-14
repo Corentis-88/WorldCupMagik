@@ -160,6 +160,29 @@ test("public lineup parser keeps expected lineups as predicted", () => {
   assert.equal(record.teams.Switzerland.status, "predicted");
 });
 
+test("public lineup parser rejects article chrome masquerading as starters", () => {
+  const fixture = {
+    id: "ger-cur",
+    date: "2026-06-14T17:00:00.000Z",
+    homeTeam: "Germany",
+    awayTeam: "Curaçao"
+  };
+  const html = `
+    <h1>Germany Starting XI and Squad Projection for the 2026 World Cup</h1>
+    <p>Bleacher Report, Soccer, Featured Video, THE WORLD CUP IS HERE, Previous Next, Home, World Football, Mika Volkmann/Getty Images, Nick Akerman Apr, Canada, and Mexico.</p>
+    <p>Germany can be considered among the favourites in 2026, and the expanded tournament size means escaping from a group that also includes Curacao should not pose too many issues.</p>
+  `;
+
+  const records = extractLineupsFromPage({
+    html,
+    fixture,
+    source: { name: "Bad article chrome test", url: "https://example.test/germany-starting-xi-projection" },
+    now: new Date("2026-06-14T16:15:00.000Z")
+  });
+
+  assert.equal(records.length, 0);
+});
+
 test("lineup fetcher can follow public search result pages for confirmed sheets", async () => {
   const originalFetch = globalThis.fetch;
   const requestedUrls = [];

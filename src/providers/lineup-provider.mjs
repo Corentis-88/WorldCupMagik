@@ -197,7 +197,7 @@ export function extractLineupsFromPage({ html, fixture, source, now = new Date()
   const teams = {};
 
   for (const team of [fixture.homeTeam, fixture.awayTeam]) {
-    const parsed = parseTeamLineup(lines, team);
+    const parsed = parseTeamLineup(lines, team, fixture);
 
     if (parsed) {
       teams[team] = parsed;
@@ -374,7 +374,7 @@ function fixtureDateKey(fixture, offsetDays = 0) {
   return date.toISOString().slice(0, 10);
 }
 
-function parseTeamLineup(lines, team) {
+function parseTeamLineup(lines, team, fixture) {
   const teamPattern = escapeRegExp(team);
   const statusWords = "(?:confirmed|official|announced|predicted|expected|probable|possible|projected|likely)";
   const lineupLabel = "(?:lineups?|starting\\s+lineups?|starting\\s+xi|starting\\s+eleven|team\\s+sheets?|teamsheets?|xi|eleven)";
@@ -391,7 +391,7 @@ function parseTeamLineup(lines, team) {
     if (match) {
       const starters = parsePlayerList(match.groups?.players);
 
-      if (starters.length >= 7) {
+      if (isPlausibleLineupStarters(starters, fixture)) {
         return {
           status: lineupStatusFromText(line),
           formation: cleanFormation(match.groups?.formation),
@@ -412,7 +412,7 @@ function parseTeamLineup(lines, team) {
 
     const starters = parsePlayerList(match.groups?.players);
 
-    if (starters.length >= 7) {
+    if (isPlausibleLineupStarters(starters, fixture)) {
       const context = lines.slice(Math.max(0, index - 4), index + 1).join(" ");
 
       return {
@@ -425,10 +425,10 @@ function parseTeamLineup(lines, team) {
     }
   }
 
-  return parseCompactTeamLineup(lines, team);
+  return parseCompactTeamLineup(lines, team, fixture);
 }
 
-function parseCompactTeamLineup(lines, team) {
+function parseCompactTeamLineup(lines, team, fixture) {
   const teamPattern = escapeRegExp(team);
   const statusWords = "(?:confirmed|official|announced|predicted|expected|probable|possible|projected|likely)";
   const lineupLabel = "(?:lineups?|starting\\s+lineups?|starting\\s+xi|starting\\s+eleven|team\\s+sheets?|teamsheets?|xi|eleven)";
@@ -445,7 +445,7 @@ function parseCompactTeamLineup(lines, team) {
     const windowText = lines.slice(index + 1, index + 18).join(", ");
     const starters = inlineStarters.length >= 7 ? inlineStarters : parsePlayerList(windowText);
 
-    if (starters.length >= 7) {
+    if (isPlausibleLineupStarters(starters, fixture)) {
       return {
         status: lineupStatusFromText(lines[index]),
         formation: cleanFormation(lines[index]),
@@ -485,6 +485,42 @@ function parsePlayerList(value) {
     .filter(Boolean)
     .filter((item, index, items) => items.findIndex((other) => normalizeName(other) === normalizeName(item)) === index)
     .slice(0, 18);
+}
+
+function isPlausibleLineupStarters(starters, fixture) {
+  const clean = (starters || []).slice(0, 11);
+
+  if (clean.length < 7) {
+    return false;
+  }
+
+  const plausible = clean.filter((name) => isPlausiblePlayerName(name, fixture)).length;
+  return plausible >= Math.min(7, clean.length);
+}
+
+function isPlausiblePlayerName(value, fixture) {
+  const text = String(value || "").trim();
+  const key = normalizeName(text);
+  const fixtureTeams = [fixture?.homeTeam, fixture?.awayTeam].map(normalizeName).filter(Boolean);
+
+  if (!key || fixtureTeams.includes(key)) {
+    return false;
+  }
+
+  if (/\/|\b(?:report|soccer|football|featured|video|world cup|previous|next|home|scores?|teams?|transfer|rumours?|rumors?|news|article|images?|getty|copyright|coach|manager|preview|prediction|odds)\b/i.test(text)) {
+    return false;
+  }
+
+  if (/^(?:and|or|the|a|an)\b/i.test(text) || /\b(?:and|or)\s+[A-Z]/.test(text)) {
+    return false;
+  }
+
+  if (/\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\b/i.test(text)) {
+    return false;
+  }
+
+  const words = key.split(/\s+/).filter(Boolean);
+  return words.length >= 1 && words.length <= 4 && words.every((word) => word.length >= 2);
 }
 
 function cleanPlayerName(value) {

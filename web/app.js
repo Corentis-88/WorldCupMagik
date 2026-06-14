@@ -1007,15 +1007,49 @@ function scorerLineupNotice(data, fixture, players) {
 }
 
 function isConfirmedTeamLineup(team) {
-  return team?.status === "confirmed" && Array.isArray(team.starters) && team.starters.length >= 7;
+  return team?.status === "confirmed" && hasPlausibleLineupStarters(team);
 }
 
 function isPredictedTeamLineup(team) {
-  return team?.status === "predicted" && Array.isArray(team.starters) && team.starters.length >= 7;
+  return team?.status === "predicted" && hasPlausibleLineupStarters(team);
 }
 
 function isUsableTeamLineup(team) {
-  return ["confirmed", "predicted"].includes(team?.status) && Array.isArray(team.starters) && team.starters.length >= 7;
+  return ["confirmed", "predicted"].includes(team?.status) && hasPlausibleLineupStarters(team);
+}
+
+function hasPlausibleLineupStarters(team) {
+  const starters = Array.isArray(team?.starters) ? team.starters.slice(0, 11) : [];
+
+  if (starters.length < 7) {
+    return false;
+  }
+
+  return starters.filter(isPlausibleLineupPlayerName).length >= Math.min(7, starters.length);
+}
+
+function isPlausibleLineupPlayerName(value) {
+  const text = String(value || "").trim();
+  const key = normalizeLookupKey(text);
+
+  if (!key) {
+    return false;
+  }
+
+  if (/\/|\b(?:report|soccer|football|featured|video|world cup|previous|next|home|scores?|teams?|transfer|rumours?|rumors?|news|article|images?|getty|copyright|coach|manager|preview|prediction|odds)\b/i.test(text)) {
+    return false;
+  }
+
+  if (/^(?:and|or|the|a|an)\b/i.test(text) || /\b(?:and|or)\s+[A-Z]/.test(text)) {
+    return false;
+  }
+
+  if (/\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\b/i.test(text)) {
+    return false;
+  }
+
+  const words = key.split(/\s+/).filter(Boolean);
+  return words.length >= 1 && words.length <= 4 && words.every((word) => word.length >= 2);
 }
 
 function isLineupRequiredForFixture(fixture, now = new Date()) {
