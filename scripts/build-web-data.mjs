@@ -354,6 +354,8 @@ function summarizeBet(bet) {
     score: bet.score,
     legCount: bet.legCount,
     combinedDecimalOdds: bet.combinedDecimalOdds,
+    uncappedCombinedDecimalOdds: bet.uncappedCombinedDecimalOdds,
+    fallbackCombinedOddsCap: bet.fallbackCombinedOddsCap,
     combinedProbability: bet.combinedProbability,
     stake: bet.stake,
     potentialReturn: bet.potentialReturn,

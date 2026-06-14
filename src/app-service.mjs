@@ -695,6 +695,8 @@ export function selectBetslip({ recommendations, stake, risk }) {
       score: combo.score,
       legCount: combo.legCount,
       combinedDecimalOdds: combo.combinedDecimalOdds,
+      uncappedCombinedDecimalOdds: combo.uncappedCombinedDecimalOdds,
+      fallbackCombinedOddsCap: combo.fallbackCombinedOddsCap,
       stake: stakePerBet,
       potentialReturn,
       potentialProfit: round(Math.max(0, potentialReturn - stakePerBet), 2),

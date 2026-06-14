@@ -157,6 +157,33 @@ test("short date windows still populate long risk slips from real legs", () => {
   assert.match(eightLeg.thesis, /Short-window fallback active/);
 });
 
+test("short date fallback caps extreme accumulator returns", () => {
+  const legs = [
+    likelyLeg("f1", "Fixture 1: under 2.5 goals", 0.57, 96, 4, { market: "under_2_5_goals", outcome: "Under" }),
+    likelyLeg("f2", "Fixture 2: favourite to win", 0.55, 93, 2.33),
+    likelyLeg("f3", "Fixture 3: home value win", 0.41, 92, 3.4),
+    likelyLeg("f1-draw", "Fixture 1: draw to win", 0.26, 99, 17, {
+      fixtureId: "f1",
+      market: "match_winner",
+      outcome: "Draw",
+      rawModelProbability: 0.28,
+      independentEdge: 0.12,
+      edge: 0.12
+    })
+  ];
+  const recommendations = buildBetRecommendations(legs, buildRiskPolicy(policy, 75));
+  const betslip = selectBetslip({ recommendations, stake: 10, risk: 75 });
+  const eightLeg = betslip.find((bet) => bet.category === "accumulator_8");
+
+  assert.ok(eightLeg);
+  assert.ok(eightLeg.shortWindowFallback);
+  assert.ok(Number(eightLeg.uncappedCombinedDecimalOdds) > Number(eightLeg.combinedDecimalOdds));
+  assert.ok(eightLeg.combinedDecimalOdds < 600, `combined odds were ${eightLeg.combinedDecimalOdds}`);
+  assert.ok(eightLeg.potentialReturn < 6000, `return was ${eightLeg.potentialReturn}`);
+  assert.ok(!eightLeg.legs.some((leg) => Number(leg.decimalOdds) >= 10));
+  assert.match(eightLeg.thesis, /Displayed fallback odds are capped/);
+});
+
 test("most likely picks ignore risk score and choose highest model probability legs", () => {
   const legs = [
     likelyLeg("flashy-longshot", "flashy", 0.28, 99, 5.5),

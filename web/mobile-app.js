@@ -629,7 +629,14 @@ function upgradeMobilePayout({ selected, selectedIds, pool, legCount, risk }) {
 function scoreMobileCombo({ key, label, type, legs, risk, likely = false, rank = null, shortWindowFallback = false }) {
   const legCount = legs.length;
   const probabilities = legs.map((leg) => mobileLikelyWinProbability(leg, { legCount }));
-  const combinedDecimalOdds = product(legs.map((leg) => leg.decimalOdds));
+  const appetite = clamp(Number(risk || 0) / 100, 0, 1);
+  const uncappedCombinedDecimalOdds = product(legs.map((leg) => leg.decimalOdds));
+  const uniqueFixtureCount = new Set(legs.map(fixtureKeyForLeg)).size;
+  const fallbackCombinedOddsCap = shortWindowFallback
+    ? mobileFallbackCombinedOddsCap(legCount, appetite, uniqueFixtureCount)
+    : Infinity;
+  const combinedDecimalOdds = Math.min(uncappedCombinedDecimalOdds, fallbackCombinedOddsCap);
+  const oddsCapped = uncappedCombinedDecimalOdds > combinedDecimalOdds + 0.005;
   const combinedProbability = product(likely ? probabilities : legs.map((leg) => leg.modelProbability || mobileLikelyWinProbability(leg, { legCount })));
   const survivalCombinedProbability = product(probabilities);
   const averageSurvivalProbability = mean(probabilities);
@@ -640,7 +647,6 @@ function scoreMobileCombo({ key, label, type, legs, risk, likely = false, rank =
   const expectedValue = combinedProbability * combinedDecimalOdds - 1;
   const riskLegCount = legs.filter((leg) => ["calculated_risk", "longshot_value", "contrarian_value"].includes(leg.riskTag)).length;
   const bttsLegCount = legs.filter(isBttsYesLeg).length;
-  const appetite = clamp(Number(risk || 0) / 100, 0, 1);
   const scorerLegCount = legs.filter(isScorerLeg).length;
   const firstScorerLegCount = legs.filter((leg) => leg.market === "first_goalscorer").length;
   const reusedSignalCount = legs.filter((leg) => leg.reusedSignal).length;
@@ -672,6 +678,8 @@ function scoreMobileCombo({ key, label, type, legs, risk, likely = false, rank =
     score: round(score, 2),
     legCount,
     combinedDecimalOdds: round(combinedDecimalOdds, 2),
+    uncappedCombinedDecimalOdds: oddsCapped ? round(uncappedCombinedDecimalOdds, 2) : undefined,
+    fallbackCombinedOddsCap: oddsCapped ? round(fallbackCombinedOddsCap, 2) : undefined,
     combinedProbability: round(combinedProbability, 4),
     expectedValue: round(expectedValue, 4),
     averageConfidence: round(averageConfidence, 4),
@@ -699,6 +707,8 @@ function scoreMobileCombo({ key, label, type, legs, risk, likely = false, rank =
       type,
       legs,
       combinedDecimalOdds,
+      uncappedCombinedDecimalOdds,
+      oddsCapped,
       expectedValue,
       averageIndependentEdge,
       averageNonMarketSignalCount,
@@ -712,11 +722,14 @@ function scoreMobileCombo({ key, label, type, legs, risk, likely = false, rank =
   };
 }
 
-function mobileComboThesis({ type, legs, combinedDecimalOdds, expectedValue, averageIndependentEdge, averageNonMarketSignalCount, survivalCombinedProbability, averageSurvivalProbability, riskLegCount, bttsLegCount, fragileLegCount, shortWindowFallback }) {
+function mobileComboThesis({ type, legs, combinedDecimalOdds, uncappedCombinedDecimalOdds, oddsCapped = false, expectedValue, averageIndependentEdge, averageNonMarketSignalCount, survivalCombinedProbability, averageSurvivalProbability, riskLegCount, bttsLegCount, fragileLegCount, shortWindowFallback }) {
   const uniqueFixtureCount = new Set(legs.map(fixtureKeyForLeg)).size;
   const reusedSignalCount = legs.filter((leg) => leg.reusedSignal).length;
+  const oddsCapText = oddsCapped
+    ? ` Displayed fallback odds are capped from raw ${round(uncappedCombinedDecimalOdds, 2)} to ${round(combinedDecimalOdds, 2)} so repeated/same-day signals cannot overstate the take-home.`
+    : "";
   const fallbackText = shortWindowFallback
-    ? `Short-window fallback active: ${uniqueFixtureCount} distinct fixture(s) for ${legs.length} leg(s), so the card stays populated with real candidates and repeats fixtures only when unavoidable. ${reusedSignalCount ? `${reusedSignalCount} strongest signal(s) were repeated. ` : ""}`
+    ? `Short-window fallback active: ${uniqueFixtureCount} distinct fixture(s) for ${legs.length} leg(s), so the card stays populated with real candidates and repeats fixtures only when unavoidable.${oddsCapText} ${reusedSignalCount ? `${reusedSignalCount} strongest signal(s) were repeated. ` : ""}`
     : "";
   const heatCount = legs.filter((leg) => Number(leg.components?.heatConfidence || 0) > 0.18 && Number(leg.components?.heatStress || 0) > 0.2).length;
   const heatText = heatCount ? `Heat layer active on ${heatCount} leg(s). ` : "";
@@ -866,6 +879,10 @@ function mobilePortfolioLegPenalty(leg, legCount, appetite) {
 }
 
 function mobileCandidateAllowed(leg, selected, legCount, appetite) {
+  if (!mobileFallbackLegOddsAllowed(leg, legCount, appetite)) {
+    return false;
+  }
+
   if (leg.market === "first_goalscorer" && appetite < 0.82) {
     return false;
   }
@@ -889,6 +906,10 @@ function mobileCandidateAllowed(leg, selected, legCount, appetite) {
 }
 
 function mobileRepeatCandidateAllowed(leg, selected, legCount, appetite) {
+  if (!mobileFallbackLegOddsAllowed(leg, legCount, appetite)) {
+    return false;
+  }
+
   if (leg.market === "first_goalscorer" && appetite < 0.95) {
     return false;
   }
@@ -907,6 +928,10 @@ function mobileRepeatCandidateAllowed(leg, selected, legCount, appetite) {
 }
 
 function mobileMostLikelyLegAllowed(leg, selected, legCount, { repeat = false } = {}) {
+  if (legCount >= 4 && !mobileFallbackLegOddsAllowed(leg, legCount, 0)) {
+    return false;
+  }
+
   if (leg.market === "first_goalscorer") {
     return false;
   }
@@ -926,6 +951,45 @@ function mobileMostLikelyLegAllowed(leg, selected, legCount, { repeat = false } 
   }
 
   return true;
+}
+
+function mobileFallbackLegOddsAllowed(leg, legCount, appetite) {
+  const decimalOdds = Number(leg.decimalOdds || 99);
+  return decimalOdds > 1 && decimalOdds <= mobileFallbackMaxLegOdds(legCount, appetite);
+}
+
+function mobileFallbackMaxLegOdds(legCount, appetite) {
+  if (legCount >= 8) {
+    return 4.35 + appetite * 0.85;
+  }
+  if (legCount >= 6) {
+    return 4.25 + appetite * 1.35;
+  }
+  if (legCount >= 4) {
+    return 5 + appetite * 1.6;
+  }
+  return 6 + appetite * 2;
+}
+
+function mobileFallbackCombinedOddsCap(legCount, appetite, uniqueFixtureCount = legCount) {
+  const fullCoverageCap = legCount >= 8
+    ? 220 + appetite * 630
+    : legCount >= 6
+      ? 140 + appetite * 380
+      : legCount >= 5
+        ? 95 + appetite * 265
+        : legCount >= 4
+          ? 60 + appetite * 180
+          : legCount >= 3
+            ? 35 + appetite * 85
+            : Infinity;
+
+  if (!Number.isFinite(fullCoverageCap)) {
+    return fullCoverageCap;
+  }
+
+  const coverage = clamp(Number(uniqueFixtureCount || legCount) / Math.max(1, legCount), 0.2, 1);
+  return fullCoverageCap * (0.45 + coverage * 0.55);
 }
 
 function isMobileLongSlipAnytimeScorerLeg(leg) {
