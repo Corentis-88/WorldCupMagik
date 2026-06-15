@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-06-15T18:48:01.314Z",
+  "createdAt": "2026-06-15T22:31:03.282Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -9,10 +9,8 @@
     "reason": "Collecting public-web odds until the coverage gate is satisfied."
   },
   "fixtureWindow": {
-    "fixtureCount": 59,
+    "fixtureCount": 57,
     "fixtureIds": [
-      "fixture_cef81942",
-      "fixture_37d4ba98",
       "fixture_883a13d3",
       "fixture_48bc0807",
       "fixture_dd4c99ca",
@@ -76,8 +74,8 @@
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 33,
-    "freshRecordCount": 33,
+    "totalRecords": 11,
+    "freshRecordCount": 11,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -98,31 +96,22 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 2 more covered fixtures",
-        "needs 12 more fixtures for coverage",
+        "needs 7 more fresh records",
+        "needs 3 more covered fixtures",
+        "needs 13 more fixtures for coverage",
         "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 33,
-      "freshRecordCount": 33,
-      "fixtureCount": 3,
-      "totalFixtureCount": 59,
-      "fixtureCoverage": 0.051,
-      "bookmakerCount": 3,
+      "recordCount": 11,
+      "freshRecordCount": 11,
+      "fixtureCount": 2,
+      "totalFixtureCount": 57,
+      "fixtureCoverage": 0.035,
+      "bookmakerCount": 2,
       "averageBookmakersPerFixture": 1,
-      "lineCount": 3,
-      "outcomeCount": 3,
-      "latestCapturedAt": "2026-06-15T18:48:01.314Z",
+      "lineCount": 2,
+      "outcomeCount": 2,
+      "latestCapturedAt": "2026-06-15T22:31:03.282Z",
       "sampleOutcomes": [
-        {
-          "fixtureId": "fixture_37d4ba98",
-          "fixture": "Saudi Arabia v Uruguay",
-          "bookmaker": "SportsGambler public prop pages: Saudi Arabia v Uruguay",
-          "outcome": "Uruguay -1.25",
-          "line": "-1.25",
-          "team": "Uruguay",
-          "decimalOdds": 1.89,
-          "capturedAt": "2026-06-15T18:48:01.314Z"
-        },
         {
           "fixtureId": "fixture_48bc0807",
           "fixture": "France v Senegal",
@@ -131,7 +120,7 @@
           "line": "+1.25",
           "team": "Senegal",
           "decimalOdds": 1.82,
-          "capturedAt": "2026-06-15T18:48:01.314Z"
+          "capturedAt": "2026-06-15T22:31:03.282Z"
         },
         {
           "fixtureId": "fixture_dd4c99ca",
@@ -141,7 +130,7 @@
           "line": "-2",
           "team": "Norway",
           "decimalOdds": 1.91,
-          "capturedAt": "2026-06-15T18:48:01.314Z"
+          "capturedAt": "2026-06-15T22:31:03.282Z"
         }
       ]
     },
@@ -172,7 +161,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 59,
+      "totalFixtureCount": 57,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -208,7 +197,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 59,
+      "totalFixtureCount": 57,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -244,7 +233,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 59,
+      "totalFixtureCount": 57,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -279,7 +268,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 59,
+      "totalFixtureCount": 57,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -314,7 +303,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 59,
+      "totalFixtureCount": 57,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
