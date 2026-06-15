@@ -1,5 +1,6 @@
 const MOBILE_BET_LIMIT = 8;
 const MOBILE_SCORER_LIMIT = 8;
+const MOBILE_ASSIST_LIMIT = 5;
 
 export function buildMobilePayload(payload) {
   const profiles = Object.fromEntries(
@@ -40,7 +41,8 @@ export function buildMobilePayload(payload) {
     },
     profiles,
     pickOfTheDay,
-    likelyScorersByDate: buildLikelyScorersByDate(payload)
+    likelyScorersByDate: buildLikelyScorersByDate(payload),
+    likelyAssistsByDate: buildLikelyAssistsByDate(payload)
   };
 }
 
@@ -140,6 +142,17 @@ function mobileLeg(leg = {}) {
       projectedMinutes: leg.components?.projectedMinutes,
       scorerGoalsPerTwentyTeamMatches: leg.components?.scorerGoalsPerTwentyTeamMatches,
       scorerConfidence: leg.components?.scorerConfidence,
+      scorerMatchesSampled: leg.components?.scorerMatchesSampled,
+      scorerMarketLiftCap: leg.components?.scorerMarketLiftCap,
+      assistMarketType: leg.components?.assistMarketType,
+      assistsPerTwentyTeamMatches: leg.components?.assistsPerTwentyTeamMatches,
+      assistConfidence: leg.components?.assistConfidence,
+      assistMatchesSampled: leg.components?.assistMatchesSampled,
+      creativeRoleScore: leg.components?.creativeRoleScore,
+      scoringRoleScore: leg.components?.scoringRoleScore,
+      playerDataCoverage: leg.components?.playerDataCoverage,
+      assistMarketLiftCap: leg.components?.assistMarketLiftCap,
+      playerStatSource: leg.components?.playerStatSource,
       projectedShotTotal: leg.components?.projectedShotTotal,
       predictionReflectionAdjustment: leg.components?.predictionReflectionAdjustment,
       predictionReflectionConfidence: leg.components?.predictionReflectionConfidence
@@ -181,6 +194,28 @@ function buildLikelyScorersByDate(payload) {
   return grouped;
 }
 
+function buildLikelyAssistsByDate(payload) {
+  const grouped = {};
+  const assistLegs = assistCandidates(payload);
+
+  for (const fixture of payload.fixtures || []) {
+    const fixturePlayers = likelyAssistsForFixture({ payload, fixture, assistLegs });
+    const key = fixture.dateKey || dateKey(fixture.date);
+
+    if (!grouped[key]) {
+      grouped[key] = [];
+    }
+
+    grouped[key].push({
+      fixture: mobileFixture(fixture),
+      fixtureLabel: `${fixture.homeTeam} vs ${fixture.awayTeam}`,
+      players: fixturePlayers.slice(0, MOBILE_ASSIST_LIMIT)
+    });
+  }
+
+  return grouped;
+}
+
 function scorerCandidates(payload) {
   const byId = new Map();
   const sourceGroups = [
@@ -191,6 +226,35 @@ function scorerCandidates(payload) {
   for (const group of sourceGroups) {
     for (const leg of group || []) {
       if (!["first_goalscorer", "anytime_scorer"].includes(leg.market)) {
+        continue;
+      }
+
+      const key = [
+        leg.fixtureId,
+        normalizeName(leg.playerName || leg.outcome || leg.selectionLabel),
+        leg.market
+      ].join("|");
+      const existing = byId.get(key);
+
+      if (!existing || scorerLegScore(leg) > scorerLegScore(existing)) {
+        byId.set(key, leg);
+      }
+    }
+  }
+
+  return [...byId.values()];
+}
+
+function assistCandidates(payload) {
+  const byId = new Map();
+  const sourceGroups = [
+    payload.mostLikelyLegCandidates || [],
+    ...Object.values(payload.legCandidatesByRisk || {})
+  ];
+
+  for (const group of sourceGroups) {
+    for (const leg of group || []) {
+      if (leg.market !== "anytime_assist") {
         continue;
       }
 
@@ -230,6 +294,22 @@ function likelyScorersForFixture({ payload, fixture, scorerLegs }) {
     .sort((left, right) => scorerRankScore(right) - scorerRankScore(left));
 }
 
+function likelyAssistsForFixture({ payload, fixture, assistLegs }) {
+  const byPlayer = new Map();
+  const fixtureLegs = assistLegs.filter((leg) => leg.fixtureId === fixture.id);
+
+  if (fixtureLegs.length) {
+    addAssistOddsCandidates({ byPlayer, payload, fixture, legs: fixtureLegs });
+  }
+
+  if (byPlayer.size < MOBILE_ASSIST_LIMIT) {
+    addAssistMemoryCandidates({ byPlayer, payload, fixture });
+  }
+
+  return [...byPlayer.values()]
+    .sort((left, right) => assistRankScore(right) - assistRankScore(left));
+}
+
 function addScorerOddsCandidates({ byPlayer, payload, fixture, legs, preferredMarket }) {
   for (const leg of legs) {
     const playerName = leg.playerName || leg.outcome || leg.selectionLabel;
@@ -256,6 +336,35 @@ function addScorerOddsCandidates({ byPlayer, payload, fixture, legs, preferredMa
       starterLikelihood: Number(leg.components?.starterLikelihood || 0),
       projectedMinutes: Number(leg.components?.projectedMinutes || 0),
       reason: `${label}${bookmaker}${oddsText}`
+    }, payload, fixture);
+  }
+}
+
+function addAssistOddsCandidates({ byPlayer, payload, fixture, legs }) {
+  for (const leg of legs) {
+    const playerName = leg.playerName || leg.outcome || leg.selectionLabel;
+
+    if (!playerName) {
+      continue;
+    }
+
+    const baseProbability = Number(leg.modelProbability || leg.rawModelProbability || leg.likelyProbability || 0);
+    const probability = clamp(baseProbability, 0.025, 0.42);
+    const bookmaker = leg.bookmaker ? ` via ${leg.bookmaker}` : "";
+    const oddsText = leg.decimalOdds ? ` @ ${Number(leg.decimalOdds).toFixed(2)}` : "";
+
+    upsertScorerCandidate(byPlayer, {
+      playerName,
+      team: playerTeamFromScorerData(leg, fixture),
+      probability,
+      confidence: Number(leg.confidence || leg.components?.assistConfidence || 0.5),
+      market: "anytime_assist",
+      sourceWeight: 1.18,
+      assistEvidence: Number(leg.components?.assistsPerTwentyTeamMatches || 0),
+      creativeRoleScore: Number(leg.components?.creativeRoleScore || 0.5),
+      starterLikelihood: Number(leg.components?.starterLikelihood || 0),
+      projectedMinutes: Number(leg.components?.projectedMinutes || 0),
+      reason: `anytime-assist odds${bookmaker}${oddsText}`
     }, payload, fixture);
   }
 }
@@ -318,6 +427,76 @@ function addScorerMemoryCandidates({ byPlayer, payload, fixture, mode }) {
   }
 }
 
+function addAssistMemoryCandidates({ byPlayer, payload, fixture }) {
+  const teamPlayers = payload.playerStats?.teams || {};
+  const profiles = payload.teamProfiles?.teams || {};
+
+  for (const side of ["home", "away"]) {
+    const team = side === "home" ? fixture.homeTeam : fixture.awayTeam;
+    const opponent = side === "home" ? fixture.awayTeam : fixture.homeTeam;
+    const teamProfile = profiles[team] || {};
+    const opponentProfile = profiles[opponent] || {};
+    const players = dedupeAssistPlayers([
+      ...(teamPlayers[team] || []),
+      ...(teamProfile.topScorers || [])
+    ]).sort((left, right) => assistMemoryRank(right) - assistMemoryRank(left));
+    const expectedGoals = clamp(Number(teamProfile.longForm?.xgFor || teamProfile.longForm?.goalsFor || 1.25), 0.45, 2.6);
+    const opponentConcede = clamp(Number(opponentProfile.longForm?.xgAgainst || opponentProfile.longForm?.goalsAgainst || 1.25), 0.45, 2.7);
+    const teamExpectedGoals = clamp((expectedGoals * 0.65) + (opponentConcede * 0.35), 0.35, 2.8);
+    const teamGoalChance = 1 - Math.exp(-teamExpectedGoals);
+
+    for (const player of players.slice(0, 10)) {
+      if (!player.playerName) {
+        continue;
+      }
+
+      const assists = Number(player.assistsPerTwentyTeamMatches || player.assists || 0);
+      const goals = Number(player.goalsPerTwentyTeamMatches || player.goals || 0);
+      const involvements = Number(player.goalInvolvementsPerTwentyTeamMatches || player.goalInvolvements || assists + goals);
+      const assistProxy = assists > 0 ? assists : Math.max(0, involvements * 0.22 + goals * 0.08 + teamExpectedGoals * 0.12);
+
+      if (assistProxy <= 0) {
+        continue;
+      }
+
+      const sample = Math.max(1, Number(player.matchesSampled || 20));
+      const assistRate = clamp(assistProxy / sample, 0.01, 0.45);
+      const coverage = Number(player.playerDataCoverage || (assists > 0 ? 0.62 : 0.42));
+      const confidence = Number(player.assistConfidence || player.scorerConfidence || coverage || 0.44);
+      const creativeRole = clamp(
+        Number(player.creativeRoleScore || 0)
+          + (assists > 0 ? 0.18 : 0)
+          + Math.min(0.12, involvements / 80)
+          + Math.min(0.06, teamExpectedGoals / 40),
+        0.28,
+        assists > 0 ? 0.82 : 0.58
+      );
+      const probability = clamp(
+        (assistRate * 0.46)
+          + (teamGoalChance * creativeRole * 0.14)
+          + (teamExpectedGoals * creativeRole * 0.035)
+          + (confidence * coverage * 0.012),
+        0.025,
+        assists > 0 ? 0.34 : 0.24
+      );
+
+      upsertScorerCandidate(byPlayer, {
+        playerName: player.playerName,
+        team,
+        probability,
+        confidence,
+        market: "anytime_assist",
+        sourceWeight: assists > 0 ? 0.86 : 0.48,
+        assistEvidence: assistProxy,
+        creativeRoleScore: creativeRole,
+        reason: assists > 0
+          ? `${round(assists, 1)} assists in last ${sample} team games`
+          : `creative-role fallback from ${round(involvements, 1)} goal involvements in last ${sample} team games`
+      }, payload, fixture);
+    }
+  }
+}
+
 function upsertScorerCandidate(byPlayer, candidate, payload, fixture) {
   const canonical = canonicalScorerIdentity(candidate, payload, fixture);
   const existingEntry = byPlayer.get(canonical.key)
@@ -335,6 +514,8 @@ function upsertScorerCandidate(byPlayer, candidate, payload, fixture) {
       confidence: round(candidate.confidence, 4),
       market: candidate.market,
       sourceWeight: round(candidate.sourceWeight, 4),
+      assistEvidence: candidate.assistEvidence,
+      creativeRoleScore: candidate.creativeRoleScore,
       starterLikelihood: candidate.starterLikelihood,
       projectedMinutes: candidate.projectedMinutes,
       reason: trimText(candidate.reason, 180)
@@ -400,6 +581,35 @@ function dedupePlayers(players) {
   return [...byName.values()];
 }
 
+function dedupeAssistPlayers(players) {
+  const byName = new Map();
+
+  for (const player of players) {
+    const key = normalizeName(player.playerName || player.name);
+
+    if (!key) {
+      continue;
+    }
+
+    const normalized = { ...player, playerName: player.playerName || player.name };
+    const existing = byName.get(key);
+
+    if (!existing || assistMemoryRank(normalized) > assistMemoryRank(existing)) {
+      byName.set(key, normalized);
+    }
+  }
+
+  return [...byName.values()];
+}
+
+function assistMemoryRank(player) {
+  return Number(player.assistsPerTwentyTeamMatches || player.assists || 0) * 4
+    + Number(player.goalInvolvementsPerTwentyTeamMatches || player.goalInvolvements || 0) * 0.7
+    + Number(player.goalsPerTwentyTeamMatches || player.goals || 0) * 0.28
+    + Number(player.creativeRoleScore || 0) * 2
+    + Number(player.playerDataCoverage || 0);
+}
+
 function playerTeamFromScorerData(leg, fixture) {
   if (leg.playerTeam) {
     return leg.playerTeam;
@@ -434,6 +644,16 @@ function scorerRankScore(player) {
     + Number(player.confidence || 0) * 0.03
     + Number(player.starterLikelihood || 0) * 0.025
     + Number(player.projectedMinutes || 0) / 9000;
+}
+
+function assistRankScore(player) {
+  return Number(player.probability || 0)
+    + Number(player.sourceWeight || 0) * 0.045
+    + Number(player.confidence || 0) * 0.025
+    + Number(player.creativeRoleScore || 0) * 0.02
+    + Math.min(0.025, Number(player.assistEvidence || 0) * 0.004)
+    + Number(player.starterLikelihood || 0) * 0.018
+    + Number(player.projectedMinutes || 0) / 10000;
 }
 
 function trimText(value, limit) {

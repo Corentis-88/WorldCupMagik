@@ -54,6 +54,32 @@
           "https://www.national-football-teams.com/country/81/2022/Haiti.html"
         ]
       }
+    },
+    "playerStatSources": {
+      "enabled": true,
+      "templates": [
+        {
+          "name": "PlayerStats assists",
+          "parser": "playerstats-football",
+          "statType": "goals_assists",
+          "urlTemplate": "https://playerstats.football/world-cup/{teamSlug}/goals-assists",
+          "reliability": 0.56
+        },
+        {
+          "name": "PlayerStats shots",
+          "parser": "playerstats-football",
+          "statType": "shots",
+          "urlTemplate": "https://playerstats.football/world-cup/{teamSlug}/total-shots",
+          "reliability": 0.52
+        },
+        {
+          "name": "PlayerStats shots on target",
+          "parser": "playerstats-football",
+          "statType": "shots_on_target",
+          "urlTemplate": "https://playerstats.football/world-cup/{teamSlug}/shots-on-target",
+          "reliability": 0.52
+        }
+      ]
     }
   },
   "weather": {

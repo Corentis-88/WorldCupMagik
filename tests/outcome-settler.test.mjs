@@ -137,6 +137,21 @@ test("settles first-goalscorer only when scorer order is available", () => {
   assert.equal(gradeLegAgainstMatch(selected, unorderedMatch).reason, "first_scorer_order_missing");
 });
 
+test("settles anytime assist when public scorer rows include assists", () => {
+  const selected = { ...leg("leg-assist", "anytime_assist", "Joshua Kimmich", 3.1), playerName: "Joshua Kimmich", playerTeam: "Germany" };
+  const assistedMatch = {
+    ...match("Germany", "Curacao", 3, 0),
+    homeScorers: [{ name: "Kai Havertz", goals: 1, assists: ["Kimmich"] }]
+  };
+  const missingAssistMatch = {
+    ...match("Germany", "Curacao", 3, 0),
+    homeScorers: [{ name: "Kai Havertz", goals: 1 }]
+  };
+
+  assert.equal(gradeLegAgainstMatch(selected, assistedMatch).status, "won");
+  assert.equal(gradeLegAgainstMatch(selected, missingAssistMatch).reason, "assist_list_missing");
+});
+
 function statusFor(settlement, market) {
   return settlement.newRecords.find((record) => record.market === market)?.status;
 }

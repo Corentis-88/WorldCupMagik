@@ -540,6 +540,7 @@ export function buildRiskPolicy(basePolicy, riskValue) {
       maxMarketOnlySurvivalGap: round(0.16 + appetite * 0.08, 4),
       maxNegativeIndependentEdge: round(0.035 + appetite * 0.035, 4),
       allowFirstGoalscorerBets: appetite >= 0.82,
+      allowAnytimeAssistBets: appetite >= 0.72,
       maxLongSlipScorerLegs: appetite >= 0.82 ? 2 : 1,
       maxLongSlipFirstScorers: appetite >= 0.95 ? 1 : 0,
       maxFavoriteImpliedProbability: round(0.82 - appetite * 0.12, 4),
@@ -592,6 +593,7 @@ export function buildMostLikelyPolicy(basePolicy) {
       maxMarketOnlySurvivalGap: 0.2,
       maxNegativeIndependentEdge: 0.055,
       allowFirstGoalscorerBets: false,
+      allowAnytimeAssistBets: false,
       maxLongSlipScorerLegs: 1,
       maxLongSlipFirstScorers: 0,
       allowHighCertaintySurvivalFavorites: true,
@@ -897,7 +899,7 @@ function isSquadDepthRecord(record) {
 }
 
 function isScorerOddsRecord(record) {
-  return record?.market === "anytime_scorer" || record?.market === "first_goalscorer";
+  return record?.market === "anytime_scorer" || record?.market === "first_goalscorer" || record?.market === "anytime_assist";
 }
 
 function isPublicNewsArticle(article) {

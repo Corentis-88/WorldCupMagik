@@ -51,7 +51,8 @@ const el = {
   marketLine: document.getElementById("marketLine"),
   betslip: document.getElementById("betslipList"),
   pickOfDay: document.getElementById("pickOfDayList"),
-  likelyScorers: document.getElementById("likelyScorersList")
+  likelyScorers: document.getElementById("likelyScorersList"),
+  likelyAssists: document.getElementById("likelyAssistsList")
 };
 
 for (const input of [el.stake, el.dateFrom, el.dateTo, el.risk]) {
@@ -195,6 +196,7 @@ function render() {
   renderSlip(slip, profile);
   renderPickOfDay(pickSlip, pickProfile || profile);
   renderLikelyGoalscorers(todayScorerGroups());
+  renderLikelyAssists(todayAssistGroups());
 }
 
 function initialiseDateInputs() {
@@ -818,6 +820,9 @@ function mobilePortfolioLegPenalty(leg, legCount, appetite) {
     const projectedMinutes = Number(leg.components?.projectedMinutes ?? 58);
     const goalsPerTwenty = Number(leg.components?.scorerGoalsPerTwentyTeamMatches ?? 0);
     const scorerConfidence = Number(leg.components?.scorerConfidence ?? 0.45);
+    const assistsPerTwenty = Number(leg.components?.assistsPerTwentyTeamMatches ?? 0);
+    const assistConfidence = Number(leg.components?.assistConfidence ?? 0);
+    const creativeRoleScore = Number(leg.components?.creativeRoleScore ?? 0);
 
     if (starter < 0.64) {
       penalty += (0.64 - starter) * 0.08;
@@ -825,10 +830,20 @@ function mobilePortfolioLegPenalty(leg, legCount, appetite) {
     if (projectedMinutes < 65) {
       penalty += (65 - projectedMinutes) * 0.0025;
     }
-    if (goalsPerTwenty < 3) {
+    if (leg.market === "anytime_assist") {
+      if (assistsPerTwenty < 1.8) {
+        penalty += (1.8 - assistsPerTwenty) * 0.014;
+      }
+      if (assistConfidence < 0.6) {
+        penalty += (0.6 - assistConfidence) * 0.07;
+      }
+      if (creativeRoleScore < 0.56) {
+        penalty += (0.56 - creativeRoleScore) * 0.06;
+      }
+    } else if (goalsPerTwenty < 3) {
       penalty += (3 - goalsPerTwenty) * 0.012;
     }
-    if (scorerConfidence < 0.58) {
+    if (leg.market !== "anytime_assist" && scorerConfidence < 0.58) {
       penalty += (0.58 - scorerConfidence) * 0.07;
     }
   }
@@ -864,6 +879,10 @@ function mobileCandidateAllowed(leg, selected, legCount, appetite) {
     return false;
   }
 
+  if (leg.market === "anytime_assist" && appetite < 0.72) {
+    return false;
+  }
+
   if (isScorerLeg(leg) && legCount >= 4) {
     const scorerCount = selected.filter(isScorerLeg).length;
     const firstScorerCount = selected.filter((item) => item.market === "first_goalscorer").length;
@@ -874,7 +893,7 @@ function mobileCandidateAllowed(leg, selected, legCount, appetite) {
     if (leg.market === "first_goalscorer" && firstScorerCount >= maxMobileFirstScorerLegs(legCount, appetite)) {
       return false;
     }
-    if (leg.market === "anytime_scorer" && !isMobileLongSlipAnytimeScorerLeg(leg) && appetite < 0.95) {
+    if ((leg.market === "anytime_scorer" || leg.market === "anytime_assist") && !isMobileLongSlipAnytimeScorerLeg(leg) && appetite < 0.95) {
       return false;
     }
   }
@@ -895,7 +914,7 @@ function mobileMostLikelyLegAllowed(leg, selected, legCount) {
     return false;
   }
 
-  if (leg.market === "first_goalscorer") {
+  if (leg.market === "first_goalscorer" || leg.market === "anytime_assist") {
     return false;
   }
 
@@ -952,6 +971,25 @@ function mobileFallbackCombinedOddsCap(legCount, appetite, uniqueFixtureCount = 
 }
 
 function isMobileLongSlipAnytimeScorerLeg(leg) {
+  if (leg.market === "anytime_assist") {
+    const model = Number(leg.modelProbability || leg.likelyProbability || 0);
+    const raw = Number(leg.rawModelProbability || model);
+    const confidence = Number(leg.confidence || 0);
+    const starter = Number(leg.components?.starterLikelihood ?? 0.5);
+    const projectedMinutes = Number(leg.components?.projectedMinutes ?? 0);
+
+    return Number(leg.decimalOdds || 99) <= 7
+      && model >= 0.16
+      && raw >= 0.14
+      && confidence >= 0.62
+      && starter >= 0.64
+      && projectedMinutes >= 62
+      && Number(leg.components?.assistsPerTwentyTeamMatches || 0) >= 1
+      && Number(leg.components?.assistConfidence || 0) >= 0.52
+      && Number(leg.components?.creativeRoleScore || 0) >= 0.5
+      && Number(leg.components?.playerDataCoverage || 0) >= 0.45;
+  }
+
   if (leg.market !== "anytime_scorer") {
     return false;
   }
@@ -1120,7 +1158,7 @@ function isTotalGoalsLeg(leg) {
 }
 
 function isScorerLeg(leg) {
-  return leg.market === "anytime_scorer" || leg.market === "first_goalscorer";
+  return leg.market === "anytime_scorer" || leg.market === "first_goalscorer" || leg.market === "anytime_assist";
 }
 
 function fragileBttsHistory(leg) {
@@ -1271,6 +1309,21 @@ function todayScorerGroups() {
   });
 }
 
+function todayAssistGroups() {
+  const today = localDateKey(new Date());
+  const groups = state.data?.likelyAssistsByDate?.[today] || [];
+
+  return groups.map((group) => {
+    const players = applyLineupAdjustments(group.players || [], group.fixture).slice(0, 5);
+
+    return {
+      ...group,
+      players,
+      lineupNotice: assistLineupNotice(group.fixture, players)
+    };
+  });
+}
+
 function renderLikelyGoalscorers(groups) {
   if (!groups.length) {
     el.likelyScorers.innerHTML = `
@@ -1287,6 +1340,57 @@ function renderLikelyGoalscorers(groups) {
 
   el.likelyScorers.innerHTML = groups.map((group) => {
     const emptyText = group.lineupNotice || "Scorer data is still building for this game.";
+    const players = group.players.length
+      ? group.players.map((player, index) => `
+        <li>
+          <span class="rank">${index + 1}</span>
+          <div>
+            <strong>${escapeHtml(player.playerName)}</strong>
+            <span>${escapeHtml(player.team)} | ${escapeHtml(player.reason)}</span>
+          </div>
+          <em>${percent(player.probability)}</em>
+        </li>
+      `).join("")
+      : `<li class="empty-scorers">${escapeHtml(emptyText)}</li>`;
+    const notice = group.lineupNotice && group.players.length
+      ? `<p class="why">${escapeHtml(group.lineupNotice)}</p>`
+      : "";
+
+    return `
+      <article class="scorer-card">
+        <header>
+          <span class="tag scorer-tag">${escapeHtml(group.fixtureLabel)}</span>
+          <span class="score">${escapeHtml(formatKickoff(group.fixture.date))}</span>
+        </header>
+        <ol class="scorers">
+          ${players}
+        </ol>
+        ${notice}
+      </article>
+    `;
+  }).join("");
+}
+
+function renderLikelyAssists(groups) {
+  if (!el.likelyAssists) {
+    return;
+  }
+
+  if (!groups.length) {
+    el.likelyAssists.innerHTML = `
+      <article class="scorer-card unavailable">
+        <header>
+          <span class="tag scorer-tag">Today</span>
+          <span class="score">waiting</span>
+        </header>
+        <p class="why">No World Cup fixtures are listed for today in the current database.</p>
+      </article>
+    `;
+    return;
+  }
+
+  el.likelyAssists.innerHTML = groups.map((group) => {
+    const emptyText = group.lineupNotice || "Assist data is still building for this game.";
     const players = group.players.length
       ? group.players.map((player, index) => `
         <li>
@@ -1445,6 +1549,43 @@ function scorerLineupNotice(fixture, players) {
   return "";
 }
 
+function assistLineupNotice(fixture, players) {
+  if (!isLineupRequiredForFixture(fixture)) {
+    return "";
+  }
+
+  const lineup = lineupForFixture(fixture);
+
+  if (!lineup) {
+    return players.length
+      ? "Team sheets are not available yet; showing model assist picks until the lineup check lands."
+      : "Team sheets are not available yet and assist data is still building.";
+  }
+
+  const missingTeams = [fixture.homeTeam, fixture.awayTeam]
+    .filter((team) => !isConfirmedTeamLineup(teamLineupFromRecord(lineup, team)));
+  const predictedTeams = missingTeams
+    .filter((team) => isPredictedTeamLineup(teamLineupFromRecord(lineup, team)));
+
+  if (!players.length && missingTeams.length) {
+    return `Lineup check is still incomplete for ${missingTeams.join(" and ")}; showing no assist candidate would be unsafe.`;
+  }
+
+  if (!players.length) {
+    return "Confirmed lineups were found, but no assist candidate matched the starting XIs.";
+  }
+
+  if (predictedTeams.length) {
+    return `Confirmed XI not published yet for ${predictedTeams.join(" and ")}; showing predicted starters from the lineup check.`;
+  }
+
+  if (missingTeams.length) {
+    return `Showing available assist picks while waiting for confirmed ${missingTeams.join(" and ")} XI.`;
+  }
+
+  return "";
+}
+
 function isConfirmedTeamLineup(team) {
   return team?.status === "confirmed" && hasPlausibleLineupStarters(team);
 }
@@ -1564,6 +1705,7 @@ function marketLine(data) {
     draw_no_bet: "Draw no bet",
     anytime_scorer: "Anytime scorer",
     first_goalscorer: "First goalscorer",
+    anytime_assist: "Anytime assist",
     both_teams_to_score: "BTTS",
     double_chance: "Double chance",
     over_1_5_goals: "Over 1.5",
@@ -1583,12 +1725,14 @@ function marketLine(data) {
   const observed = data?.markets?.observed || {};
   const active = configured.map((market) => labels[market] || market).join(", ");
   const scorerCount = Number(observed.anytime_scorer || 0) + Number(observed.first_goalscorer || 0);
+  const assistCount = Number(observed.anytime_assist || 0);
+  const playerPropCount = scorerCount + assistCount;
   const survivalCount = Number(data?.markets?.survivabilityCoverage?.summary?.freshRecordCount || 0);
   const collectOnlyText = collectOnly.length
     ? ` Survival data: ${collectOnly.map((market) => labels[market] || market).join(", ")}${survivalCount ? ` (${survivalCount}).` : "."}`
     : "";
 
-  return `Markets: ${active}.${scorerCount ? ` Scorer prices found: ${scorerCount}.` : ""}${collectOnlyText}`;
+  return `Markets: ${active}.${playerPropCount ? ` Player prop prices found: ${playerPropCount} (${scorerCount} scorers, ${assistCount} assists).` : ""}${collectOnlyText}`;
 }
 
 function automaticGatheringState(data, now = new Date()) {

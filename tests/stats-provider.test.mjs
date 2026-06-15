@@ -38,6 +38,44 @@ test("stats provider parses indexed public result tables with scorer cells", asy
   assert.ok(sampleland.topScorers[0].goals > sampleland.topScorers[1].goals);
 });
 
+test("stats provider captures assist memory from public scorer cells", async () => {
+  const rows = Array.from({ length: 20 }, (_item, index) => `
+    <tr>
+      <td>${index + 1}</td>
+      <td>${String(index + 1).padStart(2, "0")} May 2026</td>
+      <td>Test Stadium (N)</td>
+      <td>Opponent ${index}</td>
+      <td>2-0</td>
+      <td>Friendly</td>
+      <td>Alpha Striker (assist: Creative Ten), Beta Runner</td>
+      <td>1,000</td>
+      <td>Ref</td>
+    </tr>
+  `).join("");
+  const html = `<table>
+    <tr><th>No.</th><th>Date</th><th>Venue</th><th>Opponents</th><th>Score</th><th>Competition</th><th>Sampleland scorers</th><th>Att.</th><th>Ref.</th></tr>
+    ${rows}
+  </table>`;
+  const result = await fetchTeamStatsWithDiagnostics({
+    providerConfig: {
+      mode: "self-gather",
+      sourceTemplates: [dataUrl(html)],
+      profileSourceTemplates: [],
+      targetRecentMatches: 20,
+      maxRecentMatches: 20
+    },
+    fixtures: [{ homeTeam: "Sampleland", awayTeam: "Otherland" }],
+    now: new Date("2026-06-09T10:00:00.000Z")
+  });
+  const sampleland = result.records.find((team) => team.team === "Sampleland");
+  const creator = result.playerStats.find((player) => player.team === "Sampleland" && player.playerName === "Creative Ten");
+
+  assert.equal(creator.assists, 20);
+  assert.equal(creator.assistsPerTwentyTeamMatches, 20);
+  assert.ok(creator.assistConfidence >= 0.7);
+  assert.ok(sampleland.topScorers.every((player) => player.goals > 0));
+});
+
 test("stats provider can use National Football Teams style public tables as a fallback", async () => {
   const matches = Array.from({ length: 20 }, (_item, index) => `
     <tr>

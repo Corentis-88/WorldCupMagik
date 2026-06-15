@@ -658,18 +658,37 @@ function mostLikelyPortfolioPenalty(leg, legCount) {
     const starterLikelihood = Number(leg.components?.starterLikelihood || 0);
     const scorerGoals = Number(leg.components?.scorerGoalsPerTwentyTeamMatches || 0);
     const scorerConfidence = Number(leg.components?.scorerConfidence || 0);
-    penalty += 0.035;
-    if (starterLikelihood < 0.64) {
-      penalty += (0.64 - starterLikelihood) * 0.11;
-    }
-    if (decimalOdds >= 4 && scorerGoals < 3.5) {
-      penalty += (3.5 - scorerGoals) * 0.012;
-    }
-    if (decimalOdds >= 4 && scorerConfidence < 0.62) {
-      penalty += (0.62 - scorerConfidence) * 0.06;
-    }
-    if (leg.market === "first_goalscorer") {
-      penalty += 0.03;
+    if (leg.market === "anytime_assist") {
+      const assistConfidence = Number(leg.components?.assistConfidence || 0);
+      const assistsPerTwenty = Number(leg.components?.assistsPerTwentyTeamMatches || 0);
+      const creativeRoleScore = Number(leg.components?.creativeRoleScore || 0);
+      penalty += 0.045;
+      if (starterLikelihood < 0.66) {
+        penalty += (0.66 - starterLikelihood) * 0.12;
+      }
+      if (assistsPerTwenty < 1.8) {
+        penalty += (1.8 - assistsPerTwenty) * 0.014;
+      }
+      if (assistConfidence < 0.6) {
+        penalty += (0.6 - assistConfidence) * 0.07;
+      }
+      if (creativeRoleScore < 0.56) {
+        penalty += (0.56 - creativeRoleScore) * 0.06;
+      }
+    } else {
+      penalty += 0.035;
+      if (starterLikelihood < 0.64) {
+        penalty += (0.64 - starterLikelihood) * 0.11;
+      }
+      if (decimalOdds >= 4 && scorerGoals < 3.5) {
+        penalty += (3.5 - scorerGoals) * 0.012;
+      }
+      if (decimalOdds >= 4 && scorerConfidence < 0.62) {
+        penalty += (0.62 - scorerConfidence) * 0.06;
+      }
+      if (leg.market === "first_goalscorer") {
+        penalty += 0.03;
+      }
     }
   }
 
@@ -1119,6 +1138,19 @@ function isSurvivalResultLeg(leg) {
 }
 
 function isLongSlipAnytimeScorerLeg(leg) {
+  if (leg.market === "anytime_assist") {
+    return Number(leg.decimalOdds || 99) <= 7
+      && Number(leg.modelProbability || 0) >= 0.16
+      && Number(leg.rawModelProbability || leg.modelProbability || 0) >= 0.14
+      && Number(leg.confidence || 0) >= 0.62
+      && Number(leg.components?.starterLikelihood || 0) >= 0.64
+      && Number(leg.components?.projectedMinutes || 0) >= 62
+      && Number(leg.components?.assistsPerTwentyTeamMatches || 0) >= 1
+      && Number(leg.components?.assistConfidence || 0) >= 0.52
+      && Number(leg.components?.creativeRoleScore || 0) >= 0.5
+      && Number(leg.components?.playerDataCoverage || 0) >= 0.45;
+  }
+
   if (leg.market !== "anytime_scorer") {
     return false;
   }
@@ -1134,7 +1166,7 @@ function isLongSlipAnytimeScorerLeg(leg) {
 }
 
 function isScorerLeg(leg) {
-  return leg.market === "anytime_scorer" || leg.market === "first_goalscorer";
+  return leg.market === "anytime_scorer" || leg.market === "first_goalscorer" || leg.market === "anytime_assist";
 }
 
 function isOpeningGroupGoalLeg(leg) {

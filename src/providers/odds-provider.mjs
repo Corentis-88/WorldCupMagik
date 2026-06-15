@@ -1096,11 +1096,15 @@ function extractScorerMarketOdds({ block, fixture, source, bookmaker, capturedAt
   const price = oddsPricePattern();
   const tableFirstAnytime = new RegExp(`\\b(${name})(?:\\s*\\(([^)]+)\\))?\\s+First\\s+(${price})\\s+Anytime\\s+(${price})`, "gi");
   const tableAnytimeFirst = new RegExp(`\\b(${name})(?:\\s*\\(([^)]+)\\))?\\s+Anytime\\s+(${price})\\s+First\\s+(${price})`, "gi");
+  const tableAnytimeFirstAssist = new RegExp(`\\b(${name})(?:\\s*\\(([^)]+)\\))?\\s+Anytime\\s+(${price})\\s+First\\s+(${price})\\s+Assist\\s+(${price})`, "gi");
   const latestPlayerProps = new RegExp(`\\bLatest\\s+(${name})\\s+Player\\s+Prop\\s+Odds[\\s\\S]{0,120}?Goalscorer\\s+Anytime\\s+(${price})\\s+First\\s+(${price})`, "gi");
+  const latestAssistProps = new RegExp(`\\bLatest\\s+(${name})\\s+Player\\s+Prop\\s+Odds[\\s\\S]{0,160}?(?:Anytime\\s+Assist|Player\\s+Assists?|To\\s+Record\\s+An?\\s+Assist)\\s+(${price})`, "gi");
   const playerAnytime = new RegExp(`\\b(${name})(?:\\s*\\(([^)]+)\\))?\\s+(?:anytime\\s+(?:goal)?scorer|anytime\\s+to\\s+score|to\\s+score\\s+anytime|to\\s+score)\\s+(${price})`, "gi");
   const anytimePlayer = new RegExp(`\\b(?:anytime\\s+(?:goal)?scorer|anytime\\s+to\\s+score|to\\s+score\\s+anytime)\\s+(${name})(?:\\s*\\(([^)]+)\\))?\\s+(${price})`, "gi");
   const playerFirst = new RegExp(`\\b(${name})(?:\\s*\\(([^)]+)\\))?\\s+(?:first\\s+(?:goal)?scorer|first\\s+goalscorer)\\s+(${price})`, "gi");
   const firstPlayer = new RegExp(`\\b(?:first\\s+(?:goal)?scorer|first\\s+goalscorer)\\s+(${name})(?:\\s*\\(([^)]+)\\))?\\s+(${price})`, "gi");
+  const playerAssist = new RegExp(`\\b(${name})(?:\\s*\\(([^)]+)\\))?\\s+(?:anytime\\s+assist|to\\s+(?:record\\s+)?an?\\s+assist|to\\s+assist|player\\s+assists?)\\s+(${price})`, "gi");
+  const assistPlayer = new RegExp(`\\b(?:anytime\\s+assist|to\\s+(?:record\\s+)?an?\\s+assist|player\\s+assists?)\\s+(${name})(?:\\s*\\(([^)]+)\\))?\\s+(${price})`, "gi");
 
   for (const match of section.matchAll(tableFirstAnytime)) {
     add({ playerName: match[1], playerTeam: match[2], market: "first_goalscorer", price: match[3] });
@@ -1112,9 +1116,19 @@ function extractScorerMarketOdds({ block, fixture, source, bookmaker, capturedAt
     add({ playerName: match[1], playerTeam: match[2], market: "first_goalscorer", price: match[4] });
   }
 
+  for (const match of section.matchAll(tableAnytimeFirstAssist)) {
+    add({ playerName: match[1], playerTeam: match[2], market: "anytime_scorer", price: match[3] });
+    add({ playerName: match[1], playerTeam: match[2], market: "first_goalscorer", price: match[4] });
+    add({ playerName: match[1], playerTeam: match[2], market: "anytime_assist", price: match[5] });
+  }
+
   for (const match of section.matchAll(latestPlayerProps)) {
     add({ playerName: match[1], market: "anytime_scorer", price: match[2] });
     add({ playerName: match[1], market: "first_goalscorer", price: match[3] });
+  }
+
+  for (const match of section.matchAll(latestAssistProps)) {
+    add({ playerName: match[1], market: "anytime_assist", price: match[2] });
   }
 
   for (const match of section.matchAll(playerAnytime)) {
@@ -1131,6 +1145,14 @@ function extractScorerMarketOdds({ block, fixture, source, bookmaker, capturedAt
 
   for (const match of section.matchAll(firstPlayer)) {
     add({ playerName: match[1], playerTeam: match[2], market: "first_goalscorer", price: match[3] });
+  }
+
+  for (const match of section.matchAll(playerAssist)) {
+    add({ playerName: match[1], playerTeam: match[2], market: "anytime_assist", price: match[3] });
+  }
+
+  for (const match of section.matchAll(assistPlayer)) {
+    add({ playerName: match[1], playerTeam: match[2], market: "anytime_assist", price: match[3] });
   }
 
   return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}`);
@@ -1170,7 +1192,7 @@ function extractAnytimeScorerOdds({ block, fixture, source, bookmaker, capturedA
 }
 
 function scorerSection(block) {
-  const match = String(block || "").match(/(?:player\s+goals|player\s+prop|anytime\s+(?:goal)?scorer|anytime\s+to\s+score|to\s+score\s+anytime|first\s+(?:goal)?scorer)[\s\S]{0,4200}?(?=(?:bet\s+builder|full\s+time\s+result|over\/under|both\s+teams|correct\s+score|odds\s+last|popular|more markets|$))/i);
+  const match = String(block || "").match(/(?:player\s+goals|player\s+prop|player\s+assists?|anytime\s+assist|to\s+record\s+an?\s+assist|anytime\s+(?:goal)?scorer|anytime\s+to\s+score|to\s+score\s+anytime|first\s+(?:goal)?scorer)[\s\S]{0,4200}?(?=(?:bet\s+builder|full\s+time\s+result|over\/under|both\s+teams|correct\s+score|odds\s+last|popular|more markets|$))/i);
   return match?.[0] || "";
 }
 
@@ -1278,20 +1300,21 @@ function parseScorerOffer(name) {
   const text = String(name || "").replace(/\s+/g, " ").trim();
   const firstScorer = /(?:first\s+(?:goal)?scorer|first\s+goalscorer)/i.test(text);
   const anytimeScorer = /(?:anytime\s+(?:goal)?scorer|anytime\s+to\s+score|to\s+score\s+anytime|\bto\s+score\b)/i.test(text);
+  const anytimeAssist = /(?:anytime\s+assist|to\s+(?:record\s+)?an?\s+assist|player\s+assists?)/i.test(text);
 
-  if (!firstScorer && !anytimeScorer) {
+  if (!firstScorer && !anytimeScorer && !anytimeAssist) {
     return null;
   }
 
-  if (/(?:both\s+teams|team\s+to\s+score|correct\s+score|scorecast|top\s+(?:team\s+)?goalscorer|golden\s+boot)/i.test(text)) {
+  if (/(?:both\s+teams|team\s+to\s+score|correct\s+score|scorecast|top\s+(?:team\s+)?goalscorer|golden\s+boot|most\s+assists?|tournament\s+assists?)/i.test(text)) {
     return null;
   }
 
-  const [candidate] = text.split(/\s+(?:first\s+(?:goal)?scorer|first\s+goalscorer|anytime\s+(?:goal)?scorer|anytime\s+to\s+score|to\s+score\s+anytime|to\s+score)\b|[-\u2013\u2014]| at /i);
+  const [candidate] = text.split(/\s+(?:first\s+(?:goal)?scorer|first\s+goalscorer|anytime\s+(?:goal)?scorer|anytime\s+to\s+score|to\s+score\s+anytime|to\s+score|anytime\s+assist|to\s+(?:record\s+)?an?\s+assist|player\s+assists?)\b|[-\u2013\u2014]| at /i);
   const playerName = cleanScorerName(candidate);
 
   return playerName && looksLikeScorerName(playerName)
-    ? { market: firstScorer ? "first_goalscorer" : "anytime_scorer", playerName }
+    ? { market: anytimeAssist ? "anytime_assist" : firstScorer ? "first_goalscorer" : "anytime_scorer", playerName }
     : null;
 }
 
@@ -1375,7 +1398,7 @@ function capitalized(value) {
 
 function cleanScorerName(value) {
   return String(value || "")
-    .replace(/\b(?:World Cup|FIFA|Odds|Price|Bet|Boost|Selection|Player|Prop|Props|Top Pick|Latest|Goalscorer|Scorer|Anytime|First|Goals|Goal)\b/gi, " ")
+    .replace(/\b(?:World Cup|FIFA|Odds|Price|Bet|Boost|Selection|Player|Prop|Props|Top Pick|Latest|Goalscorer|Scorer|Anytime|First|Goals|Goal|Assist|Assists|Record)\b/gi, " ")
     .replace(/^[^A-Za-zÀ-ÿ]+|[^A-Za-zÀ-ÿ]+$/g, "")
     .replace(/\s+/g, " ")
     .trim();

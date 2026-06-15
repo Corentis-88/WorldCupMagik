@@ -164,6 +164,10 @@ export function gradeLegAgainstMatch(leg, match) {
     return gradeAnytimeScorer(leg, match, totalGoals);
   }
 
+  if (leg.market === "anytime_assist") {
+    return gradeAnytimeAssist(leg, match, totalGoals);
+  }
+
   if (leg.market === "first_goalscorer") {
     return gradeFirstGoalscorer(leg, match, totalGoals);
   }
@@ -285,6 +289,46 @@ function gradeAnytimeScorer(leg, match, totalGoals) {
   });
 
   return { status: landed ? "won" : "lost", reason: "anytime_scorer" };
+}
+
+function gradeAnytimeAssist(leg, match, totalGoals) {
+  const assistName = normalizeName(leg.playerName || leg.outcome);
+  const assistTeam = normalizeName(leg.playerTeam);
+  const allScorers = [
+    ...(match.homeScorers || []).map((scorer) => ({ ...scorer, team: match.homeTeam })),
+    ...(match.awayScorers || []).map((scorer) => ({ ...scorer, team: match.awayTeam }))
+  ];
+  const assistRows = allScorers.flatMap((scorer) => assistNamesForScorer(scorer).map((name) => ({
+    name,
+    team: scorer.team
+  })));
+
+  if (!assistName) {
+    return { status: "unknown", reason: "missing_assist_name" };
+  }
+
+  if (!assistRows.length && totalGoals > 0) {
+    return { status: "unknown", reason: "assist_list_missing" };
+  }
+
+  const landed = assistRows.some((assist) => {
+    const samePlayer = playerNameMatches(assist.name, assistName);
+    const sameTeam = !assistTeam || teamMatches(assist.team, assistTeam);
+    return samePlayer && sameTeam;
+  });
+
+  return { status: landed ? "won" : "lost", reason: "anytime_assist" };
+}
+
+function assistNamesForScorer(scorer = {}) {
+  const raw = scorer.assists ?? scorer.assist ?? scorer.assistedBy ?? [];
+  const names = Array.isArray(raw)
+    ? raw
+    : String(raw).split(/\s*,\s*|\s*;\s*|\s+\band\b\s+/i);
+
+  return names
+    .map((name) => String(name || "").trim())
+    .filter(Boolean);
 }
 
 function gradeFirstGoalscorer(leg, match, totalGoals) {

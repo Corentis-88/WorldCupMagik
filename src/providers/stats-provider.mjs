@@ -4,6 +4,7 @@ import {
   decodeEntities,
   extractHtmlTables,
   fetchPublicText,
+  htmlToLines,
   parseDate,
   sourceDiagnostic,
   stripTags,
@@ -79,6 +80,30 @@ export async function fetchTeamStatsWithDiagnostics({ providerConfig, fixtures =
       }
     }
 
+    for (const source of supplementalPlayerSources(team, aliases, providerConfig)) {
+      try {
+        const html = await fetchPublicText(source.url, providerConfig);
+        const extracted = extractSupplementalPlayerStats({ html, team, source, now });
+        supplementalPlayerStats.push(...extracted);
+        diagnostics.push(sourceDiagnostic({
+          kind: "player_stats",
+          source,
+          status: extracted.length ? "ok" : "empty",
+          records: extracted.length,
+          reason: extracted.length ? "" : `Fetched public player-stat page but found no usable player rows for ${team}.`,
+          now
+        }));
+      } catch (error) {
+        diagnostics.push(sourceDiagnostic({
+          kind: "player_stats",
+          source,
+          status: "error",
+          reason: error instanceof Error ? error.message : String(error),
+          now
+        }));
+      }
+    }
+
     teamMatches = uniqueBy(teamMatches.filter(isSaneMatchRecord), matchHistoryKey)
       .sort((left, right) => new Date(right.date) - new Date(left.date))
       .slice(0, Number(providerConfig?.maxRecentMatches || 20));
@@ -139,6 +164,41 @@ function teamSources(team, aliases, providerConfig) {
   }
 
   return sources;
+}
+
+function supplementalPlayerSources(team, aliases, providerConfig) {
+  const config = providerConfig?.playerStatSources;
+
+  if (config?.enabled === false) {
+    return [];
+  }
+
+  const templates = Array.isArray(config?.templates) ? config.templates : [];
+  const canonical = aliases[team] || team;
+  const teamSlug = playerStatsTeamSlug(canonical);
+
+  return templates
+    .filter((template) => template?.enabled !== false && template.urlTemplate)
+    .map((template, index) => ({
+      name: `${team} ${template.name || `player stat source ${index + 1}`}`,
+      url: String(template.urlTemplate)
+        .replace(/\{teamSlug\}/g, teamSlug)
+        .replace(/\{team\}/g, encodeURIComponent(team)),
+      matchNames: matchNameVariants(team, canonical),
+      reliability: Number(template.reliability || 0.5),
+      parser: template.parser || "playerstats-football",
+      statType: template.statType || "goals_assists"
+    }));
+}
+
+function playerStatsTeamSlug(value) {
+  return normalizeName(value)
+    .replace(/\bmen s\b/g, "")
+    .replace(/\bmens\b/g, "")
+    .replace(/\bunited states\b/g, "usa")
+    .replace(/\bczech republic\b/g, "czechia")
+    .replace(/\s+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 async function fetchTeamProfile({ team, aliases, providerConfig, now, diagnostics }) {
@@ -282,6 +342,152 @@ function extractTeamMatches({ html, team, source, now }) {
   return {
     matches,
     playerStats
+  };
+}
+
+function extractSupplementalPlayerStats({ html, team, source, now }) {
+  if (source.parser === "playerstats-football" || /playerstats\.football/i.test(source.url || "")) {
+    return extractPlayerStatsFootballStats({ html, team, source, now });
+  }
+
+  if (source.parser === "statbunker-player-stats" || /statbunker/i.test(source.url || "")) {
+    return extractStatBunkerPlayerStats({ html, team, source, now });
+  }
+
+  return [];
+}
+
+function extractPlayerStatsFootballStats({ html, team, source, now }) {
+  const records = [
+    ...extractPlayerStatTables({ html, team, source, now }),
+    ...extractPlayerStatsFootballSummary({ html, team, source, now })
+  ];
+
+  return uniqueBy(records, (record) => `${normalizeName(record.team)}|${normalizeName(record.playerName)}|${record.source}|${record.statType || ""}`);
+}
+
+function extractPlayerStatTables({ html, team, source, now }) {
+  const records = [];
+
+  for (const table of extractHtmlTables(html)) {
+    const headerIndex = table.findIndex((row) => row.some((cell) => /players?|name/i.test(cell)));
+
+    if (headerIndex < 0) {
+      continue;
+    }
+
+    const headers = table[headerIndex].map(normalizeHeaderCell);
+    const playerIndex = headers.findIndex((cell) => /players?|name/.test(cell));
+    const positionIndex = headers.findIndex((cell) => /position|pos/.test(cell));
+    const startIndex = headers.findIndex((cell) => /^start|starts/.test(cell));
+    const goalsIndex = headers.findIndex((cell) => /^g$|goals?/.test(cell));
+    const assistsIndex = headers.findIndex((cell) => /^a$|assists?/.test(cell));
+    const shotsIndex = headers.findIndex((cell) => /shots?$|total shots|sh$/.test(cell));
+    const shotsOnTargetIndex = headers.findIndex((cell) => /sot|shots on target/.test(cell));
+
+    if (playerIndex < 0) {
+      continue;
+    }
+
+    for (const row of table.slice(headerIndex + 1)) {
+      const playerName = cleanNationalFootballTeamsPlayerName(row[playerIndex]);
+
+      if (!playerName) {
+        continue;
+      }
+
+      const goals = numberCell(row[goalsIndex]);
+      const assists = numberCell(row[assistsIndex]);
+      const starts = numberCell(row[startIndex]);
+      const shots = numberCell(row[shotsIndex]);
+      const shotsOnTarget = numberCell(row[shotsOnTargetIndex]);
+
+      if (![goals, assists, starts, shots, shotsOnTarget].some((value) => Number(value || 0) > 0)) {
+        continue;
+      }
+
+      records.push(playerStatRecord({
+        team,
+        playerName,
+        now,
+        source,
+        statType: source.statType,
+        goals,
+        assists,
+        starts,
+        shots,
+        shotsOnTarget,
+        position: row[positionIndex] || ""
+      }));
+    }
+  }
+
+  return records;
+}
+
+function extractStatBunkerPlayerStats({ html, team, source, now }) {
+  return extractPlayerStatTables({ html, team, source, now });
+}
+
+function extractPlayerStatsFootballSummary({ html, team, source, now }) {
+  const lines = htmlToLines(html);
+  const text = lines.join(" ");
+  const records = [];
+  const assistSummary = text.match(/([A-ZÀ-Ý][A-Za-zÀ-ÿ'. -]+(?:\s*,\s*[A-ZÀ-Ý][A-Za-zÀ-ÿ'. -]+)*)\s+recorded\s+the\s+most\s+assists?\s+with\s+(\d+)\s+each/i);
+
+  if (assistSummary) {
+    const assists = Number(assistSummary[2]);
+
+    for (const name of assistSummary[1].split(/\s*,\s*|\s+\band\b\s+/i)) {
+      const playerName = cleanPlayerStatsSummaryName(name);
+
+      if (playerName && assists > 0) {
+        records.push(playerStatRecord({
+          team,
+          playerName,
+          now,
+          source,
+          statType: source.statType,
+          assists,
+          assistMatches: 1,
+          supplementalMatchSample: 1,
+          scorerSource: `${source.name}; public assists summary`
+        }));
+      }
+    }
+  }
+
+  return records;
+}
+
+function playerStatRecord({ team, playerName, now, source, statType = "", goals = 0, assists = 0, assistMatches = 0, starts = 0, shots = 0, shotsOnTarget = 0, position = "", supplementalMatchSample = 0, scorerSource = "" }) {
+  const role = playerRoleProfile(position);
+
+  return {
+    id: makeId("player_stat", [team, playerName, source.url, statType]),
+    team,
+    playerName,
+    updatedAt: now.toISOString(),
+    provider: "public-web",
+    sourceType: "public-web",
+    goals: Number(goals || 0),
+    assists: Number(assists || 0),
+    assistMatches: Number(assistMatches || (Number(assists || 0) > 0 ? 1 : 0)),
+    shots: Number(shots || 0),
+    shotsOnTarget: Number(shotsOnTarget || 0),
+    seasonAppearances: Number(starts || 0),
+    starts: Number(starts || 0),
+    matchesSampled: Number(supplementalMatchSample || 0),
+    scoringMatches: Number(goals || 0) > 0 ? 1 : 0,
+    position: cleanCell(position),
+    attackingRole: role.attackingRole,
+    creativeRoleScore: role.creativeRoleScore,
+    scoringRoleScore: role.scoringRoleScore,
+    statType,
+    scorerSource: scorerSource || source.name,
+    assistSource: source.name,
+    source: source.name,
+    sourceUrl: source.url
   };
 }
 
@@ -582,8 +788,10 @@ function extractNationalFootballTeamsPlayerStats({ tables, team, source, now }) 
       const playerName = cleanNationalFootballTeamsPlayerName(row[0]);
       const goals = Number(row[6] || 0);
       const appearances = Number(row[4] || 0);
+      const position = row[2] || "";
+      const role = playerRoleProfile(position);
 
-      if (!playerName || goals <= 0) {
+      if (!playerName || appearances <= 0) {
         continue;
       }
 
@@ -596,8 +804,15 @@ function extractNationalFootballTeamsPlayerStats({ tables, team, source, now }) 
         sourceType: "public-web",
         goals,
         seasonAppearances: appearances,
+        starts: appearances,
         matchesSampled: 0,
         scoringMatches: 0,
+        assists: 0,
+        assistMatches: 0,
+        position: cleanCell(position),
+        attackingRole: role.attackingRole,
+        creativeRoleScore: role.creativeRoleScore,
+        scoringRoleScore: role.scoringRoleScore,
         scorerSource: source.name,
         source: source.name,
         sourceUrl: source.url
@@ -617,6 +832,53 @@ function cleanNationalFootballTeamsPlayerName(value) {
   }
 
   return text;
+}
+
+function cleanPlayerStatsSummaryName(value) {
+  return cleanCell(value)
+    .replace(/\b(?:recorded|most|assists?|with|each|and)\b/gi, " ")
+    .replace(/^[^A-Za-zÀ-ÿ]+|[^A-Za-zÀ-ÿ]+$/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function numberCell(value) {
+  if (value == null) {
+    return 0;
+  }
+
+  const match = String(value).replace(/,/g, "").match(/-?\d+(?:\.\d+)?/);
+  return match ? Number(match[0]) : 0;
+}
+
+function playerRoleProfile(position = "") {
+  const text = normalizeName(position);
+
+  if (!text) {
+    return { attackingRole: "unknown", creativeRoleScore: 0.36, scoringRoleScore: 0.34 };
+  }
+
+  if (/goalkeeper|\bgk\b/.test(text)) {
+    return { attackingRole: "goalkeeper", creativeRoleScore: 0.03, scoringRoleScore: 0.02 };
+  }
+
+  if (/wing|wide|attacking midfielder|\bam\b|\bcam\b|\blam\b|\bram\b|\blw\b|\brw\b/.test(text)) {
+    return { attackingRole: "creator", creativeRoleScore: 0.82, scoringRoleScore: 0.58 };
+  }
+
+  if (/forward|striker|\bst\b|\bcf\b/.test(text)) {
+    return { attackingRole: "forward", creativeRoleScore: 0.48, scoringRoleScore: 0.78 };
+  }
+
+  if (/midfielder|\bcm\b|\bdm\b|\blcm\b|\brcm\b|\blm\b|\brm\b/.test(text)) {
+    return { attackingRole: "midfielder", creativeRoleScore: 0.62, scoringRoleScore: 0.42 };
+  }
+
+  if (/back|defender|\bcb\b|\blb\b|\brb\b|\bdf\b/.test(text)) {
+    return { attackingRole: "defender", creativeRoleScore: 0.24, scoringRoleScore: 0.16 };
+  }
+
+  return { attackingRole: "unknown", creativeRoleScore: 0.36, scoringRoleScore: 0.34 };
 }
 
 function buildEstimatedMatchRecord({ date, homeTeam, awayTeam, homeGoals, awayGoals, homeScorers = [], awayScorers = [], competition = "", source, now }) {
@@ -944,19 +1206,34 @@ function summarizeTeamScorers(matches, matchNames) {
         continue;
       }
 
-      const record = byPlayer.get(key) || { playerName: scorer.name, goals: 0, appearancesSampled: 0 };
+      const record = byPlayer.get(key) || { playerName: scorer.name, goals: 0, assists: 0, appearancesSampled: 0 };
       record.goals += Number(scorer.goals || 1);
       byPlayer.set(key, record);
+
+      for (const assistName of scorer.assists || []) {
+        const assistKey = normalizeName(assistName);
+
+        if (!assistKey) {
+          continue;
+        }
+
+        const assistRecord = byPlayer.get(assistKey) || { playerName: assistName, goals: 0, assists: 0, appearancesSampled: 0 };
+        assistRecord.assists += Number(scorer.goals || 1);
+        byPlayer.set(assistKey, assistRecord);
+      }
     }
   }
 
   return [...byPlayer.values()]
+    .filter((record) => Number(record.goals || 0) > 0)
     .sort((left, right) => right.goals - left.goals || normalizeName(left.playerName).localeCompare(normalizeName(right.playerName)))
     .slice(0, 8)
     .map((record) => ({
       playerName: record.playerName,
       goals: record.goals,
-      goalsPerTwentyTeamMatches: round(record.goals / Math.max(1, matches.length) * 20, 3)
+      assists: record.assists,
+      goalsPerTwentyTeamMatches: round(record.goals / Math.max(1, matches.length) * 20, 3),
+      assistsPerTwentyTeamMatches: round(Number(record.assists || 0) / Math.max(1, matches.length) * 20, 3)
     }));
 }
 
@@ -987,25 +1264,66 @@ function derivePlayerStats(teams, matchHistory, now, providerConfig = {}) {
           provider: "public-web",
           sourceType: "public-web",
           goals: 0,
+          assists: 0,
           matchesSampled: 0,
           scoringMatches: 0,
+          assistMatches: 0,
+          shots: 0,
+          shotsOnTarget: 0,
+          starts: 0,
+          seasonAppearances: 0,
+          position: "",
+          attackingRole: "unknown",
+          creativeRoleScore: 0.36,
+          scoringRoleScore: 0.34,
           scorerSource: "public result rows"
         };
         record.goals += Number(scorer.goals || 1);
         record.scoringMatches += 1;
         record.matchesSampled = teamMatchCounts.get(normalizeName(team)) || record.matchesSampled || 1;
         byPlayer.set(key, record);
+
+        for (const assistName of scorer.assists || []) {
+          const assistKey = `${normalizeName(team)}|${normalizeName(assistName)}`;
+
+          if (!normalizeName(assistName)) {
+            continue;
+          }
+
+          const assistRecord = byPlayer.get(assistKey) || {
+            id: makeId("player_stat", [team, assistName]),
+            team,
+            playerName: assistName,
+            updatedAt: now.toISOString(),
+            provider: "public-web",
+            sourceType: "public-web",
+            goals: 0,
+            assists: 0,
+            matchesSampled: 0,
+            scoringMatches: 0,
+            assistMatches: 0,
+            shots: 0,
+            shotsOnTarget: 0,
+            starts: 0,
+            seasonAppearances: 0,
+            position: "",
+            attackingRole: "unknown",
+            creativeRoleScore: 0.36,
+            scoringRoleScore: 0.34,
+            scorerSource: "public result rows",
+            assistSource: "public result rows"
+          };
+          assistRecord.assists += Number(scorer.goals || 1);
+          assistRecord.assistMatches += 1;
+          assistRecord.matchesSampled = teamMatchCounts.get(normalizeName(team)) || assistRecord.matchesSampled || 1;
+          byPlayer.set(assistKey, assistRecord);
+        }
       }
     }
   }
 
   return [...byPlayer.values()]
-    .map((record) => ({
-      ...record,
-      goalsPerMatchSample: round(record.goals / Math.max(1, record.matchesSampled), 3),
-      goalsPerTwentyTeamMatches: round(record.goals / Math.max(1, record.matchesSampled) * 20, 3),
-      scorerConfidence: round(clamp(0.28 + record.matchesSampled * 0.05, 0.28, 0.76), 3)
-    }))
+    .map(finalizePlayerStatRecord)
     .sort((left, right) => right.goals - left.goals || normalizeName(left.playerName).localeCompare(normalizeName(right.playerName)));
 }
 
@@ -1018,11 +1336,26 @@ function aggregateSupplementalPlayerStats(records, teams, matchHistory, now, pro
     const existing = byPlayer.get(key) || {
       ...record,
       goals: 0,
+      assists: 0,
+      assistMatches: 0,
+      shots: 0,
+      shotsOnTarget: 0,
+      starts: 0,
       seasonAppearances: 0,
       sourceUrls: []
     };
     existing.goals += Number(record.goals || 0);
+    existing.assists += Number(record.assists || 0);
+    existing.assistMatches += Number(record.assistMatches || 0);
+    existing.shots += Number(record.shots || 0);
+    existing.shotsOnTarget += Number(record.shotsOnTarget || 0);
+    existing.starts += Number(record.starts || 0);
     existing.seasonAppearances += Number(record.seasonAppearances || 0);
+    existing.position ||= record.position || "";
+    existing.attackingRole = strongerRole(existing.attackingRole, record.attackingRole);
+    existing.creativeRoleScore = Math.max(Number(existing.creativeRoleScore || 0), Number(record.creativeRoleScore || 0));
+    existing.scoringRoleScore = Math.max(Number(existing.scoringRoleScore || 0), Number(record.scoringRoleScore || 0));
+    existing.assistSource ||= record.assistSource || record.source || "";
     existing.sourceUrls.push(record.sourceUrl);
     existing.updatedAt = now.toISOString();
     byPlayer.set(key, existing);
@@ -1032,17 +1365,14 @@ function aggregateSupplementalPlayerStats(records, teams, matchHistory, now, pro
     .map((record) => {
       const matchesSampled = teamCounts.get(normalizeName(record.team)) || record.matchesSampled || 1;
 
-      return {
+      return finalizePlayerStatRecord({
         ...record,
         id: makeId("player_stat", [record.team, record.playerName, record.sourceUrls.join("|")]),
         matchesSampled,
         scoringMatches: record.scoringMatches || 0,
-        goalsPerMatchSample: round(record.goals / Math.max(1, matchesSampled), 3),
-        goalsPerTwentyTeamMatches: round(record.goals / Math.max(1, matchesSampled) * 20, 3),
-        scorerConfidence: round(clamp(0.22 + Math.min(20, matchesSampled) * 0.035 + Math.min(12, record.seasonAppearances || 0) * 0.01, 0.28, 0.74), 3),
         scorerSource: `${record.scorerSource}; yearly player goal table`,
         sourceUrl: record.sourceUrls.filter(Boolean).at(0) || record.sourceUrl || ""
-      };
+      });
     })
     .sort((left, right) => right.goals - left.goals || normalizeName(left.playerName).localeCompare(normalizeName(right.playerName)));
 }
@@ -1058,13 +1388,92 @@ function mergePlayerStats(primaryStats, supplementalStats) {
     const key = `${normalizeName(record.team)}|${normalizeName(record.playerName)}`;
     const existing = byPlayer.get(key);
 
-    if (!existing || Number(record.goals || 0) > Number(existing.goals || 0)) {
-      byPlayer.set(key, record);
-    }
+    byPlayer.set(key, existing ? mergePlayerStatRecord(existing, record) : finalizePlayerStatRecord(record));
   }
 
   return [...byPlayer.values()]
-    .sort((left, right) => right.goals - left.goals || normalizeName(left.playerName).localeCompare(normalizeName(right.playerName)));
+    .map(finalizePlayerStatRecord)
+    .sort((left, right) => Number(right.goals || 0) - Number(left.goals || 0) || Number(right.assists || 0) - Number(left.assists || 0) || normalizeName(left.playerName).localeCompare(normalizeName(right.playerName)));
+}
+
+function mergePlayerStatRecord(left, right) {
+  const matchesSampled = Math.max(Number(left.matchesSampled || 0), Number(right.matchesSampled || 0));
+  const goals = Math.max(Number(left.goals || 0), Number(right.goals || 0));
+  const assists = Math.max(Number(left.assists || 0), Number(right.assists || 0));
+  const sourceUrls = [
+    ...(Array.isArray(left.sourceUrls) ? left.sourceUrls : [left.sourceUrl]),
+    ...(Array.isArray(right.sourceUrls) ? right.sourceUrls : [right.sourceUrl])
+  ].filter(Boolean);
+
+  return finalizePlayerStatRecord({
+    ...left,
+    ...right,
+    id: makeId("player_stat", [left.team || right.team, left.playerName || right.playerName, sourceUrls.join("|")]),
+    goals,
+    assists,
+    assistMatches: Math.max(Number(left.assistMatches || 0), Number(right.assistMatches || 0)),
+    shots: Math.max(Number(left.shots || 0), Number(right.shots || 0)),
+    shotsOnTarget: Math.max(Number(left.shotsOnTarget || 0), Number(right.shotsOnTarget || 0)),
+    starts: Math.max(Number(left.starts || 0), Number(right.starts || 0)),
+    seasonAppearances: Math.max(Number(left.seasonAppearances || 0), Number(right.seasonAppearances || 0)),
+    scoringMatches: Math.max(Number(left.scoringMatches || 0), Number(right.scoringMatches || 0)),
+    matchesSampled,
+    position: left.position || right.position || "",
+    attackingRole: strongerRole(left.attackingRole, right.attackingRole),
+    creativeRoleScore: Math.max(Number(left.creativeRoleScore || 0), Number(right.creativeRoleScore || 0)),
+    scoringRoleScore: Math.max(Number(left.scoringRoleScore || 0), Number(right.scoringRoleScore || 0)),
+    scorerSource: [left.scorerSource, right.scorerSource].filter(Boolean).join("; "),
+    assistSource: [left.assistSource, right.assistSource].filter(Boolean).join("; "),
+    sourceUrls,
+    sourceUrl: sourceUrls[0] || left.sourceUrl || right.sourceUrl || ""
+  });
+}
+
+function finalizePlayerStatRecord(record) {
+  const matchesSampled = Math.max(1, Number(record.matchesSampled || 0));
+  const goals = Number(record.goals || 0);
+  const assists = Number(record.assists || 0);
+  const role = playerRoleProfile(record.position || record.attackingRole || "");
+  const creativeRoleScore = Math.max(Number(record.creativeRoleScore || 0), Number(role.creativeRoleScore || 0));
+  const scoringRoleScore = Math.max(Number(record.scoringRoleScore || 0), Number(role.scoringRoleScore || 0));
+  const appearanceConfidence = clamp(Math.max(Number(record.seasonAppearances || 0), Number(record.starts || 0)) / 12, 0, 0.16);
+
+  return {
+    ...record,
+    goals,
+    assists,
+    assistMatches: Number(record.assistMatches || (assists > 0 ? 1 : 0)),
+    shots: Number(record.shots || 0),
+    shotsOnTarget: Number(record.shotsOnTarget || 0),
+    starts: Number(record.starts || 0),
+    seasonAppearances: Number(record.seasonAppearances || 0),
+    matchesSampled,
+    attackingRole: record.attackingRole || role.attackingRole,
+    creativeRoleScore: round(creativeRoleScore, 3),
+    scoringRoleScore: round(scoringRoleScore, 3),
+    goalsPerMatchSample: round(goals / matchesSampled, 3),
+    goalsPerTwentyTeamMatches: round(goals / matchesSampled * 20, 3),
+    assistsPerMatchSample: round(assists / matchesSampled, 3),
+    assistsPerTwentyTeamMatches: round(assists / matchesSampled * 20, 3),
+    goalInvolvementsPerTwentyTeamMatches: round((goals + assists) / matchesSampled * 20, 3),
+    scorerConfidence: round(clamp(0.24 + Math.min(20, matchesSampled) * 0.032 + appearanceConfidence + Math.min(10, goals) * 0.012, 0.28, 0.78), 3),
+    assistConfidence: round(clamp(0.2 + Math.min(20, matchesSampled) * 0.028 + appearanceConfidence + Math.min(10, assists) * 0.014 + creativeRoleScore * 0.08, 0.24, 0.76), 3),
+    playerDataCoverage: round(clamp(matchesSampled / 20 * 0.6 + Math.max(Number(record.seasonAppearances || 0), Number(record.starts || 0)) / 12 * 0.2 + (goals + assists > 0 ? 0.14 : 0) + (record.position ? 0.06 : 0), 0.12, 0.92), 3)
+  };
+}
+
+function strongerRole(left, right) {
+  const scores = {
+    creator: 5,
+    forward: 4,
+    midfielder: 3,
+    defender: 2,
+    goalkeeper: 1,
+    unknown: 0
+  };
+  const leftValue = left || "unknown";
+  const rightValue = right || "unknown";
+  return (scores[rightValue] || 0) > (scores[leftValue] || 0) ? rightValue : leftValue;
 }
 
 function enrichTeamStatsWithSupplementalScorers(record, supplementalScorers = []) {
@@ -1073,12 +1482,15 @@ function enrichTeamStatsWithSupplementalScorers(record, supplementalScorers = []
   }
 
   const topScorers = supplementalScorers
+    .filter((scorer) => Number(scorer.goals || 0) > 0)
     .slice(0, 8)
     .map((scorer) => ({
       playerName: scorer.playerName,
       goals: scorer.goals,
+      assists: scorer.assists,
       scoringMatches: scorer.scoringMatches,
       goalsPerTwentyTeamMatches: scorer.goalsPerTwentyTeamMatches,
+      assistsPerTwentyTeamMatches: scorer.assistsPerTwentyTeamMatches,
       scorerConfidence: scorer.scorerConfidence,
       source: scorer.scorerSource
     }));
@@ -1243,21 +1655,27 @@ function extractScorersFromText(value) {
     return [];
   }
 
-  const names = [...text.matchAll(/([A-ZÀ-Ý][A-Za-zÀ-ÿ'.-]+(?:\s+[A-ZÀ-Ý][A-Za-zÀ-ÿ'.-]+){0,3})\s*(?:\d{1,3}\s*(?:'|′|min)|pen\.?|og\b)/g)]
-    .map((match) => cleanScorerName(match[1]))
-    .filter(Boolean)
-    .filter((name) => normalizeName(name).length >= 3 && normalizeName(name) !== "co")
-    .filter((name) => !/stadium|attendance|referee|friendly|qualification|league|cup/i.test(name));
   const byName = new Map();
+  const goalPattern = /([A-ZÀ-Ý][A-Za-zÀ-ÿ'.-]+(?:\s+[A-ZÀ-Ý][A-Za-zÀ-ÿ'.-]+){0,3})\s*(?:\d{1,3}\s*(?:'|′|min)|pen\.?|og\b)(?:\s*\(([^)]*)\))?/g;
 
-  for (const name of names) {
+  for (const match of text.matchAll(goalPattern)) {
+    const name = cleanScorerName(match[1]);
+
+    if (!name || normalizeName(name).length < 3 || normalizeName(name) === "co" || /stadium|attendance|referee|friendly|qualification|league|cup/i.test(name)) {
+      continue;
+    }
+
     const key = normalizeName(name);
-    const existing = byName.get(key) || { name, goals: 0 };
+    const existing = byName.get(key) || { name, goals: 0, assists: [] };
     existing.goals += 1;
+    existing.assists.push(...extractAssistNamesFromText(match[2] || ""));
     byName.set(key, existing);
   }
 
-  return [...byName.values()];
+  return [...byName.values()].map((record) => ({
+    ...record,
+    assists: uniqueNames(record.assists)
+  }));
 }
 
 function extractScorersFromScorerCell(value, goalsFor = 0) {
@@ -1284,6 +1702,7 @@ function extractScorersFromScorerCell(value, goalsFor = 0) {
     }
 
     const goals = Number(part.match(/\((\d+)\)/)?.[1] || 1);
+    const assists = extractAssistNamesFromText(part);
     const name = cleanScorerName(part
       .replace(/\([^)]*\)/g, " ")
       .replace(/\d+/g, " "));
@@ -1293,19 +1712,55 @@ function extractScorersFromScorerCell(value, goalsFor = 0) {
       continue;
     }
 
-    const existing = byName.get(key) || { name, goals: 0 };
+    const existing = byName.get(key) || { name, goals: 0, assists: [] };
     existing.goals += goals;
+    existing.assists.push(...assists);
     byName.set(key, existing);
   }
 
-  return [...byName.values()];
+  return [...byName.values()].map((record) => ({
+    ...record,
+    assists: uniqueNames(record.assists)
+  }));
 }
 
 function cleanScorerName(value) {
   return cleanCell(value)
-    .replace(/\b(?:pen|og|own goal|goal|scorer|scorers)\b/gi, " ")
+    .replace(/\([^)]*(?:assist|assisted by)[^)]*\)/gi, " ")
+    .replace(/\b(?:pen|og|own goal|goal|scorer|scorers|assist|assisted by)\b/gi, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function extractAssistNamesFromText(value) {
+  const text = cleanCell(value);
+  const names = [];
+  const patterns = [
+    /(?:assist(?:ed)?\s+by|assist)\s*[:\-]?\s*([A-ZÀ-Ý][A-Za-zÀ-ÿ'.-]+(?:\s+[A-ZÀ-Ý][A-Za-zÀ-ÿ'.-]+){0,3})/gi,
+    /([A-ZÀ-Ý][A-Za-zÀ-ÿ'.-]+(?:\s+[A-ZÀ-Ý][A-Za-zÀ-ÿ'.-]+){0,3})\s+assist(?:ed)?/gi
+  ];
+
+  for (const pattern of patterns) {
+    for (const match of text.matchAll(pattern)) {
+      const name = cleanScorerName(match[1]);
+
+      if (name && normalizeName(name).length >= 3) {
+        names.push(name);
+      }
+    }
+  }
+
+  return uniqueNames(names);
+}
+
+function uniqueNames(names = []) {
+  const byName = new Map();
+
+  for (const name of names.filter(Boolean)) {
+    byName.set(normalizeName(name), name);
+  }
+
+  return [...byName.values()];
 }
 
 function matchNameVariants(team, canonical) {

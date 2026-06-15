@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-06-15T01:42:13.652Z",
+  "createdAt": "2026-06-15T06:28:22.846Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -9,9 +9,8 @@
     "reason": "Collecting public-web odds until the coverage gate is satisfied."
   },
   "fixtureWindow": {
-    "fixtureCount": 61,
+    "fixtureCount": 60,
     "fixtureIds": [
-      "fixture_a3e16539",
       "fixture_ae576b27",
       "fixture_cef81942",
       "fixture_37d4ba98",
@@ -78,8 +77,8 @@
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 72,
-    "freshRecordCount": 72,
+    "totalRecords": 49,
+    "freshRecordCount": 49,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -101,30 +100,20 @@
       },
       "missing": [
         "needs 1 more covered fixtures",
-        "needs 12 more fixtures for coverage",
+        "needs 11 more fixtures for coverage",
         "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 72,
-      "freshRecordCount": 72,
+      "recordCount": 49,
+      "freshRecordCount": 49,
       "fixtureCount": 4,
-      "totalFixtureCount": 61,
-      "fixtureCoverage": 0.066,
+      "totalFixtureCount": 60,
+      "fixtureCoverage": 0.067,
       "bookmakerCount": 4,
       "averageBookmakersPerFixture": 1,
       "lineCount": 4,
       "outcomeCount": 4,
-      "latestCapturedAt": "2026-06-15T01:42:13.652Z",
+      "latestCapturedAt": "2026-06-15T06:28:22.846Z",
       "sampleOutcomes": [
-        {
-          "fixtureId": "fixture_a3e16539",
-          "fixture": "Sweden v Tunisia",
-          "bookmaker": "SportsGambler public prop pages: Sweden v Tunisia",
-          "outcome": "Tunisia +0.5",
-          "line": "+0.5",
-          "team": "Tunisia",
-          "decimalOdds": 2.02,
-          "capturedAt": "2026-06-15T01:42:13.652Z"
-        },
         {
           "fixtureId": "fixture_ae576b27",
           "fixture": "Spain v Cape Verde",
@@ -133,7 +122,7 @@
           "line": "-2.5",
           "team": "Spain",
           "decimalOdds": 1.82,
-          "capturedAt": "2026-06-15T01:42:13.652Z"
+          "capturedAt": "2026-06-15T06:28:22.846Z"
         },
         {
           "fixtureId": "fixture_37d4ba98",
@@ -143,7 +132,7 @@
           "line": "-1.25",
           "team": "Uruguay",
           "decimalOdds": 1.89,
-          "capturedAt": "2026-06-15T01:42:13.652Z"
+          "capturedAt": "2026-06-15T06:28:22.846Z"
         },
         {
           "fixtureId": "fixture_48bc0807",
@@ -153,7 +142,17 @@
           "line": "+1.25",
           "team": "Senegal",
           "decimalOdds": 1.82,
-          "capturedAt": "2026-06-15T01:42:13.652Z"
+          "capturedAt": "2026-06-15T06:28:22.846Z"
+        },
+        {
+          "fixtureId": "fixture_dd4c99ca",
+          "fixture": "Iraq v Norway",
+          "bookmaker": "SportsGambler public prop pages: Iraq v Norway",
+          "outcome": "Norway -2",
+          "line": "-2",
+          "team": "Norway",
+          "decimalOdds": 1.91,
+          "capturedAt": "2026-06-15T06:28:22.846Z"
         }
       ]
     },
@@ -176,7 +175,7 @@
       "missing": [
         "needs 18 more fresh records",
         "needs 5 more covered fixtures",
-        "needs 16 more fixtures for coverage",
+        "needs 15 more fixtures for coverage",
         "needs 2 more bookmaker source(s)",
         "needs deeper bookmaker coverage per fixture",
         "needs 2 more distinct line(s)"
@@ -184,7 +183,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 61,
+      "totalFixtureCount": 60,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -212,7 +211,7 @@
       "missing": [
         "needs 18 more fresh records",
         "needs 5 more covered fixtures",
-        "needs 16 more fixtures for coverage",
+        "needs 15 more fixtures for coverage",
         "needs 2 more bookmaker source(s)",
         "needs deeper bookmaker coverage per fixture",
         "needs 2 more distinct line(s)"
@@ -220,7 +219,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 61,
+      "totalFixtureCount": 60,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -248,7 +247,7 @@
       "missing": [
         "needs 18 more fresh records",
         "needs 5 more covered fixtures",
-        "needs 16 more fixtures for coverage",
+        "needs 15 more fixtures for coverage",
         "needs 2 more bookmaker source(s)",
         "needs deeper bookmaker coverage per fixture",
         "needs 2 more distinct line(s)"
@@ -256,7 +255,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 61,
+      "totalFixtureCount": 60,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -284,14 +283,14 @@
       "missing": [
         "needs 18 more fresh records",
         "needs 5 more covered fixtures",
-        "needs 16 more fixtures for coverage",
+        "needs 15 more fixtures for coverage",
         "needs 2 more bookmaker source(s)",
         "needs deeper bookmaker coverage per fixture"
       ],
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 61,
+      "totalFixtureCount": 60,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -319,14 +318,14 @@
       "missing": [
         "needs 18 more fresh records",
         "needs 2 more covered fixtures",
-        "needs 7 more fixtures for coverage",
+        "needs 6 more fixtures for coverage",
         "needs 2 more bookmaker source(s)",
         "needs deeper bookmaker coverage per fixture"
       ],
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 61,
+      "totalFixtureCount": 60,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,

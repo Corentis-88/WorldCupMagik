@@ -680,6 +680,81 @@ test("severe heat blocks marginal over 2.5 bets even when the stronger hot-clima
   assert.ok(over25.hardBlocks.includes("heat_suppresses_marginal_over25"));
 });
 
+test("anytime assist legs require real player assist and creative-role evidence", () => {
+  const now = new Date("2026-06-14T09:00:00.000Z");
+  const fixtureRecord = fixture("ger-cur-assist", "Germany", "Curacao", "2026-06-14T18:00:00.000Z");
+  const policy = buildRiskPolicy(basePolicy, 90);
+  policy.riskProfile.minLegConfidence = 0.6;
+  const playerStats = [{
+    team: "Germany",
+    playerName: "Joshua Kimmich",
+    updatedAt: now.toISOString(),
+    provider: "public-web",
+    sourceType: "public-web",
+    goals: 1,
+    assists: 5,
+    matchesSampled: 20,
+    scoringMatches: 1,
+    assistMatches: 5,
+    starts: 20,
+    seasonAppearances: 20,
+    assistsPerTwentyTeamMatches: 5,
+    assistConfidence: 0.72,
+    scorerConfidence: 0.62,
+    creativeRoleScore: 0.84,
+    scoringRoleScore: 0.42,
+    playerDataCoverage: 0.9,
+    assistSource: "public assist table"
+  }];
+  const legs = buildLegCandidates({
+    fixtures: [fixtureRecord],
+    oddsSnapshots: [
+      odds(fixtureRecord, "anytime_assist", "Joshua Kimmich", 4.5, now, {
+        playerName: "Joshua Kimmich",
+        playerTeam: "Germany"
+      })
+    ],
+    newsArticles: [article("Germany", "Germany creator expected to start in settled midfield", 0.16, now)],
+    teamStats: [
+      { ...stats("Germany", 1810, 2.15, 2.05, 0.82, 62), sourceMatchCount: 20, longForm: { matchCount: 20, scoringGameRate: 0.9, concedeGameRate: 0.35, cleanSheetRate: 0.55, failedToScoreRate: 0.1, bttsRate: 0.3, over25Rate: 0.52 } },
+      { ...stats("Curacao", 1560, 1.05, 0.88, 1.65, 44), sourceMatchCount: 20, longForm: { matchCount: 20, scoringGameRate: 0.55, concedeGameRate: 0.78, cleanSheetRate: 0.16, failedToScoreRate: 0.45, bttsRate: 0.42, over25Rate: 0.45 } }
+    ],
+    playerStats,
+    policy,
+    now
+  });
+  const assistLeg = legs.find((leg) => leg.market === "anytime_assist");
+
+  assert.ok(assistLeg);
+  assert.equal(assistLeg.selectionLabel, "Germany vs Curacao: Joshua Kimmich anytime assist");
+  assert.equal(assistLeg.hardBlocks.length, 0);
+  assert.ok(assistLeg.components.assistsPerTwentyTeamMatches >= 5);
+  assert.ok(assistLeg.components.creativeRoleScore >= 0.8);
+
+  const thinLegs = buildLegCandidates({
+    fixtures: [fixtureRecord],
+    oddsSnapshots: [
+      odds(fixtureRecord, "anytime_assist", "Unknown Creator", 4.5, now, {
+        playerName: "Unknown Creator",
+        playerTeam: "Germany"
+      })
+    ],
+    newsArticles: [],
+    teamStats: [
+      { ...stats("Germany", 1810, 2.15, 2.05, 0.82, 62), sourceMatchCount: 20, longForm: { matchCount: 20, scoringGameRate: 0.9, concedeGameRate: 0.35, cleanSheetRate: 0.55, failedToScoreRate: 0.1, bttsRate: 0.3, over25Rate: 0.52 } },
+      { ...stats("Curacao", 1560, 1.05, 0.88, 1.65, 44), sourceMatchCount: 20, longForm: { matchCount: 20, scoringGameRate: 0.55, concedeGameRate: 0.78, cleanSheetRate: 0.16, failedToScoreRate: 0.45, bttsRate: 0.42, over25Rate: 0.45 } }
+    ],
+    playerStats: [],
+    policy,
+    now
+  });
+  const thinAssistLeg = thinLegs.find((leg) => leg.market === "anytime_assist");
+
+  assert.ok(thinAssistLeg);
+  assert.ok(thinAssistLeg.hardBlocks.includes("assist_data_coverage_below_gate"));
+  assert.ok(thinAssistLeg.hardBlocks.includes("assist_twenty_match_record_too_thin"));
+});
+
 function fixture(id, homeTeam, awayTeam, date) {
   return {
     id,

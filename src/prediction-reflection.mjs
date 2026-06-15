@@ -3,7 +3,7 @@ import { gradeLegAgainstMatch } from "./outcome-settler.mjs";
 import { loadPostMatchStats, mergePostMatchStats } from "./post-match-stats.mjs";
 import { clamp, makeId, mean, normalizeName, round } from "./utils.mjs";
 
-const SCORER_MARKETS = new Set(["anytime_scorer", "first_goalscorer"]);
+const SCORER_MARKETS = new Set(["anytime_scorer", "first_goalscorer", "anytime_assist"]);
 const GOAL_ENVIRONMENT_MARKETS = new Set([
   "both_teams_to_score",
   "over_1_5_goals",

@@ -8,6 +8,7 @@
     "draw_no_bet",
     "anytime_scorer",
     "first_goalscorer",
+    "anytime_assist",
     "both_teams_to_score",
     "double_chance",
     "over_1_5_goals",
@@ -92,6 +93,16 @@
         "minFixtureCoverage": 0.1
       }
     ]
+  },
+  "assistMarketGate": {
+    "enabled": true,
+    "collectOnlyUntilSatisfied": false,
+    "maxRecordAgeHours": 72,
+    "minPlayerDataCoverage": 0.45,
+    "minAssistConfidence": 0.52,
+    "minAssistsPerTwentyTeamMatches": 1,
+    "minCreativeRoleScore": 0.48,
+    "minProjectedMinutes": 62
   },
   "bookmakerOfferPolicy": {
     "region": "GB",

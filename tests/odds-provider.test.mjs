@@ -26,7 +26,8 @@ test("public-web odds parser maps match winner, totals, and BTTS offers", async 
           { "@type": "Offer", "name": "Yes — Mexico v South Africa at Coral", "price": "2.10", "offeredBy": { "name": "Coral" } },
           { "@type": "Offer", "name": "No — Mexico v South Africa at Coral", "price": "1.67", "offeredBy": { "name": "Coral" } },
           { "@type": "Offer", "name": "Raul Jimenez anytime scorer - Mexico v South Africa at Coral", "price": "2.75", "offeredBy": { "name": "Coral" } },
-          { "@type": "Offer", "name": "Raul Jimenez first goalscorer - Mexico v South Africa at Coral", "price": "5.00", "offeredBy": { "name": "Coral" } }
+          { "@type": "Offer", "name": "Raul Jimenez first goalscorer - Mexico v South Africa at Coral", "price": "5.00", "offeredBy": { "name": "Coral" } },
+          { "@type": "Offer", "name": "Luis Chavez anytime assist - Mexico v South Africa at Coral", "price": "3.40", "offeredBy": { "name": "Coral" } }
         ]
       }
     </script>
@@ -56,6 +57,7 @@ test("public-web odds parser maps match winner, totals, and BTTS offers", async 
     });
 
     assert.deepEqual(records.map((record) => `${record.market}:${record.outcome}`).sort(), [
+      "anytime_assist:Luis Chavez",
       "anytime_scorer:Raul Jimenez",
       "both_teams_to_score:No",
       "both_teams_to_score:Yes",
@@ -72,6 +74,7 @@ test("public-web odds parser maps match winner, totals, and BTTS offers", async 
     ]);
     assert.equal(records.find((record) => record.market === "anytime_scorer")?.playerName, "Raul Jimenez");
     assert.equal(records.find((record) => record.market === "first_goalscorer")?.decimalOdds, 5);
+    assert.equal(records.find((record) => record.market === "anytime_assist")?.decimalOdds, 3.4);
   } finally {
     globalThis.fetch = originalFetch;
   }
@@ -84,7 +87,9 @@ test("public-web odds parser extracts scorer prop tables and American prices", a
       <h1>Mexico vs South Africa prediction, lineups and odds</h1>
       <p>Player Prop Picks</p>
       <p>Latest Santiago Gimenez Player Prop Odds Goalscorer Anytime +150 First 4.50 Shots Over 2.5 1.83</p>
+      <p>Latest Luis Chavez Player Prop Odds Anytime Assist +180 Crosses Over 2.5 1.83</p>
       <p>Player Goals Raul Jimenez (Mexico) First 4.20 Anytime 2.30 Lyle Foster (South Africa) First 9.00 Anytime 4.50</p>
+      <p>Luis Chavez (Mexico) anytime assist 2.80</p>
     </main>
   `;
 
@@ -120,6 +125,7 @@ test("public-web odds parser extracts scorer prop tables and American prices", a
     assert.equal(byKey.get("first_goalscorer:Santiago Gimenez")?.decimalOdds, 4.5);
     assert.equal(byKey.get("first_goalscorer:Raul Jimenez")?.playerTeam, "Mexico");
     assert.equal(byKey.get("anytime_scorer:Lyle Foster")?.playerTeam, "South Africa");
+    assert.equal(byKey.get("anytime_assist:Luis Chavez")?.decimalOdds, 2.8);
   } finally {
     globalThis.fetch = originalFetch;
   }

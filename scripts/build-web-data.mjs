@@ -390,6 +390,7 @@ function summarizeLeg(leg) {
     market: leg.market,
     selectionLabel: leg.selectionLabel,
     playerName: leg.playerName,
+    playerTeam: leg.playerTeam,
     bookmaker: leg.bookmaker,
     decimalOdds: leg.decimalOdds,
     likelyProbability: leg.likelyProbability,
@@ -460,6 +461,17 @@ function summarizeLeg(leg) {
       projectedMinutes: leg.components?.projectedMinutes,
       scorerGoalsPerTwentyTeamMatches: leg.components?.scorerGoalsPerTwentyTeamMatches,
       scorerConfidence: leg.components?.scorerConfidence,
+      scorerMatchesSampled: leg.components?.scorerMatchesSampled,
+      scorerMarketLiftCap: leg.components?.scorerMarketLiftCap,
+      assistMarketType: leg.components?.assistMarketType,
+      assistsPerTwentyTeamMatches: leg.components?.assistsPerTwentyTeamMatches,
+      assistConfidence: leg.components?.assistConfidence,
+      assistMatchesSampled: leg.components?.assistMatchesSampled,
+      creativeRoleScore: leg.components?.creativeRoleScore,
+      scoringRoleScore: leg.components?.scoringRoleScore,
+      playerDataCoverage: leg.components?.playerDataCoverage,
+      assistMarketLiftCap: leg.components?.assistMarketLiftCap,
+      playerStatSource: leg.components?.playerStatSource,
       predictionReflectionAdjustment: leg.components?.predictionReflectionAdjustment,
       predictionReflectionConfidence: leg.components?.predictionReflectionConfidence,
       predictionReflectionReasons: leg.components?.predictionReflectionReasons
@@ -565,6 +577,17 @@ function summarizeLegCandidate(leg) {
       projectedMinutes: leg.components?.projectedMinutes,
       scorerGoalsPerTwentyTeamMatches: leg.components?.scorerGoalsPerTwentyTeamMatches,
       scorerConfidence: leg.components?.scorerConfidence,
+      scorerMatchesSampled: leg.components?.scorerMatchesSampled,
+      scorerMarketLiftCap: leg.components?.scorerMarketLiftCap,
+      assistMarketType: leg.components?.assistMarketType,
+      assistsPerTwentyTeamMatches: leg.components?.assistsPerTwentyTeamMatches,
+      assistConfidence: leg.components?.assistConfidence,
+      assistMatchesSampled: leg.components?.assistMatchesSampled,
+      creativeRoleScore: leg.components?.creativeRoleScore,
+      scoringRoleScore: leg.components?.scoringRoleScore,
+      playerDataCoverage: leg.components?.playerDataCoverage,
+      assistMarketLiftCap: leg.components?.assistMarketLiftCap,
+      playerStatSource: leg.components?.playerStatSource,
       predictionReflectionAdjustment: leg.components?.predictionReflectionAdjustment,
       predictionReflectionConfidence: leg.components?.predictionReflectionConfidence,
       predictionReflectionReasons: leg.components?.predictionReflectionReasons
@@ -620,7 +643,9 @@ function summarizeMarkets(oddsSnapshots, policy, survivabilityMarketCoverage = n
     observed: counts,
     anytimeScorerRecords: counts.anytime_scorer || 0,
     firstGoalscorerRecords: counts.first_goalscorer || 0,
+    anytimeAssistRecords: counts.anytime_assist || 0,
     scorerRecords: (counts.anytime_scorer || 0) + (counts.first_goalscorer || 0),
+    playerPropRecords: (counts.anytime_scorer || 0) + (counts.first_goalscorer || 0) + (counts.anytime_assist || 0),
     survivabilityCoverage: survivabilityMarketCoverage
   };
 }
@@ -680,17 +705,27 @@ function summarizePlayerStats(playerStats) {
     bucket.push({
       playerName: record.playerName,
       goals: record.goals || 0,
+      assists: record.assists || 0,
       matchesSampled: record.matchesSampled || 0,
       scoringMatches: record.scoringMatches || 0,
+      assistMatches: record.assistMatches || 0,
       goalsPerTwentyTeamMatches: record.goalsPerTwentyTeamMatches || 0,
-      scorerConfidence: record.scorerConfidence || 0
+      assistsPerTwentyTeamMatches: record.assistsPerTwentyTeamMatches || 0,
+      goalInvolvementsPerTwentyTeamMatches: record.goalInvolvementsPerTwentyTeamMatches || 0,
+      scorerConfidence: record.scorerConfidence || 0,
+      assistConfidence: record.assistConfidence || 0,
+      creativeRoleScore: record.creativeRoleScore || 0,
+      scoringRoleScore: record.scoringRoleScore || 0,
+      playerDataCoverage: record.playerDataCoverage || 0,
+      position: record.position || "",
+      attackingRole: record.attackingRole || ""
     });
     byTeam[record.team] = bucket;
   }
 
   for (const team of Object.keys(byTeam)) {
     byTeam[team] = byTeam[team]
-      .sort((left, right) => Number(right.goals || 0) - Number(left.goals || 0))
+      .sort((left, right) => Number(right.goalInvolvementsPerTwentyTeamMatches || 0) - Number(left.goalInvolvementsPerTwentyTeamMatches || 0))
       .slice(0, 8);
   }
 
