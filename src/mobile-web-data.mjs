@@ -1,6 +1,6 @@
 const MOBILE_BET_LIMIT = 8;
 const MOBILE_SCORER_LIMIT = 8;
-const MOBILE_ASSIST_LIMIT = 5;
+const MOBILE_ASSIST_LIMIT = 10;
 
 export function buildMobilePayload(payload) {
   const profiles = Object.fromEntries(
