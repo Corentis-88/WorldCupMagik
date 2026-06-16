@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-06-16T01:49:45.953Z",
+  "createdAt": "2026-06-16T10:21:57.921Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -73,8 +73,8 @@
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 15,
-    "freshRecordCount": 15,
+    "totalRecords": 19,
+    "freshRecordCount": 19,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -95,13 +95,12 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 3 more fresh records",
         "needs 2 more covered fixtures",
         "needs 11 more fixtures for coverage",
         "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 15,
-      "freshRecordCount": 15,
+      "recordCount": 19,
+      "freshRecordCount": 19,
       "fixtureCount": 3,
       "totalFixtureCount": 56,
       "fixtureCoverage": 0.054,
@@ -109,7 +108,7 @@
       "averageBookmakersPerFixture": 1,
       "lineCount": 4,
       "outcomeCount": 4,
-      "latestCapturedAt": "2026-06-16T01:49:45.953Z",
+      "latestCapturedAt": "2026-06-16T10:21:57.921Z",
       "sampleOutcomes": [
         {
           "fixtureId": "fixture_48bc0807",
@@ -119,7 +118,7 @@
           "line": "+1.25",
           "team": "Senegal",
           "decimalOdds": 1.82,
-          "capturedAt": "2026-06-16T01:49:45.953Z"
+          "capturedAt": "2026-06-16T10:21:57.921Z"
         },
         {
           "fixtureId": "fixture_dd4c99ca",
@@ -129,7 +128,7 @@
           "line": "-2",
           "team": "Norway",
           "decimalOdds": 1.91,
-          "capturedAt": "2026-06-16T01:49:45.953Z"
+          "capturedAt": "2026-06-16T10:21:57.921Z"
         },
         {
           "fixtureId": "fixture_4d93bfba",
@@ -139,7 +138,7 @@
           "line": "-1.5",
           "team": "Portugal",
           "decimalOdds": 1.83,
-          "capturedAt": "2026-06-16T01:49:45.953Z"
+          "capturedAt": "2026-06-16T10:21:57.921Z"
         },
         {
           "fixtureId": "fixture_4d93bfba",
@@ -149,7 +148,7 @@
           "line": "+1.5",
           "team": "DR Congo",
           "decimalOdds": 1.97,
-          "capturedAt": "2026-06-16T01:49:45.953Z"
+          "capturedAt": "2026-06-16T10:21:57.921Z"
         }
       ]
     },
