@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-06-17T10:03:20.182Z",
+  "createdAt": "2026-06-17T14:30:39.726Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -69,8 +69,8 @@
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 11,
-    "freshRecordCount": 11,
+    "totalRecords": 14,
+    "freshRecordCount": 14,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -91,13 +91,13 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 7 more fresh records",
+        "needs 4 more fresh records",
         "needs 3 more covered fixtures",
         "needs 11 more fixtures for coverage",
         "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 11,
-      "freshRecordCount": 11,
+      "recordCount": 14,
+      "freshRecordCount": 14,
       "fixtureCount": 2,
       "totalFixtureCount": 52,
       "fixtureCoverage": 0.038,
@@ -105,7 +105,7 @@
       "averageBookmakersPerFixture": 1,
       "lineCount": 3,
       "outcomeCount": 3,
-      "latestCapturedAt": "2026-06-17T10:03:20.182Z",
+      "latestCapturedAt": "2026-06-17T14:30:39.726Z",
       "sampleOutcomes": [
         {
           "fixtureId": "fixture_4d93bfba",
@@ -114,8 +114,8 @@
           "outcome": "Portugal -1.5",
           "line": "-1.5",
           "team": "Portugal",
-          "decimalOdds": 1.9,
-          "capturedAt": "2026-06-17T10:03:20.182Z"
+          "decimalOdds": 1.82,
+          "capturedAt": "2026-06-17T14:30:39.726Z"
         },
         {
           "fixtureId": "fixture_4d93bfba",
@@ -125,7 +125,7 @@
           "line": "+1.5",
           "team": "DR Congo",
           "decimalOdds": 1.97,
-          "capturedAt": "2026-06-17T10:03:20.182Z"
+          "capturedAt": "2026-06-17T14:30:39.726Z"
         },
         {
           "fixtureId": "fixture_4512bbc",
@@ -135,7 +135,7 @@
           "line": "-1.5",
           "team": "Canada",
           "decimalOdds": 1.83,
-          "capturedAt": "2026-06-17T10:03:20.182Z"
+          "capturedAt": "2026-06-17T14:30:39.726Z"
         }
       ]
     },
