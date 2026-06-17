@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-06-17T19:31:54.568Z",
+  "createdAt": "2026-06-17T22:16:20.102Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -9,9 +9,8 @@
     "reason": "Collecting public-web odds until the coverage gate is satisfied."
   },
   "fixtureWindow": {
-    "fixtureCount": 51,
+    "fixtureCount": 50,
     "fixtureIds": [
-      "fixture_663c0704",
       "fixture_faed6778",
       "fixture_e983ab0d",
       "fixture_ce246298",
@@ -68,8 +67,8 @@
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 5,
-    "freshRecordCount": 5,
+    "totalRecords": 6,
+    "freshRecordCount": 6,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -90,23 +89,23 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 13 more fresh records",
+        "needs 12 more fresh records",
         "needs 4 more covered fixtures",
         "needs 12 more fixtures for coverage",
         "needs 1 more bookmaker source(s)",
         "needs deeper bookmaker coverage per fixture",
         "needs 1 more distinct line(s)"
       ],
-      "recordCount": 5,
-      "freshRecordCount": 5,
+      "recordCount": 6,
+      "freshRecordCount": 6,
       "fixtureCount": 1,
-      "totalFixtureCount": 51,
+      "totalFixtureCount": 50,
       "fixtureCoverage": 0.02,
       "bookmakerCount": 1,
       "averageBookmakersPerFixture": 1,
       "lineCount": 1,
       "outcomeCount": 1,
-      "latestCapturedAt": "2026-06-17T19:31:54.568Z",
+      "latestCapturedAt": "2026-06-17T22:16:20.102Z",
       "sampleOutcomes": [
         {
           "fixtureId": "fixture_4512bbc",
@@ -116,7 +115,7 @@
           "line": "-1.5",
           "team": "Canada",
           "decimalOdds": 1.83,
-          "capturedAt": "2026-06-17T19:31:54.568Z"
+          "capturedAt": "2026-06-17T22:16:20.102Z"
         }
       ]
     },
@@ -147,7 +146,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 51,
+      "totalFixtureCount": 50,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -183,7 +182,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 51,
+      "totalFixtureCount": 50,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -219,7 +218,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 51,
+      "totalFixtureCount": 50,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -254,7 +253,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 51,
+      "totalFixtureCount": 50,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -282,14 +281,14 @@
       "missing": [
         "needs 18 more fresh records",
         "needs 2 more covered fixtures",
-        "needs 6 more fixtures for coverage",
+        "needs 5 more fixtures for coverage",
         "needs 2 more bookmaker source(s)",
         "needs deeper bookmaker coverage per fixture"
       ],
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 51,
+      "totalFixtureCount": 50,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
