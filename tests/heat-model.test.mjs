@@ -11,7 +11,7 @@ test("heat model includes climate history and squad depth while staying capped",
     date: "2026-06-18T20:00:00.000Z",
     homeTeam: "Saudi Arabia",
     awayTeam: "Norway",
-    venue: "NRG Stadium, Houston"
+    venue: "Hard Rock Stadium, Miami"
   };
   const impact = buildHeatImpact({
     fixture,
@@ -115,6 +115,52 @@ test("host-climate fallback activates Miami heat before a live forecast exists",
   assert.ok(impact.combinedHeatDifferential < 0);
   assert.ok(impact.resultEdgeAdjustment < 0);
   assert.match(impact.notes, /host-climate baseline/);
+});
+
+test("climate-controlled stadiums neutralize outdoor heat drag", () => {
+  const fixture = {
+    id: "eng-cro-dallas",
+    date: "2026-06-17T20:00:00.000Z",
+    homeTeam: "England",
+    awayTeam: "Croatia",
+    venue: "AT&T Stadium, Dallas"
+  };
+  const impact = buildHeatImpact({
+    fixture,
+    heatRecord: {
+      fixtureId: fixture.id,
+      source: "Dallas weather forecast",
+      location: "Dallas",
+      venue: fixture.venue,
+      temperatureC: 35,
+      humidityPct: 64,
+      heatIndexC: 43,
+      heatStress: 0.9,
+      confidence: 0.7,
+      climateControlled: true
+    }
+  });
+
+  assert.equal(impact.climateBand, "climateControlled");
+  assert.equal(impact.heatStress, 0);
+  assert.equal(impact.expectedGoalsAdjustment, 0);
+  assert.equal(impact.resultEdgeAdjustment, 0);
+  assert.match(impact.notes, /outdoor heat is not applied/);
+});
+
+test("host-climate fallback does not create Dallas heat for AT&T Stadium", () => {
+  const fixture = {
+    id: "eng-cro-dallas-fallback",
+    date: "2026-06-17T20:00:00.000Z",
+    homeTeam: "England",
+    awayTeam: "Croatia",
+    venue: "AT&T Stadium, Dallas"
+  };
+  const impact = buildHeatImpact({ fixture });
+
+  assert.equal(impact.climateBand, "climateControlled");
+  assert.equal(impact.heatStress, 0);
+  assert.equal(impact.expectedGoalsAdjustment, 0);
 });
 
 test("historical climate memory covers every fixture team", () => {

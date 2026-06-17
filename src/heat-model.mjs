@@ -78,6 +78,10 @@ export function buildHeatImpact({ fixture, heatRecord = null, homeSquadDepth = n
     return neutralHeatImpact();
   }
 
+  if (isClimateControlledVenue(fixture, effectiveHeatRecord)) {
+    return climateControlledHeatImpact(fixture, effectiveHeatRecord);
+  }
+
   const confidence = clamp(Number(effectiveHeatRecord.confidence || 0), 0, 1);
   const heatStress = clamp(Number(effectiveHeatRecord.heatStress ?? heatStressFromWeather(effectiveHeatRecord)), 0, 1);
   const climateBand = climateBandForWeather({
@@ -204,6 +208,7 @@ function hostClimateFallbackRecord(fixture = {}) {
     humidityPct: round(humidityPct, 1),
     heatIndexC: round(heatIndexC, 1),
     roofFactor: round(roofFactor, 2),
+    climateControlled: Boolean(source.climateControlled),
     heatStress,
     confidence: clamp(Number(baseline.confidence || 0.38) * Number(source.reliability || 0.62) / 0.66, 0.22, 0.52),
     notes: `No fresh venue forecast yet; using low-confidence ${source.location || source.name} host-climate baseline until public weather refreshes.`
@@ -292,6 +297,38 @@ export function neutralHeatImpact() {
     drawLift: 0,
     notes: "No reliable venue weather record yet; heat is neutral."
   };
+}
+
+function climateControlledHeatImpact(fixture = {}, heatRecord = {}) {
+  return {
+    ...neutralHeatImpact(),
+    source: heatRecord.source || "",
+    venue: heatRecord.venue || fixture.venue || "",
+    location: heatRecord.location || "",
+    temperatureC: nullableNumber(heatRecord.temperatureC),
+    heatIndexC: nullableNumber(heatRecord.heatIndexC),
+    humidityPct: nullableNumber(heatRecord.humidityPct),
+    confidence: clamp(Number(heatRecord.confidence || 0.72), 0, 1),
+    climateBand: "climateControlled",
+    notes: "Climate-controlled/retractable-roof venue; outdoor heat is not applied to match tempo."
+  };
+}
+
+function isClimateControlledVenue(fixture = {}, heatRecord = {}) {
+  if (heatRecord.climateControlled === true) {
+    return true;
+  }
+
+  const text = normalizeName([
+    fixture.venue,
+    fixture.hostCity,
+    fixture.location,
+    heatRecord.venue,
+    heatRecord.location,
+    heatRecord.source
+  ].filter(Boolean).join(" "));
+
+  return /at t stadium|att stadium|dallas stadium|nrg stadium|houston stadium|mercedes benz stadium|mercedes-benz stadium|atlanta stadium/.test(text);
 }
 
 export function heatStressFromWeather({ temperatureC, heatIndexC, humidityPct, roofFactor = 1 } = {}) {

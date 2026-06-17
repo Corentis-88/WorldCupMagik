@@ -208,6 +208,7 @@ function heatSnapshotForFixture({ fixture, source, summaries, now }) {
     humidityPct: round(humidityPct, 1),
     heatIndexC: round(heatIndexC, 1),
     roofFactor: round(roofFactor, 2),
+    climateControlled: Boolean(source.climateControlled),
     heatStress,
     confidence,
     rainfallMm: summary.rainfallMm,
