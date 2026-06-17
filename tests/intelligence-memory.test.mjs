@@ -329,6 +329,48 @@ test("prediction reflections compare expected shape with actual xG shots heat an
   assert.ok(record.errors.shotTotal < 0);
 });
 
+test("prediction reflections consume prediction-ledger player assist snapshots", () => {
+  const now = new Date("2026-06-06T23:00:00.000Z");
+  const kickoff = "2026-06-06T19:00:00.000Z";
+  const assistLeg = reflectionLeg({
+    fixtureDate: kickoff,
+    createdAt: "2026-06-06T18:00:00.000Z",
+    market: "anytime_assist",
+    outcome: "Joshua Kimmich",
+    playerName: "Joshua Kimmich",
+    playerTeam: "Japan",
+    selectionLabel: "Japan vs Canada: Joshua Kimmich anytime assist",
+    modelProbability: 0.34,
+    components: {
+      expectedGoals: 2.6,
+      homeExpectedGoals: 1.7,
+      awayExpectedGoals: 0.9,
+      assistMarketType: "anytime_assist",
+      assistsPerTwentyTeamMatches: 7,
+      assistConfidence: 0.76,
+      assistMatchesSampled: 20,
+      creativeRoleScore: 0.81,
+      playerDataCoverage: 0.84
+    }
+  });
+  const settledMatch = match(kickoff, "Japan", "Canada", 2, 0, {
+    homeScorers: [{ name: "Japan scorer", goals: 1, assists: ["Kimmich"] }],
+    capturedMetricFields: ["score", "xg", "shots", "assists"]
+  });
+  const reflections = buildPredictionReflections({
+    predictionLedger: [assistLeg],
+    matchHistory: [settledMatch],
+    now
+  });
+  const record = reflections.newRecords[0];
+
+  assert.equal(reflections.insertedCount, 1);
+  assert.equal(record.market, "anytime_assist");
+  assert.equal(record.status, "won");
+  assert.equal(record.playerName, "Joshua Kimmich");
+  assert.equal(record.predicted.totalXg, 2.6);
+});
+
 test("post-match stats override score-derived match rows before reflection", () => {
   const estimated = match("2026-06-13T19:00:00.000Z", "Qatar", "Switzerland", 1, 1, {
     id: "estimated-qatar-switzerland",
@@ -549,7 +591,9 @@ function reflectionLeg(overrides = {}) {
     awayTeam: "Canada",
     market: overrides.market || "over_2_5_goals",
     outcome: overrides.outcome || "Over",
-    selectionLabel: "Japan vs Canada: Over 2.5 goals",
+    playerName: overrides.playerName || "",
+    playerTeam: overrides.playerTeam || "",
+    selectionLabel: overrides.selectionLabel || "Japan vs Canada: Over 2.5 goals",
     bookmaker: "Public Test Book",
     decimalOdds: 1.9,
     modelProbability: overrides.modelProbability || 0.58,

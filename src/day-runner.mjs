@@ -10,6 +10,7 @@ import { buildDailyReport } from "./reporting.mjs";
 import { loadOutcomeLearning } from "./intelligence-memory.mjs";
 import { settleStoredBetOutcomes } from "./outcome-settler.mjs";
 import { refreshPredictionReflections } from "./prediction-reflection.mjs";
+import { persistPredictionLedger } from "./prediction-ledger.mjs";
 import { buildLegCandidates } from "./scoring.mjs";
 import { buildSurvivabilityMarketCoverage, isSurvivabilityMarketRecord } from "./survivability-market-coverage.mjs";
 import { isoDate, makeId, normalizeName } from "./utils.mjs";
@@ -143,6 +144,7 @@ export async function runAnalysisCycle({ state, now = new Date() } = {}) {
     playerStats: engineState.playerStats
   });
   const recommendations = buildBetRecommendations(legCandidates, engineState.policy);
+  await persistPredictionLedger(legCandidates);
   const offerRanking = rankBookmakerOffers(engineState.bookmakerOffers, engineState.policy, now);
   const survivabilityMarketCoverage = buildSurvivabilityMarketCoverage({
     fixtures: engineState.fixtures,

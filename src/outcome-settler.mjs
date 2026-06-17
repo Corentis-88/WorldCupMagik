@@ -1,10 +1,12 @@
 import { readJson, upsertJsonRecords } from "./db.mjs";
+import { loadPredictionLedger } from "./prediction-ledger.mjs";
 import { loadPostMatchStats, mergePostMatchStats } from "./post-match-stats.mjs";
 import { makeId, normalizeName, round } from "./utils.mjs";
 
 export async function settleStoredBetOutcomes({ matchHistory = null, postMatchStats = null, now = new Date() } = {}) {
-  const [legCandidates, recommendations, appScanLatest, appScans, existingOutcomes, storedMatchHistory, storedPostMatchStats] = await Promise.all([
+  const [legCandidates, predictionLedger, recommendations, appScanLatest, appScans, existingOutcomes, storedMatchHistory, storedPostMatchStats] = await Promise.all([
     readJson(["data", "leg-candidates-latest.json"], []),
+    loadPredictionLedger(),
     readJson(["data", "recommendations-latest.json"], null),
     readJson(["data", "app-scan-latest.json"], null),
     readJson(["data", "app-scans.json"], []),
@@ -15,6 +17,7 @@ export async function settleStoredBetOutcomes({ matchHistory = null, postMatchSt
   const mergedMatchHistory = mergePostMatchStats(storedMatchHistory, storedPostMatchStats);
   const settlement = settleBetOutcomes({
     legCandidates,
+    predictionLedger,
     recommendations,
     appScans: [appScanLatest, ...appScans].filter(Boolean),
     matchHistory: mergedMatchHistory,
@@ -29,18 +32,24 @@ export async function settleStoredBetOutcomes({ matchHistory = null, postMatchSt
   return settlement;
 }
 
-export function settleBetOutcomes({ legCandidates = [], recommendations = null, appScans = [], matchHistory = [], existingOutcomes = [], now = new Date() } = {}) {
-  const fullLegs = recommendedFullLegs({ legCandidates, recommendations, appScans, existingOutcomes });
+export function settleBetOutcomes({ legCandidates = [], predictionLedger = [], recommendations = null, appScans = [], matchHistory = [], existingOutcomes = [], now = new Date() } = {}) {
+  const fullLegs = recommendedFullLegs({ legCandidates, predictionLedger, recommendations, appScans, existingOutcomes });
   const existingByKey = new Map(existingOutcomes.map((outcome) => [outcomeRecordKey(outcome), outcome]));
   const newRecords = [];
   const skipped = {
-    noRecommendations: recommendations || appScans.length ? 0 : 1,
+    noRecommendations: recommendations || appScans.length || predictionLedger.length || legCandidates.length ? 0 : 1,
     noMatch: 0,
     unknownMarket: 0,
+    latePrediction: 0,
     alreadySettled: 0
   };
 
   for (const leg of fullLegs) {
+    if (!leg.settlementReplay && !predictionCapturedBeforeKickoff(leg)) {
+      skipped.latePrediction += 1;
+      continue;
+    }
+
     const match = findSettledMatchForLeg(leg, matchHistory, now);
 
     if (!match) {
@@ -175,18 +184,19 @@ export function gradeLegAgainstMatch(leg, match) {
   return { status: "unknown", reason: "unsupported_market" };
 }
 
-function recommendedFullLegs({ legCandidates, recommendations, appScans = [], existingOutcomes = [] }) {
+function recommendedFullLegs({ legCandidates, predictionLedger = [], recommendations, appScans = [], existingOutcomes = [] }) {
   const candidateById = new Map(legCandidates.map((leg) => [baseLegId(leg.id), leg]));
   const selectedKeys = new Set();
   const selected = [];
 
   for (const leg of [
+    ...predictionLedger.map((ledgerLeg) => ({ ...ledgerLeg, preservePredictionSnapshot: true })),
     ...flattenRecommendedLegs(recommendations),
     ...flattenAppScanLegs(appScans),
     ...existingOutcomes.map(outcomeToLeg)
   ]) {
     const id = baseLegId(leg.id);
-    const fullLeg = candidateById.get(id) || leg;
+    const fullLeg = leg.preservePredictionSnapshot ? leg : candidateById.get(id) || leg;
     const key = predictionLegKey(fullLeg);
 
     if (!key || selectedKeys.has(key)) {
@@ -206,8 +216,20 @@ function outcomeToLeg(outcome) {
     id: outcome.legId || outcome.id,
     fixtureDate: outcome.fixtureDate || outcome.matchDate,
     createdAt: outcome.createdAt || outcome.settledAt,
+    settlementReplay: true,
     components: outcome.predictionShape || {}
   };
+}
+
+function predictionCapturedBeforeKickoff(leg) {
+  const createdAt = new Date(leg.createdAt || 0).getTime();
+  const fixtureTime = new Date(leg.fixtureDate || leg.date || 0).getTime();
+
+  if (!Number.isFinite(createdAt) || !Number.isFinite(fixtureTime)) {
+    return true;
+  }
+
+  return createdAt <= fixtureTime + 15 * 60000;
 }
 
 function flattenRecommendedLegs(recommendations) {
@@ -302,12 +324,13 @@ function gradeAnytimeAssist(leg, match, totalGoals) {
     name,
     team: scorer.team
   })));
+  const assistCoverageKnown = matchAssistCoverageKnown(match, allScorers);
 
   if (!assistName) {
     return { status: "unknown", reason: "missing_assist_name" };
   }
 
-  if (!assistRows.length && totalGoals > 0) {
+  if (!assistCoverageKnown && totalGoals > 0) {
     return { status: "unknown", reason: "assist_list_missing" };
   }
 
@@ -329,6 +352,14 @@ function assistNamesForScorer(scorer = {}) {
   return names
     .map((name) => String(name || "").trim())
     .filter(Boolean);
+}
+
+function matchAssistCoverageKnown(match = {}, allScorers = []) {
+  const captured = new Set(match.capturedMetricFields || []);
+
+  return captured.has("assists")
+    || allScorers.some((scorer) => scorer.assists !== undefined || scorer.assist !== undefined || scorer.assistedBy !== undefined)
+    || Number(match.homeGoals || 0) + Number(match.awayGoals || 0) === 0;
 }
 
 function gradeFirstGoalscorer(leg, match, totalGoals) {
@@ -469,7 +500,20 @@ function compactPredictionShape(components = {}) {
     heatClimateBand: components.heatClimateBand || "",
     openingGameCaution: round(Number(components.openingGameCaution || 0), 4),
     tournamentExpectedGoalsAdjustment: round(Number(components.tournamentExpectedGoalsAdjustment || 0), 4),
-    starterLikelihood: round(Number(components.starterLikelihood || 0), 4)
+    tournamentPhase: components.tournamentPhase || "",
+    starterLikelihood: round(Number(components.starterLikelihood || 0), 4),
+    projectedMinutes: round(Number(components.projectedMinutes || 0), 2),
+    scorerMarketType: components.scorerMarketType || "",
+    scorerGoalsPerTwentyTeamMatches: round(Number(components.scorerGoalsPerTwentyTeamMatches || 0), 4),
+    scorerConfidence: round(Number(components.scorerConfidence || 0), 4),
+    scorerMatchesSampled: Number(components.scorerMatchesSampled || 0),
+    scoringRoleScore: round(Number(components.scoringRoleScore || 0), 4),
+    assistMarketType: components.assistMarketType || "",
+    assistsPerTwentyTeamMatches: round(Number(components.assistsPerTwentyTeamMatches || 0), 4),
+    assistConfidence: round(Number(components.assistConfidence || 0), 4),
+    assistMatchesSampled: Number(components.assistMatchesSampled || 0),
+    creativeRoleScore: round(Number(components.creativeRoleScore || 0), 4),
+    playerDataCoverage: round(Number(components.playerDataCoverage || 0), 4)
   };
 }
 
@@ -537,7 +581,7 @@ function inferredOutcomeFromLabel(leg) {
     return match?.[1] || "";
   }
 
-  const match = label.match(/:\s*(.*?)\s+(?:to win|draw no bet|anytime scorer|first goalscorer)/i);
+  const match = label.match(/:\s*(.*?)\s+(?:to win|draw no bet|anytime scorer|first goalscorer|anytime assist)/i);
   return match?.[1] || "";
 }
 

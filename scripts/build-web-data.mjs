@@ -6,6 +6,7 @@ import { loadEngineState } from "../src/db.mjs";
 import { buildTeamStatsWithIntelligence, loadIntelligenceState, loadOutcomeLearning } from "../src/intelligence-memory.mjs";
 import { buildMobilePayload } from "../src/mobile-web-data.mjs";
 import { buildBetRecommendations, buildMostLikelyPicks } from "../src/portfolio-builder.mjs";
+import { persistPredictionLedger } from "../src/prediction-ledger.mjs";
 import { buildLegCandidates } from "../src/scoring.mjs";
 import { buildSurvivabilityMarketCoverage } from "../src/survivability-market-coverage.mjs";
 
@@ -93,6 +94,11 @@ for (const risk of riskBuckets) {
     .filter((leg) => !leg.hardBlocks?.length)
     .map(summarizeLegCandidate);
 }
+
+await persistPredictionLedger([
+  ...mostLikelyRangeLegCandidates,
+  ...Object.values(fullLegCandidatesByRisk).flat()
+]);
 
 for (const daysAhead of dayBuckets) {
   const scanFixtures = selectFixturesForWindow(liveFixtures, daysAhead, now);
@@ -202,9 +208,11 @@ const payload = {
   },
   profiles
 };
+const mobilePayload = buildMobilePayload(payload);
 
+await persistPredictionLedger(playerCardLedgerLegsFromMobilePayload(mobilePayload, now));
 await writeFile(join(outputDir, "latest.json"), `${JSON.stringify(payload, null, 2)}\n`, "utf8");
-await writeFile(join(outputDir, "mobile-latest.json"), `${JSON.stringify(buildMobilePayload(payload))}\n`, "utf8");
+await writeFile(join(outputDir, "mobile-latest.json"), `${JSON.stringify(mobilePayload)}\n`, "utf8");
 await writeFile(join(outputDir, "survivability-market-coverage-latest.json"), `${JSON.stringify(survivabilityMarketCoverage, null, 2)}\n`, "utf8");
 console.log(`Wrote ${join(outputDir, "latest.json")}`);
 console.log(`Wrote ${join(outputDir, "mobile-latest.json")}`);
@@ -216,6 +224,93 @@ function profileKey(daysAhead, risk) {
 
 function pickOfDayKey(daysAhead) {
   return `d${daysAhead}`;
+}
+
+function playerCardLedgerLegsFromMobilePayload(mobilePayload, createdAt) {
+  const createdAtIso = new Date(createdAt).toISOString();
+  const groups = [
+    ...Object.values(mobilePayload.likelyScorersByDate || {}).flat(),
+    ...Object.values(mobilePayload.likelyAssistsByDate || {}).flat()
+  ];
+  const legs = [];
+
+  for (const group of groups) {
+    const fixture = group.fixture || {};
+
+    if (!fixture.id || !fixture.date || !fixture.homeTeam || !fixture.awayTeam) {
+      continue;
+    }
+
+    for (const player of group.players || []) {
+      const market = player.market || "anytime_scorer";
+
+      if (!["anytime_scorer", "first_goalscorer", "anytime_assist"].includes(market) || !player.playerName) {
+        continue;
+      }
+
+      const probability = Number(player.probability || 0);
+      const confidence = Number(player.confidence || 0);
+      const marketLabel = market === "first_goalscorer"
+        ? "first goalscorer"
+        : market === "anytime_assist"
+          ? "anytime assist"
+          : "anytime scorer";
+
+      legs.push({
+        createdAt: createdAtIso,
+        fixtureId: fixture.id,
+        fixtureDate: fixture.date,
+        homeTeam: fixture.homeTeam,
+        awayTeam: fixture.awayTeam,
+        market,
+        outcome: player.playerName,
+        playerName: player.playerName,
+        playerTeam: player.team || "",
+        selectionLabel: `${fixture.homeTeam} vs ${fixture.awayTeam}: ${player.playerName} ${marketLabel}`,
+        bookmaker: "World Cup Magik daily player cards",
+        decimalOdds: 0,
+        modelProbability: probability,
+        rawModelProbability: probability,
+        impliedProbability: 0,
+        marketImpliedProbability: 0,
+        confidence,
+        edge: 0,
+        independentEdge: 0,
+        riskTag: "daily_player_card",
+        components: playerCardPredictionComponents({ player, market, confidence })
+      });
+    }
+  }
+
+  return legs;
+}
+
+function playerCardPredictionComponents({ player, market, confidence }) {
+  const components = {
+    nonMarketSignalCount: 4,
+    dataCompleteness: confidence,
+    intelligenceConfidence: confidence,
+    playerDataCoverage: confidence,
+    starterLikelihood: Number(player.starterLikelihood || 0),
+    projectedMinutes: Number(player.projectedMinutes || 0)
+  };
+
+  if (market === "anytime_assist") {
+    return {
+      ...components,
+      assistMarketType: "anytime_assist",
+      assistsPerTwentyTeamMatches: Number(player.assistEvidence || 0),
+      assistConfidence: confidence,
+      creativeRoleScore: Number(player.creativeRoleScore || 0)
+    };
+  }
+
+  return {
+    ...components,
+    scorerMarketType: market,
+    scorerConfidence: confidence,
+    scoringRoleScore: Number(player.sourceWeight || 0)
+  };
 }
 
 function filterLegCandidatesForFixtures(legCandidates, fixtures) {

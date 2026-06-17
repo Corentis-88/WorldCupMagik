@@ -1,5 +1,6 @@
 import { readJson, upsertJsonRecords } from "./db.mjs";
 import { gradeLegAgainstMatch } from "./outcome-settler.mjs";
+import { loadPredictionLedger } from "./prediction-ledger.mjs";
 import { loadPostMatchStats, mergePostMatchStats } from "./post-match-stats.mjs";
 import { clamp, makeId, mean, normalizeName, round } from "./utils.mjs";
 
@@ -18,6 +19,7 @@ export async function refreshPredictionReflections({ matchHistory = null, postMa
     appScanLatest,
     appScans,
     legCandidates,
+    predictionLedger,
     outcomes,
     existingReflections,
     storedMatchHistory,
@@ -29,6 +31,7 @@ export async function refreshPredictionReflections({ matchHistory = null, postMa
     readJson(["data", "app-scan-latest.json"], null),
     readJson(["data", "app-scans.json"], []),
     readJson(["data", "leg-candidates-latest.json"], []),
+    loadPredictionLedger(),
     readJson(["data", "bet-outcomes.json"], []),
     readJson(["data", "prediction-reflections.json"], []),
     matchHistory ? Promise.resolve(matchHistory) : readJson(["data", "team-match-history.json"], []),
@@ -41,6 +44,7 @@ export async function refreshPredictionReflections({ matchHistory = null, postMa
   const reflection = buildPredictionReflections({
     appScans: [appScanLatest, ...appScans].filter(Boolean),
     legCandidates,
+    predictionLedger,
     outcomes,
     matchHistory: mergedMatchHistory,
     heatSnapshots: storedHeatSnapshots,
@@ -57,13 +61,13 @@ export async function refreshPredictionReflections({ matchHistory = null, postMa
   return reflection;
 }
 
-export function buildPredictionReflections({ appScans = [], legCandidates = [], outcomes = [], matchHistory = [], heatSnapshots = [], lineups = [], existingReflections = [], fixtures = [], now = new Date() } = {}) {
+export function buildPredictionReflections({ appScans = [], legCandidates = [], predictionLedger = [], outcomes = [], matchHistory = [], heatSnapshots = [], lineups = [], existingReflections = [], fixtures = [], now = new Date() } = {}) {
   const existingKeys = new Set(existingReflections.map(reflectionRecordKey));
   const outcomeByLeg = new Map(outcomes.map((outcome) => [outcomeLegKey(outcome), outcome]));
   const latestHeatByFixture = latestPreKickoffHeatByFixture(heatSnapshots);
   const lineupByFixture = latestLineupByFixture(lineups);
   const fixtureContextById = reflectionTournamentContextByFixture(fixtures);
-  const predictionLegs = collectPredictionLegs({ appScans, legCandidates, outcomes });
+  const predictionLegs = collectPredictionLegs({ appScans, legCandidates, predictionLedger, outcomes });
   const selectedByKey = new Map();
 
   for (const leg of predictionLegs) {
@@ -247,7 +251,7 @@ export function reflectionRecordKey(record) {
   ].join("|");
 }
 
-function collectPredictionLegs({ appScans = [], legCandidates = [], outcomes = [] }) {
+function collectPredictionLegs({ appScans = [], legCandidates = [], predictionLedger = [], outcomes = [] }) {
   const fromScans = appScans.flatMap((scan) => [
     ...(scan?.betslip || []).flatMap((combo) => combo.legs || []),
     ...(scan?.strongestLegs || [])
@@ -261,7 +265,7 @@ function collectPredictionLegs({ appScans = [], legCandidates = [], outcomes = [
       fixtureDate: outcome.fixtureDate || outcome.matchDate
     }));
 
-  return [...fromScans, ...legCandidates, ...fromOutcomes].filter(Boolean);
+  return [...predictionLedger, ...fromScans, ...legCandidates, ...fromOutcomes].filter(Boolean);
 }
 
 function hasReflectionShape(leg = {}) {

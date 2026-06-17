@@ -143,13 +143,73 @@ test("settles anytime assist when public scorer rows include assists", () => {
     ...match("Germany", "Curacao", 3, 0),
     homeScorers: [{ name: "Kai Havertz", goals: 1, assists: ["Kimmich"] }]
   };
+  const unassistedMatch = {
+    ...match("Germany", "Curacao", 3, 0),
+    homeScorers: [{ name: "Kai Havertz", goals: 1, assists: [] }],
+    capturedMetricFields: ["score", "assists"]
+  };
   const missingAssistMatch = {
     ...match("Germany", "Curacao", 3, 0),
     homeScorers: [{ name: "Kai Havertz", goals: 1 }]
   };
 
   assert.equal(gradeLegAgainstMatch(selected, assistedMatch).status, "won");
+  assert.equal(gradeLegAgainstMatch(selected, unassistedMatch).status, "lost");
   assert.equal(gradeLegAgainstMatch(selected, missingAssistMatch).reason, "assist_list_missing");
+});
+
+test("settles prediction-ledger assist legs even when they were not in the displayed slip", () => {
+  const now = new Date("2026-06-12T12:00:00.000Z");
+  const assistLeg = {
+    ...leg("leg-ledger-assist", "anytime_assist", "Luis Chavez", 3.2),
+    playerName: "Luis Chavez",
+    playerTeam: "Mexico",
+    selectionLabel: "Mexico vs South Africa: Luis Chavez anytime assist",
+    components: {
+      nonMarketSignalCount: 6,
+      dataCompleteness: 0.82,
+      assistMarketType: "anytime_assist",
+      assistConfidence: 0.74,
+      assistsPerTwentyTeamMatches: 4,
+      creativeRoleScore: 0.68
+    }
+  };
+  const playedMatch = {
+    ...match("Mexico", "South Africa", 2, 1),
+    homeScorers: [{ name: "Raul Jimenez", goals: 1, assists: ["L. Chavez"] }],
+    awayScorers: [{ name: "Lyle Foster", goals: 1, assists: ["Teboho Mokoena"] }],
+    capturedMetricFields: ["score", "assists"]
+  };
+  const settlement = settleBetOutcomes({
+    predictionLedger: [assistLeg],
+    matchHistory: [playedMatch],
+    existingOutcomes: [],
+    now
+  });
+
+  assert.equal(settlement.insertedCount, 1);
+  assert.equal(settlement.newRecords[0].market, "anytime_assist");
+  assert.equal(settlement.newRecords[0].status, "won");
+  assert.equal(settlement.newRecords[0].predictionShape.assistMarketType, "anytime_assist");
+  assert.equal(settlement.skipped.noRecommendations, 0);
+});
+
+test("does not settle ledger predictions captured after kickoff", () => {
+  const now = new Date("2026-06-12T12:00:00.000Z");
+  const lateLeg = {
+    ...leg("leg-late", "over_2_5_goals", "Over", 1.9),
+    createdAt: "2026-06-11T19:20:00.000Z"
+  };
+  const settlement = settleBetOutcomes({
+    predictionLedger: [lateLeg],
+    matchHistory: [match("Mexico", "South Africa", 2, 1)],
+    existingOutcomes: [],
+    now
+  });
+
+  assert.equal(settlement.insertedCount, 0);
+  assert.equal(settlement.skipped.latePrediction, 1);
+  assert.equal(settlement.skipped.noMatch, 0);
 });
 
 function statusFor(settlement, market) {

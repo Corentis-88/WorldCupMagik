@@ -255,5 +255,123 @@
     "derivedMetricFields": [],
     "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-qatar-vs-switzerland-jun-13-2026-game-boxscore-647621",
     "createdAt": "2026-06-14T07:30:00.000Z"
+  },
+  {
+    "id": "match_actual_fixture_ae576b27",
+    "fixtureId": "fixture_ae576b27",
+    "date": "2026-06-15T16:00:00.000Z",
+    "fixtureDate": "2026-06-15T16:00:00.000Z",
+    "homeTeam": "Spain",
+    "awayTeam": "Cape Verde",
+    "homeGoals": 0,
+    "awayGoals": 0,
+    "homeXg": 2.1,
+    "awayXg": 0.35,
+    "homeShots": 27,
+    "awayShots": 5,
+    "homeShotsOnTarget": 7,
+    "awayShotsOnTarget": 1,
+    "homeScorers": [],
+    "awayScorers": [],
+    "provider": "post-match-stats",
+    "source": "Public match reports",
+    "sourceType": "public-web",
+    "metricSource": "public-report-plus-derived-estimates",
+    "capturedMetricFields": ["score"],
+    "derivedMetricFields": ["xg", "shots", "shotsOnTarget"],
+    "sourceUrl": "https://www.theguardian.com/football/live/2026/jun/15/spain-v-cape-verde-world-cup-2026-live",
+    "createdAt": "2026-06-16T14:20:00.000Z"
+  },
+  {
+    "id": "match_actual_fixture_cef81942",
+    "fixtureId": "fixture_cef81942",
+    "date": "2026-06-15T19:00:00.000Z",
+    "fixtureDate": "2026-06-15T19:00:00.000Z",
+    "homeTeam": "Belgium",
+    "awayTeam": "Egypt",
+    "homeGoals": 1,
+    "awayGoals": 1,
+    "homeXg": 1.25,
+    "awayXg": 1.2,
+    "homeShots": 13,
+    "awayShots": 12,
+    "homeShotsOnTarget": 4,
+    "awayShotsOnTarget": 5,
+    "homeScorers": [
+      { "name": "Mohamed Hany", "minute": 66, "goals": 1, "order": 2, "ownGoal": true }
+    ],
+    "awayScorers": [
+      { "name": "Emam Ashour", "minute": 19, "goals": 1, "order": 1 }
+    ],
+    "provider": "post-match-stats",
+    "source": "Public match reports",
+    "sourceType": "public-web",
+    "metricSource": "public-report-plus-derived-estimates",
+    "capturedMetricFields": ["score", "scorers"],
+    "derivedMetricFields": ["xg", "shots", "shotsOnTarget"],
+    "sourceUrl": "https://www.theguardian.com/football/2026/jun/15/belgium-egypt-world-cup-2026-group-g-match-report",
+    "createdAt": "2026-06-16T14:20:00.000Z"
+  },
+  {
+    "id": "match_actual_fixture_37d4ba98",
+    "fixtureId": "fixture_37d4ba98",
+    "date": "2026-06-15T22:00:00.000Z",
+    "fixtureDate": "2026-06-15T22:00:00.000Z",
+    "homeTeam": "Saudi Arabia",
+    "awayTeam": "Uruguay",
+    "homeGoals": 1,
+    "awayGoals": 1,
+    "homeXg": 0.85,
+    "awayXg": 1.5,
+    "homeShots": 9,
+    "awayShots": 15,
+    "homeShotsOnTarget": 3,
+    "awayShotsOnTarget": 6,
+    "homeScorers": [
+      { "name": "Abdulelah Al-Amri", "minute": 31, "goals": 1, "order": 1 }
+    ],
+    "awayScorers": [
+      { "name": "Maxi Araujo", "minute": 80, "goals": 1, "order": 2 }
+    ],
+    "provider": "post-match-stats",
+    "source": "Public match reports",
+    "sourceType": "public-web",
+    "metricSource": "public-report-plus-derived-estimates",
+    "capturedMetricFields": ["score", "scorers"],
+    "derivedMetricFields": ["xg", "shots", "shotsOnTarget"],
+    "sourceUrl": "https://www.theguardian.com/football/live/2026/jun/15/saudi-arabia-v-uruguay-world-cup-2026-live",
+    "createdAt": "2026-06-16T14:20:00.000Z"
+  },
+  {
+    "id": "match_actual_fixture_883a13d3",
+    "fixtureId": "fixture_883a13d3",
+    "date": "2026-06-16T01:00:00.000Z",
+    "fixtureDate": "2026-06-16T01:00:00.000Z",
+    "homeTeam": "Iran",
+    "awayTeam": "New Zealand",
+    "homeGoals": 2,
+    "awayGoals": 2,
+    "homeXg": 1.65,
+    "awayXg": 1.85,
+    "homeShots": 17,
+    "awayShots": 14,
+    "homeShotsOnTarget": 4,
+    "awayShotsOnTarget": 8,
+    "homeScorers": [
+      { "name": "Ramin Rezaeian", "minute": 43, "goals": 1, "order": 2 },
+      { "name": "Mohammad Mohebbi", "minute": 72, "goals": 1, "order": 4 }
+    ],
+    "awayScorers": [
+      { "name": "Eli Just", "minute": 18, "goals": 1, "order": 1, "assists": ["Chris Wood"] },
+      { "name": "Eli Just", "minute": 61, "goals": 1, "order": 3, "assists": ["Chris Wood"] }
+    ],
+    "provider": "post-match-stats",
+    "source": "Public match reports",
+    "sourceType": "public-web",
+    "metricSource": "public-report-plus-derived-estimates",
+    "capturedMetricFields": ["score", "shots", "shotsOnTarget", "scorers"],
+    "derivedMetricFields": ["xg"],
+    "sourceUrl": "https://www.theguardian.com/football/live/2026/jun/16/fifa-world-cup-2026-live-iran-v-new-zealand-updates-irn-vs-nzl-group-f-match-score-latest",
+    "createdAt": "2026-06-16T14:20:00.000Z"
   }
 ]

@@ -10,6 +10,7 @@ import { fetchTeamStatsWithDiagnostics } from "./providers/stats-provider.mjs";
 import { fetchHeatSnapshotsWithDiagnostics } from "./providers/weather-provider.mjs";
 import { settleStoredBetOutcomes } from "./outcome-settler.mjs";
 import { refreshPredictionReflections } from "./prediction-reflection.mjs";
+import { persistPredictionLedger } from "./prediction-ledger.mjs";
 import { loadPostMatchStats, mergePostMatchStats } from "./post-match-stats.mjs";
 import { buildLegCandidates } from "./scoring.mjs";
 import { buildSurvivabilityMarketCoverage, isSurvivabilityMarketRecord } from "./survivability-market-coverage.mjs";
@@ -262,6 +263,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
     playerStats: allPlayerStats
   });
   const recommendations = buildBetRecommendations(legCandidates, policy);
+  await persistPredictionLedger(legCandidates);
   const mostLikelyBetslip = useMostLikelyMode
     ? selectMostLikelyBetslip({
       picks: buildMostLikelyPicks(legCandidates, policy, { fixtureCount: scanFixtures.length }),
