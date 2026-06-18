@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-06-18T09:48:49.324Z",
+  "createdAt": "2026-06-18T14:25:49.411Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -65,8 +65,8 @@
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 10,
-    "freshRecordCount": 10,
+    "totalRecords": 12,
+    "freshRecordCount": 12,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -87,13 +87,13 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 8 more fresh records",
+        "needs 6 more fresh records",
         "needs 3 more covered fixtures",
         "needs 10 more fixtures for coverage",
         "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 10,
-      "freshRecordCount": 10,
+      "recordCount": 12,
+      "freshRecordCount": 12,
       "fixtureCount": 2,
       "totalFixtureCount": 48,
       "fixtureCoverage": 0.042,
@@ -101,7 +101,7 @@
       "averageBookmakersPerFixture": 1,
       "lineCount": 2,
       "outcomeCount": 2,
-      "latestCapturedAt": "2026-06-18T09:48:49.324Z",
+      "latestCapturedAt": "2026-06-18T14:25:49.411Z",
       "sampleOutcomes": [
         {
           "fixtureId": "fixture_4512bbc",
@@ -111,7 +111,7 @@
           "line": "-1.5",
           "team": "Canada",
           "decimalOdds": 1.83,
-          "capturedAt": "2026-06-18T09:48:49.324Z"
+          "capturedAt": "2026-06-18T14:25:49.411Z"
         },
         {
           "fixtureId": "fixture_ac94436b",
@@ -121,7 +121,7 @@
           "line": "-1",
           "team": "USA",
           "decimalOdds": 2.02,
-          "capturedAt": "2026-06-18T09:48:49.324Z"
+          "capturedAt": "2026-06-18T14:25:49.411Z"
         }
       ]
     },
