@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-06-19T09:55:24.259Z",
+  "createdAt": "2026-06-19T14:22:53.506Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -61,8 +61,8 @@
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 8,
-    "freshRecordCount": 8,
+    "totalRecords": 10,
+    "freshRecordCount": 10,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -83,13 +83,13 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 10 more fresh records",
+        "needs 8 more fresh records",
         "needs 3 more covered fixtures",
         "needs 9 more fixtures for coverage",
         "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 8,
-      "freshRecordCount": 8,
+      "recordCount": 10,
+      "freshRecordCount": 10,
       "fixtureCount": 2,
       "totalFixtureCount": 44,
       "fixtureCoverage": 0.045,
@@ -97,7 +97,7 @@
       "averageBookmakersPerFixture": 1,
       "lineCount": 2,
       "outcomeCount": 2,
-      "latestCapturedAt": "2026-06-19T09:55:24.259Z",
+      "latestCapturedAt": "2026-06-19T14:22:53.506Z",
       "sampleOutcomes": [
         {
           "fixtureId": "fixture_ac94436b",
@@ -107,7 +107,7 @@
           "line": "-1",
           "team": "USA",
           "decimalOdds": 2.02,
-          "capturedAt": "2026-06-19T09:55:24.259Z"
+          "capturedAt": "2026-06-19T14:22:53.506Z"
         },
         {
           "fixtureId": "fixture_4a2d215a",
@@ -117,7 +117,7 @@
           "line": "+1",
           "team": "Ivory Coast",
           "decimalOdds": 1.98,
-          "capturedAt": "2026-06-19T09:55:24.259Z"
+          "capturedAt": "2026-06-19T14:22:53.506Z"
         }
       ]
     },
