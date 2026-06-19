@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-06-19T02:08:30.122Z",
+  "createdAt": "2026-06-19T09:55:24.259Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -61,8 +61,8 @@
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 6,
-    "freshRecordCount": 6,
+    "totalRecords": 8,
+    "freshRecordCount": 8,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -83,23 +83,21 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 12 more fresh records",
-        "needs 4 more covered fixtures",
-        "needs 10 more fixtures for coverage",
-        "needs 1 more bookmaker source(s)",
-        "needs deeper bookmaker coverage per fixture",
-        "needs 1 more distinct line(s)"
+        "needs 10 more fresh records",
+        "needs 3 more covered fixtures",
+        "needs 9 more fixtures for coverage",
+        "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 6,
-      "freshRecordCount": 6,
-      "fixtureCount": 1,
+      "recordCount": 8,
+      "freshRecordCount": 8,
+      "fixtureCount": 2,
       "totalFixtureCount": 44,
-      "fixtureCoverage": 0.023,
-      "bookmakerCount": 1,
+      "fixtureCoverage": 0.045,
+      "bookmakerCount": 2,
       "averageBookmakersPerFixture": 1,
-      "lineCount": 1,
-      "outcomeCount": 1,
-      "latestCapturedAt": "2026-06-19T02:08:30.122Z",
+      "lineCount": 2,
+      "outcomeCount": 2,
+      "latestCapturedAt": "2026-06-19T09:55:24.259Z",
       "sampleOutcomes": [
         {
           "fixtureId": "fixture_ac94436b",
@@ -109,7 +107,17 @@
           "line": "-1",
           "team": "USA",
           "decimalOdds": 2.02,
-          "capturedAt": "2026-06-19T02:08:30.122Z"
+          "capturedAt": "2026-06-19T09:55:24.259Z"
+        },
+        {
+          "fixtureId": "fixture_4a2d215a",
+          "fixture": "Germany v Ivory Coast",
+          "bookmaker": "SportsGambler public prop pages: Germany v Ivory Coast",
+          "outcome": "Ivory Coast +1",
+          "line": "+1",
+          "team": "Ivory Coast",
+          "decimalOdds": 1.98,
+          "capturedAt": "2026-06-19T09:55:24.259Z"
         }
       ]
     },

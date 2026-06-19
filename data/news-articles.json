@@ -1,7 +1,7 @@
 [
   {
     "id": "news_a0d5e771",
-    "createdAt": "2026-06-19T02:08:30.122Z",
+    "createdAt": "2026-06-19T09:55:24.259Z",
     "publishedAt": "2026-06-08T09:00:03.000Z",
     "provider": "self-gather",
     "source": "The Guardian Football RSS",
@@ -35,7 +35,7 @@
   },
   {
     "id": "news_26d542e9",
-    "createdAt": "2026-06-19T02:08:30.122Z",
+    "createdAt": "2026-06-19T09:55:24.259Z",
     "publishedAt": "2026-06-08T09:00:05.000Z",
     "provider": "self-gather",
     "source": "The Guardian Football RSS",
@@ -68,7 +68,7 @@
   },
   {
     "id": "news_e5801a82",
-    "createdAt": "2026-06-19T02:08:30.122Z",
+    "createdAt": "2026-06-19T09:55:24.259Z",
     "publishedAt": "2026-06-17T06:21:08.000Z",
     "provider": "self-gather",
     "source": "The Guardian Football RSS",
@@ -104,7 +104,7 @@
   },
   {
     "id": "news_91ef48b6",
-    "createdAt": "2026-06-19T02:08:30.122Z",
+    "createdAt": "2026-06-19T09:55:24.259Z",
     "publishedAt": "2026-06-17T03:08:57.000Z",
     "provider": "self-gather",
     "source": "The Guardian Football RSS",
@@ -149,7 +149,7 @@
   },
   {
     "id": "news_a31d6f59",
-    "createdAt": "2026-06-19T02:08:30.122Z",
+    "createdAt": "2026-06-19T09:55:24.259Z",
     "publishedAt": "2026-06-17T19:28:06.000Z",
     "provider": "self-gather",
     "source": "The Guardian Football RSS",
@@ -194,17 +194,19 @@
   },
   {
     "id": "news_79db716b",
-    "createdAt": "2026-06-19T02:08:30.122Z",
+    "createdAt": "2026-06-19T09:55:24.259Z",
     "publishedAt": "2026-06-17T22:56:00.000Z",
     "provider": "self-gather",
     "source": "BBC Sport Football RSS",
     "url": "https://www.bbc.com/sport/football/videos/c4gy52zj5peo?at_medium=RSS&at_campaign=rss",
     "title": "England hit four in World Cup opener against Croatia",
     "description": "England make a winning start to their World Cup 2026 campaign, beating Croatia 4-2 in a thrilling match in Dallas.",
-    "bodySnippet": "England vs Croatia - World Cup 2026: England hit four in World Cup opener against Croatia - BBC Sport England make a winning start to their World Cup 2026 campaign, beating Croatia 4-2 in a thrilling match in Dallas. England make a winning start to their World Cup 2026 campaign, beating Croatia 4-2 in a thrilling match in Dallas. England hit four in World Cup opener against Croatia Video, 00:10:00 England hit four in World Cup opener against Croatia Up Next. England Camp debrief: First impressions, team belief and tornado alerts. Video, 00:09:39 England Camp debrief: First impressions, team belief and tornado alerts England Camp debrief: Saka's fitness and Madueke's opportunity. Video, 00:08:15 England Camp debrief: Saka's fitness and Madueke's opportunity 'Great speech' - Tuchel half-time talk made a difference. Video, 00:01:29 'Great speech' - Tuchel half-time talk made a difference Ar",
+    "bodySnippet": "England vs Croatia - World Cup 2026: England hit four in World Cup opener against Croatia - BBC Sport England make a winning start to their World Cup 2026 campaign, beating Croatia 4-2 in a thrilling match in Dallas. England make a winning start to their World Cup 2026 campaign, beating Croatia 4-2 in a thrilling match in Dallas. England hit four in World Cup opener against Croatia Video, 00:10:00 England hit four in World Cup opener against Croatia Up Next. We all heard the bone snap - Marsch. Video, 00:01:24 We all heard the bone snap - Marsch 'Great speech' - Tuchel half-time talk made a difference. Video, 00:01:29 'Great speech' - Tuchel half-time talk made a difference Argentina fans react to record-equalling Messi. Video, 00:00:49 Argentina fans react to record-equalling Messi Cape Verde fans across the world celebrate draw with Spain. Video, 00:01:38 Cape Verde fans across the wor",
     "teamTags": [
       "England",
       "Croatia",
+      "Spain",
+      "Cape Verde",
       "Argentina"
     ],
     "playerTags": [
@@ -212,14 +214,15 @@
       "Sport England",
       "Croatia Video",
       "Croatia Up Next",
-      "England Camp"
+      "Messi Cape Verde",
+      "Cape Verde"
     ],
-    "sentiment": 0.16,
+    "sentiment": 0,
     "signals": {
       "injury": 0,
-      "lineupClarity": 0.5700000000000001,
-      "tacticalFit": 0.54,
-      "morale": 0.66,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.45,
+      "morale": 0.5,
       "rotationRisk": 0.18
     },
     "sourceReliability": 0.82,
@@ -230,7 +233,7 @@
   },
   {
     "id": "news_c6065cb3",
-    "createdAt": "2026-06-19T02:08:30.122Z",
+    "createdAt": "2026-06-19T09:55:24.259Z",
     "publishedAt": "2026-06-18T07:00:04.000Z",
     "provider": "self-gather",
     "source": "The Guardian Football RSS",
@@ -270,7 +273,7 @@
   },
   {
     "id": "news_cb210293",
-    "createdAt": "2026-06-19T02:08:30.122Z",
+    "createdAt": "2026-06-19T09:55:24.259Z",
     "publishedAt": "2026-06-18T12:00:34.000Z",
     "provider": "self-gather",
     "source": "BBC Sport Football RSS",
@@ -287,6 +290,1052 @@
       "injury": 0,
       "lineupClarity": 0.45,
       "tacticalFit": 0.45,
+      "morale": 0.5,
+      "rotationRisk": 0.18
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_bd12aa90",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-18T18:49:27.000Z",
+    "provider": "self-gather",
+    "source": "BBC Sport Football RSS",
+    "url": "https://www.bbc.com/sport/football/videos/ce8kd23y37lo?at_medium=RSS&at_campaign=rss",
+    "title": "Mokoena's late penalty earns South Africa draw against Czech Republic",
+    "description": "Teboho Mokoena scores an 83rd-minute penalty to earn South Africa a draw against the Czech Republic at the World Cup.",
+    "bodySnippet": "Czech Republic v South Africa Group A: Teboho Mokoena's late penalty equalises against Michal Sadilek - BBC Sport Teboho Mokoena scores an 83rd-minute penalty to earn South Africa a draw against the Czech Republic at the World Cup. Teboho Mokoena scores an 83rd-minute penalty to earn South Africa a draw against the Czech Republic at the World Cup. MATCH REPORT: Czech Republic 1-1 South Africa Mokoena's late penalty earns South Africa draw against Czech Republic. Video, 00:08:39 Mokoena's late penalty earns South Africa draw against Czech Republic Up Next. We all heard the bone snap - Marsch. Video, 00:01:24 We all heard the bone snap - Marsch 'Great speech' - Tuchel half-time talk made a difference. Video, 00:01:29 'Great speech' - Tuchel half-time talk made a difference Argentina fans react to record-equalling Messi. Video, 00:00:49 Argentina fans react to record-equalling Messi",
+    "teamTags": [
+      "South Africa",
+      "Argentina"
+    ],
+    "playerTags": [
+      "South Africa",
+      "Czech Republic Teboho",
+      "Czech Republic",
+      "South Africa Group",
+      "Teboho Mokoena",
+      "Michal Sadilek",
+      "Sport Teboho Mokoena",
+      "South Africa Mokoena",
+      "Czech Republic Up"
+    ],
+    "sentiment": 0,
+    "signals": {
+      "injury": 0,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.45,
+      "morale": 0.5,
+      "rotationRisk": 0.18
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_6f493fee",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-18T19:04:00.000Z",
+    "provider": "self-gather",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/2026/jun/18/lionel-messi-father-receives-medical-treatment-argentina-world-cup",
+    "title": "Lionel Messi’s family ask for ‘humanity’ as his father receives medical treatment",
+    "description": "<ul><li><p>Jorge Messi, 68, ‘recovering and progressing favourably’</p></li><li><p>‘At times like these, we ask for responsibility,’ says family</p></li></ul><p>Lionel Messi’s father is undergoing medical treatment for an undisclosed illness and his family asked the media for “humanity” on Thursday amid rumours about Jorge Messi’s health while his son competes at the World Cup. “Jorge is going through a health situation,” the Messi family said in a statement.</p><p>The family did not specify the illness that the 68-year-old Jorge Messi is suffering from. “He is currently under medical observation, recovering and progressing favourably within his current condition,” the statement said.</p> <a href=\"https://www.theguardian.com/football/2026/jun/18/lionel-messi-father-receives-medical-treatment-argentina-world-cup\">Continue reading...</a>",
+    "bodySnippet": "Lionel Messi’s family ask for ‘humanity’ as his father receives medical treatment | Lionel Messi | The Guardian Lionel Messi&#x2019;s family said his father, Jorge, was being treated for an undisclosed illness and asked the media for responsible reporting Jorge Messi, 68, ‘recovering and progressing favourably’ ‘At times like these, we ask for responsibility,’ says family Jorge Messi, 68, ‘recovering and progressing favourably’ ‘At times like these, we ask for responsibility,’ says family Lionel Messi’s father is undergoing medical treatment for an undisclosed illness and his family asked the media for “humanity” on Thursday amid rumours about Jorge Messi’s health while his son competes at the World Cup. “Jorge is going through a health situation,” the Messi family said in a statement. The family did not specify the illness that the 68-year-old Jorge Messi is suffering from. “He is curre",
+    "teamTags": [
+      "Argentina"
+    ],
+    "playerTags": [
+      "Lionel Messi",
+      "Jorge Messi"
+    ],
+    "sentiment": -0.2,
+    "signals": {
+      "injury": 0.18,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.45,
+      "morale": 0.3,
+      "rotationRisk": 0.22999999999999998
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_923a43d0",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-18T18:55:29.000Z",
+    "provider": "self-gather",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/2026/jun/18/clarke-warns-scotland-morocco-real-deal-world-cup",
+    "title": "Clarke warns Scotland: ‘We must be at our best – Morocco are the real deal’",
+    "description": "<ul><li><p>Head coach says 2022 semi-finalists are now even better</p></li><li><p>Scotland could deploy back three against Group C rivals</p></li></ul><p>Steve Clarke has warned Scotland the Morocco team they will face on Friday are superior to the one that <a href=\"https://www.theguardian.com/football/2022/dec/10/morocco-portugal-world-cup-quarter-final-match-report\">reached the semi-finals </a>of the World Cup in 2022.</p><p>Scotland kicked off their tournament with a <a href=\"https://www.theguardian.com/football/2026/jun/14/haiti-scotland-world-cup-match-report\">1-0 win over Haiti</a>, which came hours after Morocco impressed during a 1-1 draw with Brazil. Clarke answered with a firm “absolutely” when asked whether Morocco would pose as stern a threat as Brazil to his side in Group C.</p> <a href=\"https://www.theguardian.com/football/2026/jun/18/clarke-warns-scotland-morocco-real-deal-world-cup\">Continue reading...</a>",
+    "bodySnippet": "Clarke warns Scotland: ‘We must be at our best – Morocco are the real deal’ | Scotland | The Guardian Head coach believes 2022 semi-finalists may be stronger now than in Qatar, and could deploy back three to stifle Group C rivals Head coach says 2022 semi-finalists are now even better Scotland could deploy back three against Group C rivals Head coach says 2022 semi-finalists are now even better Scotland could deploy back three against Group C rivals Steve Clarke has warned Scotland the Morocco team they will face on Friday are superior to the one that reached the semi-finals of the World Cup in 2022. Scotland kicked off their tournament with a 1-0 win over Haiti , which came hours after Morocco impressed during a 1-1 draw with Brazil. Clarke answered with a firm “absolutely” when asked whether Morocco would pose as stern a threat as Brazil to his side in Group C.",
+    "teamTags": [
+      "Scotland",
+      "Morocco",
+      "Brazil",
+      "Haiti",
+      "Portugal",
+      "Qatar"
+    ],
+    "playerTags": [
+      "Steve Clarke"
+    ],
+    "sentiment": 0,
+    "signals": {
+      "injury": 0,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.54,
+      "morale": 0.5,
+      "rotationRisk": 0.18
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_682be1f5",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-18T18:00:10.000Z",
+    "provider": "self-gather",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/2026/jun/18/england-thomas-tuchel-croatia-world-cup-2026",
+    "title": "‘People in the pubs will like this’: Tuchel keen for England to entertain at World Cup",
+    "description": "<ul><li><p>Manager says second-half performance was ‘rewarding’</p></li><li><p>England’s next group game is against Ghana on 23 June</p></li></ul><p>Thomas Tuchel said he wanted his England team to entertain the nation and that he pictured the scenes in the pubs as his players took the handbrake off to power past <a href=\"https://www.theguardian.com/football/2026/jun/17/england-croatia-world-cup-2026-group-l-match-report\">Croatia 4-2 in their World Cup opener</a> on Wednesday.</p><p>England were passive in the first half, too deep, the connections lacking. They entered the interval at 2-2, Harry Kane’s goals cancelled out by a pair of soft concessions that were in keeping with the team’s openness.</p> <a href=\"https://www.theguardian.com/football/2026/jun/18/england-thomas-tuchel-croatia-world-cup-2026\">Continue reading...</a>",
+    "bodySnippet": "‘People in the pubs will like this’: Tuchel keen for England to entertain at World Cup | England | The Guardian Thomas Tuchel said he wanted his England team to entertain the nation and that he pictured the pub scenes as his players powered past Croatia Manager says second-half performance was ‘rewarding’ England’s next group game is against Ghana on 23 June Manager says second-half performance was ‘rewarding’ England’s next group game is against Ghana on 23 June Thomas Tuchel said he wanted his England team to entertain the nation and that he pictured the scenes in the pubs as his players took the handbrake off to power past Croatia 4-2 in their World Cup opener on Wednesday. England were passive in the first half, too deep, the connections lacking. They entered the interval at 2-2, Harry Kane’s goals cancelled out by a pair of soft concessions that were in keeping with the team’s openn",
+    "teamTags": [
+      "England",
+      "Ghana",
+      "Croatia"
+    ],
+    "playerTags": [
+      "Thomas Tuchel",
+      "Harry Kane",
+      "Croatia Manager",
+      "June Manager",
+      "June Thomas Tuchel"
+    ],
+    "sentiment": 0,
+    "signals": {
+      "injury": 0,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.45,
+      "morale": 0.5,
+      "rotationRisk": 0.18
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_d6e9f7d6",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-18T18:10:59.000Z",
+    "provider": "self-gather",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/2026/jun/18/talisman-mctominay-has-the-motivation-to-make-impact-on-world-cup",
+    "title": "‘Talisman’ McTominay has the motivation to make impact on World Cup",
+    "description": "<p>Steve Clarke highlights squad mentality before Morocco game but Napoli midfielder stands out with his goals</p><p>It is a conversation in Milan that should resonate in Massachusetts. Italy’s failure to qualify for another World Cup has triggered harsh assessment of Serie A, including why there is a shortage of home players making sufficient impact there. The success of imports, whose talent level is marginally above average, supposedly says much about decline within the Italian game.</p><p>It would be harsh to place Scott McTominay in that category. The sharpness of the 29-year-old’s career trajectory since leaving Manchester United for Napoli depicts a player who was underappreciated at the club of his youth and early professional years. McTominay left Manchester with a point to prove and did so with bells on, courtesy <a href=\"https://www.theguardian.com/football/2025/may/23/napoli-win-serie-a-title-scott-mctominay-stunner-cagliari-inter\">of a title win</a> and the label of Serie A’s most valuable player in 2025. Should McTominay choose to leave Naples, where he is adored, he will not be short of Premier League options.</p> <a href=\"https://www.theguardian.com/football/2026/jun/18/talisman-mctominay-has-the-motivation-to-make-impact-on-world-cup\">Continue reading...</a>",
+    "bodySnippet": "‘Talisman’ McTominay has the motivation to make impact on World Cup | Scotland | The Guardian Steve Clarke has highlighted the squad mentality before playing Morocco but the Napoli midfielder stands out with his goals Steve Clarke highlights squad mentality before Morocco game but Napoli midfielder stands out with his goals Steve Clarke highlights squad mentality before Morocco game but Napoli midfielder stands out with his goals I t is a conversation in Milan that should resonate in Massachusetts. Italy’s failure to qualify for another World Cup has triggered harsh assessment of Serie A, including why there is a shortage of home players making sufficient impact there. The success of imports, whose talent level is marginally above average, supposedly says much about decline within the Italian game. It would be harsh to place Scott McTominay in that category. The sharpness of the 29-year-",
+    "teamTags": [
+      "Morocco",
+      "Scotland",
+      "England"
+    ],
+    "playerTags": [
+      "Steve Clarke",
+      "Manchester United",
+      "Premier League",
+      "Hampden Park",
+      "Kenny Dalglish",
+      "Denis Law"
+    ],
+    "sentiment": 0.16,
+    "signals": {
+      "injury": 0,
+      "lineupClarity": 0.5700000000000001,
+      "tacticalFit": 0.54,
+      "morale": 0.66,
+      "rotationRisk": 0.18
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_fdf6890c",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-06T20:30:36.000Z",
+    "provider": "self-gather",
+    "source": "BBC Sport Football RSS",
+    "url": "https://www.bbc.com/sport/football/articles/c20y4ppqy94o?at_medium=RSS&at_campaign=rss",
+    "title": "How to watch the World Cup on the BBC and ITV",
+    "description": "All the TV and radio details for each of the 2026 World Cup group games.",
+    "bodySnippet": "World Cup 2026 on TV: Where and how to watch England and Scotland games and kick-off times - BBC Sport All the TV and radio details for each of the 2026 World Cup group games. The 2026 World Cup in the United States, Canada and Mexico is almost here. It is the biggest World Cup in history with 48 teams taking place. Here's a list of the games and where you can watch and listen to them in the UK. There will be 54 matches shown live on the BBC , including the final on 19 July, with 92 games on BBC Sounds and every single match covered on the BBC Sport website and app . Everything you need to know about the World Cup Coventry play champions Arsenal in Premier League opener",
+    "teamTags": [
+      "Scotland",
+      "England",
+      "Canada",
+      "Mexico"
+    ],
+    "playerTags": [
+      "Sport All",
+      "United States",
+      "Premier League"
+    ],
+    "sentiment": 0,
+    "signals": {
+      "injury": 0,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.45,
+      "morale": 0.5,
+      "rotationRisk": 0.18
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_39fea87e",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-18T20:00:21.000Z",
+    "provider": "self-gather",
+    "source": "BBC Sport Football RSS",
+    "url": "https://www.bbc.com/sport/football/articles/cwykwyp001xo?at_medium=RSS&at_campaign=rss",
+    "title": "Sutton's World Cup score predictions - second group games",
+    "description": "BBC Sport's football expert Chris Sutton gives his predictions for the scores of the second round of group games at the 2026 World Cup.",
+    "bodySnippet": "World Cup 2026: Another win for Scotland? Chris Sutton's predictions - BBC Sport BBC Sport's football expert Chris Sutton gives his predictions for the scores of the second round of group games at the 2026 World Cup. There have already been plenty of shocks at this World Cup but one in particular caught almost everyone out. BBC Sport predictions expert Chris Sutton, AI and 99.65% of the users playing the BBC's new predictor game all expected European champions Spain to beat Cape Verde in their opening game in Group H ... and all of you were wrong. From more than 37,000 people who had a go at guessing the outcome of that match, only 61 correctly said it would end in a draw - another 67 went for a Cape Verde victory. We have seen a few correct predictions, however. Chris was right about the outcome of 12 of the 24 opening group games, AI managed 13 and those playing along were correct abou",
+    "teamTags": [
+      "Scotland",
+      "Morocco",
+      "Spain",
+      "Cape Verde",
+      "England",
+      "Ghana"
+    ],
+    "playerTags": [
+      "Chris Sutton",
+      "Cape Verde"
+    ],
+    "sentiment": 0,
+    "signals": {
+      "injury": 0,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.45,
+      "morale": 0.5,
+      "rotationRisk": 0.18
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_9d471ceb",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-18T21:10:52.000Z",
+    "provider": "self-gather",
+    "source": "BBC Sport Football RSS",
+    "url": "https://www.bbc.com/sport/football/videos/ce3ey2ygl4zo?at_medium=RSS&at_campaign=rss",
+    "title": "Switzerland's Manzambi scores superb double against Bosnia",
+    "description": "20-year-old Johan Manzambi scores twice as Switzerland beat Bosnia in their 2026 World Cup match in Los Angeles.",
+    "bodySnippet": "Switzerland v Bosnia Group B: Johan Manzambi scores twice - BBC Sport 20-year-old Johan Manzambi scores twice as Switzerland beat Bosnia in their 2026 World Cup match in Los Angeles. 20-year-old Johan Manzambi scores twice as Switzerland beat Bosnia in their 2026 World Cup match in Los Angeles. MATCH REPORT: Switzerland 4-1 Bosnia-Herzegovina Switzerland's Manzambi scores superb double against Bosnia. Video, 00:01:00 Switzerland's Manzambi scores superb double against Bosnia Up Next. Wales will go 'full gas' against Bosnia-Herzegovina. Video, 00:01:21 Wales will go 'full gas' against Bosnia-Herzegovina We all heard the bone snap - Marsch. Video, 00:01:24 We all heard the bone snap - Marsch 'Great speech' - Tuchel half-time talk made a difference. Video, 00:01:29 'Great speech' - Tuchel half-time talk made a difference",
+    "teamTags": [
+      "Switzerland"
+    ],
+    "playerTags": [
+      "Johan Manzambi",
+      "Los Angeles",
+      "Bosnia Group",
+      "Herzegovina Switzerland",
+      "Bosnia Up Next",
+      "Herzegovina We"
+    ],
+    "sentiment": 0,
+    "signals": {
+      "injury": 0,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.45,
+      "morale": 0.5,
+      "rotationRisk": 0.18
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_74be8bd2",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-18T22:29:00.000Z",
+    "provider": "self-gather",
+    "source": "BBC Sport Football RSS",
+    "url": "https://www.bbc.com/sport/football/articles/c4gyree9775o?at_medium=RSS&at_campaign=rss",
+    "title": "Scotland's Boston love affair one for the ages",
+    "description": "BBC Scotland's Scott Mullen looks at the Tartan Army's time in Boston as it gets set to finish.",
+    "bodySnippet": "World Cup 2026: Scotland's Boston love affair one for the ages - BBC Sport BBC Scotland's Scott Mullen looks at the Tartan Army's time in Boston as it gets set to finish. An estimated 50,000 Scotland fans have descended on Boston over the past week There has been some haggis controversy this week. On Wednesday, a video of Governor Maura Healey swept social media with her signing a declaration stating the Scottish dish was now legal in the state of Massachusetts. It looked like the Tartan Army's mission in Boston was not simply to drink the place dry of beer, inject fun into baseball matches, or donate generously to charities, it was to liberate the haggis from its 55-year American exile. That was until the bomb was dropped on Governor Healey's Instagram account 24 hours later. \"I have received countless messages from Massachusetts residents, Scotland supporters, legal experts, and at lea",
+    "teamTags": [
+      "Scotland"
+    ],
+    "playerTags": [
+      "Scott Mullen",
+      "Tartan Army",
+      "On Wednesday",
+      "Governor Maura Healey",
+      "Governor Healey"
+    ],
+    "sentiment": 0,
+    "signals": {
+      "injury": 0,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.45,
+      "morale": 0.5,
+      "rotationRisk": 0.18
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_1e6ccc1a",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-19T01:58:33.000Z",
+    "provider": "self-gather",
+    "source": "BBC Sport Football RSS",
+    "url": "https://www.bbc.com/sport/football/videos/ckg7nx6kg51o?at_medium=RSS&at_campaign=rss",
+    "title": "Canada score six but historic win marred by Kone injury",
+    "description": "Ismael Kone's serious-looking injury left Canada manager Jesse Marsch in tears and overshadowed their first-ever World Cup finals win as they thrashed nine-man Qatar 6-0.",
+    "bodySnippet": "Canada 6-0 Qatar Highlights - World Cup 2026 - 19 June 2024 - BBC Sport Ismael Kone's serious-looking injury left Canada manager Jesse Marsch in tears and overshadowed their first-ever World Cup finals win as they thrashed nine-man Qatar 6-0. Canada earn their first-ever World Cup finals win as they thrash nine-man Qatar 6-0, but Ismael Kone's serious-looking injury left manager Jesse Marsch in tears. Canada score six but historic win marred by Kone injury. Video, 00:09:12 Canada score six but historic win marred by Kone injury Up Next. We all heard the bone snap - Marsch. Video, 00:01:24 We all heard the bone snap - Marsch 'Great speech' - Tuchel half-time talk made a difference. Video, 00:01:29 'Great speech' - Tuchel half-time talk made a difference Argentina fans react to record-equalling Messi. Video, 00:00:49 Argentina fans react to record-equalling Messi Cape Verde fans across the",
+    "teamTags": [
+      "Canada",
+      "Qatar",
+      "Spain",
+      "Cape Verde",
+      "Argentina"
+    ],
+    "playerTags": [
+      "Ismael Kone",
+      "Jesse Marsch",
+      "Qatar Highlights",
+      "Sport Ismael Kone",
+      "Up Next",
+      "Messi Cape Verde",
+      "Cape Verde"
+    ],
+    "sentiment": -0.2,
+    "signals": {
+      "injury": 0.18,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.45,
+      "morale": 0.3,
+      "rotationRisk": 0.22999999999999998
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_d2a86c04",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-18T22:08:51.000Z",
+    "provider": "self-gather",
+    "source": "BBC Sport Football RSS",
+    "url": "https://www.bbc.com/sport/football/videos/c8x2e857755o?at_medium=RSS&at_campaign=rss",
+    "title": "Manzambi double propels Switzerland to win against Bosnia",
+    "description": "Substitute Johan Manzambi scores twice in a thrilling final 20 minutes, as Switzerland beat Bosnia-Herzegovina 4-1 to edge towards a place in the World Cup round of 32.",
+    "bodySnippet": "Switzerland v Bosnia and Herzegovina Group B: Manzambi inspires with late goals - BBC Sport Substitute Johan Manzambi scores twice in a thrilling final 20 minutes, as Switzerland beat Bosnia-Herzegovina 4-1 to edge towards a place in the World Cup round of 32. Substitute Johan Manzambi scores twice in a thrilling final 20 minutes, as Switzerland beat Bosnia-Herzegovina 4-1 to edge towards a place in the World Cup round of 32. READ MORE: Switzerland 4-1 Bosnia and Herzegovina Manzambi double propels Switzerland to win against Bosnia. Video, 00:09:04 Manzambi double propels Switzerland to win against Bosnia Up Next. Wales will go 'full gas' against Bosnia-Herzegovina. Video, 00:01:21 Wales will go 'full gas' against Bosnia-Herzegovina We all heard the bone snap - Marsch. Video, 00:01:24 We all heard the bone snap - Marsch 'Great speech' - Tuchel half-time talk made a difference. Video, 00:",
+    "teamTags": [
+      "Switzerland",
+      "Bosnia and Herzegovina"
+    ],
+    "playerTags": [
+      "Bosnia Substitute Johan",
+      "Herzegovina Group",
+      "Sport Substitute Johan",
+      "Substitute Johan Manzambi",
+      "Herzegovina Manzambi",
+      "Bosnia Up Next",
+      "Herzegovina We"
+    ],
+    "sentiment": 0,
+    "signals": {
+      "injury": 0,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.45,
+      "morale": 0.5,
+      "rotationRisk": 0.18
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_99cdacd0",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-19T01:02:38.000Z",
+    "provider": "self-gather",
+    "source": "BBC Sport Football RSS",
+    "url": "https://www.bbc.com/sport/football/videos/ckg0r24xk5wo?at_medium=RSS&at_campaign=rss",
+    "title": "Kone injury is a 'huge loss' - Marsch",
+    "description": "Canada coach Jessie Marsch praises his players for their 6-0 win over Qatar at the 2026 World Cup in Vancouver, but says losing Ismael Kone to a serious-looking injury is a \"huge loss\".",
+    "bodySnippet": "Canada v Qatar Group B: Ismael Kone injury is a 'huge loss' - Canada coach Jesse Marsch - BBC Sport Canada coach Jessie Marsch praises his players for their 6-0 win over Qatar at the 2026 World Cup in Vancouver, but says losing Ismael Kone to a serious-looking injury is a \"huge loss\". Canada coach Jessie Marsch praises his players for their 6-0 win over Qatar at the 2026 World Cup in Vancouver, but says losing Ismael Kone to a serious-looking injury is a \"huge loss\". Kone injury is a 'huge loss' - Marsch Video, 00:01:58 Kone injury is a 'huge loss' - Marsch Up Next. We all heard the bone snap - Marsch. Video, 00:01:24 We all heard the bone snap - Marsch 'Great speech' - Tuchel half-time talk made a difference. Video, 00:01:29 'Great speech' - Tuchel half-time talk made a difference Argentina fans react to record-equalling Messi. Video, 00:00:49 Argentina fans react to record-equalling Me",
+    "teamTags": [
+      "Canada",
+      "Qatar",
+      "Spain",
+      "Cape Verde",
+      "Argentina"
+    ],
+    "playerTags": [
+      "Marsch Canada",
+      "Jessie Marsch",
+      "Ismael Kone",
+      "Qatar Group",
+      "Jesse Marsch",
+      "Sport Canada",
+      "Marsch Video",
+      "Marsch Up Next",
+      "Messi Cape Verde",
+      "Cape Verde"
+    ],
+    "sentiment": -0.2,
+    "signals": {
+      "injury": 0.18,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.45,
+      "morale": 0.3,
+      "rotationRisk": 0.22999999999999998
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_31a3d14b",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-19T06:44:23.000Z",
+    "provider": "self-gather",
+    "source": "BBC Sport Football RSS",
+    "url": "https://www.bbc.com/sport/football/articles/cy04jqn90wko?at_medium=RSS&at_campaign=rss",
+    "title": "Scotland's totems must turn up to thwart dynamic Morocco",
+    "description": "Scotland will need their best display since Steve Clarke took over to achieve the result against Morocco that will secure knockout tournament football for the first time, writes Tom English.",
+    "bodySnippet": "World Cup 2026: Scotland's totems must turn up to thwart dynamic Morocco - BBC Sport Scotland will need their best display since Steve Clarke took over to achieve the result against Morocco that will secure knockout tournament football for the first time, writes Tom English. The midfield head-to-head between Scott McTominay and Ayyoub Bouaddi could be vital Last weekend in Boston, Scotland played their most important game of international football in 28 years, a walk on the wildside against Haiti, a game that put the heart sideways in every Scot but, ultimately, sparked the party to end all parties in the city they called Beantown. More like Beanotown, more like Scotland, Massachusetts. For almost four decades there was a character in the DC Thomson comic called Ball Boy, a wee football-obsessed lad who couldn't kick a can down a street without thinking he'd scored the winner in a World ",
+    "teamTags": [
+      "Scotland",
+      "Morocco",
+      "Haiti"
+    ],
+    "playerTags": [
+      "Morocco Scotland",
+      "Steve Clarke",
+      "Tom English",
+      "Sport Scotland",
+      "Ayyoub Bouaddi",
+      "Ball Boy",
+      "Ball Boys",
+      "Tartan Army"
+    ],
+    "sentiment": -0.04000000000000001,
+    "signals": {
+      "injury": 0.18,
+      "lineupClarity": 0.5700000000000001,
+      "tacticalFit": 0.54,
+      "morale": 0.45999999999999996,
+      "rotationRisk": 0.22999999999999998
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_6dc2fa74",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-19T03:34:23.000Z",
+    "provider": "self-gather",
+    "source": "BBC Sport Football RSS",
+    "url": "https://www.bbc.com/sport/football/articles/cly7r1zjmmlo?at_medium=RSS&at_campaign=rss",
+    "title": "A day of tears, scuffles & history as injury mars Canada's moment",
+    "description": "Canada's first-ever win at a World Cup finals should have been cause for pure joy - but was overshadowed by a horrific injury to Ismael Kone, and the angry and emotional scenes that followed.",
+    "bodySnippet": "World Cup 2026: A day of tears, scuffles & history as injury mars Canada's moment - BBC Sport Canada's first-ever win at a World Cup finals should have been cause for pure joy - but was overshadowed by a horrific injury to Ismael Kone, and the angry and emotional scenes that followed. Canada six-goal win over Qatar marred by serious injury It should have been a moment of pure joy. Canada, 40 years after playing in their first World Cup, secured their first-ever win at the tournament in emphatic fashion, thrashing Qatar 6-0 in front of a packed and loud Vancouver Stadium. They are almost certain of a place in the last 32. But celebrations were overshadowed by a dreadful injury to Ismael Kone. The incident happened eight minutes into the second half, with Canada leading 3-0. Their former Watford midfielder Kone, shortly after receiving the ball, was caught late and badly by Assim Madibo as",
+    "teamTags": [
+      "Canada",
+      "Qatar"
+    ],
+    "playerTags": [
+      "Ismael Kone",
+      "Sport Canada",
+      "Vancouver Stadium",
+      "Assim Madibo"
+    ],
+    "sentiment": -0.2,
+    "signals": {
+      "injury": 0.18,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.54,
+      "morale": 0.3,
+      "rotationRisk": 0.22999999999999998
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_f9c28ce1",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-19T07:50:32.000Z",
+    "provider": "self-gather",
+    "source": "BBC Sport Football RSS",
+    "url": "https://www.bbc.com/sport/football/articles/c4gy62p4e67o?at_medium=RSS&at_campaign=rss",
+    "title": "Iran to lodge complaint over travel restrictions",
+    "description": "Iran are to lodge an official complaint to Fifa about the travel restrictions they are facing at the 2026 World Cup.",
+    "bodySnippet": "World Cup 2026: Iran to lodge complaint to Fifa over travel restrictions - BBC Sport Iran are to lodge an official complaint to Fifa about the travel restrictions they are facing at the 2026 World Cup. Iran drew 2-2 with New Zealand in their opening game of the 2026 World Cup Iran are to lodge an official complaint to Fifa about the travel restrictions they are facing at the 2026 World Cup. Iran are allowed to fly into the United States, who are co-hosts along with Canada and Mexico, a day before they have a game and have to leave the country on the same day as a match under the conditions of their visas. This led to head coach Amir Ghalenoei saying they are the \"most oppressed\" team at the tournament following a 2-2 draw with New Zealand in Los Angeles in their opening game. In a statement, the Football Federation of Iran (FFIRI) said the travel restrictions they face are \"inconsistent ",
+    "teamTags": [
+      "Iran",
+      "New Zealand",
+      "Canada",
+      "Mexico"
+    ],
+    "playerTags": [
+      "Sport Iran",
+      "New Zealand",
+      "United States",
+      "Amir Ghalenoei",
+      "Los Angeles",
+      "Football Federation"
+    ],
+    "sentiment": 0,
+    "signals": {
+      "injury": 0,
+      "lineupClarity": 0.37,
+      "tacticalFit": 0.54,
+      "morale": 0.5,
+      "rotationRisk": 0.38
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_7d74cdb7",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-19T04:19:13.000Z",
+    "provider": "self-gather",
+    "source": "BBC Sport Football RSS",
+    "url": "https://www.bbc.com/sport/articles/cp8rde9q76do?at_medium=RSS&at_campaign=rss",
+    "title": "Hat-trick hero & Swiss wonderkid - World Cup duo set for Premier League?",
+    "description": "Will Canada hat-trick hero Jonathan David and Swiss goal-scoring midfielder Johan Manzambi be playing in the Premier League next season?",
+    "bodySnippet": "Hat-trick hero & Swiss wonderkid - the World Cup duo set for Premier League? - BBC Sport Will Canada hat-trick hero Jonathan David and Swiss goal-scoring midfielder Johan Manzambi be playing in the Premier League next season? Canada six-goal win over Qatar marred by serious injury There is no bigger shop window in football than the World Cup - and goalscorers are certainly taking their chance to shine. The goals are flying in at the tournament - 89 in 28 games in Mexico, Canada and the United States to date, while there have been two wonderful hat-tricks. Could some of those goalscorers move to the Premier League soon? After Lionel Messi, 38, turned back the clock to produce a masterclass for the ages in Argentina's 3-0 win over Algeria, Jonathan David also hit a treble in Canada's 6-0 rout of Qatar in Group B. It earned the co-hosts a first win at the eighth attempt on the World Cup sta",
+    "teamTags": [
+      "Canada",
+      "Argentina",
+      "Algeria",
+      "Qatar",
+      "Mexico"
+    ],
+    "playerTags": [
+      "Premier League",
+      "Will Canada",
+      "Jonathan David",
+      "Johan Manzambi",
+      "Sport Will Canada",
+      "United States",
+      "After Lionel Messi"
+    ],
+    "sentiment": -0.2,
+    "signals": {
+      "injury": 0.18,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.54,
+      "morale": 0.3,
+      "rotationRisk": 0.22999999999999998
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_f09093ed",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-19T05:50:34.000Z",
+    "provider": "self-gather",
+    "source": "BBC Sport Football RSS",
+    "url": "https://www.bbc.com/sport/football/articles/cx21l22e81no?at_medium=RSS&at_campaign=rss",
+    "title": "Who am I? Guess World Cup star No 12",
+    "description": "Will you get today's player in as few attempts as possible?",
+    "bodySnippet": "BBC Sport quiz: Who am I? Guess World Cup star footballer No 12 - BBC Sport Will you get today's player in as few attempts as possible? The rules are simple. Each day there's a new footballer and the challenge is to guess who they are in as few attempts as possible. After each wrong guess you unlock a new clue. Guess the answer after as few clues as possible to score more points. Three is a good score, four or five points is exceptional. So, take part and return for more tomorrow. Today's player and clues are set by BBC Sport's Huzaifah Khan. After more quizzes? Go to our dedicated Football Quizzes and Sports Quizzes pages and sign up for notifications to get the latest quizzes sent straight to your device.",
+    "teamTags": [],
+    "playerTags": [
+      "Sport Will",
+      "Huzaifah Khan",
+      "Football Quizzes",
+      "Sports Quizzes"
+    ],
+    "sentiment": 0,
+    "signals": {
+      "injury": 0,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.45,
+      "morale": 0.5,
+      "rotationRisk": 0.18
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_57704be8",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-19T07:53:00.000Z",
+    "provider": "self-gather",
+    "source": "BBC Sport Football RSS",
+    "url": "https://www.bbc.co.uk/sounds/play/p0ns7wjx?at_medium=RSS&at_campaign=rss",
+    "title": "Football Daily",
+    "description": "Charlie Adam joins Rick & Lloyd to preview Scotland's huge World Cup clash with Morocco.",
+    "bodySnippet": "Football Daily - World Cup: Scotland's Biggest Test Yet - BBC Sounds Catch up on your favourite BBC radio show from your favourite DJ right here, whenever you like. Listen without limits with BBC Sounds. Use BBC.com or the new BBC App to listen to BBC podcasts, Radio 4 and the World Service outside the UK. Find out how to listen to other BBC stations Scotland face their biggest test of the World Cup so far as they prepare to take on Morocco. Rick Edwards and Lloyd Griffith are joined by former Scotland international Charlie Adam to preview a huge match for Steve Clarke's side. German football journalist Raphael Honigstein joins Rick & Lloyd in Santa Monica to look back on the opening round of group games and separate the genuine contenders from the early overreactions. Are Spain already out of the running after their draw with Cape Verde? Should Portugal be worried? And will Cristiano Ro",
+    "teamTags": [
+      "Scotland",
+      "Morocco",
+      "Spain",
+      "Cape Verde",
+      "Portugal"
+    ],
+    "playerTags": [
+      "Football Daily Charlie",
+      "Football Daily",
+      "Biggest Test Yet",
+      "Sounds Catch",
+      "World Service",
+      "Rick Edwards",
+      "Lloyd Griffith",
+      "Charlie Adam",
+      "Steve Clarke",
+      "Raphael Honigstein",
+      "Santa Monica",
+      "Are Spain"
+    ],
+    "sentiment": 0.16,
+    "signals": {
+      "injury": 0,
+      "lineupClarity": 0.5700000000000001,
+      "tacticalFit": 0.45,
+      "morale": 0.66,
+      "rotationRisk": 0.18
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_6623fce8",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-19T08:48:45.000Z",
+    "provider": "self-gather",
+    "source": "BBC Sport Football RSS",
+    "url": "https://www.bbc.com/sport/football/articles/cr5jdjn65nzo?at_medium=RSS&at_campaign=rss",
+    "title": "Why Pochettino's fluid USA midfield is thriving",
+    "description": "Mauricio Pochettino has his USA midfield thriving at the World Cup with a fluid approach - here is how it works.",
+    "bodySnippet": "World Cup 2026: Why Mauricio Pochettino's fluid midfield has USA thriving - BBC Sport Mauricio Pochettino has his USA midfield thriving at the World Cup with a fluid approach - here is how it works. Mauricio Pochettino's USA team scored four goals against Paraguay from six shots on target with an expected goals of 1.34 For the past couple of seasons, many teams looking to dominate the ball have done so in a rigid manner. A very common shape in possession has been the 3-2-2-3 set-up, with a box in midfield - teams such as Manchester City, Chelsea and Arsenal have moved a full-back into midfield to achieve this. In this World Cup, teams have been willing to reimagine that strict structure, taking a more fluid approach on the ball and one of the best examples has been Mauricio Pochettino's USA. Here we analyse the shape, movement and intention behind their unique approach as they look to co",
+    "teamTags": [
+      "USA",
+      "Australia",
+      "Paraguay"
+    ],
+    "playerTags": [
+      "Why Pochettino",
+      "Mauricio Pochettino",
+      "Why Mauricio Pochettino",
+      "Sport Mauricio Pochettino",
+      "Manchester City"
+    ],
+    "sentiment": 0,
+    "signals": {
+      "injury": 0,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.81,
+      "morale": 0.5,
+      "rotationRisk": 0.18
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_3480a30c",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-19T02:46:28.000Z",
+    "provider": "self-gather",
+    "source": "BBC Sport Football RSS",
+    "url": "https://www.bbc.com/sport/football/articles/cgrk5qrkw5po?at_medium=RSS&at_campaign=rss",
+    "title": "Tuchel throws first pitch as England enjoy downtime",
+    "description": "Thomas Tuchel takes some time out at a baseball game as England enjoy some downtime at the World Cup - while Ivan Toney scores a hat-trick in a friendly against MLS side Sporting KC.",
+    "bodySnippet": "World Cup 2026: Thomas Tuchel throws first pitch as England enjoy downtime - BBC Sport Thomas Tuchel takes some time out at a baseball game as England enjoy some downtime at the World Cup - while Ivan Toney scores a hat-trick in a friendly against MLS side Sporting KC. Thomas Tuchel threw the first pitch for the Kansas City Royals at Kauffman Stadium Thomas Tuchel threw the first pitch at the home of baseball team Kansas City Royals as his England squad enjoyed some downtime after winning their opening game at the World Cup. Manager Tuchel was joined by captain Harry Kane and defenders Dan Burn and Djed Spence at Kauffman Stadium as he completed the ceremonial throw just over 24 hours after England beat Croatia 4-2 in Dallas. Kane, who scored two goals in the win over Croatia, posted on social media about the trip. \"Great recovery day with the boys at the baseball,\" he wrote. \"Would love",
+    "teamTags": [
+      "England",
+      "Croatia"
+    ],
+    "playerTags": [
+      "Thomas Tuchel",
+      "Ivan Toney",
+      "Sport Thomas Tuchel",
+      "Kansas City Royals",
+      "Kauffman Stadium Thomas",
+      "Manager Tuchel",
+      "Harry Kane",
+      "Dan Burn",
+      "Djed Spence",
+      "Kauffman Stadium"
+    ],
+    "sentiment": 0,
+    "signals": {
+      "injury": 0,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.45,
+      "morale": 0.5,
+      "rotationRisk": 0.18
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_8b8cba3d",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-19T09:53:49.000Z",
+    "provider": "self-gather",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/live/2026/jun/19/world-cup-2026-news-kone-injury-canada-rout-scotland-big-challenge-morocco-usa-australia-buildup-live",
+    "title": "World Cup 2026: Scotland fans take over Boston; Koné injury latest; USA v Australia buildup – live",
+    "description": "<p><strong>⚽ All the latest news from day eight of the tournament<br>⚽ </strong><a href=\"https://www.theguardian.com/football/ng-interactive/2026/jun/04/world-cup-2026-complete-player-guide\"><strong>Player guide</strong></a><strong> | </strong><a href=\"https://www.theguardian.com/football/ng-interactive/2026/jun/04/bracketology-predict-a-path-to-world-cup-victory\"><strong>Bracketology</strong></a><strong> | </strong><a href=\"https://www.theguardian.com/football/ng-interactive/2026/jun/04/golden-boot-world-cup-2026-top-goalscorers-winner\"><strong>Golden Boot</strong></a><strong> | </strong><a href=\"mailto:matchday.live@guardian.co.uk\"><strong>Mail us</strong></a></p><p><strong>Let’s begin our look at what will happen later today.</strong></p><p>First up is USA v Australia in Seattle at 8pm BST/12pm local time.</p> <a href=\"https://www.theguardian.com/football/live/2026/jun/19/world-cup-2026-news-kone-injury-canada-rout-scotland-big-challenge-morocco-usa-australia-buildup-live\">Continue reading...</a>",
+    "bodySnippet": "World Cup 2026: Scotland fans take over Boston; Koné injury latest; USA v Australia buildup – live | World Cup 2026 | The Guardian Join our writers for the latest from the World Cup as Scotland prepare for a clash with Morocco ⚽ All the latest news from day eight of the tournament ⚽ Player guide | Bracketology | Golden Boot | Mail us ⚽ All the latest news from day eight of the tournament ⚽ Player guide | Bracketology | Golden Boot | Mail us Former Leipzig coach Ole Werner is unhappy he wasn’t given the chance to say goodbye to staff after his surprise dismissal from the club. Leipzig fired Werner and his assistant coaches Tom Cichon and Patrick Kohlmann on Wednesday after what many would consider a successful debut season – third place in the Bundesliga for Champions League. “Ole did a great job, he led us to the Champions League, but we also have to look forward,” said Red Bull head of ",
+    "teamTags": [
+      "USA",
+      "Australia",
+      "Scotland",
+      "Morocco",
+      "Canada"
+    ],
+    "playerTags": [
+      "Golden Boot",
+      "Former Leipzig",
+      "Ole Werner",
+      "Tom Cichon",
+      "Patrick Kohlmann",
+      "Champions League",
+      "Red Bull",
+      "Oliver Mintzlaff"
+    ],
+    "sentiment": -0.2,
+    "signals": {
+      "injury": 0.18,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.45,
+      "morale": 0.3,
+      "rotationRisk": 0.22999999999999998
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_b79d0c3d",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-19T09:09:15.000Z",
+    "provider": "self-gather",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/2026/jun/19/premier-league-fixtures-opening-arsenal-coventry-liverpool-newcastle-manchester-united-hull",
+    "title": "Premier League fixtures: Arsenal open against Coventry, Liverpool at Newcastle",
+    "description": "<ul><li><p>Manchester United travel to Hull on first weekend</p></li><li><p>Manchester City without Guardiola host Bournemouth </p></li></ul><p>Coventry will begin their first Premier League campaign in 25 years with a Friday night trip to the champions, Arsenal, on 21 August.</p><p>Their fellow promoted club Hull begin at home to Manchester United on the Saturday and Ipswich entertain Sunderland that day.</p> <a href=\"https://www.theguardian.com/football/2026/jun/19/premier-league-fixtures-opening-arsenal-coventry-liverpool-newcastle-manchester-united-hull\">Continue reading...</a>",
+    "bodySnippet": "Premier League fixtures: Arsenal open against Coventry, Liverpool at Newcastle | Premier League | The Guardian Arsenal will open their Premier League title defence at home to promoted Coventry and Andoni Iraola&#x2019;s first Liverpool game will be at Newcastle Manchester United travel to Hull on first weekend Manchester City without Guardiola host Bournemouth Manchester United travel to Hull on first weekend Manchester City without Guardiola host Bournemouth Coventry will begin their first Premier League campaign in 25 years with a Friday night trip to the champions, Arsenal, on 21 August. Their fellow promoted club Hull begin at home to Manchester United on the Saturday and Ipswich entertain Sunderland that day.",
+    "teamTags": [],
+    "playerTags": [
+      "Premier League",
+      "Manchester United",
+      "Manchester City",
+      "Andoni Iraola",
+      "Newcastle Manchester United",
+      "Bournemouth Manchester United",
+      "Bournemouth Coventry"
+    ],
+    "sentiment": 0,
+    "signals": {
+      "injury": 0,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.45,
+      "morale": 0.5,
+      "rotationRisk": 0.18
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_16cadfd7",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-19T07:00:25.000Z",
+    "provider": "self-gather",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/2026/jun/19/the-cops-bought-me-an-egg-and-cheese-muffin-bostons-love-affair-with-tartan-army-goes-on",
+    "title": "‘The cops bought me an egg and cheese muffin’: Boston’s love affair with Tartan Army goes on",
+    "description": "<p>Scotland fans in the Massachusetts city awaiting their game against Morocco have continued to make an impression on the locals</p><p>On Thursday afternoon, local broadcasters in Boston went live to an event hosted by the city’s mayor, Michelle Wu. It was a significant moment, with Wu confirming a deal that would commemorate a new chapter for the city. Representatives of the other party were also present, and they were easy to spot. Particularly the one guy in a kilt and a T-shirt reading: “I’m not perfect, but I am Scottish, and that’s kind of the same thing.”</p><p>The agreement signed will see Boston and Glasgow become twin cites. Officially, according to Wu, the arrangement will “create new opportunities for meaningful cooperation and mutual growth”. But who was she kidding. A more telling line was the one that reflected “longstanding ties between Scotland and the United States” and, of course, “the goodwill generated during the Fifa World Cup 2026”. In other words, Boston’s love affair with the Tartan Army is now official.</p> <a href=\"https://www.theguardian.com/football/2026/jun/19/the-cops-bought-me-an-egg-and-cheese-muffin-bostons-love-affair-with-tartan-army-goes-on\">Continue reading...</a>",
+    "bodySnippet": "‘The cops bought me an egg and cheese muffin’: Boston’s love affair with Tartan Army goes on | Scotland | The Guardian Scotland fans in the Massachusetts city awaiting their game against Morocco have continued to make an impression on the locals Scotland fans in the Massachusetts city awaiting their game against Morocco have continued to make an impression on the locals Scotland fans in the Massachusetts city awaiting their game against Morocco have continued to make an impression on the locals O n Thursday afternoon, local broadcasters in Boston went live to an event hosted by the city’s mayor, Michelle Wu. It was a significant moment, with Wu confirming a deal that would commemorate a new chapter for the city. Representatives of the other party were also present, and they were easy to spot. Particularly the one guy in a kilt and a T-shirt reading: “I’m not perfect, but I am Scottish, a",
+    "teamTags": [
+      "Scotland",
+      "Morocco",
+      "Haiti",
+      "England"
+    ],
+    "playerTags": [
+      "Tartan Army",
+      "On Thursday",
+      "Michelle Wu",
+      "United States",
+      "New England",
+      "Boston Stadium",
+      "Sam Adams"
+    ],
+    "sentiment": 0,
+    "signals": {
+      "injury": 0,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.54,
+      "morale": 0.5,
+      "rotationRisk": 0.18
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_4b1c44c8",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-19T03:06:51.000Z",
+    "provider": "self-gather",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/2026/jun/19/mexico-south-korea-world-cup-2026-group-a-match-report",
+    "title": "South Korea howler gifts Mexico victory as World Cup co-hosts reach knockout phase",
+    "description": "<p></p><p>It wasn’t pretty, the game distinguished by little other than its black v lilac colour scheme, but Mexico became the first side at the 2026 World Cup to secure their place in the knockout stage. They are sure to top their group and stay in Mexico City, opening the path for an apocalyptic meeting at the Azteca in the last 16. The question for Mexico and South Korea after their opening wins was whether they had been good or their opponents bad, and this offered a fairly clear answer: neither is over-blessed with creative edge.</p><p>The only goal came after 50 minutes and was a gift from South Korea. Kim Seung-gyu, the goalkeeper, came to claim a looping header, but did so over the top of Lee Ki-hyuk, jarring his elbow on the defender’s head and spilling the ball for Luis Romo, who hooked in his fifth international goal on his 64th appearance. Romo was one of three changes made from Mexico’s lineup for the opener, coming in for Álvaro Fidalgo as Javier Aguirre resisted the popular demand to hand a start to the 17-year-old Gilberto Mora. A remarkable double save from Raúl Rangel in the closing minutes preserved the lead as he got down to parry Cho Gue-sung’s header and had the core strength to twist and gather Yang Hyun-jun’s sliced follow-up.</p> <a href=\"https://www.theguardian.com/football/2026/jun/19/mexico-south-korea-world-cup-2026-group-a-match-report\">Continue reading...</a>",
+    "bodySnippet": "South Korea howler gifts Mexico victory as World Cup co-hosts reach knockout phase | World Cup 2026 | The Guardian Luis Romo pounced on a second-half goalkeeping error by Kim Seung-gyu to ensure the co-hosts became the first team to qualify from the group stage It wasn’t pretty, the game distinguished by little other than its black v lilac colour scheme, but Mexico became the first side at the 2026 World Cup to secure their place in the knockout stage. They are sure to top their group and stay in Mexico City, opening the path for an apocalyptic meeting at the Azteca in the last 16. The question for Mexico and South Korea after their opening wins was whether they had been good or their opponents bad, and this offered a fairly clear answer: neither is over-blessed with creative edge. The only goal came after 50 minutes and was a gift from South Korea. Kim Seung-gyu, the goalkeeper, came to",
+    "teamTags": [
+      "Mexico",
+      "South Korea",
+      "Brazil",
+      "France",
+      "Czechia"
+    ],
+    "playerTags": [
+      "South Korea",
+      "Mexico City",
+      "Kim Seung",
+      "Lee Ki",
+      "Luis Romo",
+      "Javier Aguirre",
+      "Gilberto Mora",
+      "Cho Gue",
+      "Yang Hyun",
+      "Estadio Jalisco",
+      "Gordon Banks",
+      "Bruno Bellone"
+    ],
+    "sentiment": -0.4,
+    "signals": {
+      "injury": 0.36,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.54,
+      "morale": 0.25,
+      "rotationRisk": 0.28
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_dd20581e",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-19T07:00:27.000Z",
+    "provider": "self-gather",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/2026/jun/19/world-cup-england-rice-out-of-steam-tuchel-midfield-dilemma",
+    "title": "Declan Rice is running out of steam, leaving Tuchel a midfield conundrum",
+    "description": "<p>England mainstay is flagging after six years of nonstop action, but finding a solution to his absence is no easy task</p><p>A freak of nature is Aaron Cresswell’s description of Declan Rice. The former West Ham left-back marvels at Rice’s ability to keep going. “He can play six or seven games a week,” Cresswell says of his old West Ham teammate. “God knows how many he’s played in the last few years.”</p><p>The answer is 360 since the start of the 2020-21 season. The schedule has been relentless for the England midfielder. He was vital for West Ham when they had deep European runs in 2022 and 2023, was a mainstay for Gareth Southgate’s England and has been no less influential for Arsenal’s Premier League and Champions League endeavours since joining them three years ago.</p> <a href=\"https://www.theguardian.com/football/2026/jun/19/world-cup-england-rice-out-of-steam-tuchel-midfield-dilemma\">Continue reading...</a>",
+    "bodySnippet": "Declan Rice is running out of steam, leaving Tuchel a midfield conundrum | England | The Guardian England mainstay is flagging after six years of nonstop action, but finding a solution to his absence is no easy task England mainstay is flagging after six years of nonstop action, but finding a solution to his absence is no easy task England mainstay is flagging after six years of nonstop action, but finding a solution to his absence is no easy task A freak of nature is Aaron Cresswell’s description of Declan Rice. The former West Ham left-back marvels at Rice’s ability to keep going. “He can play six or seven games a week,” Cresswell says of his old West Ham teammate. “God knows how many he’s played in the last few years.” The answer is 360 since the start of the 2020-21 season. The schedule has been relentless for the England midfielder. He was vital for West Ham when they had deep Europ",
+    "teamTags": [
+      "England",
+      "Ghana",
+      "Croatia"
+    ],
+    "playerTags": [
+      "Declan Rice",
+      "Aaron Cresswell",
+      "West Ham",
+      "Gareth Southgate",
+      "Premier League",
+      "Champions League",
+      "Yet Rice",
+      "Elliot Anderson",
+      "Luka Modric",
+      "Thomas Tuchel"
+    ],
+    "sentiment": 0,
+    "signals": {
+      "injury": 0,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.63,
+      "morale": 0.5,
+      "rotationRisk": 0.18
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_4600feba",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-19T07:00:26.000Z",
+    "provider": "self-gather",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/2026/jun/19/players-are-human-beings-and-social-media-comments-reach-us-but-the-focus-has-to-be-on-the-pitch",
+    "title": "Players are human beings and social media comments reach us. But the focus has to be on the pitch | Rodrygo",
+    "description": "<p>The pressure of wearing the Brazil shirt can be heavy but also creates a positive kind of responsibility</p><p>Playing in a World Cup is a huge experience; when you’re with the national team, your entire focus is on the squad’s schedule – the hotel, the training centre, the stadium – basically, everything revolves around the matches.</p><p>I lived that routine daily at the 2022 World Cup and realised the immense dedication the tournament demands. In this 2026 edition, as fate would have it and as I am still recovering from my injury, I’m discovering a different side of the World Cup: a World Cup of reunions, with countless events happening simultaneously across the cities and countries, <a href=\"https://www.theguardian.com/football/2026/jun/14/england-world-cup-training-base-kansas-city-swope\">creating opportunities for conversations</a> and extraordinary experiences.</p> <a href=\"https://www.theguardian.com/football/2026/jun/19/players-are-human-beings-and-social-media-comments-reach-us-but-the-focus-has-to-be-on-the-pitch\">Continue reading...</a>",
+    "bodySnippet": "Players are human beings and social media comments reach us. But the focus has to be on the pitch | World Cup 2026 | The Guardian The pressure of wearing the Brazil shirt can be heavy but also creates a positive kind of responsibility The pressure of wearing the Brazil shirt can be heavy but also creates a positive kind of responsibility The pressure of wearing the Brazil shirt can be heavy but also creates a positive kind of responsibility P laying in a World Cup is a huge experience; when you’re with the national team, your entire focus is on the squad’s schedule – the hotel, the training centre, the stadium – basically, everything revolves around the matches. I lived that routine daily at the 2022 World Cup and realised the immense dedication the tournament demands. In this 2026 edition, as fate would have it and as I am still recovering from my injury, I’m discovering a different sid",
+    "teamTags": [
+      "Brazil",
+      "England",
+      "Morocco",
+      "France"
+    ],
+    "playerTags": [
+      "New York",
+      "Paul Pogba",
+      "Zinedine Zidane",
+      "Brooklyn Bridge"
+    ],
+    "sentiment": -0.04000000000000001,
+    "signals": {
+      "injury": 0.18,
+      "lineupClarity": 0.5700000000000001,
+      "tacticalFit": 0.54,
+      "morale": 0.45999999999999996,
+      "rotationRisk": 0.22999999999999998
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_b8f71080",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-19T05:22:59.000Z",
+    "provider": "self-gather",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/2026/jun/19/iran-lodge-complaint-fifa-restrictions-world-cup",
+    "title": "Iran to lodge complaint with Fifa over ‘restrictions imposed’ on team at World Cup",
+    "description": "<ul><li><p>Iran permitted to arrive in LA just 24 hours before Belgium game</p></li><li><p>Federation will express its ‘dissatisfaction’ over logistical issues</p></li></ul><p>Iran plan to lodge a formal complaint with Fifa regarding the “restrictions imposed by the organisers” on the team at the World Cup, after being told they will only be permitted to arrive in Los Angeles 24 hours before Sunday’s crucial game against Belgium.</p><p>After <a href=\"https://www.theguardian.com/football/2026/jun/16/iran-new-zealand-world-cup-2026-group-g-match-report\">Iran’s Group G opener with New Zealand</a>, their head coach, Amir Ghalenoei, argued they are the <a href=\"https://www.theguardian.com/football/2026/jun/16/amir-ghalenoei-iran-coach-mehdi-taremi-fifa-us-world-cup\">“most oppressed” team at the tournament</a>. Iran’s captain, Mehdi Taremi, said the logistical issues meant recent weeks had been a “disaster”.</p> <a href=\"https://www.theguardian.com/football/2026/jun/19/iran-lodge-complaint-fifa-restrictions-world-cup\">Continue reading...</a>",
+    "bodySnippet": "Iran to lodge complaint with Fifa over ‘restrictions imposed’ on team at World Cup | World Cup 2026 | The Guardian Iran will &#x2018;formally express its dissatisfaction&#x2019; after being told they will only be permitted to arrive in Los Angeles 24 hours before the crucial Belgium game Iran permitted to arrive in LA just 24 hours before Belgium game Federation will express its ‘dissatisfaction’ over logistical issues Iran permitted to arrive in LA just 24 hours before Belgium game Federation will express its ‘dissatisfaction’ over logistical issues Iran plan to lodge a formal complaint with Fifa regarding the “restrictions imposed by the organisers” on the team at the World Cup , after being told they will only be permitted to arrive in Los Angeles 24 hours before Sunday’s crucial game against Belgium. After Iran’s Group G opener with New Zealand , their head coach, Amir Ghalenoei, arg",
+    "teamTags": [
+      "Belgium",
+      "Iran",
+      "New Zealand"
+    ],
+    "playerTags": [
+      "Los Angeles",
+      "New Zealand",
+      "Amir Ghalenoei",
+      "Mehdi Taremi",
+      "After Iran"
+    ],
+    "sentiment": 0,
+    "signals": {
+      "injury": 0,
+      "lineupClarity": 0.37,
+      "tacticalFit": 0.54,
+      "morale": 0.5,
+      "rotationRisk": 0.38
+    },
+    "sourceReliability": 0.82,
+    "sourceType": "rss",
+    "sourceQuality": "reputable_editorial_source",
+    "sourceQualityReason": "Recognised sports/editorial source.",
+    "acceptedSource": true
+  },
+  {
+    "id": "news_bb9bf888",
+    "createdAt": "2026-06-19T09:55:24.259Z",
+    "publishedAt": "2026-06-19T02:00:19.000Z",
+    "provider": "self-gather",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/2026/jun/19/australia-v-usa-socceroos-usmnt-confected-hostility-2026-world-cup",
+    "title": "Forget the confected World Cup hostility, the US and Australia mirror each other",
+    "description": "<p>The Group D clash between the United States and Socceroos has been hyped as next step in a heated rivalry but the nations are on similar football journeys</p><p>Listen to the hyperbole spewed by the loudest voices, and the World Cup clash between co-hosts the United States and Australia in Seattle is the latest contest in a heated <a href=\"https://www.theguardian.com/football/2026/jun/18/usa-usmnt-barbs-australia-socceroos-world-cup-group-d-match\">sporting rivalry streaked with disrespect</a> and even downright hate.</p><p>Indeed, the sometimes <a href=\"https://www.theguardian.com/football/2026/jun/18/usmnt-australia-world-cup-friendly-preview\">spiteful clash between the teams</a> in a friendly last year serves as a preview for what is now one of the marquee matches in the pool stage, and set to <a href=\"https://www.theguardian.com/football/2026/jun/18/world-cup-2026-socceroos-australia-usa-which-team-will-win-how\">determine the winner of Group D</a>.</p> <a href=\"https://www.theguardian.com/football/2026/jun/19/australia-v-usa-socceroos-usmnt-confected-hostility-2026-world-cup\">Continue reading...</a>",
+    "bodySnippet": "Forget the confected World Cup hostility, the US and Australia mirror each other | World Cup 2026 | The Guardian The Group D clash between the United States and Socceroos has been hyped as next step in a heated rivalry but the nations are on similar football journeys The Group D clash between the United States and Socceroos has been hyped as next step in a heated rivalry but the nations are on similar football journeys The Group D clash between the United States and Socceroos has been hyped as next step in a heated rivalry but the nations are on similar football journeys L isten to the hyperbole spewed by the loudest voices, and the World Cup clash between co-hosts the United States and Australia in Seattle is the latest contest in a heated sporting rivalry streaked with disrespect and even downright hate. Indeed, the sometimes spiteful clash between the teams in a friendly last year ser",
+    "teamTags": [
+      "USA",
+      "Australia"
+    ],
+    "playerTags": [
+      "The Group",
+      "United States",
+      "New York City"
+    ],
+    "sentiment": 0,
+    "signals": {
+      "injury": 0,
+      "lineupClarity": 0.45,
+      "tacticalFit": 0.54,
       "morale": 0.5,
       "rotationRisk": 0.18
     },
@@ -399,221 +1448,6 @@
     "acceptedSource": true
   },
   {
-    "id": "news_bd12aa90",
-    "createdAt": "2026-06-19T02:08:30.122Z",
-    "publishedAt": "2026-06-18T18:49:27.000Z",
-    "provider": "self-gather",
-    "source": "BBC Sport Football RSS",
-    "url": "https://www.bbc.com/sport/football/videos/ce8kd23y37lo?at_medium=RSS&at_campaign=rss",
-    "title": "Mokoena's late penalty earns South Africa draw against Czech Republic",
-    "description": "Teboho Mokoena scores an 83rd-minute penalty to earn South Africa a draw against the Czech Republic at the World Cup.",
-    "bodySnippet": "Czech Republic v South Africa Group A: Teboho Mokoena's late penalty equalises against Michal Sadilek - BBC Sport Teboho Mokoena scores an 83rd-minute penalty to earn South Africa a draw against the Czech Republic at the World Cup. Teboho Mokoena scores an 83rd-minute penalty to earn South Africa a draw against the Czech Republic at the World Cup. MATCH REPORT: Czech Republic 1-1 South Africa Mokoena's late penalty earns South Africa draw against Czech Republic. Video, 00:08:39 Mokoena's late penalty earns South Africa draw against Czech Republic Up Next. The Brazilians are bringing the noise. Video, 00:00:49 The Brazilians are bringing the noise 'Great speech' - Tuchel half-time talk made a difference. Video, 00:01:29 'Great speech' - Tuchel half-time talk made a difference Argentina fans react to record-equalling Messi. Video, 00:00:49 Argentina fans react to record-equalling Messi",
-    "teamTags": [
-      "South Africa",
-      "Argentina"
-    ],
-    "playerTags": [
-      "South Africa",
-      "Czech Republic Teboho",
-      "Czech Republic",
-      "South Africa Group",
-      "Teboho Mokoena",
-      "Michal Sadilek",
-      "Sport Teboho Mokoena",
-      "South Africa Mokoena",
-      "Czech Republic Up",
-      "The Brazilians"
-    ],
-    "sentiment": 0,
-    "signals": {
-      "injury": 0,
-      "lineupClarity": 0.45,
-      "tacticalFit": 0.45,
-      "morale": 0.5,
-      "rotationRisk": 0.18
-    },
-    "sourceReliability": 0.82,
-    "sourceType": "rss",
-    "sourceQuality": "reputable_editorial_source",
-    "sourceQualityReason": "Recognised sports/editorial source.",
-    "acceptedSource": true
-  },
-  {
-    "id": "news_6f493fee",
-    "createdAt": "2026-06-19T02:08:30.122Z",
-    "publishedAt": "2026-06-18T19:04:00.000Z",
-    "provider": "self-gather",
-    "source": "The Guardian Football RSS",
-    "url": "https://www.theguardian.com/football/2026/jun/18/lionel-messi-father-receives-medical-treatment-argentina-world-cup",
-    "title": "Lionel Messi’s family ask for ‘humanity’ as his father receives medical treatment",
-    "description": "<ul><li><p>Jorge Messi, 68, ‘recovering and progressing favourably’</p></li><li><p>‘At times like these, we ask for responsibility,’ says family</p></li></ul><p>Lionel Messi’s father is undergoing medical treatment for an undisclosed illness and his family asked the media for “humanity” on Thursday amid rumours about Jorge Messi’s health while his son competes at the World Cup. “Jorge is going through a health situation,” the Messi family said in a statement.</p><p>The family did not specify the illness that the 68-year-old Jorge Messi is suffering from. “He is currently under medical observation, recovering and progressing favourably within his current condition,” the statement said.</p> <a href=\"https://www.theguardian.com/football/2026/jun/18/lionel-messi-father-receives-medical-treatment-argentina-world-cup\">Continue reading...</a>",
-    "bodySnippet": "Lionel Messi’s family ask for ‘humanity’ as his father receives medical treatment | Lionel Messi | The Guardian Lionel Messi&#x2019;s family said his father, Jorge, was being treated for an undisclosed illness and asked the media for responsible reporting Jorge Messi, 68, ‘recovering and progressing favourably’ ‘At times like these, we ask for responsibility,’ says family Jorge Messi, 68, ‘recovering and progressing favourably’ ‘At times like these, we ask for responsibility,’ says family Lionel Messi’s father is undergoing medical treatment for an undisclosed illness and his family asked the media for “humanity” on Thursday amid rumours about Jorge Messi’s health while his son competes at the World Cup. “Jorge is going through a health situation,” the Messi family said in a statement. The family did not specify the illness that the 68-year-old Jorge Messi is suffering from. “He is curre",
-    "teamTags": [
-      "Argentina"
-    ],
-    "playerTags": [
-      "Lionel Messi",
-      "Jorge Messi"
-    ],
-    "sentiment": -0.2,
-    "signals": {
-      "injury": 0.18,
-      "lineupClarity": 0.45,
-      "tacticalFit": 0.45,
-      "morale": 0.3,
-      "rotationRisk": 0.22999999999999998
-    },
-    "sourceReliability": 0.82,
-    "sourceType": "rss",
-    "sourceQuality": "reputable_editorial_source",
-    "sourceQualityReason": "Recognised sports/editorial source.",
-    "acceptedSource": true
-  },
-  {
-    "id": "news_923a43d0",
-    "createdAt": "2026-06-19T02:08:30.122Z",
-    "publishedAt": "2026-06-18T18:55:29.000Z",
-    "provider": "self-gather",
-    "source": "The Guardian Football RSS",
-    "url": "https://www.theguardian.com/football/2026/jun/18/clarke-warns-scotland-morocco-real-deal-world-cup",
-    "title": "Clarke warns Scotland: ‘We must be at our best – Morocco are the real deal’",
-    "description": "<ul><li><p>Head coach says 2022 semi-finalists are now even better</p></li><li><p>Scotland could deploy back three against Group C rivals</p></li></ul><p>Steve Clarke has warned Scotland the Morocco team they will face on Friday are superior to the one that <a href=\"https://www.theguardian.com/football/2022/dec/10/morocco-portugal-world-cup-quarter-final-match-report\">reached the semi-finals </a>of the World Cup in 2022.</p><p>Scotland kicked off their tournament with a <a href=\"https://www.theguardian.com/football/2026/jun/14/haiti-scotland-world-cup-match-report\">1-0 win over Haiti</a>, which came hours after Morocco impressed during a 1-1 draw with Brazil. Clarke answered with a firm “absolutely” when asked whether Morocco would pose as stern a threat as Brazil to his side in Group C.</p> <a href=\"https://www.theguardian.com/football/2026/jun/18/clarke-warns-scotland-morocco-real-deal-world-cup\">Continue reading...</a>",
-    "bodySnippet": "Clarke warns Scotland: ‘We must be at our best – Morocco are the real deal’ | Scotland | The Guardian Head coach believes 2022 semi-finalists may be stronger now than in Qatar, and could deploy back three to stifle Group C rivals Head coach says 2022 semi-finalists are now even better Scotland could deploy back three against Group C rivals Head coach says 2022 semi-finalists are now even better Scotland could deploy back three against Group C rivals Steve Clarke has warned Scotland the Morocco team they will face on Friday are superior to the one that reached the semi-finals of the World Cup in 2022. Scotland kicked off their tournament with a 1-0 win over Haiti , which came hours after Morocco impressed during a 1-1 draw with Brazil. Clarke answered with a firm “absolutely” when asked whether Morocco would pose as stern a threat as Brazil to his side in Group C.",
-    "teamTags": [
-      "Scotland",
-      "Morocco",
-      "Brazil",
-      "Haiti",
-      "Portugal",
-      "Qatar"
-    ],
-    "playerTags": [
-      "Steve Clarke"
-    ],
-    "sentiment": 0,
-    "signals": {
-      "injury": 0,
-      "lineupClarity": 0.45,
-      "tacticalFit": 0.54,
-      "morale": 0.5,
-      "rotationRisk": 0.18
-    },
-    "sourceReliability": 0.82,
-    "sourceType": "rss",
-    "sourceQuality": "reputable_editorial_source",
-    "sourceQualityReason": "Recognised sports/editorial source.",
-    "acceptedSource": true
-  },
-  {
-    "id": "news_682be1f5",
-    "createdAt": "2026-06-19T02:08:30.122Z",
-    "publishedAt": "2026-06-18T18:00:10.000Z",
-    "provider": "self-gather",
-    "source": "The Guardian Football RSS",
-    "url": "https://www.theguardian.com/football/2026/jun/18/england-thomas-tuchel-croatia-world-cup-2026",
-    "title": "‘People in the pubs will like this’: Tuchel keen for England to entertain at World Cup",
-    "description": "<ul><li><p>Manager says second-half performance was ‘rewarding’</p></li><li><p>England’s next group game is against Ghana on 23 June</p></li></ul><p>Thomas Tuchel said he wanted his England team to entertain the nation and that he pictured the scenes in the pubs as his players took the handbrake off to power past <a href=\"https://www.theguardian.com/football/2026/jun/17/england-croatia-world-cup-2026-group-l-match-report\">Croatia 4-2 in their World Cup opener</a> on Wednesday.</p><p>England were passive in the first half, too deep, the connections lacking. They entered the interval at 2-2, Harry Kane’s goals cancelled out by a pair of soft concessions that were in keeping with the team’s openness.</p> <a href=\"https://www.theguardian.com/football/2026/jun/18/england-thomas-tuchel-croatia-world-cup-2026\">Continue reading...</a>",
-    "bodySnippet": "‘People in the pubs will like this’: Tuchel keen for England to entertain at World Cup | England | The Guardian Thomas Tuchel said he wanted his England team to entertain the nation and that he pictured the pub scenes as his players powered past Croatia Manager says second-half performance was ‘rewarding’ England’s next group game is against Ghana on 23 June Manager says second-half performance was ‘rewarding’ England’s next group game is against Ghana on 23 June Thomas Tuchel said he wanted his England team to entertain the nation and that he pictured the scenes in the pubs as his players took the handbrake off to power past Croatia 4-2 in their World Cup opener on Wednesday. England were passive in the first half, too deep, the connections lacking. They entered the interval at 2-2, Harry Kane’s goals cancelled out by a pair of soft concessions that were in keeping with the team’s openn",
-    "teamTags": [
-      "England",
-      "Ghana",
-      "Croatia"
-    ],
-    "playerTags": [
-      "Thomas Tuchel",
-      "Harry Kane",
-      "Croatia Manager",
-      "June Manager",
-      "June Thomas Tuchel"
-    ],
-    "sentiment": 0,
-    "signals": {
-      "injury": 0,
-      "lineupClarity": 0.45,
-      "tacticalFit": 0.45,
-      "morale": 0.5,
-      "rotationRisk": 0.18
-    },
-    "sourceReliability": 0.82,
-    "sourceType": "rss",
-    "sourceQuality": "reputable_editorial_source",
-    "sourceQualityReason": "Recognised sports/editorial source.",
-    "acceptedSource": true
-  },
-  {
-    "id": "news_d6e9f7d6",
-    "createdAt": "2026-06-19T02:08:30.122Z",
-    "publishedAt": "2026-06-18T18:10:59.000Z",
-    "provider": "self-gather",
-    "source": "The Guardian Football RSS",
-    "url": "https://www.theguardian.com/football/2026/jun/18/talisman-mctominay-has-the-motivation-to-make-impact-on-world-cup",
-    "title": "‘Talisman’ McTominay has the motivation to make impact on World Cup",
-    "description": "<p>Steve Clarke highlights squad mentality before Morocco game but Napoli midfielder stands out with his goals</p><p>It is a conversation in Milan that should resonate in Massachusetts. Italy’s failure to qualify for another World Cup has triggered harsh assessment of Serie A, including why there is a shortage of home players making sufficient impact there. The success of imports, whose talent level is marginally above average, supposedly says much about decline within the Italian game.</p><p>It would be harsh to place Scott McTominay in that category. The sharpness of the 29-year-old’s career trajectory since leaving Manchester United for Napoli depicts a player who was underappreciated at the club of his youth and early professional years. McTominay left Manchester with a point to prove and did so with bells on, courtesy <a href=\"https://www.theguardian.com/football/2025/may/23/napoli-win-serie-a-title-scott-mctominay-stunner-cagliari-inter\">of a title win</a> and the label of Serie A’s most valuable player in 2025. Should McTominay choose to leave Naples, where he is adored, he will not be short of Premier League options.</p> <a href=\"https://www.theguardian.com/football/2026/jun/18/talisman-mctominay-has-the-motivation-to-make-impact-on-world-cup\">Continue reading...</a>",
-    "bodySnippet": "‘Talisman’ McTominay has the motivation to make impact on World Cup | Scotland | The Guardian Steve Clarke has highlighted the squad mentality before playing Morocco but the Napoli midfielder stands out with his goals Steve Clarke highlights squad mentality before Morocco game but Napoli midfielder stands out with his goals Steve Clarke highlights squad mentality before Morocco game but Napoli midfielder stands out with his goals I t is a conversation in Milan that should resonate in Massachusetts. Italy’s failure to qualify for another World Cup has triggered harsh assessment of Serie A, including why there is a shortage of home players making sufficient impact there. The success of imports, whose talent level is marginally above average, supposedly says much about decline within the Italian game. It would be harsh to place Scott McTominay in that category. The sharpness of the 29-year-",
-    "teamTags": [
-      "Morocco",
-      "Scotland",
-      "England"
-    ],
-    "playerTags": [
-      "Steve Clarke",
-      "Manchester United",
-      "Premier League",
-      "Hampden Park",
-      "Kenny Dalglish",
-      "Denis Law"
-    ],
-    "sentiment": 0.16,
-    "signals": {
-      "injury": 0,
-      "lineupClarity": 0.5700000000000001,
-      "tacticalFit": 0.54,
-      "morale": 0.66,
-      "rotationRisk": 0.18
-    },
-    "sourceReliability": 0.82,
-    "sourceType": "rss",
-    "sourceQuality": "reputable_editorial_source",
-    "sourceQualityReason": "Recognised sports/editorial source.",
-    "acceptedSource": true
-  },
-  {
-    "id": "news_fdf6890c",
-    "createdAt": "2026-06-19T02:08:30.122Z",
-    "publishedAt": "2026-06-06T20:30:36.000Z",
-    "provider": "self-gather",
-    "source": "BBC Sport Football RSS",
-    "url": "https://www.bbc.com/sport/football/articles/c20y4ppqy94o?at_medium=RSS&at_campaign=rss",
-    "title": "How to watch the World Cup on the BBC and ITV",
-    "description": "All the TV and radio details for each of the 2026 World Cup group games.",
-    "bodySnippet": "World Cup 2026 on TV: Where and how to watch England and Scotland games and kick-off times - BBC Sport All the TV and radio details for each of the 2026 World Cup group games. The 2026 World Cup in the United States, Canada and Mexico is almost here. It is the biggest World Cup in history with 48 teams taking place. Here's a list of the games and where you can watch and listen to them in the UK. There will be 54 matches shown live on the BBC , including the final on 19 July, with 92 games on BBC Sounds and every single match covered on the BBC Sport website and app . Everything you need to know about the World Cup Follow Mexico face South Korea with both knowing win would secure qualification",
-    "teamTags": [
-      "Scotland",
-      "England",
-      "Canada",
-      "Mexico",
-      "South Korea"
-    ],
-    "playerTags": [
-      "Sport All",
-      "United States",
-      "South Korea"
-    ],
-    "sentiment": 0,
-    "signals": {
-      "injury": 0,
-      "lineupClarity": 0.45,
-      "tacticalFit": 0.45,
-      "morale": 0.5,
-      "rotationRisk": 0.18
-    },
-    "sourceReliability": 0.82,
-    "sourceType": "rss",
-    "sourceQuality": "reputable_editorial_source",
-    "sourceQualityReason": "Recognised sports/editorial source.",
-    "acceptedSource": true
-  },
-  {
     "id": "news_c046ee4e",
     "createdAt": "2026-06-19T02:08:30.122Z",
     "publishedAt": "2026-06-11T17:08:40.000Z",
@@ -665,81 +1499,6 @@
       "United States",
       "Ivory Coast",
       "Paris St"
-    ],
-    "sentiment": 0,
-    "signals": {
-      "injury": 0,
-      "lineupClarity": 0.45,
-      "tacticalFit": 0.45,
-      "morale": 0.5,
-      "rotationRisk": 0.18
-    },
-    "sourceReliability": 0.82,
-    "sourceType": "rss",
-    "sourceQuality": "reputable_editorial_source",
-    "sourceQualityReason": "Recognised sports/editorial source.",
-    "acceptedSource": true
-  },
-  {
-    "id": "news_39fea87e",
-    "createdAt": "2026-06-19T02:08:30.122Z",
-    "publishedAt": "2026-06-18T20:00:21.000Z",
-    "provider": "self-gather",
-    "source": "BBC Sport Football RSS",
-    "url": "https://www.bbc.com/sport/football/articles/cwykwyp001xo?at_medium=RSS&at_campaign=rss",
-    "title": "Sutton's World Cup score predictions - second group games",
-    "description": "BBC Sport's football expert Chris Sutton gives his predictions for the scores of the second round of group games at the 2026 World Cup.",
-    "bodySnippet": "World Cup 2026: Another win for Scotland? Chris Sutton's predictions - BBC Sport BBC Sport's football expert Chris Sutton gives his predictions for the scores of the second round of group games at the 2026 World Cup. There have already been plenty of shocks at this World Cup but one in particular caught almost everyone out. BBC Sport predictions expert Chris Sutton, AI and 99.65% of the users playing the BBC's new predictor game all expected European champions Spain to beat Cape Verde in their opening game in Group H ... and all of you were wrong. From more than 37,000 people who had a go at guessing the outcome of that match, only 61 correctly said it would end in a draw - another 67 went for a Cape Verde victory. We have seen a few correct predictions, however. Chris was right about the outcome of 12 of the 24 opening group games, AI managed 13 and those playing along were correct abou",
-    "teamTags": [
-      "Scotland",
-      "Morocco",
-      "Spain",
-      "Cape Verde",
-      "England",
-      "Ghana"
-    ],
-    "playerTags": [
-      "Chris Sutton",
-      "Cape Verde"
-    ],
-    "sentiment": 0,
-    "signals": {
-      "injury": 0,
-      "lineupClarity": 0.45,
-      "tacticalFit": 0.45,
-      "morale": 0.5,
-      "rotationRisk": 0.18
-    },
-    "sourceReliability": 0.82,
-    "sourceType": "rss",
-    "sourceQuality": "reputable_editorial_source",
-    "sourceQualityReason": "Recognised sports/editorial source.",
-    "acceptedSource": true
-  },
-  {
-    "id": "news_9d471ceb",
-    "createdAt": "2026-06-19T02:08:30.122Z",
-    "publishedAt": "2026-06-18T21:10:52.000Z",
-    "provider": "self-gather",
-    "source": "BBC Sport Football RSS",
-    "url": "https://www.bbc.com/sport/football/videos/ce3ey2ygl4zo?at_medium=RSS&at_campaign=rss",
-    "title": "Switzerland's Manzambi scores superb double against Bosnia",
-    "description": "20-year-old Johan Manzambi scores twice as Switzerland beat Bosnia in their 2026 World Cup match in Los Angeles.",
-    "bodySnippet": "Switzerland v Bosnia Group B: Johan Manzambi scores twice - BBC Sport 20-year-old Johan Manzambi scores twice as Switzerland beat Bosnia in their 2026 World Cup match in Los Angeles. 20-year-old Johan Manzambi scores twice as Switzerland beat Bosnia in their 2026 World Cup match in Los Angeles. MATCH REPORT: Switzerland 4-1 Bosnia-Herzegovina Switzerland's Manzambi scores superb double against Bosnia. Video, 00:01:00 Switzerland's Manzambi scores superb double against Bosnia Up Next. 'Great speech' - Tuchel half-time talk made a difference. Video, 00:01:29 'Great speech' - Tuchel half-time talk made a difference Argentina fans react to record-equalling Messi. Video, 00:00:49 Argentina fans react to record-equalling Messi Cape Verde fans across the world celebrate draw with Spain. Video, 00:01:38 Cape Verde fans across the world celebrate draw with Spain",
-    "teamTags": [
-      "Switzerland",
-      "Spain",
-      "Cape Verde",
-      "Argentina"
-    ],
-    "playerTags": [
-      "Johan Manzambi",
-      "Los Angeles",
-      "Bosnia Group",
-      "Herzegovina Switzerland",
-      "Bosnia Up Next",
-      "Messi Cape Verde",
-      "Cape Verde"
     ],
     "sentiment": 0,
     "signals": {
@@ -899,40 +1658,6 @@
     "acceptedSource": true
   },
   {
-    "id": "news_74be8bd2",
-    "createdAt": "2026-06-19T02:08:30.122Z",
-    "publishedAt": "2026-06-18T22:29:00.000Z",
-    "provider": "self-gather",
-    "source": "BBC Sport Football RSS",
-    "url": "https://www.bbc.com/sport/football/articles/c4gyree9775o?at_medium=RSS&at_campaign=rss",
-    "title": "Scotland's Boston love affair one for the ages",
-    "description": "BBC Scotland's Scott Mullen looks at the Tartan Army's time in Boston as it gets set to finish.",
-    "bodySnippet": "World Cup 2026: Scotland's Boston love affair one for the ages - BBC Sport BBC Scotland's Scott Mullen looks at the Tartan Army's time in Boston as it gets set to finish. An estimated 50,000 Scotland fans have descended on Boston over the past week There has been some haggis controversy this week. On Wednesday, a video of Governor Maura Healey swept social media with her signing a declaration stating the Scottish dish was now legal in the state of Massachusetts. It looked like the Tartan Army's mission in Boston was not simply to drink the place dry of beer, inject fun into baseball matches, or donate generously to charities, it was to liberate the haggis from it's 55-year American exile. That was until the bomb was dropped on Governor Healey's Instagram account 24 hours later. \"I have received countless messages from Massachusetts residents, Scotland supporters, legal experts, and at le",
-    "teamTags": [
-      "Scotland"
-    ],
-    "playerTags": [
-      "Scott Mullen",
-      "Tartan Army",
-      "On Wednesday",
-      "Governor Maura Healey",
-      "Governor Healey"
-    ],
-    "sentiment": 0,
-    "signals": {
-      "injury": 0,
-      "lineupClarity": 0.45,
-      "tacticalFit": 0.45,
-      "morale": 0.5,
-      "rotationRisk": 0.18
-    },
-    "sourceReliability": 0.82,
-    "sourceType": "rss",
-    "sourceQuality": "reputable_editorial_source",
-    "sourceQualityReason": "Recognised sports/editorial source.",
-    "acceptedSource": true
-  },
-  {
     "id": "news_a0ff9157",
     "createdAt": "2026-06-19T02:08:30.122Z",
     "publishedAt": "2026-06-19T01:35:52.000Z",
@@ -968,132 +1693,6 @@
       "tacticalFit": 0.45,
       "morale": 0.66,
       "rotationRisk": 0.18
-    },
-    "sourceReliability": 0.82,
-    "sourceType": "rss",
-    "sourceQuality": "reputable_editorial_source",
-    "sourceQualityReason": "Recognised sports/editorial source.",
-    "acceptedSource": true
-  },
-  {
-    "id": "news_1e6ccc1a",
-    "createdAt": "2026-06-19T02:08:30.122Z",
-    "publishedAt": "2026-06-19T01:58:33.000Z",
-    "provider": "self-gather",
-    "source": "BBC Sport Football RSS",
-    "url": "https://www.bbc.com/sport/football/videos/ckg7nx6kg51o?at_medium=RSS&at_campaign=rss",
-    "title": "Canada score six but historic win marred by Kone injury",
-    "description": "Ismael Kone's serious-looking injury left Canada manager Jesse Marsch in tears and overshadowed their first-ever World Cup finals win as they thrashed nine-man Qatar 6-0.",
-    "bodySnippet": "Canada 6-0 Qatar Highlights - World Cup 2026 - 19 June 2024 - BBC Sport Ismael Kone's serious-looking injury left Canada manager Jesse Marsch in tears and overshadowed their first-ever World Cup finals win as they thrashed nine-man Qatar 6-0. Canada earn their first-ever World Cup finals win as they thrash nine-man Qatar 6-0, but Ismael Kone's serious-looking injury left manager Jesse Marsch in tears. Canada score six but historic win marred by Kone injury. Video, 00:09:12 Canada score six but historic win marred by Kone injury Up Next. 'Great speech' - Tuchel half-time talk made a difference. Video, 00:01:29 'Great speech' - Tuchel half-time talk made a difference Argentina fans react to record-equalling Messi. Video, 00:00:49 Argentina fans react to record-equalling Messi Cape Verde fans across the world celebrate draw with Spain. Video, 00:01:38 Cape Verde fans across the world celebr",
-    "teamTags": [
-      "Canada",
-      "Qatar",
-      "Spain",
-      "Cape Verde",
-      "Argentina"
-    ],
-    "playerTags": [
-      "Ismael Kone",
-      "Jesse Marsch",
-      "Qatar Highlights",
-      "Sport Ismael Kone",
-      "Up Next",
-      "Messi Cape Verde",
-      "Cape Verde",
-      "Shinnecock Hills"
-    ],
-    "sentiment": -0.2,
-    "signals": {
-      "injury": 0.18,
-      "lineupClarity": 0.45,
-      "tacticalFit": 0.45,
-      "morale": 0.3,
-      "rotationRisk": 0.22999999999999998
-    },
-    "sourceReliability": 0.82,
-    "sourceType": "rss",
-    "sourceQuality": "reputable_editorial_source",
-    "sourceQualityReason": "Recognised sports/editorial source.",
-    "acceptedSource": true
-  },
-  {
-    "id": "news_d2a86c04",
-    "createdAt": "2026-06-19T02:08:30.122Z",
-    "publishedAt": "2026-06-18T22:08:51.000Z",
-    "provider": "self-gather",
-    "source": "BBC Sport Football RSS",
-    "url": "https://www.bbc.com/sport/football/videos/c8x2e857755o?at_medium=RSS&at_campaign=rss",
-    "title": "Manzambi double propels Switzerland to win against Bosnia",
-    "description": "Substitute Johan Manzambi scores twice in a thrilling final 20 minutes, as Switzerland beat Bosnia-Herzegovina 4-1 to edge towards a place in the World Cup round of 32.",
-    "bodySnippet": "Switzerland v Bosnia and Herzegovina Group B: Manzambi inspires with late goals - BBC Sport Substitute Johan Manzambi scores twice in a thrilling final 20 minutes, as Switzerland beat Bosnia-Herzegovina 4-1 to edge towards a place in the World Cup round of 32. Substitute Johan Manzambi scores twice in a thrilling final 20 minutes, as Switzerland beat Bosnia-Herzegovina 4-1 to edge towards a place in the World Cup round of 32. READ MORE: Switzerland 4-1 Bosnia and Herzegovina Manzambi double propels Switzerland to win against Bosnia. Video, 00:09:04 Manzambi double propels Switzerland to win against Bosnia Up Next. 'Great speech' - Tuchel half-time talk made a difference. Video, 00:01:29 'Great speech' - Tuchel half-time talk made a difference Argentina fans react to record-equalling Messi. Video, 00:00:49 Argentina fans react to record-equalling Messi Cape Verde fans across the world cel",
-    "teamTags": [
-      "Switzerland",
-      "Spain",
-      "Cape Verde",
-      "Argentina",
-      "Bosnia and Herzegovina"
-    ],
-    "playerTags": [
-      "Bosnia Substitute Johan",
-      "Herzegovina Group",
-      "Sport Substitute Johan",
-      "Substitute Johan Manzambi",
-      "Herzegovina Manzambi",
-      "Bosnia Up Next",
-      "Messi Cape Verde",
-      "Cape Verde"
-    ],
-    "sentiment": 0,
-    "signals": {
-      "injury": 0,
-      "lineupClarity": 0.45,
-      "tacticalFit": 0.45,
-      "morale": 0.5,
-      "rotationRisk": 0.18
-    },
-    "sourceReliability": 0.82,
-    "sourceType": "rss",
-    "sourceQuality": "reputable_editorial_source",
-    "sourceQualityReason": "Recognised sports/editorial source.",
-    "acceptedSource": true
-  },
-  {
-    "id": "news_99cdacd0",
-    "createdAt": "2026-06-19T02:08:30.122Z",
-    "publishedAt": "2026-06-19T01:02:38.000Z",
-    "provider": "self-gather",
-    "source": "BBC Sport Football RSS",
-    "url": "https://www.bbc.com/sport/football/videos/ckg0r24xk5wo?at_medium=RSS&at_campaign=rss",
-    "title": "Kone injury is a 'huge loss' - Marsch",
-    "description": "Canada coach Jessie Marsch praises his players for their 6-0 win over Qatar at the 2026 World Cup in Vancouver, but says losing Ismael Kone to a serious-looking injury is a \"huge loss\".",
-    "bodySnippet": "Canada v Qatar Group B: Ismael Kone injury is a 'huge loss' - Canada coach Jesse Marsch - BBC Sport Canada coach Jessie Marsch praises his players for their 6-0 win over Qatar at the 2026 World Cup in Vancouver, but says losing Ismael Kone to a serious-looking injury is a \"huge loss\". Canada coach Jessie Marsch praises his players for their 6-0 win over Qatar at the 2026 World Cup in Vancouver, but says losing Ismael Kone to a serious-looking injury is a \"huge loss\". Kone injury is a 'huge loss' - Marsch Video, 00:01:58 Kone injury is a 'huge loss' - Marsch Up Next. 'Great speech' - Tuchel half-time talk made a difference. Video, 00:01:29 'Great speech' - Tuchel half-time talk made a difference Argentina fans react to record-equalling Messi. Video, 00:00:49 Argentina fans react to record-equalling Messi Cape Verde fans across the world celebrate draw with Spain. Video, 00:01:38 Cape Verd",
-    "teamTags": [
-      "Canada",
-      "Qatar",
-      "Spain",
-      "Cape Verde",
-      "Argentina"
-    ],
-    "playerTags": [
-      "Marsch Canada",
-      "Jessie Marsch",
-      "Ismael Kone",
-      "Qatar Group",
-      "Jesse Marsch",
-      "Sport Canada",
-      "Marsch Video",
-      "Marsch Up Next",
-      "Messi Cape Verde",
-      "Cape Verde",
-      "Shinnecock Hills"
-    ],
-    "sentiment": -0.2,
-    "signals": {
-      "injury": 0.18,
-      "lineupClarity": 0.45,
-      "tacticalFit": 0.45,
-      "morale": 0.3,
-      "rotationRisk": 0.22999999999999998
     },
     "sourceReliability": 0.82,
     "sourceType": "rss",
