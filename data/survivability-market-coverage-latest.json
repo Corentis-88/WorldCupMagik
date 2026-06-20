@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-06-19T21:37:44.729Z",
+  "createdAt": "2026-06-20T01:32:19.940Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -9,10 +9,8 @@
     "reason": "Collecting public-web odds until the coverage gate is satisfied."
   },
   "fixtureWindow": {
-    "fixtureCount": 43,
+    "fixtureCount": 41,
     "fixtureIds": [
-      "fixture_a71ae028",
-      "fixture_b4d82456",
       "fixture_72da28c8",
       "fixture_bc8dec5c",
       "fixture_4a2d215a",
@@ -60,8 +58,8 @@
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 5,
-    "freshRecordCount": 5,
+    "totalRecords": 8,
+    "freshRecordCount": 8,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -82,23 +80,21 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 13 more fresh records",
-        "needs 4 more covered fixtures",
-        "needs 10 more fixtures for coverage",
-        "needs 1 more bookmaker source(s)",
-        "needs deeper bookmaker coverage per fixture",
-        "needs 1 more distinct line(s)"
+        "needs 10 more fresh records",
+        "needs 2 more covered fixtures",
+        "needs 8 more fixtures for coverage",
+        "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 5,
-      "freshRecordCount": 5,
-      "fixtureCount": 1,
-      "totalFixtureCount": 43,
-      "fixtureCoverage": 0.023,
-      "bookmakerCount": 1,
+      "recordCount": 8,
+      "freshRecordCount": 8,
+      "fixtureCount": 3,
+      "totalFixtureCount": 41,
+      "fixtureCoverage": 0.073,
+      "bookmakerCount": 3,
       "averageBookmakersPerFixture": 1,
-      "lineCount": 1,
-      "outcomeCount": 1,
-      "latestCapturedAt": "2026-06-19T21:37:44.729Z",
+      "lineCount": 3,
+      "outcomeCount": 3,
+      "latestCapturedAt": "2026-06-20T01:32:19.940Z",
       "sampleOutcomes": [
         {
           "fixtureId": "fixture_4a2d215a",
@@ -108,7 +104,27 @@
           "line": "+1",
           "team": "Ivory Coast",
           "decimalOdds": 1.98,
-          "capturedAt": "2026-06-19T21:37:44.729Z"
+          "capturedAt": "2026-06-20T01:32:19.940Z"
+        },
+        {
+          "fixtureId": "fixture_cdfd8373",
+          "fixture": "Spain v Saudi Arabia",
+          "bookmaker": "SportsGambler public prop pages: Spain v Saudi Arabia",
+          "outcome": "Spain -2.5",
+          "line": "-2.5",
+          "team": "Spain",
+          "decimalOdds": 1.92,
+          "capturedAt": "2026-06-20T01:32:19.940Z"
+        },
+        {
+          "fixtureId": "fixture_22685454",
+          "fixture": "Belgium v Iran",
+          "bookmaker": "SportsGambler public prop pages: Belgium v Iran",
+          "outcome": "Belgium -1.25",
+          "line": "-1.25",
+          "team": "Belgium",
+          "decimalOdds": 1.89,
+          "capturedAt": "2026-06-20T01:32:19.940Z"
         }
       ]
     },
@@ -139,7 +155,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 43,
+      "totalFixtureCount": 41,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -175,7 +191,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 43,
+      "totalFixtureCount": 41,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -211,7 +227,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 43,
+      "totalFixtureCount": 41,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -246,7 +262,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 43,
+      "totalFixtureCount": 41,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -281,7 +297,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 43,
+      "totalFixtureCount": 41,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
