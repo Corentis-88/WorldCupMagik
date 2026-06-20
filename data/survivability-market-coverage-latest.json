@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-06-20T13:00:33.250Z",
+  "createdAt": "2026-06-20T15:56:26.680Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -57,8 +57,8 @@
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 16,
-    "freshRecordCount": 16,
+    "totalRecords": 20,
+    "freshRecordCount": 20,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -79,13 +79,12 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 2 more fresh records",
         "needs 1 more covered fixtures",
         "needs 6 more fixtures for coverage",
         "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 16,
-      "freshRecordCount": 16,
+      "recordCount": 20,
+      "freshRecordCount": 20,
       "fixtureCount": 4,
       "totalFixtureCount": 40,
       "fixtureCoverage": 0.1,
@@ -93,7 +92,7 @@
       "averageBookmakersPerFixture": 1,
       "lineCount": 4,
       "outcomeCount": 4,
-      "latestCapturedAt": "2026-06-20T13:00:33.250Z",
+      "latestCapturedAt": "2026-06-20T15:56:26.680Z",
       "sampleOutcomes": [
         {
           "fixtureId": "fixture_4a2d215a",
@@ -103,7 +102,7 @@
           "line": "+1",
           "team": "Ivory Coast",
           "decimalOdds": 1.98,
-          "capturedAt": "2026-06-20T13:00:33.250Z"
+          "capturedAt": "2026-06-20T15:56:26.680Z"
         },
         {
           "fixtureId": "fixture_cdfd8373",
@@ -113,7 +112,7 @@
           "line": "-2.5",
           "team": "Spain",
           "decimalOdds": 1.92,
-          "capturedAt": "2026-06-20T13:00:33.250Z"
+          "capturedAt": "2026-06-20T15:56:26.680Z"
         },
         {
           "fixtureId": "fixture_22685454",
@@ -123,7 +122,7 @@
           "line": "-1.25",
           "team": "Belgium",
           "decimalOdds": 1.89,
-          "capturedAt": "2026-06-20T13:00:33.250Z"
+          "capturedAt": "2026-06-20T15:56:26.680Z"
         },
         {
           "fixtureId": "fixture_62a53992",
@@ -133,7 +132,7 @@
           "line": "-1",
           "team": "Uruguay",
           "decimalOdds": 1.76,
-          "capturedAt": "2026-06-20T13:00:33.250Z"
+          "capturedAt": "2026-06-20T15:56:26.680Z"
         }
       ]
     },
