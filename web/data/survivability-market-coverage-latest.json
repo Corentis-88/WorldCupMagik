@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-06-20T21:41:53.716Z",
+  "createdAt": "2026-06-21T01:41:49.456Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -9,9 +9,8 @@
     "reason": "Collecting public-web odds until the coverage gate is satisfied."
   },
   "fixtureWindow": {
-    "fixtureCount": 38,
+    "fixtureCount": 37,
     "fixtureIds": [
-      "fixture_f4587d18",
       "fixture_ac19a178",
       "fixture_cdfd8373",
       "fixture_22685454",
@@ -55,8 +54,8 @@
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 17,
-    "freshRecordCount": 17,
+    "totalRecords": 20,
+    "freshRecordCount": 20,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -77,21 +76,20 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 1 more fresh records",
         "needs 2 more covered fixtures",
         "needs 7 more fixtures for coverage",
         "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 17,
-      "freshRecordCount": 17,
+      "recordCount": 20,
+      "freshRecordCount": 20,
       "fixtureCount": 3,
-      "totalFixtureCount": 38,
-      "fixtureCoverage": 0.079,
+      "totalFixtureCount": 37,
+      "fixtureCoverage": 0.081,
       "bookmakerCount": 3,
       "averageBookmakersPerFixture": 1,
       "lineCount": 3,
       "outcomeCount": 3,
-      "latestCapturedAt": "2026-06-20T21:41:53.716Z",
+      "latestCapturedAt": "2026-06-21T01:41:49.456Z",
       "sampleOutcomes": [
         {
           "fixtureId": "fixture_cdfd8373",
@@ -101,7 +99,7 @@
           "line": "-2.5",
           "team": "Spain",
           "decimalOdds": 1.92,
-          "capturedAt": "2026-06-20T21:41:53.716Z"
+          "capturedAt": "2026-06-21T01:41:49.456Z"
         },
         {
           "fixtureId": "fixture_22685454",
@@ -111,7 +109,7 @@
           "line": "-1.25",
           "team": "Belgium",
           "decimalOdds": 1.89,
-          "capturedAt": "2026-06-20T21:41:53.716Z"
+          "capturedAt": "2026-06-21T01:41:49.456Z"
         },
         {
           "fixtureId": "fixture_62a53992",
@@ -121,7 +119,7 @@
           "line": "-1",
           "team": "Uruguay",
           "decimalOdds": 1.76,
-          "capturedAt": "2026-06-20T21:41:53.716Z"
+          "capturedAt": "2026-06-21T01:41:49.456Z"
         }
       ]
     },
@@ -152,7 +150,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 38,
+      "totalFixtureCount": 37,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -188,7 +186,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 38,
+      "totalFixtureCount": 37,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -224,7 +222,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 38,
+      "totalFixtureCount": 37,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -259,7 +257,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 38,
+      "totalFixtureCount": 37,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -294,7 +292,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 38,
+      "totalFixtureCount": 37,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
