@@ -1,1591 +1,7 @@
 [
   {
-    "team": "Tunisia",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
-    "provider": "public-web",
-    "recentPointsPerGame": 1.155,
-    "xgFor": 1.026,
-    "xgAgainst": 1.529,
-    "shotsFor": 10.05,
-    "shotsAgainst": 12.22,
-    "shotsOnTargetFor": 3.32,
-    "shotsOnTargetAgainst": 4.25,
-    "possession": 48.3,
-    "passesAttempted": 615,
-    "completedPasses": 469.9,
-    "passCompletion": 0.764,
-    "highPressIndex": 44.9,
-    "setPieceThreat": 53.2,
-    "transitionThreat": 45.4,
-    "keeperForm": 47.5,
-    "rating": 1650.7,
-    "statsCompleteness": 0.92,
-    "sourceMatchCount": 20,
-    "sourceMatchTarget": 20,
-    "sourceReliability": 0.75,
-    "manager": "Hervé Renard",
-    "captain": "",
-    "profileSource": "Tunisia public profile 1",
-    "profileSourceUrl": "https://en.wikipedia.org/wiki/Tunisia_national_football_team",
-    "profileConfidence": 0.72,
-    "metricSource": "score-derived-estimates",
-    "capturedMetricFields": [
-      "date",
-      "homeTeam",
-      "awayTeam",
-      "homeGoals",
-      "awayGoals"
-    ],
-    "derivedMetricFields": [
-      "xgFor",
-      "xgAgainst",
-      "shotsFor",
-      "shotsAgainst",
-      "shotsOnTargetFor",
-      "shotsOnTargetAgainst",
-      "possession",
-      "passesAttempted",
-      "completedPasses",
-      "passCompletion",
-      "formation",
-      "styleOfPlay"
-    ],
-    "tacticalProfile": {
-      "likelyFormation": "4-2-3-1 / 4-3-3",
-      "styleOfPlay": "balanced mid-block with mixed build-up",
-      "styleTags": [
-        "balanced",
-        "mixed build-up"
-      ],
-      "possessionTier": "medium",
-      "pressingTier": "low",
-      "transitionTier": "medium",
-      "source": "derived from 20-match public result sample and score-derived event estimates"
-    },
-    "passing": {
-      "attempted": 615,
-      "completed": 469.9,
-      "completion": 0.764,
-      "source": "score-and-possession-derived estimate"
-    },
-    "recentForm": {
-      "matchCount": 6,
-      "pointsPerGame": 0.833,
-      "goalsFor": 0.5,
-      "goalsAgainst": 1.667,
-      "goalDifference": -1.167,
-      "xgFor": 0.91,
-      "xgAgainst": 1.75,
-      "xgDifference": -0.84,
-      "shotsFor": 9.55,
-      "shotsAgainst": 13.17,
-      "shotsOnTargetFor": 3.1,
-      "shotsOnTargetAgainst": 4.67,
-      "possession": 47.4,
-      "passesAttempted": 609.8,
-      "completedPasses": 463.7,
-      "passCompletion": 0.76,
-      "cleanSheetRate": 0.333,
-      "failedToScoreRate": 0.5,
-      "bttsRate": 0.333,
-      "over25Rate": 0.167,
-      "scoringGameRate": 0.5,
-      "concedeGameRate": 0.667,
-      "window": 6
-    },
-    "longForm": {
-      "matchCount": 20,
-      "pointsPerGame": 1.6,
-      "goalsFor": 0.85,
-      "goalsAgainst": 1,
-      "goalDifference": -0.15,
-      "xgFor": 1.162,
-      "xgAgainst": 1.27,
-      "xgDifference": -0.108,
-      "shotsFor": 10.63,
-      "shotsAgainst": 11.1,
-      "shotsOnTargetFor": 3.57,
-      "shotsOnTargetAgainst": 3.76,
-      "possession": 50,
-      "passesAttempted": 624.3,
-      "completedPasses": 480.9,
-      "passCompletion": 0.77,
-      "cleanSheetRate": 0.6,
-      "failedToScoreRate": 0.35,
-      "bttsRate": 0.2,
-      "over25Rate": 0.15,
-      "scoringGameRate": 0.65,
-      "concedeGameRate": 0.4,
-      "window": 20
-    },
-    "formTrend": -0.4898,
-    "marketAngles": {
-      "cleanSheetRate": 0.6,
-      "failedToScoreRate": 0.35,
-      "bttsRate": 0.2,
-      "over25Rate": 0.15,
-      "scoringGameRate": 0.65,
-      "concedeGameRate": 0.4
-    },
-    "scorerSummary": [
-      {
-        "playerName": "Talbi",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Abdi",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Achouri",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Ben Romdhane",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Ben Slimane",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Gharbi",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Jaziri",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Mastouri",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      }
-    ],
-    "topScorers": [
-      {
-        "playerName": "Talbi",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Abdi",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Achouri",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Ben Romdhane",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Ben Slimane",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Gharbi",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Jaziri",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Mastouri",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      }
-    ],
-    "intelligenceCoverage": {
-      "matchWindowTarget": 20,
-      "matchWindowAvailable": 20,
-      "hasFullTwentyMatchWindow": true,
-      "managerKnown": true,
-      "profileConfidence": 0.72,
-      "eventDataMode": "score-derived-estimates",
-      "equalSchemaForAllTeams": true
-    },
-    "recentMatches": [
-      {
-        "date": "2026-06-20T12:00:00.000Z",
-        "homeTeam": "Algeria",
-        "awayTeam": "Tunisia",
-        "score": "1-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 50,
-        "passesAttempted": 638,
-        "completedPasses": 491,
-        "passCompletion": 0.77,
-        "homeScorers": [
-          {
-            "name": "Mahrez",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Talbi",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2026-06-15T12:00:00.000Z",
-        "homeTeam": "Tunisia",
-        "awayTeam": "Mali",
-        "score": "1-0",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Ben Slimane",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2026-06-14T12:00:00.000Z",
-        "homeTeam": "Sweden",
-        "awayTeam": "Tunisia",
-        "score": "5-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 42,
-        "passesAttempted": 585,
-        "completedPasses": 432,
-        "passCompletion": 0.738,
-        "homeScorers": [
-          {
-            "name": "Ayari",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Isak",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Gyökeres",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Svanber",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Rekik",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2026-06-11T12:00:00.000Z",
-        "homeTeam": "Tunisia",
-        "awayTeam": "Algeria",
-        "score": "0-2",
-        "teamPerspective": "home",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 45,
-        "passesAttempted": 589,
-        "completedPasses": 442,
-        "passCompletion": 0.75,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Bounedjah",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Mahrez",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2026-06-09T12:00:00.000Z",
-        "homeTeam": "Namibia",
-        "awayTeam": "Tunisia",
-        "score": "0-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 50,
-        "passesAttempted": 622,
-        "completedPasses": 479,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2026-06-06T12:00:00.000Z",
-        "homeTeam": "Morocco",
-        "awayTeam": "Tunisia",
-        "score": "2-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 45,
-        "passesAttempted": 589,
-        "completedPasses": 442,
-        "passCompletion": 0.75,
-        "homeScorers": [
-          {
-            "name": "Hakimi",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2026-06-06T12:00:00.000Z",
-        "homeTeam": "Belgium",
-        "awayTeam": "Tunisia",
-        "score": "5-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 42,
-        "passesAttempted": 569,
-        "completedPasses": 420,
-        "passCompletion": 0.738,
-        "homeScorers": [
-          {
-            "name": "Trossard",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "De Ketelaere",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "De Bruyne",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Lukébakio",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Raskin",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2026-06-05T12:00:00.000Z",
-        "homeTeam": "Tunisia",
-        "awayTeam": "DR Congo",
-        "score": "1-0",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Sliti",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2026-06-05T12:00:00.000Z",
-        "homeTeam": "Tunisia",
-        "awayTeam": "Equatorial Guinea",
-        "score": "1-0",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Ben Romdhane",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2026-06-02T12:00:00.000Z",
-        "homeTeam": "Tunisia",
-        "awayTeam": "Burkina Faso",
-        "score": "2-0",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 55,
-        "passesAttempted": 651,
-        "completedPasses": 514,
-        "passCompletion": 0.79,
-        "homeScorers": [
-          {
-            "name": "Tapsoba",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2026-06-01T12:00:00.000Z",
-        "homeTeam": "Austria",
-        "awayTeam": "Tunisia",
-        "score": "1-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 47.5,
-        "passesAttempted": 605,
-        "completedPasses": 460,
-        "passCompletion": 0.76,
-        "homeScorers": [
-          {
-            "name": "Sabitzer",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2026-03-31T12:00:00.000Z",
-        "homeTeam": "Canada",
-        "awayTeam": "Tunisia",
-        "score": "0-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 50,
-        "passesAttempted": 622,
-        "completedPasses": 479,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2026-03-28T12:00:00.000Z",
-        "homeTeam": "Haiti",
-        "awayTeam": "Tunisia",
-        "score": "0-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Tounekti",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2026-03-28T00:00:00.000Z",
-        "homeTeam": "Haiti",
-        "awayTeam": "Tunisia",
-        "score": "0-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Haiti National Football Teams 1"
-      },
-      {
-        "date": "2026-03-24T12:00:00.000Z",
-        "homeTeam": "Tunisia",
-        "awayTeam": "Malawi",
-        "score": "2-0",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 55,
-        "passesAttempted": 651,
-        "completedPasses": 514,
-        "passCompletion": 0.79,
-        "homeScorers": [
-          {
-            "name": "Jaziri",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2026-03-19T12:00:00.000Z",
-        "homeTeam": "Liberia",
-        "awayTeam": "Tunisia",
-        "score": "0-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Mastouri",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2026-01-10T12:00:00.000Z",
-        "homeTeam": "Tunisia",
-        "awayTeam": "Cape Verde",
-        "score": "2-0",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 55,
-        "passesAttempted": 651,
-        "completedPasses": 514,
-        "passCompletion": 0.79,
-        "homeScorers": [
-          {
-            "name": "Achouri",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Msakni",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2026-01-06T12:00:00.000Z",
-        "homeTeam": "Tunisia",
-        "awayTeam": "Mauritania",
-        "score": "0-0",
-        "teamPerspective": "home",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 50,
-        "passesAttempted": 622,
-        "completedPasses": 479,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2025-12-30T12:00:00.000Z",
-        "homeTeam": "Tanzania",
-        "awayTeam": "Tunisia",
-        "score": "1-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 50,
-        "passesAttempted": 638,
-        "completedPasses": 491,
-        "passCompletion": 0.77,
-        "homeScorers": [
-          {
-            "name": "Salum",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Gharbi",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2025-12-27T12:00:00.000Z",
-        "homeTeam": "Nigeria",
-        "awayTeam": "Tunisia",
-        "score": "3-2",
-        "teamPerspective": "away",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 47.5,
-        "passesAttempted": 637,
-        "completedPasses": 484,
-        "passCompletion": 0.76,
-        "homeScorers": [
-          {
-            "name": "Osimhen",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Ndidi",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Lookman",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Talbi",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Abdi",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      }
-    ]
-  },
-  {
-    "team": "Japan",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
-    "provider": "public-web",
-    "recentPointsPerGame": 2.181,
-    "xgFor": 1.554,
-    "xgAgainst": 0.976,
-    "shotsFor": 12.33,
-    "shotsAgainst": 9.84,
-    "shotsOnTargetFor": 4.37,
-    "shotsOnTargetAgainst": 3.2,
-    "possession": 51.8,
-    "passesAttempted": 637.2,
-    "completedPasses": 493.9,
-    "passCompletion": 0.775,
-    "highPressIndex": 55.8,
-    "setPieceThreat": 59.5,
-    "transitionThreat": 60.7,
-    "keeperForm": 50.6,
-    "rating": 1753,
-    "statsCompleteness": 0.92,
-    "sourceMatchCount": 20,
-    "sourceMatchTarget": 20,
-    "sourceReliability": 0.75,
-    "manager": "Hajime Moriyasu",
-    "captain": "",
-    "profileSource": "Japan public profile 1",
-    "profileSourceUrl": "https://en.wikipedia.org/wiki/Japan_national_football_team",
-    "profileConfidence": 0.72,
-    "metricSource": "score-derived-estimates",
-    "capturedMetricFields": [
-      "date",
-      "homeTeam",
-      "awayTeam",
-      "homeGoals",
-      "awayGoals"
-    ],
-    "derivedMetricFields": [
-      "xgFor",
-      "xgAgainst",
-      "shotsFor",
-      "shotsAgainst",
-      "shotsOnTargetFor",
-      "shotsOnTargetAgainst",
-      "possession",
-      "passesAttempted",
-      "completedPasses",
-      "passCompletion",
-      "formation",
-      "styleOfPlay"
-    ],
-    "tacticalProfile": {
-      "likelyFormation": "5-4-1 / 4-4-2",
-      "styleOfPlay": "compact defensive block with selective counters",
-      "styleTags": [
-        "compact",
-        "defensive",
-        "counter",
-        "set-piece threat",
-        "positive xG balance"
-      ],
-      "possessionTier": "medium",
-      "pressingTier": "medium",
-      "transitionTier": "high",
-      "source": "derived from 20-match public result sample and score-derived event estimates"
-    },
-    "passing": {
-      "attempted": 637.2,
-      "completed": 493.9,
-      "completion": 0.775,
-      "source": "score-and-possession-derived estimate"
-    },
-    "recentForm": {
-      "matchCount": 6,
-      "pointsPerGame": 2.167,
-      "goalsFor": 1,
-      "goalsAgainst": 0.5,
-      "goalDifference": 0.5,
-      "xgFor": 1.27,
-      "xgAgainst": 0.91,
-      "xgDifference": 0.36,
-      "shotsFor": 11.1,
-      "shotsAgainst": 9.55,
-      "shotsOnTargetFor": 3.78,
-      "shotsOnTargetAgainst": 3.08,
-      "possession": 51.3,
-      "passesAttempted": 633.8,
-      "completedPasses": 491.3,
-      "passCompletion": 0.775,
-      "cleanSheetRate": 0.667,
-      "failedToScoreRate": 0.167,
-      "bttsRate": 0.167,
-      "over25Rate": 0.167,
-      "scoringGameRate": 0.833,
-      "concedeGameRate": 0.333,
-      "window": 6
-    },
-    "longForm": {
-      "matchCount": 20,
-      "pointsPerGame": 2.2,
-      "goalsFor": 1.95,
-      "goalsAgainst": 0.7,
-      "goalDifference": 1.25,
-      "xgFor": 1.887,
-      "xgAgainst": 1.054,
-      "xgDifference": 0.833,
-      "shotsFor": 13.78,
-      "shotsAgainst": 10.17,
-      "shotsOnTargetFor": 5.06,
-      "shotsOnTargetAgainst": 3.35,
-      "possession": 52.6,
-      "passesAttempted": 643.3,
-      "completedPasses": 498.6,
-      "passCompletion": 0.775,
-      "cleanSheetRate": 0.6,
-      "failedToScoreRate": 0.2,
-      "bttsRate": 0.3,
-      "over25Rate": 0.45,
-      "scoringGameRate": 0.8,
-      "concedeGameRate": 0.4,
-      "window": 20
-    },
-    "formTrend": -0.0925,
-    "marketAngles": {
-      "cleanSheetRate": 0.6,
-      "failedToScoreRate": 0.2,
-      "bttsRate": 0.3,
-      "over25Rate": 0.45,
-      "scoringGameRate": 0.8,
-      "concedeGameRate": 0.4
-    },
-    "scorerSummary": [
-      {
-        "playerName": "Kamada",
-        "goals": 4,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 4,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Nakamura",
-        "goals": 3,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 3,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Germain",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Hosoya",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Machino",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Minamino",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Endo",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Inagaki",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      }
-    ],
-    "topScorers": [
-      {
-        "playerName": "Kamada",
-        "goals": 4,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 4,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Nakamura",
-        "goals": 3,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 3,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Germain",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Hosoya",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Machino",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Minamino",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Endo",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Inagaki",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      }
-    ],
-    "intelligenceCoverage": {
-      "matchWindowTarget": 20,
-      "matchWindowAvailable": 20,
-      "hasFullTwentyMatchWindow": true,
-      "managerKnown": true,
-      "profileConfidence": 0.72,
-      "eventDataMode": "score-derived-estimates",
-      "equalSchemaForAllTeams": true
-    },
-    "recentMatches": [
-      {
-        "date": "2026-06-14T12:00:00.000Z",
-        "homeTeam": "Netherlands",
-        "awayTeam": "Japan",
-        "score": "2-2",
-        "teamPerspective": "away",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 50,
-        "passesAttempted": 654,
-        "completedPasses": 504,
-        "passCompletion": 0.77,
-        "homeScorers": [
-          {
-            "name": "Dijk",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Summerville",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Nakamura",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Kamada",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2026-06-05T12:00:00.000Z",
-        "homeTeam": "Australia",
-        "awayTeam": "Japan",
-        "score": "1-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 47.5,
-        "passesAttempted": 605,
-        "completedPasses": 460,
-        "passCompletion": 0.76,
-        "homeScorers": [
-          {
-            "name": "Behich",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Australia public results 2"
-      },
-      {
-        "date": "2026-05-31T12:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "Iceland",
-        "score": "1-0",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2026-03-31T12:00:00.000Z",
-        "homeTeam": "England",
-        "awayTeam": "Japan",
-        "score": "0-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Mitoma",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2026-03-28T12:00:00.000Z",
-        "homeTeam": "Scotland",
-        "awayTeam": "Japan",
-        "score": "0-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2026-03-28T00:00:00.000Z",
-        "homeTeam": "Scotland",
-        "awayTeam": "Japan",
-        "score": "0-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Scotland public results 1"
-      },
-      {
-        "date": "2026-03-25T12:00:00.000Z",
-        "homeTeam": "Saudi Arabia",
-        "awayTeam": "Japan",
-        "score": "0-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 50,
-        "passesAttempted": 622,
-        "completedPasses": 479,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Saudi Arabia public results 1"
-      },
-      {
-        "date": "2026-03-25T12:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "South Korea",
-        "score": "3-0",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 57.5,
-        "passesAttempted": 665,
-        "completedPasses": 526,
-        "passCompletion": 0.791,
-        "homeScorers": [
-          {
-            "name": "Yamane",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Kamada",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Endo",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "South Korea public results 1"
-      },
-      {
-        "date": "2025-11-18T12:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "Bolivia",
-        "score": "3-0",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 57.5,
-        "passesAttempted": 665,
-        "completedPasses": 526,
-        "passCompletion": 0.791,
-        "homeScorers": [
-          {
-            "name": "Kamada",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Machino",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Nakamura",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2025-11-14T12:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "Ghana",
-        "score": "2-0",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 55,
-        "passesAttempted": 651,
-        "completedPasses": 514,
-        "passCompletion": 0.79,
-        "homeScorers": [
-          {
-            "name": "Minamino",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2025-10-14T12:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "Brazil",
-        "score": "3-2",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 52.5,
-        "passesAttempted": 668,
-        "completedPasses": 515,
-        "passCompletion": 0.771,
-        "homeScorers": [
-          {
-            "name": "Minamino",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Nakamura",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Ueda",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Paulo Henrique",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Martinelli",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2025-10-14T00:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "Brazil",
-        "score": "3-2",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 52.5,
-        "passesAttempted": 668,
-        "completedPasses": 515,
-        "passCompletion": 0.771,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Paulo Henrique",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Martinelli",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Brazil public results 1"
-      },
-      {
-        "date": "2025-10-10T12:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "Paraguay",
-        "score": "2-2",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 50,
-        "passesAttempted": 654,
-        "completedPasses": 504,
-        "passCompletion": 0.77,
-        "homeScorers": [
-          {
-            "name": "Ogawa",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Almirón",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "D. Gómez",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2025-10-10T00:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "Paraguay",
-        "score": "2-2",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 50,
-        "passesAttempted": 654,
-        "completedPasses": 504,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Almirón",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Gómez",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Paraguay public results 1"
-      },
-      {
-        "date": "2025-09-09T12:00:00.000Z",
-        "homeTeam": "United States",
-        "awayTeam": "Japan",
-        "score": "2-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 45,
-        "passesAttempted": 589,
-        "completedPasses": 442,
-        "passCompletion": 0.75,
-        "homeScorers": [
-          {
-            "name": "Zendejas",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Balogun",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2025-09-06T12:00:00.000Z",
-        "homeTeam": "Mexico",
-        "awayTeam": "Japan",
-        "score": "0-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 50,
-        "passesAttempted": 622,
-        "completedPasses": 479,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2025-07-15T12:00:00.000Z",
-        "homeTeam": "South Korea",
-        "awayTeam": "Japan",
-        "score": "0-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Germain",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2025-07-12T12:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "China",
-        "score": "2-0",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 55,
-        "passesAttempted": 651,
-        "completedPasses": 514,
-        "passCompletion": 0.79,
-        "homeScorers": [
-          {
-            "name": "Hosoya",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Mochizuki",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2025-07-08T12:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "Hong Kong",
-        "score": "6-1",
-        "teamPerspective": "home",
-        "shotsFor": 24,
-        "shotsOnTargetFor": 10.5,
-        "possession": 58,
-        "passesAttempted": 668,
-        "completedPasses": 512,
-        "passCompletion": 0.766,
-        "homeScorers": [
-          {
-            "name": "Germain",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Inagaki",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Orr",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2025-06-10T12:00:00.000Z",
-        "homeTeam": "Japan",
-        "awayTeam": "Indonesia",
-        "score": "6-0",
-        "teamPerspective": "home",
-        "shotsFor": 24,
-        "shotsOnTargetFor": 10.5,
-        "possession": 58,
-        "passesAttempted": 650,
-        "completedPasses": 498,
-        "passCompletion": 0.766,
-        "homeScorers": [
-          {
-            "name": "Kamada",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Kubo",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Morishita",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Machino",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Hosoya",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      }
-    ]
-  },
-  {
     "team": "Spain",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.021,
     "xgFor": 1.683,
@@ -2448,7 +864,7 @@
   },
   {
     "team": "Saudi Arabia",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.092,
     "xgFor": 1.287,
@@ -3232,7 +1648,7 @@
   },
   {
     "team": "Belgium",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.025,
     "xgFor": 2.534,
@@ -3528,7 +1944,7 @@
         ],
         "awayScorers": [],
         "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
+        "source": "Belgium public results 1"
       },
       {
         "date": "2026-06-02T12:00:00.000Z",
@@ -4170,7 +2586,7 @@
   },
   {
     "team": "Iran",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.714,
     "xgFor": 2.037,
@@ -5004,7 +3420,7 @@
   },
   {
     "team": "Uruguay",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.534,
     "xgFor": 1.464,
@@ -5781,7 +4197,7 @@
   },
   {
     "team": "Cape Verde",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.79,
     "xgFor": 1.546,
@@ -6324,7 +4740,7 @@
         ],
         "awayScorers": [],
         "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
+        "source": "Cape Verde public results 1"
       },
       {
         "date": "2025-11-15T12:00:00.000Z",
@@ -6542,7 +4958,7 @@
   },
   {
     "team": "New Zealand",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 0.798,
     "xgFor": 1.172,
@@ -7256,7 +5672,7 @@
   },
   {
     "team": "Egypt",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.37,
     "xgFor": 1.564,
@@ -8078,7 +6494,7 @@
   },
   {
     "team": "Argentina",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.832,
     "xgFor": 2.399,
@@ -8910,7 +7326,7 @@
   },
   {
     "team": "Austria",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.042,
     "xgFor": 1.878,
@@ -9270,7 +7686,7 @@
         ],
         "awayScorers": [],
         "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
+        "source": "Austria public results 1"
       },
       {
         "date": "2026-03-31T12:00:00.000Z",
@@ -9735,7 +8151,7 @@
   },
   {
     "team": "France",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.084,
     "xgFor": 2.398,
@@ -10641,7 +9057,7 @@
   },
   {
     "team": "Iraq",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.37,
     "xgFor": 1.124,
@@ -11395,7 +9811,7 @@
   },
   {
     "team": "Norway",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.681,
     "xgFor": 1.876,
@@ -12272,7 +10688,7 @@
   },
   {
     "team": "Senegal",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.689,
     "xgFor": 1.434,
@@ -13026,7 +11442,7 @@
   },
   {
     "team": "Jordan",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.147,
     "xgFor": 1.568,
@@ -13897,7 +12313,7 @@
   },
   {
     "team": "Algeria",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.664,
     "xgFor": 1.946,
@@ -14179,7 +12595,7 @@
           }
         ],
         "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
+        "source": "Algeria public results 1"
       },
       {
         "date": "2026-06-16T00:00:00.000Z",
@@ -14711,7 +13127,7 @@
   },
   {
     "team": "Portugal",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.958,
     "xgFor": 1.649,
@@ -15527,7 +13943,7 @@
   },
   {
     "team": "Uzbekistan",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.273,
     "xgFor": 1.63,
@@ -16327,7 +14743,7 @@
   },
   {
     "team": "England",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.298,
     "xgFor": 2.091,
@@ -17030,7 +15446,7 @@
           }
         ],
         "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
+        "source": "England public results 1"
       },
       {
         "date": "2026-03-29T12:00:00.000Z",
@@ -17122,7 +15538,7 @@
   },
   {
     "team": "Ghana",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.172,
     "xgFor": 1.384,
@@ -17862,7 +16278,7 @@
         ],
         "awayScorers": [],
         "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
+        "source": "Ghana public results 1"
       },
       {
         "date": "2025-10-15T12:00:00.000Z",
@@ -17942,7 +16358,7 @@
   },
   {
     "team": "Panama",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.769,
     "xgFor": 1.743,
@@ -18838,7 +17254,7 @@
   },
   {
     "team": "Croatia",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.025,
     "xgFor": 1.488,
@@ -19570,7 +17986,7 @@
   },
   {
     "team": "Colombia",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.622,
     "xgFor": 2.48,
@@ -20432,7 +18848,7 @@
   },
   {
     "team": "DR Congo",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.798,
     "xgFor": 1.384,
@@ -20785,29 +19201,6 @@
       },
       {
         "date": "2026-06-05T12:00:00.000Z",
-        "homeTeam": "Tunisia",
-        "awayTeam": "DR Congo",
-        "score": "1-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 47.5,
-        "passesAttempted": 605,
-        "completedPasses": 460,
-        "passCompletion": 0.76,
-        "homeScorers": [
-          {
-            "name": "Sliti",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2026-06-05T12:00:00.000Z",
         "homeTeam": "DR Congo",
         "awayTeam": "Mali",
         "score": "1-0",
@@ -20828,6 +19221,29 @@
         "awayScorers": [],
         "metricSource": "score-derived-estimates",
         "source": "DR Congo public results 1"
+      },
+      {
+        "date": "2026-06-05T12:00:00.000Z",
+        "homeTeam": "Tunisia",
+        "awayTeam": "DR Congo",
+        "score": "1-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 47.5,
+        "passesAttempted": 605,
+        "completedPasses": 460,
+        "passCompletion": 0.76,
+        "homeScorers": [
+          {
+            "name": "Sliti",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Tunisia public results 1"
       },
       {
         "date": "2026-03-25T12:00:00.000Z",
@@ -21186,7 +19602,7 @@
   },
   {
     "team": "Switzerland",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.882,
     "xgFor": 2.219,
@@ -22073,7 +20489,7 @@
   },
   {
     "team": "Canada",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.466,
     "xgFor": 1.62,
@@ -22568,10 +20984,37 @@
         "passesAttempted": 622,
         "completedPasses": 479,
         "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [],
+        "homeScorers": [
+          {
+            "name": "Oluwaseyi",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Waterman",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Millar",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Saad",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Ayari",
+            "goals": 1,
+            "assists": []
+          }
+        ],
         "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
+        "source": "Canada public results 1"
       },
       {
         "date": "2026-03-28T12:00:00.000Z",
@@ -23098,7 +21541,7 @@
   },
   {
     "team": "Bosnia and Herzegovina",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 0.912,
     "xgFor": 1.241,
@@ -23724,7 +22167,7 @@
   },
   {
     "team": "Qatar",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.634,
     "xgFor": 1.356,
@@ -24589,7 +23032,7 @@
   },
   {
     "team": "Scotland",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.013,
     "xgFor": 1.631,
@@ -25077,23 +23520,6 @@
       {
         "date": "2026-03-28T12:00:00.000Z",
         "homeTeam": "Scotland",
-        "awayTeam": "Japan",
-        "score": "0-1",
-        "teamPerspective": "home",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 47.5,
-        "passesAttempted": 605,
-        "completedPasses": 460,
-        "passCompletion": 0.76,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Japan public results 1"
-      },
-      {
-        "date": "2026-03-28T12:00:00.000Z",
-        "homeTeam": "Scotland",
         "awayTeam": "Spain",
         "score": "2-0",
         "teamPerspective": "home",
@@ -25113,6 +23539,23 @@
         "awayScorers": [],
         "metricSource": "score-derived-estimates",
         "source": "Spain public results 1"
+      },
+      {
+        "date": "2026-03-28T12:00:00.000Z",
+        "homeTeam": "Scotland",
+        "awayTeam": "Japan",
+        "score": "0-1",
+        "teamPerspective": "home",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 47.5,
+        "passesAttempted": 605,
+        "completedPasses": 460,
+        "passCompletion": 0.76,
+        "homeScorers": [],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
       },
       {
         "date": "2026-03-28T00:00:00.000Z",
@@ -25353,7 +23796,7 @@
   },
   {
     "team": "Brazil",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.937,
     "xgFor": 1.995,
@@ -26253,7 +24696,7 @@
   },
   {
     "team": "Morocco",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.87,
     "xgFor": 1.437,
@@ -27045,7 +25488,7 @@
   },
   {
     "team": "Haiti",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 0.689,
     "xgFor": 1.32,
@@ -27629,7 +26072,7 @@
   },
   {
     "team": "Czechia",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.765,
     "xgFor": 1.762,
@@ -28393,7 +26836,7 @@
   },
   {
     "team": "Mexico",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.101,
     "xgFor": 1.677,
@@ -29207,7 +27650,7 @@
   },
   {
     "team": "South Africa",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.626,
     "xgFor": 1.484,
@@ -30035,7 +28478,7 @@
   },
   {
     "team": "South Korea",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.66,
     "xgFor": 1.649,
@@ -30894,7 +29337,7 @@
   },
   {
     "team": "Curaçao",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.874,
     "xgFor": 2.347,
@@ -31721,7 +30164,7 @@
   },
   {
     "team": "Ivory Coast",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.592,
     "xgFor": 1.241,
@@ -32521,7 +30964,7 @@
   },
   {
     "team": "Ecuador",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.458,
     "xgFor": 1.285,
@@ -33272,7 +31715,7 @@
   },
   {
     "team": "Germany",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.534,
     "xgFor": 2.373,
@@ -34179,8 +32622,822 @@
     ]
   },
   {
+    "team": "Japan",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
+    "provider": "public-web",
+    "recentPointsPerGame": 2.181,
+    "xgFor": 1.554,
+    "xgAgainst": 0.976,
+    "shotsFor": 12.33,
+    "shotsAgainst": 9.84,
+    "shotsOnTargetFor": 4.37,
+    "shotsOnTargetAgainst": 3.2,
+    "possession": 51.8,
+    "passesAttempted": 637.2,
+    "completedPasses": 493.9,
+    "passCompletion": 0.775,
+    "highPressIndex": 55.8,
+    "setPieceThreat": 59.5,
+    "transitionThreat": 60.7,
+    "keeperForm": 50.6,
+    "rating": 1753,
+    "statsCompleteness": 0.92,
+    "sourceMatchCount": 20,
+    "sourceMatchTarget": 20,
+    "sourceReliability": 0.75,
+    "manager": "Hajime Moriyasu",
+    "captain": "",
+    "profileSource": "Japan public profile 1",
+    "profileSourceUrl": "https://en.wikipedia.org/wiki/Japan_national_football_team",
+    "profileConfidence": 0.72,
+    "metricSource": "score-derived-estimates",
+    "capturedMetricFields": [
+      "date",
+      "homeTeam",
+      "awayTeam",
+      "homeGoals",
+      "awayGoals"
+    ],
+    "derivedMetricFields": [
+      "xgFor",
+      "xgAgainst",
+      "shotsFor",
+      "shotsAgainst",
+      "shotsOnTargetFor",
+      "shotsOnTargetAgainst",
+      "possession",
+      "passesAttempted",
+      "completedPasses",
+      "passCompletion",
+      "formation",
+      "styleOfPlay"
+    ],
+    "tacticalProfile": {
+      "likelyFormation": "5-4-1 / 4-4-2",
+      "styleOfPlay": "compact defensive block with selective counters",
+      "styleTags": [
+        "compact",
+        "defensive",
+        "counter",
+        "set-piece threat",
+        "positive xG balance"
+      ],
+      "possessionTier": "medium",
+      "pressingTier": "medium",
+      "transitionTier": "high",
+      "source": "derived from 20-match public result sample and score-derived event estimates"
+    },
+    "passing": {
+      "attempted": 637.2,
+      "completed": 493.9,
+      "completion": 0.775,
+      "source": "score-and-possession-derived estimate"
+    },
+    "recentForm": {
+      "matchCount": 6,
+      "pointsPerGame": 2.167,
+      "goalsFor": 1,
+      "goalsAgainst": 0.5,
+      "goalDifference": 0.5,
+      "xgFor": 1.27,
+      "xgAgainst": 0.91,
+      "xgDifference": 0.36,
+      "shotsFor": 11.1,
+      "shotsAgainst": 9.55,
+      "shotsOnTargetFor": 3.78,
+      "shotsOnTargetAgainst": 3.08,
+      "possession": 51.3,
+      "passesAttempted": 633.8,
+      "completedPasses": 491.3,
+      "passCompletion": 0.775,
+      "cleanSheetRate": 0.667,
+      "failedToScoreRate": 0.167,
+      "bttsRate": 0.167,
+      "over25Rate": 0.167,
+      "scoringGameRate": 0.833,
+      "concedeGameRate": 0.333,
+      "window": 6
+    },
+    "longForm": {
+      "matchCount": 20,
+      "pointsPerGame": 2.2,
+      "goalsFor": 1.95,
+      "goalsAgainst": 0.7,
+      "goalDifference": 1.25,
+      "xgFor": 1.887,
+      "xgAgainst": 1.054,
+      "xgDifference": 0.833,
+      "shotsFor": 13.78,
+      "shotsAgainst": 10.17,
+      "shotsOnTargetFor": 5.06,
+      "shotsOnTargetAgainst": 3.35,
+      "possession": 52.6,
+      "passesAttempted": 643.3,
+      "completedPasses": 498.6,
+      "passCompletion": 0.775,
+      "cleanSheetRate": 0.6,
+      "failedToScoreRate": 0.2,
+      "bttsRate": 0.3,
+      "over25Rate": 0.45,
+      "scoringGameRate": 0.8,
+      "concedeGameRate": 0.4,
+      "window": 20
+    },
+    "formTrend": -0.0925,
+    "marketAngles": {
+      "cleanSheetRate": 0.6,
+      "failedToScoreRate": 0.2,
+      "bttsRate": 0.3,
+      "over25Rate": 0.45,
+      "scoringGameRate": 0.8,
+      "concedeGameRate": 0.4
+    },
+    "scorerSummary": [
+      {
+        "playerName": "Kamada",
+        "goals": 4,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 4,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Nakamura",
+        "goals": 3,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 3,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Germain",
+        "goals": 2,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 2,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Hosoya",
+        "goals": 2,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 2,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Machino",
+        "goals": 2,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 2,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Minamino",
+        "goals": 2,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 2,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Endo",
+        "goals": 1,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 1,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Inagaki",
+        "goals": 1,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 1,
+        "assistsPerTwentyTeamMatches": 0
+      }
+    ],
+    "topScorers": [
+      {
+        "playerName": "Kamada",
+        "goals": 4,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 4,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Nakamura",
+        "goals": 3,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 3,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Germain",
+        "goals": 2,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 2,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Hosoya",
+        "goals": 2,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 2,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Machino",
+        "goals": 2,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 2,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Minamino",
+        "goals": 2,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 2,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Endo",
+        "goals": 1,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 1,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Inagaki",
+        "goals": 1,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 1,
+        "assistsPerTwentyTeamMatches": 0
+      }
+    ],
+    "intelligenceCoverage": {
+      "matchWindowTarget": 20,
+      "matchWindowAvailable": 20,
+      "hasFullTwentyMatchWindow": true,
+      "managerKnown": true,
+      "profileConfidence": 0.72,
+      "eventDataMode": "score-derived-estimates",
+      "equalSchemaForAllTeams": true
+    },
+    "recentMatches": [
+      {
+        "date": "2026-06-14T12:00:00.000Z",
+        "homeTeam": "Netherlands",
+        "awayTeam": "Japan",
+        "score": "2-2",
+        "teamPerspective": "away",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 50,
+        "passesAttempted": 654,
+        "completedPasses": 504,
+        "passCompletion": 0.77,
+        "homeScorers": [
+          {
+            "name": "Dijk",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Summerville",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Nakamura",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Kamada",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
+      },
+      {
+        "date": "2026-06-05T12:00:00.000Z",
+        "homeTeam": "Australia",
+        "awayTeam": "Japan",
+        "score": "1-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 47.5,
+        "passesAttempted": 605,
+        "completedPasses": 460,
+        "passCompletion": 0.76,
+        "homeScorers": [
+          {
+            "name": "Behich",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Australia public results 2"
+      },
+      {
+        "date": "2026-05-31T12:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "Iceland",
+        "score": "1-0",
+        "teamPerspective": "home",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
+      },
+      {
+        "date": "2026-03-31T12:00:00.000Z",
+        "homeTeam": "England",
+        "awayTeam": "Japan",
+        "score": "0-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Mitoma",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "England public results 1"
+      },
+      {
+        "date": "2026-03-28T12:00:00.000Z",
+        "homeTeam": "Scotland",
+        "awayTeam": "Japan",
+        "score": "0-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
+      },
+      {
+        "date": "2026-03-28T00:00:00.000Z",
+        "homeTeam": "Scotland",
+        "awayTeam": "Japan",
+        "score": "0-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Scotland public results 1"
+      },
+      {
+        "date": "2026-03-25T12:00:00.000Z",
+        "homeTeam": "Saudi Arabia",
+        "awayTeam": "Japan",
+        "score": "0-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 50,
+        "passesAttempted": 622,
+        "completedPasses": 479,
+        "passCompletion": 0.77,
+        "homeScorers": [],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Saudi Arabia public results 1"
+      },
+      {
+        "date": "2026-03-25T12:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "South Korea",
+        "score": "3-0",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 57.5,
+        "passesAttempted": 665,
+        "completedPasses": 526,
+        "passCompletion": 0.791,
+        "homeScorers": [
+          {
+            "name": "Yamane",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Kamada",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Endo",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "South Korea public results 1"
+      },
+      {
+        "date": "2025-11-18T12:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "Bolivia",
+        "score": "3-0",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 57.5,
+        "passesAttempted": 665,
+        "completedPasses": 526,
+        "passCompletion": 0.791,
+        "homeScorers": [
+          {
+            "name": "Kamada",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Machino",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Nakamura",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
+      },
+      {
+        "date": "2025-11-14T12:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "Ghana",
+        "score": "2-0",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 55,
+        "passesAttempted": 651,
+        "completedPasses": 514,
+        "passCompletion": 0.79,
+        "homeScorers": [
+          {
+            "name": "Minamino",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Ghana public results 1"
+      },
+      {
+        "date": "2025-10-14T12:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "Brazil",
+        "score": "3-2",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 52.5,
+        "passesAttempted": 668,
+        "completedPasses": 515,
+        "passCompletion": 0.771,
+        "homeScorers": [
+          {
+            "name": "Minamino",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Nakamura",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Ueda",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Paulo Henrique",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Martinelli",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
+      },
+      {
+        "date": "2025-10-14T00:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "Brazil",
+        "score": "3-2",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 52.5,
+        "passesAttempted": 668,
+        "completedPasses": 515,
+        "passCompletion": 0.771,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Paulo Henrique",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Martinelli",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Brazil public results 1"
+      },
+      {
+        "date": "2025-10-10T12:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "Paraguay",
+        "score": "2-2",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 50,
+        "passesAttempted": 654,
+        "completedPasses": 504,
+        "passCompletion": 0.77,
+        "homeScorers": [
+          {
+            "name": "Ogawa",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Almirón",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "D. Gómez",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
+      },
+      {
+        "date": "2025-10-10T00:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "Paraguay",
+        "score": "2-2",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 50,
+        "passesAttempted": 654,
+        "completedPasses": 504,
+        "passCompletion": 0.77,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Almirón",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Gómez",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Paraguay public results 1"
+      },
+      {
+        "date": "2025-09-09T12:00:00.000Z",
+        "homeTeam": "United States",
+        "awayTeam": "Japan",
+        "score": "2-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 45,
+        "passesAttempted": 589,
+        "completedPasses": 442,
+        "passCompletion": 0.75,
+        "homeScorers": [
+          {
+            "name": "Zendejas",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Balogun",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
+      },
+      {
+        "date": "2025-09-06T12:00:00.000Z",
+        "homeTeam": "Mexico",
+        "awayTeam": "Japan",
+        "score": "0-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 50,
+        "passesAttempted": 622,
+        "completedPasses": 479,
+        "passCompletion": 0.77,
+        "homeScorers": [
+          {
+            "name": "Montes",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Mexico public results 1"
+      },
+      {
+        "date": "2025-07-15T12:00:00.000Z",
+        "homeTeam": "South Korea",
+        "awayTeam": "Japan",
+        "score": "0-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Germain",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
+      },
+      {
+        "date": "2025-07-12T12:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "China",
+        "score": "2-0",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 55,
+        "passesAttempted": 651,
+        "completedPasses": 514,
+        "passCompletion": 0.79,
+        "homeScorers": [
+          {
+            "name": "Hosoya",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Mochizuki",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
+      },
+      {
+        "date": "2025-07-08T12:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "Hong Kong",
+        "score": "6-1",
+        "teamPerspective": "home",
+        "shotsFor": 24,
+        "shotsOnTargetFor": 10.5,
+        "possession": 58,
+        "passesAttempted": 668,
+        "completedPasses": 512,
+        "passCompletion": 0.766,
+        "homeScorers": [
+          {
+            "name": "Germain",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Inagaki",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Orr",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
+      },
+      {
+        "date": "2025-06-10T12:00:00.000Z",
+        "homeTeam": "Japan",
+        "awayTeam": "Indonesia",
+        "score": "6-0",
+        "teamPerspective": "home",
+        "shotsFor": 24,
+        "shotsOnTargetFor": 10.5,
+        "possession": 58,
+        "passesAttempted": 650,
+        "completedPasses": 498,
+        "passCompletion": 0.766,
+        "homeScorers": [
+          {
+            "name": "Kamada",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Kubo",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Morishita",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Machino",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Hosoya",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Japan public results 1"
+      }
+    ]
+  },
+  {
     "team": "Sweden",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.424,
     "xgFor": 2.073,
@@ -34474,6 +33731,29 @@
       },
       {
         "date": "2026-06-14T12:00:00.000Z",
+        "homeTeam": "Spain",
+        "awayTeam": "Sweden",
+        "score": "0-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 50,
+        "passesAttempted": 622,
+        "completedPasses": 479,
+        "passCompletion": 0.77,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Lustig",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Spain public results 1"
+      },
+      {
+        "date": "2026-06-14T12:00:00.000Z",
         "homeTeam": "Sweden",
         "awayTeam": "Tunisia",
         "score": "5-1",
@@ -34501,7 +33781,7 @@
             "assists": []
           },
           {
-            "name": "Svanber",
+            "name": "Svanberg",
             "goals": 1,
             "assists": []
           }
@@ -34514,30 +33794,7 @@
           }
         ],
         "metricSource": "score-derived-estimates",
-        "source": "Tunisia public results 1"
-      },
-      {
-        "date": "2026-06-14T12:00:00.000Z",
-        "homeTeam": "Spain",
-        "awayTeam": "Sweden",
-        "score": "0-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 50,
-        "passesAttempted": 622,
-        "completedPasses": 479,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Lustig",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Spain public results 1"
+        "source": "Sweden public results 1"
       },
       {
         "date": "2026-06-10T12:00:00.000Z",
@@ -35092,8 +34349,811 @@
     ]
   },
   {
+    "team": "Tunisia",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
+    "provider": "public-web",
+    "recentPointsPerGame": 1.155,
+    "xgFor": 1.026,
+    "xgAgainst": 1.724,
+    "shotsFor": 10.05,
+    "shotsAgainst": 13.05,
+    "shotsOnTargetFor": 3.32,
+    "shotsOnTargetAgainst": 4.62,
+    "possession": 48,
+    "passesAttempted": 612.9,
+    "completedPasses": 467.5,
+    "passCompletion": 0.763,
+    "highPressIndex": 43,
+    "setPieceThreat": 53.2,
+    "transitionThreat": 43.6,
+    "keeperForm": 47.5,
+    "rating": 1639.5,
+    "statsCompleteness": 0.92,
+    "sourceMatchCount": 20,
+    "sourceMatchTarget": 20,
+    "sourceReliability": 0.75,
+    "manager": "Hervé Renard",
+    "captain": "",
+    "profileSource": "Tunisia public profile 1",
+    "profileSourceUrl": "https://en.wikipedia.org/wiki/Tunisia_national_football_team",
+    "profileConfidence": 0.72,
+    "metricSource": "score-derived-estimates",
+    "capturedMetricFields": [
+      "date",
+      "homeTeam",
+      "awayTeam",
+      "homeGoals",
+      "awayGoals"
+    ],
+    "derivedMetricFields": [
+      "xgFor",
+      "xgAgainst",
+      "shotsFor",
+      "shotsAgainst",
+      "shotsOnTargetFor",
+      "shotsOnTargetAgainst",
+      "possession",
+      "passesAttempted",
+      "completedPasses",
+      "passCompletion",
+      "formation",
+      "styleOfPlay"
+    ],
+    "tacticalProfile": {
+      "likelyFormation": "4-2-3-1 / 4-3-3",
+      "styleOfPlay": "balanced mid-block with mixed build-up",
+      "styleTags": [
+        "balanced",
+        "mixed build-up"
+      ],
+      "possessionTier": "medium",
+      "pressingTier": "low",
+      "transitionTier": "low",
+      "source": "derived from 20-match public result sample and score-derived event estimates"
+    },
+    "passing": {
+      "attempted": 612.9,
+      "completed": 467.5,
+      "completion": 0.763,
+      "source": "score-and-possession-derived estimate"
+    },
+    "recentForm": {
+      "matchCount": 6,
+      "pointsPerGame": 0.833,
+      "goalsFor": 0.5,
+      "goalsAgainst": 2.167,
+      "goalDifference": -1.667,
+      "xgFor": 0.91,
+      "xgAgainst": 2.11,
+      "xgDifference": -1.2,
+      "shotsFor": 9.55,
+      "shotsAgainst": 14.72,
+      "shotsOnTargetFor": 3.1,
+      "shotsOnTargetAgainst": 5.35,
+      "possession": 46.9,
+      "passesAttempted": 606.5,
+      "completedPasses": 460,
+      "passCompletion": 0.758,
+      "cleanSheetRate": 0.333,
+      "failedToScoreRate": 0.5,
+      "bttsRate": 0.333,
+      "over25Rate": 0.333,
+      "scoringGameRate": 0.5,
+      "concedeGameRate": 0.667,
+      "window": 6
+    },
+    "longForm": {
+      "matchCount": 20,
+      "pointsPerGame": 1.6,
+      "goalsFor": 0.85,
+      "goalsAgainst": 1,
+      "goalDifference": -0.15,
+      "xgFor": 1.162,
+      "xgAgainst": 1.27,
+      "xgDifference": -0.108,
+      "shotsFor": 10.63,
+      "shotsAgainst": 11.1,
+      "shotsOnTargetFor": 3.57,
+      "shotsOnTargetAgainst": 3.76,
+      "possession": 50,
+      "passesAttempted": 624.3,
+      "completedPasses": 480.9,
+      "passCompletion": 0.77,
+      "cleanSheetRate": 0.6,
+      "failedToScoreRate": 0.35,
+      "bttsRate": 0.2,
+      "over25Rate": 0.15,
+      "scoringGameRate": 0.65,
+      "concedeGameRate": 0.4,
+      "window": 20
+    },
+    "formTrend": -0.55,
+    "marketAngles": {
+      "cleanSheetRate": 0.6,
+      "failedToScoreRate": 0.35,
+      "bttsRate": 0.2,
+      "over25Rate": 0.15,
+      "scoringGameRate": 0.65,
+      "concedeGameRate": 0.4
+    },
+    "scorerSummary": [
+      {
+        "playerName": "Talbi",
+        "goals": 2,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 2,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Abdi",
+        "goals": 1,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 1,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Achouri",
+        "goals": 1,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 1,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Ayari",
+        "goals": 1,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 1,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Ben Romdhane",
+        "goals": 1,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 1,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Ben Slimane",
+        "goals": 1,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 1,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Gharbi",
+        "goals": 1,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 1,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Jaziri",
+        "goals": 1,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 1,
+        "assistsPerTwentyTeamMatches": 0
+      }
+    ],
+    "topScorers": [
+      {
+        "playerName": "Talbi",
+        "goals": 2,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 2,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Abdi",
+        "goals": 1,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 1,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Achouri",
+        "goals": 1,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 1,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Ayari",
+        "goals": 1,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 1,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Ben Romdhane",
+        "goals": 1,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 1,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Ben Slimane",
+        "goals": 1,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 1,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Gharbi",
+        "goals": 1,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 1,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Jaziri",
+        "goals": 1,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 1,
+        "assistsPerTwentyTeamMatches": 0
+      }
+    ],
+    "intelligenceCoverage": {
+      "matchWindowTarget": 20,
+      "matchWindowAvailable": 20,
+      "hasFullTwentyMatchWindow": true,
+      "managerKnown": true,
+      "profileConfidence": 0.72,
+      "eventDataMode": "score-derived-estimates",
+      "equalSchemaForAllTeams": true
+    },
+    "recentMatches": [
+      {
+        "date": "2026-06-20T12:00:00.000Z",
+        "homeTeam": "Algeria",
+        "awayTeam": "Tunisia",
+        "score": "1-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 50,
+        "passesAttempted": 638,
+        "completedPasses": 491,
+        "passCompletion": 0.77,
+        "homeScorers": [
+          {
+            "name": "Mahrez",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Talbi",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Algeria public results 1"
+      },
+      {
+        "date": "2026-06-15T12:00:00.000Z",
+        "homeTeam": "Tunisia",
+        "awayTeam": "Mali",
+        "score": "1-0",
+        "teamPerspective": "home",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Ben Slimane",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Tunisia public results 1"
+      },
+      {
+        "date": "2026-06-14T12:00:00.000Z",
+        "homeTeam": "Sweden",
+        "awayTeam": "Tunisia",
+        "score": "5-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 42,
+        "passesAttempted": 585,
+        "completedPasses": 432,
+        "passCompletion": 0.738,
+        "homeScorers": [
+          {
+            "name": "Ayari",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Isak",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Gyökeres",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Svanberg",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Rekik",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Sweden public results 1"
+      },
+      {
+        "date": "2026-06-11T12:00:00.000Z",
+        "homeTeam": "Tunisia",
+        "awayTeam": "Algeria",
+        "score": "0-2",
+        "teamPerspective": "home",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 45,
+        "passesAttempted": 589,
+        "completedPasses": 442,
+        "passCompletion": 0.75,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Bounedjah",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Mahrez",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Tunisia public results 1"
+      },
+      {
+        "date": "2026-06-09T12:00:00.000Z",
+        "homeTeam": "Namibia",
+        "awayTeam": "Tunisia",
+        "score": "0-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 50,
+        "passesAttempted": 622,
+        "completedPasses": 479,
+        "passCompletion": 0.77,
+        "homeScorers": [],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Tunisia public results 1"
+      },
+      {
+        "date": "2026-06-06T12:00:00.000Z",
+        "homeTeam": "Belgium",
+        "awayTeam": "Tunisia",
+        "score": "5-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 42,
+        "passesAttempted": 569,
+        "completedPasses": 420,
+        "passCompletion": 0.738,
+        "homeScorers": [
+          {
+            "name": "Trossard",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "De Ketelaere",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "De Bruyne",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Lukébakio",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Raskin",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Belgium public results 1"
+      },
+      {
+        "date": "2026-06-06T12:00:00.000Z",
+        "homeTeam": "Morocco",
+        "awayTeam": "Tunisia",
+        "score": "2-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 45,
+        "passesAttempted": 589,
+        "completedPasses": 442,
+        "passCompletion": 0.75,
+        "homeScorers": [
+          {
+            "name": "Hakimi",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Tunisia public results 1"
+      },
+      {
+        "date": "2026-06-05T12:00:00.000Z",
+        "homeTeam": "Tunisia",
+        "awayTeam": "DR Congo",
+        "score": "1-0",
+        "teamPerspective": "home",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Sliti",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Tunisia public results 1"
+      },
+      {
+        "date": "2026-06-05T12:00:00.000Z",
+        "homeTeam": "Tunisia",
+        "awayTeam": "Equatorial Guinea",
+        "score": "1-0",
+        "teamPerspective": "home",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Ben Romdhane",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Tunisia public results 1"
+      },
+      {
+        "date": "2026-06-02T12:00:00.000Z",
+        "homeTeam": "Tunisia",
+        "awayTeam": "Burkina Faso",
+        "score": "2-0",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 55,
+        "passesAttempted": 651,
+        "completedPasses": 514,
+        "passCompletion": 0.79,
+        "homeScorers": [
+          {
+            "name": "Tapsoba",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Tunisia public results 1"
+      },
+      {
+        "date": "2026-06-01T12:00:00.000Z",
+        "homeTeam": "Austria",
+        "awayTeam": "Tunisia",
+        "score": "1-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 47.5,
+        "passesAttempted": 605,
+        "completedPasses": 460,
+        "passCompletion": 0.76,
+        "homeScorers": [
+          {
+            "name": "Sabitzer",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Austria public results 1"
+      },
+      {
+        "date": "2026-03-31T12:00:00.000Z",
+        "homeTeam": "Canada",
+        "awayTeam": "Tunisia",
+        "score": "0-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 50,
+        "passesAttempted": 622,
+        "completedPasses": 479,
+        "passCompletion": 0.77,
+        "homeScorers": [
+          {
+            "name": "Oluwaseyi",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Waterman",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Millar",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Saad",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Ayari",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Canada public results 1"
+      },
+      {
+        "date": "2026-03-28T12:00:00.000Z",
+        "homeTeam": "Haiti",
+        "awayTeam": "Tunisia",
+        "score": "0-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Tounekti",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Tunisia public results 1"
+      },
+      {
+        "date": "2026-03-28T00:00:00.000Z",
+        "homeTeam": "Haiti",
+        "awayTeam": "Tunisia",
+        "score": "0-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Haiti National Football Teams 1"
+      },
+      {
+        "date": "2026-03-24T12:00:00.000Z",
+        "homeTeam": "Tunisia",
+        "awayTeam": "Malawi",
+        "score": "2-0",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 55,
+        "passesAttempted": 651,
+        "completedPasses": 514,
+        "passCompletion": 0.79,
+        "homeScorers": [
+          {
+            "name": "Jaziri",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Tunisia public results 1"
+      },
+      {
+        "date": "2026-03-19T12:00:00.000Z",
+        "homeTeam": "Liberia",
+        "awayTeam": "Tunisia",
+        "score": "0-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Mastouri",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Tunisia public results 1"
+      },
+      {
+        "date": "2026-01-10T12:00:00.000Z",
+        "homeTeam": "Tunisia",
+        "awayTeam": "Cape Verde",
+        "score": "2-0",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 55,
+        "passesAttempted": 651,
+        "completedPasses": 514,
+        "passCompletion": 0.79,
+        "homeScorers": [
+          {
+            "name": "Achouri",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Msakni",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Cape Verde public results 1"
+      },
+      {
+        "date": "2026-01-06T12:00:00.000Z",
+        "homeTeam": "Tunisia",
+        "awayTeam": "Mauritania",
+        "score": "0-0",
+        "teamPerspective": "home",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 50,
+        "passesAttempted": 622,
+        "completedPasses": 479,
+        "passCompletion": 0.77,
+        "homeScorers": [],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Tunisia public results 1"
+      },
+      {
+        "date": "2025-12-30T12:00:00.000Z",
+        "homeTeam": "Tanzania",
+        "awayTeam": "Tunisia",
+        "score": "1-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 50,
+        "passesAttempted": 638,
+        "completedPasses": 491,
+        "passCompletion": 0.77,
+        "homeScorers": [
+          {
+            "name": "Salum",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Gharbi",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Tunisia public results 1"
+      },
+      {
+        "date": "2025-12-27T12:00:00.000Z",
+        "homeTeam": "Nigeria",
+        "awayTeam": "Tunisia",
+        "score": "3-2",
+        "teamPerspective": "away",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 47.5,
+        "passesAttempted": 637,
+        "completedPasses": 484,
+        "passCompletion": 0.76,
+        "homeScorers": [
+          {
+            "name": "Osimhen",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Ndidi",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Lookman",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Talbi",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Abdi",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Tunisia public results 1"
+      }
+    ]
+  },
+  {
     "team": "Netherlands",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.471,
     "xgFor": 2.529,
@@ -36011,7 +36071,7 @@
   },
   {
     "team": "Turkiye",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.076,
     "xgFor": 1.649,
@@ -36802,7 +36862,7 @@
   },
   {
     "team": "USA",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.303,
     "xgFor": 2.12,
@@ -37714,7 +37774,7 @@
   },
   {
     "team": "Paraguay",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.971,
     "xgFor": 1.889,
@@ -38510,7 +38570,7 @@
   },
   {
     "team": "Australia",
-    "updatedAt": "2026-06-21T01:41:49.456Z",
+    "updatedAt": "2026-06-21T09:04:29.555Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.87,
     "xgFor": 1.86,
