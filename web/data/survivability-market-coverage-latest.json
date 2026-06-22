@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-06-22T01:43:02.001Z",
+  "createdAt": "2026-06-22T10:48:46.886Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -49,8 +49,8 @@
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 7,
-    "freshRecordCount": 7,
+    "totalRecords": 11,
+    "freshRecordCount": 11,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -71,21 +71,21 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 11 more fresh records",
-        "needs 3 more covered fixtures",
-        "needs 6 more fixtures for coverage",
+        "needs 7 more fresh records",
+        "needs 1 more covered fixtures",
+        "needs 4 more fixtures for coverage",
         "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 7,
-      "freshRecordCount": 7,
-      "fixtureCount": 2,
+      "recordCount": 11,
+      "freshRecordCount": 11,
+      "fixtureCount": 4,
       "totalFixtureCount": 32,
-      "fixtureCoverage": 0.063,
-      "bookmakerCount": 2,
+      "fixtureCoverage": 0.125,
+      "bookmakerCount": 4,
       "averageBookmakersPerFixture": 1,
-      "lineCount": 2,
-      "outcomeCount": 2,
-      "latestCapturedAt": "2026-06-22T01:43:02.001Z",
+      "lineCount": 4,
+      "outcomeCount": 4,
+      "latestCapturedAt": "2026-06-22T10:48:46.886Z",
       "sampleOutcomes": [
         {
           "fixtureId": "fixture_f3ee58df",
@@ -95,7 +95,7 @@
           "line": "-2.5",
           "team": "France",
           "decimalOdds": 1.85,
-          "capturedAt": "2026-06-22T01:43:02.001Z"
+          "capturedAt": "2026-06-22T10:48:46.886Z"
         },
         {
           "fixtureId": "fixture_3b9df951",
@@ -105,7 +105,27 @@
           "line": "-2",
           "team": "Portugal",
           "decimalOdds": 1.98,
-          "capturedAt": "2026-06-22T01:43:02.001Z"
+          "capturedAt": "2026-06-22T10:48:46.886Z"
+        },
+        {
+          "fixtureId": "fixture_3e2a3dc7",
+          "fixture": "England v Ghana",
+          "bookmaker": "SportsGambler public prop pages: England v Ghana",
+          "outcome": "Ghana +1.75",
+          "line": "+1.75",
+          "team": "Ghana",
+          "decimalOdds": 2,
+          "capturedAt": "2026-06-22T10:48:46.886Z"
+        },
+        {
+          "fixtureId": "fixture_c68ca6e3",
+          "fixture": "Panama v Croatia",
+          "bookmaker": "SportsGambler public prop pages: Panama v Croatia",
+          "outcome": "Panama +1",
+          "line": "+1",
+          "team": "Panama",
+          "decimalOdds": 1.94,
+          "capturedAt": "2026-06-22T10:48:46.886Z"
         }
       ]
     },
