@@ -13,8 +13,10 @@ import { buildSurvivabilityMarketCoverage } from "../src/survivability-market-co
 const rootDir = dirname(dirname(fileURLToPath(import.meta.url)));
 const outputDir = join(rootDir, "web", "data");
 const now = new Date();
+const tournamentEndDate = "2026-07-19";
+const tournamentDaysAhead = daysAheadUntil(tournamentEndDate, now);
 const riskBuckets = Array.from({ length: 21 }, (_, index) => index * 5);
-const dayBuckets = Array.from({ length: 15 }, (_, index) => index);
+const dayBuckets = Array.from({ length: Math.max(15, tournamentDaysAhead + 1) }, (_, index) => index);
 const automaticRunMinutesUtc = [5, 8, 11, 14, 17, 20, 21, 23].map((hour) => (hour * 60) + 23);
 const maxDaysAhead = Math.max(...dayBuckets);
 
@@ -22,7 +24,7 @@ await mkdir(outputDir, { recursive: true });
 
 // One collection pass. The web app then publishes multiple risk/day views from the same evidence.
 const startedAt = Date.now();
-const centralScan = await scanForBets({ stake: 10, risk: 58, daysAhead: 14 }, { now, scheduled: true });
+const centralScan = await scanForBets({ stake: 10, risk: 58, daysAhead: maxDaysAhead }, { now, scheduled: true });
 const collectionDurationMs = Date.now() - startedAt;
 
 const [engineState, intelligenceState, outcomeLearning, dashboard] = await Promise.all([
@@ -161,7 +163,7 @@ const payload = {
   engine: {
     sharedCore: true,
     riskProfileGranularity: "risk values 0-100 in 5 point steps",
-    daysAheadGranularity: "every day from 0 to 14",
+    daysAheadGranularity: `every day from 0 to ${maxDaysAhead}`,
     notes: [
       "The hosted edition uses the scheduled public-web scanner, news classifier, odds movement logic, intelligence memory, risk policy, and portfolio builder.",
       "The web app loads the published database and rebuilds the slip locally; heavy public-web gathering is handled by scheduled server-side runs."
@@ -364,14 +366,29 @@ function summarizeDateRange(fixtures, now) {
   const fixtureDates = fixtures
     .map((fixture) => isoDate(fixture.date))
     .sort();
-  const maxFixtureDate = fixtureDates.at(-1) || today;
+  const maxFixtureDate = maxDateKey([fixtureDates.at(-1), tournamentEndDate, today]);
 
   return {
     min: today,
     max: maxFixtureDate,
     defaultFrom: today,
-    defaultTo: maxFixtureDate
+    defaultTo: tournamentEndDate
   };
+}
+
+function daysAheadUntil(dateKey, now) {
+  const todayUtc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+  const target = new Date(`${dateKey}T00:00:00.000Z`);
+
+  if (!Number.isFinite(target.getTime())) {
+    return 14;
+  }
+
+  return Math.max(0, Math.ceil((target.getTime() - todayUtc) / 86400000));
+}
+
+function maxDateKey(values) {
+  return values.filter(Boolean).sort().at(-1) || "";
 }
 
 function summarizeFixture(fixture) {

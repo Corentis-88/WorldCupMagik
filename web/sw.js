@@ -1,4 +1,4 @@
-const CACHE_NAME = "worldcupmagik-v18";
+const CACHE_NAME = "worldcupmagik-v19";
 const STATIC_ASSETS = [
   "./",
   "./index.html",

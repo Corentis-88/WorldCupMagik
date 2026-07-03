@@ -661,7 +661,7 @@ export function describeRisk(riskValue) {
 export function selectFixturesForWindow(fixtures, daysAhead, now = new Date()) {
   const start = new Date(now);
   const end = new Date(start);
-  end.setDate(end.getDate() + clampNumber(daysAhead, 0, 30) + 1);
+  end.setDate(end.getDate() + clampNumber(daysAhead, 0, 60) + 1);
 
   return fixtures
     .filter((fixture) => {

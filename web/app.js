@@ -39,6 +39,7 @@ const scorerLineupGate = {
   minMinutesBeforeKickoff: -10,
   refreshMs: 120000
 };
+const tournamentEndDate = "2026-07-19";
 const usageInstructions = "1. Input stake per bet 2. Choose Date From 3. Choose Date To 4. Adjust risk slider 5. We add our secret sauce and some luck, we don't just go by the bookies! Enjoy!";
 
 const el = {
@@ -64,6 +65,7 @@ const el = {
 
 for (const input of [el.stake, el.dateFrom, el.dateTo, el.risk]) {
   input.addEventListener("input", () => handleControlInput(input));
+  input.addEventListener("change", () => handleControlInput(input));
 }
 
 el.risk.addEventListener("pointerdown", beginRiskInteraction, { passive: true });
@@ -308,24 +310,25 @@ function render() {
 }
 
 function initialiseDateInputs() {
-  const range = state.data?.dateRange || fallbackDateRange();
+  const range = defaultDateRange();
+  const rawRange = state.data?.dateRange || {};
 
   for (const input of [el.dateFrom, el.dateTo]) {
     input.min = range.min || "";
     input.max = range.max || "";
   }
 
-  if (!el.dateFrom.value) {
+  if (!el.dateFrom.value || el.dateFrom.value === rawRange.defaultFrom) {
     el.dateFrom.value = range.defaultFrom || range.min || "";
   }
 
-  if (!el.dateTo.value) {
+  if (!el.dateTo.value || el.dateTo.value === rawRange.defaultTo) {
     el.dateTo.value = range.defaultTo || range.max || el.dateFrom.value || "";
   }
 }
 
 function selectedDateRange() {
-  const fallback = state.data?.dateRange || fallbackDateRange();
+  const fallback = defaultDateRange();
   let from = el.dateFrom.value || fallback.defaultFrom || fallback.min;
   let to = el.dateTo.value || fallback.defaultTo || fallback.max || from;
 
@@ -336,15 +339,37 @@ function selectedDateRange() {
   return { from, to };
 }
 
+function defaultDateRange(now = new Date()) {
+  const dataRange = state.data?.dateRange || {};
+  const today = localDateKey(now);
+  const min = minDateKey([dataRange.min, today]);
+  const max = maxDateKey([dataRange.max, tournamentEndDate, today]);
+
+  return {
+    min,
+    max,
+    defaultFrom: today,
+    defaultTo: tournamentEndDate
+  };
+}
+
 function fallbackDateRange() {
-  const today = new Date().toISOString().slice(0, 10);
+  const today = localDateKey(new Date());
 
   return {
     min: today,
-    max: today,
+    max: tournamentEndDate,
     defaultFrom: today,
-    defaultTo: today
+    defaultTo: tournamentEndDate
   };
+}
+
+function minDateKey(values) {
+  return values.filter(Boolean).sort()[0] || "";
+}
+
+function maxDateKey(values) {
+  return values.filter(Boolean).sort().at(-1) || "";
 }
 
 function buildRangeProfile({ data, riskBucket, dateRange }) {

@@ -139,6 +139,8 @@ input {
 
 .mobile-controls input[type="number"],
 .mobile-controls input[type="date"] {
+  appearance: auto;
+  color-scheme: light;
   width: 100%;
   min-height: 46px;
   border: 1px solid var(--line);
@@ -146,6 +148,15 @@ input {
   padding: 5px 10px;
   font-size: 20px;
   font-weight: 850;
+  line-height: 1.2;
+  touch-action: manipulation;
+}
+
+.mobile-controls input[type="date"]::-webkit-calendar-picker-indicator {
+  min-width: 32px;
+  min-height: 32px;
+  padding: 7px;
+  cursor: pointer;
 }
 
 .risk-row {

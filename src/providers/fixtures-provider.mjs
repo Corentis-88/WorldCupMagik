@@ -400,6 +400,10 @@ function isUsableTeam(value) {
     return false;
   }
 
+  if (/[\\/]/.test(text)) {
+    return false;
+  }
+
   return !/(world cup|fixtures|schedule|stadium|group|match|odds|betting|winner|draw|round|final|semi final|quarter final)/i.test(normalized);
 }
 

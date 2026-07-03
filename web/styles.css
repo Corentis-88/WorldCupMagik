@@ -212,6 +212,8 @@ input {
 
 .controls input[type="number"],
 .controls input[type="date"] {
+  appearance: auto;
+  color-scheme: light;
   width: 100%;
   min-height: 42px;
   border: 1px solid var(--line);
@@ -219,6 +221,15 @@ input {
   padding: 4px 10px;
   font-size: 20px;
   font-weight: 850;
+  line-height: 1.2;
+  touch-action: manipulation;
+}
+
+.controls input[type="date"]::-webkit-calendar-picker-indicator {
+  min-width: 28px;
+  min-height: 28px;
+  padding: 6px;
+  cursor: pointer;
 }
 
 .controls input[type="range"] {
