@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-07-03T06:39:24.085Z",
+  "createdAt": "2026-07-03T08:29:41.401Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -25,8 +25,8 @@
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 9,
-    "freshRecordCount": 9,
+    "totalRecords": 12,
+    "freshRecordCount": 12,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -47,12 +47,12 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 9 more fresh records",
+        "needs 6 more fresh records",
         "needs 2 more covered fixtures",
         "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 9,
-      "freshRecordCount": 9,
+      "recordCount": 12,
+      "freshRecordCount": 12,
       "fixtureCount": 3,
       "totalFixtureCount": 8,
       "fixtureCoverage": 0.375,
@@ -60,7 +60,7 @@
       "averageBookmakersPerFixture": 1,
       "lineCount": 3,
       "outcomeCount": 3,
-      "latestCapturedAt": "2026-07-03T06:39:24.085Z",
+      "latestCapturedAt": "2026-07-03T08:29:41.401Z",
       "sampleOutcomes": [
         {
           "fixtureId": "fixture_ffb5b25e",
@@ -70,7 +70,7 @@
           "line": "-0.25",
           "team": "Egypt",
           "decimalOdds": 2.04,
-          "capturedAt": "2026-07-03T06:39:24.085Z"
+          "capturedAt": "2026-07-03T08:29:41.401Z"
         },
         {
           "fixtureId": "fixture_2747b9e6",
@@ -80,7 +80,7 @@
           "line": "-2",
           "team": "Argentina",
           "decimalOdds": 1.91,
-          "capturedAt": "2026-07-03T06:39:24.085Z"
+          "capturedAt": "2026-07-03T08:29:41.401Z"
         },
         {
           "fixtureId": "fixture_cfb15439",
@@ -90,7 +90,7 @@
           "line": "+2",
           "team": "Paraguay",
           "decimalOdds": 1.9,
-          "capturedAt": "2026-07-03T06:39:24.085Z"
+          "capturedAt": "2026-07-03T08:29:41.401Z"
         }
       ]
     },
