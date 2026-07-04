@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-07-03T21:34:34.175Z",
+  "createdAt": "2026-07-04T00:18:38.375Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -9,9 +9,8 @@
     "reason": "Collecting public-web odds until the coverage gate is satisfied."
   },
   "fixtureWindow": {
-    "fixtureCount": 8,
+    "fixtureCount": 7,
     "fixtureIds": [
-      "fixture_2747b9e6",
       "fixture_1bfa8c90",
       "fixture_ceaac61",
       "fixture_cfb15439",
@@ -25,8 +24,8 @@
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 16,
-    "freshRecordCount": 16,
+    "totalRecords": 9,
+    "freshRecordCount": 9,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -47,31 +46,24 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 2 more fresh records",
-        "needs 3 more covered fixtures",
-        "needs deeper bookmaker coverage per fixture"
+        "needs 9 more fresh records",
+        "needs 4 more covered fixtures",
+        "needs 1 more fixtures for coverage",
+        "needs 1 more bookmaker source(s)",
+        "needs deeper bookmaker coverage per fixture",
+        "needs 1 more distinct line(s)"
       ],
-      "recordCount": 16,
-      "freshRecordCount": 16,
-      "fixtureCount": 2,
-      "totalFixtureCount": 8,
-      "fixtureCoverage": 0.25,
-      "bookmakerCount": 2,
+      "recordCount": 9,
+      "freshRecordCount": 9,
+      "fixtureCount": 1,
+      "totalFixtureCount": 7,
+      "fixtureCoverage": 0.143,
+      "bookmakerCount": 1,
       "averageBookmakersPerFixture": 1,
-      "lineCount": 2,
-      "outcomeCount": 2,
-      "latestCapturedAt": "2026-07-03T21:34:34.175Z",
+      "lineCount": 1,
+      "outcomeCount": 1,
+      "latestCapturedAt": "2026-07-04T00:18:38.375Z",
       "sampleOutcomes": [
-        {
-          "fixtureId": "fixture_2747b9e6",
-          "fixture": "Argentina v Cape Verde",
-          "bookmaker": "SportsGambler public prop pages: Argentina v Cape Verde",
-          "outcome": "Argentina -2",
-          "line": "-2",
-          "team": "Argentina",
-          "decimalOdds": 1.91,
-          "capturedAt": "2026-07-03T21:34:34.175Z"
-        },
         {
           "fixtureId": "fixture_cfb15439",
           "fixture": "Paraguay v France",
@@ -80,7 +72,7 @@
           "line": "+2",
           "team": "Paraguay",
           "decimalOdds": 1.9,
-          "capturedAt": "2026-07-03T21:34:34.175Z"
+          "capturedAt": "2026-07-04T00:18:38.375Z"
         }
       ]
     },
@@ -111,7 +103,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 8,
+      "totalFixtureCount": 7,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -147,7 +139,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 8,
+      "totalFixtureCount": 7,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -183,7 +175,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 8,
+      "totalFixtureCount": 7,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -218,7 +210,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 8,
+      "totalFixtureCount": 7,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -253,7 +245,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 8,
+      "totalFixtureCount": 7,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,

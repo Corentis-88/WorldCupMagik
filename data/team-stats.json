@@ -1,1611 +1,7 @@
 [
   {
-    "team": "Argentina",
-    "updatedAt": "2026-07-03T21:34:34.175Z",
-    "provider": "public-web",
-    "recentPointsPerGame": 2.79,
-    "xgFor": 2.48,
-    "xgAgainst": 0.747,
-    "shotsFor": 16.32,
-    "shotsAgainst": 8.85,
-    "shotsOnTargetFor": 6.11,
-    "shotsOnTargetAgainst": 2.78,
-    "possession": 55.5,
-    "passesAttempted": 656.1,
-    "completedPasses": 513.5,
-    "passCompletion": 0.783,
-    "highPressIndex": 67.4,
-    "setPieceThreat": 64.5,
-    "transitionThreat": 80,
-    "keeperForm": 53.4,
-    "rating": 1843.1,
-    "statsCompleteness": 0.92,
-    "sourceMatchCount": 20,
-    "sourceMatchTarget": 20,
-    "sourceReliability": 0.75,
-    "manager": "Lionel Scaloni",
-    "captain": "",
-    "profileSource": "Argentina public profile 1",
-    "profileSourceUrl": "https://en.wikipedia.org/wiki/Argentina_national_football_team",
-    "profileConfidence": 0.72,
-    "metricSource": "score-derived-estimates",
-    "capturedMetricFields": [
-      "date",
-      "homeTeam",
-      "awayTeam",
-      "homeGoals",
-      "awayGoals"
-    ],
-    "derivedMetricFields": [
-      "xgFor",
-      "xgAgainst",
-      "shotsFor",
-      "shotsAgainst",
-      "shotsOnTargetFor",
-      "shotsOnTargetAgainst",
-      "possession",
-      "passesAttempted",
-      "completedPasses",
-      "passCompletion",
-      "formation",
-      "styleOfPlay"
-    ],
-    "tacticalProfile": {
-      "likelyFormation": "4-3-3 / 4-2-3-1",
-      "styleOfPlay": "front-foot pressing and fast regains",
-      "styleTags": [
-        "pressing",
-        "front-foot",
-        "regains",
-        "set-piece threat",
-        "positive xG balance"
-      ],
-      "possessionTier": "medium",
-      "pressingTier": "high",
-      "transitionTier": "high",
-      "source": "derived from 20-match public result sample and score-derived event estimates"
-    },
-    "passing": {
-      "attempted": 656.1,
-      "completed": 513.5,
-      "completion": 0.783,
-      "source": "score-and-possession-derived estimate"
-    },
-    "recentForm": {
-      "matchCount": 6,
-      "pointsPerGame": 3,
-      "goalsFor": 3,
-      "goalsAgainst": 0.167,
-      "goalDifference": 2.833,
-      "xgFor": 2.71,
-      "xgAgainst": 0.67,
-      "xgDifference": 2.04,
-      "shotsFor": 17.3,
-      "shotsAgainst": 8.52,
-      "shotsOnTargetFor": 6.48,
-      "shotsOnTargetAgainst": 2.63,
-      "possession": 56.3,
-      "passesAttempted": 660.7,
-      "completedPasses": 518.7,
-      "passCompletion": 0.785,
-      "cleanSheetRate": 0.833,
-      "failedToScoreRate": 0,
-      "bttsRate": 0.167,
-      "over25Rate": 0.667,
-      "scoringGameRate": 1,
-      "concedeGameRate": 0.167,
-      "window": 6
-    },
-    "longForm": {
-      "matchCount": 20,
-      "pointsPerGame": 2.5,
-      "goalsFor": 2.4,
-      "goalsAgainst": 0.4,
-      "goalDifference": 2,
-      "xgFor": 2.211,
-      "xgAgainst": 0.838,
-      "xgDifference": 1.373,
-      "shotsFor": 15.18,
-      "shotsAgainst": 9.24,
-      "shotsOnTargetFor": 5.67,
-      "shotsOnTargetAgainst": 2.95,
-      "possession": 54.1,
-      "passesAttempted": 648,
-      "completedPasses": 504.3,
-      "passCompletion": 0.778,
-      "cleanSheetRate": 0.65,
-      "failedToScoreRate": 0.05,
-      "bttsRate": 0.3,
-      "over25Rate": 0.5,
-      "scoringGameRate": 0.95,
-      "concedeGameRate": 0.35,
-      "window": 20
-    },
-    "formTrend": 0.3228,
-    "marketAngles": {
-      "cleanSheetRate": 0.65,
-      "failedToScoreRate": 0.05,
-      "bttsRate": 0.3,
-      "over25Rate": 0.5,
-      "scoringGameRate": 0.95,
-      "concedeGameRate": 0.35
-    },
-    "scorerSummary": [
-      {
-        "playerName": "La. Martínez",
-        "goals": 8,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 8,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Messi",
-        "goals": 8,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 8,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Almada",
-        "goals": 4,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 4,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Álvarez",
-        "goals": 3,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 3,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Fernández",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Lo Celso",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Mac Allister",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Otamendi",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      }
-    ],
-    "topScorers": [
-      {
-        "playerName": "La. Martínez",
-        "goals": 8,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 8,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Messi",
-        "goals": 8,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 8,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Almada",
-        "goals": 4,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 4,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Álvarez",
-        "goals": 3,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 3,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Fernández",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Lo Celso",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Mac Allister",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Otamendi",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      }
-    ],
-    "intelligenceCoverage": {
-      "matchWindowTarget": 20,
-      "matchWindowAvailable": 20,
-      "hasFullTwentyMatchWindow": true,
-      "managerKnown": true,
-      "profileConfidence": 0.72,
-      "eventDataMode": "score-derived-estimates",
-      "equalSchemaForAllTeams": true
-    },
-    "recentMatches": [
-      {
-        "date": "2026-06-27T00:00:00.000Z",
-        "homeTeam": "Argentina",
-        "awayTeam": "Jordan",
-        "score": "3-1",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 55,
-        "passesAttempted": 667,
-        "completedPasses": 521,
-        "passCompletion": 0.781,
-        "homeScorers": [
-          {
-            "name": "Lo Celso",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "La. Martínez",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Messi",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Al-Taamari",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
-      },
-      {
-        "date": "2026-06-22T00:00:00.000Z",
-        "homeTeam": "Argentina",
-        "awayTeam": "Austria",
-        "score": "2-0",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 55,
-        "passesAttempted": 651,
-        "completedPasses": 514,
-        "passCompletion": 0.79,
-        "homeScorers": [
-          {
-            "name": "Messi",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
-      },
-      {
-        "date": "2026-06-16T00:00:00.000Z",
-        "homeTeam": "Argentina",
-        "awayTeam": "Algeria",
-        "score": "3-0",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 57.5,
-        "passesAttempted": 665,
-        "completedPasses": 526,
-        "passCompletion": 0.791,
-        "homeScorers": [
-          {
-            "name": "Messi",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
-      },
-      {
-        "date": "2026-06-09T00:00:00.000Z",
-        "homeTeam": "Argentina",
-        "awayTeam": "Iceland",
-        "score": "3-0",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 57.5,
-        "passesAttempted": 665,
-        "completedPasses": 526,
-        "passCompletion": 0.791,
-        "homeScorers": [
-          {
-            "name": "Barco",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Messi",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Almada",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
-      },
-      {
-        "date": "2026-06-06T00:00:00.000Z",
-        "homeTeam": "Argentina",
-        "awayTeam": "Honduras",
-        "score": "2-0",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 55,
-        "passesAttempted": 651,
-        "completedPasses": 514,
-        "passCompletion": 0.79,
-        "homeScorers": [
-          {
-            "name": "La. Martínez",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Simeone",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
-      },
-      {
-        "date": "2026-04-01T00:00:00.000Z",
-        "homeTeam": "Argentina",
-        "awayTeam": "Zambia",
-        "score": "5-0",
-        "teamPerspective": "home",
-        "shotsFor": 23.5,
-        "shotsOnTargetFor": 9.2,
-        "possession": 58,
-        "passesAttempted": 665,
-        "completedPasses": 511,
-        "passCompletion": 0.768,
-        "homeScorers": [
-          {
-            "name": "Álvarez",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Messi",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Otamendi",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Chanda",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
-      },
-      {
-        "date": "2026-03-27T00:00:00.000Z",
-        "homeTeam": "Argentina",
-        "awayTeam": "Mauritania",
-        "score": "2-1",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 52.5,
-        "passesAttempted": 652,
-        "completedPasses": 509,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Fernández",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Paz",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Lefort + '",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
-      },
-      {
-        "date": "2025-11-14T00:00:00.000Z",
-        "homeTeam": "Angola",
-        "awayTeam": "Argentina",
-        "score": "0-2",
-        "teamPerspective": "away",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 55,
-        "passesAttempted": 651,
-        "completedPasses": 514,
-        "passCompletion": 0.79,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "La. Martínez",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Messi",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
-      },
-      {
-        "date": "2025-10-13T00:00:00.000Z",
-        "homeTeam": "Argentina",
-        "awayTeam": "Puerto Rico",
-        "score": "6-0",
-        "teamPerspective": "home",
-        "shotsFor": 24,
-        "shotsOnTargetFor": 10.5,
-        "possession": 58,
-        "passesAttempted": 650,
-        "completedPasses": 498,
-        "passCompletion": 0.766,
-        "homeScorers": [
-          {
-            "name": "Mac Allister",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Montiel",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Echevarria",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "La. Martínez",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
-      },
-      {
-        "date": "2025-10-10T00:00:00.000Z",
-        "homeTeam": "Argentina",
-        "awayTeam": "Venezuela",
-        "score": "1-0",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Lo Celso",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
-      },
-      {
-        "date": "2025-09-09T00:00:00.000Z",
-        "homeTeam": "Ecuador",
-        "awayTeam": "Argentina",
-        "score": "1-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 47.5,
-        "passesAttempted": 605,
-        "completedPasses": 460,
-        "passCompletion": 0.76,
-        "homeScorers": [
-          {
-            "name": "Valencia + '",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
-      },
-      {
-        "date": "2025-09-04T00:00:00.000Z",
-        "homeTeam": "Argentina",
-        "awayTeam": "Venezuela",
-        "score": "3-0",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 57.5,
-        "passesAttempted": 665,
-        "completedPasses": 526,
-        "passCompletion": 0.791,
-        "homeScorers": [
-          {
-            "name": "Messi",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "La. Martínez",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
-      },
-      {
-        "date": "2025-06-10T00:00:00.000Z",
-        "homeTeam": "Argentina",
-        "awayTeam": "Colombia",
-        "score": "1-1",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 50,
-        "passesAttempted": 638,
-        "completedPasses": 491,
-        "passCompletion": 0.77,
-        "homeScorers": [
-          {
-            "name": "Almada",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Díaz",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
-      },
-      {
-        "date": "2025-06-05T00:00:00.000Z",
-        "homeTeam": "Chile",
-        "awayTeam": "Argentina",
-        "score": "0-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Alvarez",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
-      },
-      {
-        "date": "2025-03-25T00:00:00.000Z",
-        "homeTeam": "Argentina",
-        "awayTeam": "Brazil",
-        "score": "4-1",
-        "teamPerspective": "home",
-        "shotsFor": 20.4,
-        "shotsOnTargetFor": 7.8,
-        "possession": 57.5,
-        "passesAttempted": 682,
-        "completedPasses": 531,
-        "passCompletion": 0.778,
-        "homeScorers": [
-          {
-            "name": "Alvarez",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Fernández",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Mac Allister",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Simeone",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Cunha",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
-      },
-      {
-        "date": "2025-03-21T00:00:00.000Z",
-        "homeTeam": "Uruguay",
-        "awayTeam": "Argentina",
-        "score": "0-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Almada",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
-      },
-      {
-        "date": "2024-11-19T00:00:00.000Z",
-        "homeTeam": "Argentina",
-        "awayTeam": "Peru",
-        "score": "1-0",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "La. Martínez",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
-      },
-      {
-        "date": "2024-11-14T00:00:00.000Z",
-        "homeTeam": "Paraguay",
-        "awayTeam": "Argentina",
-        "score": "2-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 47.5,
-        "passesAttempted": 621,
-        "completedPasses": 472,
-        "passCompletion": 0.76,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "La. Martínez",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
-      },
-      {
-        "date": "2024-10-15T00:00:00.000Z",
-        "homeTeam": "Argentina",
-        "awayTeam": "Bolivia",
-        "score": "6-0",
-        "teamPerspective": "home",
-        "shotsFor": 24,
-        "shotsOnTargetFor": 10.5,
-        "possession": 58,
-        "passesAttempted": 650,
-        "completedPasses": 498,
-        "passCompletion": 0.766,
-        "homeScorers": [
-          {
-            "name": "Messi",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "La. Martínez",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Almada",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
-      },
-      {
-        "date": "2024-10-10T00:00:00.000Z",
-        "homeTeam": "Venezuela",
-        "awayTeam": "Argentina",
-        "score": "1-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 50,
-        "passesAttempted": 638,
-        "completedPasses": 491,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Otamendi",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
-      }
-    ]
-  },
-  {
-    "team": "Cape Verde",
-    "updatedAt": "2026-07-03T21:34:34.175Z",
-    "provider": "public-web",
-    "recentPointsPerGame": 1.403,
-    "xgFor": 1.303,
-    "xgAgainst": 1.026,
-    "shotsFor": 11.24,
-    "shotsAgainst": 10.05,
-    "shotsOnTargetFor": 3.83,
-    "shotsOnTargetAgainst": 3.3,
-    "possession": 51,
-    "passesAttempted": 634.6,
-    "completedPasses": 490.6,
-    "passCompletion": 0.773,
-    "highPressIndex": 52.8,
-    "setPieceThreat": 55.2,
-    "transitionThreat": 54.8,
-    "keeperForm": 49.6,
-    "rating": 1706.6,
-    "statsCompleteness": 0.92,
-    "sourceMatchCount": 20,
-    "sourceMatchTarget": 20,
-    "sourceReliability": 0.75,
-    "manager": "Bubista",
-    "captain": "",
-    "profileSource": "Cape Verde public profile 1",
-    "profileSourceUrl": "https://en.wikipedia.org/wiki/Cape_Verde_national_football_team",
-    "profileConfidence": 0.72,
-    "metricSource": "score-derived-estimates",
-    "capturedMetricFields": [
-      "date",
-      "homeTeam",
-      "awayTeam",
-      "homeGoals",
-      "awayGoals"
-    ],
-    "derivedMetricFields": [
-      "xgFor",
-      "xgAgainst",
-      "shotsFor",
-      "shotsAgainst",
-      "shotsOnTargetFor",
-      "shotsOnTargetAgainst",
-      "possession",
-      "passesAttempted",
-      "completedPasses",
-      "passCompletion",
-      "formation",
-      "styleOfPlay"
-    ],
-    "tacticalProfile": {
-      "likelyFormation": "5-4-1 / 4-4-2",
-      "styleOfPlay": "compact defensive block with selective counters",
-      "styleTags": [
-        "compact",
-        "defensive",
-        "counter"
-      ],
-      "possessionTier": "medium",
-      "pressingTier": "medium",
-      "transitionTier": "medium",
-      "source": "derived from 20-match public result sample and score-derived event estimates"
-    },
-    "passing": {
-      "attempted": 634.6,
-      "completed": 490.6,
-      "completion": 0.773,
-      "source": "score-and-possession-derived estimate"
-    },
-    "recentForm": {
-      "matchCount": 6,
-      "pointsPerGame": 1.333,
-      "goalsFor": 1,
-      "goalsAgainst": 0.5,
-      "goalDifference": 0.5,
-      "xgFor": 1.27,
-      "xgAgainst": 0.91,
-      "xgDifference": 0.36,
-      "shotsFor": 11.1,
-      "shotsAgainst": 9.55,
-      "shotsOnTargetFor": 3.77,
-      "shotsOnTargetAgainst": 3.08,
-      "possession": 51.3,
-      "passesAttempted": 637.2,
-      "completedPasses": 493,
-      "passCompletion": 0.774,
-      "cleanSheetRate": 0.667,
-      "failedToScoreRate": 0.5,
-      "bttsRate": 0.333,
-      "over25Rate": 0.333,
-      "scoringGameRate": 0.5,
-      "concedeGameRate": 0.333,
-      "window": 6
-    },
-    "longForm": {
-      "matchCount": 20,
-      "pointsPerGame": 1.5,
-      "goalsFor": 1.1,
-      "goalsAgainst": 0.85,
-      "goalDifference": 0.25,
-      "xgFor": 1.342,
-      "xgAgainst": 1.162,
-      "xgDifference": 0.18,
-      "shotsFor": 11.41,
-      "shotsAgainst": 10.64,
-      "shotsOnTargetFor": 3.91,
-      "shotsOnTargetAgainst": 3.56,
-      "possession": 50.6,
-      "passesAttempted": 630,
-      "completedPasses": 486.2,
-      "passCompletion": 0.771,
-      "cleanSheetRate": 0.5,
-      "failedToScoreRate": 0.4,
-      "bttsRate": 0.25,
-      "over25Rate": 0.35,
-      "scoringGameRate": 0.6,
-      "concedeGameRate": 0.5,
-      "window": 20
-    },
-    "formTrend": -0.1807,
-    "marketAngles": {
-      "cleanSheetRate": 0.5,
-      "failedToScoreRate": 0.4,
-      "bttsRate": 0.25,
-      "over25Rate": 0.35,
-      "scoringGameRate": 0.6,
-      "concedeGameRate": 0.5
-    },
-    "scorerSummary": [
-      {
-        "playerName": "R. Mendes",
-        "goals": 4,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 4,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "D. Livramento",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Semedo",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Benchimol",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Diney",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Duarte",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "H. Tavares",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "J. Cabral",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      }
-    ],
-    "topScorers": [
-      {
-        "playerName": "R. Mendes",
-        "goals": 4,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 4,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "D. Livramento",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Semedo",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Benchimol",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Diney",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Duarte",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "H. Tavares",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "J. Cabral",
-        "goals": 1,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 1,
-        "assistsPerTwentyTeamMatches": 0
-      }
-    ],
-    "intelligenceCoverage": {
-      "matchWindowTarget": 20,
-      "matchWindowAvailable": 20,
-      "hasFullTwentyMatchWindow": true,
-      "managerKnown": true,
-      "profileConfidence": 0.72,
-      "eventDataMode": "score-derived-estimates",
-      "equalSchemaForAllTeams": true
-    },
-    "recentMatches": [
-      {
-        "date": "2026-06-26T12:00:00.000Z",
-        "homeTeam": "Cape Verde",
-        "awayTeam": "Saudi Arabia",
-        "score": "0-0",
-        "teamPerspective": "home",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 50,
-        "passesAttempted": 622,
-        "completedPasses": 479,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      },
-      {
-        "date": "2026-06-21T12:00:00.000Z",
-        "homeTeam": "Uruguay",
-        "awayTeam": "Cape Verde",
-        "score": "2-2",
-        "teamPerspective": "away",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 50,
-        "passesAttempted": 654,
-        "completedPasses": 504,
-        "passCompletion": 0.77,
-        "homeScorers": [
-          {
-            "name": "Araújo",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Pina",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Varela",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      },
-      {
-        "date": "2026-06-15T12:00:00.000Z",
-        "homeTeam": "Spain",
-        "awayTeam": "Cape Verde",
-        "score": "0-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 50,
-        "passesAttempted": 622,
-        "completedPasses": 479,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      },
-      {
-        "date": "2026-06-12T12:00:00.000Z",
-        "homeTeam": "Morocco",
-        "awayTeam": "Cape Verde",
-        "score": "0-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 50,
-        "passesAttempted": 622,
-        "completedPasses": 479,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      },
-      {
-        "date": "2026-06-08T12:00:00.000Z",
-        "homeTeam": "Georgia",
-        "awayTeam": "Cape Verde",
-        "score": "1-1",
-        "teamPerspective": "away",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 50,
-        "passesAttempted": 638,
-        "completedPasses": 491,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "R. Mendes",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      },
-      {
-        "date": "2026-06-06T12:00:00.000Z",
-        "homeTeam": "Cape Verde",
-        "awayTeam": "Bermuda",
-        "score": "3-0",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 57.5,
-        "passesAttempted": 665,
-        "completedPasses": 526,
-        "passCompletion": 0.791,
-        "homeScorers": [
-          {
-            "name": "Semedo",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Rodrigues",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      },
-      {
-        "date": "2026-06-03T12:00:00.000Z",
-        "homeTeam": "Malaysia",
-        "awayTeam": "Cape Verde",
-        "score": "0-3",
-        "teamPerspective": "away",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 57.5,
-        "passesAttempted": 665,
-        "completedPasses": 526,
-        "passCompletion": 0.791,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "D. Livramento",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "H. Tavares",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      },
-      {
-        "date": "2026-05-31T12:00:00.000Z",
-        "homeTeam": "Cape Verde",
-        "awayTeam": "Serbia",
-        "score": "3-0",
-        "teamPerspective": "home",
-        "shotsFor": 17.3,
-        "shotsOnTargetFor": 6.5,
-        "possession": 57.5,
-        "passesAttempted": 665,
-        "completedPasses": 526,
-        "passCompletion": 0.791,
-        "homeScorers": [
-          {
-            "name": "K. Pina",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Duarte",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Benchimol",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      },
-      {
-        "date": "2026-03-27T12:00:00.000Z",
-        "homeTeam": "Chile",
-        "awayTeam": "Cape Verde",
-        "score": "4-2",
-        "teamPerspective": "away",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 45,
-        "passesAttempted": 621,
-        "completedPasses": 466,
-        "passCompletion": 0.75,
-        "homeScorers": [
-          {
-            "name": "Brereton",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "M. Gutiérrez",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Loyola",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Tapia",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "D. Livramento",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Diney",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      },
-      {
-        "date": "2026-03-25T12:00:00.000Z",
-        "homeTeam": "Angola",
-        "awayTeam": "Cape Verde",
-        "score": "1-2",
-        "teamPerspective": "away",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 52.5,
-        "passesAttempted": 652,
-        "completedPasses": 509,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Dala",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      },
-      {
-        "date": "2026-03-20T12:00:00.000Z",
-        "homeTeam": "Cape Verde",
-        "awayTeam": "Mauritius",
-        "score": "1-0",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "Semedo",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      },
-      {
-        "date": "2026-01-29T12:00:00.000Z",
-        "homeTeam": "Cape Verde",
-        "awayTeam": "Mauritania",
-        "score": "1-0",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "R. Mendes",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      },
-      {
-        "date": "2026-01-10T12:00:00.000Z",
-        "homeTeam": "Tunisia",
-        "awayTeam": "Cape Verde",
-        "score": "2-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 45,
-        "passesAttempted": 589,
-        "completedPasses": 442,
-        "passCompletion": 0.75,
-        "homeScorers": [
-          {
-            "name": "Achouri",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Msakni",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      },
-      {
-        "date": "2024-11-19T12:00:00.000Z",
-        "homeTeam": "Mauritania",
-        "awayTeam": "Cape Verde",
-        "score": "1-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 47.5,
-        "passesAttempted": 605,
-        "completedPasses": 460,
-        "passCompletion": 0.76,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      },
-      {
-        "date": "2024-11-15T12:00:00.000Z",
-        "homeTeam": "Cape Verde",
-        "awayTeam": "Egypt",
-        "score": "1-1",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 50,
-        "passesAttempted": 638,
-        "completedPasses": 491,
-        "passCompletion": 0.77,
-        "homeScorers": [
-          {
-            "name": "R. Mendes",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Mohamed",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      },
-      {
-        "date": "2024-10-15T12:00:00.000Z",
-        "homeTeam": "Botswana",
-        "awayTeam": "Cape Verde",
-        "score": "1-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 47.5,
-        "passesAttempted": 605,
-        "completedPasses": 460,
-        "passCompletion": 0.76,
-        "homeScorers": [
-          {
-            "name": "Sesinyi",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      },
-      {
-        "date": "2024-10-10T12:00:00.000Z",
-        "homeTeam": "Cape Verde",
-        "awayTeam": "Botswana",
-        "score": "0-1",
-        "teamPerspective": "home",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 47.5,
-        "passesAttempted": 605,
-        "completedPasses": 460,
-        "passCompletion": 0.76,
-        "homeScorers": [],
-        "awayScorers": [
-          {
-            "name": "Orebonye",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      },
-      {
-        "date": "2024-09-10T12:00:00.000Z",
-        "homeTeam": "Cape Verde",
-        "awayTeam": "Mauritania",
-        "score": "2-0",
-        "teamPerspective": "home",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 55,
-        "passesAttempted": 651,
-        "completedPasses": 514,
-        "passCompletion": 0.79,
-        "homeScorers": [
-          {
-            "name": "R. Mendes",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      },
-      {
-        "date": "2024-09-06T12:00:00.000Z",
-        "homeTeam": "Egypt",
-        "awayTeam": "Cape Verde",
-        "score": "3-0",
-        "teamPerspective": "away",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 42.5,
-        "passesAttempted": 572,
-        "completedPasses": 423,
-        "passCompletion": 0.74,
-        "homeScorers": [
-          {
-            "name": "Rabia",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Adel",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      },
-      {
-        "date": "2024-03-25T12:00:00.000Z",
-        "homeTeam": "Cape Verde",
-        "awayTeam": "Equatorial Guinea",
-        "score": "1-0",
-        "teamPerspective": "home",
-        "shotsFor": 11.1,
-        "shotsOnTargetFor": 3.8,
-        "possession": 52.5,
-        "passesAttempted": 636,
-        "completedPasses": 496,
-        "passCompletion": 0.78,
-        "homeScorers": [
-          {
-            "name": "J. Cabral",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      }
-    ]
-  },
-  {
     "team": "Colombia",
-    "updatedAt": "2026-07-03T21:34:34.175Z",
+    "updatedAt": "2026-07-04T00:18:38.375Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.013,
     "xgFor": 1.812,
@@ -2333,13 +729,7 @@
         "passesAttempted": 638,
         "completedPasses": 491,
         "passCompletion": 0.77,
-        "homeScorers": [
-          {
-            "name": "Almada",
-            "goals": 1,
-            "assists": []
-          }
-        ],
+        "homeScorers": [],
         "awayScorers": [
           {
             "name": "Díaz",
@@ -2348,7 +738,7 @@
           }
         ],
         "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
+        "source": "Colombia public results 1"
       },
       {
         "date": "2025-06-06T00:00:00.000Z",
@@ -2422,7 +812,7 @@
   },
   {
     "team": "Ghana",
-    "updatedAt": "2026-07-03T21:34:34.175Z",
+    "updatedAt": "2026-07-04T00:18:38.375Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.214,
     "xgFor": 1.336,
@@ -3225,7 +1615,7 @@
   },
   {
     "team": "Canada",
-    "updatedAt": "2026-07-03T21:34:34.175Z",
+    "updatedAt": "2026-07-04T00:18:38.375Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.508,
     "xgFor": 1.653,
@@ -4321,24 +2711,24 @@
   },
   {
     "team": "Morocco",
-    "updatedAt": "2026-07-03T21:34:34.175Z",
+    "updatedAt": "2026-07-04T00:18:38.375Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.168,
-    "xgFor": 1.681,
-    "xgAgainst": 0.958,
-    "shotsFor": 12.87,
-    "shotsAgainst": 9.76,
-    "shotsOnTargetFor": 4.55,
-    "shotsOnTargetAgainst": 3.18,
+    "xgFor": 1.746,
+    "xgAgainst": 1.023,
+    "shotsFor": 13.15,
+    "shotsAgainst": 10.04,
+    "shotsOnTargetFor": 4.68,
+    "shotsOnTargetAgainst": 3.31,
     "possession": 52.2,
-    "passesAttempted": 644,
-    "completedPasses": 498.9,
+    "passesAttempted": 645.7,
+    "completedPasses": 500.1,
     "passCompletion": 0.775,
     "highPressIndex": 57.2,
-    "setPieceThreat": 59.5,
+    "setPieceThreat": 59.7,
     "transitionThreat": 63,
-    "keeperForm": 51.8,
-    "rating": 1754.2,
+    "keeperForm": 51.4,
+    "rating": 1751,
     "statsCompleteness": 0.92,
     "sourceMatchCount": 20,
     "sourceMatchTarget": 20,
@@ -4385,34 +2775,34 @@
       "source": "derived from 20-match public result sample and score-derived event estimates"
     },
     "passing": {
-      "attempted": 644,
-      "completed": 498.9,
+      "attempted": 645.7,
+      "completed": 500.1,
       "completion": 0.775,
       "source": "score-and-possession-derived estimate"
     },
     "recentForm": {
       "matchCount": 6,
       "pointsPerGame": 2,
-      "goalsFor": 1.333,
-      "goalsAgainst": 0.667,
+      "goalsFor": 1.5,
+      "goalsAgainst": 0.833,
       "goalDifference": 0.667,
-      "xgFor": 1.51,
-      "xgAgainst": 1.03,
+      "xgFor": 1.63,
+      "xgAgainst": 1.15,
       "xgDifference": 0.48,
-      "shotsFor": 12.13,
-      "shotsAgainst": 10.07,
-      "shotsOnTargetFor": 4.23,
-      "shotsOnTargetAgainst": 3.32,
+      "shotsFor": 12.65,
+      "shotsAgainst": 10.58,
+      "shotsOnTargetFor": 4.47,
+      "shotsOnTargetAgainst": 3.55,
       "possession": 51.7,
-      "passesAttempted": 642.2,
-      "completedPasses": 496.3,
+      "passesAttempted": 644.8,
+      "completedPasses": 498.3,
       "passCompletion": 0.773,
-      "cleanSheetRate": 0.5,
-      "failedToScoreRate": 0.167,
-      "bttsRate": 0.5,
+      "cleanSheetRate": 0.333,
+      "failedToScoreRate": 0,
+      "bttsRate": 0.667,
       "over25Rate": 0.167,
-      "scoringGameRate": 0.833,
-      "concedeGameRate": 0.5,
+      "scoringGameRate": 1,
+      "concedeGameRate": 0.667,
       "window": 6
     },
     "longForm": {
@@ -4424,7 +2814,7 @@
       "xgFor": 1.882,
       "xgAgainst": 0.874,
       "xgDifference": 1.008,
-      "shotsFor": 13.74,
+      "shotsFor": 13.73,
       "shotsAgainst": 9.4,
       "shotsOnTargetFor": 4.93,
       "shotsOnTargetAgainst": 3.02,
@@ -4440,7 +2830,7 @@
       "concedeGameRate": 0.4,
       "window": 20
     },
-    "formTrend": -0.2603,
+    "formTrend": -0.376,
     "marketAngles": {
       "cleanSheetRate": 0.6,
       "failedToScoreRate": 0.05,
@@ -4693,23 +3083,6 @@
         "awayScorers": [],
         "metricSource": "score-derived-estimates",
         "source": "Brazil public results 1"
-      },
-      {
-        "date": "2026-06-12T12:00:00.000Z",
-        "homeTeam": "Morocco",
-        "awayTeam": "Cape Verde",
-        "score": "0-0",
-        "teamPerspective": "home",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 50,
-        "passesAttempted": 622,
-        "completedPasses": 479,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
       },
       {
         "date": "2026-06-08T12:00:00.000Z",
@@ -5118,12 +3491,29 @@
         "awayScorers": [],
         "metricSource": "score-derived-estimates",
         "source": "Morocco public results 1"
+      },
+      {
+        "date": "2025-12-05T12:00:00.000Z",
+        "homeTeam": "Oman",
+        "awayTeam": "Morocco",
+        "score": "0-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 50,
+        "passesAttempted": 622,
+        "completedPasses": 479,
+        "passCompletion": 0.77,
+        "homeScorers": [],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Morocco public results 1"
       }
     ]
   },
   {
     "team": "Paraguay",
-    "updatedAt": "2026-07-03T21:34:34.175Z",
+    "updatedAt": "2026-07-04T00:18:38.375Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.735,
     "xgFor": 1.71,
@@ -5889,7 +4279,7 @@
   },
   {
     "team": "France",
-    "updatedAt": "2026-07-03T21:34:34.175Z",
+    "updatedAt": "2026-07-04T00:18:38.375Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.126,
     "xgFor": 2.594,
@@ -6797,7 +5187,7 @@
   },
   {
     "team": "Brazil",
-    "updatedAt": "2026-07-03T21:34:34.175Z",
+    "updatedAt": "2026-07-04T00:18:38.375Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.895,
     "xgFor": 1.893,
@@ -7590,28 +5980,7 @@
         "passesAttempted": 588,
         "completedPasses": 435,
         "passCompletion": 0.74,
-        "homeScorers": [
-          {
-            "name": "Alvarez",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Fernández",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Mac Allister",
-            "goals": 1,
-            "assists": []
-          },
-          {
-            "name": "Simeone",
-            "goals": 1,
-            "assists": []
-          }
-        ],
+        "homeScorers": [],
         "awayScorers": [
           {
             "name": "Cunha",
@@ -7620,13 +5989,13 @@
           }
         ],
         "metricSource": "score-derived-estimates",
-        "source": "Argentina public results 1"
+        "source": "Brazil public results 1"
       }
     ]
   },
   {
     "team": "Norway",
-    "updatedAt": "2026-07-03T21:34:34.175Z",
+    "updatedAt": "2026-07-04T00:18:38.375Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.937,
     "xgFor": 2.088,
@@ -8494,7 +6863,7 @@
   },
   {
     "team": "Mexico",
-    "updatedAt": "2026-07-03T21:34:34.175Z",
+    "updatedAt": "2026-07-04T00:18:38.375Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.185,
     "xgFor": 1.856,
@@ -9313,7 +7682,7 @@
   },
   {
     "team": "England",
-    "updatedAt": "2026-07-03T21:34:34.175Z",
+    "updatedAt": "2026-07-04T00:18:38.375Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.319,
     "xgFor": 1.762,
@@ -10101,7 +8470,7 @@
   },
   {
     "team": "Portugal",
-    "updatedAt": "2026-07-03T21:34:34.175Z",
+    "updatedAt": "2026-07-04T00:18:38.375Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.235,
     "xgFor": 2.008,
@@ -10944,7 +9313,7 @@
   },
   {
     "team": "Spain",
-    "updatedAt": "2026-07-03T21:34:34.175Z",
+    "updatedAt": "2026-07-04T00:18:38.375Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.832,
     "xgFor": 2.578,
@@ -11474,23 +9843,6 @@
       {
         "date": "2026-06-15T12:00:00.000Z",
         "homeTeam": "Spain",
-        "awayTeam": "Cape Verde",
-        "score": "0-0",
-        "teamPerspective": "home",
-        "shotsFor": 8,
-        "shotsOnTargetFor": 2.4,
-        "possession": 50,
-        "passesAttempted": 622,
-        "completedPasses": 479,
-        "passCompletion": 0.77,
-        "homeScorers": [],
-        "awayScorers": [],
-        "metricSource": "score-derived-estimates",
-        "source": "Cape Verde public results 1"
-      },
-      {
-        "date": "2026-06-15T12:00:00.000Z",
-        "homeTeam": "Spain",
         "awayTeam": "Italy",
         "score": "2-1",
         "teamPerspective": "home",
@@ -11546,6 +9898,23 @@
             "assists": []
           }
         ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "Spain public results 1"
+      },
+      {
+        "date": "2026-06-15T12:00:00.000Z",
+        "homeTeam": "Spain",
+        "awayTeam": "Cape Verde",
+        "score": "0-0",
+        "teamPerspective": "home",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 50,
+        "passesAttempted": 622,
+        "completedPasses": 479,
+        "passCompletion": 0.77,
+        "homeScorers": [],
         "awayScorers": [],
         "metricSource": "score-derived-estimates",
         "source": "Spain public results 1"
@@ -11865,7 +10234,7 @@
   },
   {
     "team": "USA",
-    "updatedAt": "2026-07-03T21:34:34.175Z",
+    "updatedAt": "2026-07-04T00:18:38.375Z",
     "provider": "public-web",
     "recentPointsPerGame": 2.042,
     "xgFor": 2.312,
@@ -12758,7 +11127,7 @@
   },
   {
     "team": "Belgium",
-    "updatedAt": "2026-07-03T21:34:34.175Z",
+    "updatedAt": "2026-07-04T00:18:38.375Z",
     "provider": "public-web",
     "recentPointsPerGame": 1.874,
     "xgFor": 2.256,
