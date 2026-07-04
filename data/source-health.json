@@ -1,5 +1,1305 @@
 [
   {
+    "id": "source_434089a7",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "fixtures",
+    "source": "DCS World Cup public schedule",
+    "url": "https://wc.dcs.pm/",
+    "status": "ok",
+    "records": 8,
+    "reason": ""
+  },
+  {
+    "id": "source_6da113f4",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "fixtures",
+    "source": "OnlyOdds World Cup fixtures",
+    "url": "https://worldcup.onlyodds.co.uk/world-cup",
+    "status": "ok",
+    "records": 49,
+    "reason": ""
+  },
+  {
+    "id": "source_a7f917a6",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "stats",
+    "source": "Canada public results 1",
+    "url": "https://en.wikipedia.org/wiki/Canada_national_football_team_results_(2020%E2%80%93present)",
+    "status": "ok",
+    "records": 76,
+    "reason": ""
+  },
+  {
+    "id": "source_8763a0b",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Canada PlayerStats assists",
+    "url": "https://playerstats.football/world-cup/canada/goals-assists",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Canada."
+  },
+  {
+    "id": "source_d0ca7ea9",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Canada PlayerStats shots",
+    "url": "https://playerstats.football/world-cup/canada/total-shots",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Canada."
+  },
+  {
+    "id": "source_429a35fc",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Canada PlayerStats shots on target",
+    "url": "https://playerstats.football/world-cup/canada/shots-on-target",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Canada."
+  },
+  {
+    "id": "source_6ca5bc60",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "team_profile",
+    "source": "Canada public profile 1",
+    "url": "https://en.wikipedia.org/wiki/Canada_national_football_team",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public team page but found no manager/profile fields for Canada."
+  },
+  {
+    "id": "source_2530e3e5",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "team_profile",
+    "source": "Canada public profile 2",
+    "url": "https://en.wikipedia.org/wiki/Canada_national_soccer_team",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public team page but found no manager/profile fields for Canada."
+  },
+  {
+    "id": "source_f40f80c3",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "team_profile",
+    "source": "Canada public profile 3",
+    "url": "https://en.wikipedia.org/wiki/Canada_men%27s_national_soccer_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_95029829",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "stats",
+    "source": "Morocco public results 1",
+    "url": "https://en.wikipedia.org/wiki/Morocco_national_football_team_results_(2020%E2%80%93present)",
+    "status": "ok",
+    "records": 97,
+    "reason": ""
+  },
+  {
+    "id": "source_531f7259",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Morocco PlayerStats assists",
+    "url": "https://playerstats.football/world-cup/morocco/goals-assists",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Morocco."
+  },
+  {
+    "id": "source_49425bbd",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Morocco PlayerStats shots",
+    "url": "https://playerstats.football/world-cup/morocco/total-shots",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Morocco."
+  },
+  {
+    "id": "source_1d241766",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Morocco PlayerStats shots on target",
+    "url": "https://playerstats.football/world-cup/morocco/shots-on-target",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Morocco."
+  },
+  {
+    "id": "source_98532ef9",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "team_profile",
+    "source": "Morocco public profile 1",
+    "url": "https://en.wikipedia.org/wiki/Morocco_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_21ef9554",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "stats",
+    "source": "Paraguay public results 1",
+    "url": "https://en.wikipedia.org/wiki/Paraguay_national_football_team_results_(2020%E2%80%93present)",
+    "status": "ok",
+    "records": 67,
+    "reason": ""
+  },
+  {
+    "id": "source_efc49ad3",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Paraguay PlayerStats assists",
+    "url": "https://playerstats.football/world-cup/paraguay/goals-assists",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Paraguay."
+  },
+  {
+    "id": "source_ea9df5b1",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Paraguay PlayerStats shots",
+    "url": "https://playerstats.football/world-cup/paraguay/total-shots",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Paraguay."
+  },
+  {
+    "id": "source_494d2ec4",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Paraguay PlayerStats shots on target",
+    "url": "https://playerstats.football/world-cup/paraguay/shots-on-target",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Paraguay."
+  },
+  {
+    "id": "source_67f7bad",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "team_profile",
+    "source": "Paraguay public profile 1",
+    "url": "https://en.wikipedia.org/wiki/Paraguay_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_9a56934a",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "stats",
+    "source": "France public results 1",
+    "url": "https://en.wikipedia.org/wiki/France_national_football_team_results_(2020%E2%80%93present)",
+    "status": "ok",
+    "records": 78,
+    "reason": ""
+  },
+  {
+    "id": "source_b96efafe",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "France PlayerStats assists",
+    "url": "https://playerstats.football/world-cup/france/goals-assists",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for France."
+  },
+  {
+    "id": "source_e13a39dc",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "France PlayerStats shots",
+    "url": "https://playerstats.football/world-cup/france/total-shots",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for France."
+  },
+  {
+    "id": "source_bb926f",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "France PlayerStats shots on target",
+    "url": "https://playerstats.football/world-cup/france/shots-on-target",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for France."
+  },
+  {
+    "id": "source_e623c283",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "team_profile",
+    "source": "France public profile 1",
+    "url": "https://en.wikipedia.org/wiki/France_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_92ab3332",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "stats",
+    "source": "Brazil public results 1",
+    "url": "https://en.wikipedia.org/wiki/Brazil_national_football_team_results_(2020%E2%80%93present)",
+    "status": "ok",
+    "records": 218,
+    "reason": ""
+  },
+  {
+    "id": "source_1faf0c08",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Brazil PlayerStats assists",
+    "url": "https://playerstats.football/world-cup/brazil/goals-assists",
+    "status": "ok",
+    "records": 2,
+    "reason": ""
+  },
+  {
+    "id": "source_25afc50b",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Brazil PlayerStats shots",
+    "url": "https://playerstats.football/world-cup/brazil/total-shots",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Brazil."
+  },
+  {
+    "id": "source_28d757de",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Brazil PlayerStats shots on target",
+    "url": "https://playerstats.football/world-cup/brazil/shots-on-target",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Brazil."
+  },
+  {
+    "id": "source_431a9be1",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "team_profile",
+    "source": "Brazil public profile 1",
+    "url": "https://en.wikipedia.org/wiki/Brazil_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_11c15f29",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "stats",
+    "source": "Norway public results 1",
+    "url": "https://en.wikipedia.org/wiki/Norway_national_football_team_results_(2020%E2%80%93present)",
+    "status": "ok",
+    "records": 51,
+    "reason": ""
+  },
+  {
+    "id": "source_c34037ac",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Norway PlayerStats assists",
+    "url": "https://playerstats.football/world-cup/norway/goals-assists",
+    "status": "ok",
+    "records": 2,
+    "reason": ""
+  },
+  {
+    "id": "source_4fab3af9",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Norway PlayerStats shots",
+    "url": "https://playerstats.football/world-cup/norway/total-shots",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Norway."
+  },
+  {
+    "id": "source_5fb7fe4c",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Norway PlayerStats shots on target",
+    "url": "https://playerstats.football/world-cup/norway/shots-on-target",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Norway."
+  },
+  {
+    "id": "source_1f6d5dbd",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "team_profile",
+    "source": "Norway public profile 1",
+    "url": "https://en.wikipedia.org/wiki/Norway_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_2b58b364",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "stats",
+    "source": "Mexico public results 1",
+    "url": "https://en.wikipedia.org/wiki/Mexico_national_football_team_results_(2020%E2%80%93present)",
+    "status": "ok",
+    "records": 108,
+    "reason": ""
+  },
+  {
+    "id": "source_1460055a",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Mexico PlayerStats assists",
+    "url": "https://playerstats.football/world-cup/mexico/goals-assists",
+    "status": "ok",
+    "records": 2,
+    "reason": ""
+  },
+  {
+    "id": "source_547e5642",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Mexico PlayerStats shots",
+    "url": "https://playerstats.football/world-cup/mexico/total-shots",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Mexico."
+  },
+  {
+    "id": "source_99957155",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Mexico PlayerStats shots on target",
+    "url": "https://playerstats.football/world-cup/mexico/shots-on-target",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Mexico."
+  },
+  {
+    "id": "source_cc6ee94f",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "team_profile",
+    "source": "Mexico public profile 1",
+    "url": "https://en.wikipedia.org/wiki/Mexico_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_b8269fc8",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "stats",
+    "source": "England public results 1",
+    "url": "https://en.wikipedia.org/wiki/England_national_football_team_results_(2020%E2%80%93present)",
+    "status": "ok",
+    "records": 65,
+    "reason": ""
+  },
+  {
+    "id": "source_990df5f2",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "England PlayerStats assists",
+    "url": "https://playerstats.football/world-cup/england/goals-assists",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for England."
+  },
+  {
+    "id": "source_d420c516",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "England PlayerStats shots",
+    "url": "https://playerstats.football/world-cup/england/total-shots",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for England."
+  },
+  {
+    "id": "source_976bff",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "England PlayerStats shots on target",
+    "url": "https://playerstats.football/world-cup/england/shots-on-target",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for England."
+  },
+  {
+    "id": "source_91a58f19",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "team_profile",
+    "source": "England public profile 1",
+    "url": "https://en.wikipedia.org/wiki/England_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_c8b25786",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "stats",
+    "source": "Portugal public results 1",
+    "url": "https://en.wikipedia.org/wiki/Portugal_national_football_team_results_(2020%E2%80%93present)",
+    "status": "ok",
+    "records": 76,
+    "reason": ""
+  },
+  {
+    "id": "source_3561b61b",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Portugal PlayerStats assists",
+    "url": "https://playerstats.football/world-cup/portugal/goals-assists",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Portugal."
+  },
+  {
+    "id": "source_2e0de6f9",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Portugal PlayerStats shots",
+    "url": "https://playerstats.football/world-cup/portugal/total-shots",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Portugal."
+  },
+  {
+    "id": "source_2dce9e0c",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Portugal PlayerStats shots on target",
+    "url": "https://playerstats.football/world-cup/portugal/shots-on-target",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Portugal."
+  },
+  {
+    "id": "source_a280c03d",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "team_profile",
+    "source": "Portugal public profile 1",
+    "url": "https://en.wikipedia.org/wiki/Portugal_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_103a4888",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "stats",
+    "source": "Spain public results 1",
+    "url": "https://en.wikipedia.org/wiki/Spain_national_football_team_results_(2020%E2%80%93present)",
+    "status": "ok",
+    "records": 43,
+    "reason": ""
+  },
+  {
+    "id": "source_977d3b2",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Spain PlayerStats assists",
+    "url": "https://playerstats.football/world-cup/spain/goals-assists",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Spain."
+  },
+  {
+    "id": "source_93eb6c16",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Spain PlayerStats shots",
+    "url": "https://playerstats.football/world-cup/spain/total-shots",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Spain."
+  },
+  {
+    "id": "source_7b097cbf",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Spain PlayerStats shots on target",
+    "url": "https://playerstats.football/world-cup/spain/shots-on-target",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Spain."
+  },
+  {
+    "id": "source_4ff7bad9",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "team_profile",
+    "source": "Spain public profile 1",
+    "url": "https://en.wikipedia.org/wiki/Spain_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_44928690",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "stats",
+    "source": "USA public results 1",
+    "url": "https://en.wikipedia.org/wiki/United_States_men's_national_football_team_results_(2020%E2%80%93present)",
+    "status": "error",
+    "records": 0,
+    "reason": "404 Not Found"
+  },
+  {
+    "id": "source_e2c2440f",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "stats",
+    "source": "USA public results 2",
+    "url": "https://en.wikipedia.org/wiki/United_States_men's_national_soccer_team_results_(2020%E2%80%93present)",
+    "status": "ok",
+    "records": 52,
+    "reason": ""
+  },
+  {
+    "id": "source_37844baf",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "USA PlayerStats assists",
+    "url": "https://playerstats.football/world-cup/usa/goals-assists",
+    "status": "error",
+    "records": 0,
+    "reason": "404 Not Found"
+  },
+  {
+    "id": "source_2738370b",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "USA PlayerStats shots",
+    "url": "https://playerstats.football/world-cup/usa/total-shots",
+    "status": "error",
+    "records": 0,
+    "reason": "404 Not Found"
+  },
+  {
+    "id": "source_14c33dc2",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "USA PlayerStats shots on target",
+    "url": "https://playerstats.football/world-cup/usa/shots-on-target",
+    "status": "error",
+    "records": 0,
+    "reason": "404 Not Found"
+  },
+  {
+    "id": "source_e49b00b",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "team_profile",
+    "source": "USA public profile 1",
+    "url": "https://en.wikipedia.org/wiki/United_States_men's_national_football_team",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public team page but found no manager/profile fields for USA."
+  },
+  {
+    "id": "source_915a3f3e",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "team_profile",
+    "source": "USA public profile 2",
+    "url": "https://en.wikipedia.org/wiki/United_States_men's_national_soccer_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_fdc2d4e8",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "stats",
+    "source": "Belgium public results 1",
+    "url": "https://en.wikipedia.org/wiki/Belgium_national_football_team_results_(2020%E2%80%93present)",
+    "status": "ok",
+    "records": 76,
+    "reason": ""
+  },
+  {
+    "id": "source_d7a93bfa",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Belgium PlayerStats assists",
+    "url": "https://playerstats.football/world-cup/belgium/goals-assists",
+    "status": "ok",
+    "records": 2,
+    "reason": ""
+  },
+  {
+    "id": "source_837c710",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Belgium PlayerStats shots",
+    "url": "https://playerstats.football/world-cup/belgium/total-shots",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Belgium."
+  },
+  {
+    "id": "source_d5db3e79",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Belgium PlayerStats shots on target",
+    "url": "https://playerstats.football/world-cup/belgium/shots-on-target",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Belgium."
+  },
+  {
+    "id": "source_9dac6059",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "team_profile",
+    "source": "Belgium public profile 1",
+    "url": "https://en.wikipedia.org/wiki/Belgium_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_7b803ba6",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "stats",
+    "source": "Argentina public results 1",
+    "url": "https://en.wikipedia.org/wiki/Argentina_national_football_team_results_(2020%E2%80%93present)",
+    "status": "ok",
+    "records": 78,
+    "reason": ""
+  },
+  {
+    "id": "source_f7f31c7a",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Argentina PlayerStats assists",
+    "url": "https://playerstats.football/world-cup/argentina/goals-assists",
+    "status": "ok",
+    "records": 2,
+    "reason": ""
+  },
+  {
+    "id": "source_a048b6f4",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Argentina PlayerStats shots",
+    "url": "https://playerstats.football/world-cup/argentina/total-shots",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Argentina."
+  },
+  {
+    "id": "source_8c35a19d",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Argentina PlayerStats shots on target",
+    "url": "https://playerstats.football/world-cup/argentina/shots-on-target",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Argentina."
+  },
+  {
+    "id": "source_2a783599",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "team_profile",
+    "source": "Argentina public profile 1",
+    "url": "https://en.wikipedia.org/wiki/Argentina_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_77bc89a4",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "stats",
+    "source": "Egypt public results 1",
+    "url": "https://en.wikipedia.org/wiki/Egypt_national_football_team_results_(2020%E2%80%93present)",
+    "status": "ok",
+    "records": 58,
+    "reason": ""
+  },
+  {
+    "id": "source_d152fe04",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Egypt PlayerStats assists",
+    "url": "https://playerstats.football/world-cup/egypt/goals-assists",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Egypt."
+  },
+  {
+    "id": "source_b45e99e8",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Egypt PlayerStats shots",
+    "url": "https://playerstats.football/world-cup/egypt/total-shots",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Egypt."
+  },
+  {
+    "id": "source_d56f0911",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Egypt PlayerStats shots on target",
+    "url": "https://playerstats.football/world-cup/egypt/shots-on-target",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Egypt."
+  },
+  {
+    "id": "source_8d5d4b99",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "team_profile",
+    "source": "Egypt public profile 1",
+    "url": "https://en.wikipedia.org/wiki/Egypt_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_13defe07",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "stats",
+    "source": "Switzerland public results 1",
+    "url": "https://en.wikipedia.org/wiki/Switzerland_national_football_team_results_(2020%E2%80%93present)",
+    "status": "ok",
+    "records": 77,
+    "reason": ""
+  },
+  {
+    "id": "source_9e92b08c",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Switzerland PlayerStats assists",
+    "url": "https://playerstats.football/world-cup/switzerland/goals-assists",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Switzerland."
+  },
+  {
+    "id": "source_3c072eb0",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Switzerland PlayerStats shots",
+    "url": "https://playerstats.football/world-cup/switzerland/total-shots",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Switzerland."
+  },
+  {
+    "id": "source_acbcaa99",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Switzerland PlayerStats shots on target",
+    "url": "https://playerstats.football/world-cup/switzerland/shots-on-target",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Switzerland."
+  },
+  {
+    "id": "source_82b82fd9",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "team_profile",
+    "source": "Switzerland public profile 1",
+    "url": "https://en.wikipedia.org/wiki/Switzerland_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_1b1b51ca",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "stats",
+    "source": "Colombia public results 1",
+    "url": "https://en.wikipedia.org/wiki/Colombia_national_football_team_results_(2020%E2%80%93present)",
+    "status": "ok",
+    "records": 76,
+    "reason": ""
+  },
+  {
+    "id": "source_1755bba8",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Colombia PlayerStats assists",
+    "url": "https://playerstats.football/world-cup/colombia/goals-assists",
+    "status": "ok",
+    "records": 2,
+    "reason": ""
+  },
+  {
+    "id": "source_90aedddb",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Colombia PlayerStats shots",
+    "url": "https://playerstats.football/world-cup/colombia/total-shots",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Colombia."
+  },
+  {
+    "id": "source_7f80f06e",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "player_stats",
+    "source": "Colombia PlayerStats shots on target",
+    "url": "https://playerstats.football/world-cup/colombia/shots-on-target",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Colombia."
+  },
+  {
+    "id": "source_e643ca81",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "team_profile",
+    "source": "Colombia public profile 1",
+    "url": "https://en.wikipedia.org/wiki/Colombia_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_a3a3409",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "news",
+    "source": "FIFA World Cup Articles",
+    "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
+  },
+  {
+    "id": "source_fbc349af",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "news",
+    "source": "BBC Sport Football RSS",
+    "url": "https://feeds.bbci.co.uk/sport/football/rss.xml",
+    "status": "ok",
+    "records": 18,
+    "reason": ""
+  },
+  {
+    "id": "source_4b3edcd9",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "news",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/rss",
+    "status": "ok",
+    "records": 18,
+    "reason": ""
+  },
+  {
+    "id": "source_15dc55a6",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "odds",
+    "source": "OnlyOdds match pages: Canada v Morocco",
+    "url": "https://worldcup.onlyodds.co.uk/match/canada-v-morocco",
+    "status": "error",
+    "records": 0,
+    "reason": "404 Not Found"
+  },
+  {
+    "id": "source_c0b12284",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "odds",
+    "source": "OnlyOdds match pages: Paraguay v France",
+    "url": "https://worldcup.onlyodds.co.uk/match/paraguay-v-france",
+    "status": "error",
+    "records": 0,
+    "reason": "404 Not Found"
+  },
+  {
+    "id": "source_cb1cabca",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "odds",
+    "source": "OnlyOdds match pages: Brazil v Norway",
+    "url": "https://worldcup.onlyodds.co.uk/match/brazil-v-norway",
+    "status": "error",
+    "records": 0,
+    "reason": "404 Not Found"
+  },
+  {
+    "id": "source_e38209a6",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "odds",
+    "source": "OnlyOdds match pages: Mexico v England",
+    "url": "https://worldcup.onlyodds.co.uk/match/mexico-v-england",
+    "status": "error",
+    "records": 0,
+    "reason": "404 Not Found"
+  },
+  {
+    "id": "source_aa23a46",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "odds",
+    "source": "OnlyOdds match pages: Portugal v Spain",
+    "url": "https://worldcup.onlyodds.co.uk/match/portugal-v-spain",
+    "status": "error",
+    "records": 0,
+    "reason": "404 Not Found"
+  },
+  {
+    "id": "source_550e6be",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "odds",
+    "source": "OnlyOdds match pages: USA v Belgium",
+    "url": "https://worldcup.onlyodds.co.uk/match/usa-v-belgium",
+    "status": "error",
+    "records": 0,
+    "reason": "404 Not Found"
+  },
+  {
+    "id": "source_693d4546",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "odds",
+    "source": "OnlyOdds match pages: Argentina v Egypt",
+    "url": "https://worldcup.onlyodds.co.uk/match/argentina-v-egypt",
+    "status": "error",
+    "records": 0,
+    "reason": "404 Not Found"
+  },
+  {
+    "id": "source_61dc0392",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "odds",
+    "source": "OnlyOdds match pages: Switzerland v Colombia",
+    "url": "https://worldcup.onlyodds.co.uk/match/switzerland-v-colombia",
+    "status": "error",
+    "records": 0,
+    "reason": "404 Not Found"
+  },
+  {
+    "id": "source_31f1f7b1",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "odds",
+    "source": "SportsGambler public prop pages: Canada v Morocco",
+    "url": "https://www.sportsgambler.com/betting-tips/football/canada-vs-morocco-prediction-lineups-odds-2026-07-04/",
+    "status": "ok",
+    "records": 172,
+    "reason": ""
+  },
+  {
+    "id": "source_1e350d78",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "odds",
+    "source": "SportsGambler public prop pages: Paraguay v France",
+    "url": "https://www.sportsgambler.com/betting-tips/football/paraguay-vs-france-prediction-lineups-odds-2026-07-04/",
+    "status": "ok",
+    "records": 164,
+    "reason": ""
+  },
+  {
+    "id": "source_cd465401",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "odds",
+    "source": "SportsGambler public prop pages: Brazil v Norway",
+    "url": "https://www.sportsgambler.com/betting-tips/football/brazil-vs-norway-prediction-lineups-odds-2026-07-05/",
+    "status": "ok",
+    "records": 188,
+    "reason": ""
+  },
+  {
+    "id": "source_dd473bfa",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "odds",
+    "source": "SportsGambler public prop pages: Mexico v England",
+    "url": "https://www.sportsgambler.com/betting-tips/football/mexico-vs-england-prediction-lineups-odds-2026-07-06/",
+    "status": "ok",
+    "records": 3,
+    "reason": ""
+  },
+  {
+    "id": "source_91fb4a6d",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "odds",
+    "source": "SportsGambler public prop pages: Portugal v Spain",
+    "url": "https://www.sportsgambler.com/betting-tips/football/portugal-vs-spain-prediction-lineups-odds-2026-07-06/",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public match page but found no supported odds offers."
+  },
+  {
+    "id": "source_a0aecffa",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "odds",
+    "source": "SportsGambler public prop pages: USA v Belgium",
+    "url": "https://www.sportsgambler.com/betting-tips/football/usa-vs-belgium-prediction-lineups-odds-2026-07-07/",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public match page but found no supported odds offers."
+  },
+  {
+    "id": "source_b3ba4b82",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "odds",
+    "source": "SportsGambler public prop pages: Argentina v Egypt",
+    "url": "https://www.sportsgambler.com/betting-tips/football/argentina-vs-egypt-prediction-lineups-odds-2026-07-07/",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public match page but found no supported odds offers."
+  },
+  {
+    "id": "source_8db6a12e",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "odds",
+    "source": "SportsGambler public prop pages: Switzerland v Colombia",
+    "url": "https://www.sportsgambler.com/betting-tips/football/switzerland-vs-colombia-prediction-lineups-odds-2026-07-07/",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public match page but found no supported odds offers."
+  },
+  {
+    "id": "source_1a8cc5a4",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "weather",
+    "source": "Houston weather forecast",
+    "url": "https://www.weather-forecast.com/locations/Houston/forecasts/latest",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_1212ba64",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "weather",
+    "source": "Philadelphia weather forecast",
+    "url": "https://www.weather-forecast.com/locations/Philadelphia/forecasts/latest",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_df2d0077",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "weather",
+    "source": "New York weather forecast",
+    "url": "https://www.weather-forecast.com/locations/New-York/forecasts/latest",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_cf3f98e7",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "weather",
+    "source": "Mexico City weather forecast",
+    "url": "https://www.weather-forecast.com/locations/Mexico-City/forecasts/latest",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_576e0de4",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "weather",
+    "source": "Dallas weather forecast",
+    "url": "https://www.weather-forecast.com/locations/Dallas/forecasts/latest",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_3eda530",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "weather",
+    "source": "Seattle weather forecast",
+    "url": "https://www.weather-forecast.com/locations/Seattle/forecasts/latest",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_410f1a9a",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "weather",
+    "source": "Atlanta weather forecast",
+    "url": "https://www.weather-forecast.com/locations/Atlanta/forecasts/latest",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_b53e9306",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "weather",
+    "source": "Vancouver weather forecast",
+    "url": "https://www.weather-forecast.com/locations/Vancouver/forecasts/latest",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_f04f1c37",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia 2026 FIFA World Cup squads",
+    "url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
+    "status": "ok",
+    "records": 16,
+    "reason": ""
+  },
+  {
+    "id": "source_2012e44b",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia national team squad pages: Argentina",
+    "url": "https://en.wikipedia.org/wiki/Argentina_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_79912313",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia national team squad pages: Belgium",
+    "url": "https://en.wikipedia.org/wiki/Belgium_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_4f69b733",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia national team squad pages: Brazil",
+    "url": "https://en.wikipedia.org/wiki/Brazil_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_7effb314",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia national team squad pages: Canada",
+    "url": "https://en.wikipedia.org/wiki/Canada_men's_national_soccer_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_3b6072f3",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia national team squad pages: Colombia",
+    "url": "https://en.wikipedia.org/wiki/Colombia_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_40f18663",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia national team squad pages: Egypt",
+    "url": "https://en.wikipedia.org/wiki/Egypt_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_b313f587",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia national team squad pages: England",
+    "url": "https://en.wikipedia.org/wiki/England_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_2ce841d3",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia national team squad pages: France",
+    "url": "https://en.wikipedia.org/wiki/France_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_dcb73193",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia national team squad pages: Mexico",
+    "url": "https://en.wikipedia.org/wiki/Mexico_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_d332679",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia national team squad pages: Morocco",
+    "url": "https://en.wikipedia.org/wiki/Morocco_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_3414dbf3",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia national team squad pages: Norway",
+    "url": "https://en.wikipedia.org/wiki/Norway_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_f039f633",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia national team squad pages: Paraguay",
+    "url": "https://en.wikipedia.org/wiki/Paraguay_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_617f533",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia national team squad pages: Portugal",
+    "url": "https://en.wikipedia.org/wiki/Portugal_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_362ecc07",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia national team squad pages: Spain",
+    "url": "https://en.wikipedia.org/wiki/Spain_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_75dfd9d3",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia national team squad pages: Switzerland",
+    "url": "https://en.wikipedia.org/wiki/Switzerland_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_583cd659",
+    "createdAt": "2026-07-04T12:37:01.557Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia national team squad pages: USA",
+    "url": "https://en.wikipedia.org/wiki/United_States_men's_national_soccer_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
     "id": "source_42aa19f6",
     "createdAt": "2026-07-04T10:27:50.256Z",
     "kind": "fixtures",
@@ -198697,1306 +199997,6 @@
     "url": "https://worldcup.onlyodds.co.uk/match/germany-v-curacao",
     "status": "ok",
     "records": 40,
-    "reason": ""
-  },
-  {
-    "id": "source_8d5b5b24",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Netherlands v Japan",
-    "url": "https://worldcup.onlyodds.co.uk/match/netherlands-v-japan",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_ea9cc945",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Ivory Coast v Ecuador",
-    "url": "https://worldcup.onlyodds.co.uk/match/ivory-coast-v-ecuador",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_3540004c",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Sweden v Tunisia",
-    "url": "https://worldcup.onlyodds.co.uk/match/sweden-v-tunisia",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_7a5a783f",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Spain v Cape Verde",
-    "url": "https://worldcup.onlyodds.co.uk/match/spain-v-cape-verde",
-    "status": "ok",
-    "records": 37,
-    "reason": ""
-  },
-  {
-    "id": "source_6977b894",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Belgium v Egypt",
-    "url": "https://worldcup.onlyodds.co.uk/match/belgium-v-egypt",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_247403df",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Saudi Arabia v Uruguay",
-    "url": "https://worldcup.onlyodds.co.uk/match/saudi-arabia-v-uruguay",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_86dc2839",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Iran v New Zealand",
-    "url": "https://worldcup.onlyodds.co.uk/match/iran-v-new-zealand",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_cf05f26c",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: France v Senegal",
-    "url": "https://worldcup.onlyodds.co.uk/match/france-v-senegal",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_cc7a47e5",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Iraq v Norway",
-    "url": "https://worldcup.onlyodds.co.uk/match/iraq-v-norway",
-    "status": "ok",
-    "records": 36,
-    "reason": ""
-  },
-  {
-    "id": "source_9abf9640",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Argentina v Algeria",
-    "url": "https://worldcup.onlyodds.co.uk/match/argentina-v-algeria",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_1ac80f98",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Austria v Jordan",
-    "url": "https://worldcup.onlyodds.co.uk/match/austria-v-jordan",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_7f6eda0a",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Portugal v DR Congo",
-    "url": "https://worldcup.onlyodds.co.uk/match/portugal-v-dr-congo",
-    "status": "ok",
-    "records": 34,
-    "reason": ""
-  },
-  {
-    "id": "source_95a583e8",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: England v Croatia",
-    "url": "https://worldcup.onlyodds.co.uk/match/england-v-croatia",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_6ba7e998",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Ghana v Panama",
-    "url": "https://worldcup.onlyodds.co.uk/match/ghana-v-panama",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_7b183564",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Uzbekistan v Colombia",
-    "url": "https://worldcup.onlyodds.co.uk/match/uzbekistan-v-colombia",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_57c44883",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Czechia v South Africa",
-    "url": "https://worldcup.onlyodds.co.uk/match/czechia-v-south-africa",
-    "status": "ok",
-    "records": 17,
-    "reason": ""
-  },
-  {
-    "id": "source_6281d6d7",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Switzerland v Bosnia and Herzegovina",
-    "url": "https://worldcup.onlyodds.co.uk/match/switzerland-v-bosnia-and-herzegovina",
-    "status": "error",
-    "records": 0,
-    "reason": "404 Not Found"
-  },
-  {
-    "id": "source_7c8227cc",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Canada v Qatar",
-    "url": "https://worldcup.onlyodds.co.uk/match/canada-v-qatar",
-    "status": "ok",
-    "records": 20,
-    "reason": ""
-  },
-  {
-    "id": "source_f4ee0819",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Mexico v South Korea",
-    "url": "https://worldcup.onlyodds.co.uk/match/mexico-v-south-korea",
-    "status": "ok",
-    "records": 20,
-    "reason": ""
-  },
-  {
-    "id": "source_c01e3322",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: USA v Australia",
-    "url": "https://worldcup.onlyodds.co.uk/match/usa-v-australia",
-    "status": "ok",
-    "records": 17,
-    "reason": ""
-  },
-  {
-    "id": "source_5edc0e44",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Scotland v Morocco",
-    "url": "https://worldcup.onlyodds.co.uk/match/scotland-v-morocco",
-    "status": "ok",
-    "records": 17,
-    "reason": ""
-  },
-  {
-    "id": "source_a828b1e6",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Brazil v Haiti",
-    "url": "https://worldcup.onlyodds.co.uk/match/brazil-v-haiti",
-    "status": "ok",
-    "records": 15,
-    "reason": ""
-  },
-  {
-    "id": "source_696a4430",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Turkiye v Paraguay",
-    "url": "https://worldcup.onlyodds.co.uk/match/turkiye-v-paraguay",
-    "status": "ok",
-    "records": 17,
-    "reason": ""
-  },
-  {
-    "id": "source_8b087c78",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Netherlands v Sweden",
-    "url": "https://worldcup.onlyodds.co.uk/match/netherlands-v-sweden",
-    "status": "ok",
-    "records": 20,
-    "reason": ""
-  },
-  {
-    "id": "source_acbc7e99",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Germany v Ivory Coast",
-    "url": "https://worldcup.onlyodds.co.uk/match/germany-v-ivory-coast",
-    "status": "ok",
-    "records": 20,
-    "reason": ""
-  },
-  {
-    "id": "source_865fb072",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Ecuador v Curaçao",
-    "url": "https://worldcup.onlyodds.co.uk/match/ecuador-v-curacao",
-    "status": "ok",
-    "records": 20,
-    "reason": ""
-  },
-  {
-    "id": "source_c2fc6266",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Tunisia v Japan",
-    "url": "https://worldcup.onlyodds.co.uk/match/tunisia-v-japan",
-    "status": "ok",
-    "records": 20,
-    "reason": ""
-  },
-  {
-    "id": "source_a0e79002",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Spain v Saudi Arabia",
-    "url": "https://worldcup.onlyodds.co.uk/match/spain-v-saudi-arabia",
-    "status": "ok",
-    "records": 18,
-    "reason": ""
-  },
-  {
-    "id": "source_cb36815",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Belgium v Iran",
-    "url": "https://worldcup.onlyodds.co.uk/match/belgium-v-iran",
-    "status": "ok",
-    "records": 12,
-    "reason": ""
-  },
-  {
-    "id": "source_ff7c1905",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Uruguay v Cape Verde",
-    "url": "https://worldcup.onlyodds.co.uk/match/uruguay-v-cape-verde",
-    "status": "ok",
-    "records": 20,
-    "reason": ""
-  },
-  {
-    "id": "source_13abcb45",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: New Zealand v Egypt",
-    "url": "https://worldcup.onlyodds.co.uk/match/new-zealand-v-egypt",
-    "status": "ok",
-    "records": 20,
-    "reason": ""
-  },
-  {
-    "id": "source_eb803818",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Argentina v Austria",
-    "url": "https://worldcup.onlyodds.co.uk/match/argentina-v-austria",
-    "status": "ok",
-    "records": 20,
-    "reason": ""
-  },
-  {
-    "id": "source_3ff326f8",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: France v Iraq",
-    "url": "https://worldcup.onlyodds.co.uk/match/france-v-iraq",
-    "status": "ok",
-    "records": 20,
-    "reason": ""
-  },
-  {
-    "id": "source_4dc34724",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Norway v Senegal",
-    "url": "https://worldcup.onlyodds.co.uk/match/norway-v-senegal",
-    "status": "ok",
-    "records": 17,
-    "reason": ""
-  },
-  {
-    "id": "source_5d7953cc",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Jordan v Algeria",
-    "url": "https://worldcup.onlyodds.co.uk/match/jordan-v-algeria",
-    "status": "ok",
-    "records": 20,
-    "reason": ""
-  },
-  {
-    "id": "source_5f5a57e2",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Portugal v Uzbekistan",
-    "url": "https://worldcup.onlyodds.co.uk/match/portugal-v-uzbekistan",
-    "status": "ok",
-    "records": 15,
-    "reason": ""
-  },
-  {
-    "id": "source_89d10458",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: England v Ghana",
-    "url": "https://worldcup.onlyodds.co.uk/match/england-v-ghana",
-    "status": "ok",
-    "records": 20,
-    "reason": ""
-  },
-  {
-    "id": "source_c7d9a58c",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Panama v Croatia",
-    "url": "https://worldcup.onlyodds.co.uk/match/panama-v-croatia",
-    "status": "ok",
-    "records": 20,
-    "reason": ""
-  },
-  {
-    "id": "source_c0c91aa1",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Colombia v DR Congo",
-    "url": "https://worldcup.onlyodds.co.uk/match/colombia-v-dr-congo",
-    "status": "ok",
-    "records": 17,
-    "reason": ""
-  },
-  {
-    "id": "source_6c8fddc",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Switzerland v Canada",
-    "url": "https://worldcup.onlyodds.co.uk/match/switzerland-v-canada",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_f5b6510b",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Bosnia and Herzegovina v Qatar",
-    "url": "https://worldcup.onlyodds.co.uk/match/bosnia-and-herzegovina-v-qatar",
-    "status": "error",
-    "records": 0,
-    "reason": "404 Not Found"
-  },
-  {
-    "id": "source_b25fd4b4",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Scotland v Brazil",
-    "url": "https://worldcup.onlyodds.co.uk/match/scotland-v-brazil",
-    "status": "ok",
-    "records": 17,
-    "reason": ""
-  },
-  {
-    "id": "source_6d1827ea",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Morocco v Haiti",
-    "url": "https://worldcup.onlyodds.co.uk/match/morocco-v-haiti",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_ee6a7a3c",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Czechia v Mexico",
-    "url": "https://worldcup.onlyodds.co.uk/match/czechia-v-mexico",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_b6106f10",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: South Africa v South Korea",
-    "url": "https://worldcup.onlyodds.co.uk/match/south-africa-v-south-korea",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_4afe075f",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Curaçao v Ivory Coast",
-    "url": "https://worldcup.onlyodds.co.uk/match/curacao-v-ivory-coast",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_57ee5f74",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Ecuador v Germany",
-    "url": "https://worldcup.onlyodds.co.uk/match/ecuador-v-germany",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_33ad8f3c",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Japan v Sweden",
-    "url": "https://worldcup.onlyodds.co.uk/match/japan-v-sweden",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_26da4016",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Tunisia v Netherlands",
-    "url": "https://worldcup.onlyodds.co.uk/match/tunisia-v-netherlands",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_f9057d18",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Turkiye v USA",
-    "url": "https://worldcup.onlyodds.co.uk/match/turkiye-v-usa",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_53b58670",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Paraguay v Australia",
-    "url": "https://worldcup.onlyodds.co.uk/match/paraguay-v-australia",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_4dcd9f7e",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Norway v France",
-    "url": "https://worldcup.onlyodds.co.uk/match/norway-v-france",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_763aba7c",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Senegal v Iraq",
-    "url": "https://worldcup.onlyodds.co.uk/match/senegal-v-iraq",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_b2757ed0",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Cape Verde v Saudi Arabia",
-    "url": "https://worldcup.onlyodds.co.uk/match/cape-verde-v-saudi-arabia",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_23ea58c6",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Uruguay v Spain",
-    "url": "https://worldcup.onlyodds.co.uk/match/uruguay-v-spain",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_9409145c",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Egypt v Iran",
-    "url": "https://worldcup.onlyodds.co.uk/match/egypt-v-iran",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_bf043f9",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: New Zealand v Belgium",
-    "url": "https://worldcup.onlyodds.co.uk/match/new-zealand-v-belgium",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_55fcc850",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Panama v England",
-    "url": "https://worldcup.onlyodds.co.uk/match/panama-v-england",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_d48cb18",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Croatia v Ghana",
-    "url": "https://worldcup.onlyodds.co.uk/match/croatia-v-ghana",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_a65cfa6d",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Colombia v Portugal",
-    "url": "https://worldcup.onlyodds.co.uk/match/colombia-v-portugal",
-    "status": "ok",
-    "records": 12,
-    "reason": ""
-  },
-  {
-    "id": "source_3db85053",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: DR Congo v Uzbekistan",
-    "url": "https://worldcup.onlyodds.co.uk/match/dr-congo-v-uzbekistan",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_869c8628",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Algeria v Austria",
-    "url": "https://worldcup.onlyodds.co.uk/match/algeria-v-austria",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_ee922f50",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Jordan v Argentina",
-    "url": "https://worldcup.onlyodds.co.uk/match/jordan-v-argentina",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_e8e28ae3",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Germany v Curaçao",
-    "url": "https://www.sportsgambler.com/betting-tips/football/germany-vs-curacao-prediction-lineups-odds-2026-06-14/",
-    "status": "ok",
-    "records": 52,
-    "reason": ""
-  },
-  {
-    "id": "source_2bc16122",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Netherlands v Japan",
-    "url": "https://www.sportsgambler.com/betting-tips/football/netherlands-vs-japan-prediction-lineups-odds-2026-06-14/",
-    "status": "ok",
-    "records": 244,
-    "reason": ""
-  },
-  {
-    "id": "source_709fad6b",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Ivory Coast v Ecuador",
-    "url": "https://www.sportsgambler.com/betting-tips/football/ivory-coast-vs-ecuador-prediction-lineups-odds-2026-06-14/",
-    "status": "ok",
-    "records": 239,
-    "reason": ""
-  },
-  {
-    "id": "source_6692c450",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Sweden v Tunisia",
-    "url": "https://www.sportsgambler.com/betting-tips/football/sweden-vs-tunisia-prediction-lineups-odds-2026-06-15/",
-    "status": "ok",
-    "records": 236,
-    "reason": ""
-  },
-  {
-    "id": "source_675539f2",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Spain v Cape Verde",
-    "url": "https://www.sportsgambler.com/betting-tips/football/spain-vs-cape-verde-prediction-lineups-odds-2026-06-15/",
-    "status": "ok",
-    "records": 242,
-    "reason": ""
-  },
-  {
-    "id": "source_ce96c97d",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Belgium v Egypt",
-    "url": "https://www.sportsgambler.com/betting-tips/football/belgium-vs-egypt-prediction-lineups-odds-2026-06-15/",
-    "status": "ok",
-    "records": 242,
-    "reason": ""
-  },
-  {
-    "id": "source_bb86e165",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Saudi Arabia v Uruguay",
-    "url": "https://www.sportsgambler.com/betting-tips/football/saudi-arabia-vs-uruguay-prediction-lineups-odds-2026-06-15/",
-    "status": "ok",
-    "records": 210,
-    "reason": ""
-  },
-  {
-    "id": "source_95805fa8",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Iran v New Zealand",
-    "url": "https://www.sportsgambler.com/betting-tips/football/iran-vs-new-zealand-prediction-lineups-odds-2026-06-16/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_5667a9b8",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: France v Senegal",
-    "url": "https://www.sportsgambler.com/betting-tips/football/france-vs-senegal-prediction-lineups-odds-2026-06-16/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_a7f85c7a",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Iraq v Norway",
-    "url": "https://www.sportsgambler.com/betting-tips/football/iraq-vs-norway-prediction-lineups-odds-2026-06-16/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_51aeedad",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Argentina v Algeria",
-    "url": "https://www.sportsgambler.com/betting-tips/football/argentina-vs-algeria-prediction-lineups-odds-2026-06-17/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_8d549989",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Austria v Jordan",
-    "url": "https://www.sportsgambler.com/betting-tips/football/austria-vs-jordan-prediction-lineups-odds-2026-06-17/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_9048fb7e",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Portugal v DR Congo",
-    "url": "https://www.sportsgambler.com/betting-tips/football/portugal-vs-dr-congo-prediction-lineups-odds-2026-06-17/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_8bbf0c31",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: England v Croatia",
-    "url": "https://www.sportsgambler.com/betting-tips/football/england-vs-croatia-prediction-lineups-odds-2026-06-17/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_e3f3ffe1",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Ghana v Panama",
-    "url": "https://www.sportsgambler.com/betting-tips/football/ghana-vs-panama-prediction-lineups-odds-2026-06-17/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_d06ec086",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Uzbekistan v Colombia",
-    "url": "https://www.sportsgambler.com/betting-tips/football/uzbekistan-vs-colombia-prediction-lineups-odds-2026-06-18/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_403d456b",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Czechia v South Africa",
-    "url": "https://www.sportsgambler.com/betting-tips/football/czechia-vs-south-africa-prediction-lineups-odds-2026-06-18/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_6848e4c2",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Switzerland v Bosnia and Herzegovina",
-    "url": "https://www.sportsgambler.com/betting-tips/football/switzerland-vs-bosnia-and-herzegovina-prediction-lineups-odds-2026-06-18/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_890bc8c2",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Canada v Qatar",
-    "url": "https://www.sportsgambler.com/betting-tips/football/canada-vs-qatar-prediction-lineups-odds-2026-06-18/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_e55a26cc",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Mexico v South Korea",
-    "url": "https://www.sportsgambler.com/betting-tips/football/mexico-vs-south-korea-prediction-lineups-odds-2026-06-19/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_425b1bf6",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: USA v Australia",
-    "url": "https://www.sportsgambler.com/betting-tips/football/usa-vs-australia-prediction-lineups-odds-2026-06-19/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_5c392f4d",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Scotland v Morocco",
-    "url": "https://www.sportsgambler.com/betting-tips/football/scotland-vs-morocco-prediction-lineups-odds-2026-06-19/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_c998caf9",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Brazil v Haiti",
-    "url": "https://www.sportsgambler.com/betting-tips/football/brazil-vs-haiti-prediction-lineups-odds-2026-06-20/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_e6d6591d",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Turkiye v Paraguay",
-    "url": "https://www.sportsgambler.com/betting-tips/football/turkiye-vs-paraguay-prediction-lineups-odds-2026-06-20/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_92f3914c",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Netherlands v Sweden",
-    "url": "https://www.sportsgambler.com/betting-tips/football/netherlands-vs-sweden-prediction-lineups-odds-2026-06-20/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_abb2d9d3",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Germany v Ivory Coast",
-    "url": "https://www.sportsgambler.com/betting-tips/football/germany-vs-ivory-coast-prediction-lineups-odds-2026-06-20/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_eb626047",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Ecuador v Curaçao",
-    "url": "https://www.sportsgambler.com/betting-tips/football/ecuador-vs-curacao-prediction-lineups-odds-2026-06-21/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_cec56ca7",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Tunisia v Japan",
-    "url": "https://www.sportsgambler.com/betting-tips/football/tunisia-vs-japan-prediction-lineups-odds-2026-06-21/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_ccaa589c",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Spain v Saudi Arabia",
-    "url": "https://www.sportsgambler.com/betting-tips/football/spain-vs-saudi-arabia-prediction-lineups-odds-2026-06-21/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_9c8475df",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Belgium v Iran",
-    "url": "https://www.sportsgambler.com/betting-tips/football/belgium-vs-iran-prediction-lineups-odds-2026-06-21/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_b85db634",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Uruguay v Cape Verde",
-    "url": "https://www.sportsgambler.com/betting-tips/football/uruguay-vs-cape-verde-prediction-lineups-odds-2026-06-21/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_718523af",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: New Zealand v Egypt",
-    "url": "https://www.sportsgambler.com/betting-tips/football/new-zealand-vs-egypt-prediction-lineups-odds-2026-06-22/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_d5ec09c7",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Argentina v Austria",
-    "url": "https://www.sportsgambler.com/betting-tips/football/argentina-vs-austria-prediction-lineups-odds-2026-06-22/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_37e4dd71",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: France v Iraq",
-    "url": "https://www.sportsgambler.com/betting-tips/football/france-vs-iraq-prediction-lineups-odds-2026-06-22/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_e8b87eb4",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Norway v Senegal",
-    "url": "https://www.sportsgambler.com/betting-tips/football/norway-vs-senegal-prediction-lineups-odds-2026-06-23/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_f6733f84",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Jordan v Algeria",
-    "url": "https://www.sportsgambler.com/betting-tips/football/jordan-vs-algeria-prediction-lineups-odds-2026-06-23/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_e7de8c8c",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Portugal v Uzbekistan",
-    "url": "https://www.sportsgambler.com/betting-tips/football/portugal-vs-uzbekistan-prediction-lineups-odds-2026-06-23/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_e08a04cc",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: England v Ghana",
-    "url": "https://www.sportsgambler.com/betting-tips/football/england-vs-ghana-prediction-lineups-odds-2026-06-23/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_8e762d70",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Panama v Croatia",
-    "url": "https://www.sportsgambler.com/betting-tips/football/panama-vs-croatia-prediction-lineups-odds-2026-06-23/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_c77cdcde",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Colombia v DR Congo",
-    "url": "https://www.sportsgambler.com/betting-tips/football/colombia-vs-dr-congo-prediction-lineups-odds-2026-06-24/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_c69ee111",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Switzerland v Canada",
-    "url": "https://www.sportsgambler.com/betting-tips/football/switzerland-vs-canada-prediction-lineups-odds-2026-06-24/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_f11be703",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Bosnia and Herzegovina v Qatar",
-    "url": "https://www.sportsgambler.com/betting-tips/football/bosnia-and-herzegovina-vs-qatar-prediction-lineups-odds-2026-06-24/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_8314489",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Scotland v Brazil",
-    "url": "https://www.sportsgambler.com/betting-tips/football/scotland-vs-brazil-prediction-lineups-odds-2026-06-24/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_d4781db",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Morocco v Haiti",
-    "url": "https://www.sportsgambler.com/betting-tips/football/morocco-vs-haiti-prediction-lineups-odds-2026-06-24/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_965ce404",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Czechia v Mexico",
-    "url": "https://www.sportsgambler.com/betting-tips/football/czechia-vs-mexico-prediction-lineups-odds-2026-06-25/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_d63101d4",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: South Africa v South Korea",
-    "url": "https://www.sportsgambler.com/betting-tips/football/south-africa-vs-south-korea-prediction-lineups-odds-2026-06-25/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_d27f85f0",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Curaçao v Ivory Coast",
-    "url": "https://www.sportsgambler.com/betting-tips/football/curacao-vs-ivory-coast-prediction-lineups-odds-2026-06-25/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_ded4bd67",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Ecuador v Germany",
-    "url": "https://www.sportsgambler.com/betting-tips/football/ecuador-vs-germany-prediction-lineups-odds-2026-06-25/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_b697a2e7",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Japan v Sweden",
-    "url": "https://www.sportsgambler.com/betting-tips/football/japan-vs-sweden-prediction-lineups-odds-2026-06-25/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_2e362fe3",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Tunisia v Netherlands",
-    "url": "https://www.sportsgambler.com/betting-tips/football/tunisia-vs-netherlands-prediction-lineups-odds-2026-06-25/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_435aa933",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Turkiye v USA",
-    "url": "https://www.sportsgambler.com/betting-tips/football/turkiye-vs-usa-prediction-lineups-odds-2026-06-26/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_dd0dd989",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Paraguay v Australia",
-    "url": "https://www.sportsgambler.com/betting-tips/football/paraguay-vs-australia-prediction-lineups-odds-2026-06-26/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_7fc7de6f",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Norway v France",
-    "url": "https://www.sportsgambler.com/betting-tips/football/norway-vs-france-prediction-lineups-odds-2026-06-26/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_6cd6027d",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Senegal v Iraq",
-    "url": "https://www.sportsgambler.com/betting-tips/football/senegal-vs-iraq-prediction-lineups-odds-2026-06-26/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_746b6b5f",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Cape Verde v Saudi Arabia",
-    "url": "https://www.sportsgambler.com/betting-tips/football/cape-verde-vs-saudi-arabia-prediction-lineups-odds-2026-06-27/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_90638ee3",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Uruguay v Spain",
-    "url": "https://www.sportsgambler.com/betting-tips/football/uruguay-vs-spain-prediction-lineups-odds-2026-06-27/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_546c3d9",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Egypt v Iran",
-    "url": "https://www.sportsgambler.com/betting-tips/football/egypt-vs-iran-prediction-lineups-odds-2026-06-27/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_5fed4b8a",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: New Zealand v Belgium",
-    "url": "https://www.sportsgambler.com/betting-tips/football/new-zealand-vs-belgium-prediction-lineups-odds-2026-06-27/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_bf7041b8",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Panama v England",
-    "url": "https://www.sportsgambler.com/betting-tips/football/panama-vs-england-prediction-lineups-odds-2026-06-27/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_cceeed14",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Croatia v Ghana",
-    "url": "https://www.sportsgambler.com/betting-tips/football/croatia-vs-ghana-prediction-lineups-odds-2026-06-27/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_ff4348d4",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Colombia v Portugal",
-    "url": "https://www.sportsgambler.com/betting-tips/football/colombia-vs-portugal-prediction-lineups-odds-2026-06-27/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_23f04429",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: DR Congo v Uzbekistan",
-    "url": "https://www.sportsgambler.com/betting-tips/football/dr-congo-vs-uzbekistan-prediction-lineups-odds-2026-06-27/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_3dbd5241",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Algeria v Austria",
-    "url": "https://www.sportsgambler.com/betting-tips/football/algeria-vs-austria-prediction-lineups-odds-2026-06-28/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_42c226bd",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Jordan v Argentina",
-    "url": "https://www.sportsgambler.com/betting-tips/football/jordan-vs-argentina-prediction-lineups-odds-2026-06-28/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_6094ec8b",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "weather",
-    "source": "Houston weather forecast",
-    "url": "https://www.weather-forecast.com/locations/Houston/forecasts/latest",
-    "status": "ok",
-    "records": 5,
-    "reason": ""
-  },
-  {
-    "id": "source_9d7634cb",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "weather",
-    "source": "Dallas weather forecast",
-    "url": "https://www.weather-forecast.com/locations/Dallas/forecasts/latest",
-    "status": "ok",
-    "records": 5,
-    "reason": ""
-  },
-  {
-    "id": "source_581ae14b",
-    "createdAt": "2026-06-14T10:39:51.126Z",
-    "kind": "weather",
-    "source": "Philadelphia weather forecast",
-    "url": "https://www.weather-forecast.com/locations/Philadelphia/forecasts/latest",
-    "status": "ok",
-    "records": 5,
     "reason": ""
   }
 ]

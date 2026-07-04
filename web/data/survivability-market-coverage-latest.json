@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-07-04T10:27:50.256Z",
+  "createdAt": "2026-07-04T12:37:01.557Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -9,22 +9,24 @@
     "reason": "Collecting public-web odds until the coverage gate is satisfied."
   },
   "fixtureWindow": {
-    "fixtureCount": 6,
+    "fixtureCount": 8,
     "fixtureIds": [
       "fixture_ceaac61",
       "fixture_cfb15439",
       "fixture_c536b958",
       "fixture_8af91559",
       "fixture_6a2aba8a",
-      "fixture_a4eee394"
+      "fixture_a4eee394",
+      "fixture_430996cb",
+      "fixture_3dce0e89"
     ]
   },
   "summary": {
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 13,
-    "freshRecordCount": 13,
+    "totalRecords": 15,
+    "freshRecordCount": 15,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -45,20 +47,20 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 5 more fresh records",
+        "needs 3 more fresh records",
         "needs 3 more covered fixtures",
         "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 13,
-      "freshRecordCount": 13,
+      "recordCount": 15,
+      "freshRecordCount": 15,
       "fixtureCount": 2,
-      "totalFixtureCount": 6,
-      "fixtureCoverage": 0.333,
+      "totalFixtureCount": 8,
+      "fixtureCoverage": 0.25,
       "bookmakerCount": 2,
       "averageBookmakersPerFixture": 1,
       "lineCount": 2,
       "outcomeCount": 2,
-      "latestCapturedAt": "2026-07-04T10:27:50.256Z",
+      "latestCapturedAt": "2026-07-04T12:37:01.557Z",
       "sampleOutcomes": [
         {
           "fixtureId": "fixture_cfb15439",
@@ -68,7 +70,7 @@
           "line": "+2",
           "team": "Paraguay",
           "decimalOdds": 1.9,
-          "capturedAt": "2026-07-04T10:27:50.256Z"
+          "capturedAt": "2026-07-04T12:37:01.557Z"
         },
         {
           "fixtureId": "fixture_c536b958",
@@ -78,7 +80,7 @@
           "line": "+0.75",
           "team": "Norway",
           "decimalOdds": 1.79,
-          "capturedAt": "2026-07-04T10:27:50.256Z"
+          "capturedAt": "2026-07-04T12:37:01.557Z"
         }
       ]
     },
@@ -109,7 +111,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 6,
+      "totalFixtureCount": 8,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -145,7 +147,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 6,
+      "totalFixtureCount": 8,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -181,7 +183,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 6,
+      "totalFixtureCount": 8,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -216,7 +218,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 6,
+      "totalFixtureCount": 8,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -251,7 +253,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 6,
+      "totalFixtureCount": 8,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
