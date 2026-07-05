@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-07-05T18:18:11.173Z",
+  "createdAt": "2026-07-05T21:29:47.306Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -11,20 +11,20 @@
   "fixtureWindow": {
     "fixtureCount": 6,
     "fixtureIds": [
-      "fixture_c536b958",
       "fixture_8af91559",
       "fixture_6a2aba8a",
       "fixture_a4eee394",
       "fixture_430996cb",
-      "fixture_3dce0e89"
+      "fixture_3dce0e89",
+      "fixture_74905ce1"
     ]
   },
   "summary": {
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 18,
-    "freshRecordCount": 18,
+    "totalRecords": 6,
+    "freshRecordCount": 6,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -45,30 +45,24 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 3 more covered fixtures",
-        "needs deeper bookmaker coverage per fixture"
+        "needs 12 more fresh records",
+        "needs 4 more covered fixtures",
+        "needs 1 more fixtures for coverage",
+        "needs 1 more bookmaker source(s)",
+        "needs deeper bookmaker coverage per fixture",
+        "needs 1 more distinct line(s)"
       ],
-      "recordCount": 18,
-      "freshRecordCount": 18,
-      "fixtureCount": 2,
+      "recordCount": 6,
+      "freshRecordCount": 6,
+      "fixtureCount": 1,
       "totalFixtureCount": 6,
-      "fixtureCoverage": 0.333,
-      "bookmakerCount": 2,
+      "fixtureCoverage": 0.167,
+      "bookmakerCount": 1,
       "averageBookmakersPerFixture": 1,
-      "lineCount": 2,
-      "outcomeCount": 2,
-      "latestCapturedAt": "2026-07-05T18:18:11.173Z",
+      "lineCount": 1,
+      "outcomeCount": 1,
+      "latestCapturedAt": "2026-07-05T21:29:47.306Z",
       "sampleOutcomes": [
-        {
-          "fixtureId": "fixture_c536b958",
-          "fixture": "Brazil v Norway",
-          "bookmaker": "SportsGambler public prop pages: Brazil v Norway",
-          "outcome": "Norway +0.75",
-          "line": "+0.75",
-          "team": "Norway",
-          "decimalOdds": 1.79,
-          "capturedAt": "2026-07-05T18:18:11.173Z"
-        },
         {
           "fixtureId": "fixture_6a2aba8a",
           "fixture": "Portugal v Spain",
@@ -77,7 +71,7 @@
           "line": "+0.5",
           "team": "Portugal",
           "decimalOdds": 1.9,
-          "capturedAt": "2026-07-05T18:18:11.173Z"
+          "capturedAt": "2026-07-05T21:29:47.306Z"
         }
       ]
     },
