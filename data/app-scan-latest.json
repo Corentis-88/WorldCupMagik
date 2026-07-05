@@ -1,6 +1,6 @@
 {
-  "id": "app_scan_32eb467d",
-  "createdAt": "2026-07-05T15:40:06.820Z",
+  "id": "app_scan_5762d5f4",
+  "createdAt": "2026-07-05T18:18:11.173Z",
   "scheduled": true,
   "settings": {
     "stake": 10,
@@ -45,9 +45,9 @@
     "freshHeatRecords": 6,
     "freshSquadDepthRecords": 12,
     "oddsHistoryRecords": 50000,
-    "survivabilityOddsHistoryRecords": 204,
-    "scorerOddsHistoryRecords": 14222,
-    "heatHistoryRecords": 5069,
+    "survivabilityOddsHistoryRecords": 206,
+    "scorerOddsHistoryRecords": 14232,
+    "heatHistoryRecords": 5075,
     "squadDepthHistoryRecords": 51,
     "playerStatsRecords": 812,
     "newsArticleCount": 36,
@@ -69,7 +69,7 @@
     "message": "Real public-web data was gathered and scored. Source misses are recorded instead of filled with made-up data."
   },
   "survivabilityMarketCoverage": {
-    "createdAt": "2026-07-05T15:40:06.820Z",
+    "createdAt": "2026-07-05T18:18:11.173Z",
     "gateVersion": "survivability-public-web-v1",
     "enabled": true,
     "status": "collecting",
@@ -93,8 +93,8 @@
       "marketCount": 6,
       "satisfiedMarketCount": 0,
       "satisfiedMarkets": [],
-      "totalRecords": 16,
-      "freshRecordCount": 16,
+      "totalRecords": 18,
+      "freshRecordCount": 18,
       "message": "Survivability markets are being gathered and audited before betting logic can use them."
     },
     "markets": {
@@ -115,12 +115,11 @@
           "maxRecordAgeHours": 72
         },
         "missing": [
-          "needs 2 more fresh records",
           "needs 3 more covered fixtures",
           "needs deeper bookmaker coverage per fixture"
         ],
-        "recordCount": 16,
-        "freshRecordCount": 16,
+        "recordCount": 18,
+        "freshRecordCount": 18,
         "fixtureCount": 2,
         "totalFixtureCount": 6,
         "fixtureCoverage": 0.333,
@@ -128,7 +127,7 @@
         "averageBookmakersPerFixture": 1,
         "lineCount": 2,
         "outcomeCount": 2,
-        "latestCapturedAt": "2026-07-05T15:40:06.820Z",
+        "latestCapturedAt": "2026-07-05T18:18:11.173Z",
         "sampleOutcomes": [
           {
             "fixtureId": "fixture_c536b958",
@@ -138,7 +137,7 @@
             "line": "+0.75",
             "team": "Norway",
             "decimalOdds": 1.79,
-            "capturedAt": "2026-07-05T15:40:06.820Z"
+            "capturedAt": "2026-07-05T18:18:11.173Z"
           },
           {
             "fixtureId": "fixture_6a2aba8a",
@@ -148,7 +147,7 @@
             "line": "+0.5",
             "team": "Portugal",
             "decimalOdds": 1.9,
-            "capturedAt": "2026-07-05T15:40:06.820Z"
+            "capturedAt": "2026-07-05T18:18:11.173Z"
           }
         ]
       },
@@ -385,8 +384,8 @@
     },
     "failures": [
       {
-        "id": "source_8594139d",
-        "createdAt": "2026-07-05T15:40:06.820Z",
+        "id": "source_8e4b0d14",
+        "createdAt": "2026-07-05T18:18:11.173Z",
         "kind": "player_stats",
         "source": "Brazil PlayerStats shots",
         "url": "https://playerstats.football/world-cup/brazil/total-shots",
@@ -395,8 +394,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Brazil."
       },
       {
-        "id": "source_88bba670",
-        "createdAt": "2026-07-05T15:40:06.820Z",
+        "id": "source_91729fe7",
+        "createdAt": "2026-07-05T18:18:11.173Z",
         "kind": "player_stats",
         "source": "Brazil PlayerStats shots on target",
         "url": "https://playerstats.football/world-cup/brazil/shots-on-target",
@@ -405,8 +404,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Brazil."
       },
       {
-        "id": "source_af8f898b",
-        "createdAt": "2026-07-05T15:40:06.820Z",
+        "id": "source_b8468302",
+        "createdAt": "2026-07-05T18:18:11.173Z",
         "kind": "player_stats",
         "source": "Norway PlayerStats shots",
         "url": "https://playerstats.football/world-cup/norway/total-shots",
@@ -415,8 +414,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Norway."
       },
       {
-        "id": "source_bf9c4cde",
-        "createdAt": "2026-07-05T15:40:06.820Z",
+        "id": "source_c8534655",
+        "createdAt": "2026-07-05T18:18:11.173Z",
         "kind": "player_stats",
         "source": "Norway PlayerStats shots on target",
         "url": "https://playerstats.football/world-cup/norway/shots-on-target",
@@ -425,8 +424,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Norway."
       },
       {
-        "id": "source_b462a4d4",
-        "createdAt": "2026-07-05T15:40:06.820Z",
+        "id": "source_bd199e4b",
+        "createdAt": "2026-07-05T18:18:11.173Z",
         "kind": "player_stats",
         "source": "Mexico PlayerStats shots",
         "url": "https://playerstats.football/world-cup/mexico/total-shots",
@@ -435,8 +434,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Mexico."
       },
       {
-        "id": "source_f979bfe7",
-        "createdAt": "2026-07-05T15:40:06.820Z",
+        "id": "source_230b95e",
+        "createdAt": "2026-07-05T18:18:11.173Z",
         "kind": "player_stats",
         "source": "Mexico PlayerStats shots on target",
         "url": "https://playerstats.football/world-cup/mexico/shots-on-target",
@@ -445,8 +444,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Mexico."
       },
       {
-        "id": "source_f8f24484",
-        "createdAt": "2026-07-05T15:40:06.820Z",
+        "id": "source_1a93dfb",
+        "createdAt": "2026-07-05T18:18:11.173Z",
         "kind": "player_stats",
         "source": "England PlayerStats assists",
         "url": "https://playerstats.football/world-cup/england/goals-assists",
@@ -455,8 +454,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for England."
       },
       {
-        "id": "source_340513a8",
-        "createdAt": "2026-07-05T15:40:06.820Z",
+        "id": "source_3cbc0d1f",
+        "createdAt": "2026-07-05T18:18:11.173Z",
         "kind": "player_stats",
         "source": "England PlayerStats shots",
         "url": "https://playerstats.football/world-cup/england/total-shots",
@@ -465,8 +464,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for England."
       },
       {
-        "id": "source_607bba91",
-        "createdAt": "2026-07-05T15:40:06.820Z",
+        "id": "source_6932b408",
+        "createdAt": "2026-07-05T18:18:11.173Z",
         "kind": "player_stats",
         "source": "England PlayerStats shots on target",
         "url": "https://playerstats.football/world-cup/england/shots-on-target",
@@ -475,8 +474,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for England."
       },
       {
-        "id": "source_954604ad",
-        "createdAt": "2026-07-05T15:40:06.820Z",
+        "id": "source_9dfcfe24",
+        "createdAt": "2026-07-05T18:18:11.173Z",
         "kind": "player_stats",
         "source": "Portugal PlayerStats assists",
         "url": "https://playerstats.football/world-cup/portugal/goals-assists",
@@ -485,8 +484,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Portugal."
       },
       {
-        "id": "source_8df2358b",
-        "createdAt": "2026-07-05T15:40:06.820Z",
+        "id": "source_96a92f02",
+        "createdAt": "2026-07-05T18:18:11.173Z",
         "kind": "player_stats",
         "source": "Portugal PlayerStats shots",
         "url": "https://playerstats.football/world-cup/portugal/total-shots",
@@ -495,8 +494,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Portugal."
       },
       {
-        "id": "source_8db2ec9e",
-        "createdAt": "2026-07-05T15:40:06.820Z",
+        "id": "source_9669e615",
+        "createdAt": "2026-07-05T18:18:11.173Z",
         "kind": "player_stats",
         "source": "Portugal PlayerStats shots on target",
         "url": "https://playerstats.football/world-cup/portugal/shots-on-target",
@@ -505,8 +504,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Portugal."
       },
       {
-        "id": "source_695c2244",
-        "createdAt": "2026-07-05T15:40:06.820Z",
+        "id": "source_72131bbb",
+        "createdAt": "2026-07-05T18:18:11.173Z",
         "kind": "player_stats",
         "source": "Spain PlayerStats assists",
         "url": "https://playerstats.football/world-cup/spain/goals-assists",
@@ -515,8 +514,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Spain."
       },
       {
-        "id": "source_f3cfbaa8",
-        "createdAt": "2026-07-05T15:40:06.820Z",
+        "id": "source_fc86b41f",
+        "createdAt": "2026-07-05T18:18:11.173Z",
         "kind": "player_stats",
         "source": "Spain PlayerStats shots",
         "url": "https://playerstats.football/world-cup/spain/total-shots",
@@ -525,8 +524,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Spain."
       },
       {
-        "id": "source_daedcb51",
-        "createdAt": "2026-07-05T15:40:06.820Z",
+        "id": "source_e3a4c4c8",
+        "createdAt": "2026-07-05T18:18:11.173Z",
         "kind": "player_stats",
         "source": "Spain PlayerStats shots on target",
         "url": "https://playerstats.football/world-cup/spain/shots-on-target",
@@ -535,8 +534,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Spain."
       },
       {
-        "id": "source_a476d522",
-        "createdAt": "2026-07-05T15:40:06.820Z",
+        "id": "source_ad2dce99",
+        "createdAt": "2026-07-05T18:18:11.173Z",
         "kind": "stats",
         "source": "USA public results 1",
         "url": "https://en.wikipedia.org/wiki/United_States_men's_national_football_team_results_(2020%E2%80%93present)",
@@ -545,8 +544,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_97689a41",
-        "createdAt": "2026-07-05T15:40:06.820Z",
+        "id": "source_a01f93b8",
+        "createdAt": "2026-07-05T18:18:11.173Z",
         "kind": "player_stats",
         "source": "USA PlayerStats assists",
         "url": "https://playerstats.football/world-cup/usa/goals-assists",
@@ -555,8 +554,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_871c859d",
-        "createdAt": "2026-07-05T15:40:06.820Z",
+        "id": "source_8fd37f14",
+        "createdAt": "2026-07-05T18:18:11.173Z",
         "kind": "player_stats",
         "source": "USA PlayerStats shots",
         "url": "https://playerstats.football/world-cup/usa/total-shots",
@@ -565,8 +564,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_74a78c54",
-        "createdAt": "2026-07-05T15:40:06.820Z",
+        "id": "source_7d5e85cb",
+        "createdAt": "2026-07-05T18:18:11.173Z",
         "kind": "player_stats",
         "source": "USA PlayerStats shots on target",
         "url": "https://playerstats.football/world-cup/usa/shots-on-target",
@@ -575,8 +574,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_6e2dfe9d",
-        "createdAt": "2026-07-05T15:40:06.820Z",
+        "id": "source_76e4f814",
+        "createdAt": "2026-07-05T18:18:11.173Z",
         "kind": "team_profile",
         "source": "USA public profile 1",
         "url": "https://en.wikipedia.org/wiki/United_States_men's_national_football_team",
@@ -1286,18 +1285,18 @@
       }
     },
     "lastOutcomeSettlement": {
-      "examinedLegCount": 2937,
+      "examinedLegCount": 2939,
       "insertedCount": 0,
       "skipped": {
         "noRecommendations": 0,
-        "noMatch": 536,
+        "noMatch": 538,
         "unknownMarket": 327,
         "latePrediction": 1,
         "alreadySettled": 2073
       }
     },
     "lastPredictionReflection": {
-      "examinedPredictionCount": 10383,
+      "examinedPredictionCount": 10389,
       "insertedCount": 0,
       "updatedCount": 2101,
       "upsertedCount": 2101
@@ -1305,12 +1304,12 @@
     "topTeams": [
       {
         "team": "Mexico",
-        "learnedEdge": 0.2792,
+        "learnedEdge": 0.2788,
         "confidence": 0.7639,
         "reasons": [
           "20-match form 1.9 PPG, xG 1.486-1",
           "recent form improving",
-          "133 news item(s), news impact 0.0807",
+          "134 news item(s), news impact 0.0815",
           "market intelligence 0% movement, consensus 1.13 across 1 bookie(s)",
           "16 scorer record(s), top scorer signal 0.063",
           "memory currently leans positive"
@@ -1318,11 +1317,11 @@
       },
       {
         "team": "England",
-        "learnedEdge": 0.1747,
+        "learnedEdge": 0.1745,
         "confidence": 0.7638,
         "reasons": [
           "20-match form 2.3 PPG, xG 1.791-0.761",
-          "268 news item(s), news impact 0.0926",
+          "269 news item(s), news impact 0.093",
           "market intelligence 0% movement, consensus 1.19 across 1 bookie(s)",
           "14 scorer record(s), top scorer signal 0.09",
           "memory currently leans positive"
@@ -1330,12 +1329,12 @@
       },
       {
         "team": "Belgium",
-        "learnedEdge": 0.1705,
-        "confidence": 0.7623,
+        "learnedEdge": 0.1734,
+        "confidence": 0.7626,
         "reasons": [
           "20-match form 1.75 PPG, xG 2.293-1.297",
           "recent form improving",
-          "25 news item(s), news impact 0.0418",
+          "27 news item(s), news impact 0.0406",
           "market intelligence 0% movement, consensus 1.19 across 1 bookie(s)",
           "20 scorer record(s), top scorer signal 0.09",
           "memory currently leans positive"
@@ -1343,7 +1342,7 @@
       },
       {
         "team": "Colombia",
-        "learnedEdge": 0.1557,
+        "learnedEdge": 0.1559,
         "confidence": 0.7146,
         "reasons": [
           "20-match form 2.3 PPG, xG 1.956-1.088",
@@ -1355,11 +1354,11 @@
       },
       {
         "team": "USA",
-        "learnedEdge": 0.1522,
-        "confidence": 0.7604,
+        "learnedEdge": 0.1551,
+        "confidence": 0.7606,
         "reasons": [
           "20-match form 1.95 PPG, xG 2.051-1.242",
-          "75 news item(s), news impact 0.0689",
+          "77 news item(s), news impact 0.0676",
           "market intelligence 0% movement, consensus 1.13 across 1 bookie(s)",
           "24 scorer record(s), top scorer signal 0.0765",
           "memory currently leans positive"
@@ -1367,8 +1366,8 @@
       },
       {
         "team": "Spain",
-        "learnedEdge": 0.1188,
-        "confidence": 0.7643,
+        "learnedEdge": 0.116,
+        "confidence": 0.7644,
         "reasons": [
           "20-match form 2.6 PPG, xG 2.44-0.927",
           "recent form improving",
@@ -1383,25 +1382,25 @@
   "eligibleLegCount": 1,
   "betslip": [
     {
-      "id": "single_leg_7b053ec0",
+      "id": "single_leg_38a4bc4f",
       "rank": 1,
       "category": "single",
       "label": "Single",
       "type": "single",
-      "score": 72.35,
+      "score": 76.99,
       "legCount": 1,
-      "combinedDecimalOdds": 4,
+      "combinedDecimalOdds": 4.1,
       "stake": 10,
-      "potentialReturn": 40,
-      "potentialProfit": 30,
-      "combinedProbability": 0.2871,
-      "expectedValue": 0.1484,
-      "averageConfidence": 0.8533,
-      "averageIndependentEdge": 0.0193,
-      "survivalCombinedProbability": 0.3259,
-      "averageSurvivalProbability": 0.3259,
+      "potentialReturn": 41,
+      "potentialProfit": 31,
+      "combinedProbability": 0.2933,
+      "expectedValue": 0.2025,
+      "averageConfidence": 0.9063,
+      "averageIndependentEdge": 0.0556,
+      "survivalCombinedProbability": 0.323,
+      "averageSurvivalProbability": 0.323,
       "averageNonMarketSignalCount": 7,
-      "displayRating": 0.6872,
+      "displayRating": 0.7356,
       "riskLegCount": 1,
       "bttsLegCount": 0,
       "scorerLegCount": 1,
@@ -1411,24 +1410,24 @@
       "reusedSignalCount": 0,
       "legs": [
         {
-          "id": "leg_7b053ec0",
+          "id": "leg_38a4bc4f",
           "fixtureId": "fixture_c536b958",
           "fixtureDate": "2026-07-05T20:00:00.000Z",
           "homeTeam": "Brazil",
           "awayTeam": "Norway",
           "market": "anytime_scorer",
-          "playerName": "Gabriel Martinelli",
-          "selectionLabel": "Brazil vs Norway: Gabriel Martinelli anytime scorer",
+          "playerName": "Alexander Sørloth",
+          "selectionLabel": "Brazil vs Norway: Alexander Sørloth anytime scorer",
           "bookmaker": "SportsGambler public prop pages: Brazil v Norway",
-          "decimalOdds": 4,
-          "modelProbability": 0.2871,
-          "rawModelProbability": 0.2896,
-          "impliedProbability": 0.25,
-          "marketImpliedProbability": 0.2703,
-          "independentEdge": 0.0193,
-          "edge": 0.0239,
-          "confidence": 0.8533,
-          "riskTag": "calculated_risk",
+          "decimalOdds": 4.1,
+          "modelProbability": 0.2933,
+          "rawModelProbability": 0.312,
+          "impliedProbability": 0.2439,
+          "marketImpliedProbability": 0.2564,
+          "independentEdge": 0.0556,
+          "edge": 0.0512,
+          "confidence": 0.9063,
+          "riskTag": "longshot_value",
           "shortWindowFallback": false,
           "reusedSignal": false,
           "components": {
@@ -1443,12 +1442,12 @@
               "starter/minutes projection is healthy",
               "20-match scorer memory"
             ],
-            "independentEvidenceStrength": 0.4949,
-            "marketBlendLift": -0.0025,
-            "oddsMovement": -0.0263,
+            "independentEvidenceStrength": 0.6784,
+            "marketBlendLift": -0.0187,
+            "oddsMovement": -0.025,
             "oddsShortening": true,
             "oddsDrifting": false,
-            "marketAverageOdds": 3.7,
+            "marketAverageOdds": 3.9,
             "heatStress": 0.5827,
             "heatConfidence": 0.7055,
             "heatClimateBand": "hotHumid",
@@ -1488,63 +1487,63 @@
               "high combined confidence",
               "strong team-data completeness",
               "team intelligence memory is mature",
-              "odds are ageing",
               "many non-market signals agree",
               "settled-outcome learning active",
-              "post-match xG/shot reflection active"
+              "post-match xG/shot reflection active",
+              "market type fits the football evidence"
             ],
             "scorerMarketType": "anytime_scorer",
-            "teamGoalLikelihood": 0.7943,
-            "teamFirstGoalShare": 0.525,
-            "starterLikelihood": 0.6266,
-            "projectedMinutes": 68.1,
-            "scorerGoalsPerTwentyTeamMatches": 3,
+            "teamGoalLikelihood": 0.7636,
+            "teamFirstGoalShare": 0.475,
+            "starterLikelihood": 0.6344,
+            "projectedMinutes": 68.6,
+            "scorerGoalsPerTwentyTeamMatches": 4,
             "scorerConfidence": 0.78,
-            "predictionReflectionAdjustment": -0.0303,
+            "predictionReflectionAdjustment": -0.032,
             "predictionReflectionConfidence": 1,
             "predictionReflectionReasons": [
               "anytime_scorer post-match reflection 9.4% actual vs 18.4% projected over 1009",
               "moderate heat matches undershot expected xG",
               "non group game reflection 27% actual over 37"
             ],
-            "survivalPenalty": 0.01
+            "survivalPenalty": 0.0195
           },
-          "thesis": "Brazil vs Norway: Gabriel Martinelli anytime scorer is priced at 4; raw AI probability 29%, market-adjusted probability 28.7%, market view 27%. Independent edge 1.93%, final value edge 2.39%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw scorer probability beats market, team goals environment is live, scorer raw probability clears floor, starter/minutes projection is healthy, 20-match scorer memory. Fixture model: expected goals 3.37 (1.78-1.59), rating edge 30.7, style edge 5.1, memory edge -2.04. Odds intelligence is capped: market result edge 0, consensus probability 0.3258 where available. News impact is 0.059 for Brazil and 0.071 for Norway. Tactical memory: Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Norway 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.51. Scorer memory: Brazil top recent scorers Vinicius Junior, Casemiro, Cunha; Norway top recent scorers Haaland, Sørloth, E. Haaland. Heat layer: New York/New Jersey hotHumid stress 58.3%, xG adjustment -0.059, result edge 6.98; climate/history/depth differential 0.3693. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goals environment is live at 3.37 expected goals; scorer price gives the betslip a higher-upside angle. Outcome learning: anytime_scorer historical strike 8.7% over 1292; calculated_risk historical strike 15.8% over 240; anytime_scorer calibration 8.7% actual vs 18.8% projected; calculated_risk calibration 15.8% actual vs 25.8% projected. Post-match reflection: anytime_scorer post-match reflection 9.4% actual vs 18.4% projected over 1009; moderate heat matches undershot expected xG; non group game reflection 27% actual over 37. Market average moved from 3.8 to 3.7; best price is 0% over average. Confidence 85.3% after odds freshness and data completeness checks."
+          "thesis": "Brazil vs Norway: Alexander Sørloth anytime scorer is priced at 4.1; raw AI probability 31.2%, market-adjusted probability 29.3%, market view 25.6%. Independent edge 5.56%, final value edge 5.12%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw scorer probability beats market, team goals environment is live, scorer raw probability clears floor, starter/minutes projection is healthy, 20-match scorer memory. Fixture model: expected goals 3.37 (1.78-1.59), rating edge 30.8, style edge 5.1, memory edge -1.9. Odds intelligence is capped: market result edge 0, consensus probability 0.3258 where available. News impact is 0.057 for Brazil and 0.065 for Norway. Tactical memory: Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Norway 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.51. Scorer memory: Brazil top recent scorers Vinicius Junior, Casemiro, Cunha; Norway top recent scorers Haaland, Sørloth, E. Haaland. Heat layer: New York/New Jersey hotHumid stress 58.3%, xG adjustment -0.059, result edge 6.98; climate/history/depth differential 0.3693. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goals environment is live at 3.37 expected goals; scorer price gives the betslip a higher-upside angle. Outcome learning: anytime_scorer historical strike 8.7% over 1292; longshot_value historical strike 10.5% over 172; anytime_scorer calibration 8.7% actual vs 18.8% projected; longshot_value calibration 10.5% actual vs 25.1% projected. Post-match reflection: anytime_scorer post-match reflection 9.4% actual vs 18.4% projected over 1009; moderate heat matches undershot expected xG; non group game reflection 27% actual over 37. Market average moved from 4 to 3.9; best price is 0% over average. Confidence 90.6% after odds freshness and data completeness checks."
         }
       ],
-      "thesis": "single at combined odds 4 with estimated slip chance 32.59% and average leg survival 32.6%. Expected value is 14.84%, independent edge averages 1.93%, and the model has 7 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  1 calculated-risk/value leg(s) stop this from being a favourite-only single. No high-implied-probability favourite crowding. Heat layer active on 1 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: Brazil vs Norway: Gabriel Martinelli anytime scorer."
+      "thesis": "single at combined odds 4.1 with estimated slip chance 32.3% and average leg survival 32.3%. Expected value is 20.25%, independent edge averages 5.56%, and the model has 7 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  1 calculated-risk/value leg(s) stop this from being a favourite-only single. No high-implied-probability favourite crowding. Heat layer active on 1 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: Brazil vs Norway: Alexander Sørloth anytime scorer."
     }
   ],
   "offerRanking": [],
   "strongestLegs": [
     {
-      "id": "leg_7b053ec0",
-      "createdAt": "2026-07-05T15:40:06.820Z",
+      "id": "leg_38a4bc4f",
+      "createdAt": "2026-07-05T18:18:11.173Z",
       "fixtureId": "fixture_c536b958",
       "fixtureDate": "2026-07-05T20:00:00.000Z",
       "homeTeam": "Brazil",
       "awayTeam": "Norway",
       "market": "anytime_scorer",
-      "outcome": "Gabriel Martinelli",
-      "playerName": "Gabriel Martinelli",
-      "playerTeam": "Brazil",
-      "selectionLabel": "Brazil vs Norway: Gabriel Martinelli anytime scorer",
+      "outcome": "Alexander Sørloth",
+      "playerName": "Alexander Sørloth",
+      "playerTeam": "Norway",
+      "selectionLabel": "Brazil vs Norway: Alexander Sørloth anytime scorer",
       "bookmaker": "SportsGambler public prop pages: Brazil v Norway",
-      "decimalOdds": 4,
-      "modelProbability": 0.2871,
-      "rawModelProbability": 0.2896,
-      "impliedProbability": 0.25,
-      "marketImpliedProbability": 0.2703,
-      "independentEdge": 0.0193,
-      "edge": 0.0239,
-      "priceEdge": 0.0371,
-      "marketEdge": 0.0168,
-      "confidence": 0.8533,
-      "score": 78.05,
-      "riskTag": "calculated_risk",
+      "decimalOdds": 4.1,
+      "modelProbability": 0.2933,
+      "rawModelProbability": 0.312,
+      "impliedProbability": 0.2439,
+      "marketImpliedProbability": 0.2564,
+      "independentEdge": 0.0556,
+      "edge": 0.0512,
+      "priceEdge": 0.0494,
+      "marketEdge": 0.0369,
+      "confidence": 0.9063,
+      "score": 84.77,
+      "riskTag": "longshot_value",
       "hardBlocks": [],
       "components": {
-        "ratingEdge": 30.7,
+        "ratingEdge": 30.8,
         "formEdge": 11.59,
         "xgEdge": -8.5,
         "styleEdge": 5.1,
@@ -1588,9 +1587,9 @@
           "Ødegaard",
           "Nusa"
         ],
-        "newsEdge": -1.11,
-        "memoryEdge": -2.04,
-        "independentResultEdge": 50.51,
+        "newsEdge": -0.77,
+        "memoryEdge": -1.9,
+        "independentResultEdge": 51.09,
         "marketMemoryEdge": -0.63,
         "marketResultEdge": 0,
         "marketConfidence": 0.66,
@@ -1616,7 +1615,7 @@
         "homeMarketDominanceGoalAdjustment": 0,
         "awayMarketDominanceGoalAdjustment": 0,
         "tournamentContextNote": "Tournament pressure layer inactive outside group-stage fixtures.",
-        "qualityGapEdge": 40.8,
+        "qualityGapEdge": 40.9,
         "qualityGapPressure": 0,
         "homeQualityGoalAdjustment": 0,
         "awayQualityGoalAdjustment": 0,
@@ -1629,20 +1628,20 @@
         "projectedShotsOnTargetTotal": 10.12,
         "homeProjectedShotsOnTarget": 5.33,
         "awayProjectedShotsOnTarget": 4.79,
-        "bttsShapeProbability": 0.6511,
+        "bttsShapeProbability": 0.651,
         "over15ShapeProbability": 0.8492,
-        "preOpeningOver25ShapeProbability": 0.6536,
-        "over25ShapeProbability": 0.6536,
-        "under35ShapeProbability": 0.5658,
-        "under45ShapeProbability": 0.7505,
-        "rawHomeWinProbability": 0.4257,
-        "rawDrawProbability": 0.2396,
-        "rawAwayWinProbability": 0.3347,
-        "rawBttsShapeProbability": 0.6511,
+        "preOpeningOver25ShapeProbability": 0.6535,
+        "over25ShapeProbability": 0.6535,
+        "under35ShapeProbability": 0.566,
+        "under45ShapeProbability": 0.7506,
+        "rawHomeWinProbability": 0.4264,
+        "rawDrawProbability": 0.2393,
+        "rawAwayWinProbability": 0.3343,
+        "rawBttsShapeProbability": 0.651,
         "rawOver15ShapeProbability": 0.8492,
-        "rawOver25ShapeProbability": 0.6536,
-        "rawUnder35ShapeProbability": 0.5658,
-        "rawUnder45ShapeProbability": 0.7505,
+        "rawOver25ShapeProbability": 0.6535,
+        "rawUnder35ShapeProbability": 0.566,
+        "rawUnder45ShapeProbability": 0.7506,
         "homeLongMatchCount": 20,
         "awayLongMatchCount": 20,
         "homeBttsRate": 0.6,
@@ -1651,8 +1650,8 @@
         "awayOver25Rate": 0.65,
         "homeCleanSheetRate": 0.35,
         "awayCleanSheetRate": 0.35,
-        "homeNewsImpact": 0.059,
-        "awayNewsImpact": 0.071,
+        "homeNewsImpact": 0.057,
+        "awayNewsImpact": 0.065,
         "heatStress": 0.5827,
         "heatConfidence": 0.7055,
         "heatClimateBand": "hotHumid",
@@ -1670,37 +1669,37 @@
         "heatHistoryDifferential": 0.0467,
         "heatSquadDepthDifferential": 0.1215,
         "combinedHeatDifferential": 0.3693,
-        "homeLearnedEdge": 0.0623,
-        "awayLearnedEdge": 0.0855,
+        "homeLearnedEdge": 0.0624,
+        "awayLearnedEdge": 0.084,
         "intelligenceConfidence": 0.762,
         "dataCompleteness": 0.822,
-        "playerTeam": "Brazil",
-        "starterLikelihood": 0.6266,
-        "projectedMinutes": 68.1,
+        "playerTeam": "Norway",
+        "starterLikelihood": 0.6344,
+        "projectedMinutes": 68.6,
         "scorerMarketType": "anytime_scorer",
-        "teamGoalLikelihood": 0.7943,
-        "teamFirstGoalShare": 0.525,
-        "scorerSampleRate": 0.15,
-        "scorerGoalsPerTwentyTeamMatches": 3,
+        "teamGoalLikelihood": 0.7636,
+        "teamFirstGoalShare": 0.475,
+        "scorerSampleRate": 0.2,
+        "scorerGoalsPerTwentyTeamMatches": 4,
         "scorerConfidence": 0.78,
         "scorerMatchesSampled": 20,
         "scoringRoleScore": 0.34,
         "playerDataCoverage": 0.74,
         "playerStatSource": "public result rows",
-        "scorerMarketLiftCap": 0.1046,
-        "rawScorerProbabilityUncapped": 0.2896,
+        "scorerMarketLiftCap": 0.1141,
+        "rawScorerProbabilityUncapped": 0.312,
         "scorerProbabilityCalibrated": true,
         "playerMinutesSource": "public scorer sample plus market role estimate",
-        "oddsAgeHours": 21.42,
-        "oddsFreshness": 0.286,
+        "oddsAgeHours": 9.96,
+        "oddsFreshness": 0.668,
         "bookmakerCoverage": 1,
-        "marketAverageOdds": 3.7,
-        "oddsMovement": -0.0263,
+        "marketAverageOdds": 3.9,
+        "oddsMovement": -0.025,
         "oddsShortening": true,
         "oddsDrifting": false,
         "bestOverAverage": 0,
-        "independentEdge": 0.0193,
-        "marketBlendLift": -0.0025,
+        "independentEdge": 0.0556,
+        "marketBlendLift": -0.0187,
         "nonMarketSignalCount": 7,
         "nonMarketSignals": [
           "raw AI probability beats market",
@@ -1711,7 +1710,7 @@
           "starter/minutes projection is healthy",
           "20-match scorer memory"
         ],
-        "independentEvidenceStrength": 0.4949,
+        "independentEvidenceStrength": 0.6784,
         "oddsMovementBonus": 3,
         "intelligenceBonus": 5.05,
         "marketFocusBonus": 7,
@@ -1721,16 +1720,16 @@
           "goals environment is live at 3.37 expected goals",
           "scorer price gives the betslip a higher-upside angle"
         ],
-        "outcomeLearningAdjustment": -0.057,
+        "outcomeLearningAdjustment": -0.0603,
         "outcomeLearningConfidence": 1,
         "outcomeLearningReasons": [
           "anytime_scorer historical strike 8.7% over 1292",
-          "calculated_risk historical strike 15.8% over 240",
+          "longshot_value historical strike 10.5% over 172",
           "anytime_scorer calibration 8.7% actual vs 18.8% projected",
-          "calculated_risk calibration 15.8% actual vs 25.8% projected"
+          "longshot_value calibration 10.5% actual vs 25.1% projected"
         ],
-        "outcomeLearningBaseAdjustment": -0.0516,
-        "predictionReflectionAdjustment": -0.0303,
+        "outcomeLearningBaseAdjustment": -0.0546,
+        "predictionReflectionAdjustment": -0.032,
         "predictionReflectionConfidence": 1,
         "predictionReflectionReasons": [
           "anytime_scorer post-match reflection 9.4% actual vs 18.4% projected over 1009",
@@ -1742,16 +1741,16 @@
           "high combined confidence",
           "strong team-data completeness",
           "team intelligence memory is mature",
-          "odds are ageing",
           "many non-market signals agree",
           "settled-outcome learning active",
-          "post-match xG/shot reflection active"
+          "post-match xG/shot reflection active",
+          "market type fits the football evidence"
         ],
         "favoriteCrowdingPenalty": 0,
         "valueOddsBonus": 3.5
       },
-      "thesis": "Brazil vs Norway: Gabriel Martinelli anytime scorer is priced at 4; raw AI probability 29%, market-adjusted probability 28.7%, market view 27%. Independent edge 1.93%, final value edge 2.39%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw scorer probability beats market, team goals environment is live, scorer raw probability clears floor, starter/minutes projection is healthy, 20-match scorer memory. Fixture model: expected goals 3.37 (1.78-1.59), rating edge 30.7, style edge 5.1, memory edge -2.04. Odds intelligence is capped: market result edge 0, consensus probability 0.3258 where available. News impact is 0.059 for Brazil and 0.071 for Norway. Tactical memory: Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Norway 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.51. Scorer memory: Brazil top recent scorers Vinicius Junior, Casemiro, Cunha; Norway top recent scorers Haaland, Sørloth, E. Haaland. Heat layer: New York/New Jersey hotHumid stress 58.3%, xG adjustment -0.059, result edge 6.98; climate/history/depth differential 0.3693. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goals environment is live at 3.37 expected goals; scorer price gives the betslip a higher-upside angle. Outcome learning: anytime_scorer historical strike 8.7% over 1292; calculated_risk historical strike 15.8% over 240; anytime_scorer calibration 8.7% actual vs 18.8% projected; calculated_risk calibration 15.8% actual vs 25.8% projected. Post-match reflection: anytime_scorer post-match reflection 9.4% actual vs 18.4% projected over 1009; moderate heat matches undershot expected xG; non group game reflection 27% actual over 37. Market average moved from 3.8 to 3.7; best price is 0% over average. Confidence 85.3% after odds freshness and data completeness checks.",
-      "rank": 14
+      "thesis": "Brazil vs Norway: Alexander Sørloth anytime scorer is priced at 4.1; raw AI probability 31.2%, market-adjusted probability 29.3%, market view 25.6%. Independent edge 5.56%, final value edge 5.12%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw scorer probability beats market, team goals environment is live, scorer raw probability clears floor, starter/minutes projection is healthy, 20-match scorer memory. Fixture model: expected goals 3.37 (1.78-1.59), rating edge 30.8, style edge 5.1, memory edge -1.9. Odds intelligence is capped: market result edge 0, consensus probability 0.3258 where available. News impact is 0.057 for Brazil and 0.065 for Norway. Tactical memory: Brazil 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Norway 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up); build-up edge -0.51. Scorer memory: Brazil top recent scorers Vinicius Junior, Casemiro, Cunha; Norway top recent scorers Haaland, Sørloth, E. Haaland. Heat layer: New York/New Jersey hotHumid stress 58.3%, xG adjustment -0.059, result edge 6.98; climate/history/depth differential 0.3693. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goals environment is live at 3.37 expected goals; scorer price gives the betslip a higher-upside angle. Outcome learning: anytime_scorer historical strike 8.7% over 1292; longshot_value historical strike 10.5% over 172; anytime_scorer calibration 8.7% actual vs 18.8% projected; longshot_value calibration 10.5% actual vs 25.1% projected. Post-match reflection: anytime_scorer post-match reflection 9.4% actual vs 18.4% projected over 1009; moderate heat matches undershot expected xG; non group game reflection 27% actual over 37. Market average moved from 4 to 3.9; best price is 0% over average. Confidence 90.6% after odds freshness and data completeness checks.",
+      "rank": 6
     }
   ]
 }
