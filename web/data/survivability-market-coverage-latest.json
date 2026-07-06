@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-07-06T00:17:54.953Z",
+  "createdAt": "2026-07-06T09:12:09.677Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -22,8 +22,8 @@
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 8,
-    "freshRecordCount": 8,
+    "totalRecords": 10,
+    "freshRecordCount": 10,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -44,12 +44,12 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 10 more fresh records",
+        "needs 8 more fresh records",
         "needs 3 more covered fixtures",
         "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 8,
-      "freshRecordCount": 8,
+      "recordCount": 10,
+      "freshRecordCount": 10,
       "fixtureCount": 2,
       "totalFixtureCount": 5,
       "fixtureCoverage": 0.4,
@@ -57,7 +57,7 @@
       "averageBookmakersPerFixture": 1,
       "lineCount": 2,
       "outcomeCount": 2,
-      "latestCapturedAt": "2026-07-06T00:17:54.953Z",
+      "latestCapturedAt": "2026-07-06T09:12:09.677Z",
       "sampleOutcomes": [
         {
           "fixtureId": "fixture_6a2aba8a",
@@ -67,7 +67,7 @@
           "line": "+0.5",
           "team": "Portugal",
           "decimalOdds": 1.9,
-          "capturedAt": "2026-07-06T00:17:54.953Z"
+          "capturedAt": "2026-07-06T09:12:09.677Z"
         },
         {
           "fixtureId": "fixture_430996cb",
@@ -77,7 +77,7 @@
           "line": "-1.25",
           "team": "Argentina",
           "decimalOdds": 1.82,
-          "capturedAt": "2026-07-06T00:17:54.953Z"
+          "capturedAt": "2026-07-06T09:12:09.677Z"
         }
       ]
     },
