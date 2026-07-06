@@ -1,8 +1,8 @@
 [
   {
     "team": "Portugal",
-    "updatedAt": "2026-07-06T09:12:09.677Z",
-    "learnedEdge": 0.046,
+    "updatedAt": "2026-07-06T14:38:44.825Z",
+    "learnedEdge": 0.0458,
     "dataConfidence": 0.7595,
     "form": {
       "matchCount": 20,
@@ -593,7 +593,7 @@
     },
     "news": {
       "articleCount": 36,
-      "contextArticleCount": 18,
+      "contextArticleCount": 19,
       "rejectedArticleCount": 0,
       "relevance": 0.8911,
       "sourceDiversity": 2,
@@ -619,20 +619,15 @@
       "bookmakerCount": 1
     },
     "scorer": {
-      "trackedPlayers": 19,
+      "trackedPlayers": 18,
       "topScorers": [
         {
           "playerName": "Ronaldo",
-          "goals": 9,
+          "goals": 8,
           "matchesSampled": 20
         },
         {
           "playerName": "Félix",
-          "goals": 3,
-          "matchesSampled": 20
-        },
-        {
-          "playerName": "Fernandes",
           "goals": 3,
           "matchesSampled": 20
         },
@@ -645,9 +640,14 @@
           "playerName": "Conceição",
           "goals": 2,
           "matchesSampled": 20
+        },
+        {
+          "playerName": "Fernandes",
+          "goals": 2,
+          "matchesSampled": 20
         }
       ],
-      "threat": 0.0855,
+      "threat": 0.0765,
       "confidence": 0.78
     },
     "manager": "Roberto Martínez",
@@ -717,9 +717,9 @@
       }
     ],
     "passing": {
-      "attempted": 641.4,
-      "completed": 496.7,
-      "completion": 0.779,
+      "attempted": 638.3,
+      "completed": 493.3,
+      "completion": 0.777,
       "source": "score-and-possession-derived estimate"
     },
     "intelligenceCoverage": {
@@ -736,14 +736,14 @@
       "20-match form 1.9 PPG, xG 1.868-1.168",
       "36 news item(s), news impact 0.08",
       "market intelligence 0% movement, consensus 8.8 across 1 bookie(s)",
-      "19 scorer record(s), top scorer signal 0.0855"
+      "18 scorer record(s), top scorer signal 0.0765"
     ]
   },
   {
     "team": "Spain",
-    "updatedAt": "2026-07-06T09:12:09.677Z",
-    "learnedEdge": 0.1156,
-    "dataConfidence": 0.7644,
+    "updatedAt": "2026-07-06T14:38:44.825Z",
+    "learnedEdge": 0.1154,
+    "dataConfidence": 0.7645,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 2.6,
@@ -1416,18 +1416,18 @@
       ]
     },
     "news": {
-      "articleCount": 59,
-      "contextArticleCount": 51,
+      "articleCount": 60,
+      "contextArticleCount": 52,
       "rejectedArticleCount": 0,
-      "relevance": 0.9668,
+      "relevance": 0.9673,
       "sourceDiversity": 2,
-      "sentiment": -0.0586,
-      "injury": 0.0961,
-      "tacticalFit": 0.4929,
-      "lineupClarity": 0.4823,
-      "rotationRisk": 0.2162,
-      "impact": 0.0409,
-      "confidence": 0.8012,
+      "sentiment": -0.061,
+      "injury": 0.0975,
+      "tacticalFit": 0.4921,
+      "lineupClarity": 0.4817,
+      "rotationRisk": 0.2165,
+      "impact": 0.039,
+      "confidence": 0.8014,
       "topSignals": [
         "availability risk",
         "positive availability",
@@ -1559,7 +1559,7 @@
     "reasons": [
       "20-match form 2.6 PPG, xG 2.44-0.927",
       "recent form improving",
-      "59 news item(s), news impact 0.0409",
+      "60 news item(s), news impact 0.039",
       "market intelligence 0% movement, consensus 9.4 across 1 bookie(s)",
       "33 scorer record(s), top scorer signal 0.081",
       "memory currently leans positive"
@@ -1567,24 +1567,24 @@
   },
   {
     "team": "USA",
-    "updatedAt": "2026-07-06T09:12:09.677Z",
-    "learnedEdge": 0.1607,
-    "dataConfidence": 0.7609,
+    "updatedAt": "2026-07-06T14:38:44.825Z",
+    "learnedEdge": 0.16,
+    "dataConfidence": 0.761,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 1.95,
       "goalsFor": 2.25,
-      "goalsAgainst": 1,
+      "goalsAgainst": 0.9,
       "xgFor": 2.051,
-      "xgAgainst": 1.242,
+      "xgAgainst": 1.17,
       "shotsFor": 14.69,
-      "shotsAgainst": 10.89,
+      "shotsAgainst": 10.58,
       "shotsOnTargetFor": 5.4,
-      "shotsOnTargetAgainst": 3.72,
-      "possession": 52.1,
-      "passesAttempted": 642,
-      "completedPasses": 496.2,
-      "passCompletion": 0.781,
+      "shotsOnTargetAgainst": 3.59,
+      "possession": 52.4,
+      "passesAttempted": 643.7,
+      "completedPasses": 498.1,
+      "passCompletion": 0.782,
       "topScorers": [
         {
           "playerName": "Balogun",
@@ -1599,6 +1599,12 @@
           "goalsPerTwentyTeamMatches": 3
         },
         {
+          "playerName": "Richards",
+          "goals": 3,
+          "scoringMatches": 3,
+          "goalsPerTwentyTeamMatches": 3
+        },
+        {
           "playerName": "Agyemang",
           "goals": 2,
           "scoringMatches": 2,
@@ -1606,12 +1612,6 @@
         },
         {
           "playerName": "Ferreira",
-          "goals": 2,
-          "scoringMatches": 2,
-          "goalsPerTwentyTeamMatches": 2
-        },
-        {
-          "playerName": "Richards",
           "goals": 2,
           "scoringMatches": 2,
           "goalsPerTwentyTeamMatches": 2
@@ -1635,7 +1635,7 @@
           "goalsPerTwentyTeamMatches": 1
         }
       ],
-      "formMomentum": 0.0792,
+      "formMomentum": 0.0689,
       "confidence": 0.9,
       "shortForm": {
         "matchCount": 6,
@@ -1663,17 +1663,17 @@
         "matchCount": 20,
         "pointsPerGame": 1.95,
         "goalsFor": 2.25,
-        "goalsAgainst": 1,
+        "goalsAgainst": 0.9,
         "xgFor": 2.051,
-        "xgAgainst": 1.242,
+        "xgAgainst": 1.17,
         "shotsFor": 14.69,
-        "shotsAgainst": 10.89,
+        "shotsAgainst": 10.58,
         "shotsOnTargetFor": 5.4,
-        "shotsOnTargetAgainst": 3.72,
-        "possession": 52.1,
-        "passesAttempted": 642,
-        "completedPasses": 496.2,
-        "passCompletion": 0.781,
+        "shotsOnTargetAgainst": 3.59,
+        "possession": 52.4,
+        "passesAttempted": 643.7,
+        "completedPasses": 498.1,
+        "passCompletion": 0.782,
         "cleanSheetRate": 0.45,
         "failedToScoreRate": 0.05,
         "bttsRate": 0.5,
@@ -1690,6 +1690,26 @@
         "concedeGameRate": 0.55
       },
       "recentMatches": [
+        {
+          "points": 0,
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "xgFor": 1.27,
+          "xgAgainst": 1.99,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 47.5,
+          "passesAttempted": 621,
+          "completedPasses": 472,
+          "passCompletion": 0.76,
+          "scorers": [
+            {
+              "name": "Richards",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
         {
           "points": 3,
           "goalsFor": 6,
@@ -2154,36 +2174,22 @@
           "completedPasses": 435,
           "passCompletion": 0.74,
           "scorers": []
-        },
-        {
-          "points": 0,
-          "goalsFor": 1,
-          "goalsAgainst": 4,
-          "xgFor": 1.27,
-          "xgAgainst": 3.43,
-          "shotsFor": 11.1,
-          "shotsOnTargetFor": 3.8,
-          "possession": 42.5,
-          "passesAttempted": 588,
-          "completedPasses": 435,
-          "passCompletion": 0.74,
-          "scorers": []
         }
       ]
     },
     "news": {
-      "articleCount": 81,
+      "articleCount": 82,
       "contextArticleCount": 35,
       "rejectedArticleCount": 0,
-      "relevance": 0.9136,
+      "relevance": 0.9146,
       "sourceDiversity": 2,
-      "sentiment": -0.016,
-      "injury": 0.0617,
-      "tacticalFit": 0.5099,
-      "lineupClarity": 0.4735,
-      "rotationRisk": 0.237,
-      "impact": 0.072,
-      "confidence": 0.7847,
+      "sentiment": -0.0136,
+      "injury": 0.0609,
+      "tacticalFit": 0.5091,
+      "lineupClarity": 0.4748,
+      "rotationRisk": 0.2363,
+      "impact": 0.0736,
+      "confidence": 0.785,
       "topSignals": [
         "availability risk",
         "lineup/tactical clue",
@@ -2223,7 +2229,7 @@
           "matchesSampled": 20
         },
         {
-          "playerName": "Tillman",
+          "playerName": "Richards",
           "goals": 3,
           "matchesSampled": 20
         }
@@ -2261,6 +2267,12 @@
         "goalsPerTwentyTeamMatches": 3
       },
       {
+        "playerName": "Richards",
+        "goals": 3,
+        "scoringMatches": 3,
+        "goalsPerTwentyTeamMatches": 3
+      },
+      {
         "playerName": "Agyemang",
         "goals": 2,
         "scoringMatches": 2,
@@ -2268,12 +2280,6 @@
       },
       {
         "playerName": "Ferreira",
-        "goals": 2,
-        "scoringMatches": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Richards",
         "goals": 2,
         "scoringMatches": 2,
         "goalsPerTwentyTeamMatches": 2
@@ -2298,8 +2304,8 @@
       }
     ],
     "passing": {
-      "attempted": 640.6,
-      "completed": 494.5,
+      "attempted": 641.6,
+      "completed": 495.7,
       "completion": 0.774,
       "source": "score-and-possession-derived estimate"
     },
@@ -2314,8 +2320,8 @@
       "topScorerCount": 8
     },
     "reasons": [
-      "20-match form 1.95 PPG, xG 2.051-1.242",
-      "81 news item(s), news impact 0.072",
+      "20-match form 1.95 PPG, xG 2.051-1.17",
+      "82 news item(s), news impact 0.0736",
       "market intelligence 0% movement, consensus 1.13 across 1 bookie(s)",
       "24 scorer record(s), top scorer signal 0.0765",
       "memory currently leans positive"
@@ -2323,9 +2329,9 @@
   },
   {
     "team": "Belgium",
-    "updatedAt": "2026-07-06T09:12:09.677Z",
-    "learnedEdge": 0.1837,
-    "dataConfidence": 0.763,
+    "updatedAt": "2026-07-06T14:38:44.825Z",
+    "learnedEdge": 0.1864,
+    "dataConfidence": 0.7631,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 1.75,
@@ -2993,18 +2999,18 @@
       ]
     },
     "news": {
-      "articleCount": 30,
-      "contextArticleCount": 26,
+      "articleCount": 31,
+      "contextArticleCount": 27,
       "rejectedArticleCount": 0,
-      "relevance": 0.944,
+      "relevance": 0.9458,
       "sourceDiversity": 2,
-      "sentiment": -0.0306,
-      "injury": 0.0829,
-      "tacticalFit": 0.4959,
-      "lineupClarity": 0.4751,
-      "rotationRisk": 0.2556,
-      "impact": 0.0539,
-      "confidence": 0.7942,
+      "sentiment": -0.0241,
+      "injury": 0.0801,
+      "tacticalFit": 0.4943,
+      "lineupClarity": 0.4783,
+      "rotationRisk": 0.253,
+      "impact": 0.0586,
+      "confidence": 0.7947,
       "topSignals": [
         "availability risk",
         "positive availability",
@@ -3136,7 +3142,7 @@
     "reasons": [
       "20-match form 1.75 PPG, xG 2.293-1.297",
       "recent form improving",
-      "30 news item(s), news impact 0.0539",
+      "31 news item(s), news impact 0.0586",
       "market intelligence 0% movement, consensus 1.19 across 1 bookie(s)",
       "20 scorer record(s), top scorer signal 0.09",
       "memory currently leans positive"
@@ -3144,9 +3150,9 @@
   },
   {
     "team": "Argentina",
-    "updatedAt": "2026-07-06T09:12:09.677Z",
-    "learnedEdge": 0.1104,
-    "dataConfidence": 0.7615,
+    "updatedAt": "2026-07-06T14:38:44.825Z",
+    "learnedEdge": 0.1186,
+    "dataConfidence": 0.7632,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 2.85,
@@ -3802,7 +3808,7 @@
     },
     "news": {
       "articleCount": 64,
-      "contextArticleCount": 72,
+      "contextArticleCount": 73,
       "rejectedArticleCount": 0,
       "relevance": 0.9519,
       "sourceDiversity": 2,
@@ -3952,9 +3958,9 @@
   },
   {
     "team": "Egypt",
-    "updatedAt": "2026-07-06T09:12:09.677Z",
-    "learnedEdge": -0.0104,
-    "dataConfidence": 0.7582,
+    "updatedAt": "2026-07-06T14:38:44.825Z",
+    "learnedEdge": -0.001,
+    "dataConfidence": 0.7598,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 1.8,
@@ -4642,9 +4648,9 @@
   },
   {
     "team": "Switzerland",
-    "updatedAt": "2026-07-06T09:12:09.677Z",
-    "learnedEdge": 0.1004,
-    "dataConfidence": 0.7554,
+    "updatedAt": "2026-07-06T14:38:44.825Z",
+    "learnedEdge": 0.091,
+    "dataConfidence": 0.7628,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 1.95,
@@ -5265,7 +5271,7 @@
     },
     "news": {
       "articleCount": 21,
-      "contextArticleCount": 13,
+      "contextArticleCount": 15,
       "rejectedArticleCount": 0,
       "relevance": 0.9733,
       "sourceDiversity": 2,
@@ -5296,17 +5302,12 @@
       "topScorers": [
         {
           "playerName": "Embolo",
-          "goals": 11,
+          "goals": 10,
           "matchesSampled": 20
         },
         {
           "playerName": "Ndoye",
-          "goals": 9,
-          "matchesSampled": 20
-        },
-        {
-          "playerName": "Manzambi",
-          "goals": 4,
+          "goals": 8,
           "matchesSampled": 20
         },
         {
@@ -5315,27 +5316,31 @@
           "matchesSampled": 20
         },
         {
-          "playerName": "Aebischer",
+          "playerName": "Manzambi",
+          "goals": 3,
+          "matchesSampled": 20
+        },
+        {
+          "playerName": "Amdouni",
           "goals": 2,
           "matchesSampled": 20
         }
       ],
-      "threat": 0.135,
+      "threat": 0.1215,
       "confidence": 0.78
     },
     "manager": "Murat Yakin",
     "tacticalProfile": {
-      "likelyFormation": "4-3-3 / 4-2-3-1",
-      "styleOfPlay": "front-foot pressing and fast regains",
+      "likelyFormation": "4-2-3-1 / 4-3-3",
+      "styleOfPlay": "balanced mid-block with mixed build-up",
       "styleTags": [
-        "pressing",
-        "front-foot",
-        "regains",
+        "balanced",
+        "mixed build-up",
         "set-piece threat",
         "positive xG balance"
       ],
       "possessionTier": "medium",
-      "pressingTier": "high",
+      "pressingTier": "medium",
       "transitionTier": "high",
       "source": "derived from 20-match public result sample and score-derived event estimates"
     },
@@ -5390,9 +5395,9 @@
       }
     ],
     "passing": {
-      "attempted": 650.5,
-      "completed": 504.7,
-      "completion": 0.779,
+      "attempted": 647.7,
+      "completed": 501.8,
+      "completion": 0.778,
       "source": "score-and-possession-derived estimate"
     },
     "intelligenceCoverage": {
@@ -5410,15 +5415,15 @@
       "recent form improving",
       "21 news item(s), news impact 0.0387",
       "market intelligence 0% movement, consensus 8.3 across 1 bookie(s)",
-      "15 scorer record(s), top scorer signal 0.135",
+      "15 scorer record(s), top scorer signal 0.1215",
       "memory currently leans positive"
     ]
   },
   {
     "team": "Colombia",
-    "updatedAt": "2026-07-06T09:12:09.677Z",
-    "learnedEdge": 0.143,
-    "dataConfidence": 0.7479,
+    "updatedAt": "2026-07-06T14:38:44.825Z",
+    "learnedEdge": 0.1351,
+    "dataConfidence": 0.7553,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 2.3,
@@ -6130,9 +6135,9 @@
       }
     ],
     "passing": {
-      "attempted": 645.1,
-      "completed": 501.5,
-      "completion": 0.78,
+      "attempted": 641.7,
+      "completed": 498.4,
+      "completion": 0.779,
       "source": "score-and-possession-derived estimate"
     },
     "intelligenceCoverage": {
@@ -6156,9 +6161,9 @@
   },
   {
     "team": "France",
-    "updatedAt": "2026-07-06T09:12:09.677Z",
-    "learnedEdge": 0.1448,
-    "dataConfidence": 0.7173,
+    "updatedAt": "2026-07-06T14:38:44.825Z",
+    "learnedEdge": 0.1608,
+    "dataConfidence": 0.7199,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 2.2,
@@ -6974,9 +6979,9 @@
   },
   {
     "team": "Morocco",
-    "updatedAt": "2026-07-06T09:12:09.677Z",
-    "learnedEdge": 0.0125,
-    "dataConfidence": 0.7163,
+    "updatedAt": "2026-07-06T14:38:44.825Z",
+    "learnedEdge": 0.0139,
+    "dataConfidence": 0.7187,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 2.15,
@@ -7528,7 +7533,7 @@
     },
     "news": {
       "articleCount": 59,
-      "contextArticleCount": 42,
+      "contextArticleCount": 43,
       "rejectedArticleCount": 0,
       "relevance": 0.9336,
       "sourceDiversity": 2,
@@ -7670,6 +7675,1497 @@
       "20-match form 2.15 PPG, xG 1.784-0.856",
       "59 news item(s), news impact 0.0329",
       "17 scorer record(s), top scorer signal 0.0855"
+    ]
+  },
+  {
+    "team": "Norway",
+    "updatedAt": "2026-07-06T14:38:44.825Z",
+    "learnedEdge": 0.0368,
+    "dataConfidence": 0.6533,
+    "form": {
+      "matchCount": 20,
+      "pointsPerGame": 1.85,
+      "goalsFor": 2.1,
+      "goalsAgainst": 1.15,
+      "xgFor": 1.892,
+      "xgAgainst": 1.237,
+      "shotsFor": 13.34,
+      "shotsAgainst": 11.78,
+      "shotsOnTargetFor": 5.07,
+      "shotsOnTargetAgainst": 4.19,
+      "possession": 51,
+      "passesAttempted": 638.9,
+      "completedPasses": 493.2,
+      "passCompletion": 0.783,
+      "topScorers": [
+        {
+          "playerName": "Haaland",
+          "goals": 10,
+          "scoringMatches": 10,
+          "goalsPerTwentyTeamMatches": 10
+        },
+        {
+          "playerName": "Sørloth",
+          "goals": 4,
+          "scoringMatches": 4,
+          "goalsPerTwentyTeamMatches": 4
+        },
+        {
+          "playerName": "E. Haaland",
+          "goals": 3,
+          "scoringMatches": 3,
+          "goalsPerTwentyTeamMatches": 3
+        },
+        {
+          "playerName": "Nusa",
+          "goals": 2,
+          "scoringMatches": 2,
+          "goalsPerTwentyTeamMatches": 2
+        },
+        {
+          "playerName": "A. Nusa",
+          "goals": 1,
+          "scoringMatches": 1,
+          "goalsPerTwentyTeamMatches": 1
+        },
+        {
+          "playerName": "Dæhli",
+          "goals": 1,
+          "scoringMatches": 1,
+          "goalsPerTwentyTeamMatches": 1
+        },
+        {
+          "playerName": "Ødegaard",
+          "goals": 1,
+          "scoringMatches": 1,
+          "goalsPerTwentyTeamMatches": 1
+        },
+        {
+          "playerName": "King",
+          "goals": 1,
+          "scoringMatches": 1,
+          "goalsPerTwentyTeamMatches": 1
+        }
+      ],
+      "formMomentum": 0.0486,
+      "confidence": 0.9,
+      "shortForm": {
+        "matchCount": 6,
+        "pointsPerGame": 2,
+        "goalsFor": 2,
+        "goalsAgainst": 1.833,
+        "xgFor": 1.893,
+        "xgAgainst": 1.398,
+        "shotsFor": 12.27,
+        "shotsAgainst": 14.4,
+        "shotsOnTargetFor": 4.9,
+        "shotsOnTargetAgainst": 5.62,
+        "possession": 48.2,
+        "passesAttempted": 641.3,
+        "completedPasses": 493.5,
+        "passCompletion": 0.809,
+        "cleanSheetRate": 0,
+        "failedToScoreRate": 0,
+        "bttsRate": 1,
+        "over25Rate": 1,
+        "scoringGameRate": 1,
+        "concedeGameRate": 1
+      },
+      "longForm": {
+        "matchCount": 20,
+        "pointsPerGame": 1.85,
+        "goalsFor": 2.1,
+        "goalsAgainst": 1.15,
+        "xgFor": 1.892,
+        "xgAgainst": 1.237,
+        "shotsFor": 13.34,
+        "shotsAgainst": 11.78,
+        "shotsOnTargetFor": 5.07,
+        "shotsOnTargetAgainst": 4.19,
+        "possession": 51,
+        "passesAttempted": 638.9,
+        "completedPasses": 493.2,
+        "passCompletion": 0.783,
+        "cleanSheetRate": 0.3,
+        "failedToScoreRate": 0.05,
+        "bttsRate": 0.7,
+        "over25Rate": 0.7,
+        "scoringGameRate": 0.95,
+        "concedeGameRate": 0.7
+      },
+      "marketAngles": {
+        "cleanSheetRate": 0.3,
+        "failedToScoreRate": 0.05,
+        "bttsRate": 0.7,
+        "over25Rate": 0.7,
+        "scoringGameRate": 0.95,
+        "concedeGameRate": 0.7
+      },
+      "recentMatches": [
+        {
+          "points": 3,
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "xgFor": 1.99,
+          "xgAgainst": 1.27,
+          "shotsFor": 14.2,
+          "shotsOnTargetFor": 5.1,
+          "possession": 52.5,
+          "passesAttempted": 652,
+          "completedPasses": 509,
+          "passCompletion": 0.78,
+          "scorers": [
+            {
+              "name": "Haaland",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "xgFor": 2.07,
+          "xgAgainst": 1.15,
+          "shotsFor": 9,
+          "shotsOnTargetFor": 3,
+          "possession": 48,
+          "passesAttempted": 652,
+          "completedPasses": 509,
+          "passCompletion": 0.9,
+          "scorers": [
+            {
+              "name": "A. Nusa",
+              "minute": 39,
+              "goals": 1,
+              "order": 1,
+              "assists": [
+                "M. Odegaard"
+              ]
+            },
+            {
+              "name": "E. Haaland",
+              "minute": 86,
+              "goals": 1,
+              "order": 3,
+              "assists": [
+                "P. Berg"
+              ]
+            }
+          ]
+        },
+        {
+          "points": 0,
+          "goalsFor": 1,
+          "goalsAgainst": 4,
+          "xgFor": 1.42,
+          "xgAgainst": 1.12,
+          "shotsFor": 10,
+          "shotsOnTargetFor": 5,
+          "possession": 43,
+          "passesAttempted": 588,
+          "completedPasses": 435,
+          "passCompletion": 0.83,
+          "scorers": [
+            {
+              "name": "T. Aasgaard",
+              "minute": 21,
+              "goals": 1,
+              "order": 3,
+              "assists": [
+                "A. Schjelderup"
+              ]
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "goalsFor": 3,
+          "goalsAgainst": 2,
+          "xgFor": 1.9,
+          "xgAgainst": 1.59,
+          "shotsFor": 12,
+          "shotsOnTargetFor": 6,
+          "possession": 43,
+          "passesAttempted": 668,
+          "completedPasses": 515,
+          "passCompletion": 0.8,
+          "scorers": [
+            {
+              "name": "M. Holmgren Pedersen",
+              "minute": 43,
+              "goals": 1,
+              "order": 1
+            },
+            {
+              "name": "E. Haaland",
+              "minute": 48,
+              "goals": 1,
+              "order": 2,
+              "assists": [
+                "M. Odegaard"
+              ]
+            },
+            {
+              "name": "E. Haaland",
+              "minute": 58,
+              "goals": 1,
+              "order": 4,
+              "assists": [
+                "P. Berg"
+              ]
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "xgFor": 2.71,
+          "xgAgainst": 1.27,
+          "shotsFor": 17.3,
+          "shotsOnTargetFor": 6.5,
+          "possession": 55,
+          "passesAttempted": 667,
+          "completedPasses": 521,
+          "passCompletion": 0.781,
+          "scorers": [
+            {
+              "name": "Solbakken",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Haaland",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 0,
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "xgFor": 1.27,
+          "xgAgainst": 1.99,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 47.5,
+          "passesAttempted": 621,
+          "completedPasses": 472,
+          "passCompletion": 0.76,
+          "scorers": [
+            {
+              "name": "Haaland",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "goalsFor": 4,
+          "goalsAgainst": 1,
+          "xgFor": 3.43,
+          "xgAgainst": 1.27,
+          "shotsFor": 20.4,
+          "shotsOnTargetFor": 7.8,
+          "possession": 57.5,
+          "passesAttempted": 682,
+          "completedPasses": 531,
+          "passCompletion": 0.778,
+          "scorers": [
+            {
+              "name": "Haaland",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Østigård",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "xgFor": 1.27,
+          "xgAgainst": 0.55,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 52.5,
+          "passesAttempted": 636,
+          "completedPasses": 496,
+          "passCompletion": 0.78,
+          "scorers": [
+            {
+              "name": "Haaland",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 0,
+          "goalsFor": 1,
+          "goalsAgainst": 3,
+          "xgFor": 1.27,
+          "xgAgainst": 2.71,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 45,
+          "passesAttempted": 605,
+          "completedPasses": 454,
+          "passCompletion": 0.75,
+          "scorers": [
+            {
+              "name": "Haaland",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 1,
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "xgFor": 1.27,
+          "xgAgainst": 1.27,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 50,
+          "passesAttempted": 638,
+          "completedPasses": 491,
+          "passCompletion": 0.77,
+          "scorers": [
+            {
+              "name": "Ødegaard",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 0,
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "xgFor": 1.27,
+          "xgAgainst": 1.99,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 47.5,
+          "passesAttempted": 621,
+          "completedPasses": 472,
+          "passCompletion": 0.76,
+          "scorers": [
+            {
+              "name": "Strandberg",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "xgFor": 2.71,
+          "xgAgainst": 0.55,
+          "shotsFor": 17.3,
+          "shotsOnTargetFor": 6.5,
+          "possession": 57.5,
+          "passesAttempted": 665,
+          "completedPasses": 526,
+          "passCompletion": 0.791,
+          "scorers": [
+            {
+              "name": "Sørloth",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Nusa",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Haaland",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "xgFor": 2.71,
+          "xgAgainst": 0.55,
+          "shotsFor": 17.3,
+          "shotsOnTargetFor": 6.5,
+          "possession": 57.5,
+          "passesAttempted": 665,
+          "completedPasses": 526,
+          "passCompletion": 0.791,
+          "scorers": [
+            {
+              "name": "Haaland",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "xgFor": 1.27,
+          "xgAgainst": 0.55,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 52.5,
+          "passesAttempted": 636,
+          "completedPasses": 496,
+          "passCompletion": 0.78,
+          "scorers": []
+        },
+        {
+          "points": 3,
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "xgFor": 2.71,
+          "xgAgainst": 1.27,
+          "shotsFor": 17.3,
+          "shotsOnTargetFor": 6.5,
+          "possession": 55,
+          "passesAttempted": 667,
+          "completedPasses": 521,
+          "passCompletion": 0.781,
+          "scorers": [
+            {
+              "name": "Larsen",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Nusa",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 1,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "xgFor": 0.55,
+          "xgAgainst": 0.55,
+          "shotsFor": 8,
+          "shotsOnTargetFor": 2.4,
+          "possession": 50,
+          "passesAttempted": 622,
+          "completedPasses": 479,
+          "passCompletion": 0.77,
+          "scorers": []
+        },
+        {
+          "points": 3,
+          "goalsFor": 9,
+          "goalsAgainst": 0,
+          "xgFor": 4.2,
+          "xgAgainst": 0.55,
+          "shotsFor": 24,
+          "shotsOnTargetFor": 12,
+          "possession": 58,
+          "passesAttempted": 596,
+          "completedPasses": 457,
+          "passCompletion": 0.766,
+          "scorers": [
+            {
+              "name": "Haaland",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "King",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Thorstvedt",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Dæhli",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Sørloth",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 1,
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "xgFor": 1.27,
+          "xgAgainst": 1.27,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 50,
+          "passesAttempted": 638,
+          "completedPasses": 491,
+          "passCompletion": 0.77,
+          "scorers": [
+            {
+              "name": "Sørloth",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 0,
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "xgFor": 1.27,
+          "xgAgainst": 1.99,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 47.5,
+          "passesAttempted": 621,
+          "completedPasses": 472,
+          "passCompletion": 0.76,
+          "scorers": [
+            {
+              "name": "Schjelderup",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 1,
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "xgFor": 1.27,
+          "xgAgainst": 1.27,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 50,
+          "passesAttempted": 638,
+          "completedPasses": 491,
+          "passCompletion": 0.77,
+          "scorers": [
+            {
+              "name": "Sørloth",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Haaland",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        }
+      ]
+    },
+    "news": {
+      "articleCount": 28,
+      "contextArticleCount": 21,
+      "rejectedArticleCount": 0,
+      "relevance": 0.94,
+      "sourceDiversity": 2,
+      "sentiment": -0.0178,
+      "injury": 0.0528,
+      "tacticalFit": 0.4901,
+      "lineupClarity": 0.4715,
+      "rotationRisk": 0.2175,
+      "impact": 0.0733,
+      "confidence": 0.7929,
+      "topSignals": [
+        "availability risk",
+        "positive availability",
+        "style clue"
+      ]
+    },
+    "market": {
+      "pressure": 0,
+      "confidence": 0.28,
+      "consensusOdds": null,
+      "movement": 0,
+      "bookmakerCount": 0
+    },
+    "scorer": {
+      "trackedPlayers": 14,
+      "topScorers": [
+        {
+          "playerName": "Haaland",
+          "goals": 12,
+          "matchesSampled": 20
+        },
+        {
+          "playerName": "Sørloth",
+          "goals": 4,
+          "matchesSampled": 20
+        },
+        {
+          "playerName": "Nusa",
+          "goals": 3,
+          "matchesSampled": 20
+        },
+        {
+          "playerName": "Aasgaard",
+          "goals": 1,
+          "matchesSampled": 20
+        },
+        {
+          "playerName": "Dæhli",
+          "goals": 1,
+          "matchesSampled": 20
+        }
+      ],
+      "threat": 0.0945,
+      "confidence": 0.78
+    },
+    "manager": "Ståle Solbakken",
+    "tacticalProfile": {
+      "likelyFormation": "4-2-3-1 / 4-3-3",
+      "styleOfPlay": "balanced mid-block with mixed build-up",
+      "styleTags": [
+        "balanced",
+        "mixed build-up",
+        "set-piece threat"
+      ],
+      "possessionTier": "medium",
+      "pressingTier": "medium",
+      "transitionTier": "medium",
+      "source": "derived from 20-match public result sample and score-derived event estimates"
+    },
+    "topScorers": [
+      {
+        "playerName": "Haaland",
+        "goals": 10,
+        "scoringMatches": 10,
+        "goalsPerTwentyTeamMatches": 10
+      },
+      {
+        "playerName": "Sørloth",
+        "goals": 4,
+        "scoringMatches": 4,
+        "goalsPerTwentyTeamMatches": 4
+      },
+      {
+        "playerName": "E. Haaland",
+        "goals": 3,
+        "scoringMatches": 3,
+        "goalsPerTwentyTeamMatches": 3
+      },
+      {
+        "playerName": "Nusa",
+        "goals": 2,
+        "scoringMatches": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "A. Nusa",
+        "goals": 1,
+        "scoringMatches": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
+        "playerName": "Dæhli",
+        "goals": 1,
+        "scoringMatches": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
+        "playerName": "Ødegaard",
+        "goals": 1,
+        "scoringMatches": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
+        "playerName": "King",
+        "goals": 1,
+        "scoringMatches": 1,
+        "goalsPerTwentyTeamMatches": 1
+      }
+    ],
+    "passing": {
+      "attempted": 640,
+      "completed": 493.4,
+      "completion": 0.773,
+      "source": "score-and-possession-derived estimate"
+    },
+    "intelligenceCoverage": {
+      "matchWindowTarget": 20,
+      "matchWindowAvailable": 20,
+      "hasFullTwentyMatchWindow": true,
+      "managerKnown": true,
+      "profileConfidence": 0.72,
+      "eventDataMode": "score-derived-estimates",
+      "equalSchemaForAllTeams": true,
+      "topScorerCount": 8
+    },
+    "reasons": [
+      "20-match form 1.85 PPG, xG 1.892-1.237",
+      "28 news item(s), news impact 0.0733",
+      "14 scorer record(s), top scorer signal 0.0945"
+    ]
+  },
+  {
+    "team": "England",
+    "updatedAt": "2026-07-06T14:38:44.825Z",
+    "learnedEdge": 0.0718,
+    "dataConfidence": 0.6543,
+    "form": {
+      "matchCount": 20,
+      "pointsPerGame": 2.3,
+      "goalsFor": 1.9,
+      "goalsAgainst": 0.5,
+      "xgFor": 1.863,
+      "xgAgainst": 0.833,
+      "shotsFor": 14.39,
+      "shotsAgainst": 9.1,
+      "shotsOnTargetFor": 5.36,
+      "shotsOnTargetAgainst": 2.9,
+      "possession": 55.3,
+      "passesAttempted": 641.5,
+      "completedPasses": 497.5,
+      "passCompletion": 0.797,
+      "topScorers": [
+        {
+          "playerName": "Kane",
+          "goals": 9,
+          "scoringMatches": 9,
+          "goalsPerTwentyTeamMatches": 9
+        },
+        {
+          "playerName": "Bellingham",
+          "goals": 3,
+          "scoringMatches": 3,
+          "goalsPerTwentyTeamMatches": 3
+        },
+        {
+          "playerName": "H. Kane",
+          "goals": 3,
+          "scoringMatches": 3,
+          "goalsPerTwentyTeamMatches": 3
+        },
+        {
+          "playerName": "Sterling",
+          "goals": 3,
+          "scoringMatches": 3,
+          "goalsPerTwentyTeamMatches": 3
+        },
+        {
+          "playerName": "Rashford",
+          "goals": 2,
+          "scoringMatches": 2,
+          "goalsPerTwentyTeamMatches": 2
+        },
+        {
+          "playerName": "Alexander-Arnold",
+          "goals": 1,
+          "scoringMatches": 1,
+          "goalsPerTwentyTeamMatches": 1
+        },
+        {
+          "playerName": "Apap",
+          "goals": 1,
+          "scoringMatches": 1,
+          "goalsPerTwentyTeamMatches": 1
+        },
+        {
+          "playerName": "Gordon",
+          "goals": 1,
+          "scoringMatches": 1,
+          "goalsPerTwentyTeamMatches": 1
+        }
+      ],
+      "formMomentum": 0.2118,
+      "confidence": 0.9,
+      "shortForm": {
+        "matchCount": 6,
+        "pointsPerGame": 2.667,
+        "goalsFor": 2.167,
+        "goalsAgainst": 0.5,
+        "xgFor": 2.035,
+        "xgAgainst": 0.745,
+        "shotsFor": 15.48,
+        "shotsAgainst": 9.03,
+        "shotsOnTargetFor": 6.3,
+        "shotsOnTargetAgainst": 2.72,
+        "possession": 57.3,
+        "passesAttempted": 651.8,
+        "completedPasses": 508.5,
+        "passCompletion": 0.824,
+        "cleanSheetRate": 0.667,
+        "failedToScoreRate": 0.167,
+        "bttsRate": 0.333,
+        "over25Rate": 0.5,
+        "scoringGameRate": 0.833,
+        "concedeGameRate": 0.333
+      },
+      "longForm": {
+        "matchCount": 20,
+        "pointsPerGame": 2.3,
+        "goalsFor": 1.9,
+        "goalsAgainst": 0.5,
+        "xgFor": 1.863,
+        "xgAgainst": 0.833,
+        "shotsFor": 14.39,
+        "shotsAgainst": 9.1,
+        "shotsOnTargetFor": 5.36,
+        "shotsOnTargetAgainst": 2.9,
+        "possession": 55.3,
+        "passesAttempted": 641.5,
+        "completedPasses": 497.5,
+        "passCompletion": 0.797,
+        "cleanSheetRate": 0.7,
+        "failedToScoreRate": 0.2,
+        "bttsRate": 0.25,
+        "over25Rate": 0.4,
+        "scoringGameRate": 0.8,
+        "concedeGameRate": 0.3
+      },
+      "marketAngles": {
+        "cleanSheetRate": 0.7,
+        "failedToScoreRate": 0.2,
+        "bttsRate": 0.25,
+        "over25Rate": 0.4,
+        "scoringGameRate": 0.8,
+        "concedeGameRate": 0.3
+      },
+      "recentMatches": [
+        {
+          "points": 3,
+          "goalsFor": 3,
+          "goalsAgainst": 2,
+          "xgFor": 2.71,
+          "xgAgainst": 1.99,
+          "shotsFor": 17.3,
+          "shotsOnTargetFor": 6.5,
+          "possession": 52.5,
+          "passesAttempted": 668,
+          "completedPasses": 515,
+          "passCompletion": 0.771,
+          "scorers": [
+            {
+              "name": "Bellingham",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Quansah",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Kane",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "goalsFor": 4,
+          "goalsAgainst": 0,
+          "xgFor": 3.43,
+          "xgAgainst": 0.55,
+          "shotsFor": 20.4,
+          "shotsOnTargetFor": 7.8,
+          "possession": 58,
+          "passesAttempted": 667,
+          "completedPasses": 520,
+          "passCompletion": 0.78,
+          "scorers": [
+            {
+              "name": "Kane",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Maguire",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "J. Henderson",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "xgFor": 2.16,
+          "xgAgainst": 0.31,
+          "shotsFor": 16,
+          "shotsOnTargetFor": 8,
+          "possession": 60,
+          "passesAttempted": 652,
+          "completedPasses": 509,
+          "passCompletion": 0.93,
+          "scorers": [
+            {
+              "name": "H. Kane",
+              "minute": 75,
+              "goals": 1,
+              "order": 2,
+              "assists": [
+                "A. Gordon"
+              ]
+            },
+            {
+              "name": "H. Kane",
+              "minute": 86,
+              "goals": 1,
+              "order": 3,
+              "assists": [
+                "A. Gordon"
+              ]
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "xgFor": 1.99,
+          "xgAgainst": 0.55,
+          "shotsFor": 14.2,
+          "shotsOnTargetFor": 5.1,
+          "possession": 55,
+          "passesAttempted": 651,
+          "completedPasses": 514,
+          "passCompletion": 0.79,
+          "scorers": [
+            {
+              "name": "Sterling",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Kane",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "xgFor": 1.37,
+          "xgAgainst": 0.52,
+          "shotsFor": 17,
+          "shotsOnTargetFor": 8,
+          "possession": 68,
+          "passesAttempted": 651,
+          "completedPasses": 514,
+          "passCompletion": 0.9,
+          "scorers": [
+            {
+              "name": "J. Bellingham",
+              "minute": 62,
+              "goals": 1,
+              "order": 1,
+              "assists": [
+                "B. Saka"
+              ]
+            },
+            {
+              "name": "H. Kane",
+              "minute": 67,
+              "goals": 1,
+              "order": 2,
+              "assists": [
+                "J. Bellingham"
+              ]
+            }
+          ]
+        },
+        {
+          "points": 1,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "xgFor": 0.55,
+          "xgAgainst": 0.55,
+          "shotsFor": 8,
+          "shotsOnTargetFor": 2.4,
+          "possession": 50,
+          "passesAttempted": 622,
+          "completedPasses": 479,
+          "passCompletion": 0.77,
+          "scorers": []
+        },
+        {
+          "points": 1,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "xgFor": 1.28,
+          "xgAgainst": 0,
+          "shotsFor": 19,
+          "shotsOnTargetFor": 4,
+          "possession": 78,
+          "passesAttempted": 622,
+          "completedPasses": 479,
+          "passCompletion": 0.95,
+          "scorers": []
+        },
+        {
+          "points": 3,
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "xgFor": 1.27,
+          "xgAgainst": 0.55,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 52.5,
+          "passesAttempted": 636,
+          "completedPasses": 496,
+          "passCompletion": 0.78,
+          "scorers": [
+            {
+              "name": "Sterling",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 1,
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "xgFor": 1.27,
+          "xgAgainst": 1.27,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 50,
+          "passesAttempted": 638,
+          "completedPasses": 491,
+          "passCompletion": 0.77,
+          "scorers": [
+            {
+              "name": "Kane",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "goalsFor": 7,
+          "goalsAgainst": 0,
+          "xgFor": 4.2,
+          "xgAgainst": 0.55,
+          "shotsFor": 24,
+          "shotsOnTargetFor": 11.9,
+          "possession": 58,
+          "passesAttempted": 632,
+          "completedPasses": 484,
+          "passCompletion": 0.766,
+          "scorers": [
+            {
+              "name": "Kane",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Saka",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Rashford",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Phillips",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 1,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "xgFor": 0.55,
+          "xgAgainst": 0.55,
+          "shotsFor": 8,
+          "shotsOnTargetFor": 2.4,
+          "possession": 50,
+          "passesAttempted": 622,
+          "completedPasses": 479,
+          "passCompletion": 0.77,
+          "scorers": []
+        },
+        {
+          "points": 3,
+          "goalsFor": 4,
+          "goalsAgainst": 2,
+          "xgFor": 3.43,
+          "xgAgainst": 1.99,
+          "shotsFor": 20.4,
+          "shotsOnTargetFor": 7.8,
+          "possession": 55,
+          "passesAttempted": 683,
+          "completedPasses": 525,
+          "passCompletion": 0.768,
+          "scorers": [
+            {
+              "name": "Kane",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Bellingham",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Rashford",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "goalsFor": 4,
+          "goalsAgainst": 0,
+          "xgFor": 3.43,
+          "xgAgainst": 0.55,
+          "shotsFor": 20.4,
+          "shotsOnTargetFor": 7.8,
+          "possession": 58,
+          "passesAttempted": 667,
+          "completedPasses": 520,
+          "passCompletion": 0.78,
+          "scorers": [
+            {
+              "name": "Apap",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Alexander-Arnold",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Kane",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Wilson",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "xgFor": 1.27,
+          "xgAgainst": 0.55,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 52.5,
+          "passesAttempted": 636,
+          "completedPasses": 496,
+          "passCompletion": 0.78,
+          "scorers": [
+            {
+              "name": "Bellingham",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "xgFor": 1.27,
+          "xgAgainst": 0.55,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 52.5,
+          "passesAttempted": 636,
+          "completedPasses": 496,
+          "passCompletion": 0.78,
+          "scorers": [
+            {
+              "name": "Sterling",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 0,
+          "goalsFor": 1,
+          "goalsAgainst": 3,
+          "xgFor": 1.27,
+          "xgAgainst": 2.71,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 45,
+          "passesAttempted": 605,
+          "completedPasses": 454,
+          "passCompletion": 0.75,
+          "scorers": [
+            {
+              "name": "Kane",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "xgFor": 2.71,
+          "xgAgainst": 0.55,
+          "shotsFor": 17.3,
+          "shotsOnTargetFor": 6.5,
+          "possession": 57.5,
+          "passesAttempted": 665,
+          "completedPasses": 526,
+          "passCompletion": 0.791,
+          "scorers": [
+            {
+              "name": "Rice",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Gordon",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Watkins",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 0,
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "xgFor": 0.55,
+          "xgAgainst": 1.27,
+          "shotsFor": 8,
+          "shotsOnTargetFor": 2.4,
+          "possession": 47.5,
+          "passesAttempted": 605,
+          "completedPasses": 460,
+          "passCompletion": 0.76,
+          "scorers": []
+        },
+        {
+          "points": 3,
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "xgFor": 1.27,
+          "xgAgainst": 0.55,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 52.5,
+          "passesAttempted": 636,
+          "completedPasses": 496,
+          "passCompletion": 0.78,
+          "scorers": [
+            {
+              "name": "Kane",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
+        {
+          "points": 3,
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "xgFor": 1.27,
+          "xgAgainst": 0.55,
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 52.5,
+          "passesAttempted": 636,
+          "completedPasses": 496,
+          "passCompletion": 0.78,
+          "scorers": []
+        }
+      ]
+    },
+    "news": {
+      "articleCount": 283,
+      "contextArticleCount": 72,
+      "rejectedArticleCount": 0,
+      "relevance": 0.9584,
+      "sourceDiversity": 2,
+      "sentiment": 0.0137,
+      "injury": 0.0413,
+      "tacticalFit": 0.4865,
+      "lineupClarity": 0.48,
+      "rotationRisk": 0.228,
+      "impact": 0.092,
+      "confidence": 0.7987,
+      "topSignals": [
+        "availability risk",
+        "lineup/tactical clue",
+        "positive availability",
+        "style clue"
+      ]
+    },
+    "market": {
+      "pressure": 0,
+      "confidence": 0.28,
+      "consensusOdds": null,
+      "movement": 0,
+      "bookmakerCount": 0
+    },
+    "scorer": {
+      "trackedPlayers": 17,
+      "topScorers": [
+        {
+          "playerName": "Kane",
+          "goals": 11,
+          "matchesSampled": 20
+        },
+        {
+          "playerName": "Bellingham",
+          "goals": 4,
+          "matchesSampled": 20
+        },
+        {
+          "playerName": "Rashford",
+          "goals": 3,
+          "matchesSampled": 20
+        },
+        {
+          "playerName": "Sterling",
+          "goals": 3,
+          "matchesSampled": 20
+        },
+        {
+          "playerName": "Alexander-Arnold",
+          "goals": 1,
+          "matchesSampled": 20
+        }
+      ],
+      "threat": 0.099,
+      "confidence": 0.78
+    },
+    "manager": "Thomas Tuchel",
+    "tacticalProfile": {
+      "likelyFormation": "4-3-3 / 4-2-3-1",
+      "styleOfPlay": "front-foot pressing and fast regains",
+      "styleTags": [
+        "pressing",
+        "front-foot",
+        "regains",
+        "set-piece threat",
+        "positive xG balance"
+      ],
+      "possessionTier": "medium",
+      "pressingTier": "high",
+      "transitionTier": "high",
+      "source": "derived from 20-match public result sample and score-derived event estimates"
+    },
+    "topScorers": [
+      {
+        "playerName": "Kane",
+        "goals": 9,
+        "scoringMatches": 9,
+        "goalsPerTwentyTeamMatches": 9
+      },
+      {
+        "playerName": "Bellingham",
+        "goals": 3,
+        "scoringMatches": 3,
+        "goalsPerTwentyTeamMatches": 3
+      },
+      {
+        "playerName": "H. Kane",
+        "goals": 3,
+        "scoringMatches": 3,
+        "goalsPerTwentyTeamMatches": 3
+      },
+      {
+        "playerName": "Sterling",
+        "goals": 3,
+        "scoringMatches": 3,
+        "goalsPerTwentyTeamMatches": 3
+      },
+      {
+        "playerName": "Rashford",
+        "goals": 2,
+        "scoringMatches": 2,
+        "goalsPerTwentyTeamMatches": 2
+      },
+      {
+        "playerName": "Alexander-Arnold",
+        "goals": 1,
+        "scoringMatches": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
+        "playerName": "Apap",
+        "goals": 1,
+        "scoringMatches": 1,
+        "goalsPerTwentyTeamMatches": 1
+      },
+      {
+        "playerName": "Gordon",
+        "goals": 1,
+        "scoringMatches": 1,
+        "goalsPerTwentyTeamMatches": 1
+      }
+    ],
+    "passing": {
+      "attempted": 646.5,
+      "completed": 502.8,
+      "completion": 0.783,
+      "source": "score-and-possession-derived estimate"
+    },
+    "intelligenceCoverage": {
+      "matchWindowTarget": 20,
+      "matchWindowAvailable": 20,
+      "hasFullTwentyMatchWindow": true,
+      "managerKnown": true,
+      "profileConfidence": 0.72,
+      "eventDataMode": "score-derived-estimates",
+      "equalSchemaForAllTeams": true,
+      "topScorerCount": 8
+    },
+    "reasons": [
+      "20-match form 2.3 PPG, xG 1.863-0.833",
+      "recent form improving",
+      "283 news item(s), news impact 0.092",
+      "17 scorer record(s), top scorer signal 0.099"
     ]
   }
 ]
