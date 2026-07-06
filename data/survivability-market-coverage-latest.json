@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-07-06T19:09:05.246Z",
+  "createdAt": "2026-07-06T21:50:12.862Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -22,8 +22,8 @@
     "marketCount": 6,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 4,
-    "freshRecordCount": 4,
+    "totalRecords": 5,
+    "freshRecordCount": 5,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -44,15 +44,15 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 14 more fresh records",
+        "needs 13 more fresh records",
         "needs 4 more covered fixtures",
         "needs 1 more fixtures for coverage",
         "needs 1 more bookmaker source(s)",
         "needs deeper bookmaker coverage per fixture",
         "needs 1 more distinct line(s)"
       ],
-      "recordCount": 4,
-      "freshRecordCount": 4,
+      "recordCount": 5,
+      "freshRecordCount": 5,
       "fixtureCount": 1,
       "totalFixtureCount": 5,
       "fixtureCoverage": 0.2,
@@ -60,7 +60,7 @@
       "averageBookmakersPerFixture": 1,
       "lineCount": 1,
       "outcomeCount": 1,
-      "latestCapturedAt": "2026-07-06T19:09:05.246Z",
+      "latestCapturedAt": "2026-07-06T21:50:12.862Z",
       "sampleOutcomes": [
         {
           "fixtureId": "fixture_430996cb",
@@ -70,7 +70,7 @@
           "line": "-1.25",
           "team": "Argentina",
           "decimalOdds": 1.82,
-          "capturedAt": "2026-07-06T19:09:05.246Z"
+          "capturedAt": "2026-07-06T21:50:12.862Z"
         }
       ]
     },
