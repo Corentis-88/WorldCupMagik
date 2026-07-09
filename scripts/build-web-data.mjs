@@ -8,6 +8,7 @@ import { buildMobilePayload } from "../src/mobile-web-data.mjs";
 import { buildBetRecommendations, buildMostLikelyPicks } from "../src/portfolio-builder.mjs";
 import { persistPredictionLedger } from "../src/prediction-ledger.mjs";
 import { buildLegCandidates } from "../src/scoring.mjs";
+import { selectionBrainMetadata } from "../src/selection-brain.mjs";
 import { buildSurvivabilityMarketCoverage } from "../src/survivability-market-coverage.mjs";
 
 const rootDir = dirname(dirname(fileURLToPath(import.meta.url)));
@@ -116,7 +117,7 @@ for (const daysAhead of dayBuckets) {
     dataQuality: centralScan.dataQuality,
     fixtureCount: scanFixtures.length,
     eligibleLegCount: mostLikelyLegCandidates.filter((leg) => !leg.hardBlocks?.length).length,
-    betslip: mostLikelyPicks.map(summarizeBet)
+    betslip: mostLikelyPicks.map((bet) => summarizeBet(bet, { risk: 0 }))
   };
 
   for (const risk of riskBuckets) {
@@ -133,7 +134,7 @@ for (const daysAhead of dayBuckets) {
         dataQuality: centralScan.dataQuality,
         fixtureCount: scanFixtures.length,
         eligibleLegCount: mostLikelyLegCandidates.filter((leg) => !leg.hardBlocks?.length).length,
-        betslip: mostLikelyPicks.map(summarizeBet)
+        betslip: mostLikelyPicks.map((bet) => summarizeBet(bet, { risk: 0 }))
       };
       continue;
     }
@@ -150,7 +151,7 @@ for (const daysAhead of dayBuckets) {
       dataQuality: centralScan.dataQuality,
       fixtureCount: scanFixtures.length,
       eligibleLegCount: legCandidates.filter((leg) => !leg.hardBlocks?.length).length,
-      betslip: betslip.map(summarizeBet)
+      betslip: betslip.map((bet) => summarizeBet(bet, { risk }))
     };
   }
 }
@@ -457,7 +458,12 @@ function summarizePolicy(policy) {
   };
 }
 
-function summarizeBet(bet) {
+function summarizeBet(bet, { risk = 50 } = {}) {
+  const category = categoryFromBet(bet);
+  const selection = bet.selectionIntent
+    ? bet
+    : selectionBrainMetadata(bet, { risk, category });
+
   return {
     rank: bet.rank,
     category: bet.category,
@@ -480,14 +486,37 @@ function summarizeBet(bet) {
     displayRating: bet.displayRating,
     riskLegCount: bet.riskLegCount,
     bttsLegCount: bet.bttsLegCount,
+    scorerLegCount: bet.scorerLegCount,
+    firstScorerLegCount: bet.firstScorerLegCount,
     fragileLegCount: bet.fragileLegCount,
     correlationPenalty: bet.correlationPenalty,
     correlationReasons: bet.correlationReasons,
     marketFamilyMix: bet.marketFamilyMix,
     repeatedTeamCount: bet.repeatedTeamCount,
     sameDateCluster: bet.sameDateCluster,
+    shortWindowFallback: bet.shortWindowFallback,
+    reusedSignalCount: bet.reusedSignalCount,
+    selectionIntent: selection.selectionIntent,
+    recommendedUse: selection.recommendedUse,
+    selectionQuality: selection.selectionQuality,
+    selectionBrainScore: selection.selectionBrainScore,
+    cashScore: selection.cashScore,
+    freeBetScore: selection.freeBetScore,
+    longshotScore: selection.longshotScore,
+    freeBetConversion: selection.freeBetConversion,
+    probabilityRange: selection.probabilityRange,
+    portfolioWarnings: selection.portfolioWarnings,
     thesis: bet.thesis,
     legs: bet.legs.map(summarizeLeg)
+  };
+}
+
+function categoryFromBet(bet = {}) {
+  return {
+    key: bet.category,
+    label: bet.label,
+    type: bet.type,
+    legCount: Number(bet.legCount || bet.legs?.length || 1)
   };
 }
 

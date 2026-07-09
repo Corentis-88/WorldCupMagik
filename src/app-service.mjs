@@ -14,6 +14,7 @@ import { refreshPredictionReflections } from "./prediction-reflection.mjs";
 import { persistPredictionLedger } from "./prediction-ledger.mjs";
 import { loadPostMatchStats, mergePostMatchStats } from "./post-match-stats.mjs";
 import { buildLegCandidates } from "./scoring.mjs";
+import { selectionBrainFit, selectionBrainMetadata } from "./selection-brain.mjs";
 import { buildSurvivabilityMarketCoverage, isSurvivabilityMarketRecord } from "./survivability-market-coverage.mjs";
 import { isoDate, makeId, normalizeName, round } from "./utils.mjs";
 import climateProfiles from "../config/team-climate-profiles.json" with { type: "json" };
@@ -744,6 +745,7 @@ export function selectBetslip({ recommendations, stake, risk }) {
 
   return selected.map(({ category, combo }, index) => {
     const potentialReturn = calculatePotentialReturn(combo, stakePerBet);
+    const selection = selectionBrainMetadata(combo, { risk, category });
 
     return {
       id: combo.id,
@@ -772,8 +774,23 @@ export function selectBetslip({ recommendations, stake, risk }) {
       scorerLegCount: combo.scorerLegCount,
       firstScorerLegCount: combo.firstScorerLegCount,
       fragileLegCount: combo.fragileLegCount,
+      correlationPenalty: combo.correlationPenalty,
+      correlationReasons: combo.correlationReasons,
+      marketFamilyMix: combo.marketFamilyMix,
+      repeatedTeamCount: combo.repeatedTeamCount,
+      sameDateCluster: combo.sameDateCluster,
       shortWindowFallback: combo.shortWindowFallback,
       reusedSignalCount: combo.reusedSignalCount,
+      selectionIntent: selection.selectionIntent,
+      recommendedUse: selection.recommendedUse,
+      selectionQuality: selection.selectionQuality,
+      selectionBrainScore: selection.selectionBrainScore,
+      cashScore: selection.cashScore,
+      freeBetScore: selection.freeBetScore,
+      longshotScore: selection.longshotScore,
+      freeBetConversion: selection.freeBetConversion,
+      probabilityRange: selection.probabilityRange,
+      portfolioWarnings: selection.portfolioWarnings,
       legs: combo.legs,
       thesis: combo.thesis
     };
@@ -785,15 +802,46 @@ function selectMostLikelyBetslip({ picks, stake }) {
 
   return (picks || []).map((combo, index) => {
     const potentialReturn = calculatePotentialReturn(combo, stakePerBet);
+    const category = categoryForCombo(combo);
+    const selection = selectionBrainMetadata(combo, { risk: 0, category });
 
     return {
       ...combo,
       rank: index + 1,
       stake: stakePerBet,
       potentialReturn,
-      potentialProfit: round(Math.max(0, potentialReturn - stakePerBet), 2)
+      potentialProfit: round(Math.max(0, potentialReturn - stakePerBet), 2),
+      selectionIntent: selection.selectionIntent,
+      recommendedUse: selection.recommendedUse,
+      selectionQuality: selection.selectionQuality,
+      selectionBrainScore: selection.selectionBrainScore,
+      cashScore: selection.cashScore,
+      freeBetScore: selection.freeBetScore,
+      longshotScore: selection.longshotScore,
+      freeBetConversion: selection.freeBetConversion,
+      probabilityRange: selection.probabilityRange,
+      portfolioWarnings: selection.portfolioWarnings
     };
   });
+}
+
+function categoryForCombo(combo = {}) {
+  return STANDARD_BET_TYPES.find((category) => {
+    if (category.type !== combo.type) {
+      return false;
+    }
+
+    if (category.type === "single" || category.type === "double" || category.type === "trixie") {
+      return true;
+    }
+
+    return Number(category.legCount) === Number(combo.legCount);
+  }) || {
+    key: combo.type,
+    label: combo.type,
+    type: combo.type,
+    legCount: Number(combo.legCount || combo.legs?.length || 1)
+  };
 }
 
 function sanitizeSettings(settings) {
@@ -810,38 +858,38 @@ function pickCategoryCombo(recommendations, category, risk = 50) {
   }
 
   if (category.type === "single") {
-    return bestSingleForRisk(recommendations.singles || [], risk);
+    return bestSingleForRisk(recommendations.singles || [], risk, category);
   }
 
   if (category.type === "double") {
-    return bestCombo(recommendations.doubles || [], risk);
+    return bestCombo(recommendations.doubles || [], risk, category);
   }
 
   if (category.type === "trixie") {
-    return bestCombo(recommendations.trixies || [], risk);
+    return bestCombo(recommendations.trixies || [], risk, category);
   }
 
   const byLegCount = recommendations.accumulatorsByLegCount?.[category.legCount] || [];
   const fallback = (recommendations.accumulators || []).filter((combo) => Number(combo.legCount) === category.legCount);
-  return bestCombo(byLegCount.length ? byLegCount : fallback, risk);
+  return bestCombo(byLegCount.length ? byLegCount : fallback, risk, category);
 }
 
-function bestSingleForRisk(combos, risk) {
+function bestSingleForRisk(combos, risk, category = {}) {
   const appetite = clampNumber(risk, 0, 100) / 100;
 
   if (appetite <= 0) {
-    return bestCombo(combos, 0);
+    return bestCombo(combos, 0, category);
   }
 
   const targetOdds = 1.48 + appetite * 2.35;
   const targetRisk = appetite * 3;
 
   return [...combos].sort((left, right) => {
-    return singleRiskFit(right, targetOdds, targetRisk, appetite) - singleRiskFit(left, targetOdds, targetRisk, appetite);
+    return singleRiskFit(right, targetOdds, targetRisk, appetite, risk, category) - singleRiskFit(left, targetOdds, targetRisk, appetite, risk, category);
   })[0] || null;
 }
 
-function singleRiskFit(combo, targetOdds, targetRisk, appetite) {
+function singleRiskFit(combo, targetOdds, targetRisk, appetite, risk, category = {}) {
   const leg = combo.legs?.[0] || {};
   const odds = Number(combo.combinedDecimalOdds || leg.decimalOdds || 1);
   const confidence = Number(combo.averageConfidence || leg.confidence || 0);
@@ -853,7 +901,7 @@ function singleRiskFit(combo, targetOdds, targetRisk, appetite) {
   const edgeBlend = clampNumber((appetite - 0.8) / 0.2, 0, 1);
   const highRiskPrice = edgeBlend > 0 && ["calculated_risk", "longshot_value", "contrarian_value"].includes(leg.riskTag) ? 4 * edgeBlend : 0;
 
-  return (Number(combo.score || 0) * 0.1)
+  const baseFit = (Number(combo.score || 0) * 0.1)
     + oddsFit * (34 - edgeBlend * 10)
     + tagFit * 14
     + comboSurvivalFit(combo, appetite) * 0.62
@@ -862,6 +910,8 @@ function singleRiskFit(combo, targetOdds, targetRisk, appetite) {
     + Math.min(8, Math.max(-4, expectedValue * 6)) * edgeBlend
     + lowRiskStability
     + highRiskPrice;
+
+  return baseFit + selectionBrainFit(combo, { risk, category }) * 0.18;
 }
 
 function riskTagLevel(tag) {
@@ -884,12 +934,17 @@ function riskTagLevel(tag) {
   return 0;
 }
 
-function bestCombo(combos, risk = 50) {
+function bestCombo(combos, risk = 50, category = {}) {
   const appetite = clampNumber(risk, 0, 100) / 100;
 
   return [...combos].sort((left, right) => {
-    return comboFit(right, appetite) - comboFit(left, appetite);
+    return comboSelectionFit(right, appetite, risk, category) - comboSelectionFit(left, appetite, risk, category);
   })[0] || null;
+}
+
+function comboSelectionFit(combo, appetite, risk, category = {}) {
+  return comboFit(combo, appetite) * 0.72
+    + selectionBrainFit(combo, { risk, category }) * 0.28;
 }
 
 function comboFit(combo, appetite) {

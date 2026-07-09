@@ -1,6 +1,6 @@
 {
-  "createdAt": "2026-07-09T14:42:17.841Z",
-  "eligibleLegCount": 6,
+  "createdAt": "2026-07-09T15:53:48.663Z",
+  "eligibleLegCount": 5,
   "singles": [
     {
       "id": "single_leg_a3237dc7",
@@ -17,18 +17,18 @@
           "selectionLabel": "France vs Morocco: Under 4.5 goals",
           "bookmaker": "SportsGambler public prop pages: France v Morocco",
           "decimalOdds": 2.2,
-          "modelProbability": 0.7977,
-          "rawModelProbability": 0.7977,
+          "modelProbability": 0.7978,
+          "rawModelProbability": 0.7978,
           "impliedProbability": 0.4545,
           "marketImpliedProbability": 0.4587,
-          "independentEdge": 0.339,
-          "edge": 0.3402,
-          "confidence": 0.7479,
+          "independentEdge": 0.3391,
+          "edge": 0.3403,
+          "confidence": 0.7381,
           "riskTag": "calculated_risk",
           "shortWindowFallback": false,
           "reusedSignal": false,
           "components": {
-            "intelligenceConfidence": 0.635,
+            "intelligenceConfidence": 0.613,
             "nonMarketSignalCount": 6,
             "nonMarketSignals": [
               "raw AI probability beats market",
@@ -38,9 +38,9 @@
               "20-match goal history is survivable for the line",
               "heat layer trims goal tempo"
             ],
-            "independentEvidenceStrength": 0.6013,
+            "independentEvidenceStrength": 0.6014,
             "marketBlendLift": 0,
-            "oddsMovement": -0.0091,
+            "oddsMovement": 0,
             "oddsShortening": false,
             "oddsDrifting": false,
             "marketAverageOdds": 2.18,
@@ -57,7 +57,7 @@
             "awayHistoricalHeatMemory": 0.012,
             "combinedHeatDifferential": -0.0553,
             "expectedGoals": 3.1,
-            "homeExpectedGoals": 1.55,
+            "homeExpectedGoals": 1.54,
             "awayExpectedGoals": 1.56,
             "projectedShotTotal": 26.39,
             "homeProjectedShots": 13.25,
@@ -94,25 +94,25 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "France vs Morocco: Under 4.5 goals is priced at 2.2; raw AI probability 79.8%, market-adjusted probability 79.8%, market view 45.9%. Independent edge 33.9%, final value edge 34.02%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw under-4.5 model clears survival line, expected-goals model stays below under-4.5 danger zone, 20-match goal history is survivable for the line, heat layer trims goal tempo. Fixture model: expected goals 3.1 (1.55-1.56), rating edge -2.1, style edge -1.46, memory edge 5.96. Odds intelligence is capped: market result edge 0, consensus probability 0.2985 where available. News impact is 0.095 for France and 0.037 for Morocco. Tactical memory: France 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Morocco 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.2. Scorer memory: France top recent scorers Mbappé, K. Mbappe, O. Dembele; Morocco top recent scorers Brahim, El Kaabi, Saibari. Heat layer: Boston hotHumid stress 100%, xG adjustment -0.101, result edge -1.79; climate/history/depth differential -0.0553. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model keeps under-4.5 below its danger zone at 3.1 expected goals; heat layer modestly supports a lower game tempo; edge is strong enough to justify focus. Outcome learning: calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: non group game reflection 10.1% actual over 396. Market average moved from 2.2 to 2.18; best price is 0% over average. Confidence 74.8% after odds freshness and data completeness checks."
+          "thesis": "France vs Morocco: Under 4.5 goals is priced at 2.2; raw AI probability 79.8%, market-adjusted probability 79.8%, market view 45.9%. Independent edge 33.91%, final value edge 34.03%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw under-4.5 model clears survival line, expected-goals model stays below under-4.5 danger zone, 20-match goal history is survivable for the line, heat layer trims goal tempo. Fixture model: expected goals 3.1 (1.54-1.56), rating edge -3.2, style edge -1.46, memory edge 2.18. Odds intelligence is capped: market result edge 0, consensus probability 0.2985 where available. News impact is 0.092 for France and 0.034 for Morocco. Tactical memory: France 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Morocco 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.2. Scorer memory: France top recent scorers Mbappé, K. Mbappe, O. Dembele; Morocco top recent scorers Brahim, El Kaabi, Saibari. Heat layer: Boston hotHumid stress 100%, xG adjustment -0.101, result edge -1.79; climate/history/depth differential -0.0553. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model keeps under-4.5 below its danger zone at 3.1 expected goals; heat layer modestly supports a lower game tempo; edge is strong enough to justify focus. Outcome learning: calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: non group game reflection 10.1% actual over 396. Market average moved from 2.18 to 2.18; best price is 0% over average. Confidence 73.8% after odds freshness and data completeness checks."
         }
       ],
       "combinedDecimalOdds": 2.2,
-      "combinedProbability": 0.7977,
-      "expectedValue": 0.7549,
-      "averageEdge": 0.3402,
-      "averageIndependentEdge": 0.339,
-      "averageConfidence": 0.7479,
-      "survivalCombinedProbability": 0.6786,
-      "averageSurvivalProbability": 0.6786,
-      "displayRating": 0.877,
+      "combinedProbability": 0.7978,
+      "expectedValue": 0.7552,
+      "averageEdge": 0.3403,
+      "averageIndependentEdge": 0.3391,
+      "averageConfidence": 0.7381,
+      "survivalCombinedProbability": 0.6775,
+      "averageSurvivalProbability": 0.6775,
+      "displayRating": 0.8726,
       "riskLegCount": 1,
       "bttsLegCount": 0,
       "scorerLegCount": 0,
       "firstScorerLegCount": 0,
       "fragileLegCount": 0,
       "reusedSignalCount": 0,
-      "intelligenceConfidence": 0.635,
+      "intelligenceConfidence": 0.613,
       "averageNonMarketSignalCount": 6,
       "marketConfirmedLegCount": 0,
       "contrarianLegCount": 0,
@@ -125,15 +125,15 @@
       "shortWindowFallback": false,
       "score": 100,
       "hardBlocks": [],
-      "thesis": "single at combined odds 2.2 with estimated slip chance 67.86% and average leg survival 67.9%. Expected value is 75.49%, independent edge averages 33.9%, and the model has 6 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  1 calculated-risk/value leg(s) stop this from being a favourite-only single. No high-implied-probability favourite crowding. Heat layer active on 1 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: France vs Morocco: Under 4.5 goals."
+      "thesis": "single at combined odds 2.2 with estimated slip chance 67.75% and average leg survival 67.7%. Expected value is 75.52%, independent edge averages 33.91%, and the model has 6 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  1 calculated-risk/value leg(s) stop this from being a favourite-only single. No high-implied-probability favourite crowding. Heat layer active on 1 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: France vs Morocco: Under 4.5 goals."
     },
     {
-      "id": "single_leg_75f65178",
+      "id": "single_leg_fc66d5e8",
       "type": "single",
       "legCount": 1,
       "legs": [
         {
-          "id": "leg_75f65178",
+          "id": "leg_fc66d5e8",
           "fixtureId": "fixture_eb65f44a",
           "fixtureDate": "2026-07-10T19:00:00.000Z",
           "homeTeam": "Spain",
@@ -148,12 +148,12 @@
           "marketImpliedProbability": 0.5051,
           "independentEdge": 0.3299,
           "edge": 0.3299,
-          "confidence": 0.7616,
+          "confidence": 0.7573,
           "riskTag": "calculated_risk",
           "shortWindowFallback": false,
           "reusedSignal": false,
           "components": {
-            "intelligenceConfidence": 0.633,
+            "intelligenceConfidence": 0.613,
             "nonMarketSignalCount": 7,
             "nonMarketSignals": [
               "raw AI probability beats market",
@@ -224,7 +224,7 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "Spain vs Belgium: Over 1.5 goals is priced at 1.98; raw AI probability 83.5%, market-adjusted probability 83.5%, market view 50.5%. Independent edge 32.99%, final value edge 32.99%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-1.5 model clears survival line, expected-goals base supports two goals, 20-match goals history is not dead, second goal can arrive from either match shape, opening caution still leaves a two-goal route. Fixture model: expected goals 3.25 (1.62-1.63), rating edge 24, style edge -0.26, memory edge 1.09. Odds intelligence is capped: market result edge 0, consensus probability 0.301 where available. News impact is 0.079 for Spain and 0.124 for Belgium. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.44. Scorer memory: Spain top recent scorers Morata, Oyarzabal, Sarabia; Belgium top recent scorers De Bruyne, Tielemans, De Ketelaere. Heat layer: Los Angeles hotMixed stress 29.6%, xG adjustment -0.03, result edge 1.48; climate/history/depth differential 0.1545. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: safer two-goal line has 3.25 expected-goals support; edge is strong enough to justify focus. Outcome learning: over_1_5_goals historical strike 40% over 5; calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: over_1_5_goals post-match reflection 33.3% actual vs 77.1% projected over 9; xG environment ran cooler than model by 1.11; actual goals finished 1.56 below expected goal shape; moderate heat matches undershot expected xG; non group game reflection 10.1% actual over 396. Market average moved from 1.98 to 1.98; best price is 0% over average. Confidence 76.2% after odds freshness and data completeness checks."
+          "thesis": "Spain vs Belgium: Over 1.5 goals is priced at 1.98; raw AI probability 83.5%, market-adjusted probability 83.5%, market view 50.5%. Independent edge 32.99%, final value edge 32.99%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-1.5 model clears survival line, expected-goals base supports two goals, 20-match goals history is not dead, second goal can arrive from either match shape, opening caution still leaves a two-goal route. Fixture model: expected goals 3.25 (1.62-1.63), rating edge 24.1, style edge -0.26, memory edge 1.19. Odds intelligence is capped: market result edge 0, consensus probability 0.301 where available. News impact is 0.079 for Spain and 0.124 for Belgium. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.44. Scorer memory: Spain top recent scorers Morata, Oyarzabal, Sarabia; Belgium top recent scorers De Bruyne, Tielemans, De Ketelaere. Heat layer: Los Angeles hotMixed stress 29.6%, xG adjustment -0.03, result edge 1.48; climate/history/depth differential 0.1545. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: safer two-goal line has 3.25 expected-goals support; edge is strong enough to justify focus. Outcome learning: over_1_5_goals historical strike 40% over 5; calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: over_1_5_goals post-match reflection 33.3% actual vs 77.1% projected over 9; xG environment ran cooler than model by 1.11; actual goals finished 1.56 below expected goal shape; moderate heat matches undershot expected xG; non group game reflection 10.1% actual over 396. Market average moved from 1.98 to 1.98; best price is 0% over average. Confidence 75.7% after odds freshness and data completeness checks."
         }
       ],
       "combinedDecimalOdds": 1.98,
@@ -232,17 +232,17 @@
       "expectedValue": 0.6533,
       "averageEdge": 0.3299,
       "averageIndependentEdge": 0.3299,
-      "averageConfidence": 0.7616,
-      "survivalCombinedProbability": 0.7197,
-      "averageSurvivalProbability": 0.7197,
-      "displayRating": 0.8859,
+      "averageConfidence": 0.7573,
+      "survivalCombinedProbability": 0.7192,
+      "averageSurvivalProbability": 0.7192,
+      "displayRating": 0.8839,
       "riskLegCount": 1,
       "bttsLegCount": 0,
       "scorerLegCount": 0,
       "firstScorerLegCount": 0,
       "fragileLegCount": 0,
       "reusedSignalCount": 0,
-      "intelligenceConfidence": 0.633,
+      "intelligenceConfidence": 0.613,
       "averageNonMarketSignalCount": 7,
       "marketConfirmedLegCount": 0,
       "contrarianLegCount": 0,
@@ -255,15 +255,15 @@
       "shortWindowFallback": false,
       "score": 100,
       "hardBlocks": [],
-      "thesis": "single at combined odds 1.98 with estimated slip chance 71.97% and average leg survival 72%. Expected value is 65.33%, independent edge averages 32.99%, and the model has 7 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  1 calculated-risk/value leg(s) stop this from being a favourite-only single. No high-implied-probability favourite crowding. Heat layer active on 1 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: Spain vs Belgium: Over 1.5 goals."
+      "thesis": "single at combined odds 1.98 with estimated slip chance 71.92% and average leg survival 71.9%. Expected value is 65.33%, independent edge averages 32.99%, and the model has 7 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  1 calculated-risk/value leg(s) stop this from being a favourite-only single. No high-implied-probability favourite crowding. Heat layer active on 1 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: Spain vs Belgium: Over 1.5 goals."
     },
     {
-      "id": "single_leg_b780525",
+      "id": "single_leg_91e88995",
       "type": "single",
       "legCount": 1,
       "legs": [
         {
-          "id": "leg_b780525",
+          "id": "leg_91e88995",
           "fixtureId": "fixture_eb65f44a",
           "fixtureDate": "2026-07-10T19:00:00.000Z",
           "homeTeam": "Spain",
@@ -278,12 +278,12 @@
           "marketImpliedProbability": 0.4808,
           "independentEdge": 0.2912,
           "edge": 0.2912,
-          "confidence": 0.7415,
+          "confidence": 0.7371,
           "riskTag": "calculated_risk",
           "shortWindowFallback": false,
           "reusedSignal": false,
           "components": {
-            "intelligenceConfidence": 0.633,
+            "intelligenceConfidence": 0.613,
             "nonMarketSignalCount": 5,
             "nonMarketSignals": [
               "raw AI probability beats market",
@@ -349,7 +349,7 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "Spain vs Belgium: Under 4.5 goals is priced at 2.08; raw AI probability 77.2%, market-adjusted probability 77.2%, market view 48.1%. Independent edge 29.12%, final value edge 29.12%, backed by 5 non-market signal(s): raw AI probability beats market, 20-match team sample, expected-goals model stays below under-4.5 danger zone, 20-match goal history is survivable for the line, heat layer trims goal tempo. Fixture model: expected goals 3.25 (1.62-1.63), rating edge 24, style edge -0.26, memory edge 1.09. Odds intelligence is capped: market result edge 0, consensus probability 0.301 where available. News impact is 0.079 for Spain and 0.124 for Belgium. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.44. Scorer memory: Spain top recent scorers Morata, Oyarzabal, Sarabia; Belgium top recent scorers De Bruyne, Tielemans, De Ketelaere. Heat layer: Los Angeles hotMixed stress 29.6%, xG adjustment -0.03, result edge 1.48; climate/history/depth differential 0.1545. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model keeps under-4.5 below its danger zone at 3.25 expected goals; edge is strong enough to justify focus. Outcome learning: calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: moderate heat matches undershot expected xG; non group game reflection 10.1% actual over 396. Market average moved from 2.08 to 2.08; best price is 0% over average. Confidence 74.1% after odds freshness and data completeness checks."
+          "thesis": "Spain vs Belgium: Under 4.5 goals is priced at 2.08; raw AI probability 77.2%, market-adjusted probability 77.2%, market view 48.1%. Independent edge 29.12%, final value edge 29.12%, backed by 5 non-market signal(s): raw AI probability beats market, 20-match team sample, expected-goals model stays below under-4.5 danger zone, 20-match goal history is survivable for the line, heat layer trims goal tempo. Fixture model: expected goals 3.25 (1.62-1.63), rating edge 24.1, style edge -0.26, memory edge 1.19. Odds intelligence is capped: market result edge 0, consensus probability 0.301 where available. News impact is 0.079 for Spain and 0.124 for Belgium. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.44. Scorer memory: Spain top recent scorers Morata, Oyarzabal, Sarabia; Belgium top recent scorers De Bruyne, Tielemans, De Ketelaere. Heat layer: Los Angeles hotMixed stress 29.6%, xG adjustment -0.03, result edge 1.48; climate/history/depth differential 0.1545. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model keeps under-4.5 below its danger zone at 3.25 expected goals; edge is strong enough to justify focus. Outcome learning: calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: moderate heat matches undershot expected xG; non group game reflection 10.1% actual over 396. Market average moved from 2.08 to 2.08; best price is 0% over average. Confidence 73.7% after odds freshness and data completeness checks."
         }
       ],
       "combinedDecimalOdds": 2.08,
@@ -357,17 +357,17 @@
       "expectedValue": 0.6058,
       "averageEdge": 0.2912,
       "averageIndependentEdge": 0.2912,
-      "averageConfidence": 0.7415,
-      "survivalCombinedProbability": 0.6858,
-      "averageSurvivalProbability": 0.6858,
-      "displayRating": 0.8721,
+      "averageConfidence": 0.7371,
+      "survivalCombinedProbability": 0.6853,
+      "averageSurvivalProbability": 0.6853,
+      "displayRating": 0.8701,
       "riskLegCount": 1,
       "bttsLegCount": 0,
       "scorerLegCount": 0,
       "firstScorerLegCount": 0,
       "fragileLegCount": 0,
       "reusedSignalCount": 0,
-      "intelligenceConfidence": 0.633,
+      "intelligenceConfidence": 0.613,
       "averageNonMarketSignalCount": 5,
       "marketConfirmedLegCount": 0,
       "contrarianLegCount": 0,
@@ -380,7 +380,7 @@
       "shortWindowFallback": false,
       "score": 100,
       "hardBlocks": [],
-      "thesis": "single at combined odds 2.08 with estimated slip chance 68.58% and average leg survival 68.6%. Expected value is 60.58%, independent edge averages 29.12%, and the model has 5 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  1 calculated-risk/value leg(s) stop this from being a favourite-only single. No high-implied-probability favourite crowding. Heat layer active on 1 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: Spain vs Belgium: Under 4.5 goals."
+      "thesis": "single at combined odds 2.08 with estimated slip chance 68.53% and average leg survival 68.5%. Expected value is 60.58%, independent edge averages 29.12%, and the model has 5 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  1 calculated-risk/value leg(s) stop this from being a favourite-only single. No high-implied-probability favourite crowding. Heat layer active on 1 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: Spain vs Belgium: Under 4.5 goals."
     },
     {
       "id": "single_leg_686a3a14",
@@ -403,12 +403,12 @@
           "marketImpliedProbability": 0.578,
           "independentEdge": 0.2377,
           "edge": 0.2386,
-          "confidence": 0.7537,
+          "confidence": 0.7438,
           "riskTag": "steady_edge",
           "shortWindowFallback": false,
           "reusedSignal": false,
           "components": {
-            "intelligenceConfidence": 0.635,
+            "intelligenceConfidence": 0.613,
             "nonMarketSignalCount": 7,
             "nonMarketSignals": [
               "raw AI probability beats market",
@@ -421,7 +421,7 @@
             ],
             "independentEvidenceStrength": 0.738,
             "marketBlendLift": 0,
-            "oddsMovement": -0.0057,
+            "oddsMovement": 0,
             "oddsShortening": false,
             "oddsDrifting": false,
             "marketAverageOdds": 1.73,
@@ -438,7 +438,7 @@
             "awayHistoricalHeatMemory": 0.012,
             "combinedHeatDifferential": -0.0553,
             "expectedGoals": 3.1,
-            "homeExpectedGoals": 1.55,
+            "homeExpectedGoals": 1.54,
             "awayExpectedGoals": 1.56,
             "projectedShotTotal": 26.39,
             "homeProjectedShots": 13.25,
@@ -478,7 +478,7 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "France vs Morocco: Over 1.5 goals is priced at 1.74; raw AI probability 81.6%, market-adjusted probability 81.6%, market view 57.8%. Independent edge 23.77%, final value edge 23.86%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-1.5 model clears survival line, expected-goals base supports two goals, 20-match goals history is not dead, second goal can arrive from either match shape, opening caution still leaves a two-goal route. Fixture model: expected goals 3.1 (1.55-1.56), rating edge -2.1, style edge -1.46, memory edge 5.96. Odds intelligence is capped: market result edge 0, consensus probability 0.2985 where available. News impact is 0.095 for France and 0.037 for Morocco. Tactical memory: France 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Morocco 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.2. Scorer memory: France top recent scorers Mbappé, K. Mbappe, O. Dembele; Morocco top recent scorers Brahim, El Kaabi, Saibari. Heat layer: Boston hotHumid stress 100%, xG adjustment -0.101, result edge -1.79; climate/history/depth differential -0.0553. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: safer two-goal line has 3.1 expected-goals support; edge is strong enough to justify focus. Outcome learning: over_1_5_goals historical strike 40% over 5; steady_edge historical strike 18.2% over 781; steady_edge calibration 18.2% actual vs 22.3% projected. Post-match reflection: over_1_5_goals post-match reflection 33.3% actual vs 77.1% projected over 9; xG environment ran cooler than model by 1.11; actual goals finished 1.56 below expected goal shape; non group game reflection 10.1% actual over 396. Market average moved from 1.74 to 1.73; best price is 0% over average. Confidence 75.4% after odds freshness and data completeness checks."
+          "thesis": "France vs Morocco: Over 1.5 goals is priced at 1.74; raw AI probability 81.6%, market-adjusted probability 81.6%, market view 57.8%. Independent edge 23.77%, final value edge 23.86%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-1.5 model clears survival line, expected-goals base supports two goals, 20-match goals history is not dead, second goal can arrive from either match shape, opening caution still leaves a two-goal route. Fixture model: expected goals 3.1 (1.54-1.56), rating edge -3.2, style edge -1.46, memory edge 2.18. Odds intelligence is capped: market result edge 0, consensus probability 0.2985 where available. News impact is 0.092 for France and 0.034 for Morocco. Tactical memory: France 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Morocco 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.2. Scorer memory: France top recent scorers Mbappé, K. Mbappe, O. Dembele; Morocco top recent scorers Brahim, El Kaabi, Saibari. Heat layer: Boston hotHumid stress 100%, xG adjustment -0.101, result edge -1.79; climate/history/depth differential -0.0553. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: safer two-goal line has 3.1 expected-goals support; edge is strong enough to justify focus. Outcome learning: over_1_5_goals historical strike 40% over 5; steady_edge historical strike 18.2% over 781; steady_edge calibration 18.2% actual vs 22.3% projected. Post-match reflection: over_1_5_goals post-match reflection 33.3% actual vs 77.1% projected over 9; xG environment ran cooler than model by 1.11; actual goals finished 1.56 below expected goal shape; non group game reflection 10.1% actual over 396. Market average moved from 1.73 to 1.73; best price is 0% over average. Confidence 74.4% after odds freshness and data completeness checks."
         }
       ],
       "combinedDecimalOdds": 1.74,
@@ -486,17 +486,17 @@
       "expectedValue": 0.4193,
       "averageEdge": 0.2386,
       "averageIndependentEdge": 0.2377,
-      "averageConfidence": 0.7537,
-      "survivalCombinedProbability": 0.7614,
-      "averageSurvivalProbability": 0.7614,
-      "displayRating": 0.881,
+      "averageConfidence": 0.7438,
+      "survivalCombinedProbability": 0.7602,
+      "averageSurvivalProbability": 0.7602,
+      "displayRating": 0.8765,
       "riskLegCount": 0,
       "bttsLegCount": 0,
       "scorerLegCount": 0,
       "firstScorerLegCount": 0,
       "fragileLegCount": 0,
       "reusedSignalCount": 0,
-      "intelligenceConfidence": 0.635,
+      "intelligenceConfidence": 0.613,
       "averageNonMarketSignalCount": 7,
       "marketConfirmedLegCount": 0,
       "contrarianLegCount": 0,
@@ -509,7 +509,7 @@
       "shortWindowFallback": false,
       "score": 100,
       "hardBlocks": [],
-      "thesis": "single at combined odds 1.74 with estimated slip chance 76.14% and average leg survival 76.1%. Expected value is 41.93%, independent edge averages 23.77%, and the model has 7 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  No calculated-risk leg; this should only survive if the edge is exceptional. No high-implied-probability favourite crowding. Heat layer active on 1 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: France vs Morocco: Over 1.5 goals."
+      "thesis": "single at combined odds 1.74 with estimated slip chance 76.02% and average leg survival 76%. Expected value is 41.93%, independent edge averages 23.77%, and the model has 7 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  No calculated-risk leg; this should only survive if the edge is exceptional. No high-implied-probability favourite crowding. Heat layer active on 1 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: France vs Morocco: Over 1.5 goals."
     },
     {
       "id": "single_leg_6463a707",
@@ -532,12 +532,12 @@
           "marketImpliedProbability": 0.5051,
           "independentEdge": 0.0989,
           "edge": 0.0946,
-          "confidence": 0.6859,
+          "confidence": 0.676,
           "riskTag": "calculated_risk",
           "shortWindowFallback": false,
           "reusedSignal": false,
           "components": {
-            "intelligenceConfidence": 0.635,
+            "intelligenceConfidence": 0.613,
             "nonMarketSignalCount": 5,
             "nonMarketSignals": [
               "raw AI probability beats market",
@@ -548,7 +548,7 @@
             ],
             "independentEvidenceStrength": 0.7551,
             "marketBlendLift": -0.0137,
-            "oddsMovement": -0.01,
+            "oddsMovement": 0,
             "oddsShortening": false,
             "oddsDrifting": false,
             "marketAverageOdds": 1.98,
@@ -565,7 +565,7 @@
             "awayHistoricalHeatMemory": 0.012,
             "combinedHeatDifferential": -0.0553,
             "expectedGoals": 3.1,
-            "homeExpectedGoals": 1.55,
+            "homeExpectedGoals": 1.54,
             "awayExpectedGoals": 1.56,
             "projectedShotTotal": 26.39,
             "homeProjectedShots": 13.25,
@@ -604,7 +604,7 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "France vs Morocco: Both teams to score: Yes is priced at 2; raw AI probability 60.4%, market-adjusted probability 59%, market view 50.5%. Independent edge 9.89%, final value edge 9.46%, backed by 5 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS. Fixture model: expected goals 3.1 (1.55-1.56), rating edge -2.1, style edge -1.46, memory edge 5.96. Odds intelligence is capped: market result edge 0, consensus probability 0.2985 where available. News impact is 0.095 for France and 0.037 for Morocco. Tactical memory: France 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Morocco 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.2. Scorer memory: France top recent scorers Mbappé, K. Mbappe, O. Dembele; Morocco top recent scorers Brahim, El Kaabi, Saibari. Heat layer: Boston hotHumid stress 100%, xG adjustment -0.101, result edge -1.79; climate/history/depth differential -0.0553. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.55-1.56 expected goals; edge is strong enough to justify focus. Outcome learning: both_teams_to_score historical strike 49.4% over 79; calculated_risk historical strike 10.9% over 294; both_teams_to_score calibration 49.4% actual vs 51.5% projected; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: both_teams_to_score post-match reflection 47.7% actual vs 53.4% projected over 107; actual goals finished 0.29 below expected goal shape; non group game reflection 10.1% actual over 396. Market average moved from 2 to 1.98; best price is 0% over average. Confidence 68.6% after odds freshness and data completeness checks."
+          "thesis": "France vs Morocco: Both teams to score: Yes is priced at 2; raw AI probability 60.4%, market-adjusted probability 59%, market view 50.5%. Independent edge 9.89%, final value edge 9.46%, backed by 5 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS. Fixture model: expected goals 3.1 (1.54-1.56), rating edge -3.2, style edge -1.46, memory edge 2.18. Odds intelligence is capped: market result edge 0, consensus probability 0.2985 where available. News impact is 0.092 for France and 0.034 for Morocco. Tactical memory: France 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Morocco 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.2. Scorer memory: France top recent scorers Mbappé, K. Mbappe, O. Dembele; Morocco top recent scorers Brahim, El Kaabi, Saibari. Heat layer: Boston hotHumid stress 100%, xG adjustment -0.101, result edge -1.79; climate/history/depth differential -0.0553. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.54-1.56 expected goals; edge is strong enough to justify focus. Outcome learning: both_teams_to_score historical strike 49.4% over 79; calculated_risk historical strike 10.9% over 294; both_teams_to_score calibration 49.4% actual vs 51.5% projected; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: both_teams_to_score post-match reflection 47.7% actual vs 53.4% projected over 107; actual goals finished 0.29 below expected goal shape; non group game reflection 10.1% actual over 396. Market average moved from 1.98 to 1.98; best price is 0% over average. Confidence 67.6% after odds freshness and data completeness checks."
         }
       ],
       "combinedDecimalOdds": 2,
@@ -612,17 +612,17 @@
       "expectedValue": 0.1806,
       "averageEdge": 0.0946,
       "averageIndependentEdge": 0.0989,
-      "averageConfidence": 0.6859,
-      "survivalCombinedProbability": 0.5948,
-      "averageSurvivalProbability": 0.5948,
-      "displayRating": 0.7627,
+      "averageConfidence": 0.676,
+      "survivalCombinedProbability": 0.5938,
+      "averageSurvivalProbability": 0.5938,
+      "displayRating": 0.7582,
       "riskLegCount": 1,
       "bttsLegCount": 1,
       "scorerLegCount": 0,
       "firstScorerLegCount": 0,
       "fragileLegCount": 0,
       "reusedSignalCount": 0,
-      "intelligenceConfidence": 0.635,
+      "intelligenceConfidence": 0.613,
       "averageNonMarketSignalCount": 5,
       "marketConfirmedLegCount": 0,
       "contrarianLegCount": 0,
@@ -633,150 +633,14 @@
       "repeatedTeamCount": 0,
       "sameDateCluster": 0,
       "shortWindowFallback": false,
-      "score": 92.01,
+      "score": 91.58,
       "hardBlocks": [],
-      "thesis": "single at combined odds 2 with estimated slip chance 59.48% and average leg survival 59.5%. Expected value is 18.06%, independent edge averages 9.89%, and the model has 5 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  1 calculated-risk/value leg(s) stop this from being a favourite-only single. No high-implied-probability favourite crowding. Heat layer active on 1 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: France vs Morocco: Both teams to score: Yes."
-    },
-    {
-      "id": "single_leg_d6eb22bd",
-      "type": "single",
-      "legCount": 1,
-      "legs": [
-        {
-          "id": "leg_d6eb22bd",
-          "fixtureId": "fixture_74905ce1",
-          "fixtureDate": "2026-07-09T20:00:00.000Z",
-          "homeTeam": "France",
-          "awayTeam": "Morocco",
-          "market": "anytime_scorer",
-          "playerName": "Soufiane Rahimi",
-          "selectionLabel": "France vs Morocco: Soufiane Rahimi anytime scorer",
-          "bookmaker": "SportsGambler public prop pages: France v Morocco",
-          "decimalOdds": 4.5,
-          "modelProbability": 0.2598,
-          "rawModelProbability": 0.2662,
-          "impliedProbability": 0.2222,
-          "marketImpliedProbability": 0.2273,
-          "independentEdge": 0.0389,
-          "edge": 0.0376,
-          "confidence": 0.8714,
-          "riskTag": "calculated_risk",
-          "shortWindowFallback": false,
-          "reusedSignal": false,
-          "components": {
-            "intelligenceConfidence": 0.635,
-            "nonMarketSignalCount": 7,
-            "nonMarketSignals": [
-              "raw AI probability beats market",
-              "20-match team sample",
-              "raw scorer probability beats market",
-              "team goals environment is live",
-              "scorer raw probability clears floor",
-              "starter/minutes projection is healthy",
-              "20-match scorer memory"
-            ],
-            "independentEvidenceStrength": 0.5561,
-            "marketBlendLift": -0.0064,
-            "oddsMovement": -0.0222,
-            "oddsShortening": true,
-            "oddsDrifting": false,
-            "marketAverageOdds": 4.4,
-            "heatStress": 1,
-            "heatConfidence": 0.7055,
-            "heatClimateBand": "hotHumid",
-            "heatExpectedGoalsAdjustment": -0.101,
-            "heatEdge": -1.79,
-            "heatLocation": "Boston",
-            "homeSquadDepth": 0.7236,
-            "awaySquadDepth": 0.6246,
-            "squadDepthConfidence": 0.6954,
-            "homeHistoricalHeatMemory": 0.006,
-            "awayHistoricalHeatMemory": 0.012,
-            "combinedHeatDifferential": -0.0553,
-            "expectedGoals": 3.1,
-            "homeExpectedGoals": 1.55,
-            "awayExpectedGoals": 1.56,
-            "projectedShotTotal": 26.39,
-            "homeProjectedShots": 13.25,
-            "awayProjectedShots": 13.14,
-            "projectedShotsOnTargetTotal": 9.49,
-            "homeLongMatchCount": 20,
-            "awayLongMatchCount": 20,
-            "homeBttsRate": 0.55,
-            "awayBttsRate": 0.35,
-            "homeOver25Rate": 0.75,
-            "awayOver25Rate": 0.45,
-            "tournamentPhase": "non_group_game",
-            "homeGroupGameNumber": null,
-            "awayGroupGameNumber": null,
-            "bothOpeningGroupGame": false,
-            "oneOpeningGroupGame": false,
-            "openingGameCaution": 0,
-            "tournamentExpectedGoalsAdjustment": 0,
-            "tournamentBttsAdjustment": 0,
-            "tournamentDrawLift": 0,
-            "tournamentContextNote": "Tournament pressure layer inactive outside group-stage fixtures.",
-            "confidenceReasons": [
-              "high combined confidence",
-              "event stats mostly score-derived estimates",
-              "fresh odds snapshot",
-              "many non-market signals agree",
-              "settled-outcome learning active",
-              "post-match xG/shot reflection active",
-              "market type fits the football evidence"
-            ],
-            "scorerMarketType": "anytime_scorer",
-            "teamGoalLikelihood": 0.7479,
-            "teamFirstGoalShare": 0.5018,
-            "starterLikelihood": 0.5983,
-            "projectedMinutes": 66.3,
-            "scorerGoalsPerTwentyTeamMatches": 3,
-            "scorerConfidence": 0.78,
-            "predictionReflectionAdjustment": -0.0375,
-            "predictionReflectionConfidence": 1,
-            "predictionReflectionReasons": [
-              "anytime_scorer post-match reflection 8.8% actual vs 19.1% projected over 1256",
-              "non group game reflection 10.1% actual over 396"
-            ],
-            "survivalPenalty": 0.0011
-          },
-          "thesis": "France vs Morocco: Soufiane Rahimi anytime scorer is priced at 4.5; raw AI probability 26.6%, market-adjusted probability 26%, market view 22.7%. Independent edge 3.89%, final value edge 3.76%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw scorer probability beats market, team goals environment is live, scorer raw probability clears floor, starter/minutes projection is healthy, 20-match scorer memory. Fixture model: expected goals 3.1 (1.55-1.56), rating edge -2.1, style edge -1.46, memory edge 5.96. Odds intelligence is capped: market result edge 0, consensus probability 0.2985 where available. News impact is 0.095 for France and 0.037 for Morocco. Tactical memory: France 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Morocco 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.2. Scorer memory: France top recent scorers Mbappé, K. Mbappe, O. Dembele; Morocco top recent scorers Brahim, El Kaabi, Saibari. Heat layer: Boston hotHumid stress 100%, xG adjustment -0.101, result edge -1.79; climate/history/depth differential -0.0553. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goals environment is live at 3.1 expected goals; scorer price gives the betslip a higher-upside angle. Outcome learning: anytime_scorer historical strike 8.4% over 1183; calculated_risk historical strike 10.9% over 294; anytime_scorer calibration 8.4% actual vs 18.3% projected; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: anytime_scorer post-match reflection 8.8% actual vs 19.1% projected over 1256; non group game reflection 10.1% actual over 396. Market average moved from 4.5 to 4.4; best price is 0% over average. Confidence 87.1% after odds freshness and data completeness checks."
-        }
-      ],
-      "combinedDecimalOdds": 4.5,
-      "combinedProbability": 0.2598,
-      "expectedValue": 0.1691,
-      "averageEdge": 0.0376,
-      "averageIndependentEdge": 0.0389,
-      "averageConfidence": 0.8714,
-      "survivalCombinedProbability": 0.3175,
-      "averageSurvivalProbability": 0.3175,
-      "displayRating": 0.7124,
-      "riskLegCount": 1,
-      "bttsLegCount": 0,
-      "scorerLegCount": 1,
-      "firstScorerLegCount": 0,
-      "fragileLegCount": 0,
-      "reusedSignalCount": 0,
-      "intelligenceConfidence": 0.635,
-      "averageNonMarketSignalCount": 7,
-      "marketConfirmedLegCount": 0,
-      "contrarianLegCount": 0,
-      "favouriteLegCount": 0,
-      "correlationPenalty": 0,
-      "correlationReasons": [],
-      "marketFamilyMix": {},
-      "repeatedTeamCount": 0,
-      "sameDateCluster": 0,
-      "shortWindowFallback": false,
-      "score": 72.95,
-      "hardBlocks": [],
-      "thesis": "single at combined odds 4.5 with estimated slip chance 31.75% and average leg survival 31.8%. Expected value is 16.91%, independent edge averages 3.89%, and the model has 7 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  1 calculated-risk/value leg(s) stop this from being a favourite-only single. No high-implied-probability favourite crowding. Heat layer active on 1 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: France vs Morocco: Soufiane Rahimi anytime scorer."
+      "thesis": "single at combined odds 2 with estimated slip chance 59.38% and average leg survival 59.4%. Expected value is 18.06%, independent edge averages 9.89%, and the model has 5 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  1 calculated-risk/value leg(s) stop this from being a favourite-only single. No high-implied-probability favourite crowding. Heat layer active on 1 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: France vs Morocco: Both teams to score: Yes."
     }
   ],
   "doubles": [
     {
-      "id": "double_leg_a3237dc7_leg_75f65178",
+      "id": "double_leg_a3237dc7_leg_fc66d5e8",
       "type": "double",
       "legCount": 2,
       "legs": [
@@ -790,18 +654,18 @@
           "selectionLabel": "France vs Morocco: Under 4.5 goals",
           "bookmaker": "SportsGambler public prop pages: France v Morocco",
           "decimalOdds": 2.2,
-          "modelProbability": 0.7977,
-          "rawModelProbability": 0.7977,
+          "modelProbability": 0.7978,
+          "rawModelProbability": 0.7978,
           "impliedProbability": 0.4545,
           "marketImpliedProbability": 0.4587,
-          "independentEdge": 0.339,
-          "edge": 0.3402,
-          "confidence": 0.7479,
+          "independentEdge": 0.3391,
+          "edge": 0.3403,
+          "confidence": 0.7381,
           "riskTag": "calculated_risk",
           "shortWindowFallback": false,
           "reusedSignal": false,
           "components": {
-            "intelligenceConfidence": 0.635,
+            "intelligenceConfidence": 0.613,
             "nonMarketSignalCount": 6,
             "nonMarketSignals": [
               "raw AI probability beats market",
@@ -811,9 +675,9 @@
               "20-match goal history is survivable for the line",
               "heat layer trims goal tempo"
             ],
-            "independentEvidenceStrength": 0.6013,
+            "independentEvidenceStrength": 0.6014,
             "marketBlendLift": 0,
-            "oddsMovement": -0.0091,
+            "oddsMovement": 0,
             "oddsShortening": false,
             "oddsDrifting": false,
             "marketAverageOdds": 2.18,
@@ -830,7 +694,7 @@
             "awayHistoricalHeatMemory": 0.012,
             "combinedHeatDifferential": -0.0553,
             "expectedGoals": 3.1,
-            "homeExpectedGoals": 1.55,
+            "homeExpectedGoals": 1.54,
             "awayExpectedGoals": 1.56,
             "projectedShotTotal": 26.39,
             "homeProjectedShots": 13.25,
@@ -867,10 +731,10 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "France vs Morocco: Under 4.5 goals is priced at 2.2; raw AI probability 79.8%, market-adjusted probability 79.8%, market view 45.9%. Independent edge 33.9%, final value edge 34.02%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw under-4.5 model clears survival line, expected-goals model stays below under-4.5 danger zone, 20-match goal history is survivable for the line, heat layer trims goal tempo. Fixture model: expected goals 3.1 (1.55-1.56), rating edge -2.1, style edge -1.46, memory edge 5.96. Odds intelligence is capped: market result edge 0, consensus probability 0.2985 where available. News impact is 0.095 for France and 0.037 for Morocco. Tactical memory: France 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Morocco 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.2. Scorer memory: France top recent scorers Mbappé, K. Mbappe, O. Dembele; Morocco top recent scorers Brahim, El Kaabi, Saibari. Heat layer: Boston hotHumid stress 100%, xG adjustment -0.101, result edge -1.79; climate/history/depth differential -0.0553. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model keeps under-4.5 below its danger zone at 3.1 expected goals; heat layer modestly supports a lower game tempo; edge is strong enough to justify focus. Outcome learning: calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: non group game reflection 10.1% actual over 396. Market average moved from 2.2 to 2.18; best price is 0% over average. Confidence 74.8% after odds freshness and data completeness checks."
+          "thesis": "France vs Morocco: Under 4.5 goals is priced at 2.2; raw AI probability 79.8%, market-adjusted probability 79.8%, market view 45.9%. Independent edge 33.91%, final value edge 34.03%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw under-4.5 model clears survival line, expected-goals model stays below under-4.5 danger zone, 20-match goal history is survivable for the line, heat layer trims goal tempo. Fixture model: expected goals 3.1 (1.54-1.56), rating edge -3.2, style edge -1.46, memory edge 2.18. Odds intelligence is capped: market result edge 0, consensus probability 0.2985 where available. News impact is 0.092 for France and 0.034 for Morocco. Tactical memory: France 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Morocco 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.2. Scorer memory: France top recent scorers Mbappé, K. Mbappe, O. Dembele; Morocco top recent scorers Brahim, El Kaabi, Saibari. Heat layer: Boston hotHumid stress 100%, xG adjustment -0.101, result edge -1.79; climate/history/depth differential -0.0553. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model keeps under-4.5 below its danger zone at 3.1 expected goals; heat layer modestly supports a lower game tempo; edge is strong enough to justify focus. Outcome learning: calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: non group game reflection 10.1% actual over 396. Market average moved from 2.18 to 2.18; best price is 0% over average. Confidence 73.8% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_75f65178",
+          "id": "leg_fc66d5e8",
           "fixtureId": "fixture_eb65f44a",
           "fixtureDate": "2026-07-10T19:00:00.000Z",
           "homeTeam": "Spain",
@@ -885,12 +749,12 @@
           "marketImpliedProbability": 0.5051,
           "independentEdge": 0.3299,
           "edge": 0.3299,
-          "confidence": 0.7616,
+          "confidence": 0.7573,
           "riskTag": "calculated_risk",
           "shortWindowFallback": false,
           "reusedSignal": false,
           "components": {
-            "intelligenceConfidence": 0.633,
+            "intelligenceConfidence": 0.613,
             "nonMarketSignalCount": 7,
             "nonMarketSignals": [
               "raw AI probability beats market",
@@ -961,25 +825,25 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "Spain vs Belgium: Over 1.5 goals is priced at 1.98; raw AI probability 83.5%, market-adjusted probability 83.5%, market view 50.5%. Independent edge 32.99%, final value edge 32.99%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-1.5 model clears survival line, expected-goals base supports two goals, 20-match goals history is not dead, second goal can arrive from either match shape, opening caution still leaves a two-goal route. Fixture model: expected goals 3.25 (1.62-1.63), rating edge 24, style edge -0.26, memory edge 1.09. Odds intelligence is capped: market result edge 0, consensus probability 0.301 where available. News impact is 0.079 for Spain and 0.124 for Belgium. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.44. Scorer memory: Spain top recent scorers Morata, Oyarzabal, Sarabia; Belgium top recent scorers De Bruyne, Tielemans, De Ketelaere. Heat layer: Los Angeles hotMixed stress 29.6%, xG adjustment -0.03, result edge 1.48; climate/history/depth differential 0.1545. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: safer two-goal line has 3.25 expected-goals support; edge is strong enough to justify focus. Outcome learning: over_1_5_goals historical strike 40% over 5; calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: over_1_5_goals post-match reflection 33.3% actual vs 77.1% projected over 9; xG environment ran cooler than model by 1.11; actual goals finished 1.56 below expected goal shape; moderate heat matches undershot expected xG; non group game reflection 10.1% actual over 396. Market average moved from 1.98 to 1.98; best price is 0% over average. Confidence 76.2% after odds freshness and data completeness checks."
+          "thesis": "Spain vs Belgium: Over 1.5 goals is priced at 1.98; raw AI probability 83.5%, market-adjusted probability 83.5%, market view 50.5%. Independent edge 32.99%, final value edge 32.99%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-1.5 model clears survival line, expected-goals base supports two goals, 20-match goals history is not dead, second goal can arrive from either match shape, opening caution still leaves a two-goal route. Fixture model: expected goals 3.25 (1.62-1.63), rating edge 24.1, style edge -0.26, memory edge 1.19. Odds intelligence is capped: market result edge 0, consensus probability 0.301 where available. News impact is 0.079 for Spain and 0.124 for Belgium. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.44. Scorer memory: Spain top recent scorers Morata, Oyarzabal, Sarabia; Belgium top recent scorers De Bruyne, Tielemans, De Ketelaere. Heat layer: Los Angeles hotMixed stress 29.6%, xG adjustment -0.03, result edge 1.48; climate/history/depth differential 0.1545. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: safer two-goal line has 3.25 expected-goals support; edge is strong enough to justify focus. Outcome learning: over_1_5_goals historical strike 40% over 5; calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: over_1_5_goals post-match reflection 33.3% actual vs 77.1% projected over 9; xG environment ran cooler than model by 1.11; actual goals finished 1.56 below expected goal shape; moderate heat matches undershot expected xG; non group game reflection 10.1% actual over 396. Market average moved from 1.98 to 1.98; best price is 0% over average. Confidence 75.7% after odds freshness and data completeness checks."
         }
       ],
       "combinedDecimalOdds": 4.36,
-      "combinedProbability": 0.6661,
-      "expectedValue": 1.9014,
+      "combinedProbability": 0.6662,
+      "expectedValue": 1.9018,
       "averageEdge": 0.3351,
       "averageIndependentEdge": 0.3345,
-      "averageConfidence": 0.7548,
-      "survivalCombinedProbability": 0.4884,
-      "averageSurvivalProbability": 0.6992,
-      "displayRating": 0.8815,
+      "averageConfidence": 0.7477,
+      "survivalCombinedProbability": 0.4873,
+      "averageSurvivalProbability": 0.6983,
+      "displayRating": 0.8782,
       "riskLegCount": 2,
       "bttsLegCount": 0,
       "scorerLegCount": 0,
       "firstScorerLegCount": 0,
       "fragileLegCount": 0,
       "reusedSignalCount": 0,
-      "intelligenceConfidence": 0.634,
+      "intelligenceConfidence": 0.613,
       "averageNonMarketSignalCount": 6.5,
       "marketConfirmedLegCount": 0,
       "contrarianLegCount": 0,
@@ -992,10 +856,10 @@
       "shortWindowFallback": false,
       "score": 100,
       "hardBlocks": [],
-      "thesis": "double at combined odds 4.36 with estimated slip chance 48.84% and average leg survival 69.9%. Expected value is 190.14%, independent edge averages 33.45%, and the model has 6.5 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  2 calculated-risk/value leg(s) stop this from being a favourite-only double. No high-implied-probability favourite crowding. Heat layer active on 2 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: France vs Morocco: Under 4.5 goals | Spain vs Belgium: Over 1.5 goals."
+      "thesis": "double at combined odds 4.36 with estimated slip chance 48.73% and average leg survival 69.8%. Expected value is 190.18%, independent edge averages 33.45%, and the model has 6.5 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  2 calculated-risk/value leg(s) stop this from being a favourite-only double. No high-implied-probability favourite crowding. Heat layer active on 2 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: France vs Morocco: Under 4.5 goals | Spain vs Belgium: Over 1.5 goals."
     },
     {
-      "id": "double_leg_a3237dc7_leg_b780525",
+      "id": "double_leg_a3237dc7_leg_91e88995",
       "type": "double",
       "legCount": 2,
       "legs": [
@@ -1009,18 +873,18 @@
           "selectionLabel": "France vs Morocco: Under 4.5 goals",
           "bookmaker": "SportsGambler public prop pages: France v Morocco",
           "decimalOdds": 2.2,
-          "modelProbability": 0.7977,
-          "rawModelProbability": 0.7977,
+          "modelProbability": 0.7978,
+          "rawModelProbability": 0.7978,
           "impliedProbability": 0.4545,
           "marketImpliedProbability": 0.4587,
-          "independentEdge": 0.339,
-          "edge": 0.3402,
-          "confidence": 0.7479,
+          "independentEdge": 0.3391,
+          "edge": 0.3403,
+          "confidence": 0.7381,
           "riskTag": "calculated_risk",
           "shortWindowFallback": false,
           "reusedSignal": false,
           "components": {
-            "intelligenceConfidence": 0.635,
+            "intelligenceConfidence": 0.613,
             "nonMarketSignalCount": 6,
             "nonMarketSignals": [
               "raw AI probability beats market",
@@ -1030,9 +894,9 @@
               "20-match goal history is survivable for the line",
               "heat layer trims goal tempo"
             ],
-            "independentEvidenceStrength": 0.6013,
+            "independentEvidenceStrength": 0.6014,
             "marketBlendLift": 0,
-            "oddsMovement": -0.0091,
+            "oddsMovement": 0,
             "oddsShortening": false,
             "oddsDrifting": false,
             "marketAverageOdds": 2.18,
@@ -1049,7 +913,7 @@
             "awayHistoricalHeatMemory": 0.012,
             "combinedHeatDifferential": -0.0553,
             "expectedGoals": 3.1,
-            "homeExpectedGoals": 1.55,
+            "homeExpectedGoals": 1.54,
             "awayExpectedGoals": 1.56,
             "projectedShotTotal": 26.39,
             "homeProjectedShots": 13.25,
@@ -1086,10 +950,10 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "France vs Morocco: Under 4.5 goals is priced at 2.2; raw AI probability 79.8%, market-adjusted probability 79.8%, market view 45.9%. Independent edge 33.9%, final value edge 34.02%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw under-4.5 model clears survival line, expected-goals model stays below under-4.5 danger zone, 20-match goal history is survivable for the line, heat layer trims goal tempo. Fixture model: expected goals 3.1 (1.55-1.56), rating edge -2.1, style edge -1.46, memory edge 5.96. Odds intelligence is capped: market result edge 0, consensus probability 0.2985 where available. News impact is 0.095 for France and 0.037 for Morocco. Tactical memory: France 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Morocco 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.2. Scorer memory: France top recent scorers Mbappé, K. Mbappe, O. Dembele; Morocco top recent scorers Brahim, El Kaabi, Saibari. Heat layer: Boston hotHumid stress 100%, xG adjustment -0.101, result edge -1.79; climate/history/depth differential -0.0553. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model keeps under-4.5 below its danger zone at 3.1 expected goals; heat layer modestly supports a lower game tempo; edge is strong enough to justify focus. Outcome learning: calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: non group game reflection 10.1% actual over 396. Market average moved from 2.2 to 2.18; best price is 0% over average. Confidence 74.8% after odds freshness and data completeness checks."
+          "thesis": "France vs Morocco: Under 4.5 goals is priced at 2.2; raw AI probability 79.8%, market-adjusted probability 79.8%, market view 45.9%. Independent edge 33.91%, final value edge 34.03%, backed by 6 non-market signal(s): raw AI probability beats market, 20-match team sample, raw under-4.5 model clears survival line, expected-goals model stays below under-4.5 danger zone, 20-match goal history is survivable for the line, heat layer trims goal tempo. Fixture model: expected goals 3.1 (1.54-1.56), rating edge -3.2, style edge -1.46, memory edge 2.18. Odds intelligence is capped: market result edge 0, consensus probability 0.2985 where available. News impact is 0.092 for France and 0.034 for Morocco. Tactical memory: France 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Morocco 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.2. Scorer memory: France top recent scorers Mbappé, K. Mbappe, O. Dembele; Morocco top recent scorers Brahim, El Kaabi, Saibari. Heat layer: Boston hotHumid stress 100%, xG adjustment -0.101, result edge -1.79; climate/history/depth differential -0.0553. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model keeps under-4.5 below its danger zone at 3.1 expected goals; heat layer modestly supports a lower game tempo; edge is strong enough to justify focus. Outcome learning: calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: non group game reflection 10.1% actual over 396. Market average moved from 2.18 to 2.18; best price is 0% over average. Confidence 73.8% after odds freshness and data completeness checks."
         },
         {
-          "id": "leg_b780525",
+          "id": "leg_91e88995",
           "fixtureId": "fixture_eb65f44a",
           "fixtureDate": "2026-07-10T19:00:00.000Z",
           "homeTeam": "Spain",
@@ -1104,12 +968,12 @@
           "marketImpliedProbability": 0.4808,
           "independentEdge": 0.2912,
           "edge": 0.2912,
-          "confidence": 0.7415,
+          "confidence": 0.7371,
           "riskTag": "calculated_risk",
           "shortWindowFallback": false,
           "reusedSignal": false,
           "components": {
-            "intelligenceConfidence": 0.633,
+            "intelligenceConfidence": 0.613,
             "nonMarketSignalCount": 5,
             "nonMarketSignals": [
               "raw AI probability beats market",
@@ -1175,25 +1039,25 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "Spain vs Belgium: Under 4.5 goals is priced at 2.08; raw AI probability 77.2%, market-adjusted probability 77.2%, market view 48.1%. Independent edge 29.12%, final value edge 29.12%, backed by 5 non-market signal(s): raw AI probability beats market, 20-match team sample, expected-goals model stays below under-4.5 danger zone, 20-match goal history is survivable for the line, heat layer trims goal tempo. Fixture model: expected goals 3.25 (1.62-1.63), rating edge 24, style edge -0.26, memory edge 1.09. Odds intelligence is capped: market result edge 0, consensus probability 0.301 where available. News impact is 0.079 for Spain and 0.124 for Belgium. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.44. Scorer memory: Spain top recent scorers Morata, Oyarzabal, Sarabia; Belgium top recent scorers De Bruyne, Tielemans, De Ketelaere. Heat layer: Los Angeles hotMixed stress 29.6%, xG adjustment -0.03, result edge 1.48; climate/history/depth differential 0.1545. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model keeps under-4.5 below its danger zone at 3.25 expected goals; edge is strong enough to justify focus. Outcome learning: calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: moderate heat matches undershot expected xG; non group game reflection 10.1% actual over 396. Market average moved from 2.08 to 2.08; best price is 0% over average. Confidence 74.1% after odds freshness and data completeness checks."
+          "thesis": "Spain vs Belgium: Under 4.5 goals is priced at 2.08; raw AI probability 77.2%, market-adjusted probability 77.2%, market view 48.1%. Independent edge 29.12%, final value edge 29.12%, backed by 5 non-market signal(s): raw AI probability beats market, 20-match team sample, expected-goals model stays below under-4.5 danger zone, 20-match goal history is survivable for the line, heat layer trims goal tempo. Fixture model: expected goals 3.25 (1.62-1.63), rating edge 24.1, style edge -0.26, memory edge 1.19. Odds intelligence is capped: market result edge 0, consensus probability 0.301 where available. News impact is 0.079 for Spain and 0.124 for Belgium. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.44. Scorer memory: Spain top recent scorers Morata, Oyarzabal, Sarabia; Belgium top recent scorers De Bruyne, Tielemans, De Ketelaere. Heat layer: Los Angeles hotMixed stress 29.6%, xG adjustment -0.03, result edge 1.48; climate/history/depth differential 0.1545. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model keeps under-4.5 below its danger zone at 3.25 expected goals; edge is strong enough to justify focus. Outcome learning: calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: moderate heat matches undershot expected xG; non group game reflection 10.1% actual over 396. Market average moved from 2.08 to 2.08; best price is 0% over average. Confidence 73.7% after odds freshness and data completeness checks."
         }
       ],
       "combinedDecimalOdds": 4.58,
-      "combinedProbability": 0.6158,
-      "expectedValue": 1.818,
+      "combinedProbability": 0.6159,
+      "expectedValue": 1.8184,
       "averageEdge": 0.3157,
-      "averageIndependentEdge": 0.3151,
-      "averageConfidence": 0.7447,
-      "survivalCombinedProbability": 0.4654,
-      "averageSurvivalProbability": 0.6822,
-      "displayRating": 0.8746,
+      "averageIndependentEdge": 0.3152,
+      "averageConfidence": 0.7376,
+      "survivalCombinedProbability": 0.4643,
+      "averageSurvivalProbability": 0.6814,
+      "displayRating": 0.8713,
       "riskLegCount": 2,
       "bttsLegCount": 0,
       "scorerLegCount": 0,
       "firstScorerLegCount": 0,
       "fragileLegCount": 0,
       "reusedSignalCount": 0,
-      "intelligenceConfidence": 0.634,
+      "intelligenceConfidence": 0.613,
       "averageNonMarketSignalCount": 5.5,
       "marketConfirmedLegCount": 0,
       "contrarianLegCount": 0,
@@ -1206,15 +1070,15 @@
       "shortWindowFallback": false,
       "score": 100,
       "hardBlocks": [],
-      "thesis": "double at combined odds 4.58 with estimated slip chance 46.54% and average leg survival 68.2%. Expected value is 181.8%, independent edge averages 31.51%, and the model has 5.5 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  2 calculated-risk/value leg(s) stop this from being a favourite-only double. No high-implied-probability favourite crowding. Heat layer active on 2 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: France vs Morocco: Under 4.5 goals | Spain vs Belgium: Under 4.5 goals."
+      "thesis": "double at combined odds 4.58 with estimated slip chance 46.43% and average leg survival 68.1%. Expected value is 181.84%, independent edge averages 31.52%, and the model has 5.5 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  2 calculated-risk/value leg(s) stop this from being a favourite-only double. No high-implied-probability favourite crowding. Heat layer active on 2 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: France vs Morocco: Under 4.5 goals | Spain vs Belgium: Under 4.5 goals."
     },
     {
-      "id": "double_leg_75f65178_leg_686a3a14",
+      "id": "double_leg_fc66d5e8_leg_686a3a14",
       "type": "double",
       "legCount": 2,
       "legs": [
         {
-          "id": "leg_75f65178",
+          "id": "leg_fc66d5e8",
           "fixtureId": "fixture_eb65f44a",
           "fixtureDate": "2026-07-10T19:00:00.000Z",
           "homeTeam": "Spain",
@@ -1229,12 +1093,12 @@
           "marketImpliedProbability": 0.5051,
           "independentEdge": 0.3299,
           "edge": 0.3299,
-          "confidence": 0.7616,
+          "confidence": 0.7573,
           "riskTag": "calculated_risk",
           "shortWindowFallback": false,
           "reusedSignal": false,
           "components": {
-            "intelligenceConfidence": 0.633,
+            "intelligenceConfidence": 0.613,
             "nonMarketSignalCount": 7,
             "nonMarketSignals": [
               "raw AI probability beats market",
@@ -1305,7 +1169,7 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "Spain vs Belgium: Over 1.5 goals is priced at 1.98; raw AI probability 83.5%, market-adjusted probability 83.5%, market view 50.5%. Independent edge 32.99%, final value edge 32.99%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-1.5 model clears survival line, expected-goals base supports two goals, 20-match goals history is not dead, second goal can arrive from either match shape, opening caution still leaves a two-goal route. Fixture model: expected goals 3.25 (1.62-1.63), rating edge 24, style edge -0.26, memory edge 1.09. Odds intelligence is capped: market result edge 0, consensus probability 0.301 where available. News impact is 0.079 for Spain and 0.124 for Belgium. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.44. Scorer memory: Spain top recent scorers Morata, Oyarzabal, Sarabia; Belgium top recent scorers De Bruyne, Tielemans, De Ketelaere. Heat layer: Los Angeles hotMixed stress 29.6%, xG adjustment -0.03, result edge 1.48; climate/history/depth differential 0.1545. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: safer two-goal line has 3.25 expected-goals support; edge is strong enough to justify focus. Outcome learning: over_1_5_goals historical strike 40% over 5; calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: over_1_5_goals post-match reflection 33.3% actual vs 77.1% projected over 9; xG environment ran cooler than model by 1.11; actual goals finished 1.56 below expected goal shape; moderate heat matches undershot expected xG; non group game reflection 10.1% actual over 396. Market average moved from 1.98 to 1.98; best price is 0% over average. Confidence 76.2% after odds freshness and data completeness checks."
+          "thesis": "Spain vs Belgium: Over 1.5 goals is priced at 1.98; raw AI probability 83.5%, market-adjusted probability 83.5%, market view 50.5%. Independent edge 32.99%, final value edge 32.99%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-1.5 model clears survival line, expected-goals base supports two goals, 20-match goals history is not dead, second goal can arrive from either match shape, opening caution still leaves a two-goal route. Fixture model: expected goals 3.25 (1.62-1.63), rating edge 24.1, style edge -0.26, memory edge 1.19. Odds intelligence is capped: market result edge 0, consensus probability 0.301 where available. News impact is 0.079 for Spain and 0.124 for Belgium. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.44. Scorer memory: Spain top recent scorers Morata, Oyarzabal, Sarabia; Belgium top recent scorers De Bruyne, Tielemans, De Ketelaere. Heat layer: Los Angeles hotMixed stress 29.6%, xG adjustment -0.03, result edge 1.48; climate/history/depth differential 0.1545. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: safer two-goal line has 3.25 expected-goals support; edge is strong enough to justify focus. Outcome learning: over_1_5_goals historical strike 40% over 5; calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: over_1_5_goals post-match reflection 33.3% actual vs 77.1% projected over 9; xG environment ran cooler than model by 1.11; actual goals finished 1.56 below expected goal shape; moderate heat matches undershot expected xG; non group game reflection 10.1% actual over 396. Market average moved from 1.98 to 1.98; best price is 0% over average. Confidence 75.7% after odds freshness and data completeness checks."
         },
         {
           "id": "leg_686a3a14",
@@ -1323,12 +1187,12 @@
           "marketImpliedProbability": 0.578,
           "independentEdge": 0.2377,
           "edge": 0.2386,
-          "confidence": 0.7537,
+          "confidence": 0.7438,
           "riskTag": "steady_edge",
           "shortWindowFallback": false,
           "reusedSignal": false,
           "components": {
-            "intelligenceConfidence": 0.635,
+            "intelligenceConfidence": 0.613,
             "nonMarketSignalCount": 7,
             "nonMarketSignals": [
               "raw AI probability beats market",
@@ -1341,7 +1205,7 @@
             ],
             "independentEvidenceStrength": 0.738,
             "marketBlendLift": 0,
-            "oddsMovement": -0.0057,
+            "oddsMovement": 0,
             "oddsShortening": false,
             "oddsDrifting": false,
             "marketAverageOdds": 1.73,
@@ -1358,7 +1222,7 @@
             "awayHistoricalHeatMemory": 0.012,
             "combinedHeatDifferential": -0.0553,
             "expectedGoals": 3.1,
-            "homeExpectedGoals": 1.55,
+            "homeExpectedGoals": 1.54,
             "awayExpectedGoals": 1.56,
             "projectedShotTotal": 26.39,
             "homeProjectedShots": 13.25,
@@ -1398,7 +1262,7 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "France vs Morocco: Over 1.5 goals is priced at 1.74; raw AI probability 81.6%, market-adjusted probability 81.6%, market view 57.8%. Independent edge 23.77%, final value edge 23.86%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-1.5 model clears survival line, expected-goals base supports two goals, 20-match goals history is not dead, second goal can arrive from either match shape, opening caution still leaves a two-goal route. Fixture model: expected goals 3.1 (1.55-1.56), rating edge -2.1, style edge -1.46, memory edge 5.96. Odds intelligence is capped: market result edge 0, consensus probability 0.2985 where available. News impact is 0.095 for France and 0.037 for Morocco. Tactical memory: France 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Morocco 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.2. Scorer memory: France top recent scorers Mbappé, K. Mbappe, O. Dembele; Morocco top recent scorers Brahim, El Kaabi, Saibari. Heat layer: Boston hotHumid stress 100%, xG adjustment -0.101, result edge -1.79; climate/history/depth differential -0.0553. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: safer two-goal line has 3.1 expected-goals support; edge is strong enough to justify focus. Outcome learning: over_1_5_goals historical strike 40% over 5; steady_edge historical strike 18.2% over 781; steady_edge calibration 18.2% actual vs 22.3% projected. Post-match reflection: over_1_5_goals post-match reflection 33.3% actual vs 77.1% projected over 9; xG environment ran cooler than model by 1.11; actual goals finished 1.56 below expected goal shape; non group game reflection 10.1% actual over 396. Market average moved from 1.74 to 1.73; best price is 0% over average. Confidence 75.4% after odds freshness and data completeness checks."
+          "thesis": "France vs Morocco: Over 1.5 goals is priced at 1.74; raw AI probability 81.6%, market-adjusted probability 81.6%, market view 57.8%. Independent edge 23.77%, final value edge 23.86%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-1.5 model clears survival line, expected-goals base supports two goals, 20-match goals history is not dead, second goal can arrive from either match shape, opening caution still leaves a two-goal route. Fixture model: expected goals 3.1 (1.54-1.56), rating edge -3.2, style edge -1.46, memory edge 2.18. Odds intelligence is capped: market result edge 0, consensus probability 0.2985 where available. News impact is 0.092 for France and 0.034 for Morocco. Tactical memory: France 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Morocco 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.2. Scorer memory: France top recent scorers Mbappé, K. Mbappe, O. Dembele; Morocco top recent scorers Brahim, El Kaabi, Saibari. Heat layer: Boston hotHumid stress 100%, xG adjustment -0.101, result edge -1.79; climate/history/depth differential -0.0553. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: safer two-goal line has 3.1 expected-goals support; edge is strong enough to justify focus. Outcome learning: over_1_5_goals historical strike 40% over 5; steady_edge historical strike 18.2% over 781; steady_edge calibration 18.2% actual vs 22.3% projected. Post-match reflection: over_1_5_goals post-match reflection 33.3% actual vs 77.1% projected over 9; xG environment ran cooler than model by 1.11; actual goals finished 1.56 below expected goal shape; non group game reflection 10.1% actual over 396. Market average moved from 1.73 to 1.73; best price is 0% over average. Confidence 74.4% after odds freshness and data completeness checks."
         }
       ],
       "combinedDecimalOdds": 3.45,
@@ -1406,17 +1270,17 @@
       "expectedValue": 1.3466,
       "averageEdge": 0.2843,
       "averageIndependentEdge": 0.2838,
-      "averageConfidence": 0.7577,
-      "survivalCombinedProbability": 0.548,
-      "averageSurvivalProbability": 0.7405,
-      "displayRating": 0.8835,
+      "averageConfidence": 0.7506,
+      "survivalCombinedProbability": 0.5467,
+      "averageSurvivalProbability": 0.7397,
+      "displayRating": 0.8802,
       "riskLegCount": 1,
       "bttsLegCount": 0,
       "scorerLegCount": 0,
       "firstScorerLegCount": 0,
       "fragileLegCount": 0,
       "reusedSignalCount": 0,
-      "intelligenceConfidence": 0.634,
+      "intelligenceConfidence": 0.613,
       "averageNonMarketSignalCount": 7,
       "marketConfirmedLegCount": 0,
       "contrarianLegCount": 0,
@@ -1429,15 +1293,15 @@
       "shortWindowFallback": false,
       "score": 100,
       "hardBlocks": [],
-      "thesis": "double at combined odds 3.45 with estimated slip chance 54.8% and average leg survival 74.1%. Expected value is 134.66%, independent edge averages 28.38%, and the model has 7 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  1 calculated-risk/value leg(s) stop this from being a favourite-only double. No high-implied-probability favourite crowding. Heat layer active on 2 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: Spain vs Belgium: Over 1.5 goals | France vs Morocco: Over 1.5 goals."
+      "thesis": "double at combined odds 3.45 with estimated slip chance 54.67% and average leg survival 74%. Expected value is 134.66%, independent edge averages 28.38%, and the model has 7 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  1 calculated-risk/value leg(s) stop this from being a favourite-only double. No high-implied-probability favourite crowding. Heat layer active on 2 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: Spain vs Belgium: Over 1.5 goals | France vs Morocco: Over 1.5 goals."
     },
     {
-      "id": "double_leg_75f65178_leg_6463a707",
+      "id": "double_leg_fc66d5e8_leg_6463a707",
       "type": "double",
       "legCount": 2,
       "legs": [
         {
-          "id": "leg_75f65178",
+          "id": "leg_fc66d5e8",
           "fixtureId": "fixture_eb65f44a",
           "fixtureDate": "2026-07-10T19:00:00.000Z",
           "homeTeam": "Spain",
@@ -1452,12 +1316,12 @@
           "marketImpliedProbability": 0.5051,
           "independentEdge": 0.3299,
           "edge": 0.3299,
-          "confidence": 0.7616,
+          "confidence": 0.7573,
           "riskTag": "calculated_risk",
           "shortWindowFallback": false,
           "reusedSignal": false,
           "components": {
-            "intelligenceConfidence": 0.633,
+            "intelligenceConfidence": 0.613,
             "nonMarketSignalCount": 7,
             "nonMarketSignals": [
               "raw AI probability beats market",
@@ -1528,7 +1392,7 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "Spain vs Belgium: Over 1.5 goals is priced at 1.98; raw AI probability 83.5%, market-adjusted probability 83.5%, market view 50.5%. Independent edge 32.99%, final value edge 32.99%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-1.5 model clears survival line, expected-goals base supports two goals, 20-match goals history is not dead, second goal can arrive from either match shape, opening caution still leaves a two-goal route. Fixture model: expected goals 3.25 (1.62-1.63), rating edge 24, style edge -0.26, memory edge 1.09. Odds intelligence is capped: market result edge 0, consensus probability 0.301 where available. News impact is 0.079 for Spain and 0.124 for Belgium. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.44. Scorer memory: Spain top recent scorers Morata, Oyarzabal, Sarabia; Belgium top recent scorers De Bruyne, Tielemans, De Ketelaere. Heat layer: Los Angeles hotMixed stress 29.6%, xG adjustment -0.03, result edge 1.48; climate/history/depth differential 0.1545. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: safer two-goal line has 3.25 expected-goals support; edge is strong enough to justify focus. Outcome learning: over_1_5_goals historical strike 40% over 5; calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: over_1_5_goals post-match reflection 33.3% actual vs 77.1% projected over 9; xG environment ran cooler than model by 1.11; actual goals finished 1.56 below expected goal shape; moderate heat matches undershot expected xG; non group game reflection 10.1% actual over 396. Market average moved from 1.98 to 1.98; best price is 0% over average. Confidence 76.2% after odds freshness and data completeness checks."
+          "thesis": "Spain vs Belgium: Over 1.5 goals is priced at 1.98; raw AI probability 83.5%, market-adjusted probability 83.5%, market view 50.5%. Independent edge 32.99%, final value edge 32.99%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-1.5 model clears survival line, expected-goals base supports two goals, 20-match goals history is not dead, second goal can arrive from either match shape, opening caution still leaves a two-goal route. Fixture model: expected goals 3.25 (1.62-1.63), rating edge 24.1, style edge -0.26, memory edge 1.19. Odds intelligence is capped: market result edge 0, consensus probability 0.301 where available. News impact is 0.079 for Spain and 0.124 for Belgium. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.44. Scorer memory: Spain top recent scorers Morata, Oyarzabal, Sarabia; Belgium top recent scorers De Bruyne, Tielemans, De Ketelaere. Heat layer: Los Angeles hotMixed stress 29.6%, xG adjustment -0.03, result edge 1.48; climate/history/depth differential 0.1545. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: safer two-goal line has 3.25 expected-goals support; edge is strong enough to justify focus. Outcome learning: over_1_5_goals historical strike 40% over 5; calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: over_1_5_goals post-match reflection 33.3% actual vs 77.1% projected over 9; xG environment ran cooler than model by 1.11; actual goals finished 1.56 below expected goal shape; moderate heat matches undershot expected xG; non group game reflection 10.1% actual over 396. Market average moved from 1.98 to 1.98; best price is 0% over average. Confidence 75.7% after odds freshness and data completeness checks."
         },
         {
           "id": "leg_6463a707",
@@ -1546,12 +1410,12 @@
           "marketImpliedProbability": 0.5051,
           "independentEdge": 0.0989,
           "edge": 0.0946,
-          "confidence": 0.6859,
+          "confidence": 0.676,
           "riskTag": "calculated_risk",
           "shortWindowFallback": false,
           "reusedSignal": false,
           "components": {
-            "intelligenceConfidence": 0.635,
+            "intelligenceConfidence": 0.613,
             "nonMarketSignalCount": 5,
             "nonMarketSignals": [
               "raw AI probability beats market",
@@ -1562,7 +1426,7 @@
             ],
             "independentEvidenceStrength": 0.7551,
             "marketBlendLift": -0.0137,
-            "oddsMovement": -0.01,
+            "oddsMovement": 0,
             "oddsShortening": false,
             "oddsDrifting": false,
             "marketAverageOdds": 1.98,
@@ -1579,7 +1443,7 @@
             "awayHistoricalHeatMemory": 0.012,
             "combinedHeatDifferential": -0.0553,
             "expectedGoals": 3.1,
-            "homeExpectedGoals": 1.55,
+            "homeExpectedGoals": 1.54,
             "awayExpectedGoals": 1.56,
             "projectedShotTotal": 26.39,
             "homeProjectedShots": 13.25,
@@ -1618,7 +1482,7 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "France vs Morocco: Both teams to score: Yes is priced at 2; raw AI probability 60.4%, market-adjusted probability 59%, market view 50.5%. Independent edge 9.89%, final value edge 9.46%, backed by 5 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS. Fixture model: expected goals 3.1 (1.55-1.56), rating edge -2.1, style edge -1.46, memory edge 5.96. Odds intelligence is capped: market result edge 0, consensus probability 0.2985 where available. News impact is 0.095 for France and 0.037 for Morocco. Tactical memory: France 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Morocco 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.2. Scorer memory: France top recent scorers Mbappé, K. Mbappe, O. Dembele; Morocco top recent scorers Brahim, El Kaabi, Saibari. Heat layer: Boston hotHumid stress 100%, xG adjustment -0.101, result edge -1.79; climate/history/depth differential -0.0553. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.55-1.56 expected goals; edge is strong enough to justify focus. Outcome learning: both_teams_to_score historical strike 49.4% over 79; calculated_risk historical strike 10.9% over 294; both_teams_to_score calibration 49.4% actual vs 51.5% projected; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: both_teams_to_score post-match reflection 47.7% actual vs 53.4% projected over 107; actual goals finished 0.29 below expected goal shape; non group game reflection 10.1% actual over 396. Market average moved from 2 to 1.98; best price is 0% over average. Confidence 68.6% after odds freshness and data completeness checks."
+          "thesis": "France vs Morocco: Both teams to score: Yes is priced at 2; raw AI probability 60.4%, market-adjusted probability 59%, market view 50.5%. Independent edge 9.89%, final value edge 9.46%, backed by 5 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS. Fixture model: expected goals 3.1 (1.54-1.56), rating edge -3.2, style edge -1.46, memory edge 2.18. Odds intelligence is capped: market result edge 0, consensus probability 0.2985 where available. News impact is 0.092 for France and 0.034 for Morocco. Tactical memory: France 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Morocco 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.2. Scorer memory: France top recent scorers Mbappé, K. Mbappe, O. Dembele; Morocco top recent scorers Brahim, El Kaabi, Saibari. Heat layer: Boston hotHumid stress 100%, xG adjustment -0.101, result edge -1.79; climate/history/depth differential -0.0553. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.54-1.56 expected goals; edge is strong enough to justify focus. Outcome learning: both_teams_to_score historical strike 49.4% over 79; calculated_risk historical strike 10.9% over 294; both_teams_to_score calibration 49.4% actual vs 51.5% projected; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: both_teams_to_score post-match reflection 47.7% actual vs 53.4% projected over 107; actual goals finished 0.29 below expected goal shape; non group game reflection 10.1% actual over 396. Market average moved from 1.98 to 1.98; best price is 0% over average. Confidence 67.6% after odds freshness and data completeness checks."
         }
       ],
       "combinedDecimalOdds": 3.96,
@@ -1626,17 +1490,17 @@
       "expectedValue": 0.9519,
       "averageEdge": 0.2123,
       "averageIndependentEdge": 0.2144,
-      "averageConfidence": 0.7238,
-      "survivalCombinedProbability": 0.4281,
-      "averageSurvivalProbability": 0.6573,
-      "displayRating": 0.848,
+      "averageConfidence": 0.7167,
+      "survivalCombinedProbability": 0.4271,
+      "averageSurvivalProbability": 0.6565,
+      "displayRating": 0.8448,
       "riskLegCount": 2,
       "bttsLegCount": 1,
       "scorerLegCount": 0,
       "firstScorerLegCount": 0,
       "fragileLegCount": 0,
       "reusedSignalCount": 0,
-      "intelligenceConfidence": 0.634,
+      "intelligenceConfidence": 0.613,
       "averageNonMarketSignalCount": 6,
       "marketConfirmedLegCount": 0,
       "contrarianLegCount": 0,
@@ -1649,15 +1513,15 @@
       "shortWindowFallback": false,
       "score": 100,
       "hardBlocks": [],
-      "thesis": "double at combined odds 3.96 with estimated slip chance 42.81% and average leg survival 65.7%. Expected value is 95.19%, independent edge averages 21.44%, and the model has 6 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  2 calculated-risk/value leg(s) stop this from being a favourite-only double. No high-implied-probability favourite crowding. Heat layer active on 2 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: Spain vs Belgium: Over 1.5 goals | France vs Morocco: Both teams to score: Yes."
+      "thesis": "double at combined odds 3.96 with estimated slip chance 42.71% and average leg survival 65.6%. Expected value is 95.19%, independent edge averages 21.44%, and the model has 6 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  2 calculated-risk/value leg(s) stop this from being a favourite-only double. No high-implied-probability favourite crowding. Heat layer active on 2 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: Spain vs Belgium: Over 1.5 goals | France vs Morocco: Both teams to score: Yes."
     },
     {
-      "id": "double_leg_b780525_leg_686a3a14",
+      "id": "double_leg_91e88995_leg_686a3a14",
       "type": "double",
       "legCount": 2,
       "legs": [
         {
-          "id": "leg_b780525",
+          "id": "leg_91e88995",
           "fixtureId": "fixture_eb65f44a",
           "fixtureDate": "2026-07-10T19:00:00.000Z",
           "homeTeam": "Spain",
@@ -1672,12 +1536,12 @@
           "marketImpliedProbability": 0.4808,
           "independentEdge": 0.2912,
           "edge": 0.2912,
-          "confidence": 0.7415,
+          "confidence": 0.7371,
           "riskTag": "calculated_risk",
           "shortWindowFallback": false,
           "reusedSignal": false,
           "components": {
-            "intelligenceConfidence": 0.633,
+            "intelligenceConfidence": 0.613,
             "nonMarketSignalCount": 5,
             "nonMarketSignals": [
               "raw AI probability beats market",
@@ -1743,7 +1607,7 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "Spain vs Belgium: Under 4.5 goals is priced at 2.08; raw AI probability 77.2%, market-adjusted probability 77.2%, market view 48.1%. Independent edge 29.12%, final value edge 29.12%, backed by 5 non-market signal(s): raw AI probability beats market, 20-match team sample, expected-goals model stays below under-4.5 danger zone, 20-match goal history is survivable for the line, heat layer trims goal tempo. Fixture model: expected goals 3.25 (1.62-1.63), rating edge 24, style edge -0.26, memory edge 1.09. Odds intelligence is capped: market result edge 0, consensus probability 0.301 where available. News impact is 0.079 for Spain and 0.124 for Belgium. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.44. Scorer memory: Spain top recent scorers Morata, Oyarzabal, Sarabia; Belgium top recent scorers De Bruyne, Tielemans, De Ketelaere. Heat layer: Los Angeles hotMixed stress 29.6%, xG adjustment -0.03, result edge 1.48; climate/history/depth differential 0.1545. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model keeps under-4.5 below its danger zone at 3.25 expected goals; edge is strong enough to justify focus. Outcome learning: calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: moderate heat matches undershot expected xG; non group game reflection 10.1% actual over 396. Market average moved from 2.08 to 2.08; best price is 0% over average. Confidence 74.1% after odds freshness and data completeness checks."
+          "thesis": "Spain vs Belgium: Under 4.5 goals is priced at 2.08; raw AI probability 77.2%, market-adjusted probability 77.2%, market view 48.1%. Independent edge 29.12%, final value edge 29.12%, backed by 5 non-market signal(s): raw AI probability beats market, 20-match team sample, expected-goals model stays below under-4.5 danger zone, 20-match goal history is survivable for the line, heat layer trims goal tempo. Fixture model: expected goals 3.25 (1.62-1.63), rating edge 24.1, style edge -0.26, memory edge 1.19. Odds intelligence is capped: market result edge 0, consensus probability 0.301 where available. News impact is 0.079 for Spain and 0.124 for Belgium. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.44. Scorer memory: Spain top recent scorers Morata, Oyarzabal, Sarabia; Belgium top recent scorers De Bruyne, Tielemans, De Ketelaere. Heat layer: Los Angeles hotMixed stress 29.6%, xG adjustment -0.03, result edge 1.48; climate/history/depth differential 0.1545. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model keeps under-4.5 below its danger zone at 3.25 expected goals; edge is strong enough to justify focus. Outcome learning: calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: moderate heat matches undershot expected xG; non group game reflection 10.1% actual over 396. Market average moved from 2.08 to 2.08; best price is 0% over average. Confidence 73.7% after odds freshness and data completeness checks."
         },
         {
           "id": "leg_686a3a14",
@@ -1761,12 +1625,12 @@
           "marketImpliedProbability": 0.578,
           "independentEdge": 0.2377,
           "edge": 0.2386,
-          "confidence": 0.7537,
+          "confidence": 0.7438,
           "riskTag": "steady_edge",
           "shortWindowFallback": false,
           "reusedSignal": false,
           "components": {
-            "intelligenceConfidence": 0.635,
+            "intelligenceConfidence": 0.613,
             "nonMarketSignalCount": 7,
             "nonMarketSignals": [
               "raw AI probability beats market",
@@ -1779,7 +1643,7 @@
             ],
             "independentEvidenceStrength": 0.738,
             "marketBlendLift": 0,
-            "oddsMovement": -0.0057,
+            "oddsMovement": 0,
             "oddsShortening": false,
             "oddsDrifting": false,
             "marketAverageOdds": 1.73,
@@ -1796,7 +1660,7 @@
             "awayHistoricalHeatMemory": 0.012,
             "combinedHeatDifferential": -0.0553,
             "expectedGoals": 3.1,
-            "homeExpectedGoals": 1.55,
+            "homeExpectedGoals": 1.54,
             "awayExpectedGoals": 1.56,
             "projectedShotTotal": 26.39,
             "homeProjectedShots": 13.25,
@@ -1836,7 +1700,7 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "France vs Morocco: Over 1.5 goals is priced at 1.74; raw AI probability 81.6%, market-adjusted probability 81.6%, market view 57.8%. Independent edge 23.77%, final value edge 23.86%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-1.5 model clears survival line, expected-goals base supports two goals, 20-match goals history is not dead, second goal can arrive from either match shape, opening caution still leaves a two-goal route. Fixture model: expected goals 3.1 (1.55-1.56), rating edge -2.1, style edge -1.46, memory edge 5.96. Odds intelligence is capped: market result edge 0, consensus probability 0.2985 where available. News impact is 0.095 for France and 0.037 for Morocco. Tactical memory: France 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Morocco 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.2. Scorer memory: France top recent scorers Mbappé, K. Mbappe, O. Dembele; Morocco top recent scorers Brahim, El Kaabi, Saibari. Heat layer: Boston hotHumid stress 100%, xG adjustment -0.101, result edge -1.79; climate/history/depth differential -0.0553. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: safer two-goal line has 3.1 expected-goals support; edge is strong enough to justify focus. Outcome learning: over_1_5_goals historical strike 40% over 5; steady_edge historical strike 18.2% over 781; steady_edge calibration 18.2% actual vs 22.3% projected. Post-match reflection: over_1_5_goals post-match reflection 33.3% actual vs 77.1% projected over 9; xG environment ran cooler than model by 1.11; actual goals finished 1.56 below expected goal shape; non group game reflection 10.1% actual over 396. Market average moved from 1.74 to 1.73; best price is 0% over average. Confidence 75.4% after odds freshness and data completeness checks."
+          "thesis": "France vs Morocco: Over 1.5 goals is priced at 1.74; raw AI probability 81.6%, market-adjusted probability 81.6%, market view 57.8%. Independent edge 23.77%, final value edge 23.86%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-1.5 model clears survival line, expected-goals base supports two goals, 20-match goals history is not dead, second goal can arrive from either match shape, opening caution still leaves a two-goal route. Fixture model: expected goals 3.1 (1.54-1.56), rating edge -3.2, style edge -1.46, memory edge 2.18. Odds intelligence is capped: market result edge 0, consensus probability 0.2985 where available. News impact is 0.092 for France and 0.034 for Morocco. Tactical memory: France 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Morocco 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.2. Scorer memory: France top recent scorers Mbappé, K. Mbappe, O. Dembele; Morocco top recent scorers Brahim, El Kaabi, Saibari. Heat layer: Boston hotHumid stress 100%, xG adjustment -0.101, result edge -1.79; climate/history/depth differential -0.0553. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: safer two-goal line has 3.1 expected-goals support; edge is strong enough to justify focus. Outcome learning: over_1_5_goals historical strike 40% over 5; steady_edge historical strike 18.2% over 781; steady_edge calibration 18.2% actual vs 22.3% projected. Post-match reflection: over_1_5_goals post-match reflection 33.3% actual vs 77.1% projected over 9; xG environment ran cooler than model by 1.11; actual goals finished 1.56 below expected goal shape; non group game reflection 10.1% actual over 396. Market average moved from 1.73 to 1.73; best price is 0% over average. Confidence 74.4% after odds freshness and data completeness checks."
         }
       ],
       "combinedDecimalOdds": 3.62,
@@ -1844,17 +1708,17 @@
       "expectedValue": 1.2791,
       "averageEdge": 0.2649,
       "averageIndependentEdge": 0.2645,
-      "averageConfidence": 0.7476,
-      "survivalCombinedProbability": 0.5221,
-      "averageSurvivalProbability": 0.7236,
-      "displayRating": 0.8766,
+      "averageConfidence": 0.7405,
+      "survivalCombinedProbability": 0.5209,
+      "averageSurvivalProbability": 0.7227,
+      "displayRating": 0.8733,
       "riskLegCount": 1,
       "bttsLegCount": 0,
       "scorerLegCount": 0,
       "firstScorerLegCount": 0,
       "fragileLegCount": 0,
       "reusedSignalCount": 0,
-      "intelligenceConfidence": 0.634,
+      "intelligenceConfidence": 0.613,
       "averageNonMarketSignalCount": 6,
       "marketConfirmedLegCount": 0,
       "contrarianLegCount": 0,
@@ -1867,15 +1731,15 @@
       "shortWindowFallback": false,
       "score": 100,
       "hardBlocks": [],
-      "thesis": "double at combined odds 3.62 with estimated slip chance 52.21% and average leg survival 72.4%. Expected value is 127.91%, independent edge averages 26.45%, and the model has 6 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  1 calculated-risk/value leg(s) stop this from being a favourite-only double. No high-implied-probability favourite crowding. Heat layer active on 2 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: Spain vs Belgium: Under 4.5 goals | France vs Morocco: Over 1.5 goals."
+      "thesis": "double at combined odds 3.62 with estimated slip chance 52.09% and average leg survival 72.3%. Expected value is 127.91%, independent edge averages 26.45%, and the model has 6 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  1 calculated-risk/value leg(s) stop this from being a favourite-only double. No high-implied-probability favourite crowding. Heat layer active on 2 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: Spain vs Belgium: Under 4.5 goals | France vs Morocco: Over 1.5 goals."
     },
     {
-      "id": "double_leg_b780525_leg_6463a707",
+      "id": "double_leg_91e88995_leg_6463a707",
       "type": "double",
       "legCount": 2,
       "legs": [
         {
-          "id": "leg_b780525",
+          "id": "leg_91e88995",
           "fixtureId": "fixture_eb65f44a",
           "fixtureDate": "2026-07-10T19:00:00.000Z",
           "homeTeam": "Spain",
@@ -1890,12 +1754,12 @@
           "marketImpliedProbability": 0.4808,
           "independentEdge": 0.2912,
           "edge": 0.2912,
-          "confidence": 0.7415,
+          "confidence": 0.7371,
           "riskTag": "calculated_risk",
           "shortWindowFallback": false,
           "reusedSignal": false,
           "components": {
-            "intelligenceConfidence": 0.633,
+            "intelligenceConfidence": 0.613,
             "nonMarketSignalCount": 5,
             "nonMarketSignals": [
               "raw AI probability beats market",
@@ -1961,7 +1825,7 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "Spain vs Belgium: Under 4.5 goals is priced at 2.08; raw AI probability 77.2%, market-adjusted probability 77.2%, market view 48.1%. Independent edge 29.12%, final value edge 29.12%, backed by 5 non-market signal(s): raw AI probability beats market, 20-match team sample, expected-goals model stays below under-4.5 danger zone, 20-match goal history is survivable for the line, heat layer trims goal tempo. Fixture model: expected goals 3.25 (1.62-1.63), rating edge 24, style edge -0.26, memory edge 1.09. Odds intelligence is capped: market result edge 0, consensus probability 0.301 where available. News impact is 0.079 for Spain and 0.124 for Belgium. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.44. Scorer memory: Spain top recent scorers Morata, Oyarzabal, Sarabia; Belgium top recent scorers De Bruyne, Tielemans, De Ketelaere. Heat layer: Los Angeles hotMixed stress 29.6%, xG adjustment -0.03, result edge 1.48; climate/history/depth differential 0.1545. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model keeps under-4.5 below its danger zone at 3.25 expected goals; edge is strong enough to justify focus. Outcome learning: calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: moderate heat matches undershot expected xG; non group game reflection 10.1% actual over 396. Market average moved from 2.08 to 2.08; best price is 0% over average. Confidence 74.1% after odds freshness and data completeness checks."
+          "thesis": "Spain vs Belgium: Under 4.5 goals is priced at 2.08; raw AI probability 77.2%, market-adjusted probability 77.2%, market view 48.1%. Independent edge 29.12%, final value edge 29.12%, backed by 5 non-market signal(s): raw AI probability beats market, 20-match team sample, expected-goals model stays below under-4.5 danger zone, 20-match goal history is survivable for the line, heat layer trims goal tempo. Fixture model: expected goals 3.25 (1.62-1.63), rating edge 24.1, style edge -0.26, memory edge 1.19. Odds intelligence is capped: market result edge 0, consensus probability 0.301 where available. News impact is 0.079 for Spain and 0.124 for Belgium. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.44. Scorer memory: Spain top recent scorers Morata, Oyarzabal, Sarabia; Belgium top recent scorers De Bruyne, Tielemans, De Ketelaere. Heat layer: Los Angeles hotMixed stress 29.6%, xG adjustment -0.03, result edge 1.48; climate/history/depth differential 0.1545. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model keeps under-4.5 below its danger zone at 3.25 expected goals; edge is strong enough to justify focus. Outcome learning: calculated_risk historical strike 10.9% over 294; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: moderate heat matches undershot expected xG; non group game reflection 10.1% actual over 396. Market average moved from 2.08 to 2.08; best price is 0% over average. Confidence 73.7% after odds freshness and data completeness checks."
         },
         {
           "id": "leg_6463a707",
@@ -1979,12 +1843,12 @@
           "marketImpliedProbability": 0.5051,
           "independentEdge": 0.0989,
           "edge": 0.0946,
-          "confidence": 0.6859,
+          "confidence": 0.676,
           "riskTag": "calculated_risk",
           "shortWindowFallback": false,
           "reusedSignal": false,
           "components": {
-            "intelligenceConfidence": 0.635,
+            "intelligenceConfidence": 0.613,
             "nonMarketSignalCount": 5,
             "nonMarketSignals": [
               "raw AI probability beats market",
@@ -1995,7 +1859,7 @@
             ],
             "independentEvidenceStrength": 0.7551,
             "marketBlendLift": -0.0137,
-            "oddsMovement": -0.01,
+            "oddsMovement": 0,
             "oddsShortening": false,
             "oddsDrifting": false,
             "marketAverageOdds": 1.98,
@@ -2012,7 +1876,7 @@
             "awayHistoricalHeatMemory": 0.012,
             "combinedHeatDifferential": -0.0553,
             "expectedGoals": 3.1,
-            "homeExpectedGoals": 1.55,
+            "homeExpectedGoals": 1.54,
             "awayExpectedGoals": 1.56,
             "projectedShotTotal": 26.39,
             "homeProjectedShots": 13.25,
@@ -2051,7 +1915,7 @@
             ],
             "survivalPenalty": 0
           },
-          "thesis": "France vs Morocco: Both teams to score: Yes is priced at 2; raw AI probability 60.4%, market-adjusted probability 59%, market view 50.5%. Independent edge 9.89%, final value edge 9.46%, backed by 5 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS. Fixture model: expected goals 3.1 (1.55-1.56), rating edge -2.1, style edge -1.46, memory edge 5.96. Odds intelligence is capped: market result edge 0, consensus probability 0.2985 where available. News impact is 0.095 for France and 0.037 for Morocco. Tactical memory: France 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Morocco 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.2. Scorer memory: France top recent scorers Mbappé, K. Mbappe, O. Dembele; Morocco top recent scorers Brahim, El Kaabi, Saibari. Heat layer: Boston hotHumid stress 100%, xG adjustment -0.101, result edge -1.79; climate/history/depth differential -0.0553. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.55-1.56 expected goals; edge is strong enough to justify focus. Outcome learning: both_teams_to_score historical strike 49.4% over 79; calculated_risk historical strike 10.9% over 294; both_teams_to_score calibration 49.4% actual vs 51.5% projected; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: both_teams_to_score post-match reflection 47.7% actual vs 53.4% projected over 107; actual goals finished 0.29 below expected goal shape; non group game reflection 10.1% actual over 396. Market average moved from 2 to 1.98; best price is 0% over average. Confidence 68.6% after odds freshness and data completeness checks."
+          "thesis": "France vs Morocco: Both teams to score: Yes is priced at 2; raw AI probability 60.4%, market-adjusted probability 59%, market view 50.5%. Independent edge 9.89%, final value edge 9.46%, backed by 5 non-market signal(s): raw AI probability beats market, 20-match team sample, raw BTTS model is positive, both teams carry scoring threat, goals environment supports BTTS. Fixture model: expected goals 3.1 (1.54-1.56), rating edge -3.2, style edge -1.46, memory edge 2.18. Odds intelligence is capped: market result edge 0, consensus probability 0.2985 where available. News impact is 0.092 for France and 0.034 for Morocco. Tactical memory: France 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Morocco 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.2. Scorer memory: France top recent scorers Mbappé, K. Mbappe, O. Dembele; Morocco top recent scorers Brahim, El Kaabi, Saibari. Heat layer: Boston hotHumid stress 100%, xG adjustment -0.101, result edge -1.79; climate/history/depth differential -0.0553. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: BTTS shape is balanced at 1.54-1.56 expected goals; edge is strong enough to justify focus. Outcome learning: both_teams_to_score historical strike 49.4% over 79; calculated_risk historical strike 10.9% over 294; both_teams_to_score calibration 49.4% actual vs 51.5% projected; calculated_risk calibration 10.9% actual vs 22.7% projected. Post-match reflection: both_teams_to_score post-match reflection 47.7% actual vs 53.4% projected over 107; actual goals finished 0.29 below expected goal shape; non group game reflection 10.1% actual over 396. Market average moved from 1.98 to 1.98; best price is 0% over average. Confidence 67.6% after odds freshness and data completeness checks."
         }
       ],
       "combinedDecimalOdds": 4.16,
@@ -2059,17 +1923,17 @@
       "expectedValue": 0.8958,
       "averageEdge": 0.1929,
       "averageIndependentEdge": 0.1951,
-      "averageConfidence": 0.7137,
-      "survivalCombinedProbability": 0.4079,
-      "averageSurvivalProbability": 0.6403,
-      "displayRating": 0.8412,
+      "averageConfidence": 0.7066,
+      "survivalCombinedProbability": 0.4069,
+      "averageSurvivalProbability": 0.6395,
+      "displayRating": 0.8379,
       "riskLegCount": 2,
       "bttsLegCount": 1,
       "scorerLegCount": 0,
       "firstScorerLegCount": 0,
       "fragileLegCount": 0,
       "reusedSignalCount": 0,
-      "intelligenceConfidence": 0.634,
+      "intelligenceConfidence": 0.613,
       "averageNonMarketSignalCount": 5,
       "marketConfirmedLegCount": 0,
       "contrarianLegCount": 0,
@@ -2082,7 +1946,7 @@
       "shortWindowFallback": false,
       "score": 100,
       "hardBlocks": [],
-      "thesis": "double at combined odds 4.16 with estimated slip chance 40.79% and average leg survival 64%. Expected value is 89.58%, independent edge averages 19.51%, and the model has 5 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  2 calculated-risk/value leg(s) stop this from being a favourite-only double. No high-implied-probability favourite crowding. Heat layer active on 2 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: Spain vs Belgium: Under 4.5 goals | France vs Morocco: Both teams to score: Yes."
+      "thesis": "double at combined odds 4.16 with estimated slip chance 40.69% and average leg survival 64%. Expected value is 89.58%, independent edge averages 19.51%, and the model has 5 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  2 calculated-risk/value leg(s) stop this from being a favourite-only double. No high-implied-probability favourite crowding. Heat layer active on 2 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: Spain vs Belgium: Under 4.5 goals | France vs Morocco: Both teams to score: Yes."
     }
   ],
   "trixies": [],
