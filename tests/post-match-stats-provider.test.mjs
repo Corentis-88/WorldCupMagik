@@ -26,7 +26,8 @@ test("parseFoxBoxscorePage extracts event stats, scorers, and assists", () => {
           "EXPECTED GOALS (xG)","0.54","1.97",
           "PASSING ACCURACY (%)","89","83",
           "CORNERS","3","5",
-          "FOULS","10","9"
+          "FOULS","10","9",
+          "SAVES","4","1"
         </script>
         <div class="keyplay-title fs-18">BEL GOAL</div>
         <div><span>USA 1</span><span>BEL 2</span></div>
@@ -62,6 +63,8 @@ test("parseFoxBoxscorePage extracts event stats, scorers, and assists", () => {
   assert.equal(record.awayTeam, "Belgium");
   assert.equal(record.homeXg, 0.54);
   assert.equal(record.awayShotsOnTarget, 7);
+  assert.equal(record.homeKeeperSaves, 4);
+  assert.equal(record.awayKeeperSaves, 1);
   assert.equal(record.homePassCompletion, 0.89);
   assert.equal(record.homeGoals, 1);
   assert.equal(record.awayGoals, 1);
@@ -76,4 +79,5 @@ test("parseFoxBoxscorePage extracts event stats, scorers, and assists", () => {
   assert.ok(record.capturedMetricFields.includes("assists"));
   assert.ok(record.capturedMetricFields.includes("cards"));
   assert.ok(record.capturedMetricFields.includes("penalties"));
+  assert.ok(record.capturedMetricFields.includes("keeperSaves"));
 });

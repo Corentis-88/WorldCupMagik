@@ -28,7 +28,17 @@ test("public-web odds parser maps match winner, totals, and BTTS offers", async 
           { "@type": "Offer", "name": "Raul Jimenez anytime scorer - Mexico v South Africa at Coral", "price": "2.75", "offeredBy": { "name": "Coral" } },
           { "@type": "Offer", "name": "Raul Jimenez first goalscorer - Mexico v South Africa at Coral", "price": "5.00", "offeredBy": { "name": "Coral" } },
           { "@type": "Offer", "name": "Luis Chavez anytime assist - Mexico v South Africa at Coral", "price": "3.40", "offeredBy": { "name": "Coral" } },
+          { "@type": "Offer", "name": "Luis Chavez 1+ shots - Mexico v South Africa at Coral", "price": "1.45", "offeredBy": { "name": "Coral" } },
           { "@type": "Offer", "name": "Luis Chavez 1+ shots on target - Mexico v South Africa at Coral", "price": "2.20", "offeredBy": { "name": "Coral" } },
+          { "@type": "Offer", "name": "Guillermo Ochoa goalkeeper saves over 2.5 - Mexico v South Africa at Coral", "price": "1.90", "offeredBy": { "name": "Coral" } },
+          { "@type": "Offer", "name": "Mexico team shots over 9.5 - Mexico v South Africa at Coral", "price": "1.80", "offeredBy": { "name": "Coral" } },
+          { "@type": "Offer", "name": "South Africa team shots on target over 2.5 - Mexico v South Africa at Coral", "price": "2.00", "offeredBy": { "name": "Coral" } },
+          { "@type": "Offer", "name": "Total corners over 8.5 - Mexico v South Africa at Coral", "price": "1.95", "offeredBy": { "name": "Coral" } },
+          { "@type": "Offer", "name": "Mexico team corners over 4.5 - Mexico v South Africa at Coral", "price": "2.10", "offeredBy": { "name": "Coral" } },
+          { "@type": "Offer", "name": "Total cards over 3.5 - Mexico v South Africa at Coral", "price": "1.85", "offeredBy": { "name": "Coral" } },
+          { "@type": "Offer", "name": "South Africa team cards over 1.5 - Mexico v South Africa at Coral", "price": "1.66", "offeredBy": { "name": "Coral" } },
+          { "@type": "Offer", "name": "Mexico clean sheet Yes - Mexico v South Africa at Coral", "price": "2.20", "offeredBy": { "name": "Coral" } },
+          { "@type": "Offer", "name": "Mexico win to nil Yes - Mexico v South Africa at Coral", "price": "3.10", "offeredBy": { "name": "Coral" } },
           { "@type": "Offer", "name": "Edson Alvarez to be carded - Mexico v South Africa at Coral", "price": "3.10", "offeredBy": { "name": "Coral" } },
           { "@type": "Offer", "name": "Penalty awarded Yes - Mexico v South Africa at Coral", "price": "3.50", "offeredBy": { "name": "Coral" } },
           { "@type": "Offer", "name": "Red card in match No - Mexico v South Africa at Coral", "price": "1.18", "offeredBy": { "name": "Coral" } }
@@ -65,8 +75,10 @@ test("public-web odds parser maps match winner, totals, and BTTS offers", async 
       "anytime_scorer:Raul Jimenez",
       "both_teams_to_score:No",
       "both_teams_to_score:Yes",
+      "clean_sheet:Mexico clean sheet: Yes",
       "double_chance:Mexico or Draw",
       "first_goalscorer:Raul Jimenez",
+      "goalkeeper_saves:Guillermo Ochoa",
       "match_winner:Draw",
       "match_winner:Mexico",
       "match_winner:South Africa",
@@ -74,16 +86,28 @@ test("public-web odds parser maps match winner, totals, and BTTS offers", async 
       "over_2_5_goals:Over",
       "penalty_awarded:Yes",
       "player_card:Edson Alvarez",
+      "player_shot:Luis Chavez",
       "player_shot_on_target:Luis Chavez",
       "red_card:No",
+      "team_cards:South Africa Over 1.5",
+      "team_corners:Mexico Over 4.5",
+      "team_shots:Mexico Over 9.5",
+      "team_shots_on_target:South Africa Over 2.5",
+      "total_cards:Over 3.5",
+      "total_corners:Over 8.5",
       "under_2_5_goals:Under",
       "under_3_5_goals:Under",
-      "under_4_5_goals:Under"
+      "under_4_5_goals:Under",
+      "win_to_nil:Mexico win to nil: Yes"
     ]);
     assert.equal(records.find((record) => record.market === "anytime_scorer")?.playerName, "Raul Jimenez");
     assert.equal(records.find((record) => record.market === "first_goalscorer")?.decimalOdds, 5);
     assert.equal(records.find((record) => record.market === "anytime_assist")?.decimalOdds, 3.4);
+    assert.equal(records.find((record) => record.market === "player_shot")?.line, "0.5");
     assert.equal(records.find((record) => record.market === "player_shot_on_target")?.line, "0.5");
+    assert.equal(records.find((record) => record.market === "goalkeeper_saves")?.line, "2.5");
+    assert.equal(records.find((record) => record.market === "team_corners")?.team, "Mexico");
+    assert.equal(records.find((record) => record.market === "clean_sheet")?.dataOnly, true);
     assert.equal(records.find((record) => record.market === "player_card")?.dataOnly, true);
   } finally {
     globalThis.fetch = originalFetch;
@@ -98,6 +122,15 @@ test("public-web odds parser extracts scorer prop tables and American prices", a
       <p>Player Prop Picks</p>
       <p>Latest Santiago Gimenez Player Prop Odds Goalscorer Anytime +150 First 4.50 Shots Over 2.5 1.83</p>
       <p>Latest Santiago Gimenez Player Prop Odds Shots On Target 1.91</p>
+      <p>Guillermo Ochoa goalkeeper saves over 2.5 1.90</p>
+      <section><h2>Team Shots</h2>Mexico Over 9.5 Shots 1.80 Under 9.5 Shots 1.95 South Africa Over 7.5 Shots 2.05 Under 7.5 Shots 1.72</section>
+      <section><h2>Team Shots On Target</h2>Mexico Over 3.5 Shots On Target 1.88 Under 3.5 Shots On Target 1.90</section>
+      <section><h2>Total Corners</h2>Over 8.5 Corners 1.92 Under 8.5 Corners 1.88</section>
+      <section><h2>Team Corners</h2>Mexico Over 4.5 Corners 2.10 Under 4.5 Corners 1.67</section>
+      <section><h2>Total Cards</h2>Over 3.5 Cards 1.85 Under 3.5 Cards 1.95</section>
+      <section><h2>Team Cards</h2>South Africa Over 1.5 Cards 1.66 Under 1.5 Cards 2.10</section>
+      <section><h2>Clean Sheet</h2>Mexico clean sheet Yes 2.20 No 1.62</section>
+      <section><h2>Win To Nil</h2>Mexico win to nil Yes 3.10 No 1.30</section>
       <p>Latest Luis Chavez Player Prop Odds Anytime Assist +180 Crosses Over 2.5 1.83</p>
       <p>Edson Alvarez to be carded 3.30</p>
       <p>Penalty awarded Yes 3.60 No 1.25</p>
@@ -140,7 +173,17 @@ test("public-web odds parser extracts scorer prop tables and American prices", a
     assert.equal(byKey.get("first_goalscorer:Raul Jimenez")?.playerTeam, "Mexico");
     assert.equal(byKey.get("anytime_scorer:Lyle Foster")?.playerTeam, "South Africa");
     assert.equal(byKey.get("anytime_assist:Luis Chavez")?.decimalOdds, 2.8);
+    assert.equal(byKey.get("player_shot:Santiago Gimenez")?.line, "2.5");
     assert.equal(byKey.get("player_shot_on_target:Santiago Gimenez")?.decimalOdds, 1.91);
+    assert.equal(byKey.get("goalkeeper_saves:Guillermo Ochoa")?.line, "2.5");
+    assert.equal(byKey.get("team_shots:Mexico Over 9.5")?.decimalOdds, 1.8);
+    assert.equal(byKey.get("team_shots_on_target:Mexico Over 3.5")?.decimalOdds, 1.88);
+    assert.equal(byKey.get("total_corners:Over 8.5")?.decimalOdds, 1.92);
+    assert.equal(byKey.get("team_corners:Mexico Over 4.5")?.decimalOdds, 2.1);
+    assert.equal(byKey.get("total_cards:Over 3.5")?.decimalOdds, 1.85);
+    assert.equal(byKey.get("team_cards:South Africa Over 1.5")?.decimalOdds, 1.66);
+    assert.equal(byKey.get("clean_sheet:Mexico clean sheet: Yes")?.decimalOdds, 2.2);
+    assert.equal(byKey.get("win_to_nil:Mexico win to nil: Yes")?.decimalOdds, 3.1);
     assert.equal(byKey.get("player_card:Edson Alvarez")?.decimalOdds, 3.3);
     assert.equal(byKey.get("penalty_awarded:Yes")?.decimalOdds, 3.6);
     assert.equal(byKey.get("red_card:No")?.decimalOdds, 1.12);

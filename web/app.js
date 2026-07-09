@@ -62,7 +62,15 @@ const el = {
   pickOfDay: document.getElementById("pickOfDayList"),
   likelyScorers: document.getElementById("likelyScorersList"),
   likelyAssists: document.getElementById("likelyAssistsList"),
+  likelyPlayerShots: document.getElementById("likelyPlayerShotsList"),
   likelyShots: document.getElementById("likelyShotsList"),
+  likelyKeeperSaves: document.getElementById("likelyKeeperSavesList"),
+  likelyTeamShots: document.getElementById("likelyTeamShotsList"),
+  likelyTeamShotsOnTarget: document.getElementById("likelyTeamShotsOnTargetList"),
+  likelyCorners: document.getElementById("likelyCornersList"),
+  likelyTeamCards: document.getElementById("likelyTeamCardsList"),
+  likelyCleanSheets: document.getElementById("likelyCleanSheetsList"),
+  likelyWinToNil: document.getElementById("likelyWinToNilList"),
   likelyCards: document.getElementById("likelyCardsList"),
   likelyPenalties: document.getElementById("likelyPenaltiesList"),
   likelyRedCards: document.getElementById("likelyRedCardsList")
@@ -313,7 +321,15 @@ function render() {
   renderPickOfDay(pickSlip, pickProfile || profile);
   renderLikelyGoalscorers(buildLikelyGoalscorersToday(state.data));
   renderLikelyAssists(buildLikelyAssistsToday(state.data));
+  renderLikelyPlayerEvents(el.likelyPlayerShots, buildLikelyPlayerEventsToday(state.data, "playerShots"), "No player-shot event data is available for today yet.");
   renderLikelyPlayerEvents(el.likelyShots, buildLikelyPlayerEventsToday(state.data, "playerShotsOnTarget"), "No player shots-on-target event data is available for today yet.");
+  renderLikelyPlayerEvents(el.likelyKeeperSaves, buildLikelyPlayerEventsToday(state.data, "goalkeeperSaves"), "No goalkeeper-save event data is available for today yet.");
+  renderLikelyBinaryEvents(el.likelyTeamShots, buildLikelyBinaryEventsToday(state.data, "teamShots"), "No team-shot event data is available for today yet.");
+  renderLikelyBinaryEvents(el.likelyTeamShotsOnTarget, buildLikelyBinaryEventsToday(state.data, "teamShotsOnTarget"), "No team-shots-on-target event data is available for today yet.");
+  renderLikelyBinaryEvents(el.likelyCorners, buildLikelyBinaryEventsToday(state.data, "corners"), "No corner event data is available for today yet.");
+  renderLikelyBinaryEvents(el.likelyTeamCards, buildLikelyBinaryEventsToday(state.data, "teamCards"), "No team-card event data is available for today yet.");
+  renderLikelyBinaryEvents(el.likelyCleanSheets, buildLikelyBinaryEventsToday(state.data, "cleanSheets"), "No clean-sheet event data is available for today yet.");
+  renderLikelyBinaryEvents(el.likelyWinToNil, buildLikelyBinaryEventsToday(state.data, "winToNil"), "No win-to-nil event data is available for today yet.");
   renderLikelyPlayerEvents(el.likelyCards, buildLikelyPlayerEventsToday(state.data, "playerCards"), "No player-card event data is available for today yet.");
   renderLikelyBinaryEvents(el.likelyPenalties, buildLikelyBinaryEventsToday(state.data, "penalties"), "No penalty-awarded event data is available for today yet.");
   renderLikelyBinaryEvents(el.likelyRedCards, buildLikelyBinaryEventsToday(state.data, "redCards"), "No red-card event data is available for today yet.");
@@ -3908,7 +3924,17 @@ function marketLine(data) {
     anytime_scorer: "Anytime scorer",
     first_goalscorer: "First goalscorer",
     anytime_assist: "Anytime assist",
+    player_shot: "Player shots",
     player_shot_on_target: "Player shots on target",
+    goalkeeper_saves: "Goalkeeper saves",
+    team_shots: "Team shots",
+    team_shots_on_target: "Team shots on target",
+    total_corners: "Total corners",
+    team_corners: "Team corners",
+    total_cards: "Total cards",
+    team_cards: "Team cards",
+    clean_sheet: "Clean sheet",
+    win_to_nil: "Win to nil",
     player_card: "Player carded",
     penalty_awarded: "Penalty awarded",
     red_card: "Red card",
@@ -3934,20 +3960,26 @@ function marketLine(data) {
   const anytimeCount = Number(observed.anytime_scorer || 0);
   const firstCount = Number(observed.first_goalscorer || 0);
   const assistCount = Number(observed.anytime_assist || 0);
+  const playerShotCount = Number(observed.player_shot || 0);
   const shotCount = Number(observed.player_shot_on_target || 0);
+  const keeperSaveCount = Number(observed.goalkeeper_saves || 0);
+  const teamShotCount = Number(observed.team_shots || 0);
+  const teamSotCount = Number(observed.team_shots_on_target || 0);
+  const cornerCount = Number(observed.total_corners || 0) + Number(observed.team_corners || 0);
+  const cardTotalCount = Number(observed.total_cards || 0) + Number(observed.team_cards || 0);
+  const cleanSheetCount = Number(observed.clean_sheet || 0);
+  const winToNilCount = Number(observed.win_to_nil || 0);
   const cardCount = Number(observed.player_card || 0);
   const penaltyCount = Number(observed.penalty_awarded || 0);
   const redCardCount = Number(observed.red_card || 0);
   const scorerCount = anytimeCount + firstCount;
-  const eventPropCount = shotCount + cardCount + penaltyCount + redCardCount;
-  const playerPropCount = scorerCount + assistCount + shotCount + cardCount;
-  const scorerText = scorerCount
-    ? ` Player prop prices found: ${playerPropCount} (${anytimeCount} anytime scorer, ${firstCount} first scorer, ${assistCount} assist, ${shotCount} shots on target, ${cardCount} carded).`
-    : assistCount
-      ? ` Player prop prices found: ${assistCount} assist.`
-      : " Player prop markets are switched on, but current public sources have not exposed player prices yet.";
+  const eventPropCount = playerShotCount + shotCount + keeperSaveCount + teamShotCount + teamSotCount + cornerCount + cardTotalCount + cleanSheetCount + winToNilCount + cardCount + penaltyCount + redCardCount;
+  const playerPropCount = scorerCount + assistCount + playerShotCount + shotCount + keeperSaveCount + cardCount;
+  const scorerText = playerPropCount
+    ? ` Player prop prices found: ${playerPropCount} (${anytimeCount} anytime scorer, ${firstCount} first scorer, ${assistCount} assist, ${playerShotCount} shots, ${shotCount} shots on target, ${keeperSaveCount} keeper saves, ${cardCount} carded).`
+    : " Player prop markets are switched on, but current public sources have not exposed player prices yet.";
   const eventText = eventPropCount
-    ? ` Event prices found: ${eventPropCount} (${penaltyCount} penalty, ${redCardCount} red card).`
+    ? ` Event prices found: ${eventPropCount} (${teamShotCount} team shots, ${teamSotCount} team SOT, ${cornerCount} corners, ${cardTotalCount} card totals, ${cleanSheetCount} clean sheet, ${winToNilCount} win to nil, ${penaltyCount} penalty, ${redCardCount} red card).`
     : "";
   const collectOnlyText = collectOnly.length
     ? ` Collect-only survival markets: ${collectOnly.map((market) => labels[market] || market).join(", ")}${survivabilityRecords ? ` (${survivabilityRecords} fresh records).` : "."}`

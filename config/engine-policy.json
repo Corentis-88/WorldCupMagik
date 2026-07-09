@@ -9,7 +9,17 @@
     "anytime_scorer",
     "first_goalscorer",
     "anytime_assist",
+    "player_shot",
     "player_shot_on_target",
+    "goalkeeper_saves",
+    "team_shots",
+    "team_shots_on_target",
+    "total_corners",
+    "team_corners",
+    "total_cards",
+    "team_cards",
+    "clean_sheet",
+    "win_to_nil",
     "player_card",
     "penalty_awarded",
     "red_card",
@@ -95,6 +105,40 @@
         "minLineCount": 0,
         "minFixtures": 2,
         "minFixtureCoverage": 0.1
+      },
+      {
+        "key": "team_shots",
+        "label": "Team shots"
+      },
+      {
+        "key": "team_shots_on_target",
+        "label": "Team shots on target"
+      },
+      {
+        "key": "total_corners",
+        "label": "Total corners"
+      },
+      {
+        "key": "team_corners",
+        "label": "Team corners"
+      },
+      {
+        "key": "total_cards",
+        "label": "Total cards"
+      },
+      {
+        "key": "team_cards",
+        "label": "Team cards"
+      },
+      {
+        "key": "clean_sheet",
+        "label": "Clean sheet",
+        "minLineCount": 0
+      },
+      {
+        "key": "win_to_nil",
+        "label": "Win to nil",
+        "minLineCount": 0
       }
     ]
   },

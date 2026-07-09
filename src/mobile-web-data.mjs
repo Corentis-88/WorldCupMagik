@@ -249,7 +249,15 @@ function mobileLikelyEventsByDate(eventsByDate = {}) {
 
   for (const [date, markets] of Object.entries(eventsByDate || {})) {
     compact[date] = {
+      playerShots: mobilePlayerEventGroups(markets.playerShots || []),
       playerShotsOnTarget: mobilePlayerEventGroups(markets.playerShotsOnTarget || []),
+      goalkeeperSaves: mobilePlayerEventGroups(markets.goalkeeperSaves || []),
+      teamShots: mobileBinaryEventGroups(markets.teamShots || []),
+      teamShotsOnTarget: mobileBinaryEventGroups(markets.teamShotsOnTarget || []),
+      corners: mobileBinaryEventGroups(markets.corners || []),
+      teamCards: mobileBinaryEventGroups(markets.teamCards || []),
+      cleanSheets: mobileBinaryEventGroups(markets.cleanSheets || []),
+      winToNil: mobileBinaryEventGroups(markets.winToNil || []),
       playerCards: mobilePlayerEventGroups(markets.playerCards || []),
       penalties: mobileBinaryEventGroups(markets.penalties || []),
       redCards: mobileBinaryEventGroups(markets.redCards || [])
@@ -271,6 +279,8 @@ function mobilePlayerEventGroups(groups = []) {
       sourceWeight: player.sourceWeight,
       reason: trimText(player.reason, 160),
       market: player.market,
+      line: player.line || "",
+      side: player.side || "",
       decimalOdds: player.decimalOdds,
       bookmaker: player.bookmaker || ""
     }))
@@ -288,6 +298,9 @@ function mobileBinaryEventGroups(groups = []) {
       confidence: event.confidence,
       reason: trimText(event.reason, 160),
       market: event.market,
+      team: event.team || "",
+      line: event.line || "",
+      side: event.side || "",
       decimalOdds: event.decimalOdds,
       bookmaker: event.bookmaker || ""
     }))

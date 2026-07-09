@@ -36,6 +36,54 @@ export const SURVIVABILITY_MARKETS = [
     label: "To qualify",
     family: "qualification",
     requiresLineDepth: false
+  },
+  {
+    key: "team_shots",
+    label: "Team shots",
+    family: "shots",
+    requiresLineDepth: true
+  },
+  {
+    key: "team_shots_on_target",
+    label: "Team shots on target",
+    family: "shots",
+    requiresLineDepth: true
+  },
+  {
+    key: "total_corners",
+    label: "Total corners",
+    family: "corners",
+    requiresLineDepth: true
+  },
+  {
+    key: "team_corners",
+    label: "Team corners",
+    family: "corners",
+    requiresLineDepth: true
+  },
+  {
+    key: "total_cards",
+    label: "Total cards",
+    family: "cards",
+    requiresLineDepth: true
+  },
+  {
+    key: "team_cards",
+    label: "Team cards",
+    family: "cards",
+    requiresLineDepth: true
+  },
+  {
+    key: "clean_sheet",
+    label: "Clean sheet",
+    family: "defence",
+    requiresLineDepth: false
+  },
+  {
+    key: "win_to_nil",
+    label: "Win to nil",
+    family: "defence",
+    requiresLineDepth: false
   }
 ];
 

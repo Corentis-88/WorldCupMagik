@@ -856,7 +856,15 @@ function summarizeMarkets(oddsSnapshots, policy, survivabilityMarketCoverage = n
     anytimeScorerRecords: counts.anytime_scorer || 0,
     firstGoalscorerRecords: counts.first_goalscorer || 0,
     anytimeAssistRecords: counts.anytime_assist || 0,
+    playerShotRecords: counts.player_shot || 0,
     playerShotOnTargetRecords: counts.player_shot_on_target || 0,
+    goalkeeperSaveRecords: counts.goalkeeper_saves || 0,
+    teamShotRecords: counts.team_shots || 0,
+    teamShotOnTargetRecords: counts.team_shots_on_target || 0,
+    cornerRecords: (counts.total_corners || 0) + (counts.team_corners || 0),
+    cardTotalRecords: (counts.total_cards || 0) + (counts.team_cards || 0),
+    cleanSheetRecords: counts.clean_sheet || 0,
+    winToNilRecords: counts.win_to_nil || 0,
     playerCardRecords: counts.player_card || 0,
     penaltyAwardedRecords: counts.penalty_awarded || 0,
     redCardRecords: counts.red_card || 0,
@@ -864,7 +872,9 @@ function summarizeMarkets(oddsSnapshots, policy, survivabilityMarketCoverage = n
     playerPropRecords: (counts.anytime_scorer || 0)
       + (counts.first_goalscorer || 0)
       + (counts.anytime_assist || 0)
+      + (counts.player_shot || 0)
       + (counts.player_shot_on_target || 0)
+      + (counts.goalkeeper_saves || 0)
       + (counts.player_card || 0),
     survivabilityCoverage: survivabilityMarketCoverage
   };

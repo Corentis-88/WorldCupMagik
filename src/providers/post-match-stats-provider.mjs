@@ -213,6 +213,7 @@ export function parseFoxBoxscorePage(html, { url = "", fixtures = [], now = new 
     stats.homePassCompletion != null || stats.awayPassCompletion != null ? "passCompletion" : "",
     stats.homeCorners != null || stats.awayCorners != null ? "corners" : "",
     stats.homeFouls != null || stats.awayFouls != null ? "fouls" : "",
+    stats.homeKeeperSaves != null || stats.awayKeeperSaves != null ? "keeperSaves" : "",
     homeScorers.length || awayScorers.length ? "scorers" : "",
     hasAssists(homeScorers) || hasAssists(awayScorers) ? "assists" : "",
     disciplineEvents.length ? "cards" : "",
@@ -265,6 +266,7 @@ function parseFoxStats(html) {
   const passAccuracy = stat("PASSING ACCURACY (%)");
   const corners = stat("CORNERS");
   const fouls = stat("FOULS");
+  const saves = stat("SAVES") || stat("GOALKEEPER SAVES");
   const clearances = stat("CLEARANCES");
 
   return cleanUndefined({
@@ -282,6 +284,8 @@ function parseFoxStats(html) {
     awayCorners: numberValue(corners?.away),
     homeFouls: numberValue(fouls?.home),
     awayFouls: numberValue(fouls?.away),
+    homeKeeperSaves: numberValue(saves?.home),
+    awayKeeperSaves: numberValue(saves?.away),
     homeClearances: numberValue(clearances?.home),
     awayClearances: numberValue(clearances?.away)
   });

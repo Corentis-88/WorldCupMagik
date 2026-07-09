@@ -80,6 +80,27 @@ test("mobile payload includes compact likely event market groups", () => {
     teamProfiles: { teams: {} },
     likelyEventsByDate: {
       "2026-06-15": {
+        playerShots: [{
+          fixture: {
+            id: "fixture_events",
+            date: "2026-06-15T17:00:00.000Z",
+            dateKey: "2026-06-15",
+            homeTeam: "Alpha",
+            awayTeam: "Beta"
+          },
+          fixtureLabel: "Alpha vs Beta",
+          players: [{
+            playerName: "Alex Shooter",
+            team: "Alpha",
+            probability: 0.72,
+            confidence: 0.66,
+            reason: "player shots odds",
+            market: "player_shot",
+            line: "0.5",
+            side: "over",
+            decimalOdds: 1.45
+          }]
+        }],
         playerShotsOnTarget: [{
           fixture: {
             id: "fixture_events",
@@ -99,6 +120,52 @@ test("mobile payload includes compact likely event market groups", () => {
             decimalOdds: 1.83
           }]
         }],
+        goalkeeperSaves: [{
+          fixture: {
+            id: "fixture_events",
+            date: "2026-06-15T17:00:00.000Z",
+            dateKey: "2026-06-15",
+            homeTeam: "Alpha",
+            awayTeam: "Beta"
+          },
+          fixtureLabel: "Alpha vs Beta",
+          players: [{
+            playerName: "Bailey Keeper",
+            team: "Beta",
+            probability: 0.51,
+            confidence: 0.56,
+            reason: "keeper saves odds",
+            market: "goalkeeper_saves",
+            line: "2.5",
+            side: "over",
+            decimalOdds: 1.95
+          }]
+        }],
+        teamShots: [],
+        teamShotsOnTarget: [],
+        corners: [{
+          fixture: {
+            id: "fixture_events",
+            date: "2026-06-15T17:00:00.000Z",
+            dateKey: "2026-06-15",
+            homeTeam: "Alpha",
+            awayTeam: "Beta"
+          },
+          fixtureLabel: "Alpha vs Beta",
+          events: [{
+            event: "Total corners",
+            outcome: "Over 8.5",
+            probability: 0.59,
+            confidence: 0.6,
+            reason: "corner-total odds",
+            market: "total_corners",
+            line: "8.5",
+            side: "over"
+          }]
+        }],
+        teamCards: [],
+        cleanSheets: [],
+        winToNil: [],
         playerCards: [],
         penalties: [{
           fixture: {
@@ -123,7 +190,10 @@ test("mobile payload includes compact likely event market groups", () => {
     }
   });
 
+  assert.equal(payload.likelyEventsByDate["2026-06-15"].playerShots[0].players[0].line, "0.5");
   assert.equal(payload.likelyEventsByDate["2026-06-15"].playerShotsOnTarget[0].players[0].playerName, "Alex Shooter");
+  assert.equal(payload.likelyEventsByDate["2026-06-15"].goalkeeperSaves[0].players[0].playerName, "Bailey Keeper");
+  assert.equal(payload.likelyEventsByDate["2026-06-15"].corners[0].events[0].line, "8.5");
   assert.equal(payload.likelyEventsByDate["2026-06-15"].penalties[0].events[0].outcome, "Yes");
 });
 
