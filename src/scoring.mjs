@@ -1,8 +1,9 @@
 import { clamp, daysBetween, decimalToImpliedProbability, hoursBetween, latestBy, logistic, makeId, mean, normalizeName, round } from "./utils.mjs";
 import { buildOddsMovementSummaries, outcomeLearningAdjustment } from "./intelligence-memory.mjs";
 import { buildHeatImpact } from "./heat-model.mjs";
+import { bettingPerformanceAdjustment } from "./betting-performance.mjs";
 
-export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, teamStats, policy, now = new Date(), outcomeLearning = null, heatSnapshots = [], squadDepthRecords = [], playerStats = [] }) {
+export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, teamStats, policy, now = new Date(), outcomeLearning = null, bettingPerformance = null, heatSnapshots = [], squadDepthRecords = [], playerStats = [] }) {
   const statsByTeam = new Map(teamStats.map((team) => [normalizeName(team.team), team]));
   const latestOdds = bestLatestOddsByOutcome(oddsSnapshots);
   const latestOddsRecords = [...latestOdds.values()];
@@ -62,7 +63,8 @@ export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, team
           model,
           policy,
           now,
-          outcomeLearning
+          outcomeLearning,
+          bettingPerformance
         });
 
         candidates.push(candidate);
@@ -95,6 +97,7 @@ export function buildLegCandidates({ fixtures, oddsSnapshots, newsArticles, team
           policy,
           now,
           outcomeLearning,
+          bettingPerformance,
           extraComponents: playerPropProbability.components
         }));
       }
@@ -1068,7 +1071,7 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
   };
 }
 
-function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbability, odds, movement, model, policy, now, outcomeLearning, extraComponents = {} }) {
+function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbability, odds, movement, model, policy, now, outcomeLearning, bettingPerformance = null, extraComponents = {} }) {
   const legModel = {
     ...model,
     components: {
@@ -1115,9 +1118,30 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     contrarianValue
   });
   const learning = outcomeLearningAdjustment({ market, riskTag: preliminaryRiskTag, outcomeLearning, model: legModel });
+  const performance = bettingPerformanceAdjustment({
+    market,
+    riskTag: preliminaryRiskTag,
+    bookmaker: odds.bookmaker,
+    decimalOdds: odds.decimalOdds,
+    movement,
+    bettingPerformance,
+    risk: Number(policy.riskProfile?.sliderRisk ?? policy.riskProfile?.risk ?? 0)
+  });
   const marketFocus = evaluateMarketFocus({ market, outcome, model: legModel, modelProbability: adjustedModelProbability, edge, odds, policy });
-  const learnedModelProbability = clamp(adjustedModelProbability + learning.adjustment * learning.confidence, 0.03, 0.92);
-  const learnedIndependentProbability = clamp(independentModelProbability + learning.adjustment * learning.confidence * 0.55, 0.03, 0.92);
+  const learnedModelProbability = clamp(
+    adjustedModelProbability
+      + learning.adjustment * learning.confidence
+      + performance.probabilityAdjustment * performance.confidence,
+    0.03,
+    0.92
+  );
+  const learnedIndependentProbability = clamp(
+    independentModelProbability
+      + learning.adjustment * learning.confidence * 0.55
+      + performance.probabilityAdjustment * performance.confidence * 0.42,
+    0.03,
+    0.92
+  );
   const learnedEdge = learnedModelProbability - impliedProbability;
   const learnedIndependentEdge = learnedIndependentProbability - marketImpliedProbability;
   const evidenceConfidence = clamp(Number(independentEvidence.count || 0) / 4, 0, 1);
@@ -1163,7 +1187,7 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
   const independentEdgeScore = clamp(learnedIndependentEdge, -0.05, 0.16) * 92;
   const probabilityScore = learnedModelProbability * 23;
   const confidenceScore = confidence * 18;
-  const rawScore = 28 + edgeScore + independentEdgeScore + probabilityScore + confidenceScore + evidenceBonus + valueOddsBonus + oddsMovementBonus + intelligenceBonus + marketFocusBonus - favoriteCrowdingPenalty - marketBlendPenalty;
+  const rawScore = 28 + edgeScore + independentEdgeScore + probabilityScore + confidenceScore + evidenceBonus + valueOddsBonus + oddsMovementBonus + intelligenceBonus + marketFocusBonus + Number(performance.scoreBonus || 0) - favoriteCrowdingPenalty - marketBlendPenalty - Number(performance.scorePenalty || 0);
   const score = clamp(compressTopScore(rawScore), 0, 100);
   const hardBlocks = [];
 
@@ -1197,6 +1221,10 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
 
   if (marketFocus.score < -6 && confidence < 0.76 && !highCertaintySurvivalFavorite) {
     hardBlocks.push("market_does_not_match_evidence");
+  }
+
+  if (performance.hardBlock && !highCertaintySurvivalFavorite) {
+    hardBlocks.push(performance.priceGone ? "price_gone_below_value_threshold" : "market_suppressed_by_betting_performance");
   }
 
   if (market === "match_winner" && outcome === "Draw") {
@@ -1423,6 +1451,7 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     playerTeam: odds.playerTeam,
     selectionLabel: selectionLabel({ fixture, market, outcome }),
     bookmaker: odds.bookmaker,
+    oddsCapturedAt: odds.capturedAt,
     decimalOdds: Number(odds.decimalOdds),
     modelProbability: round(adjustedModelProbability, 4),
     rawModelProbability: round(independentModelProbability, 4),
@@ -1465,6 +1494,17 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
       predictionReflectionAdjustment: learning.reflectionAdjustment,
       predictionReflectionConfidence: learning.reflectionConfidence,
       predictionReflectionReasons: learning.reflectionReasons,
+      bettingPerformanceAdjustment: performance.probabilityAdjustment,
+      bettingPerformanceConfidence: performance.confidence,
+      bettingPerformanceScorePenalty: performance.scorePenalty,
+      bettingPerformanceScoreBonus: performance.scoreBonus,
+      bettingPerformanceMarketAction: performance.marketAction,
+      bettingPerformanceMarketRoi: performance.marketRoi,
+      bettingPerformanceMarketClv: performance.marketClv,
+      bettingPerformanceMarketSample: performance.marketSample,
+      bettingPerformanceReasons: performance.reasons,
+      priceGone: performance.priceGone,
+      livePriceDiscipline: performance.livePriceDiscipline,
       highCertaintySurvivalFavorite,
       confidenceReasons: buildConfidenceReasons({
         confidence,
@@ -1475,6 +1515,7 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
         independentEvidence,
         marketBlendLift,
         learning,
+        performance,
         marketFocus,
         eventMetricQuality
       }),
@@ -1496,7 +1537,8 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
       confidence,
       independentEvidence,
       marketFocus,
-      learning
+      learning,
+      performance
     })
   };
 }
@@ -1547,7 +1589,7 @@ function buildNewsByTeam(newsArticles, policy, now) {
   return aggregates;
 }
 
-function buildConfidenceReasons({ confidence, dataCompleteness, intelligenceConfidence, oddsFreshness, bookmakerCoverage, independentEvidence, marketBlendLift, learning, marketFocus, eventMetricQuality = 0.34 }) {
+function buildConfidenceReasons({ confidence, dataCompleteness, intelligenceConfidence, oddsFreshness, bookmakerCoverage, independentEvidence, marketBlendLift, learning, performance, marketFocus, eventMetricQuality = 0.34 }) {
   const reasons = [];
 
   if (confidence >= 0.78) {
@@ -1594,6 +1636,14 @@ function buildConfidenceReasons({ confidence, dataCompleteness, intelligenceConf
 
   if (Number(learning?.reflectionConfidence || 0) > 0.2) {
     reasons.push("post-match xG/shot reflection active");
+  }
+
+  if (Number(performance?.confidence || 0) > 0.2) {
+    reasons.push("settled money/CLV performance active");
+  }
+
+  if (performance?.priceGone) {
+    reasons.push("price has shortened from model value");
   }
 
   if (Number(marketFocus?.score || 0) >= 6) {
@@ -2182,7 +2232,7 @@ function classifyRiskTag({ decimalOdds, impliedProbability, edge, independentEdg
   return "steady_edge";
 }
 
-function buildLegThesis({ fixture, market, outcome, edge, independentEdge, rawModelProbability, modelProbability, marketImpliedProbability, odds, movement, model, confidence, independentEvidence, marketFocus, learning }) {
+function buildLegThesis({ fixture, market, outcome, edge, independentEdge, rawModelProbability, modelProbability, marketImpliedProbability, odds, movement, model, confidence, independentEvidence, marketFocus, learning, performance }) {
   const movementText = movement?.previousAverageDecimalOdds
     ? `Market average moved from ${movement.previousAverageDecimalOdds} to ${movement.averageDecimalOdds}; best price is ${round(Number(movement.bestOverAverage || 0) * 100, 2)}% over average.`
     : `No prior market movement yet; this scan becomes part of the local memory.`;
@@ -2201,6 +2251,9 @@ function buildLegThesis({ fixture, market, outcome, edge, independentEdge, rawMo
   const reflectionText = learning.reflectionReasons?.length
     ? `Post-match reflection: ${learning.reflectionReasons.join("; ")}.`
     : "";
+  const performanceText = performance?.reasons?.length
+    ? `Betting performance: ${performance.reasons.join("; ")}.`
+    : "";
   const notes = [
     `${selectionLabel({ fixture, market, outcome })} is priced at ${odds.decimalOdds}; raw AI probability ${round(rawModelProbability * 100, 1)}%, market-adjusted probability ${round(modelProbability * 100, 1)}%, market view ${round(marketImpliedProbability * 100, 1)}%.`,
     `Independent edge ${round(independentEdge * 100, 2)}%, final value edge ${round(edge * 100, 2)}%, backed by ${independentEvidence.count} non-market signal(s): ${independentEvidence.signals.join(", ") || "none yet"}.`,
@@ -2214,6 +2267,7 @@ function buildLegThesis({ fixture, market, outcome, edge, independentEdge, rawMo
     `Market focus: ${marketFocus.reasons.join("; ") || "general value check"}.`,
     learning.reasons.length ? `Outcome learning: ${learning.reasons.join("; ")}.` : "Outcome learning: waiting for enough settled bets before adjusting.",
     reflectionText,
+    performanceText,
     movementText,
     `Confidence ${round(confidence * 100, 1)}% after odds freshness and data completeness checks.`
   ].filter(Boolean);

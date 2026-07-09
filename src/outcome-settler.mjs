@@ -1,10 +1,11 @@
 import { readJson, upsertJsonRecords } from "./db.mjs";
+import { buildClosingLineIndex, closingLineValue, findClosingLine } from "./betting-performance.mjs";
 import { loadPredictionLedger } from "./prediction-ledger.mjs";
 import { loadPostMatchStats, mergePostMatchStats } from "./post-match-stats.mjs";
 import { makeId, normalizeName, round } from "./utils.mjs";
 
 export async function settleStoredBetOutcomes({ matchHistory = null, postMatchStats = null, now = new Date() } = {}) {
-  const [legCandidates, predictionLedger, recommendations, appScanLatest, appScans, existingOutcomes, storedMatchHistory, storedPostMatchStats] = await Promise.all([
+  const [legCandidates, predictionLedger, recommendations, appScanLatest, appScans, existingOutcomes, storedMatchHistory, storedPostMatchStats, oddsSnapshots] = await Promise.all([
     readJson(["data", "leg-candidates-latest.json"], []),
     loadPredictionLedger(),
     readJson(["data", "recommendations-latest.json"], null),
@@ -12,7 +13,8 @@ export async function settleStoredBetOutcomes({ matchHistory = null, postMatchSt
     readJson(["data", "app-scans.json"], []),
     readJson(["data", "bet-outcomes.json"], []),
     matchHistory ? Promise.resolve(matchHistory) : readJson(["data", "team-match-history.json"], []),
-    postMatchStats ? Promise.resolve(postMatchStats) : loadPostMatchStats()
+    postMatchStats ? Promise.resolve(postMatchStats) : loadPostMatchStats(),
+    readJson(["data", "odds-snapshots.json"], [])
   ]);
   const mergedMatchHistory = mergePostMatchStats(storedMatchHistory, storedPostMatchStats);
   const settlement = settleBetOutcomes({
@@ -22,6 +24,7 @@ export async function settleStoredBetOutcomes({ matchHistory = null, postMatchSt
     appScans: [appScanLatest, ...appScans].filter(Boolean),
     matchHistory: mergedMatchHistory,
     existingOutcomes,
+    oddsSnapshots,
     now
   });
 
@@ -32,9 +35,10 @@ export async function settleStoredBetOutcomes({ matchHistory = null, postMatchSt
   return settlement;
 }
 
-export function settleBetOutcomes({ legCandidates = [], predictionLedger = [], recommendations = null, appScans = [], matchHistory = [], existingOutcomes = [], now = new Date() } = {}) {
+export function settleBetOutcomes({ legCandidates = [], predictionLedger = [], recommendations = null, appScans = [], matchHistory = [], existingOutcomes = [], oddsSnapshots = [], now = new Date() } = {}) {
   const fullLegs = recommendedFullLegs({ legCandidates, predictionLedger, recommendations, appScans, existingOutcomes });
   const existingByKey = new Map(existingOutcomes.map((outcome) => [outcomeRecordKey(outcome), outcome]));
+  const closingLineIndex = buildClosingLineIndex(oddsSnapshots);
   const newRecords = [];
   const skipped = {
     noRecommendations: recommendations || appScans.length || predictionLedger.length || legCandidates.length ? 0 : 1,
@@ -64,7 +68,7 @@ export function settleBetOutcomes({ legCandidates = [], predictionLedger = [], r
       continue;
     }
 
-    const record = buildOutcomeRecord({ leg, match, result, now });
+    const record = buildOutcomeRecord({ leg, match, result, closingLineIndex, now });
     const key = outcomeRecordKey(record);
     const existing = existingByKey.get(key);
 
@@ -439,7 +443,20 @@ function playerNameMatches(left, right) {
     || rightKey.length >= 5;
 }
 
-function buildOutcomeRecord({ leg, match, result, now }) {
+function buildOutcomeRecord({ leg, match, result, closingLineIndex = null, now }) {
+  const provisional = {
+    fixtureId: leg.fixtureId || "",
+    fixtureDate: leg.fixtureDate || "",
+    matchDate: match.date,
+    market: leg.market,
+    outcome: leg.outcome || inferredOutcomeFromLabel(leg),
+    playerName: leg.playerName || "",
+    selectionLabel: leg.selectionLabel || "",
+    decimalOdds: Number(leg.decimalOdds || 0)
+  };
+  const closingLine = closingLineIndex ? findClosingLine(provisional, closingLineIndex) : null;
+  const clv = closingLineValue(provisional, closingLine);
+
   return {
     id: makeId("outcome", [
       baseLegId(leg.id),
@@ -468,7 +485,10 @@ function buildOutcomeRecord({ leg, match, result, now }) {
     playerTeam: leg.playerTeam || "",
     selectionLabel: leg.selectionLabel || "",
     bookmaker: leg.bookmaker || "",
+    oddsCapturedAt: leg.oddsCapturedAt || leg.components?.oddsCapturedAt || "",
     decimalOdds: Number(leg.decimalOdds || 0),
+    closingLine,
+    closingLineValue: clv,
     status: result.status,
     resultReason: result.reason,
     modelProbability: round(Number(leg.modelProbability || 0), 4),
@@ -532,7 +552,8 @@ function outcomeRecordChanged(existing, next) {
   return existing.status !== next.status
     || existing.resultReason !== next.resultReason
     || Number(existing.homeGoals) !== Number(next.homeGoals)
-    || Number(existing.awayGoals) !== Number(next.awayGoals);
+    || Number(existing.awayGoals) !== Number(next.awayGoals)
+    || round(Number(existing.closingLineValue?.decimal || 0), 4) !== round(Number(next.closingLineValue?.decimal || 0), 4);
 }
 
 function baseLegId(id) {

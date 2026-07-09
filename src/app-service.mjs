@@ -2,6 +2,7 @@ import { appendJsonRecords, loadEngineState, readJson, upsertJsonRecords, writeJ
 import { buildScanIntelligence, buildTeamStatsWithIntelligence, loadIntelligenceState, loadOutcomeLearning, persistScanIntelligence } from "./intelligence-memory.mjs";
 import { rankBookmakerOffers } from "./offer-engine.mjs";
 import { buildBetRecommendations, buildMostLikelyPicks } from "./portfolio-builder.mjs";
+import { loadBettingPerformance } from "./betting-performance.mjs";
 import { fetchFixturesWithDiagnostics } from "./providers/fixtures-provider.mjs";
 import { fetchNewsArticlesWithDiagnostics } from "./providers/news-provider.mjs";
 import { fetchOddsSnapshotWithDiagnostics } from "./providers/odds-provider.mjs";
@@ -152,6 +153,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
   if (outcomeSettlement.insertedCount || reflectionRefresh.upsertedCount) {
     outcomeLearning = await loadOutcomeLearning();
   }
+  const bettingPerformance = await loadBettingPerformance({ now });
 
   if (statsResult.playerStats?.length) {
     await persistPlayerStats(statsResult);
@@ -276,6 +278,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
     policy,
     now,
     outcomeLearning,
+    bettingPerformance,
     heatSnapshots: allHeatSnapshots,
     squadDepthRecords: allSquadDepthRecords,
     playerStats: allPlayerStats

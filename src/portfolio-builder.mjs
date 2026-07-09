@@ -266,6 +266,7 @@ function likelyLegScore(leg, legCount = 1) {
   const independentEdge = Number(leg.independentEdge ?? edge);
   const signalScore = clamp(Number(leg.components?.nonMarketSignalCount || 0) / 4, 0, 1);
   const intelligence = Number(leg.components?.intelligenceConfidence || 0.45);
+  const performancePenalty = Number(leg.components?.bettingPerformanceScorePenalty || 0) + (leg.components?.priceGone ? 8 : 0);
   const freshness = Number(leg.components?.oddsFreshness || 0.75);
   const survivalPressure = survivalPressureForLegCount(legCount);
   const valueWeight = 1 - survivalPressure * 0.78;
@@ -369,6 +370,7 @@ function scoreMostLikelyCombo(legs, target, rank) {
       playerName: leg.playerName,
       selectionLabel: leg.selectionLabel,
       bookmaker: leg.bookmaker,
+      oddsCapturedAt: leg.oddsCapturedAt,
       decimalOdds: leg.decimalOdds,
       likelyProbability: round(likelyWinProbability(leg, { legCount: target.legCount }), 4),
       modelProbability: leg.modelProbability,
@@ -1724,6 +1726,7 @@ function shortWindowLegScore(leg, policy, legCount) {
   const odds = Number(leg.decimalOdds || 1);
   const signalScore = clamp(Number(leg.components?.nonMarketSignalCount || 0) / 4, 0, 1);
   const intelligence = Number(leg.components?.intelligenceConfidence || 0.45);
+  const performancePenalty = Number(leg.components?.bettingPerformanceScorePenalty || 0) + (leg.components?.priceGone ? 8 : 0);
   const targetOdds = shortWindowTargetLegOdds(legCount, appetite);
   const oddsFit = clamp(1 - Math.abs(Math.log(Math.max(1.01, odds) / targetOdds)) / 1.1, 0, 1);
   const edgeBlend = clamp((appetite - 0.8) / 0.2, 0, 1);
@@ -1749,7 +1752,8 @@ function shortWindowLegScore(leg, policy, legCount) {
     + boldSweetSpotLift
     + riskTagLift
     - longPricePenalty
-    - riskPortfolioLegPenalty(leg, legCount, appetite) * 55;
+    - riskPortfolioLegPenalty(leg, legCount, appetite) * 55
+    - performancePenalty;
 }
 
 function shortWindowTargetLegOdds(legCount, appetite) {
@@ -1802,6 +1806,7 @@ export function scoreCombo(legs, type, policy, options = {}) {
   const riskLegs = legs.filter((leg) => ["calculated_risk", "longshot_value", "contrarian_value"].includes(leg.riskTag));
   const intelligenceConfidence = mean(legs.map((leg) => leg.components?.intelligenceConfidence || 0.45));
   const averageNonMarketSignalCount = mean(legs.map((leg) => leg.components?.nonMarketSignalCount || 0));
+  const averagePerformancePenalty = mean(legs.map((leg) => Number(leg.components?.bettingPerformanceScorePenalty || 0) + (leg.components?.priceGone ? 8 : 0)));
   const marketConfirmedLegs = legs.filter((leg) => leg.riskTag === "market_confirmed_edge");
   const contrarianLegs = legs.filter((leg) => leg.riskTag === "contrarian_value");
   const favouriteLegs = legs.filter((leg) => Number(leg.impliedProbability) >= Number(riskProfile.maxFavoriteImpliedProbability || 0.72));
@@ -1872,7 +1877,8 @@ export function scoreCombo(legs, type, policy, options = {}) {
     + intelligenceBonus
     - favouritePenalty
     - sizePenalty
-    - portfolioPenalty, 0, 100);
+    - portfolioPenalty
+    - averagePerformancePenalty, 0, 100);
 
   return {
     id: `${type}_${legs.map((leg) => leg.id).join("_").slice(0, 48)}`,

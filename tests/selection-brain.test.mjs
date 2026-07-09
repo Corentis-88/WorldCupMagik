@@ -79,6 +79,28 @@ test("high risk identifies logical free-bet value without hiding weak picks", ()
   assert.equal(weakMetadata.recommendedUse, "weak_best_available");
 });
 
+test("selection brain downgrades price-gone slips instead of labelling them strong", () => {
+  const priceGone = combo({
+    combinedDecimalOdds: 2.2,
+    combinedProbability: 0.64,
+    survivalCombinedProbability: 0.62,
+    averageSurvivalProbability: 0.72,
+    averageConfidence: 0.78,
+    averageIndependentEdge: 0.08,
+    averageNonMarketSignalCount: 5,
+    legs: [leg("price-gone", "over_2_5_goals", {
+      priceGone: true,
+      bettingPerformanceScorePenalty: 14,
+      bettingPerformanceMarketAction: "suppress_for_cash"
+    })]
+  });
+  const metadata = selectionBrainMetadata(priceGone, { risk: 0, category: { type: "single", legCount: 1 } });
+
+  assert.ok(metadata.portfolioWarnings.includes("price_gone"));
+  assert.ok(metadata.portfolioWarnings.includes("market_suppressed_by_performance"));
+  assert.notEqual(metadata.selectionQuality, "strong");
+});
+
 function combo(overrides = {}) {
   const legs = overrides.legs || [leg("a"), leg("b")];
 
@@ -104,7 +126,7 @@ function combo(overrides = {}) {
   };
 }
 
-function leg(id, market = "match_winner") {
+function leg(id, market = "match_winner", components = {}) {
   return {
     id,
     fixtureId: `fixture-${id}`,
@@ -116,7 +138,8 @@ function leg(id, market = "match_winner") {
     edge: 0.07,
     components: {
       nonMarketSignalCount: 5,
-      intelligenceConfidence: 0.76
+      intelligenceConfidence: 0.76,
+      ...components
     }
   };
 }

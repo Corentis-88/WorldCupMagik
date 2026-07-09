@@ -91,7 +91,24 @@ test("mobile profile keeps selection-brain metadata", () => {
           freeBetConversion: 1.84,
           probabilityRange: { low: 0.04, mid: 0.08, high: 0.12, width: 0.08, label: "tight" },
           portfolioWarnings: ["same_date_cluster"],
-          legs: []
+          legs: [{
+            id: "leg-price-gone",
+            fixtureId: "fixture-price",
+            market: "over_2_5_goals",
+            selectionLabel: "Alpha vs Beta: Over 2.5 goals",
+            decimalOdds: 1.72,
+            components: {
+              bettingPerformanceMarketAction: "downgrade",
+              bettingPerformanceMarketRoi: -0.12,
+              bettingPerformanceMarketClv: -0.018,
+              bettingPerformanceReasons: ["over_2_5_goals is being downgraded"],
+              priceGone: true,
+              livePriceDiscipline: {
+                priceGone: true,
+                reason: "price shortened 9.5% from recent average"
+              }
+            }
+          }]
         }]
       }
     },
@@ -103,15 +120,26 @@ test("mobile profile keeps selection-brain metadata", () => {
     legCandidatesByRisk: {},
     mostLikelyLegCandidates: [],
     markets: {},
-    intelligence: {},
+    intelligence: {
+      bettingPerformance: {
+        outcomeCount: 12,
+        market: {
+          over_2_5_goals: { action: "downgrade", cashRoi: -0.12 }
+        }
+      }
+    },
     playerStats: { teams: {} },
     teamProfiles: { teams: {} }
   });
 
   const bet = payload.profiles["14_85"].betslip[0];
+  const leg = bet.legs[0];
 
   assert.equal(bet.selectionIntent, "free_bet_value");
   assert.equal(bet.recommendedUse, "free_bet");
   assert.equal(bet.probabilityRange.label, "tight");
   assert.deepEqual(bet.portfolioWarnings, ["same_date_cluster"]);
+  assert.equal(payload.intelligence.bettingPerformance.outcomeCount, 12);
+  assert.equal(leg.components.priceGone, true);
+  assert.equal(leg.components.bettingPerformanceMarketAction, "downgrade");
 });

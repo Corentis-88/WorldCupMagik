@@ -30,6 +30,7 @@ export function buildMobilePayload(payload) {
     markets: payload.markets || {},
     intelligence: {
       outcomeLearningCount: payload.intelligence?.outcomeLearningCount || 0,
+      bettingPerformance: payload.intelligence?.bettingPerformance || null,
       predictionReflectionCount: payload.intelligence?.predictionReflectionCount || 0,
       predictionReflection: payload.intelligence?.predictionReflection || null
     },
@@ -125,6 +126,7 @@ function mobileLeg(leg = {}) {
     playerName: leg.playerName,
     playerTeam: leg.playerTeam,
     bookmaker: leg.bookmaker,
+    oddsCapturedAt: leg.oddsCapturedAt,
     decimalOdds: leg.decimalOdds,
     likelyProbability: leg.likelyProbability,
     modelProbability: leg.modelProbability,
@@ -170,7 +172,17 @@ function mobileLeg(leg = {}) {
       playerStatSource: leg.components?.playerStatSource,
       projectedShotTotal: leg.components?.projectedShotTotal,
       predictionReflectionAdjustment: leg.components?.predictionReflectionAdjustment,
-      predictionReflectionConfidence: leg.components?.predictionReflectionConfidence
+      predictionReflectionConfidence: leg.components?.predictionReflectionConfidence,
+      bettingPerformanceAdjustment: leg.components?.bettingPerformanceAdjustment,
+      bettingPerformanceConfidence: leg.components?.bettingPerformanceConfidence,
+      bettingPerformanceScorePenalty: leg.components?.bettingPerformanceScorePenalty,
+      bettingPerformanceMarketAction: leg.components?.bettingPerformanceMarketAction,
+      bettingPerformanceMarketRoi: leg.components?.bettingPerformanceMarketRoi,
+      bettingPerformanceMarketClv: leg.components?.bettingPerformanceMarketClv,
+      bettingPerformanceMarketSample: leg.components?.bettingPerformanceMarketSample,
+      bettingPerformanceReasons: leg.components?.bettingPerformanceReasons,
+      priceGone: leg.components?.priceGone,
+      livePriceDiscipline: leg.components?.livePriceDiscipline
     }
   };
 }

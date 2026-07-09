@@ -12,6 +12,7 @@ import { settleStoredBetOutcomes } from "./outcome-settler.mjs";
 import { refreshPredictionReflections } from "./prediction-reflection.mjs";
 import { persistPredictionLedger } from "./prediction-ledger.mjs";
 import { buildLegCandidates } from "./scoring.mjs";
+import { loadBettingPerformance } from "./betting-performance.mjs";
 import { buildSurvivabilityMarketCoverage, isSurvivabilityMarketRecord } from "./survivability-market-coverage.mjs";
 import { isoDate, makeId, normalizeName } from "./utils.mjs";
 
@@ -131,6 +132,7 @@ export async function runAnalysisCycle({ state, now = new Date() } = {}) {
   const outcomeSettlement = await settleStoredBetOutcomes({ now });
   const reflectionRefresh = await refreshPredictionReflections({ now });
   const outcomeLearning = await loadOutcomeLearning();
+  const bettingPerformance = await loadBettingPerformance({ oddsSnapshots: engineState.oddsSnapshots, now });
   const legCandidates = buildLegCandidates({
     fixtures: engineState.fixtures,
     oddsSnapshots: engineState.oddsSnapshots,
@@ -139,6 +141,7 @@ export async function runAnalysisCycle({ state, now = new Date() } = {}) {
     policy: engineState.policy,
     now,
     outcomeLearning,
+    bettingPerformance,
     heatSnapshots: engineState.heatSnapshots,
     squadDepthRecords: engineState.squadDepthRecords,
     playerStats: engineState.playerStats

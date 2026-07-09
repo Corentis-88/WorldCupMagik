@@ -2,7 +2,8 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { getDashboardState, scanForBets, buildMostLikelyPolicy, buildRiskPolicy, describeRisk, selectBetslip, selectFixturesForWindow } from "../src/app-service.mjs";
-import { loadEngineState } from "../src/db.mjs";
+import { buildBettingPerformance } from "../src/betting-performance.mjs";
+import { loadEngineState, readJson } from "../src/db.mjs";
 import { buildTeamStatsWithIntelligence, loadIntelligenceState, loadOutcomeLearning } from "../src/intelligence-memory.mjs";
 import { buildMobilePayload } from "../src/mobile-web-data.mjs";
 import { buildBetRecommendations, buildMostLikelyPicks } from "../src/portfolio-builder.mjs";
@@ -42,6 +43,11 @@ const liveSquadDepthRecords = engineState.squadDepthRecords.filter(isSquadDepthR
 const livePlayerStats = engineState.playerStats.filter(isPublicPlayerStat);
 const liveMatchHistory = intelligenceState.matchHistory.filter(isPublicMatchRecord);
 const baseTeamStats = engineState.teamStats.filter(isPublicTeamStat);
+const bettingPerformance = buildBettingPerformance({
+  outcomes: await readJson(["data", "bet-outcomes.json"], []),
+  oddsSnapshots: liveOddsSnapshots,
+  now
+});
 const teamStats = buildTeamStatsWithIntelligence({
   baseStats: baseTeamStats,
   matchHistory: liveMatchHistory,
@@ -69,6 +75,7 @@ const mostLikelyRangeLegCandidates = buildLegCandidates({
   policy: mostLikelyPolicy,
   now,
   outcomeLearning,
+  bettingPerformance,
   heatSnapshots: liveHeatSnapshots,
   squadDepthRecords: liveSquadDepthRecords,
   playerStats: livePlayerStats
@@ -86,6 +93,7 @@ for (const risk of riskBuckets) {
       policy,
       now,
       outcomeLearning,
+      bettingPerformance,
       heatSnapshots: liveHeatSnapshots,
       squadDepthRecords: liveSquadDepthRecords,
       playerStats: livePlayerStats
@@ -205,6 +213,7 @@ const payload = {
     teamCount: intelligenceState.teamIntelligence.length,
     outcomeLearningCount: outcomeLearning.outcomeCount,
     outcomeCalibration: summarizeOutcomeCalibration(outcomeLearning.calibration),
+    bettingPerformance: summarizeBettingPerformance(bettingPerformance),
     predictionReflectionCount: outcomeLearning.reflection?.count || 0,
     predictionReflection: summarizePredictionReflection(outcomeLearning.reflection),
     teams: intelligenceState.teamIntelligence
@@ -533,6 +542,7 @@ function summarizeLeg(leg) {
     playerName: leg.playerName,
     playerTeam: leg.playerTeam,
     bookmaker: leg.bookmaker,
+    oddsCapturedAt: leg.oddsCapturedAt,
     decimalOdds: leg.decimalOdds,
     likelyProbability: leg.likelyProbability,
     modelProbability: leg.modelProbability,
@@ -619,7 +629,17 @@ function summarizeLeg(leg) {
       playerStatSource: leg.components?.playerStatSource,
       predictionReflectionAdjustment: leg.components?.predictionReflectionAdjustment,
       predictionReflectionConfidence: leg.components?.predictionReflectionConfidence,
-      predictionReflectionReasons: leg.components?.predictionReflectionReasons
+      predictionReflectionReasons: leg.components?.predictionReflectionReasons,
+      bettingPerformanceAdjustment: leg.components?.bettingPerformanceAdjustment,
+      bettingPerformanceConfidence: leg.components?.bettingPerformanceConfidence,
+      bettingPerformanceScorePenalty: leg.components?.bettingPerformanceScorePenalty,
+      bettingPerformanceMarketAction: leg.components?.bettingPerformanceMarketAction,
+      bettingPerformanceMarketRoi: leg.components?.bettingPerformanceMarketRoi,
+      bettingPerformanceMarketClv: leg.components?.bettingPerformanceMarketClv,
+      bettingPerformanceMarketSample: leg.components?.bettingPerformanceMarketSample,
+      bettingPerformanceReasons: leg.components?.bettingPerformanceReasons,
+      priceGone: leg.components?.priceGone,
+      livePriceDiscipline: leg.components?.livePriceDiscipline
     }
   };
 }
@@ -639,6 +659,7 @@ function summarizeLegCandidate(leg) {
     playerTeam: leg.playerTeam,
     selectionLabel: leg.selectionLabel,
     bookmaker: leg.bookmaker,
+    oddsCapturedAt: leg.oddsCapturedAt,
     decimalOdds: leg.decimalOdds,
     likelyProbability: leg.likelyProbability,
     modelProbability: leg.modelProbability,
@@ -739,7 +760,17 @@ function summarizeLegCandidate(leg) {
       playerStatSource: leg.components?.playerStatSource,
       predictionReflectionAdjustment: leg.components?.predictionReflectionAdjustment,
       predictionReflectionConfidence: leg.components?.predictionReflectionConfidence,
-      predictionReflectionReasons: leg.components?.predictionReflectionReasons
+      predictionReflectionReasons: leg.components?.predictionReflectionReasons,
+      bettingPerformanceAdjustment: leg.components?.bettingPerformanceAdjustment,
+      bettingPerformanceConfidence: leg.components?.bettingPerformanceConfidence,
+      bettingPerformanceScorePenalty: leg.components?.bettingPerformanceScorePenalty,
+      bettingPerformanceMarketAction: leg.components?.bettingPerformanceMarketAction,
+      bettingPerformanceMarketRoi: leg.components?.bettingPerformanceMarketRoi,
+      bettingPerformanceMarketClv: leg.components?.bettingPerformanceMarketClv,
+      bettingPerformanceMarketSample: leg.components?.bettingPerformanceMarketSample,
+      bettingPerformanceReasons: leg.components?.bettingPerformanceReasons,
+      priceGone: leg.components?.priceGone,
+      livePriceDiscipline: leg.components?.livePriceDiscipline
     },
     thesis: leg.thesis
   };
@@ -758,6 +789,23 @@ function summarizeOutcomeCalibration(calibration = {}) {
     probabilityBand: compactMap(calibration.probabilityBand),
     market: compactMap(calibration.market),
     riskTag: compactMap(calibration.riskTag)
+  };
+}
+
+function summarizeBettingPerformance(performance = {}) {
+  const compactMap = (items = {}) => Object.fromEntries(
+    Object.entries(items)
+      .filter(([, value]) => Number(value?.count || 0) > 0)
+      .sort((left, right) => Number(right[1].stakedCount || right[1].count || 0) - Number(left[1].stakedCount || left[1].count || 0))
+      .slice(0, 14)
+  );
+
+  return {
+    outcomeCount: performance.outcomeCount || 0,
+    summary: performance.summary || null,
+    market: compactMap(performance.market),
+    riskTag: compactMap(performance.riskTag),
+    bookmaker: compactMap(performance.bookmaker)
   };
 }
 

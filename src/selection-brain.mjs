@@ -36,6 +36,7 @@ export function selectionBrainMetadata(combo = {}, { risk = 50, category = {} } 
   const legCount = Number(combo.legCount || combo.legs?.length || category.legCount || 1);
   const uncertainty = Number(probabilityRange.width || 0);
   const warnings = portfolioWarnings(combo, { probabilityRange });
+  const performanceSignals = comboPerformanceSignals(combo);
   const correlationPenalty = Number(combo.correlationPenalty || 0);
   const fragileLegCount = Number(combo.fragileLegCount || 0);
   const scorerLegCount = Number(combo.scorerLegCount || 0) + Number(combo.firstScorerLegCount || 0);
@@ -53,6 +54,7 @@ export function selectionBrainMetadata(combo = {}, { risk = 50, category = {} } 
       + signalFit * 12
       + clamp(independentEdge, -0.03, 0.18) * 50
       - uncertainty * 86
+      - performanceSignals.penalty * 0.75
       - correlationPenalty * 0.72
       - fragileLegCount * 4.5
       - scorerLegCount * (2.5 - appetite)
@@ -72,6 +74,7 @@ export function selectionBrainMetadata(combo = {}, { risk = 50, category = {} } 
         + signalFit * 10
     )
       - uncertainty * 58
+      - performanceSignals.penalty * 0.5
       - correlationPenalty * 0.58
       - fragileLegCount * 3.8
       - Number(combo.repeatedTeamCount || 0) * 4.5,
@@ -90,6 +93,7 @@ export function selectionBrainMetadata(combo = {}, { risk = 50, category = {} } 
         + signalFit * 8
     )
       - uncertainty * 54
+      - performanceSignals.penalty * 0.38
       - correlationPenalty * 0.52
       - fragileLegCount * 3.3,
     0,
@@ -140,6 +144,7 @@ export function probabilityRangeForCombo(combo = {}, { risk = 50, category = {} 
   const correlationPenalty = Number(combo.correlationPenalty || 0);
   const scorerLegCount = Number(combo.scorerLegCount || 0) + Number(combo.firstScorerLegCount || 0);
   const fragileLegCount = Number(combo.fragileLegCount || 0);
+  const performanceSignals = comboPerformanceSignals(combo);
   const fallbackPenalty = combo.shortWindowFallback ? 0.026 : 0;
   const signalPenalty = clamp((4 - signalCount) * 0.014, 0, 0.07);
   const confidencePenalty = clamp((0.82 - confidence) * 0.16, 0, 0.12);
@@ -155,6 +160,7 @@ export function probabilityRangeForCombo(combo = {}, { risk = 50, category = {} 
       + legPenalty
       + playerPenalty
       + fragilePenalty
+      + performanceSignals.widthPenalty
       + correlationWidth
       + fallbackPenalty
       + appetiteWidth,
@@ -185,6 +191,14 @@ export function probabilityRangeForCombo(combo = {}, { risk = 50, category = {} 
 
   if (combo.shortWindowFallback) {
     reasons.push("short-window fallback");
+  }
+
+  if (performanceSignals.priceGoneCount > 0) {
+    reasons.push("price-gone risk");
+  }
+
+  if (performanceSignals.weakMarketCount > 0) {
+    reasons.push("weak settled market performance");
   }
 
   return { low, mid: round(mid, 4), high, width, label, reasons };
@@ -239,6 +253,7 @@ function oddsBandFit(odds, range) {
 function portfolioWarnings(combo = {}, { probabilityRange } = {}) {
   const warnings = [];
   const range = probabilityRange || probabilityRangeForCombo(combo);
+  const performanceSignals = comboPerformanceSignals(combo);
   const averageConfidence = Number(combo.averageConfidence || 0);
   const averageSignals = Number(combo.averageNonMarketSignalCount || 0);
   const correlationPenalty = Number(combo.correlationPenalty || 0);
@@ -294,10 +309,52 @@ function portfolioWarnings(combo = {}, { probabilityRange } = {}) {
     warnings.push("display_odds_capped");
   }
 
+  if (performanceSignals.priceGoneCount > 0) {
+    warnings.push("price_gone");
+  }
+
+  if (performanceSignals.suppressedMarketCount > 0) {
+    warnings.push("market_suppressed_by_performance");
+  } else if (performanceSignals.weakMarketCount > 0) {
+    warnings.push("market_downgraded_by_performance");
+  }
+
   return [...new Set(warnings)];
 }
 
+function comboPerformanceSignals(combo = {}) {
+  const legs = combo.legs || [];
+  const priceGoneCount = legs.filter((leg) => leg.components?.priceGone).length;
+  const suppressedMarketCount = legs.filter((leg) => leg.components?.bettingPerformanceMarketAction === "suppress_for_cash").length;
+  const downgradedMarketCount = legs.filter((leg) => leg.components?.bettingPerformanceMarketAction === "downgrade").length;
+  const penalty = mean(legs.map((leg) => Number(leg.components?.bettingPerformanceScorePenalty || 0)));
+  const confidence = mean(legs.map((leg) => Number(leg.components?.bettingPerformanceConfidence || 0)));
+  const widthPenalty = clamp(
+    priceGoneCount * 0.035
+      + suppressedMarketCount * 0.028
+      + downgradedMarketCount * 0.018
+      + penalty / 420
+      + confidence * (suppressedMarketCount || downgradedMarketCount ? 0.018 : 0),
+    0,
+    0.16
+  );
+
+  return {
+    priceGoneCount,
+    suppressedMarketCount,
+    downgradedMarketCount,
+    weakMarketCount: suppressedMarketCount + downgradedMarketCount,
+    penalty,
+    confidence,
+    widthPenalty
+  };
+}
+
 function qualityLabel({ score, probabilityRange, confidence, averageSurvival, survivalCombined, warnings }) {
+  if (warnings.includes("price_gone") || warnings.includes("market_suppressed_by_performance")) {
+    return score >= 58 && averageSurvival >= 0.56 ? "caution" : "weak_best_available";
+  }
+
   if (score >= 76 && probabilityRange.label === "tight" && confidence >= 0.72 && averageSurvival >= 0.62) {
     return "strong";
   }
@@ -310,7 +367,7 @@ function qualityLabel({ score, probabilityRange, confidence, averageSurvival, su
     return "weak_best_available";
   }
 
-  if (warnings.includes("correlated_slip") || warnings.includes("thin_non_market_data")) {
+  if (warnings.includes("correlated_slip") || warnings.includes("thin_non_market_data") || warnings.includes("market_downgraded_by_performance")) {
     return "caution";
   }
 

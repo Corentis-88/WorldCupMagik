@@ -38,6 +38,7 @@ export function compactPredictionLeg(leg = {}) {
     playerTeam: leg.playerTeam || "",
     selectionLabel: leg.selectionLabel || "",
     bookmaker: leg.bookmaker || "",
+    oddsCapturedAt: leg.oddsCapturedAt || leg.components?.oddsCapturedAt || "",
     decimalOdds: Number(leg.decimalOdds || 0),
     modelProbability: round(Number(leg.modelProbability || 0), 4),
     rawModelProbability: round(Number(leg.rawModelProbability || leg.modelProbability || 0), 4),

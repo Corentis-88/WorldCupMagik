@@ -643,6 +643,7 @@ function scoreMobileCombo({ key, label, type, legs, risk, likely = false, rank =
   const averageEdge = mean(legs.map((leg) => leg.edge));
   const averageIndependentEdge = mean(legs.map((leg) => leg.independentEdge ?? leg.edge));
   const averageNonMarketSignalCount = mean(legs.map((leg) => leg.components?.nonMarketSignalCount || 0));
+  const averagePerformancePenalty = mean(legs.map((leg) => Number(leg.components?.bettingPerformanceScorePenalty || 0) + (leg.components?.priceGone ? 8 : 0)));
   const expectedValue = combinedProbability * combinedDecimalOdds - 1;
   const riskLegCount = legs.filter((leg) => ["calculated_risk", "longshot_value", "contrarian_value"].includes(leg.riskTag)).length;
   const bttsLegCount = legs.filter(isBttsYesLeg).length;
@@ -663,7 +664,8 @@ function scoreMobileCombo({ key, label, type, legs, risk, likely = false, rank =
       + Math.min(8, Math.max(-4, expectedValue * 4))
       - fallbackRatingPenalty * 45
       - scorerOverage * 4
-      - firstScorerOverage * 5,
+      - firstScorerOverage * 5
+      - averagePerformancePenalty,
     0,
     100
   );
@@ -745,6 +747,7 @@ function mobileLegScore(leg, legCount, appetite) {
   const odds = Number(leg.decimalOdds || 1);
   const signalScore = clamp(Number(leg.components?.nonMarketSignalCount || 0) / 4, 0, 1);
   const intelligence = Number(leg.components?.intelligenceConfidence || 0.45);
+  const performancePenalty = Number(leg.components?.bettingPerformanceScorePenalty || 0) + (leg.components?.priceGone ? 8 : 0);
   const targetOdds = mobileTargetLegOdds(legCount, appetite);
   const oddsFit = clamp(1 - Math.abs(Math.log(Math.max(1.01, odds) / targetOdds)) / 1.1, 0, 1);
   const edgeBlend = clamp((appetite - 0.8) / 0.2, 0, 1);
@@ -764,7 +767,8 @@ function mobileLegScore(leg, legCount, appetite) {
     + cappedPriceLift * ((4 + appetite * 22) * (1 - mobileSurvivalPressure(legCount) * 0.72))
     - longPricePenalty
     - mobileMarketOnlySurvivalPenalty(leg) * 72
-    - mobilePortfolioLegPenalty(leg, legCount, appetite) * 55;
+    - mobilePortfolioLegPenalty(leg, legCount, appetite) * 55
+    - performancePenalty;
 }
 
 function mobileMostLikelyLegScore(leg, legCount) {
@@ -1721,13 +1725,33 @@ function formatLegNote(leg, likely = false) {
   const independentEdge = Number(leg.independentEdge ?? (rawAi - market));
   const signals = Number(leg.components?.nonMarketSignalCount || 0);
   const bookmaker = leg.bookmaker ? ` via ${leg.bookmaker}` : "";
+  const performance = performanceLegNote(leg);
 
   if (likely) {
-    return `AI survival ${percent(leg.likelyProbability || leg.modelProbability)}${bookmaker} | raw AI ${percent(rawAi)} vs market ${percent(market)} | edge ${percent(independentEdge)} | ${signals} signals`;
+    return `AI survival ${percent(leg.likelyProbability || leg.modelProbability)}${bookmaker} | raw AI ${percent(rawAi)} vs market ${percent(market)} | edge ${percent(independentEdge)} | ${signals} signals${performance}`;
   }
 
   const tag = String(leg.riskTag || "edge").replace(/_/g, " ");
-  return `${tag}${bookmaker} | AI ${percent(rawAi)} vs market ${percent(market)} | edge ${percent(independentEdge)} | ${signals} signals | data ${percent(leg.confidence)}`;
+  return `${tag}${bookmaker} | AI ${percent(rawAi)} vs market ${percent(market)} | edge ${percent(independentEdge)} | ${signals} signals | data ${percent(leg.confidence)}${performance}`;
+}
+
+function performanceLegNote(leg) {
+  const components = leg.components || {};
+
+  if (components.priceGone) {
+    const reason = components.livePriceDiscipline?.reason || "price has moved below model value";
+    return ` | price warning: ${reason}`;
+  }
+
+  if (components.bettingPerformanceMarketAction === "suppress_for_cash") {
+    return ` | market health: poor ROI/CLV sample`;
+  }
+
+  if (components.bettingPerformanceMarketAction === "downgrade") {
+    return ` | market health: downgraded`;
+  }
+
+  return "";
 }
 
 function confidenceLabel(bet, likely = false) {

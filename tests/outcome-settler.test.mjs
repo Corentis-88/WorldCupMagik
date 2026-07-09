@@ -212,6 +212,30 @@ test("does not settle ledger predictions captured after kickoff", () => {
   assert.equal(settlement.skipped.noMatch, 0);
 });
 
+test("settlement stores closing line value when pre-kickoff odds history exists", () => {
+  const now = new Date("2026-06-12T12:00:00.000Z");
+  const selected = leg("leg-clv", "match_winner", "Mexico", 2.1);
+  const settlement = settleBetOutcomes({
+    predictionLedger: [selected],
+    matchHistory: [match("Mexico", "South Africa", 2, 1)],
+    oddsSnapshots: [{
+      fixtureId: "mex-rsa",
+      fixtureDate: "2026-06-11T19:00:00.000Z",
+      market: "match_winner",
+      outcome: "Mexico",
+      bookmaker: "Closing Test Book",
+      decimalOdds: 1.9,
+      capturedAt: "2026-06-11T18:52:00.000Z"
+    }],
+    existingOutcomes: [],
+    now
+  });
+
+  assert.equal(settlement.insertedCount, 1);
+  assert.equal(settlement.newRecords[0].closingLine.decimalOdds, 1.9);
+  assert.ok(settlement.newRecords[0].closingLineValue.decimal > 0);
+});
+
 function statusFor(settlement, market) {
   return settlement.newRecords.find((record) => record.market === market)?.status;
 }
