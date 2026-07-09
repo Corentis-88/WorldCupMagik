@@ -9,7 +9,8 @@ on:
       - main
   pull_request:
   schedule:
-    - cron: "23 5,8,11,14,17,20,21,23 * * *"
+    # 02:17 UK time during the tournament's summer schedule. Accuracy is preferred over speed.
+    - cron: "17 1 * * *"
   workflow_dispatch:
 
 permissions:
@@ -17,16 +18,23 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: worldcupmagic-pages
+  cancel-in-progress: false
+
 jobs:
   github-pages:
     name: Build Full Web Edition
     runs-on: ubuntu-latest
+    timeout-minutes: 120
     if: github.ref_type != 'tag'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -35,18 +43,6 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run web:build-data
-      - name: Persist scanner database
-        if: github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data web/data
-          if git diff --cached --quiet; then
-            echo "No scanner database changes to persist."
-          else
-            git commit -m "Update WorldCupMagik public-web database [skip ci]"
-            git push
-          fi
       - name: Preserve current published lineup feed
         run: |
           mkdir -p web/data
@@ -81,3 +77,24 @@ jobs:
       - id: deployment
         if: github.event_name != 'pull_request'
         uses: actions/deploy-pages@v4
+      - name: Persist scanner database
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+        run: |
+          npm run data:guard
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data web/data
+          if git diff --cached --quiet; then
+            echo "No scanner database changes to persist."
+          else
+            git commit -m "Update WorldCupMagik public-web database [skip ci]"
+            for attempt in 1 2 3; do
+              git push && break
+              if [ "$attempt" = "3" ]; then
+                echo "Persist push failed after 3 attempts."
+                exit 1
+              fi
+              git pull --rebase --autostash origin main
+              sleep 8
+            done
+          fi

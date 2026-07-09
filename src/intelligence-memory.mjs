@@ -44,7 +44,7 @@ export async function loadOutcomeLearning() {
 }
 
 export function buildOutcomeLearning(outcomes = [], { reflections = [] } = {}) {
-  const settled = outcomes.filter((outcome) => outcome.status === "won" || outcome.status === "lost");
+  const settled = dedupeSettledOutcomes(outcomes.filter((outcome) => outcome.status === "won" || outcome.status === "lost"));
   const byMarket = new Map();
   const byRiskTag = new Map();
   const byProbabilityBand = new Map();
@@ -180,9 +180,13 @@ export function buildTeamStatsWithIntelligence({ baseStats, matchHistory = [], t
       rating: round(Number(team.rating || 1700) + form.formMomentum * 22 + memoryScore * 24, 1),
       statsCompleteness: round(clamp(mean([
         team.statsCompleteness || 0.5,
-        form.matchCount ? 0.62 + Math.min(0.28, form.matchCount * 0.014) : 0.4,
+        form.matchCount ? 0.5 + Math.min(0.22, form.matchCount * 0.011) : 0.34,
+        form.eventMetricQuality || team.eventMetricQuality || 0.34,
         memoryConfidence || 0.42
       ]), 0, 1), 3),
+      eventMetricQuality: round(Number(form.eventMetricQuality || team.eventMetricQuality || 0.34), 4),
+      estimatedMetricRate: round(Number(form.estimatedMetricRate ?? team.estimatedMetricRate ?? 1), 4),
+      realMetricMatchCount: Number(form.realMetricMatchCount || team.realMetricMatchCount || 0),
       formMemory: form,
       longForm,
       topScorers,
@@ -200,6 +204,9 @@ export function buildTeamStatsWithIntelligence({ baseStats, matchHistory = [], t
         ...(team.intelligenceCoverage || {}),
         matchWindowAvailable: form.matchCount || team.sourceMatchCount || 0,
         topScorerCount: topScorers.length,
+        eventMetricQuality: round(Number(form.eventMetricQuality || team.eventMetricQuality || 0.34), 4),
+        estimatedMetricRate: round(Number(form.estimatedMetricRate ?? team.estimatedMetricRate ?? 1), 4),
+        realMetricMatchCount: Number(form.realMetricMatchCount || team.realMetricMatchCount || 0),
         equalSchemaForAllTeams: true
       },
       learnedEdge: round(memoryScore, 4),
@@ -244,10 +251,12 @@ export function buildScanIntelligence({ fixtures, oddsRecords, allOddsSnapshots,
     );
     const dataConfidence = clamp(mean([
       form.confidence,
+      form.eventMetricQuality,
       news.confidence,
       market.confidence,
       scorer.confidence,
       Number(stats.statsCompleteness || 0.5),
+      Number(stats.eventMetricQuality || 0.34),
       previous?.dataConfidence || 0.42
     ]), 0, 1);
     const reasons = buildReasons({ form, news, market, scorer, learnedEdge });
@@ -304,13 +313,86 @@ export function buildScanIntelligence({ fixtures, oddsRecords, allOddsSnapshots,
 export async function persistScanIntelligence(intelligence) {
   await writeJson(["data", "team-intelligence-latest.json"], intelligence.teamIntelligence);
   await upsertJsonRecords(["data", "intelligence-observations.json"], intelligence.observations, (item) => item.id, 5000);
-  await appendJsonRecords(["data", "team-intelligence-history.json"], [{
-    id: makeId("intel_run", [intelligence.createdAt, intelligence.teamIntelligence.length]),
-    createdAt: intelligence.createdAt,
-    teamCount: intelligence.teamIntelligence.length,
-    teams: intelligence.teamIntelligence
-  }], 1000);
+  await appendJsonRecords(["data", "team-intelligence-history.json"], [compactIntelligenceRun(intelligence)], 180);
   await appendJsonRecords(["data", "market-movement-observations.json"], intelligence.marketMovements, 10000);
+}
+
+function dedupeSettledOutcomes(outcomes = []) {
+  const byEvent = new Map();
+
+  for (const [index, outcome] of outcomes.entries()) {
+    const fixtureIdentity = outcome.fixtureId || outcome.fixtureDate || "";
+    const selectionIdentity = normalizeName(outcome.playerName || outcome.outcome || outcome.selectionLabel || "");
+    const key = fixtureIdentity && selectionIdentity
+      ? [fixtureIdentity, outcome.market || outcome.type || "unknown", selectionIdentity].join("|")
+      : `aggregate:${index}`;
+    const existing = byEvent.get(key);
+
+    if (!existing || new Date(outcome.settledAt || outcome.createdAt || 0) > new Date(existing.settledAt || existing.createdAt || 0)) {
+      byEvent.set(key, outcome);
+    }
+  }
+
+  return [...byEvent.values()];
+}
+
+export function compactIntelligenceRun(intelligence = {}) {
+  const teams = Array.isArray(intelligence.teamIntelligence) ? intelligence.teamIntelligence : [];
+  const createdAt = intelligence.createdAt || new Date().toISOString();
+  const confidences = teams.map((team) => Number(team.dataConfidence || 0));
+  const edges = teams.map((team) => Number(team.learnedEdge || 0));
+
+  return {
+    id: makeId("intel_run", [createdAt, teams.length]),
+    createdAt,
+    teamCount: teams.length,
+    observationCount: Array.isArray(intelligence.observations) ? intelligence.observations.length : 0,
+    marketMovementCount: Array.isArray(intelligence.marketMovements) ? intelligence.marketMovements.length : 0,
+    averageDataConfidence: round(mean(confidences), 4),
+    averageAbsoluteLearnedEdge: round(mean(edges.map(Math.abs)), 4),
+    highConfidenceTeamCount: teams.filter((team) => Number(team.dataConfidence || 0) >= 0.7).length,
+    lowCoverageTeamCount: teams.filter((team) => teamCoverageCount(team) < 20).length,
+    estimatedEventOnlyTeamCount: teams.filter(isEstimatedEventOnlyTeam).length,
+    topPositiveEdges: compactEdgeTeams(teams, "positive"),
+    topNegativeEdges: compactEdgeTeams(teams, "negative")
+  };
+}
+
+function compactEdgeTeams(teams, direction) {
+  const sign = direction === "negative" ? -1 : 1;
+
+  return [...teams]
+    .filter((team) => Number(team.learnedEdge || 0) * sign > 0)
+    .sort((left, right) => Number(right.learnedEdge || 0) * sign - Number(left.learnedEdge || 0) * sign)
+    .slice(0, 8)
+    .map((team) => ({
+      team: team.team,
+      learnedEdge: round(Number(team.learnedEdge || 0), 4),
+      dataConfidence: round(Number(team.dataConfidence || 0), 4),
+      matchWindowAvailable: teamCoverageCount(team),
+      eventMetricQuality: round(Number(team.eventMetricQuality || team.form?.eventMetricQuality || team.intelligenceCoverage?.eventMetricQuality || 0.34), 4),
+      reasons: (team.reasons || []).slice(0, 3)
+    }));
+}
+
+function teamCoverageCount(team = {}) {
+  return Number(
+    team.intelligenceCoverage?.matchWindowAvailable
+    || team.form?.matchCount
+    || team.sourceMatchCount
+    || 0
+  );
+}
+
+function isEstimatedEventOnlyTeam(team = {}) {
+  const realMetricCount = Number(
+    team.realMetricMatchCount
+    || team.form?.realMetricMatchCount
+    || team.intelligenceCoverage?.realMetricMatchCount
+    || 0
+  );
+
+  return teamCoverageCount(team) > 0 && realMetricCount <= 0;
 }
 
 export function deriveTeamForm(matchHistory, team, now = new Date(), limit = 20) {
@@ -341,6 +423,9 @@ export function deriveTeamForm(matchHistory, team, now = new Date(), limit = 20)
       topScorers: [],
       formMomentum: 0,
       confidence: 0.35,
+      eventMetricQuality: 0.28,
+      estimatedMetricRate: 1,
+      realMetricMatchCount: 0,
       marketAngles: {
         cleanSheetRate: 0.28,
         failedToScoreRate: 0.24,
@@ -370,7 +455,9 @@ export function deriveTeamForm(matchHistory, team, now = new Date(), limit = 20)
       passesAttempted: Number(isHome ? match.homePassesAttempted : match.awayPassesAttempted) || 420,
       completedPasses: Number(isHome ? match.homeCompletedPasses : match.awayCompletedPasses) || 342,
       passCompletion: Number(isHome ? match.homePassCompletion : match.awayPassCompletion) || 0.815,
-      scorers: isHome ? match.homeScorers || [] : match.awayScorers || []
+      scorers: isHome ? match.homeScorers || [] : match.awayScorers || [],
+      metricSource: match.metricSource || "",
+      capturedMetricFields: match.capturedMetricFields || []
     };
   });
   const latestSix = rows.slice(0, 6);
@@ -383,6 +470,9 @@ export function deriveTeamForm(matchHistory, team, now = new Date(), limit = 20)
   const longForm = summarizeFormRows(rows);
   const shortForm = summarizeFormRows(latestSix);
   const topScorers = summarizeFormScorers(rows);
+  const eventMetricQuality = eventMetricQualityForRows(rows);
+  const realMetricMatchCount = rows.filter(hasRealEventMetrics).length;
+  const estimatedMetricRate = rows.length ? 1 - (realMetricMatchCount / rows.length) : 1;
 
   return {
     matchCount: rows.length,
@@ -401,7 +491,10 @@ export function deriveTeamForm(matchHistory, team, now = new Date(), limit = 20)
     passCompletion: longForm.passCompletion,
     topScorers,
     formMomentum: round(formMomentum, 4),
-    confidence: round(clamp(0.4 + rows.length * 0.025, 0, 0.9), 3),
+    confidence: round(clamp(0.34 + rows.length * 0.018 + eventMetricQuality * 0.32, 0, 0.9), 3),
+    eventMetricQuality: round(eventMetricQuality, 4),
+    estimatedMetricRate: round(estimatedMetricRate, 4),
+    realMetricMatchCount,
     shortForm: {
       ...shortForm,
       matchCount: latestSix.length
@@ -427,6 +520,8 @@ export function deriveTeamForm(matchHistory, team, now = new Date(), limit = 20)
       passesAttempted: row.passesAttempted,
       completedPasses: row.completedPasses,
       passCompletion: row.passCompletion,
+      metricSource: row.metricSource,
+      capturedMetricFields: row.capturedMetricFields,
       scorers: row.scorers
     }))
   };
@@ -451,6 +546,50 @@ function isSaneGoalCount(value) {
 function isSaneEventValue(value, min, max) {
   const number = Number(value);
   return !Number.isFinite(number) || (number >= min && number <= max);
+}
+
+function eventMetricQualityForRows(rows = []) {
+  if (!rows.length) {
+    return 0.28;
+  }
+
+  return clamp(mean(rows.map(eventMetricQualityForRow)), 0.2, 0.95);
+}
+
+function eventMetricQualityForRow(row = {}) {
+  const captured = new Set(row.capturedMetricFields || []);
+  const realMetrics = hasRealEventMetrics(row);
+  let quality = realMetrics ? 0.5 : 0.26;
+
+  if (captured.has("xg") || captured.has("homeXg") || captured.has("awayXg")) {
+    quality += realMetrics ? 0.16 : 0.05;
+  }
+
+  if (captured.has("shots") || captured.has("homeShots") || captured.has("awayShots")) {
+    quality += realMetrics ? 0.12 : 0.04;
+  }
+
+  if (captured.has("shotsOnTarget") || captured.has("homeShotsOnTarget") || captured.has("awayShotsOnTarget")) {
+    quality += realMetrics ? 0.1 : 0.03;
+  }
+
+  if (captured.has("possession")) {
+    quality += 0.05;
+  }
+
+  if (captured.has("passCompletion") || captured.has("passes")) {
+    quality += 0.04;
+  }
+
+  if (captured.has("scorers") || captured.has("assists")) {
+    quality += 0.04;
+  }
+
+  return clamp(quality, realMetrics ? 0.46 : 0.22, realMetrics ? 0.95 : 0.42);
+}
+
+function hasRealEventMetrics(row = {}) {
+  return Boolean(row.metricSource && row.metricSource !== "score-derived-estimates");
 }
 
 function teamIdentityKeys(team) {

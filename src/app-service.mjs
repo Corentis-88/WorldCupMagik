@@ -5,6 +5,7 @@ import { buildBetRecommendations, buildMostLikelyPicks } from "./portfolio-build
 import { fetchFixturesWithDiagnostics } from "./providers/fixtures-provider.mjs";
 import { fetchNewsArticlesWithDiagnostics } from "./providers/news-provider.mjs";
 import { fetchOddsSnapshotWithDiagnostics } from "./providers/odds-provider.mjs";
+import { fetchPostMatchStatsWithDiagnostics } from "./providers/post-match-stats-provider.mjs";
 import { fetchSquadDepthWithDiagnostics } from "./providers/squad-provider.mjs";
 import { fetchTeamStatsWithDiagnostics } from "./providers/stats-provider.mjs";
 import { fetchHeatSnapshotsWithDiagnostics } from "./providers/weather-provider.mjs";
@@ -113,6 +114,17 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
     now
   });
   sourceDiagnostics.push(...statsResult.diagnostics);
+  const postMatchResult = await fetchPostMatchStatsWithDiagnostics({
+    providerConfig: engineState.providers.postMatchStats,
+    fixtures: liveFixtures,
+    now
+  });
+  sourceDiagnostics.push(...postMatchResult.diagnostics);
+
+  if (postMatchResult.records.length) {
+    await upsertJsonRecords(["data", "post-match-stats.json"], postMatchResult.records, postMatchRecordKey, 2000);
+  }
+
   const postMatchStats = await loadPostMatchStats();
   const liveMatchHistory = [
     ...(statsResult.matchHistory || []),
@@ -146,6 +158,11 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
 
   if (baseTeamStats.length) {
     await writeJson(["data", "team-stats.json"], baseTeamStats);
+    await writeJson(["data", "team-stats-latest.json"], {
+      createdAt: now.toISOString(),
+      providerMode: engineState.providers.stats?.mode || "self-gather",
+      teams: baseTeamStats
+    });
   }
 
   const preScanTeamStats = buildTeamStatsWithIntelligence({
@@ -287,6 +304,7 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
     playerStats: allPlayerStats,
     newsArticles,
     teamStats,
+    postMatchStats,
     sourceDiagnostics
   });
   const scan = {
@@ -311,6 +329,8 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
       newsArticles: newsArticles.length,
       teamStats: teamStats.length,
       matchHistoryRecords: statsResult.matchHistory?.length || 0,
+      postMatchStatsCollected: postMatchResult.records.length,
+      postMatchStatsRecords: postMatchStats.length,
       outcomeRecordsSettled: outcomeSettlement.insertedCount,
       predictionReflectionsSettled: reflectionRefresh.insertedCount,
       intelligenceObservations: intelligence.observations.length,
@@ -358,12 +378,12 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
   await writeJson(["data", "bookmaker-offer-ranking-latest.json"], offerRanking);
   await writeJson(["data", "survivability-market-coverage-latest.json"], survivabilityMarketCoverage);
   await writeJson(["data", "app-scan-latest.json"], scan);
-  await appendJsonRecords(["data", "app-scans.json"], [scan], 1000);
+  await appendJsonRecords(["data", "app-scans.json"], [scan], 240);
 
   return scan;
 }
 
-function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, heatRecords = [], allHeatSnapshots = [], squadDepthRecords = [], allSquadDepthRecords = [], playerStats = [], newsArticles, teamStats, sourceDiagnostics }) {
+function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, heatRecords = [], allHeatSnapshots = [], squadDepthRecords = [], allSquadDepthRecords = [], playerStats = [], newsArticles, teamStats, postMatchStats = [], sourceDiagnostics }) {
   const sourceErrors = sourceDiagnostics.filter((item) => item.status === "error").length;
   const sourceEmpty = sourceDiagnostics.filter((item) => item.status === "empty").length;
   const sourceOk = sourceDiagnostics.filter((item) => item.status === "ok").length;
@@ -394,6 +414,29 @@ function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, 
     ? (selectedTeamLabels.length - missingHeatMemoryTeams.length) / selectedTeamLabels.length
     : 0;
   const selectedFixtureIds = new Set(scanFixtures.map((fixture) => fixture.id));
+  const postMatchTeamKeys = new Set(postMatchStats.flatMap((record) => [record.homeTeam, record.awayTeam]).map(normalizeName).filter(Boolean));
+  const postMatchFixtureIds = new Set(postMatchStats.map((record) => record.fixtureId).filter(Boolean));
+  const realEventTeamCoverage = selectedTeams.size
+    ? [...selectedTeams].filter((team) => postMatchTeamKeys.has(team)).length / selectedTeams.size
+    : 0;
+  const selectedPostMatchFixtureCoverage = scanFixtures.length
+    ? scanFixtures.filter((fixture) => postMatchFixtureIds.has(fixture.id)).length / scanFixtures.length
+    : 0;
+  const eventMetricQualities = teamStats
+    .filter((team) => selectedTeams.has(normalizeName(team.team)))
+    .map((team) => Number(team.eventMetricQuality || team.formMemory?.eventMetricQuality || team.intelligenceCoverage?.eventMetricQuality || 0.34));
+  const averageEventMetricQuality = eventMetricQualities.length ? eventMetricQualities.reduce((total, value) => total + value, 0) / eventMetricQualities.length : 0;
+  const estimatedMetricOnlyTeams = teamStats
+    .filter((team) => selectedTeams.has(normalizeName(team.team)))
+    .filter((team) => Number(team.realMetricMatchCount || team.formMemory?.realMetricMatchCount || team.intelligenceCoverage?.realMetricMatchCount || 0) <= 0)
+    .map((team) => team.team)
+    .sort();
+  const playerShotCoverage = playerStats.length
+    ? playerStats.filter((record) => Number(record.shots || 0) > 0 || Number(record.shotsOnTarget || 0) > 0).length / playerStats.length
+    : 0;
+  const playerAssistCoverage = playerStats.length
+    ? playerStats.filter((record) => Number(record.assists || 0) > 0 || Number(record.assistMatches || 0) > 0).length / playerStats.length
+    : 0;
   const fixtureOddsCoverage = scanFixtures.length
     ? new Set(allOddsSnapshots.filter((record) => selectedFixtureIds.has(record.fixtureId)).map((record) => record.fixtureId)).size / scanFixtures.length
     : 0;
@@ -407,12 +450,15 @@ function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, 
   const squadDepthCoverage = selectedTeams.size
     ? [...selectedTeams].filter((team) => squadTeams.has(team)).length / selectedTeams.size
     : 0;
-  const readiness = scanFixtures.length
+  const baseReady = scanFixtures.length
     && oddsRecords.length
     && teamStats.length
-    && teamTwentyMatchCoverage >= 1
+    && teamTwentyMatchCoverage >= 1;
+  const readiness = baseReady && (realEventTeamCoverage >= 0.45 || averageEventMetricQuality >= 0.52)
     ? "ready"
-    : "collecting";
+    : baseReady
+      ? "estimated-event-data"
+      : "collecting";
 
   return {
     readiness,
@@ -431,8 +477,15 @@ function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, 
     heatHistoryRecords: allHeatSnapshots.length,
     squadDepthHistoryRecords: allSquadDepthRecords.length,
     playerStatsRecords: playerStats.length,
+    playerShotCoverage: round(playerShotCoverage, 3),
+    playerAssistCoverage: round(playerAssistCoverage, 3),
     newsArticleCount: newsArticles.length,
     teamStatsCount: teamStats.length,
+    postMatchStatsRecords: postMatchStats.length,
+    realPostMatchTeamCoverage: round(realEventTeamCoverage, 3),
+    selectedPostMatchFixtureCoverage: round(selectedPostMatchFixtureCoverage, 3),
+    averageEventMetricQuality: round(averageEventMetricQuality, 3),
+    estimatedMetricOnlyTeams: estimatedMetricOnlyTeams.slice(0, 16),
     teamsWithRecentMatches,
     requiredTeamCount: selectedTeamLabels.length,
     teamsWithTwentyMatchSamples,
@@ -451,8 +504,10 @@ function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, 
     missingHeatMemoryTeams: missingHeatMemoryTeams.slice(0, 16),
     fixtureNewsCoverage: round(fixtureNewsCoverage, 3),
     message: readiness === "ready"
-      ? "Real public-web data was gathered and scored. Source misses are recorded instead of filled with made-up data."
-      : "The database is still collecting real public-web data, including full 20-match team samples. Missing sources are visible in source health; no fake bets are generated."
+      ? "Real public-web data was gathered and scored, including post-match event actuals where available."
+      : readiness === "estimated-event-data"
+        ? "Fixture, odds, and 20-match team samples are present, but some xG/shot inputs are still score-derived estimates and are discounted in scoring."
+        : "The database is still collecting real public-web data, including full 20-match team samples. Missing sources are visible in source health; no fake bets are generated."
   };
 }
 
@@ -928,6 +983,18 @@ async function persistPlayerStats(statsResult) {
 
 function matchHistoryKey(match) {
   return `${match.date}|${normalizeName(match.homeTeam)}|${normalizeName(match.awayTeam)}|${match.homeGoals}-${match.awayGoals}`;
+}
+
+function postMatchRecordKey(record) {
+  if (record.sourceGameId) {
+    return `fox:${record.sourceGameId}`;
+  }
+
+  if (record.fixtureId) {
+    return `fixture:${record.fixtureId}`;
+  }
+
+  return matchHistoryKey(record);
 }
 
 function clampNumber(value, min, max) {

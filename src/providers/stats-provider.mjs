@@ -986,6 +986,10 @@ function deriveTeamStats(team, matchHistory, now, providerConfig = {}, profile =
       statsCompleteness: 0.22,
       sourceMatchCount: 0,
       sourceReliability: 0,
+      metricSource: "missing-public-match-sample",
+      eventMetricQuality: 0.22,
+      estimatedMetricRate: 1,
+      realMetricMatchCount: 0,
       manager: profile?.manager || "",
       captain: profile?.captain || "",
       tacticalProfile: inferTacticalProfile({
@@ -1037,6 +1041,15 @@ function deriveTeamStats(team, matchHistory, now, providerConfig = {}, profile =
     transitionThreat: clamp(50 + goalDiff * 7 + Math.max(0, xgDiff) * 8, 30, 80),
     passCompletion
   });
+  const eventMetricQuality = 0.34;
+  const statsCompleteness = clamp(
+    0.28
+    + Math.min(0.36, matches.length * 0.018)
+    + eventMetricQuality * 0.22
+    + Number(profile?.profileConfidence || 0.2) * 0.08,
+    0,
+    0.72
+  );
 
   return {
     team,
@@ -1058,7 +1071,7 @@ function deriveTeamStats(team, matchHistory, now, providerConfig = {}, profile =
     transitionThreat: round(clamp(50 + goalDiff * 7 + Math.max(0, xgDiff) * 8, 30, 80), 1),
     keeperForm: round(clamp(52 - longForm.goalsAgainst * 4.5 + Math.max(0, 11 - shotsAgainst) * 1.5, 30, 80), 1),
     rating: round(1650 + pointsPerGame * 34 + goalDiff * 24 + xgDiff * 18 + formTrend * 28, 1),
-    statsCompleteness: round(clamp(0.32 + matches.length * 0.035, 0, 0.92), 3),
+    statsCompleteness: round(statsCompleteness, 3),
     sourceMatchCount: matches.length,
     sourceMatchTarget: maxMatches,
     sourceReliability: 0.75,
@@ -1068,6 +1081,9 @@ function deriveTeamStats(team, matchHistory, now, providerConfig = {}, profile =
     profileSourceUrl: profile?.sourceUrl || "",
     profileConfidence: round(Number(profile?.profileConfidence || 0.2), 3),
     metricSource: "score-derived-estimates",
+    eventMetricQuality,
+    estimatedMetricRate: 1,
+    realMetricMatchCount: 0,
     capturedMetricFields: ["date", "homeTeam", "awayTeam", "homeGoals", "awayGoals"],
     derivedMetricFields: ["xgFor", "xgAgainst", "shotsFor", "shotsAgainst", "shotsOnTargetFor", "shotsOnTargetAgainst", "possession", "passesAttempted", "completedPasses", "passCompletion", "formation", "styleOfPlay"],
     tacticalProfile,

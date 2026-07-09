@@ -5,6 +5,7 @@ import {
   buildOddsMovementSummaries,
   buildScanIntelligence,
   buildTeamStatsWithIntelligence,
+  compactIntelligenceRun,
   deriveTeamForm,
   outcomeLearningAdjustment
 } from "../src/intelligence-memory.mjs";
@@ -32,6 +33,41 @@ test("derives recent team form from local match history", () => {
   assert.ok(form.matchCount >= 2);
   assert.ok(form.pointsPerGame > 1);
   assert.ok(form.confidence > 0.4);
+});
+
+test("compact intelligence history stores summaries instead of full team snapshots", () => {
+  const compact = compactIntelligenceRun({
+    createdAt: "2026-07-09T02:17:00.000Z",
+    teamIntelligence: [{
+      team: "Brazil",
+      learnedEdge: 0.21,
+      dataConfidence: 0.78,
+      eventMetricQuality: 0.71,
+      intelligenceCoverage: {
+        matchWindowAvailable: 20,
+        realMetricMatchCount: 4
+      },
+      reasons: ["strong form", "heat fit", "market support", "extra reason"]
+    }, {
+      team: "Scotland",
+      learnedEdge: -0.14,
+      dataConfidence: 0.48,
+      intelligenceCoverage: {
+        matchWindowAvailable: 20,
+        realMetricMatchCount: 0
+      },
+      reasons: ["thin event data"]
+    }],
+    observations: [{ id: "obs_1" }],
+    marketMovements: [{ id: "move_1" }]
+  });
+
+  assert.equal(compact.teamCount, 2);
+  assert.equal(compact.observationCount, 1);
+  assert.equal(compact.estimatedEventOnlyTeamCount, 1);
+  assert.equal(compact.topPositiveEdges[0].team, "Brazil");
+  assert.equal(compact.topPositiveEdges[0].reasons.length, 3);
+  assert.equal(compact.teams, undefined);
 });
 
 test("20-match intelligence keeps long form and short momentum separate", () => {
@@ -274,6 +310,36 @@ test("outcome learning builds calibration buckets from settled probabilities", (
   assert.equal(learning.calibration.probabilityBand["60-69"].count, 10);
   assert.equal(learning.calibration.probabilityBand["60-69"].winRate, 0.6);
   assert.ok(Number.isFinite(learning.calibration.overall.brierScore));
+});
+
+test("outcome learning deduplicates repeated bookmaker snapshots for the same settled selection", () => {
+  const outcomes = [
+    {
+      fixtureId: "fixture_1",
+      market: "match_winner",
+      outcome: "Brazil",
+      selectionLabel: "Brazil to win",
+      bookmaker: "A",
+      status: "won",
+      modelProbability: 0.68,
+      settledAt: "2026-07-01T23:00:00.000Z"
+    },
+    {
+      fixtureId: "fixture_1",
+      market: "match_winner",
+      outcome: "Brazil",
+      selectionLabel: "Brazil to win",
+      bookmaker: "B",
+      status: "won",
+      modelProbability: 0.7,
+      settledAt: "2026-07-01T23:10:00.000Z"
+    }
+  ];
+  const learning = buildOutcomeLearning(outcomes);
+
+  assert.equal(learning.outcomeCount, 1);
+  assert.equal(learning.calibration.market.match_winner.count, 1);
+  assert.equal(learning.calibration.market.match_winner.averageModelProbability, 0.7);
 });
 
 test("prediction reflections compare expected shape with actual xG shots heat and lineups", () => {

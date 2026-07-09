@@ -1,272 +1,31 @@
 [
   {
-    "id": "match_actual_fixture_a89ee8da",
-    "fixtureId": "fixture_a89ee8da",
-    "date": "2026-06-13T19:00:00.000Z",
-    "fixtureDate": "2026-06-13T19:00:00.000Z",
-    "homeTeam": "Qatar",
-    "awayTeam": "Switzerland",
-    "homeGoals": 1,
-    "awayGoals": 1,
-    "homeXg": 0.56,
-    "awayXg": 3.09,
-    "homeShots": 5,
-    "awayShots": 27,
-    "homeShotsOnTarget": 3,
-    "awayShotsOnTarget": 10,
-    "homePossession": 30,
-    "awayPossession": 70,
-    "homePassCompletion": 0.74,
-    "awayPassCompletion": 0.93,
-    "homeCorners": 3,
-    "awayCorners": 10,
-    "homeOffsides": 0,
-    "awayOffsides": 1,
-    "homeFouls": 11,
-    "awayFouls": 11,
-    "homeBlocks": 9,
-    "awayBlocks": 0,
-    "homeClearances": 30,
-    "awayClearances": 22,
-    "homeKeeperSaves": 7,
-    "awayKeeperSaves": 3,
-    "homeYellowCards": 2,
-    "awayYellowCards": 1,
-    "homeRedCards": 0,
-    "awayRedCards": 0,
-    "homeScorers": [
-      {
-        "name": "Boualem Khoukhi",
-        "minute": 95,
-        "goals": 1,
-        "order": 2
-      }
-    ],
-    "awayScorers": [
-      {
-        "name": "Breel Embolo",
-        "minute": 17,
-        "goals": 1,
-        "order": 1,
-        "penalty": true
-      }
-    ],
-    "provider": "post-match-stats",
-    "source": "FOX Sports boxscore",
-    "sourceType": "public-web",
-    "metricSource": "fox-sports-boxscore",
-    "capturedMetricFields": [
-      "score",
-      "xg",
-      "shots",
-      "shotsOnTarget",
-      "possession",
-      "passCompletion",
-      "corners",
-      "offsides",
-      "fouls",
-      "blocks",
-      "clearances",
-      "keeperSaves",
-      "cards",
-      "scorers"
-    ],
-    "derivedMetricFields": [],
-    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-qatar-vs-switzerland-jun-13-2026-game-boxscore-647621",
-    "createdAt": "2026-06-14T07:30:00.000Z"
-  },
-  {
-    "id": "match_actual_fixture_b5106f3a",
-    "fixtureId": "fixture_b5106f3a",
-    "date": "2026-06-13T22:00:00.000Z",
-    "fixtureDate": "2026-06-13T22:00:00.000Z",
-    "homeTeam": "Brazil",
-    "awayTeam": "Morocco",
-    "homeGoals": 1,
-    "awayGoals": 1,
-    "homeXg": 0.56,
-    "awayXg": 1.35,
-    "homeShots": 8,
-    "awayShots": 13,
-    "homeShotsOnTarget": 5,
-    "awayShotsOnTarget": 4,
-    "homePossession": 54,
-    "awayPossession": 46,
-    "homePassCompletion": 0.88,
-    "awayPassCompletion": 0.88,
-    "homeCorners": 6,
-    "awayCorners": 2,
-    "homeOffsides": 0,
-    "awayOffsides": 1,
-    "homeFouls": 16,
-    "awayFouls": 14,
-    "homeBlocks": 6,
-    "awayBlocks": 2,
-    "homeClearances": 32,
-    "awayClearances": 23,
-    "homeKeeperSaves": 3,
-    "awayKeeperSaves": 3,
-    "homeYellowCards": 2,
-    "awayYellowCards": 0,
-    "homeRedCards": 0,
-    "awayRedCards": 0,
-    "homeScorers": [
-      {
-        "name": "Vinicius Junior",
-        "minute": 32,
-        "goals": 1,
-        "order": 2
-      }
-    ],
-    "awayScorers": [
-      {
-        "name": "Ismael Saibari",
-        "minute": 21,
-        "goals": 1,
-        "order": 1
-      }
-    ],
-    "provider": "post-match-stats",
-    "source": "FOX Sports boxscore",
-    "sourceType": "public-web",
-    "metricSource": "fox-sports-boxscore",
-    "capturedMetricFields": [
-      "score",
-      "xg",
-      "shots",
-      "shotsOnTarget",
-      "possession",
-      "passCompletion",
-      "corners",
-      "offsides",
-      "fouls",
-      "blocks",
-      "clearances",
-      "keeperSaves",
-      "cards",
-      "scorers"
-    ],
-    "derivedMetricFields": [],
-    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-brazil-vs-morocco-jun-13-2026-game-boxscore-647622",
-    "createdAt": "2026-06-14T07:30:00.000Z"
-  },
-  {
-    "id": "match_actual_fixture_fc94e491",
-    "fixtureId": "fixture_fc94e491",
-    "date": "2026-06-14T01:00:00.000Z",
-    "fixtureDate": "2026-06-14T01:00:00.000Z",
-    "homeTeam": "Haiti",
-    "awayTeam": "Scotland",
+    "id": "match_actual_fox_a7a29d0",
+    "fixtureId": "",
+    "sourceGameId": 607926,
+    "date": "2026-07-07T12:00:00.000Z",
+    "fixtureDate": "2026-07-07T12:00:00.000Z",
+    "homeTeam": "Switzerland",
+    "awayTeam": "Colombia",
     "homeGoals": 0,
-    "awayGoals": 1,
-    "homeXg": 0.71,
-    "awayXg": 1.16,
-    "homeShots": 13,
-    "awayShots": 8,
-    "homeShotsOnTarget": 3,
+    "awayGoals": 0,
+    "homeXg": 0.58,
+    "awayXg": 1.17,
+    "homeShots": 7,
+    "awayShots": 15,
+    "homeShotsOnTarget": 2,
     "awayShotsOnTarget": 3,
-    "homePossession": 50,
-    "awayPossession": 50,
+    "homePossession": 53,
+    "awayPossession": 47,
     "homePassCompletion": 0.89,
-    "awayPassCompletion": 0.82,
-    "homeCorners": 4,
-    "awayCorners": 3,
-    "homeOffsides": 3,
-    "awayOffsides": 1,
+    "awayPassCompletion": 0.87,
+    "homeCorners": 0,
+    "awayCorners": 0,
     "homeFouls": 23,
     "awayFouls": 21,
-    "homeBlocks": 2,
-    "awayBlocks": 4,
-    "homeClearances": 33,
-    "awayClearances": 28,
-    "homeKeeperSaves": 2,
-    "awayKeeperSaves": 1,
-    "homeYellowCards": 1,
-    "awayYellowCards": 3,
-    "homeRedCards": 0,
-    "awayRedCards": 0,
+    "homeClearances": 45,
+    "awayClearances": 36,
     "homeScorers": [],
-    "awayScorers": [
-      {
-        "name": "John McGinn",
-        "minute": 28,
-        "goals": 1,
-        "order": 1
-      }
-    ],
-    "provider": "post-match-stats",
-    "source": "FOX Sports boxscore",
-    "sourceType": "public-web",
-    "metricSource": "fox-sports-boxscore",
-    "capturedMetricFields": [
-      "score",
-      "xg",
-      "shots",
-      "shotsOnTarget",
-      "possession",
-      "passCompletion",
-      "corners",
-      "offsides",
-      "fouls",
-      "blocks",
-      "clearances",
-      "keeperSaves",
-      "cards",
-      "scorers"
-    ],
-    "derivedMetricFields": [],
-    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-haiti-vs-scotland-jun-13-2026-game-boxscore-647623",
-    "createdAt": "2026-06-14T07:30:00.000Z"
-  },
-  {
-    "id": "match_actual_fixture_492bb0c2",
-    "fixtureId": "fixture_492bb0c2",
-    "date": "2026-06-14T04:00:00.000Z",
-    "fixtureDate": "2026-06-14T04:00:00.000Z",
-    "homeTeam": "Australia",
-    "awayTeam": "Turkiye",
-    "homeGoals": 2,
-    "awayGoals": 0,
-    "homeXg": 0.84,
-    "awayXg": 1.6,
-    "homeShots": 8,
-    "awayShots": 28,
-    "homeShotsOnTarget": 4,
-    "awayShotsOnTarget": 7,
-    "homePossession": 37,
-    "awayPossession": 63,
-    "homePassCompletion": 0.76,
-    "awayPassCompletion": 0.92,
-    "homeCorners": 5,
-    "awayCorners": 8,
-    "homeOffsides": 1,
-    "awayOffsides": 3,
-    "homeFouls": 12,
-    "awayFouls": 4,
-    "homeBlocks": 12,
-    "awayBlocks": 1,
-    "homeClearances": 58,
-    "awayClearances": 43,
-    "homeKeeperSaves": 8,
-    "awayKeeperSaves": 2,
-    "homeYellowCards": 0,
-    "awayYellowCards": 1,
-    "homeRedCards": 0,
-    "awayRedCards": 0,
-    "homeScorers": [
-      {
-        "name": "Nestory Irankunda",
-        "minute": 27,
-        "goals": 1,
-        "order": 1
-      },
-      {
-        "name": "Connor Metcalfe",
-        "minute": 75,
-        "goals": 1,
-        "order": 2
-      }
-    ],
     "awayScorers": [],
     "provider": "post-match-stats",
     "source": "FOX Sports boxscore",
@@ -280,209 +39,1412 @@
       "possession",
       "passCompletion",
       "corners",
-      "offsides",
-      "fouls",
-      "blocks",
-      "clearances",
-      "keeperSaves",
-      "cards",
-      "scorers"
+      "fouls"
     ],
     "derivedMetricFields": [],
-    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-australia-vs-turkiye-jun-14-2026-game-boxscore-647620",
-    "createdAt": "2026-06-14T07:30:00.000Z"
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-placeholder-game-boxscore-607926",
+    "sourceReliability": 0.84,
+    "createdAt": "2026-07-09T14:39:12.861Z",
+    "updatedAt": "2026-07-09T14:39:12.861Z"
   },
   {
-    "id": "match_actual_fixture_ae576b27",
-    "fixtureId": "fixture_ae576b27",
-    "date": "2026-06-15T16:00:00.000Z",
-    "fixtureDate": "2026-06-15T16:00:00.000Z",
-    "homeTeam": "Spain",
-    "awayTeam": "Cape Verde",
-    "homeGoals": 0,
-    "awayGoals": 0,
-    "homeXg": 2.1,
-    "awayXg": 0.35,
-    "homeShots": 27,
-    "awayShots": 5,
-    "homeShotsOnTarget": 7,
-    "awayShotsOnTarget": 1,
-    "homeScorers": [],
-    "awayScorers": [],
-    "provider": "post-match-stats",
-    "source": "Public match reports",
-    "sourceType": "public-web",
-    "metricSource": "public-report-plus-derived-estimates",
-    "capturedMetricFields": [
-      "score"
-    ],
-    "derivedMetricFields": [
-      "xg",
-      "shots",
-      "shotsOnTarget"
-    ],
-    "sourceUrl": "https://www.theguardian.com/football/live/2026/jun/15/spain-v-cape-verde-world-cup-2026-live",
-    "createdAt": "2026-06-16T14:20:00.000Z"
-  },
-  {
-    "id": "match_actual_fixture_cef81942",
-    "fixtureId": "fixture_cef81942",
-    "date": "2026-06-15T19:00:00.000Z",
-    "fixtureDate": "2026-06-15T19:00:00.000Z",
-    "homeTeam": "Belgium",
+    "id": "match_actual_fox_1971ce4c",
+    "fixtureId": "",
+    "sourceGameId": 607925,
+    "date": "2026-07-07T12:00:00.000Z",
+    "fixtureDate": "2026-07-07T12:00:00.000Z",
+    "homeTeam": "Argentina",
     "awayTeam": "Egypt",
-    "homeGoals": 1,
-    "awayGoals": 1,
-    "homeXg": 1.25,
-    "awayXg": 1.2,
-    "homeShots": 13,
-    "awayShots": 12,
-    "homeShotsOnTarget": 4,
-    "awayShotsOnTarget": 5,
-    "homeScorers": [
-      {
-        "name": "Mohamed Hany",
-        "minute": 66,
-        "goals": 1,
-        "order": 2,
-        "ownGoal": true
-      }
-    ],
-    "awayScorers": [
-      {
-        "name": "Emam Ashour",
-        "minute": 19,
-        "goals": 1,
-        "order": 1
-      }
-    ],
-    "provider": "post-match-stats",
-    "source": "Public match reports",
-    "sourceType": "public-web",
-    "metricSource": "public-report-plus-derived-estimates",
-    "capturedMetricFields": [
-      "score",
-      "scorers"
-    ],
-    "derivedMetricFields": [
-      "xg",
-      "shots",
-      "shotsOnTarget"
-    ],
-    "sourceUrl": "https://www.theguardian.com/football/2026/jun/15/belgium-egypt-world-cup-2026-group-g-match-report",
-    "createdAt": "2026-06-16T14:20:00.000Z"
-  },
-  {
-    "id": "match_actual_fixture_37d4ba98",
-    "fixtureId": "fixture_37d4ba98",
-    "date": "2026-06-15T22:00:00.000Z",
-    "fixtureDate": "2026-06-15T22:00:00.000Z",
-    "homeTeam": "Saudi Arabia",
-    "awayTeam": "Uruguay",
-    "homeGoals": 1,
-    "awayGoals": 1,
-    "homeXg": 0.85,
-    "awayXg": 1.5,
-    "homeShots": 9,
-    "awayShots": 15,
-    "homeShotsOnTarget": 3,
-    "awayShotsOnTarget": 6,
-    "homeScorers": [
-      {
-        "name": "Abdulelah Al-Amri",
-        "minute": 31,
-        "goals": 1,
-        "order": 1
-      }
-    ],
-    "awayScorers": [
-      {
-        "name": "Maxi Araujo",
-        "minute": 80,
-        "goals": 1,
-        "order": 2
-      }
-    ],
-    "provider": "post-match-stats",
-    "source": "Public match reports",
-    "sourceType": "public-web",
-    "metricSource": "public-report-plus-derived-estimates",
-    "capturedMetricFields": [
-      "score",
-      "scorers"
-    ],
-    "derivedMetricFields": [
-      "xg",
-      "shots",
-      "shotsOnTarget"
-    ],
-    "sourceUrl": "https://www.theguardian.com/football/live/2026/jun/15/saudi-arabia-v-uruguay-world-cup-2026-live",
-    "createdAt": "2026-06-16T14:20:00.000Z"
-  },
-  {
-    "id": "match_actual_fixture_883a13d3",
-    "fixtureId": "fixture_883a13d3",
-    "date": "2026-06-16T01:00:00.000Z",
-    "fixtureDate": "2026-06-16T01:00:00.000Z",
-    "homeTeam": "Iran",
-    "awayTeam": "New Zealand",
-    "homeGoals": 2,
+    "homeGoals": 3,
     "awayGoals": 2,
-    "homeXg": 1.65,
-    "awayXg": 1.85,
+    "homeXg": 2.62,
+    "awayXg": 0.59,
     "homeShots": 17,
-    "awayShots": 14,
-    "homeShotsOnTarget": 4,
-    "awayShotsOnTarget": 8,
+    "awayShots": 4,
+    "homeShotsOnTarget": 7,
+    "awayShotsOnTarget": 2,
+    "homePossession": 58,
+    "awayPossession": 42,
+    "homePassCompletion": 0.91,
+    "awayPassCompletion": 0.84,
+    "homeCorners": 6,
+    "awayCorners": 1,
+    "homeFouls": 13,
+    "awayFouls": 10,
+    "homeClearances": 20,
+    "awayClearances": 49,
     "homeScorers": [
       {
-        "name": "Ramin Rezaeian",
-        "minute": 43,
-        "goals": 1,
-        "order": 2
-      },
-      {
-        "name": "Mohammad Mohebbi",
-        "minute": 72,
-        "goals": 1,
-        "order": 4
-      }
-    ],
-    "awayScorers": [
-      {
-        "name": "Eli Just",
-        "minute": 18,
+        "name": "E. Fernandez",
+        "minute": 92,
+        "minutes": [
+          92
+        ],
         "goals": 1,
         "order": 1,
         "assists": [
-          "Chris Wood"
+          "Li"
         ]
       },
       {
-        "name": "Eli Just",
-        "minute": 61,
+        "name": "L. Messi",
+        "minute": 83,
+        "minutes": [
+          83
+        ],
+        "goals": 1,
+        "order": 2,
+        "assists": [
+          "G. Montiel"
+        ]
+      },
+      {
+        "name": "C. Romero",
+        "minute": 79,
+        "minutes": [
+          79
+        ],
         "goals": 1,
         "order": 3,
         "assists": [
-          "Chris Wood"
+          "L. Messi"
+        ]
+      }
+    ],
+    "awayScorers": [
+      {
+        "name": "Mostafa Zico",
+        "minute": 67,
+        "minutes": [
+          67
+        ],
+        "goals": 1,
+        "order": 4,
+        "assists": [
+          "H. Hassan"
+        ]
+      },
+      {
+        "name": "Y. Ibrahim",
+        "minute": 15,
+        "minutes": [
+          15
+        ],
+        "goals": 1,
+        "order": 5,
+        "assists": [
+          "Marawan Attia"
         ]
       }
     ],
     "provider": "post-match-stats",
-    "source": "Public match reports",
+    "source": "FOX Sports boxscore",
     "sourceType": "public-web",
-    "metricSource": "public-report-plus-derived-estimates",
+    "metricSource": "fox-sports-boxscore",
     "capturedMetricFields": [
       "score",
+      "xg",
       "shots",
       "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "fouls",
+      "scorers",
+      "assists"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-placeholder-game-boxscore-607925",
+    "sourceReliability": 0.84,
+    "createdAt": "2026-07-09T14:39:12.861Z",
+    "updatedAt": "2026-07-09T14:39:12.861Z"
+  },
+  {
+    "id": "match_actual_fox_5b65bf2c",
+    "fixtureId": "",
+    "sourceGameId": 607924,
+    "date": "2026-07-06T12:00:00.000Z",
+    "fixtureDate": "2026-07-06T12:00:00.000Z",
+    "homeTeam": "United States",
+    "awayTeam": "Belgium",
+    "homeGoals": 1,
+    "awayGoals": 4,
+    "homeXg": 0.54,
+    "awayXg": 1.97,
+    "homeShots": 6,
+    "awayShots": 15,
+    "homeShotsOnTarget": 2,
+    "awayShotsOnTarget": 7,
+    "homePossession": 57,
+    "awayPossession": 43,
+    "homePassCompletion": 0.89,
+    "awayPassCompletion": 0.83,
+    "homeCorners": 3,
+    "awayCorners": 5,
+    "homeFouls": 10,
+    "awayFouls": 9,
+    "homeClearances": 35,
+    "awayClearances": 23,
+    "homeScorers": [
+      {
+        "name": "M. Tillman",
+        "minute": 31,
+        "minutes": [
+          31
+        ],
+        "goals": 1,
+        "order": 4,
+        "assists": []
+      }
+    ],
+    "awayScorers": [
+      {
+        "name": "R. Lukaku",
+        "minute": 92,
+        "minutes": [
+          92
+        ],
+        "goals": 1,
+        "order": 1,
+        "assists": [
+          "H. Vanaken"
+        ]
+      },
+      {
+        "name": "H. Vanaken",
+        "minute": 57,
+        "minutes": [
+          57
+        ],
+        "goals": 1,
+        "order": 2,
+        "assists": [
+          "C. De Ketelaere"
+        ]
+      },
+      {
+        "name": "C. De Ketelaere",
+        "minute": 33,
+        "minutes": [
+          33,
+          9
+        ],
+        "goals": 2,
+        "order": 3,
+        "assists": [
+          "L. Trossard",
+          "N. Raskin"
+        ]
+      }
+    ],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "fouls",
+      "scorers",
+      "assists"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-united-states-vs-belgium-jul-06-2026-game-boxscore-607924",
+    "sourceReliability": 0.84,
+    "createdAt": "2026-07-09T14:39:12.861Z",
+    "updatedAt": "2026-07-09T14:39:12.861Z"
+  },
+  {
+    "id": "match_actual_fox_8ad986a4",
+    "fixtureId": "",
+    "sourceGameId": 607923,
+    "date": "2026-07-06T12:00:00.000Z",
+    "fixtureDate": "2026-07-06T12:00:00.000Z",
+    "homeTeam": "Portugal",
+    "awayTeam": "Spain",
+    "homeGoals": 0,
+    "awayGoals": 1,
+    "homeXg": 1.1,
+    "awayXg": 1.6,
+    "homeShots": 10,
+    "awayShots": 15,
+    "homeShotsOnTarget": 3,
+    "awayShotsOnTarget": 6,
+    "homePossession": 44,
+    "awayPossession": 56,
+    "homePassCompletion": 0.85,
+    "awayPassCompletion": 0.91,
+    "homeCorners": 0,
+    "awayCorners": 0,
+    "homeFouls": 0,
+    "awayFouls": 0,
+    "homeClearances": 25,
+    "awayClearances": 28,
+    "homeScorers": [],
+    "awayScorers": [
+      {
+        "name": "M. Merino",
+        "minute": 90,
+        "minutes": [
+          90
+        ],
+        "goals": 1,
+        "order": 1,
+        "assists": [
+          "F. Torres"
+        ]
+      }
+    ],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "fouls",
+      "scorers",
+      "assists"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-placeholder-game-boxscore-607923",
+    "sourceReliability": 0.84,
+    "createdAt": "2026-07-09T14:39:12.861Z",
+    "updatedAt": "2026-07-09T14:39:12.861Z"
+  },
+  {
+    "id": "match_actual_fox_1305a8fb",
+    "fixtureId": "",
+    "sourceGameId": 607922,
+    "date": "2026-07-05T12:00:00.000Z",
+    "fixtureDate": "2026-07-05T12:00:00.000Z",
+    "homeTeam": "Mexico",
+    "awayTeam": "England",
+    "homeGoals": 1,
+    "awayGoals": 2,
+    "homeXg": 2.9,
+    "awayXg": 2.32,
+    "homeShots": 23,
+    "awayShots": 6,
+    "homeShotsOnTarget": 5,
+    "awayShotsOnTarget": 0,
+    "homePossession": 66,
+    "awayPossession": 34,
+    "homePassCompletion": 0.93,
+    "awayPassCompletion": 0.83,
+    "homeCorners": 12,
+    "awayCorners": 2,
+    "homeFouls": 0,
+    "awayFouls": 0,
+    "homeClearances": 18,
+    "awayClearances": 51,
+    "homeScorers": [
+      {
+        "name": "J. Quinones",
+        "minute": 42,
+        "minutes": [
+          42
+        ],
+        "goals": 1,
+        "order": 1,
+        "assists": []
+      }
+    ],
+    "awayScorers": [
+      {
+        "name": "J. Bellingham",
+        "minute": 38,
+        "minutes": [
+          38,
+          36
+        ],
+        "goals": 2,
+        "order": 2,
+        "assists": [
+          "H. Kane",
+          "B. Saka"
+        ]
+      }
+    ],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "fouls",
+      "scorers",
+      "assists"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-placeholder-game-boxscore-607922",
+    "sourceReliability": 0.84,
+    "createdAt": "2026-07-09T14:39:12.861Z",
+    "updatedAt": "2026-07-09T14:39:12.861Z"
+  },
+  {
+    "id": "match_actual_fox_20e7fb96",
+    "fixtureId": "",
+    "sourceGameId": 607921,
+    "date": "2026-07-05T12:00:00.000Z",
+    "fixtureDate": "2026-07-05T12:00:00.000Z",
+    "homeTeam": "Brazil",
+    "awayTeam": "Norway",
+    "homeGoals": 0,
+    "awayGoals": 2,
+    "homeXg": 2.3,
+    "awayXg": 0.76,
+    "homeShots": 12,
+    "awayShots": 9,
+    "homeShotsOnTarget": 4,
+    "awayShotsOnTarget": 5,
+    "homePossession": 34,
+    "awayPossession": 66,
+    "homePassCompletion": 0.88,
+    "awayPassCompletion": 0.92,
+    "homeCorners": 0,
+    "awayCorners": 0,
+    "homeFouls": 0,
+    "awayFouls": 0,
+    "homeClearances": 0,
+    "awayClearances": 0,
+    "homeScorers": [],
+    "awayScorers": [
+      {
+        "name": "E. Haaland",
+        "minute": 90,
+        "minutes": [
+          90,
+          79
+        ],
+        "goals": 2,
+        "order": 1,
+        "assists": [
+          "A. Schjelderup"
+        ]
+      }
+    ],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "fouls",
+      "scorers",
+      "assists"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-placeholder-game-boxscore-607921",
+    "sourceReliability": 0.84,
+    "createdAt": "2026-07-09T14:39:12.861Z",
+    "updatedAt": "2026-07-09T14:39:12.861Z"
+  },
+  {
+    "id": "match_actual_fox_fa5b18fa",
+    "fixtureId": "",
+    "sourceGameId": 607920,
+    "date": "2026-07-04T12:00:00.000Z",
+    "fixtureDate": "2026-07-04T12:00:00.000Z",
+    "homeTeam": "Canada",
+    "awayTeam": "Morocco",
+    "homeGoals": 0,
+    "awayGoals": 3,
+    "homeXg": 0.84,
+    "awayXg": 0.9,
+    "homeShots": 10,
+    "awayShots": 5,
+    "homeShotsOnTarget": 3,
+    "awayShotsOnTarget": 4,
+    "homePossession": 44,
+    "awayPossession": 56,
+    "homePassCompletion": 0.79,
+    "awayPassCompletion": 0.85,
+    "homeCorners": 11,
+    "awayCorners": 1,
+    "homeFouls": 23,
+    "awayFouls": 14,
+    "homeClearances": 26,
+    "awayClearances": 51,
+    "homeScorers": [],
+    "awayScorers": [
+      {
+        "name": "S. Rahimi",
+        "minute": 97,
+        "minutes": [
+          97
+        ],
+        "goals": 1,
+        "order": 1,
+        "assists": [
+          "B. Diaz"
+        ]
+      },
+      {
+        "name": "A. Ounahi",
+        "minute": 82,
+        "minutes": [
+          82,
+          50
+        ],
+        "goals": 2,
+        "order": 2,
+        "assists": [
+          "B. Diaz",
+          "A. Hakimi"
+        ]
+      }
+    ],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "fouls",
+      "scorers",
+      "assists"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-placeholder-game-boxscore-607920",
+    "sourceReliability": 0.84,
+    "createdAt": "2026-07-09T14:39:12.861Z",
+    "updatedAt": "2026-07-09T14:39:12.861Z"
+  },
+  {
+    "id": "match_actual_fox_693231cf",
+    "fixtureId": "",
+    "sourceGameId": 607919,
+    "date": "2026-07-04T12:00:00.000Z",
+    "fixtureDate": "2026-07-04T12:00:00.000Z",
+    "homeTeam": "Paraguay",
+    "awayTeam": "France",
+    "homeGoals": 0,
+    "awayGoals": 0,
+    "homeXg": 0.17,
+    "awayXg": 1.29,
+    "homeShots": 5,
+    "awayShots": 15,
+    "homeShotsOnTarget": 0,
+    "awayShotsOnTarget": 0,
+    "homePossession": 24,
+    "awayPossession": 76,
+    "homePassCompletion": 0.57,
+    "awayPassCompletion": 0.9,
+    "homeCorners": 0,
+    "awayCorners": 0,
+    "homeFouls": 0,
+    "awayFouls": 0,
+    "homeClearances": 36,
+    "awayClearances": 27,
+    "homeScorers": [],
+    "awayScorers": [],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "fouls"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-placeholder-game-boxscore-607919",
+    "sourceReliability": 0.84,
+    "createdAt": "2026-07-09T14:39:12.861Z",
+    "updatedAt": "2026-07-09T14:39:12.861Z"
+  },
+  {
+    "id": "match_actual_fox_a96e07ce",
+    "fixtureId": "",
+    "sourceGameId": 607918,
+    "date": "2026-07-03T12:00:00.000Z",
+    "fixtureDate": "2026-07-03T12:00:00.000Z",
+    "homeTeam": "Argentina",
+    "awayTeam": "Cape Verde",
+    "homeGoals": 2,
+    "awayGoals": 2,
+    "homeXg": 1.96,
+    "awayXg": 0.81,
+    "homeShots": 21,
+    "awayShots": 15,
+    "homeShotsOnTarget": 10,
+    "awayShotsOnTarget": 5,
+    "homePossession": 64,
+    "awayPossession": 36,
+    "homePassCompletion": 0.93,
+    "awayPassCompletion": 0.88,
+    "homeCorners": 0,
+    "awayCorners": 0,
+    "homeFouls": 13,
+    "awayFouls": 12,
+    "homeClearances": 25,
+    "awayClearances": 34,
+    "homeScorers": [
+      {
+        "name": "Li. Martinez",
+        "minute": 92,
+        "minutes": [
+          92
+        ],
+        "goals": 1,
+        "order": 2,
+        "assists": [
+          "A. Mac Allister"
+        ]
+      },
+      {
+        "name": "L. Messi",
+        "minute": 29,
+        "minutes": [
+          29
+        ],
+        "goals": 1,
+        "order": 4,
+        "assists": [
+          "Li"
+        ]
+      }
+    ],
+    "awayScorers": [
+      {
+        "name": "S. Lopes Cabral",
+        "minute": 103,
+        "minutes": [
+          103
+        ],
+        "goals": 1,
+        "order": 1,
+        "assists": [
+          "Y. Semedo"
+        ]
+      },
+      {
+        "name": "D. Duarte",
+        "minute": 59,
+        "minutes": [
+          59
+        ],
+        "goals": 1,
+        "order": 3,
+        "assists": [
+          "R. Mendes"
+        ]
+      }
+    ],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "fouls",
+      "scorers",
+      "assists"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-placeholder-game-boxscore-607918",
+    "sourceReliability": 0.84,
+    "createdAt": "2026-07-09T14:39:12.861Z",
+    "updatedAt": "2026-07-09T14:39:12.861Z"
+  },
+  {
+    "id": "match_actual_fox_95e0ca54",
+    "fixtureId": "",
+    "sourceGameId": 607917,
+    "date": "2026-07-03T12:00:00.000Z",
+    "fixtureDate": "2026-07-03T12:00:00.000Z",
+    "homeTeam": "Colombia",
+    "awayTeam": "Ghana",
+    "homeGoals": 1,
+    "awayGoals": 0,
+    "homeXg": 2.24,
+    "awayXg": 0.28,
+    "homeShots": 20,
+    "awayShots": 8,
+    "homeShotsOnTarget": 0,
+    "awayShotsOnTarget": 0,
+    "homePossession": 62,
+    "awayPossession": 38,
+    "homePassCompletion": 0.91,
+    "awayPassCompletion": 0.85,
+    "homeCorners": 0,
+    "awayCorners": 0,
+    "homeFouls": 0,
+    "awayFouls": 0,
+    "homeClearances": 36,
+    "awayClearances": 19,
+    "homeScorers": [
+      {
+        "name": "J. Arias",
+        "minute": 14,
+        "minutes": [
+          14
+        ],
+        "goals": 1,
+        "order": 1,
+        "assists": [
+          "L. Suarez"
+        ]
+      }
+    ],
+    "awayScorers": [],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "fouls",
+      "scorers",
+      "assists"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-placeholder-game-boxscore-607917",
+    "sourceReliability": 0.84,
+    "createdAt": "2026-07-09T14:39:12.861Z",
+    "updatedAt": "2026-07-09T14:39:12.861Z"
+  },
+  {
+    "id": "match_actual_fox_169fa17f",
+    "fixtureId": "",
+    "sourceGameId": 607916,
+    "date": "2026-07-03T12:00:00.000Z",
+    "fixtureDate": "2026-07-03T12:00:00.000Z",
+    "homeTeam": "Australia",
+    "awayTeam": "Egypt",
+    "homeGoals": 0,
+    "awayGoals": 1,
+    "homeXg": 0.68,
+    "awayXg": 1.3,
+    "homeShots": 15,
+    "awayShots": 14,
+    "homeShotsOnTarget": 3,
+    "awayShotsOnTarget": 4,
+    "homePossession": 42,
+    "awayPossession": 58,
+    "homePassCompletion": 0.84,
+    "awayPassCompletion": 0.9,
+    "homeCorners": 0,
+    "awayCorners": 0,
+    "homeFouls": 0,
+    "awayFouls": 0,
+    "homeClearances": 51,
+    "awayClearances": 66,
+    "homeScorers": [],
+    "awayScorers": [
+      {
+        "name": "E. Ashour",
+        "minute": 13,
+        "minutes": [
+          13
+        ],
+        "goals": 1,
+        "order": 1,
+        "assists": [
+          "K. Hafez"
+        ]
+      }
+    ],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "fouls",
+      "scorers",
+      "assists"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-placeholder-game-boxscore-607916",
+    "sourceReliability": 0.84,
+    "createdAt": "2026-07-09T14:39:12.861Z",
+    "updatedAt": "2026-07-09T14:39:12.861Z"
+  },
+  {
+    "id": "match_actual_fox_785f0d62",
+    "fixtureId": "",
+    "sourceGameId": 607915,
+    "date": "2026-07-02T12:00:00.000Z",
+    "fixtureDate": "2026-07-02T12:00:00.000Z",
+    "homeTeam": "Spain",
+    "awayTeam": "Austria",
+    "homeGoals": 3,
+    "awayGoals": 0,
+    "homeXg": 2.25,
+    "awayXg": 0.45,
+    "homeShots": 22,
+    "awayShots": 5,
+    "homeShotsOnTarget": 0,
+    "awayShotsOnTarget": 0,
+    "homePossession": 65,
+    "awayPossession": 35,
+    "homePassCompletion": 0.91,
+    "awayPassCompletion": 0.84,
+    "homeCorners": 0,
+    "awayCorners": 0,
+    "homeFouls": 0,
+    "awayFouls": 0,
+    "homeClearances": 19,
+    "awayClearances": 31,
+    "homeScorers": [
+      {
+        "name": "M. Oyarzabal",
+        "minute": 89,
+        "minutes": [
+          89,
+          36
+        ],
+        "goals": 2,
+        "order": 1,
+        "assists": [
+          "M. Cucurella"
+        ]
+      },
+      {
+        "name": "P. Porro",
+        "minute": 66,
+        "minutes": [
+          66
+        ],
+        "goals": 1,
+        "order": 2,
+        "assists": [
+          "A. Baena"
+        ]
+      }
+    ],
+    "awayScorers": [],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "fouls",
+      "scorers",
+      "assists"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-placeholder-game-boxscore-607915",
+    "sourceReliability": 0.84,
+    "createdAt": "2026-07-09T14:39:12.861Z",
+    "updatedAt": "2026-07-09T14:39:12.861Z"
+  },
+  {
+    "id": "match_actual_fox_f1ee3a6c",
+    "fixtureId": "",
+    "sourceGameId": 607914,
+    "date": "2026-07-02T12:00:00.000Z",
+    "fixtureDate": "2026-07-02T12:00:00.000Z",
+    "homeTeam": "Portugal",
+    "awayTeam": "Croatia",
+    "homeGoals": 1,
+    "awayGoals": 1,
+    "homeXg": 2.42,
+    "awayXg": 1.37,
+    "homeShots": 15,
+    "awayShots": 13,
+    "homeShotsOnTarget": 3,
+    "awayShotsOnTarget": 7,
+    "homePossession": 62,
+    "awayPossession": 38,
+    "homePassCompletion": 0.92,
+    "awayPassCompletion": 0.85,
+    "homeCorners": 0,
+    "awayCorners": 0,
+    "homeFouls": 6,
+    "awayFouls": 11,
+    "homeClearances": 29,
+    "awayClearances": 23,
+    "homeScorers": [
+      {
+        "name": "G. Ramos",
+        "minute": 93,
+        "minutes": [
+          93
+        ],
+        "goals": 1,
+        "order": 1,
+        "assists": [
+          "R. Leao"
+        ]
+      }
+    ],
+    "awayScorers": [
+      {
+        "name": "I. Perisic",
+        "minute": 53,
+        "minutes": [
+          53
+        ],
+        "goals": 1,
+        "order": 2,
+        "assists": [
+          "J. Stanisic"
+        ]
+      }
+    ],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "fouls",
+      "scorers",
+      "assists"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-placeholder-game-boxscore-607914",
+    "sourceReliability": 0.84,
+    "createdAt": "2026-07-09T14:39:12.861Z",
+    "updatedAt": "2026-07-09T14:39:12.861Z"
+  },
+  {
+    "id": "match_actual_fox_60a0f0ca",
+    "fixtureId": "",
+    "sourceGameId": 607913,
+    "date": "2026-07-02T12:00:00.000Z",
+    "fixtureDate": "2026-07-02T12:00:00.000Z",
+    "homeTeam": "Switzerland",
+    "awayTeam": "Algeria",
+    "homeGoals": 2,
+    "awayGoals": 0,
+    "homeXg": 2.32,
+    "awayXg": 0.69,
+    "homeShots": 11,
+    "awayShots": 8,
+    "homeShotsOnTarget": 5,
+    "awayShotsOnTarget": 2,
+    "homePossession": 45,
+    "awayPossession": 55,
+    "homePassCompletion": 0.86,
+    "awayPassCompletion": 0.88,
+    "homeCorners": 0,
+    "awayCorners": 0,
+    "homeFouls": 10,
+    "awayFouls": 12,
+    "homeClearances": 43,
+    "awayClearances": 30,
+    "homeScorers": [
+      {
+        "name": "D. Ndoye",
+        "minute": 46,
+        "minutes": [
+          46
+        ],
+        "goals": 1,
+        "order": 1,
+        "assists": []
+      },
+      {
+        "name": "B. Embolo",
+        "minute": 10,
+        "minutes": [
+          10
+        ],
+        "goals": 1,
+        "order": 2,
+        "assists": [
+          "J. Manzambi"
+        ]
+      }
+    ],
+    "awayScorers": [],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "fouls",
+      "scorers",
+      "assists"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-placeholder-game-boxscore-607913",
+    "sourceReliability": 0.84,
+    "createdAt": "2026-07-09T14:39:12.861Z",
+    "updatedAt": "2026-07-09T14:39:12.861Z"
+  },
+  {
+    "id": "match_actual_fox_d6e70909",
+    "fixtureId": "",
+    "sourceGameId": 607912,
+    "date": "2026-07-01T12:00:00.000Z",
+    "fixtureDate": "2026-07-01T12:00:00.000Z",
+    "homeTeam": "England",
+    "awayTeam": "DR Congo",
+    "homeGoals": 2,
+    "awayGoals": 1,
+    "homeXg": 2.16,
+    "awayXg": 0.31,
+    "homeShots": 16,
+    "awayShots": 7,
+    "homeShotsOnTarget": 8,
+    "awayShotsOnTarget": 2,
+    "homePossession": 60,
+    "awayPossession": 40,
+    "homePassCompletion": 0.93,
+    "awayPassCompletion": 0.84,
+    "homeCorners": 5,
+    "awayCorners": 3,
+    "homeFouls": 10,
+    "awayFouls": 12,
+    "homeClearances": 17,
+    "awayClearances": 35,
+    "homeScorers": [
+      {
+        "name": "H. Kane",
+        "minute": 86,
+        "minutes": [
+          86,
+          75
+        ],
+        "goals": 2,
+        "order": 1,
+        "assists": [
+          "A. Gordon"
+        ]
+      }
+    ],
+    "awayScorers": [
+      {
+        "name": "B. Cipenga",
+        "minute": 7,
+        "minutes": [
+          7
+        ],
+        "goals": 1,
+        "order": 3,
+        "assists": [
+          "C. Mbemba"
+        ]
+      }
+    ],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "fouls",
+      "scorers",
+      "assists"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-placeholder-game-boxscore-607912",
+    "sourceReliability": 0.84,
+    "createdAt": "2026-07-09T14:39:12.861Z",
+    "updatedAt": "2026-07-09T14:39:12.861Z"
+  },
+  {
+    "id": "match_actual_fox_344f7733",
+    "fixtureId": "",
+    "sourceGameId": 607911,
+    "date": "2026-07-01T12:00:00.000Z",
+    "fixtureDate": "2026-07-01T12:00:00.000Z",
+    "homeTeam": "Belgium",
+    "awayTeam": "Senegal",
+    "homeGoals": 2,
+    "awayGoals": 2,
+    "homeXg": 2.02,
+    "awayXg": 2.51,
+    "homeShots": 21,
+    "awayShots": 19,
+    "homeShotsOnTarget": 5,
+    "awayShotsOnTarget": 0,
+    "homePossession": 53,
+    "awayPossession": 47,
+    "homePassCompletion": 0.89,
+    "awayPassCompletion": 0.87,
+    "homeCorners": 4,
+    "awayCorners": 2,
+    "homeFouls": 22,
+    "awayFouls": 11,
+    "homeClearances": 60,
+    "awayClearances": 55,
+    "homeScorers": [
+      {
+        "name": "Y. Tielemans",
+        "minute": 89,
+        "minutes": [
+          89
+        ],
+        "goals": 1,
+        "order": 1,
+        "assists": [
+          "L. Trossard"
+        ]
+      },
+      {
+        "name": "R. Lukaku",
+        "minute": 86,
+        "minutes": [
+          86
+        ],
+        "goals": 1,
+        "order": 2,
+        "assists": [
+          "T. Meunier"
+        ]
+      }
+    ],
+    "awayScorers": [
+      {
+        "name": "I. Sarr",
+        "minute": 51,
+        "minutes": [
+          51
+        ],
+        "goals": 1,
+        "order": 3,
+        "assists": [
+          "M. Niakhate"
+        ]
+      },
+      {
+        "name": "H. Diarra",
+        "minute": 24,
+        "minutes": [
+          24
+        ],
+        "goals": 1,
+        "order": 4,
+        "assists": []
+      }
+    ],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "fouls",
+      "scorers",
+      "assists"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-placeholder-game-boxscore-607911",
+    "sourceReliability": 0.84,
+    "createdAt": "2026-07-09T14:39:12.861Z",
+    "updatedAt": "2026-07-09T14:39:12.861Z"
+  },
+  {
+    "id": "match_actual_fox_1b7a3efe",
+    "fixtureId": "",
+    "sourceGameId": 607910,
+    "date": "2026-07-01T12:00:00.000Z",
+    "fixtureDate": "2026-07-01T12:00:00.000Z",
+    "homeTeam": "United States",
+    "awayTeam": "Bosnia and Herzegovina",
+    "homeGoals": 2,
+    "awayGoals": 0,
+    "homeXg": 1.13,
+    "awayXg": 0.53,
+    "homeShots": 9,
+    "awayShots": 11,
+    "homeShotsOnTarget": 2,
+    "awayShotsOnTarget": 4,
+    "homePossession": 48,
+    "awayPossession": 52,
+    "homePassCompletion": 0.87,
+    "awayPassCompletion": 0.86,
+    "homeCorners": 0,
+    "awayCorners": 0,
+    "homeFouls": 7,
+    "awayFouls": 13,
+    "homeClearances": 43,
+    "awayClearances": 36,
+    "homeScorers": [
+      {
+        "name": "M. Tillman",
+        "minute": 82,
+        "minutes": [
+          82
+        ],
+        "goals": 1,
+        "order": 1,
+        "assists": []
+      },
+      {
+        "name": "F. Balogun",
+        "minute": 45,
+        "minutes": [
+          45
+        ],
+        "goals": 1,
+        "order": 2,
+        "assists": []
+      }
+    ],
+    "awayScorers": [],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "fouls",
       "scorers"
     ],
-    "derivedMetricFields": [
-      "xg"
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-placeholder-game-boxscore-607910",
+    "sourceReliability": 0.84,
+    "createdAt": "2026-07-09T14:39:12.861Z",
+    "updatedAt": "2026-07-09T14:39:12.861Z"
+  },
+  {
+    "id": "match_actual_fox_881ab3ff",
+    "fixtureId": "",
+    "sourceGameId": 607909,
+    "date": "2026-06-30T12:00:00.000Z",
+    "fixtureDate": "2026-06-30T12:00:00.000Z",
+    "homeTeam": "Mexico",
+    "awayTeam": "Ecuador",
+    "homeGoals": 2,
+    "awayGoals": 0,
+    "homeXg": 1.63,
+    "awayXg": 0.72,
+    "homeShots": 15,
+    "awayShots": 8,
+    "homeShotsOnTarget": 3,
+    "awayShotsOnTarget": 1,
+    "homePossession": 43,
+    "awayPossession": 57,
+    "homePassCompletion": 0,
+    "awayPassCompletion": 0,
+    "homeCorners": 0,
+    "awayCorners": 0,
+    "homeFouls": 0,
+    "awayFouls": 0,
+    "homeClearances": 54,
+    "awayClearances": 18,
+    "homeScorers": [
+      {
+        "name": "R. Jimenez",
+        "minute": 31,
+        "minutes": [
+          31
+        ],
+        "goals": 1,
+        "order": 1,
+        "assists": [
+          "J. Quinones"
+        ]
+      },
+      {
+        "name": "J. Quinones",
+        "minute": 22,
+        "minutes": [
+          22
+        ],
+        "goals": 1,
+        "order": 2,
+        "assists": [
+          "R. Alvarado"
+        ]
+      }
     ],
-    "sourceUrl": "https://www.theguardian.com/football/live/2026/jun/16/fifa-world-cup-2026-live-iran-v-new-zealand-updates-irn-vs-nzl-group-f-match-score-latest",
-    "createdAt": "2026-06-16T14:20:00.000Z"
+    "awayScorers": [],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "fouls",
+      "scorers",
+      "assists"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-placeholder-game-boxscore-607909",
+    "sourceReliability": 0.84,
+    "createdAt": "2026-07-09T14:39:12.861Z",
+    "updatedAt": "2026-07-09T14:39:12.861Z"
+  },
+  {
+    "id": "match_actual_fox_a40b5f03",
+    "fixtureId": "",
+    "sourceGameId": 607908,
+    "date": "2026-06-30T12:00:00.000Z",
+    "fixtureDate": "2026-06-30T12:00:00.000Z",
+    "homeTeam": "Ivory Coast",
+    "awayTeam": "Norway",
+    "homeGoals": 1,
+    "awayGoals": 2,
+    "homeXg": 1.15,
+    "awayXg": 2.07,
+    "homeShots": 14,
+    "awayShots": 9,
+    "homeShotsOnTarget": 5,
+    "awayShotsOnTarget": 3,
+    "homePossession": 52,
+    "awayPossession": 48,
+    "homePassCompletion": 0.86,
+    "awayPassCompletion": 0.9,
+    "homeCorners": 0,
+    "awayCorners": 0,
+    "homeFouls": 0,
+    "awayFouls": 0,
+    "homeClearances": 23,
+    "awayClearances": 39,
+    "homeScorers": [
+      {
+        "name": "A. Diallo",
+        "minute": 74,
+        "minutes": [
+          74
+        ],
+        "goals": 1,
+        "order": 2,
+        "assists": [
+          "N. Pepe"
+        ]
+      }
+    ],
+    "awayScorers": [
+      {
+        "name": "E. Haaland",
+        "minute": 86,
+        "minutes": [
+          86
+        ],
+        "goals": 1,
+        "order": 1,
+        "assists": [
+          "P. Berg"
+        ]
+      },
+      {
+        "name": "A. Nusa",
+        "minute": 39,
+        "minutes": [
+          39
+        ],
+        "goals": 1,
+        "order": 3,
+        "assists": [
+          "M. Odegaard"
+        ]
+      }
+    ],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "fouls",
+      "scorers",
+      "assists"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-placeholder-game-boxscore-607908",
+    "sourceReliability": 0.84,
+    "createdAt": "2026-07-09T14:39:12.861Z",
+    "updatedAt": "2026-07-09T14:39:12.861Z"
   },
   {
     "id": "match_actual_fixture_7c6d953e",
@@ -4829,5 +5791,490 @@
     "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-x-v-y-jul-02-2026-game-boxscore-607913?tab=boxscore",
     "createdAt": "2026-07-03T06:55:00.000Z",
     "updatedAt": "2026-07-03T06:55:00.000Z"
+  },
+  {
+    "id": "match_actual_fixture_ae576b27",
+    "fixtureId": "fixture_ae576b27",
+    "date": "2026-06-15T16:00:00.000Z",
+    "fixtureDate": "2026-06-15T16:00:00.000Z",
+    "homeTeam": "Spain",
+    "awayTeam": "Cape Verde",
+    "homeGoals": 0,
+    "awayGoals": 0,
+    "homeXg": 2.1,
+    "awayXg": 0.35,
+    "homeShots": 27,
+    "awayShots": 5,
+    "homeShotsOnTarget": 7,
+    "awayShotsOnTarget": 1,
+    "homeScorers": [],
+    "awayScorers": [],
+    "provider": "post-match-stats",
+    "source": "Public match reports",
+    "sourceType": "public-web",
+    "metricSource": "public-report-plus-derived-estimates",
+    "capturedMetricFields": [
+      "score"
+    ],
+    "derivedMetricFields": [
+      "xg",
+      "shots",
+      "shotsOnTarget"
+    ],
+    "sourceUrl": "https://www.theguardian.com/football/live/2026/jun/15/spain-v-cape-verde-world-cup-2026-live",
+    "createdAt": "2026-06-16T14:20:00.000Z"
+  },
+  {
+    "id": "match_actual_fixture_cef81942",
+    "fixtureId": "fixture_cef81942",
+    "date": "2026-06-15T19:00:00.000Z",
+    "fixtureDate": "2026-06-15T19:00:00.000Z",
+    "homeTeam": "Belgium",
+    "awayTeam": "Egypt",
+    "homeGoals": 1,
+    "awayGoals": 1,
+    "homeXg": 1.25,
+    "awayXg": 1.2,
+    "homeShots": 13,
+    "awayShots": 12,
+    "homeShotsOnTarget": 4,
+    "awayShotsOnTarget": 5,
+    "homeScorers": [
+      {
+        "name": "Mohamed Hany",
+        "minute": 66,
+        "goals": 1,
+        "order": 2,
+        "ownGoal": true
+      }
+    ],
+    "awayScorers": [
+      {
+        "name": "Emam Ashour",
+        "minute": 19,
+        "goals": 1,
+        "order": 1
+      }
+    ],
+    "provider": "post-match-stats",
+    "source": "Public match reports",
+    "sourceType": "public-web",
+    "metricSource": "public-report-plus-derived-estimates",
+    "capturedMetricFields": [
+      "score",
+      "scorers"
+    ],
+    "derivedMetricFields": [
+      "xg",
+      "shots",
+      "shotsOnTarget"
+    ],
+    "sourceUrl": "https://www.theguardian.com/football/2026/jun/15/belgium-egypt-world-cup-2026-group-g-match-report",
+    "createdAt": "2026-06-16T14:20:00.000Z"
+  },
+  {
+    "id": "match_actual_fixture_37d4ba98",
+    "fixtureId": "fixture_37d4ba98",
+    "date": "2026-06-15T22:00:00.000Z",
+    "fixtureDate": "2026-06-15T22:00:00.000Z",
+    "homeTeam": "Saudi Arabia",
+    "awayTeam": "Uruguay",
+    "homeGoals": 1,
+    "awayGoals": 1,
+    "homeXg": 0.85,
+    "awayXg": 1.5,
+    "homeShots": 9,
+    "awayShots": 15,
+    "homeShotsOnTarget": 3,
+    "awayShotsOnTarget": 6,
+    "homeScorers": [
+      {
+        "name": "Abdulelah Al-Amri",
+        "minute": 31,
+        "goals": 1,
+        "order": 1
+      }
+    ],
+    "awayScorers": [
+      {
+        "name": "Maxi Araujo",
+        "minute": 80,
+        "goals": 1,
+        "order": 2
+      }
+    ],
+    "provider": "post-match-stats",
+    "source": "Public match reports",
+    "sourceType": "public-web",
+    "metricSource": "public-report-plus-derived-estimates",
+    "capturedMetricFields": [
+      "score",
+      "scorers"
+    ],
+    "derivedMetricFields": [
+      "xg",
+      "shots",
+      "shotsOnTarget"
+    ],
+    "sourceUrl": "https://www.theguardian.com/football/live/2026/jun/15/saudi-arabia-v-uruguay-world-cup-2026-live",
+    "createdAt": "2026-06-16T14:20:00.000Z"
+  },
+  {
+    "id": "match_actual_fixture_883a13d3",
+    "fixtureId": "fixture_883a13d3",
+    "date": "2026-06-16T01:00:00.000Z",
+    "fixtureDate": "2026-06-16T01:00:00.000Z",
+    "homeTeam": "Iran",
+    "awayTeam": "New Zealand",
+    "homeGoals": 2,
+    "awayGoals": 2,
+    "homeXg": 1.65,
+    "awayXg": 1.85,
+    "homeShots": 17,
+    "awayShots": 14,
+    "homeShotsOnTarget": 4,
+    "awayShotsOnTarget": 8,
+    "homeScorers": [
+      {
+        "name": "Ramin Rezaeian",
+        "minute": 43,
+        "goals": 1,
+        "order": 2
+      },
+      {
+        "name": "Mohammad Mohebbi",
+        "minute": 72,
+        "goals": 1,
+        "order": 4
+      }
+    ],
+    "awayScorers": [
+      {
+        "name": "Eli Just",
+        "minute": 18,
+        "goals": 1,
+        "order": 1,
+        "assists": [
+          "Chris Wood"
+        ]
+      },
+      {
+        "name": "Eli Just",
+        "minute": 61,
+        "goals": 1,
+        "order": 3,
+        "assists": [
+          "Chris Wood"
+        ]
+      }
+    ],
+    "provider": "post-match-stats",
+    "source": "Public match reports",
+    "sourceType": "public-web",
+    "metricSource": "public-report-plus-derived-estimates",
+    "capturedMetricFields": [
+      "score",
+      "shots",
+      "shotsOnTarget",
+      "scorers"
+    ],
+    "derivedMetricFields": [
+      "xg"
+    ],
+    "sourceUrl": "https://www.theguardian.com/football/live/2026/jun/16/fifa-world-cup-2026-live-iran-v-new-zealand-updates-irn-vs-nzl-group-f-match-score-latest",
+    "createdAt": "2026-06-16T14:20:00.000Z"
+  },
+  {
+    "id": "match_actual_fixture_a89ee8da",
+    "fixtureId": "fixture_a89ee8da",
+    "date": "2026-06-13T19:00:00.000Z",
+    "fixtureDate": "2026-06-13T19:00:00.000Z",
+    "homeTeam": "Qatar",
+    "awayTeam": "Switzerland",
+    "homeGoals": 1,
+    "awayGoals": 1,
+    "homeXg": 0.56,
+    "awayXg": 3.09,
+    "homeShots": 5,
+    "awayShots": 27,
+    "homeShotsOnTarget": 3,
+    "awayShotsOnTarget": 10,
+    "homePossession": 30,
+    "awayPossession": 70,
+    "homePassCompletion": 0.74,
+    "awayPassCompletion": 0.93,
+    "homeCorners": 3,
+    "awayCorners": 10,
+    "homeOffsides": 0,
+    "awayOffsides": 1,
+    "homeFouls": 11,
+    "awayFouls": 11,
+    "homeBlocks": 9,
+    "awayBlocks": 0,
+    "homeClearances": 30,
+    "awayClearances": 22,
+    "homeKeeperSaves": 7,
+    "awayKeeperSaves": 3,
+    "homeYellowCards": 2,
+    "awayYellowCards": 1,
+    "homeRedCards": 0,
+    "awayRedCards": 0,
+    "homeScorers": [
+      {
+        "name": "Boualem Khoukhi",
+        "minute": 95,
+        "goals": 1,
+        "order": 2
+      }
+    ],
+    "awayScorers": [
+      {
+        "name": "Breel Embolo",
+        "minute": 17,
+        "goals": 1,
+        "order": 1,
+        "penalty": true
+      }
+    ],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "offsides",
+      "fouls",
+      "blocks",
+      "clearances",
+      "keeperSaves",
+      "cards",
+      "scorers"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-qatar-vs-switzerland-jun-13-2026-game-boxscore-647621",
+    "createdAt": "2026-06-14T07:30:00.000Z"
+  },
+  {
+    "id": "match_actual_fixture_b5106f3a",
+    "fixtureId": "fixture_b5106f3a",
+    "date": "2026-06-13T22:00:00.000Z",
+    "fixtureDate": "2026-06-13T22:00:00.000Z",
+    "homeTeam": "Brazil",
+    "awayTeam": "Morocco",
+    "homeGoals": 1,
+    "awayGoals": 1,
+    "homeXg": 0.56,
+    "awayXg": 1.35,
+    "homeShots": 8,
+    "awayShots": 13,
+    "homeShotsOnTarget": 5,
+    "awayShotsOnTarget": 4,
+    "homePossession": 54,
+    "awayPossession": 46,
+    "homePassCompletion": 0.88,
+    "awayPassCompletion": 0.88,
+    "homeCorners": 6,
+    "awayCorners": 2,
+    "homeOffsides": 0,
+    "awayOffsides": 1,
+    "homeFouls": 16,
+    "awayFouls": 14,
+    "homeBlocks": 6,
+    "awayBlocks": 2,
+    "homeClearances": 32,
+    "awayClearances": 23,
+    "homeKeeperSaves": 3,
+    "awayKeeperSaves": 3,
+    "homeYellowCards": 2,
+    "awayYellowCards": 0,
+    "homeRedCards": 0,
+    "awayRedCards": 0,
+    "homeScorers": [
+      {
+        "name": "Vinicius Junior",
+        "minute": 32,
+        "goals": 1,
+        "order": 2
+      }
+    ],
+    "awayScorers": [
+      {
+        "name": "Ismael Saibari",
+        "minute": 21,
+        "goals": 1,
+        "order": 1
+      }
+    ],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "offsides",
+      "fouls",
+      "blocks",
+      "clearances",
+      "keeperSaves",
+      "cards",
+      "scorers"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-brazil-vs-morocco-jun-13-2026-game-boxscore-647622",
+    "createdAt": "2026-06-14T07:30:00.000Z"
+  },
+  {
+    "id": "match_actual_fixture_fc94e491",
+    "fixtureId": "fixture_fc94e491",
+    "date": "2026-06-14T01:00:00.000Z",
+    "fixtureDate": "2026-06-14T01:00:00.000Z",
+    "homeTeam": "Haiti",
+    "awayTeam": "Scotland",
+    "homeGoals": 0,
+    "awayGoals": 1,
+    "homeXg": 0.71,
+    "awayXg": 1.16,
+    "homeShots": 13,
+    "awayShots": 8,
+    "homeShotsOnTarget": 3,
+    "awayShotsOnTarget": 3,
+    "homePossession": 50,
+    "awayPossession": 50,
+    "homePassCompletion": 0.89,
+    "awayPassCompletion": 0.82,
+    "homeCorners": 4,
+    "awayCorners": 3,
+    "homeOffsides": 3,
+    "awayOffsides": 1,
+    "homeFouls": 23,
+    "awayFouls": 21,
+    "homeBlocks": 2,
+    "awayBlocks": 4,
+    "homeClearances": 33,
+    "awayClearances": 28,
+    "homeKeeperSaves": 2,
+    "awayKeeperSaves": 1,
+    "homeYellowCards": 1,
+    "awayYellowCards": 3,
+    "homeRedCards": 0,
+    "awayRedCards": 0,
+    "homeScorers": [],
+    "awayScorers": [
+      {
+        "name": "John McGinn",
+        "minute": 28,
+        "goals": 1,
+        "order": 1
+      }
+    ],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "offsides",
+      "fouls",
+      "blocks",
+      "clearances",
+      "keeperSaves",
+      "cards",
+      "scorers"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-haiti-vs-scotland-jun-13-2026-game-boxscore-647623",
+    "createdAt": "2026-06-14T07:30:00.000Z"
+  },
+  {
+    "id": "match_actual_fixture_492bb0c2",
+    "fixtureId": "fixture_492bb0c2",
+    "date": "2026-06-14T04:00:00.000Z",
+    "fixtureDate": "2026-06-14T04:00:00.000Z",
+    "homeTeam": "Australia",
+    "awayTeam": "Turkiye",
+    "homeGoals": 2,
+    "awayGoals": 0,
+    "homeXg": 0.84,
+    "awayXg": 1.6,
+    "homeShots": 8,
+    "awayShots": 28,
+    "homeShotsOnTarget": 4,
+    "awayShotsOnTarget": 7,
+    "homePossession": 37,
+    "awayPossession": 63,
+    "homePassCompletion": 0.76,
+    "awayPassCompletion": 0.92,
+    "homeCorners": 5,
+    "awayCorners": 8,
+    "homeOffsides": 1,
+    "awayOffsides": 3,
+    "homeFouls": 12,
+    "awayFouls": 4,
+    "homeBlocks": 12,
+    "awayBlocks": 1,
+    "homeClearances": 58,
+    "awayClearances": 43,
+    "homeKeeperSaves": 8,
+    "awayKeeperSaves": 2,
+    "homeYellowCards": 0,
+    "awayYellowCards": 1,
+    "homeRedCards": 0,
+    "awayRedCards": 0,
+    "homeScorers": [
+      {
+        "name": "Nestory Irankunda",
+        "minute": 27,
+        "goals": 1,
+        "order": 1
+      },
+      {
+        "name": "Connor Metcalfe",
+        "minute": 75,
+        "goals": 1,
+        "order": 2
+      }
+    ],
+    "awayScorers": [],
+    "provider": "post-match-stats",
+    "source": "FOX Sports boxscore",
+    "sourceType": "public-web",
+    "metricSource": "fox-sports-boxscore",
+    "capturedMetricFields": [
+      "score",
+      "xg",
+      "shots",
+      "shotsOnTarget",
+      "possession",
+      "passCompletion",
+      "corners",
+      "offsides",
+      "fouls",
+      "blocks",
+      "clearances",
+      "keeperSaves",
+      "cards",
+      "scorers"
+    ],
+    "derivedMetricFields": [],
+    "sourceUrl": "https://www.foxsports.com/soccer/fifa-world-cup-men-australia-vs-turkiye-jun-14-2026-game-boxscore-647620",
+    "createdAt": "2026-06-14T07:30:00.000Z"
   }
 ]

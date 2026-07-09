@@ -82,6 +82,22 @@
       ]
     }
   },
+  "postMatchStats": {
+    "mode": "self-gather",
+    "enabled": true,
+    "requestTimeoutMs": 16000,
+    "maxBoxscorePages": 52,
+    "backfillGameIdLookback": 16,
+    "backfillGameIdLookahead": 4,
+    "userAgent": "WorldCupMagik/1.0 public-web post-match gatherer; no APIs",
+    "sources": [
+      {
+        "name": "FOX Sports World Cup boxscores",
+        "url": "https://www.foxsports.com/soccer/fifa-world-cup-men/schedule",
+        "reliability": 0.84
+      }
+    ]
+  },
   "weather": {
     "mode": "self-gather",
     "sourcesFile": "config/weather-sources.json",

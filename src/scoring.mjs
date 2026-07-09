@@ -444,6 +444,34 @@ function latestPlayerStatsByKey(playerStats) {
   );
 }
 
+function pairedEventMetricQuality(homeStats = {}, awayStats = {}) {
+  return clamp(mean([teamEventMetricQuality(homeStats), teamEventMetricQuality(awayStats)]), 0.2, 0.95);
+}
+
+function teamEventMetricQuality(stats = {}) {
+  const direct = Number(
+    stats.eventMetricQuality
+    || stats.formMemory?.eventMetricQuality
+    || stats.longForm?.eventMetricQuality
+    || stats.intelligenceCoverage?.eventMetricQuality
+    || 0
+  );
+
+  if (Number.isFinite(direct) && direct > 0) {
+    return clamp(direct, 0.2, 0.95);
+  }
+
+  if (stats.metricSource && stats.metricSource !== "score-derived-estimates") {
+    return 0.74;
+  }
+
+  if (stats.metricSource === "score-derived-estimates") {
+    return 0.34;
+  }
+
+  return 0.58;
+}
+
 function fixtureMarketSnapshot({ fixture, latestOdds }) {
   const matchWinner = normalizeMatchWinnerMarket({
     home: latestOdds.get(outcomeKey(fixture.id, "match_winner", fixture.homeTeam)),
@@ -766,11 +794,14 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
   const awaySquadDepthScore = squadDepthValue(awaySquadDepth);
   const squadDepthConfidence = squadDepthEvidenceConfidence(homeSquadDepth, awaySquadDepth);
   const squadDepthEdge = squadDepthResultEdge(homeSquadDepth, awaySquadDepth);
+  const eventMetricQuality = pairedEventMetricQuality(homeStats, awayStats);
+  const estimatedMetricPenalty = clamp(1 - eventMetricQuality, 0, 1);
   const ratingEdge = clamp(Number(homeStats.rating || 1700) - Number(awayStats.rating || 1700), -180, 180);
   const formEdge = clamp((Number(homeStats.recentPointsPerGame || 1.4) - Number(awayStats.recentPointsPerGame || 1.4)) * 42, -75, 75);
-  const xgEdge = clamp(((Number(homeStats.xgFor || 1.3) - Number(awayStats.xgAgainst || 1.2)) - (Number(awayStats.xgFor || 1.3) - Number(homeStats.xgAgainst || 1.2))) * 48, -90, 90);
+  const rawXgEdge = ((Number(homeStats.xgFor || 1.3) - Number(awayStats.xgAgainst || 1.2)) - (Number(awayStats.xgFor || 1.3) - Number(homeStats.xgAgainst || 1.2))) * 48;
+  const xgEdge = clamp(rawXgEdge * (0.58 + eventMetricQuality * 0.42), -90, 90);
   const styleDetails = styleMatchupDetails(homeStats, awayStats);
-  const styleEdge = clamp(styleDetails.edge, -65, 65);
+  const styleEdge = clamp(styleDetails.edge * (0.66 + eventMetricQuality * 0.34), -65, 65);
   const newsEdge = clamp((homeNews.netImpact - awayNews.netImpact) * 95, -55, 55);
   const memoryEdge = clamp((Number(homeStats.learnedEdge || 0) - Number(awayStats.learnedEdge || 0)) * 88, -45, 45);
   const marketMemoryEdge = clamp((Number(homeStats.memoryOddsPressure || 0) - Number(awayStats.memoryOddsPressure || 0)) * 28, -22, 22);
@@ -839,7 +870,14 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
       ratingEdge: round(ratingEdge, 2),
       formEdge: round(formEdge, 2),
       xgEdge: round(xgEdge, 2),
+      rawXgEdge: round(rawXgEdge, 2),
       styleEdge: round(styleEdge, 2),
+      eventMetricQuality: round(eventMetricQuality, 4),
+      estimatedMetricPenalty: round(estimatedMetricPenalty, 4),
+      homeEventMetricQuality: round(teamEventMetricQuality(homeStats), 4),
+      awayEventMetricQuality: round(teamEventMetricQuality(awayStats), 4),
+      homeRealMetricMatchCount: Number(homeStats.realMetricMatchCount || homeStats.formMemory?.realMetricMatchCount || homeStats.intelligenceCoverage?.realMetricMatchCount || 0),
+      awayRealMetricMatchCount: Number(awayStats.realMetricMatchCount || awayStats.formMemory?.realMetricMatchCount || awayStats.intelligenceCoverage?.realMetricMatchCount || 0),
       squadDepthEdge: round(squadDepthEdge, 2),
       buildUpEdge: round(styleDetails.buildUpEdge, 2),
       pressBuildEdge: round(styleDetails.pressBuildEdge, 2),
@@ -948,6 +986,7 @@ export function fixtureModel({ fixture, homeStats, awayStats, newsByTeam, market
       dataCompleteness: round(mean([
         homeStats.statsCompleteness,
         awayStats.statsCompleteness,
+        eventMetricQuality,
         homeNews.confidence,
         awayNews.confidence,
         homeStats.intelligenceConfidence,
@@ -1050,6 +1089,7 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
   const oddsFreshness = clamp(1 - oddsAgeHours / (policy.sourceRequirements?.maxOddsAgeHours || 30), 0, 1);
   const dataCompleteness = legModel.components.dataCompleteness;
   const intelligenceConfidence = legModel.components.intelligenceConfidence;
+  const eventMetricQuality = Number(legModel.components.eventMetricQuality || 0.34);
   const bookmakerCoverage = movement?.bookmakerCount || 1;
   const marketConfirmation = movement?.shortening && edge > 0 ? 1 : 0;
   const contrarianValue = movement?.drifting && edge > 0 && Number(odds.decimalOdds) >= policy.riskProfile.minDecimalOddsForRiskLeg ? 1 : 0;
@@ -1083,8 +1123,9 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
   const evidenceConfidence = clamp(Number(independentEvidence.count || 0) / 4, 0, 1);
   const confidence = clamp(
     (independentModelProbability * 0.32)
-    + (dataCompleteness * 0.22)
+    + (dataCompleteness * 0.17)
     + (intelligenceConfidence * 0.16)
+    + (eventMetricQuality * 0.08)
     + (oddsFreshness * 0.12)
     + (evidenceConfidence * 0.12)
     + Math.min(0.04, bookmakerCoverage * 0.01)
@@ -1325,6 +1366,15 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
   }
 
   if (
+    eventMetricQuality < 0.45
+    && ["over_2_5_goals", "both_teams_to_score"].includes(market)
+    && independentEdge < 0.06
+    && !highCertaintySurvivalFavorite
+  ) {
+    hardBlocks.push("estimated_event_data_marginal_goal_market");
+  }
+
+  if (
     Number(legModel.components.openingGameCaution || 0) >= 0.75
     && (market === "over_2_5_goals" || (market === "both_teams_to_score" && outcome === "Yes"))
     && Number(legModel.components.expectedGoals || 0) < 2.82
@@ -1425,7 +1475,8 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
         independentEvidence,
         marketBlendLift,
         learning,
-        marketFocus
+        marketFocus,
+        eventMetricQuality
       }),
       favoriteCrowdingPenalty: round(favoriteCrowdingPenalty, 2),
       valueOddsBonus
@@ -1496,7 +1547,7 @@ function buildNewsByTeam(newsArticles, policy, now) {
   return aggregates;
 }
 
-function buildConfidenceReasons({ confidence, dataCompleteness, intelligenceConfidence, oddsFreshness, bookmakerCoverage, independentEvidence, marketBlendLift, learning, marketFocus }) {
+function buildConfidenceReasons({ confidence, dataCompleteness, intelligenceConfidence, oddsFreshness, bookmakerCoverage, independentEvidence, marketBlendLift, learning, marketFocus, eventMetricQuality = 0.34 }) {
   const reasons = [];
 
   if (confidence >= 0.78) {
@@ -1507,6 +1558,12 @@ function buildConfidenceReasons({ confidence, dataCompleteness, intelligenceConf
 
   if (dataCompleteness >= 0.75) {
     reasons.push("strong team-data completeness");
+  }
+
+  if (eventMetricQuality >= 0.65) {
+    reasons.push("real post-match xG/shot data present");
+  } else if (eventMetricQuality < 0.45) {
+    reasons.push("event stats mostly score-derived estimates");
   }
 
   if (intelligenceConfidence >= 0.72) {

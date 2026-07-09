@@ -17,7 +17,7 @@ const tournamentEndDate = "2026-07-19";
 const tournamentDaysAhead = daysAheadUntil(tournamentEndDate, now);
 const riskBuckets = Array.from({ length: 21 }, (_, index) => index * 5);
 const dayBuckets = Array.from({ length: Math.max(15, tournamentDaysAhead + 1) }, (_, index) => index);
-const automaticRunMinutesUtc = [5, 8, 11, 14, 17, 20, 21, 23].map((hour) => (hour * 60) + 23);
+const automaticRunMinutesUtc = [(1 * 60) + 17];
 const maxDaysAhead = Math.max(...dayBuckets);
 
 await mkdir(outputDir, { recursive: true });
@@ -516,6 +516,10 @@ function summarizeLeg(leg) {
     riskTag: leg.riskTag,
     components: {
       intelligenceConfidence: leg.components?.intelligenceConfidence,
+      eventMetricQuality: leg.components?.eventMetricQuality,
+      estimatedMetricPenalty: leg.components?.estimatedMetricPenalty,
+      homeRealMetricMatchCount: leg.components?.homeRealMetricMatchCount,
+      awayRealMetricMatchCount: leg.components?.awayRealMetricMatchCount,
       oddsAgeHours: leg.components?.oddsAgeHours,
       oddsFreshness: leg.components?.oddsFreshness,
       oddsMovement: leg.components?.oddsMovement,
@@ -619,6 +623,10 @@ function summarizeLegCandidate(leg) {
     riskTag: leg.riskTag,
     components: {
       intelligenceConfidence: leg.components?.intelligenceConfidence,
+      eventMetricQuality: leg.components?.eventMetricQuality,
+      estimatedMetricPenalty: leg.components?.estimatedMetricPenalty,
+      homeRealMetricMatchCount: leg.components?.homeRealMetricMatchCount,
+      awayRealMetricMatchCount: leg.components?.awayRealMetricMatchCount,
       nonMarketSignalCount: leg.components?.nonMarketSignalCount,
       nonMarketSignals: leg.components?.nonMarketSignals,
       independentEvidenceStrength: leg.components?.independentEvidenceStrength,
@@ -861,6 +869,9 @@ function summarizeTeamProfiles(teamStats) {
       sourceMatchTarget: team.sourceMatchTarget || team.intelligenceCoverage?.matchWindowTarget || 20,
       statsCompleteness: team.statsCompleteness || 0,
       intelligenceConfidence: team.intelligenceConfidence || 0,
+      eventMetricQuality: team.eventMetricQuality || team.formMemory?.eventMetricQuality || 0,
+      estimatedMetricRate: team.estimatedMetricRate ?? team.formMemory?.estimatedMetricRate ?? 1,
+      realMetricMatchCount: team.realMetricMatchCount || team.formMemory?.realMetricMatchCount || 0,
       tacticalProfile: team.tacticalProfile || null,
       passing: team.passing || {
         attempted: team.passesAttempted || 420,
