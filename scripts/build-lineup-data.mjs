@@ -2,22 +2,35 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadEngineState, readJson } from "../src/db.mjs";
-import { isInsideLineupWindow, lineupWindowFromEnv, minutesUntilKickoff } from "../src/lineup-window.mjs";
+import { isInsideFinalLineupPass, isInsideLineupWindow, lineupFinalPassFromEnv, lineupWindowFromEnv, minutesUntilKickoff } from "../src/lineup-window.mjs";
 import { fetchLineupSnapshotWithDiagnostics } from "../src/providers/lineup-provider.mjs";
 
 const rootDir = dirname(dirname(fileURLToPath(import.meta.url)));
 const outputPath = join(rootDir, "web", "data", "lineups-latest.json");
 const now = new Date(process.env.LINEUP_NOW || Date.now());
 const lineupWindow = lineupWindowFromEnv();
+const finalPass = lineupFinalPassFromEnv();
 const forceAllUpcoming = process.argv.includes("--all-upcoming");
+const finalPrekickoffMode = process.argv.includes("--final-prekickoff");
 
 const engineState = await loadEngineState();
 const latestWebData = await readJson(["web", "data", "latest.json"], null).catch(() => null);
 const fixtures = (latestWebData?.fixtures?.length ? latestWebData.fixtures : engineState.fixtures)
-  .filter(isPublicFixture)
-  .filter(isGroupFixture);
+  .filter(isPublicFixture);
 const targetFixtures = fixtures
-  .filter((fixture) => forceAllUpcoming ? minutesUntilKickoff(fixture, now) >= -15 && minutesUntilKickoff(fixture, now) <= 24 * 60 : isInsideLineupWindow(fixture, now, lineupWindow))
+  .filter((fixture) => {
+    const minutes = minutesUntilKickoff(fixture, now);
+
+    if (forceAllUpcoming) {
+      return minutes >= -15 && minutes <= 24 * 60;
+    }
+
+    if (finalPrekickoffMode) {
+      return isInsideFinalLineupPass(fixture, now, finalPass);
+    }
+
+    return isInsideLineupWindow(fixture, now, lineupWindow) || isInsideFinalLineupPass(fixture, now, finalPass);
+  })
   .sort((left, right) => new Date(left.date) - new Date(right.date));
 const existing = await readExistingLineups();
 const providerConfig = engineState.providers.lineups || {
@@ -36,8 +49,11 @@ const payload = {
   source: "GitHub Actions lightweight public-web lineup scanner",
   targetWindow: {
     minMinutesBeforeKickoff: lineupWindow.minMinutesBefore,
-    maxMinutesBeforeKickoff: lineupWindow.maxMinutesBefore
+    maxMinutesBeforeKickoff: lineupWindow.maxMinutesBefore,
+    finalPassMinutesBeforeKickoff: finalPass.targetMinutesBefore,
+    finalPassToleranceMinutes: finalPass.toleranceMinutes
   },
+  finalPrekickoffMode,
   targetFixtureCount: targetFixtures.length,
   targetFixtures: targetFixtures.map((fixture) => ({
     id: fixture.id,
@@ -67,10 +83,6 @@ function isPublicFixture(fixture) {
   return fixture?.sourceType === "public-web" || fixture?.source || fixture?.id;
 }
 
-function isGroupFixture(fixture) {
-  return !fixture.stage || /\bgroup\b/i.test(String(fixture.stage));
-}
-
 function mergeLineups(existingLineups, freshLineups, currentTime) {
   const byFixture = new Map();
 
@@ -81,7 +93,11 @@ function mergeLineups(existingLineups, freshLineups, currentTime) {
 
     const previous = byFixture.get(record.fixtureId);
 
-    if (!previous || recordRank(record) > recordRank(previous) || new Date(record.capturedAt || 0) > new Date(previous.capturedAt || 0)) {
+    const rank = recordRank(record);
+    const previousRank = previous ? recordRank(previous) : 0;
+    const newerSameRank = rank === previousRank && new Date(record.capturedAt || 0) > new Date(previous.capturedAt || 0);
+
+    if (!previous || rank > previousRank || newerSameRank) {
       byFixture.set(record.fixtureId, record);
     }
   }

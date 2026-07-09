@@ -63,6 +63,70 @@ test("mobile payload includes daily likely assist groups", () => {
   assert.match(groups[0].players[0].reason, /assists in last 20 team games/);
 });
 
+test("mobile payload includes compact likely event market groups", () => {
+  const payload = buildMobilePayload({
+    generatedAt: "2026-06-15T08:00:00.000Z",
+    profiles: {},
+    pickOfTheDay: {},
+    riskBuckets: [],
+    dayBuckets: [],
+    dateRange: {},
+    fixtures: [],
+    legCandidatesByRisk: {},
+    mostLikelyLegCandidates: [],
+    markets: {},
+    intelligence: {},
+    playerStats: { teams: {} },
+    teamProfiles: { teams: {} },
+    likelyEventsByDate: {
+      "2026-06-15": {
+        playerShotsOnTarget: [{
+          fixture: {
+            id: "fixture_events",
+            date: "2026-06-15T17:00:00.000Z",
+            dateKey: "2026-06-15",
+            homeTeam: "Alpha",
+            awayTeam: "Beta"
+          },
+          fixtureLabel: "Alpha vs Beta",
+          players: [{
+            playerName: "Alex Shooter",
+            team: "Alpha",
+            probability: 0.54,
+            confidence: 0.7,
+            reason: "1+ shot on target odds",
+            market: "player_shot_on_target",
+            decimalOdds: 1.83
+          }]
+        }],
+        playerCards: [],
+        penalties: [{
+          fixture: {
+            id: "fixture_events",
+            date: "2026-06-15T17:00:00.000Z",
+            dateKey: "2026-06-15",
+            homeTeam: "Alpha",
+            awayTeam: "Beta"
+          },
+          fixtureLabel: "Alpha vs Beta",
+          events: [{
+            event: "Penalty awarded",
+            outcome: "Yes",
+            probability: 0.28,
+            confidence: 0.62,
+            reason: "market yes/no prices",
+            market: "penalty_awarded"
+          }]
+        }],
+        redCards: []
+      }
+    }
+  });
+
+  assert.equal(payload.likelyEventsByDate["2026-06-15"].playerShotsOnTarget[0].players[0].playerName, "Alex Shooter");
+  assert.equal(payload.likelyEventsByDate["2026-06-15"].penalties[0].events[0].outcome, "Yes");
+});
+
 test("mobile profile keeps selection-brain metadata", () => {
   const payload = buildMobilePayload({
     generatedAt: "2026-06-15T08:00:00.000Z",

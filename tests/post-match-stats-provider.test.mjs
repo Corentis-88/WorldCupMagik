@@ -34,6 +34,15 @@ test("parseFoxBoxscorePage extracts event stats, scorers, and assists", () => {
         <div class="keyplay-title fs-18">USA GOAL</div>
         <div><span>USA 1</span><span>BEL 1</span></div>
         <span class="keystats-desc fs-13">31&#39; M. Tillman scored a goal.</span>
+        <div class="keyplay-title fs-18">USA YELLOW CARD</div>
+        <div><span>USA 1</span><span>BEL 2</span></div>
+        <span class="keystats-desc fs-13">44&#39; T. Adams is shown a yellow card.</span>
+        <div class="keyplay-title fs-18">BEL RED CARD</div>
+        <div><span>USA 1</span><span>BEL 2</span></div>
+        <span class="keystats-desc fs-13">75&#39; A. Onana is shown a red card.</span>
+        <div class="keyplay-title fs-18">BEL PENALTY</div>
+        <div><span>USA 1</span><span>BEL 2</span></div>
+        <span class="keystats-desc fs-13">81&#39; R. Lukaku scored a penalty.</span>
       </body>
     </html>
   `;
@@ -57,6 +66,14 @@ test("parseFoxBoxscorePage extracts event stats, scorers, and assists", () => {
   assert.equal(record.homeGoals, 1);
   assert.equal(record.awayGoals, 1);
   assert.deepEqual(record.awayScorers[0].assists, ["L. Trossard"]);
+  assert.equal(record.homeYellowCards, 1);
+  assert.equal(record.awayRedCards, 1);
+  assert.deepEqual(record.homeCardedPlayers[0], { name: "T. Adams", minute: 44, card: "yellow" });
+  assert.equal(record.penaltyAwarded, true);
+  assert.equal(record.penaltyCount, 1);
+  assert.equal(record.awayPenaltyCount, 1);
   assert.ok(record.capturedMetricFields.includes("xg"));
   assert.ok(record.capturedMetricFields.includes("assists"));
+  assert.ok(record.capturedMetricFields.includes("cards"));
+  assert.ok(record.capturedMetricFields.includes("penalties"));
 });

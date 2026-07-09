@@ -43,7 +43,8 @@ export function buildMobilePayload(payload) {
     profiles,
     pickOfTheDay,
     likelyScorersByDate: buildLikelyScorersByDate(payload),
-    likelyAssistsByDate: buildLikelyAssistsByDate(payload)
+    likelyAssistsByDate: buildLikelyAssistsByDate(payload),
+    likelyEventsByDate: mobileLikelyEventsByDate(payload.likelyEventsByDate || {})
   };
 }
 
@@ -241,6 +242,56 @@ function buildLikelyAssistsByDate(payload) {
   }
 
   return grouped;
+}
+
+function mobileLikelyEventsByDate(eventsByDate = {}) {
+  const compact = {};
+
+  for (const [date, markets] of Object.entries(eventsByDate || {})) {
+    compact[date] = {
+      playerShotsOnTarget: mobilePlayerEventGroups(markets.playerShotsOnTarget || []),
+      playerCards: mobilePlayerEventGroups(markets.playerCards || []),
+      penalties: mobileBinaryEventGroups(markets.penalties || []),
+      redCards: mobileBinaryEventGroups(markets.redCards || [])
+    };
+  }
+
+  return compact;
+}
+
+function mobilePlayerEventGroups(groups = []) {
+  return groups.map((group) => ({
+    fixture: mobileFixture(group.fixture || {}),
+    fixtureLabel: group.fixtureLabel || "",
+    players: (group.players || []).slice(0, 6).map((player) => ({
+      playerName: player.playerName,
+      team: player.team,
+      probability: player.probability,
+      confidence: player.confidence,
+      sourceWeight: player.sourceWeight,
+      reason: trimText(player.reason, 160),
+      market: player.market,
+      decimalOdds: player.decimalOdds,
+      bookmaker: player.bookmaker || ""
+    }))
+  }));
+}
+
+function mobileBinaryEventGroups(groups = []) {
+  return groups.map((group) => ({
+    fixture: mobileFixture(group.fixture || {}),
+    fixtureLabel: group.fixtureLabel || "",
+    events: (group.events || []).map((event) => ({
+      event: event.event,
+      outcome: event.outcome,
+      probability: event.probability,
+      confidence: event.confidence,
+      reason: trimText(event.reason, 160),
+      market: event.market,
+      decimalOdds: event.decimalOdds,
+      bookmaker: event.bookmaker || ""
+    }))
+  }));
 }
 
 function scorerCandidates(payload) {

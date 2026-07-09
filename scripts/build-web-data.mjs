@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { getDashboardState, scanForBets, buildMostLikelyPolicy, buildRiskPolicy, describeRisk, selectBetslip, selectFixturesForWindow } from "../src/app-service.mjs";
 import { buildBettingPerformance } from "../src/betting-performance.mjs";
 import { loadEngineState, readJson } from "../src/db.mjs";
+import { buildLikelyEventsByDate } from "../src/event-markets.mjs";
 import { buildTeamStatsWithIntelligence, loadIntelligenceState, loadOutcomeLearning } from "../src/intelligence-memory.mjs";
 import { buildMobilePayload } from "../src/mobile-web-data.mjs";
 import { buildBetRecommendations, buildMostLikelyPicks } from "../src/portfolio-builder.mjs";
@@ -41,6 +42,7 @@ const liveNewsArticles = engineState.newsArticles.filter(isPublicNewsArticle);
 const liveHeatSnapshots = engineState.heatSnapshots.filter(isPublicHeatRecord);
 const liveSquadDepthRecords = engineState.squadDepthRecords.filter(isSquadDepthRecord);
 const livePlayerStats = engineState.playerStats.filter(isPublicPlayerStat);
+const livePostMatchStats = (await readJson(["data", "post-match-stats.json"], [])).filter(isPublicPostMatchRecord);
 const liveMatchHistory = intelligenceState.matchHistory.filter(isPublicMatchRecord);
 const baseTeamStats = engineState.teamStats.filter(isPublicTeamStat);
 const bettingPerformance = buildBettingPerformance({
@@ -79,6 +81,14 @@ const mostLikelyRangeLegCandidates = buildLegCandidates({
   heatSnapshots: liveHeatSnapshots,
   squadDepthRecords: liveSquadDepthRecords,
   playerStats: livePlayerStats
+});
+const likelyEventsByDate = buildLikelyEventsByDate({
+  fixtures: maxRangeFixtures,
+  oddsSnapshots: liveOddsSnapshots,
+  teamStats,
+  playerStats: livePlayerStats,
+  postMatchStats: livePostMatchStats,
+  now
 });
 
 for (const risk of riskBuckets) {
@@ -207,6 +217,7 @@ const payload = {
   heat: summarizeHeat(liveHeatSnapshots),
   squadDepth: summarizeSquadDepth(liveSquadDepthRecords),
   playerStats: summarizePlayerStats(livePlayerStats),
+  likelyEventsByDate,
   teamProfiles: summarizeTeamProfiles(teamStats),
   pickOfTheDay,
   intelligence: {
@@ -442,6 +453,10 @@ function isPublicTeamStat(team) {
 
 function isPublicMatchRecord(match) {
   return match?.sourceType === "public-web" || match?.provider === "public-web";
+}
+
+function isPublicPostMatchRecord(match) {
+  return match?.sourceType === "public-web" || match?.provider === "post-match-stats";
 }
 
 function isPublicPlayerStat(record) {
@@ -841,8 +856,16 @@ function summarizeMarkets(oddsSnapshots, policy, survivabilityMarketCoverage = n
     anytimeScorerRecords: counts.anytime_scorer || 0,
     firstGoalscorerRecords: counts.first_goalscorer || 0,
     anytimeAssistRecords: counts.anytime_assist || 0,
+    playerShotOnTargetRecords: counts.player_shot_on_target || 0,
+    playerCardRecords: counts.player_card || 0,
+    penaltyAwardedRecords: counts.penalty_awarded || 0,
+    redCardRecords: counts.red_card || 0,
     scorerRecords: (counts.anytime_scorer || 0) + (counts.first_goalscorer || 0),
-    playerPropRecords: (counts.anytime_scorer || 0) + (counts.first_goalscorer || 0) + (counts.anytime_assist || 0),
+    playerPropRecords: (counts.anytime_scorer || 0)
+      + (counts.first_goalscorer || 0)
+      + (counts.anytime_assist || 0)
+      + (counts.player_shot_on_target || 0)
+      + (counts.player_card || 0),
     survivabilityCoverage: survivabilityMarketCoverage
   };
 }

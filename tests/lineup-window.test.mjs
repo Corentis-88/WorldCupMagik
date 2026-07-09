@@ -3,7 +3,9 @@ import assert from "node:assert/strict";
 import {
   DEFAULT_LINEUP_MAX_MINUTES_BEFORE,
   DEFAULT_LINEUP_MIN_MINUTES_BEFORE,
+  isInsideFinalLineupPass,
   isInsideLineupWindow,
+  lineupFinalPassFromEnv,
   lineupWindowFromEnv,
   minutesUntilKickoff
 } from "../src/lineup-window.mjs";
@@ -33,4 +35,14 @@ test("lineup window defaults cover pre-match and just-after-kickoff checks", () 
   assert.equal(window.maxMinutesBefore, DEFAULT_LINEUP_MAX_MINUTES_BEFORE);
   assert.equal(isInsideLineupWindow({ date: "2026-06-12T19:00:00.000Z" }, new Date("2026-06-12T16:40:00.000Z"), window), false);
   assert.equal(isInsideLineupWindow({ date: "2026-06-12T19:00:00.000Z" }, new Date("2026-06-12T19:09:00.000Z"), window), true);
+});
+
+test("final lineup pass targets the 28 minute pre-kickoff check", () => {
+  const fixture = { date: "2026-06-12T19:00:00.000Z" };
+  const finalPass = lineupFinalPassFromEnv({});
+
+  assert.equal(finalPass.targetMinutesBefore, 28);
+  assert.equal(finalPass.toleranceMinutes, 4);
+  assert.equal(isInsideFinalLineupPass(fixture, new Date("2026-06-12T18:32:00.000Z"), finalPass), true);
+  assert.equal(isInsideFinalLineupPass(fixture, new Date("2026-06-12T18:20:00.000Z"), finalPass), false);
 });

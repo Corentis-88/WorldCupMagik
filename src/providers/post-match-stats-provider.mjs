@@ -185,6 +185,8 @@ export function parseFoxBoxscorePage(html, { url = "", fixtures = [], now = new 
   }
 
   const goals = parseFoxGoalEvents(html, meta);
+  const disciplineEvents = parseFoxDisciplineEvents(html, meta);
+  const penaltyEvents = parseFoxPenaltyEvents(html, meta, goals);
   const fixture = matchFixture(meta, fixtures);
   const homeTeam = fixture?.homeTeam || meta.homeTeam;
   const awayTeam = fixture?.awayTeam || meta.awayTeam;
@@ -197,6 +199,11 @@ export function parseFoxBoxscorePage(html, { url = "", fixtures = [], now = new 
     homeScorers,
     awayScorers
   });
+  const homeDisciplineEvents = disciplineEvents.filter((event) => teamMatchesWithAliases(event.team, meta.homeTeam) || teamMatchesWithAliases(event.team, homeTeam));
+  const awayDisciplineEvents = disciplineEvents.filter((event) => teamMatchesWithAliases(event.team, meta.awayTeam) || teamMatchesWithAliases(event.team, awayTeam));
+  const homePenaltyEvents = penaltyEvents.filter((event) => teamMatchesWithAliases(event.team, meta.homeTeam) || teamMatchesWithAliases(event.team, homeTeam));
+  const awayPenaltyEvents = penaltyEvents.filter((event) => teamMatchesWithAliases(event.team, meta.awayTeam) || teamMatchesWithAliases(event.team, awayTeam));
+  const penaltyCount = homePenaltyEvents.length + awayPenaltyEvents.length;
   const capturedMetricFields = [
     "score",
     "xg",
@@ -207,7 +214,9 @@ export function parseFoxBoxscorePage(html, { url = "", fixtures = [], now = new 
     stats.homeCorners != null || stats.awayCorners != null ? "corners" : "",
     stats.homeFouls != null || stats.awayFouls != null ? "fouls" : "",
     homeScorers.length || awayScorers.length ? "scorers" : "",
-    hasAssists(homeScorers) || hasAssists(awayScorers) ? "assists" : ""
+    hasAssists(homeScorers) || hasAssists(awayScorers) ? "assists" : "",
+    disciplineEvents.length ? "cards" : "",
+    penaltyCount ? "penalties" : ""
   ].filter(Boolean);
 
   return {
@@ -221,6 +230,17 @@ export function parseFoxBoxscorePage(html, { url = "", fixtures = [], now = new 
     homeGoals: score.homeGoals,
     awayGoals: score.awayGoals,
     ...stats,
+    homeYellowCards: homeDisciplineEvents.filter((event) => event.card === "yellow").length,
+    awayYellowCards: awayDisciplineEvents.filter((event) => event.card === "yellow").length,
+    homeRedCards: homeDisciplineEvents.filter((event) => event.card === "red").length,
+    awayRedCards: awayDisciplineEvents.filter((event) => event.card === "red").length,
+    homeCardedPlayers: cardedPlayers(homeDisciplineEvents),
+    awayCardedPlayers: cardedPlayers(awayDisciplineEvents),
+    penaltyAwarded: penaltyCount > 0,
+    penaltyCount,
+    homePenaltyCount: homePenaltyEvents.length,
+    awayPenaltyCount: awayPenaltyEvents.length,
+    penaltyEvents,
     homeScorers,
     awayScorers,
     provider: "post-match-stats",
@@ -322,6 +342,120 @@ function parseFoxGoalEvents(html, meta) {
   return events;
 }
 
+function parseFoxDisciplineEvents(html, meta) {
+  const events = [];
+  const blockRegex = /<div class="keyplay-title[^>]*">([^<]*(?:YELLOW|RED)[^<]*CARD[^<]*)<\/div>([\s\S]*?)<span class="keystats-desc[^>]*">([^<]+)<\/span>/gi;
+
+  for (const match of String(html || "").matchAll(blockRegex)) {
+    const title = decodeEntities(match[1]).replace(/\s+/g, " ").trim();
+    const body = match[2] || "";
+    const description = decodeEntities(match[3]).replace(/\s+/g, " ").trim();
+    const card = /\bred\b/i.test(title) || /\bred card\b/i.test(description) ? "red" : "yellow";
+    const name = extractCardedPlayerName(description);
+
+    if (!name) {
+      continue;
+    }
+
+    events.push({
+      team: keyplayTeam(title, body, meta),
+      name,
+      minute: parseMinute(description),
+      card,
+      description
+    });
+  }
+
+  return uniqueEvents(events, (event) => `${event.card}|${normalizeName(event.team)}|${normalizeName(event.name)}|${event.minute || ""}`);
+}
+
+function parseFoxPenaltyEvents(html, meta, goalEvents = []) {
+  const events = [];
+
+  for (const goal of goalEvents.filter((event) => event.penalty)) {
+    events.push({
+      team: goal.team,
+      name: goal.name,
+      minute: goal.minute,
+      scored: true,
+      source: "goal-event"
+    });
+  }
+
+  const blockRegex = /<div class="keyplay-title[^>]*">([^<]*PENALTY[^<]*)<\/div>([\s\S]*?)<span class="keystats-desc[^>]*">([^<]+)<\/span>/gi;
+
+  for (const match of String(html || "").matchAll(blockRegex)) {
+    const title = decodeEntities(match[1]).replace(/\s+/g, " ").trim();
+    const body = match[2] || "";
+    const description = decodeEntities(match[3]).replace(/\s+/g, " ").trim();
+    const name = extractPenaltyPlayerName(description);
+
+    events.push({
+      team: keyplayTeam(title, body, meta),
+      name,
+      minute: parseMinute(description),
+      scored: /\bscored\b/i.test(description) && !/\bmiss|saved\b/i.test(description),
+      source: "keyplay",
+      description
+    });
+  }
+
+  return uniqueEvents(events, (event) => `${normalizeName(event.team)}|${normalizeName(event.name)}|${event.minute || ""}|${event.scored ? "scored" : "awarded"}`);
+}
+
+function extractCardedPlayerName(description) {
+  const patterns = [
+    /([A-Z][A-Za-zÀ-ÿ'. -]+?)\s+(?:is\s+)?(?:shown|receives|gets)\s+(?:a\s+)?(?:yellow|red)\s+card/i,
+    /(?:yellow|red)\s+card\s+(?:shown\s+to|to|for)\s+([A-Z][A-Za-zÀ-ÿ'. -]+?)(?:\.|$|\s+\()/i,
+    /([A-Z][A-Za-zÀ-ÿ'. -]+?)\s+\([^)]+\)\s+(?:is\s+)?(?:shown|receives|gets)/i
+  ];
+
+  for (const pattern of patterns) {
+    const match = String(description || "").match(pattern);
+
+    if (match?.[1]) {
+      return cleanEventPlayerName(match[1]);
+    }
+  }
+
+  return "";
+}
+
+function extractPenaltyPlayerName(description) {
+  const patterns = [
+    /([A-Z][A-Za-zÀ-ÿ'. -]+?)\s+(?:scored|missed|had|takes|took)\s+(?:a\s+)?penalty/i,
+    /penalty\s+(?:by|taken by|missed by|saved from)\s+([A-Z][A-Za-zÀ-ÿ'. -]+?)(?:\.|$)/i,
+    /([A-Z][A-Za-zÀ-ÿ'. -]+?)\s+penalty/i
+  ];
+
+  for (const pattern of patterns) {
+    const match = String(description || "").match(pattern);
+
+    if (match?.[1]) {
+      return cleanEventPlayerName(match[1]);
+    }
+  }
+
+  return "";
+}
+
+function keyplayTeam(title, body, meta) {
+  const abbr = String(title || "").match(/^([A-Z]{2,5})\s+/)?.[1] || "";
+  const scoreLabels = [...String(body || "").matchAll(/>([A-Z]{2,5})\s+\d{1,2}</g)];
+
+  if (abbr && scoreLabels.length >= 2) {
+    if (abbr === scoreLabels[0][1]) {
+      return meta.homeTeam;
+    }
+
+    if (abbr === scoreLabels[1][1]) {
+      return meta.awayTeam;
+    }
+  }
+
+  return abbr;
+}
+
 function aggregateGoalEvents(events = []) {
   const byPlayer = new Map();
 
@@ -357,6 +491,38 @@ function aggregateGoalEvents(events = []) {
       assists: [...new Set(event.assists.filter(Boolean))],
       penalty: Boolean(event.penalty) || undefined
     }));
+}
+
+function cardedPlayers(events = []) {
+  return events
+    .filter((event) => event.name)
+    .map((event) => ({
+      name: event.name,
+      minute: event.minute,
+      card: event.card
+    }));
+}
+
+function uniqueEvents(events, keyFn) {
+  const byKey = new Map();
+
+  for (const event of events) {
+    const key = keyFn(event);
+
+    if (!byKey.has(key)) {
+      byKey.set(key, event);
+    }
+  }
+
+  return [...byKey.values()];
+}
+
+function cleanEventPlayerName(value) {
+  return String(value || "")
+    .replace(/\b(?:penalty|yellow|red|card|shown|receives|gets|scored|missed|saved|from|for|by)\b/gi, " ")
+    .replace(/^[^A-Za-zÀ-ÿ]+|[^A-Za-zÀ-ÿ]+$/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function finalScoreFromGoals(events, meta, { homeScorers, awayScorers }) {

@@ -10,7 +10,8 @@ const state = {
   profileCache: new Map(),
   pickProfileCache: new Map(),
   scorerCache: new Map(),
-  assistCache: new Map()
+  assistCache: new Map(),
+  eventCache: new Map()
 };
 const standardSlip = [
   ["single", "Single"],
@@ -37,7 +38,7 @@ const defaultGatheringSchedule = {
 const scorerLineupGate = {
   maxMinutesBeforeKickoff: 75,
   minMinutesBeforeKickoff: -10,
-  refreshMs: 120000
+  refreshMs: 30000
 };
 const tournamentEndDate = "2026-07-19";
 const usageInstructions = "1. Input stake per bet 2. Choose Date From 3. Choose Date To 4. Adjust risk slider 5. We add our secret sauce and some luck, we don't just go by the bookies! Enjoy!";
@@ -60,7 +61,11 @@ const el = {
   betslip: document.getElementById("betslipList"),
   pickOfDay: document.getElementById("pickOfDayList"),
   likelyScorers: document.getElementById("likelyScorersList"),
-  likelyAssists: document.getElementById("likelyAssistsList")
+  likelyAssists: document.getElementById("likelyAssistsList"),
+  likelyShots: document.getElementById("likelyShotsList"),
+  likelyCards: document.getElementById("likelyCardsList"),
+  likelyPenalties: document.getElementById("likelyPenaltiesList"),
+  likelyRedCards: document.getElementById("likelyRedCardsList")
 };
 
 for (const input of [el.stake, el.dateFrom, el.dateTo, el.risk]) {
@@ -265,6 +270,7 @@ function clearRenderCaches() {
   state.pickProfileCache.clear();
   state.scorerCache.clear();
   state.assistCache.clear();
+  state.eventCache.clear();
 }
 
 function render() {
@@ -307,6 +313,10 @@ function render() {
   renderPickOfDay(pickSlip, pickProfile || profile);
   renderLikelyGoalscorers(buildLikelyGoalscorersToday(state.data));
   renderLikelyAssists(buildLikelyAssistsToday(state.data));
+  renderLikelyPlayerEvents(el.likelyShots, buildLikelyPlayerEventsToday(state.data, "playerShotsOnTarget"), "No player shots-on-target event data is available for today yet.");
+  renderLikelyPlayerEvents(el.likelyCards, buildLikelyPlayerEventsToday(state.data, "playerCards"), "No player-card event data is available for today yet.");
+  renderLikelyBinaryEvents(el.likelyPenalties, buildLikelyBinaryEventsToday(state.data, "penalties"), "No penalty-awarded event data is available for today yet.");
+  renderLikelyBinaryEvents(el.likelyRedCards, buildLikelyBinaryEventsToday(state.data, "redCards"), "No red-card event data is available for today yet.");
 }
 
 function initialiseDateInputs() {
@@ -641,6 +651,106 @@ function renderLikelyAssists(groups) {
   }).join("");
 }
 
+function renderLikelyPlayerEvents(container, groups, emptyMessage) {
+  if (!container) {
+    return;
+  }
+
+  if (!groups.length) {
+    container.innerHTML = unavailableEventCard(emptyMessage);
+    return;
+  }
+
+  container.innerHTML = groups.map((group) => {
+    const emptyText = group.lineupNotice || "Event data is still building for this game.";
+    const players = group.players.length
+      ? group.players.map((player, index) => `
+        <li>
+          <span class="rank">${index + 1}</span>
+          <div>
+            <strong>${escapeHtml(player.playerName)}</strong>
+            <span>${escapeHtml(player.team)} | ${escapeHtml(player.reason)}</span>
+          </div>
+          <em>${percent(player.probability)}</em>
+        </li>
+      `).join("")
+      : `<li class="empty-scorers">${escapeHtml(emptyText)}</li>`;
+    const notice = group.lineupNotice && group.players.length
+      ? `<p class="why">${escapeHtml(group.lineupNotice)}</p>`
+      : "";
+
+    return `
+      <article class="scorer-card event-card">
+        <header>
+          <span class="tag scorer-tag">${escapeHtml(group.fixtureLabel)}</span>
+          <span class="score">${escapeHtml(formatKickoff(group.fixture.date))}</span>
+        </header>
+        <ol class="scorers">
+          ${players}
+        </ol>
+        ${notice}
+      </article>
+    `;
+  }).join("");
+}
+
+function renderLikelyBinaryEvents(container, groups, emptyMessage) {
+  if (!container) {
+    return;
+  }
+
+  if (!groups.length) {
+    container.innerHTML = unavailableEventCard(emptyMessage);
+    return;
+  }
+
+  container.innerHTML = groups.map((group) => {
+    const events = group.events.length
+      ? group.events.map((event) => `
+        <li>
+          <span class="rank">${escapeHtml(event.outcome)}</span>
+          <div>
+            <strong>${escapeHtml(event.event)}: ${escapeHtml(event.outcome)}</strong>
+            <span>${escapeHtml(binaryEventReason(event))}</span>
+          </div>
+          <em>${percent(event.probability)}</em>
+        </li>
+      `).join("")
+      : `<li class="empty-scorers">Event data is still building for this game.</li>`;
+
+    return `
+      <article class="scorer-card event-card">
+        <header>
+          <span class="tag scorer-tag">${escapeHtml(group.fixtureLabel)}</span>
+          <span class="score">${escapeHtml(formatKickoff(group.fixture.date))}</span>
+        </header>
+        <ol class="scorers event-outcomes">
+          ${events}
+        </ol>
+      </article>
+    `;
+  }).join("");
+}
+
+function unavailableEventCard(message) {
+  return `
+    <article class="scorer-card unavailable">
+      <header>
+        <span class="tag scorer-tag">Today</span>
+        <span class="score">waiting</span>
+      </header>
+      <p class="why">${escapeHtml(message)}</p>
+    </article>
+  `;
+}
+
+function binaryEventReason(event) {
+  const oddsText = event.decimalOdds ? ` @ ${Number(event.decimalOdds).toFixed(2)}` : "";
+  const bookmaker = event.bookmaker ? ` via ${event.bookmaker}` : "";
+
+  return `${event.reason || "model event estimate"}${bookmaker}${oddsText}`;
+}
+
 function buildLikelyGoalscorersToday(data, today = localDateKey(new Date())) {
   const cacheKey = `${data?.generatedAt || "database"}|${data?.lineupAdjustments?.generatedAt || ""}|${today}`;
 
@@ -684,6 +794,45 @@ function buildLikelyAssistsToday(data, today = localDateKey(new Date())) {
       players,
       lineupNotice: assistLineupNotice(data, fixture, players)
     };
+  }));
+}
+
+function buildLikelyPlayerEventsToday(data, marketKey, today = localDateKey(new Date())) {
+  const cacheKey = `${data?.generatedAt || "database"}|${data?.lineupAdjustments?.generatedAt || ""}|${today}|${marketKey}`;
+
+  if (state.eventCache.has(cacheKey)) {
+    return state.eventCache.get(cacheKey);
+  }
+
+  const groups = data?.likelyEventsByDate?.[today]?.[marketKey] || [];
+
+  return rememberCache(state.eventCache, cacheKey, groups.map((group) => {
+    const players = applyLineupAdjustments(group.players || [], data, group.fixture).slice(0, 5);
+
+    return {
+      ...group,
+      players,
+      lineupNotice: eventLineupNotice(data, group.fixture, players)
+    };
+  }));
+}
+
+function buildLikelyBinaryEventsToday(data, marketKey, today = localDateKey(new Date())) {
+  const groups = data?.likelyEventsByDate?.[today]?.[marketKey] || [];
+
+  return groups.map((group) => ({
+    ...group,
+    events: (group.events || []).slice().sort((left, right) => {
+      if (left.outcome === "Yes") {
+        return -1;
+      }
+
+      if (right.outcome === "Yes") {
+        return 1;
+      }
+
+      return Number(right.probability || 0) - Number(left.probability || 0);
+    })
   }));
 }
 
@@ -1335,6 +1484,43 @@ function assistLineupNotice(data, fixture, players) {
 
   if (missingTeams.length) {
     return `Showing available assist picks while waiting for confirmed ${missingTeams.join(" and ")} XI.`;
+  }
+
+  return "";
+}
+
+function eventLineupNotice(data, fixture, players) {
+  if (!isLineupRequiredForFixture(fixture)) {
+    return "";
+  }
+
+  const lineup = lineupForFixture(data, fixture);
+
+  if (!lineup) {
+    return players.length
+      ? "Team sheets are not available yet; showing model event picks until the lineup check lands."
+      : "Team sheets are not available yet and event data is still building.";
+  }
+
+  const missingTeams = [fixture.homeTeam, fixture.awayTeam]
+    .filter((team) => !isConfirmedTeamLineup(teamLineupFromRecord(lineup, team)));
+  const predictedTeams = missingTeams
+    .filter((team) => isPredictedTeamLineup(teamLineupFromRecord(lineup, team)));
+
+  if (!players.length && missingTeams.length) {
+    return `Lineup check is still incomplete for ${missingTeams.join(" and ")}; showing no player-event candidate would be unsafe.`;
+  }
+
+  if (!players.length) {
+    return "Confirmed lineups were found, but no player-event candidate matched the starting XIs.";
+  }
+
+  if (predictedTeams.length) {
+    return `Confirmed XI not published yet for ${predictedTeams.join(" and ")}; showing predicted starters from the lineup check.`;
+  }
+
+  if (missingTeams.length) {
+    return `Showing available event picks while waiting for confirmed ${missingTeams.join(" and ")} XI.`;
   }
 
   return "";
@@ -3722,6 +3908,10 @@ function marketLine(data) {
     anytime_scorer: "Anytime scorer",
     first_goalscorer: "First goalscorer",
     anytime_assist: "Anytime assist",
+    player_shot_on_target: "Player shots on target",
+    player_card: "Player carded",
+    penalty_awarded: "Penalty awarded",
+    red_card: "Red card",
     both_teams_to_score: "Both teams to score",
     double_chance: "Double chance",
     over_1_5_goals: "Over 1.5 goals",
@@ -3744,18 +3934,26 @@ function marketLine(data) {
   const anytimeCount = Number(observed.anytime_scorer || 0);
   const firstCount = Number(observed.first_goalscorer || 0);
   const assistCount = Number(observed.anytime_assist || 0);
+  const shotCount = Number(observed.player_shot_on_target || 0);
+  const cardCount = Number(observed.player_card || 0);
+  const penaltyCount = Number(observed.penalty_awarded || 0);
+  const redCardCount = Number(observed.red_card || 0);
   const scorerCount = anytimeCount + firstCount;
-  const playerPropCount = scorerCount + assistCount;
+  const eventPropCount = shotCount + cardCount + penaltyCount + redCardCount;
+  const playerPropCount = scorerCount + assistCount + shotCount + cardCount;
   const scorerText = scorerCount
-    ? ` Player prop prices found: ${playerPropCount} (${anytimeCount} anytime scorer, ${firstCount} first scorer, ${assistCount} assist).`
+    ? ` Player prop prices found: ${playerPropCount} (${anytimeCount} anytime scorer, ${firstCount} first scorer, ${assistCount} assist, ${shotCount} shots on target, ${cardCount} carded).`
     : assistCount
       ? ` Player prop prices found: ${assistCount} assist.`
       : " Player prop markets are switched on, but current public sources have not exposed player prices yet.";
+  const eventText = eventPropCount
+    ? ` Event prices found: ${eventPropCount} (${penaltyCount} penalty, ${redCardCount} red card).`
+    : "";
   const collectOnlyText = collectOnly.length
     ? ` Collect-only survival markets: ${collectOnly.map((market) => labels[market] || market).join(", ")}${survivabilityRecords ? ` (${survivabilityRecords} fresh records).` : "."}`
     : "";
 
-  return `Markets: ${active}.${scorerText}${collectOnlyText}`;
+  return `Markets: ${active}.${scorerText}${eventText}${collectOnlyText}`;
 }
 
 function percent(value) {

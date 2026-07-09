@@ -110,7 +110,7 @@ export async function fetchOddsSnapshotWithDiagnostics({ fixtures, providerConfi
   }
 
   return {
-    records: uniqueBy(records, (record) => `${record.capturedAt}|${record.bookmaker}|${record.fixtureId}|${record.market}|${record.outcome}`),
+    records: uniqueBy(records, (record) => `${record.capturedAt}|${record.bookmaker}|${record.fixtureId}|${record.market}|${record.outcome}|${record.line || ""}|${record.side || ""}`),
     diagnostics
   };
 }
@@ -206,7 +206,7 @@ function extractJsonLdOdds({ html, fixtures, source, now }) {
     }
   }
 
-  return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}`);
+  return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}|${record.line || ""}|${record.side || ""}`);
 }
 
 function matchFixtureFromJsonLd(fixtures, item) {
@@ -225,12 +225,17 @@ function matchFixtureFromJsonLd(fixtures, item) {
 function mapJsonLdOffer(offer, fixture, event) {
   const name = String(offer.name || "");
   const scorer = parseScorerOffer(name);
+  const eventOffer = parseEventOffer(name, fixture);
   const prefix = normalizeName(name.split(/[—-]/)[0]);
   const homeNames = [fixture.homeTeam, event.homeTeam?.alternateName, event.homeTeam?.name].filter(Boolean).map(normalizeName);
   const awayNames = [fixture.awayTeam, event.awayTeam?.alternateName, event.awayTeam?.name].filter(Boolean).map(normalizeName);
 
   if (scorer) {
     return { market: scorer.market, outcome: scorer.playerName, playerName: scorer.playerName, playerTeam: scorer.playerTeam };
+  }
+
+  if (eventOffer) {
+    return eventOffer;
   }
 
   const doubleChance = parseDoubleChanceOffer(name, fixture);
@@ -434,6 +439,13 @@ function extractFixtureOdds({ block, fixture, source, now }) {
     bookmaker,
     capturedAt
   }));
+  records.push(...extractEventMarketOdds({
+    block,
+    fixture,
+    source,
+    bookmaker,
+    capturedAt
+  }));
   records.push(...extractScorerMarketOdds({
     block,
     fixture,
@@ -442,7 +454,7 @@ function extractFixtureOdds({ block, fixture, source, now }) {
     capturedAt
   }));
 
-  return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}`);
+  return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}|${record.line || ""}|${record.side || ""}`);
 }
 
 function extractNamedOutcomeOdds({ block, fixture, source, bookmaker, capturedAt, now }) {
@@ -1024,6 +1036,198 @@ function addCollectOnlyRecord(records, values) {
   }));
 }
 
+function extractEventMarketOdds({ block, fixture, source, bookmaker, capturedAt }) {
+  const records = [
+    ...extractBinaryEventMarketOdds({
+      block,
+      fixture,
+      source,
+      bookmaker,
+      capturedAt,
+      market: "penalty_awarded",
+      startPattern: /(?:penalty|penalties).{0,80}?(?:awarded|taken|in match|yes|no)|(?:to be a penalty|penalty awarded)/i,
+      stopPattern: /(?:player|shots?|goalscorer|assists?|corners?|cards?|handicap|total goals|both teams|correct score|$)/i
+    }),
+    ...extractBinaryEventMarketOdds({
+      block,
+      fixture,
+      source,
+      bookmaker,
+      capturedAt,
+      market: "red_card",
+      startPattern: /(?:red card|sending off|sent off).{0,80}?(?:shown|in match|yes|no)|(?:to be a red card)/i,
+      stopPattern: /(?:player|shots?|goalscorer|assists?|corners?|yellow|cards?|handicap|total goals|both teams|correct score|$)/i
+    }),
+    ...extractPlayerShotOnTargetOdds({ block, fixture, source, bookmaker, capturedAt }),
+    ...extractPlayerCardOdds({ block, fixture, source, bookmaker, capturedAt })
+  ];
+
+  return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}|${record.line || ""}|${record.side || ""}`);
+}
+
+function extractBinaryEventMarketOdds({ block, fixture, source, bookmaker, capturedAt, market, startPattern, stopPattern }) {
+  const section = marketSection(block, startPattern, stopPattern, 1200);
+  const records = [];
+
+  if (!section) {
+    return records;
+  }
+
+  const price = oddsPricePattern();
+  const compactPair = new RegExp(`\\byes\\b[\\s\\S]{0,32}?(${price})[\\s\\S]{0,80}?\\bno\\b[\\s\\S]{0,32}?(${price})`, "i");
+  const reverseCompactPair = new RegExp(`\\bno\\b[\\s\\S]{0,32}?(${price})[\\s\\S]{0,80}?\\byes\\b[\\s\\S]{0,32}?(${price})`, "i");
+  const yesOnly = new RegExp(`\\byes\\b[\\s\\S]{0,42}?(${price})`, "i");
+  const noOnly = new RegExp(`\\bno\\b[\\s\\S]{0,42}?(${price})`, "i");
+  const compact = section.match(compactPair);
+  const reverseCompact = section.match(reverseCompactPair);
+
+  if (compact) {
+    addEventRecord(records, { fixture, source, bookmaker, capturedAt, market, outcome: "Yes", decimalOdds: compact[1] });
+    addEventRecord(records, { fixture, source, bookmaker, capturedAt, market, outcome: "No", decimalOdds: compact[2] });
+    return records;
+  }
+
+  if (reverseCompact) {
+    addEventRecord(records, { fixture, source, bookmaker, capturedAt, market, outcome: "No", decimalOdds: reverseCompact[1] });
+    addEventRecord(records, { fixture, source, bookmaker, capturedAt, market, outcome: "Yes", decimalOdds: reverseCompact[2] });
+    return records;
+  }
+
+  const yes = section.match(yesOnly);
+  const no = section.match(noOnly);
+
+  if (yes) {
+    addEventRecord(records, { fixture, source, bookmaker, capturedAt, market, outcome: "Yes", decimalOdds: yes[1] });
+  }
+
+  if (no) {
+    addEventRecord(records, { fixture, source, bookmaker, capturedAt, market, outcome: "No", decimalOdds: no[1] });
+  }
+
+  return records;
+}
+
+function extractPlayerShotOnTargetOdds({ block, fixture, source, bookmaker, capturedAt }) {
+  const section = String(block || "");
+  const records = [];
+  const name = playerEventNamePattern();
+  const price = oddsPricePattern();
+  const playerThenShot = new RegExp(`\\b(${name})(?:\\s*\\(([^)]+)\\))?\\s+(?:to\\s+have\\s+)?(?:1\\+|one\\s+or\\s+more|over\\s*0\\.?5)?\\s*(?:shots?\\s+on\\s+target|sot)\\s+(${price})`, "gi");
+  const shotThenPlayer = new RegExp(`\\b(?:1\\+|one\\s+or\\s+more|over\\s*0\\.?5)\\s+(?:shots?\\s+on\\s+target|sot)\\s+(${name})(?:\\s*\\(([^)]+)\\))?\\s+(${price})`, "gi");
+  const latestProps = new RegExp(`\\bLatest\\s+(${name})\\s+Player\\s+Prop\\s+Odds[\\s\\S]{0,220}?(?:shots?\\s+on\\s+target|sot)[\\s\\S]{0,44}?(${price})`, "gi");
+
+  for (const match of section.matchAll(playerThenShot)) {
+    addEventRecord(records, {
+      fixture,
+      source,
+      bookmaker,
+      capturedAt,
+      market: "player_shot_on_target",
+      outcome: match[1],
+      playerName: match[1],
+      playerTeam: cleanPlayerTeam(match[2], fixture),
+      decimalOdds: match[3],
+      line: "0.5",
+      side: "over"
+    });
+  }
+
+  for (const match of section.matchAll(shotThenPlayer)) {
+    addEventRecord(records, {
+      fixture,
+      source,
+      bookmaker,
+      capturedAt,
+      market: "player_shot_on_target",
+      outcome: match[1],
+      playerName: match[1],
+      playerTeam: cleanPlayerTeam(match[2], fixture),
+      decimalOdds: match[3],
+      line: "0.5",
+      side: "over"
+    });
+  }
+
+  for (const match of section.matchAll(latestProps)) {
+    addEventRecord(records, {
+      fixture,
+      source,
+      bookmaker,
+      capturedAt,
+      market: "player_shot_on_target",
+      outcome: match[1],
+      playerName: match[1],
+      decimalOdds: match[2],
+      line: "0.5",
+      side: "over"
+    });
+  }
+
+  return records;
+}
+
+function extractPlayerCardOdds({ block, fixture, source, bookmaker, capturedAt }) {
+  const section = String(block || "");
+  const records = [];
+  const name = playerEventNamePattern();
+  const price = oddsPricePattern();
+  const playerThenCard = new RegExp(`\\b(${name})(?:\\s*\\(([^)]+)\\))?\\s+(?:to\\s+be\\s+(?:shown\\s+a\\s+)?carded|to\\s+receive\\s+a\\s+card|to\\s+be\\s+booked|shown\\s+a\\s+card|yellow\\s+card|carded)\\s+(${price})`, "gi");
+  const cardThenPlayer = new RegExp(`\\b(?:to\\s+be\\s+(?:shown\\s+a\\s+)?carded|to\\s+receive\\s+a\\s+card|to\\s+be\\s+booked|shown\\s+a\\s+card|yellow\\s+card|player\\s+card)\\s+(${name})(?:\\s*\\(([^)]+)\\))?\\s+(${price})`, "gi");
+
+  for (const match of section.matchAll(playerThenCard)) {
+    addEventRecord(records, {
+      fixture,
+      source,
+      bookmaker,
+      capturedAt,
+      market: "player_card",
+      outcome: match[1],
+      playerName: match[1],
+      playerTeam: cleanPlayerTeam(match[2], fixture),
+      decimalOdds: match[3]
+    });
+  }
+
+  for (const match of section.matchAll(cardThenPlayer)) {
+    addEventRecord(records, {
+      fixture,
+      source,
+      bookmaker,
+      capturedAt,
+      market: "player_card",
+      outcome: match[1],
+      playerName: match[1],
+      playerTeam: cleanPlayerTeam(match[2], fixture),
+      decimalOdds: match[3]
+    });
+  }
+
+  return records;
+}
+
+function addEventRecord(records, values) {
+  const decimalOdds = toDecimalOdds(values.decimalOdds);
+
+  if (!decimalOdds) {
+    return;
+  }
+
+  const isPlayerMarket = ["player_shot_on_target", "player_card"].includes(values.market);
+  const playerName = cleanPlayerEventName(values.playerName || values.outcome);
+
+  if (isPlayerMarket && (!playerName || !looksLikeScorerName(playerName, values.fixture))) {
+    return;
+  }
+
+  records.push(toOddsRecord({
+    ...values,
+    outcome: isPlayerMarket ? playerName : values.outcome,
+    playerName: isPlayerMarket ? playerName : undefined,
+    decimalOdds,
+    dataOnly: true
+  }));
+}
+
 function marketSection(block, startPattern, stopPattern, maxChars = 1400) {
   const text = String(block || "");
   const start = text.search(startPattern);
@@ -1296,6 +1500,77 @@ function parseSurvivabilityOffer(name, fixture) {
   return null;
 }
 
+function parseEventOffer(name, fixture) {
+  const text = String(name || "").replace(/\s+/g, " ").trim();
+  const selection = text.split(/\s+-\s+|\s+at\s+/i)[0] || text;
+  const playerShot = parsePlayerEventSelection(selection, {
+    market: "player_shot_on_target",
+    trigger: /(?:shots?\s+on\s+target|sot|1\+\s+shots?\s+on\s+target|over\s*0\.?5\s+shots?\s+on\s+target)/i
+  });
+
+  if (playerShot) {
+    return {
+      ...playerShot,
+      outcome: playerShot.playerName,
+      line: "0.5",
+      side: "over",
+      dataOnly: true
+    };
+  }
+
+  const playerCard = parsePlayerEventSelection(selection, {
+    market: "player_card",
+    trigger: /(?:to\s+be\s+(?:shown\s+a\s+)?carded|to\s+receive\s+a\s+card|to\s+be\s+booked|shown\s+a\s+card|yellow\s+card|player\s+card)/i
+  });
+
+  if (playerCard && !/(?:red\s+card|sending\s+off|sent\s+off)/i.test(selection)) {
+    return {
+      ...playerCard,
+      outcome: playerCard.playerName,
+      dataOnly: true
+    };
+  }
+
+  if (/(?:penalty|penalties).{0,80}(?:awarded|taken|in match)|(?:to be a penalty|penalty awarded)/i.test(selection)) {
+    return {
+      market: "penalty_awarded",
+      outcome: yesNoOutcome(selection),
+      settlementType: "penalty_awarded",
+      dataOnly: true
+    };
+  }
+
+  if (/(?:red card|sending off|sent off).{0,80}(?:shown|in match|yes|no)|(?:to be a red card)/i.test(selection)) {
+    return {
+      market: "red_card",
+      outcome: yesNoOutcome(selection),
+      settlementType: "red_card",
+      dataOnly: true
+    };
+  }
+
+  return null;
+}
+
+function parsePlayerEventSelection(selection, { market, trigger }) {
+  const text = String(selection || "");
+
+  if (!trigger.test(text)) {
+    return null;
+  }
+
+  const [candidate] = text.split(trigger);
+  const playerName = cleanPlayerEventName(candidate);
+
+  return playerName && looksLikeScorerName(playerName)
+    ? { market, playerName }
+    : null;
+}
+
+function yesNoOutcome(selection) {
+  return /\bno\b/i.test(selection) && !/\byes\b/i.test(selection) ? "No" : "Yes";
+}
+
 function parseScorerOffer(name) {
   const text = String(name || "").replace(/\s+/g, " ").trim();
   const firstScorer = /(?:first\s+(?:goal)?scorer|first\s+goalscorer)/i.test(text);
@@ -1404,6 +1679,15 @@ function cleanScorerName(value) {
     .trim();
 }
 
+function cleanPlayerEventName(value) {
+  return String(value || "")
+    .replace(/\b(?:World Cup|FIFA|Odds|Price|Bet|Boost|Selection|Player|Prop|Props|Top Pick|Latest|Shots?|Shot|SOT|On Target|Target|Cards?|Carded|Booked|Booking|Yellow|Red|Shown|Receive|Penalty|Awarded|Yes|No|Over|Under)\b/gi, " ")
+    .replace(/(?:1\+|one\s+or\s+more|0\.?5)/gi, " ")
+    .replace(/^[^A-Za-z\u00C0-\u017F]+|[^A-Za-z\u00C0-\u017F]+$/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function cleanPlayerTeam(value, fixture) {
   const text = String(value || "").trim();
 
@@ -1469,6 +1753,10 @@ function scorerNamePattern() {
   return "[A-Z\\u00C0-\\u017F][A-Za-z\\u00C0-\\u017F' .-]{2,45}";
 }
 
+function playerEventNamePattern() {
+  return "[A-Z\\u00C0-\\u017F][A-Za-z\\u00C0-\\u017F' .-]{2,45}?";
+}
+
 function oddsPricePattern() {
   return "(?:\\d{1,2}\\.\\d{2}|[+-]\\d{3,4}|\\d{1,3}\\s*\\/\\s*\\d{1,3})";
 }
@@ -1496,7 +1784,7 @@ function toOddsRecord({
 }) {
   const collectOnly = dataOnly ?? SURVIVABILITY_MARKET_KEYS.includes(market);
   const record = {
-    id: makeId("odds", [capturedAt, bookmaker, fixture.id, market, outcome, decimalOdds]),
+    id: makeId("odds", [capturedAt, bookmaker, fixture.id, market, outcome, line, side, decimalOdds]),
     capturedAt,
     provider: "public-web",
     source: source.name,
