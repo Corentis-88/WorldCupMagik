@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-07-09T18:21:47.767Z",
+  "createdAt": "2026-07-10T05:07:44.357Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -9,9 +9,8 @@
     "reason": "Collecting public-web odds until the coverage gate is satisfied."
   },
   "fixtureWindow": {
-    "fixtureCount": 4,
+    "fixtureCount": 3,
     "fixtureIds": [
-      "fixture_74905ce1",
       "fixture_eb65f44a",
       "fixture_c2e307c7",
       "fixture_cb478d1"
@@ -21,8 +20,8 @@
     "marketCount": 14,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 12,
-    "freshRecordCount": 12,
+    "totalRecords": 43,
+    "freshRecordCount": 43,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -43,24 +42,34 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 18 more fresh records",
-        "needs 5 more covered fixtures",
-        "needs 1 more fixtures for coverage",
-        "needs 2 more bookmaker source(s)",
+        "needs 17 more fresh records",
+        "needs 4 more covered fixtures",
+        "needs 1 more bookmaker source(s)",
         "needs deeper bookmaker coverage per fixture",
-        "needs 2 more distinct line(s)"
+        "needs 1 more distinct line(s)"
       ],
-      "recordCount": 0,
-      "freshRecordCount": 0,
-      "fixtureCount": 0,
-      "totalFixtureCount": 4,
-      "fixtureCoverage": 0,
-      "bookmakerCount": 0,
-      "averageBookmakersPerFixture": 0,
-      "lineCount": 0,
-      "outcomeCount": 0,
-      "latestCapturedAt": null,
-      "sampleOutcomes": []
+      "recordCount": 1,
+      "freshRecordCount": 1,
+      "fixtureCount": 1,
+      "totalFixtureCount": 3,
+      "fixtureCoverage": 0.333,
+      "bookmakerCount": 1,
+      "averageBookmakersPerFixture": 1,
+      "lineCount": 1,
+      "outcomeCount": 1,
+      "latestCapturedAt": "2026-07-10T05:07:44.357Z",
+      "sampleOutcomes": [
+        {
+          "fixtureId": "fixture_c2e307c7",
+          "fixture": "Norway v England",
+          "bookmaker": "SportsGambler public prop pages: Norway v England",
+          "outcome": "Norway +0.5",
+          "line": "+0.5",
+          "team": "Norway",
+          "decimalOdds": 1.96,
+          "capturedAt": "2026-07-10T05:07:44.357Z"
+        }
+      ]
     },
     "asian_total_goals": {
       "key": "asian_total_goals",
@@ -89,7 +98,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 4,
+      "totalFixtureCount": 3,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -125,7 +134,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 4,
+      "totalFixtureCount": 3,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -161,7 +170,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 4,
+      "totalFixtureCount": 3,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -196,7 +205,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 4,
+      "totalFixtureCount": 3,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -231,7 +240,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 4,
+      "totalFixtureCount": 3,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -267,7 +276,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 4,
+      "totalFixtureCount": 3,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -303,7 +312,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 4,
+      "totalFixtureCount": 3,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -329,61 +338,59 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 10 more fresh records",
-        "needs 4 more covered fixtures",
-        "needs 1 more bookmaker source(s)",
+        "needs 3 more covered fixtures",
         "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 8,
-      "freshRecordCount": 8,
-      "fixtureCount": 1,
-      "totalFixtureCount": 4,
-      "fixtureCoverage": 0.25,
-      "bookmakerCount": 1,
+      "recordCount": 34,
+      "freshRecordCount": 34,
+      "fixtureCount": 2,
+      "totalFixtureCount": 3,
+      "fixtureCoverage": 0.667,
+      "bookmakerCount": 2,
       "averageBookmakersPerFixture": 1,
-      "lineCount": 8,
-      "outcomeCount": 8,
-      "latestCapturedAt": "2026-07-09T18:21:47.767Z",
+      "lineCount": 24,
+      "outcomeCount": 24,
+      "latestCapturedAt": "2026-07-10T05:07:44.357Z",
       "sampleOutcomes": [
         {
           "fixtureId": "fixture_eb65f44a",
           "fixture": "Spain v Belgium",
           "bookmaker": "SportsGambler public prop pages: Spain v Belgium",
-          "outcome": "Over 9.5",
-          "line": "9.5",
+          "outcome": "Over 10.5",
+          "line": "10.5",
           "team": "",
           "decimalOdds": 2.02,
-          "capturedAt": "2026-07-09T18:21:47.767Z"
+          "capturedAt": "2026-07-10T05:07:44.357Z"
         },
         {
           "fixtureId": "fixture_eb65f44a",
           "fixture": "Spain v Belgium",
           "bookmaker": "SportsGambler public prop pages: Spain v Belgium",
-          "outcome": "Under 9.5",
-          "line": "9.5",
+          "outcome": "Under 10.5",
+          "line": "10.5",
           "team": "",
           "decimalOdds": 1.71,
-          "capturedAt": "2026-07-09T18:21:47.767Z"
+          "capturedAt": "2026-07-10T05:07:44.357Z"
         },
         {
           "fixtureId": "fixture_eb65f44a",
           "fixture": "Spain v Belgium",
           "bookmaker": "SportsGambler public prop pages: Spain v Belgium",
-          "outcome": "Over 5.5",
-          "line": "5.5",
+          "outcome": "Over 6.5",
+          "line": "6.5",
           "team": "",
-          "decimalOdds": 1.84,
-          "capturedAt": "2026-07-09T18:21:47.767Z"
+          "decimalOdds": 1.89,
+          "capturedAt": "2026-07-10T05:07:44.357Z"
         },
         {
           "fixtureId": "fixture_eb65f44a",
           "fixture": "Spain v Belgium",
           "bookmaker": "SportsGambler public prop pages: Spain v Belgium",
-          "outcome": "Under 5.5",
-          "line": "5.5",
+          "outcome": "Under 6.5",
+          "line": "6.5",
           "team": "",
-          "decimalOdds": 1.84,
-          "capturedAt": "2026-07-09T18:21:47.767Z"
+          "decimalOdds": 1.79,
+          "capturedAt": "2026-07-10T05:07:44.357Z"
         },
         {
           "fixtureId": "fixture_eb65f44a",
@@ -392,8 +399,8 @@
           "outcome": "Over 3.5",
           "line": "3.5",
           "team": "",
-          "decimalOdds": 2.07,
-          "capturedAt": "2026-07-09T18:21:47.767Z"
+          "decimalOdds": 2.02,
+          "capturedAt": "2026-07-10T05:07:44.357Z"
         },
         {
           "fixtureId": "fixture_eb65f44a",
@@ -402,8 +409,8 @@
           "outcome": "Under 3.5",
           "line": "3.5",
           "team": "",
-          "decimalOdds": 1.65,
-          "capturedAt": "2026-07-09T18:21:47.767Z"
+          "decimalOdds": 1.68,
+          "capturedAt": "2026-07-10T05:07:44.357Z"
         },
         {
           "fixtureId": "fixture_eb65f44a",
@@ -412,8 +419,8 @@
           "outcome": "Over 1",
           "line": "1",
           "team": "",
-          "decimalOdds": 1.38,
-          "capturedAt": "2026-07-09T18:21:47.767Z"
+          "decimalOdds": 1.29,
+          "capturedAt": "2026-07-10T05:07:44.357Z"
         },
         {
           "fixtureId": "fixture_eb65f44a",
@@ -422,8 +429,8 @@
           "outcome": "Under 1",
           "line": "1",
           "team": "",
-          "decimalOdds": 7.5,
-          "capturedAt": "2026-07-09T18:21:47.767Z"
+          "decimalOdds": 8.5,
+          "capturedAt": "2026-07-10T05:07:44.357Z"
         }
       ]
     },
@@ -444,21 +451,21 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 14 more fresh records",
+        "needs 10 more fresh records",
         "needs 4 more covered fixtures",
         "needs 1 more bookmaker source(s)",
         "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 4,
-      "freshRecordCount": 4,
+      "recordCount": 8,
+      "freshRecordCount": 8,
       "fixtureCount": 1,
-      "totalFixtureCount": 4,
-      "fixtureCoverage": 0.25,
+      "totalFixtureCount": 3,
+      "fixtureCoverage": 0.333,
       "bookmakerCount": 1,
       "averageBookmakersPerFixture": 1,
       "lineCount": 4,
       "outcomeCount": 4,
-      "latestCapturedAt": "2026-07-09T18:21:47.767Z",
+      "latestCapturedAt": "2026-07-10T05:07:44.357Z",
       "sampleOutcomes": [
         {
           "fixtureId": "fixture_eb65f44a",
@@ -468,7 +475,7 @@
           "line": "9.7",
           "team": "Spain",
           "decimalOdds": 7.6,
-          "capturedAt": "2026-07-09T18:21:47.767Z"
+          "capturedAt": "2026-07-10T05:07:44.357Z"
         },
         {
           "fixtureId": "fixture_eb65f44a",
@@ -478,7 +485,7 @@
           "line": "9.7",
           "team": "Spain",
           "decimalOdds": 2.1,
-          "capturedAt": "2026-07-09T18:21:47.767Z"
+          "capturedAt": "2026-07-10T05:07:44.357Z"
         },
         {
           "fixtureId": "fixture_eb65f44a",
@@ -488,7 +495,7 @@
           "line": "11.2",
           "team": "Belgium",
           "decimalOdds": 7.9,
-          "capturedAt": "2026-07-09T18:21:47.767Z"
+          "capturedAt": "2026-07-10T05:07:44.357Z"
         },
         {
           "fixtureId": "fixture_eb65f44a",
@@ -498,7 +505,7 @@
           "line": "11.2",
           "team": "Belgium",
           "decimalOdds": 3.3,
-          "capturedAt": "2026-07-09T18:21:47.767Z"
+          "capturedAt": "2026-07-10T05:07:44.357Z"
         }
       ]
     },
@@ -529,7 +536,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 4,
+      "totalFixtureCount": 3,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -565,7 +572,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 4,
+      "totalFixtureCount": 3,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -600,7 +607,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 4,
+      "totalFixtureCount": 3,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -635,7 +642,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 4,
+      "totalFixtureCount": 3,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,

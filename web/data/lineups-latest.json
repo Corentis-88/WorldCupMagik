@@ -1,144 +1,16 @@
 {
-  "generatedAt": "2026-06-15T15:38:47.000Z",
-  "edition": "github-pages-lineup-manual-override",
-  "source": "Manual confirmed lineup override from user screenshots",
+  "generatedAt": "2026-07-10T04:11:09.360Z",
+  "edition": "github-pages-lineup-quick-check",
+  "source": "GitHub Actions lightweight public-web lineup scanner",
   "targetWindow": {
     "minMinutesBeforeKickoff": -10,
-    "maxMinutesBeforeKickoff": 125
+    "maxMinutesBeforeKickoff": 125,
+    "finalPassMinutesBeforeKickoff": 28,
+    "finalPassToleranceMinutes": 4
   },
-  "targetFixtureCount": 1,
-  "targetFixtures": [
-    {
-      "id": "fixture_ae576b27",
-      "date": "2026-06-15T16:00:00.000Z",
-      "homeTeam": "Spain",
-      "awayTeam": "Cape Verde",
-      "minutesUntilKickoff": 21
-    }
-  ],
-  "lineups": [
-    {
-      "id": "lineup_manual_spain_cape_verde_20260615",
-      "fixtureId": "fixture_ae576b27",
-      "fixtureDate": "2026-06-15T16:00:00.000Z",
-      "fixtureDateKey": "2026-06-15",
-      "homeTeam": "Spain",
-      "awayTeam": "Cape Verde",
-      "capturedAt": "2026-06-15T15:38:47.000Z",
-      "provider": "manual-user-confirmed",
-      "source": "User supplied confirmed lineup screenshots: Spain v Cape Verde",
-      "sourceUrl": "manual://user-screenshot/spain-v-cape-verde-2026-06-15",
-      "status": "confirmed",
-      "teams": {
-        "Spain": {
-          "status": "confirmed",
-          "formation": "4-3-3",
-          "starters": [
-            "Unai Simon",
-            "Marcos Llorente",
-            "Pau Cubarsi",
-            "Aymeric Laporte",
-            "Marc Cucurella",
-            "Pedri",
-            "Rodri",
-            "Fabian Ruiz",
-            "Ferran Torres",
-            "Mikel Oyarzabal",
-            "Gavi"
-          ],
-          "normalizedStarters": [
-            "unai simon",
-            "marcos llorente",
-            "pau cubarsi",
-            "aymeric laporte",
-            "marc cucurella",
-            "pedri",
-            "rodri",
-            "fabian ruiz",
-            "ferran torres",
-            "mikel oyarzabal",
-            "gavi"
-          ],
-          "bench": [
-            "David Raya",
-            "Marc Pubill",
-            "Alejandro Grimaldo",
-            "Eric Garcia",
-            "Mikel Merino",
-            "Dani Olmo",
-            "Yeremy Pino",
-            "Pedro Porro",
-            "Joan Garcia",
-            "Alex Baena",
-            "Nico Williams",
-            "Martin Zubimendi",
-            "Lamine Yamal",
-            "Victor Munoz",
-            "Borja Iglesias"
-          ],
-          "sourceText": "Spain confirmed lineup (4-3-3): Unai Simon, Marcos Llorente, Pau Cubarsi, Aymeric Laporte, Marc Cucurella, Pedri, Rodri, Fabian Ruiz, Ferran Torres, Mikel Oyarzabal, Gavi. Bench includes David Raya, Marc Pubill, Alejandro Grimaldo, Eric Garcia, Mikel Merino, Dani Olmo, Yeremy Pino, Pedro Porro, Joan Garcia, Alex Baena, Nico Williams, Martin Zubimendi, Lamine Yamal, Victor Munoz, Borja Iglesias."
-        },
-        "Cape Verde": {
-          "status": "confirmed",
-          "formation": "4-2-3-1",
-          "starters": [
-            "Vozinha",
-            "S. Lopes Cabral",
-            "Diney",
-            "R. Lopes",
-            "S. Moreira",
-            "L. Duarte",
-            "K. Pina",
-            "J. Cabral",
-            "J. Monteiro",
-            "R. Mendes",
-            "D. Livramento"
-          ],
-          "normalizedStarters": [
-            "vozinha",
-            "s lopes cabral",
-            "diney",
-            "r lopes",
-            "s moreira",
-            "l duarte",
-            "k pina",
-            "j cabral",
-            "j monteiro",
-            "r mendes",
-            "d livramento"
-          ],
-          "bench": [
-            "Stopira",
-            "L. Costa",
-            "J.P. Fernandes",
-            "G. Tavares",
-            "G. Rodrigues",
-            "M. Rosa",
-            "D. Duarte",
-            "Y. Semedo",
-            "W. Semedo",
-            "T. Arcanjo",
-            "N. da Costa",
-            "CJ dos Santos",
-            "W. Pina",
-            "K. Pires",
-            "H. Varela"
-          ],
-          "sourceText": "Cape Verde confirmed lineup (4-2-3-1): Vozinha, S. Lopes Cabral, Diney, R. Lopes, S. Moreira, L. Duarte, K. Pina, J. Cabral, J. Monteiro, R. Mendes, D. Livramento. Bench includes Stopira, L. Costa, J.P. Fernandes, G. Tavares, G. Rodrigues, M. Rosa, D. Duarte, Y. Semedo, W. Semedo, T. Arcanjo, N. da Costa, CJ dos Santos, W. Pina, K. Pires, H. Varela."
-        }
-      }
-    }
-  ],
-  "diagnostics": [
-    {
-      "id": "source_manual_spain_cape_verde_20260615",
-      "createdAt": "2026-06-15T15:38:47.000Z",
-      "kind": "lineups",
-      "source": "Manual user screenshots: Spain v Cape Verde",
-      "url": "manual://user-screenshot/spain-v-cape-verde-2026-06-15",
-      "status": "ok",
-      "records": 1,
-      "reason": "Confirmed lineup entered from user-provided screenshots 24 minutes before kickoff."
-    }
-  ]
+  "finalPrekickoffMode": false,
+  "targetFixtureCount": 0,
+  "targetFixtures": [],
+  "lineups": [],
+  "diagnostics": []
 }
