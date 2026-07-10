@@ -6,6 +6,7 @@ import { loadBettingPerformance } from "./betting-performance.mjs";
 import { fetchFixturesWithDiagnostics } from "./providers/fixtures-provider.mjs";
 import { fetchNewsArticlesWithDiagnostics } from "./providers/news-provider.mjs";
 import { fetchOddsSnapshotWithDiagnostics } from "./providers/odds-provider.mjs";
+import { filterOddsIntegrity } from "./providers/odds-integrity.mjs";
 import { fetchPostMatchStatsWithDiagnostics } from "./providers/post-match-stats-provider.mjs";
 import { fetchSquadDepthWithDiagnostics } from "./providers/squad-provider.mjs";
 import { fetchTeamStatsWithDiagnostics } from "./providers/stats-provider.mjs";
@@ -15,9 +16,10 @@ import { refreshPredictionReflections } from "./prediction-reflection.mjs";
 import { persistPredictionLedger } from "./prediction-ledger.mjs";
 import { loadPostMatchStats, mergePostMatchStats } from "./post-match-stats.mjs";
 import { buildLegCandidates } from "./scoring.mjs";
+import { mergeTeamStatsRecords } from "./team-stats-store.mjs";
 import { selectionBrainFit, selectionBrainMetadata } from "./selection-brain.mjs";
 import { buildSurvivabilityMarketCoverage, isSurvivabilityMarketRecord } from "./survivability-market-coverage.mjs";
-import { isoDate, makeId, normalizeName, round } from "./utils.mjs";
+import { isoDate, makeId, normalizeName, product, round } from "./utils.mjs";
 import climateProfiles from "../config/team-climate-profiles.json" with { type: "json" };
 import climateHistory from "../config/world-cup-climate-history.json" with { type: "json" };
 
@@ -160,11 +162,12 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
   }
 
   if (baseTeamStats.length) {
-    await writeJson(["data", "team-stats.json"], baseTeamStats);
+    const mergedTeamStats = mergeTeamStatsRecords(engineState.teamStats, baseTeamStats, { now });
+    await writeJson(["data", "team-stats.json"], mergedTeamStats);
     await writeJson(["data", "team-stats-latest.json"], {
       createdAt: now.toISOString(),
       providerMode: engineState.providers.stats?.mode || "self-gather",
-      teams: baseTeamStats
+      teams: mergedTeamStats
     });
   }
 
@@ -205,9 +208,11 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
 
   if (oddsRecords.length) {
     const existingOdds = (await readJson(["data", "odds-snapshots.json"], [])).filter(isPublicOddsRecord);
-    await writeJson(["data", "odds-snapshots.json"], [...oddsRecords, ...existingOdds].slice(0, 50000));
+    const acceptedOdds = filterOddsIntegrity([...oddsRecords, ...existingOdds]).accepted.slice(0, 50000);
+    await writeJson(["data", "odds-snapshots.json"], acceptedOdds);
     const existingDailyOdds = (await readJson(["data", "snapshots", `odds-${isoDate(now)}.json`], [])).filter(isPublicOddsRecord);
-    await writeJson(["data", "snapshots", `odds-${isoDate(now)}.json`], [...oddsRecords, ...existingDailyOdds].slice(0, 50000));
+    const acceptedDailyOdds = filterOddsIntegrity([...oddsRecords, ...existingDailyOdds]).accepted.slice(0, 50000);
+    await writeJson(["data", "snapshots", `odds-${isoDate(now)}.json`], acceptedDailyOdds);
   }
 
   if (heatRecords.length) {
@@ -382,7 +387,11 @@ export async function scanForBets(settings, { now = new Date(), scheduled = fals
   await writeJson(["data", "bookmaker-offer-ranking-latest.json"], offerRanking);
   await writeJson(["data", "survivability-market-coverage-latest.json"], survivabilityMarketCoverage);
   await writeJson(["data", "app-scan-latest.json"], scan);
-  await appendJsonRecords(["data", "app-scans.json"], [scan], 240);
+  const existingScans = await readJson(["data", "app-scans.json"], []);
+  await writeJson(["data", "app-scans.json"], [
+    compactAppScanHistoryRecord(scan),
+    ...existingScans.map(compactAppScanHistoryRecord)
+  ].slice(0, 240));
 
   return scan;
 }
@@ -423,6 +432,20 @@ function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, 
   const realEventTeamCoverage = selectedTeams.size
     ? [...selectedTeams].filter((team) => postMatchTeamKeys.has(team)).length / selectedTeams.size
     : 0;
+  const teamRealMetricCoverage = teamMatchSamples.map(({ team, matchCount }) => {
+    const stats = teamStatsByName.get(normalizeName(team)) || {};
+    const realMatches = Number(stats.realMetricMatchCount || stats.formMemory?.realMetricMatchCount || stats.intelligenceCoverage?.realMetricMatchCount || 0);
+    return {
+      team,
+      matchCount,
+      realMatches,
+      coverage: matchCount ? Math.min(1, realMatches / matchCount) : 0
+    };
+  });
+  const teamsWithUsefulRealMetrics = teamRealMetricCoverage.filter((team) => team.realMatches >= 3 && team.coverage >= 0.15).length;
+  const usefulRealMetricTeamCoverage = teamRealMetricCoverage.length
+    ? teamsWithUsefulRealMetrics / teamRealMetricCoverage.length
+    : 0;
   const selectedPostMatchFixtureCoverage = scanFixtures.length
     ? scanFixtures.filter((fixture) => postMatchFixtureIds.has(fixture.id)).length / scanFixtures.length
     : 0;
@@ -442,7 +465,7 @@ function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, 
     ? playerStats.filter((record) => Number(record.assists || 0) > 0 || Number(record.assistMatches || 0) > 0).length / playerStats.length
     : 0;
   const fixtureOddsCoverage = scanFixtures.length
-    ? new Set(allOddsSnapshots.filter((record) => selectedFixtureIds.has(record.fixtureId)).map((record) => record.fixtureId)).size / scanFixtures.length
+    ? new Set(oddsRecords.filter((record) => selectedFixtureIds.has(record.fixtureId)).map((record) => record.fixtureId)).size / scanFixtures.length
     : 0;
   const fixtureNewsCoverage = scanFixtures.length
     ? new Set(newsArticles.flatMap((article) => article.teamTags || [])).size / Math.max(1, new Set(scanFixtures.flatMap((fixture) => [fixture.homeTeam, fixture.awayTeam])).size)
@@ -454,15 +477,28 @@ function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, 
   const squadDepthCoverage = selectedTeams.size
     ? [...selectedTeams].filter((team) => squadTeams.has(team)).length / selectedTeams.size
     : 0;
-  const baseReady = scanFixtures.length
+  const sourceFailureRate = sourceDiagnostics.length ? (sourceErrors + sourceEmpty) / sourceDiagnostics.length : 1;
+  const coreReady = scanFixtures.length
     && oddsRecords.length
     && teamStats.length
-    && teamTwentyMatchCoverage >= 1;
-  const readiness = baseReady && (realEventTeamCoverage >= 0.45 || averageEventMetricQuality >= 0.52)
+    && teamTwentyMatchCoverage >= 1
+    && fixtureOddsCoverage >= 0.85;
+  const evidenceReady = usefulRealMetricTeamCoverage >= 0.75
+    && averageEventMetricQuality >= 0.52
+    && sourceFailureRate <= 0.35;
+  const readiness = coreReady && evidenceReady
     ? "ready"
-    : baseReady
+    : coreReady
       ? "estimated-event-data"
+      : scanFixtures.length && oddsRecords.length && teamStats.length
+        ? "partial"
       : "collecting";
+  const marketReadiness = {
+    coreResultsAndGoals: coreReady ? (evidenceReady ? "ready" : "estimated-event-data") : "partial",
+    scorers: playerStats.length && fixtureOddsCoverage >= 0.85 ? "partial" : "collecting",
+    assists: playerAssistCoverage >= 0.45 ? "ready" : playerAssistCoverage >= 0.15 ? "partial" : "collecting",
+    playerShots: playerShotCoverage >= 0.45 ? "ready" : playerShotCoverage >= 0.15 ? "partial" : "collecting"
+  };
 
   return {
     readiness,
@@ -487,6 +523,13 @@ function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, 
     teamStatsCount: teamStats.length,
     postMatchStatsRecords: postMatchStats.length,
     realPostMatchTeamCoverage: round(realEventTeamCoverage, 3),
+    usefulRealMetricTeamCoverage: round(usefulRealMetricTeamCoverage, 3),
+    teamRealMetricCoverage: teamRealMetricCoverage.map((team) => ({
+      team: team.team,
+      realMatches: team.realMatches,
+      matchCount: team.matchCount,
+      coverage: round(team.coverage, 3)
+    })),
     selectedPostMatchFixtureCoverage: round(selectedPostMatchFixtureCoverage, 3),
     averageEventMetricQuality: round(averageEventMetricQuality, 3),
     estimatedMetricOnlyTeams: estimatedMetricOnlyTeams.slice(0, 16),
@@ -507,11 +550,61 @@ function buildDataQualitySummary({ scanFixtures, oddsRecords, allOddsSnapshots, 
     missingClimateProfileTeams: missingClimateProfileTeams.slice(0, 16),
     missingHeatMemoryTeams: missingHeatMemoryTeams.slice(0, 16),
     fixtureNewsCoverage: round(fixtureNewsCoverage, 3),
+    sourceFailureRate: round(sourceFailureRate, 3),
+    marketReadiness,
     message: readiness === "ready"
       ? "Real public-web data was gathered and scored, including post-match event actuals where available."
       : readiness === "estimated-event-data"
         ? "Fixture, odds, and 20-match team samples are present, but some xG/shot inputs are still score-derived estimates and are discounted in scoring."
-        : "The database is still collecting real public-web data, including full 20-match team samples. Missing sources are visible in source health; no fake bets are generated."
+        : readiness === "partial"
+          ? "Some fixtures have usable public evidence, but the selected range does not yet have complete fresh odds and event-quality coverage."
+          : "The database is still collecting real public-web data, including full 20-match team samples. Missing sources are visible in source health."
+  };
+}
+
+function compactAppScanHistoryRecord(scan = {}) {
+  return {
+    id: scan.id,
+    createdAt: scan.createdAt,
+    scheduled: Boolean(scan.scheduled),
+    settings: scan.settings,
+    riskProfile: scan.riskProfile,
+    fixtureWindow: scan.fixtureWindow,
+    collected: scan.collected,
+    dataQuality: scan.dataQuality,
+    sourceHealth: scan.sourceHealth,
+    intelligence: scan.intelligence ? {
+      teamCount: scan.intelligence.teamCount,
+      observationCount: scan.intelligence.observationCount,
+      outcomeLearningCount: scan.intelligence.outcomeLearningCount,
+      predictionReflectionCount: scan.intelligence.predictionReflectionCount,
+      lastOutcomeSettlement: scan.intelligence.lastOutcomeSettlement,
+      lastPredictionReflection: scan.intelligence.lastPredictionReflection
+    } : null,
+    eligibleLegCount: scan.eligibleLegCount,
+    betslip: (scan.betslip || []).map((bet) => ({
+      id: bet.id,
+      category: bet.category,
+      type: bet.type,
+      legCount: bet.legCount,
+      combinedDecimalOdds: bet.combinedDecimalOdds,
+      combinedProbability: bet.combinedProbability,
+      survivalCombinedProbability: bet.survivalCombinedProbability,
+      score: bet.score,
+      legs: (bet.legs || []).map((leg) => ({
+        id: leg.id,
+        fixtureId: leg.fixtureId,
+        fixtureDate: leg.fixtureDate,
+        market: leg.market,
+        outcome: leg.outcome,
+        playerName: leg.playerName,
+        bookmaker: leg.bookmaker,
+        decimalOdds: leg.decimalOdds,
+        modelProbability: leg.modelProbability,
+        confidence: leg.confidence,
+        riskTag: leg.riskTag
+      }))
+    }))
   };
 }
 
@@ -549,31 +642,32 @@ export function buildRiskPolicy(basePolicy, riskValue) {
   }
 
   const appetite = risk / 100;
+  const survivalProgress = clampNumber(risk / 80, 0, 1);
   const edgeAppetite = clampNumber((risk - 80) / 20, 0, 1);
-  const preferredDoubleMin = 1.8 + appetite * 0.75 + edgeAppetite * 0.25;
-  const preferredDoubleMax = 4.2 + appetite * 3.9 + edgeAppetite * 1.2;
-  const preferredTrixieMin = 3 + appetite * 2.6 + edgeAppetite * 0.8;
-  const preferredTrixieMax = 10 + appetite * 11 + edgeAppetite * 5;
+  const preferredDoubleMin = 1.8 + survivalProgress * 0.7 + edgeAppetite * 0.35;
+  const preferredDoubleMax = 4.2 + survivalProgress * 2.8 + edgeAppetite * 2;
+  const preferredTrixieMin = 3 + survivalProgress * 2.2 + edgeAppetite * 1.2;
+  const preferredTrixieMax = 10 + survivalProgress * 8 + edgeAppetite * 8;
   const accumulatorRanges = {
     3: {
-      min: round(4 + appetite * 3 + edgeAppetite * 1, 2),
-      max: round(14 + appetite * 24 + edgeAppetite * 12, 2)
+      min: round(4 + survivalProgress * 2.5 + edgeAppetite * 1.5, 2),
+      max: round(14 + survivalProgress * 18 + edgeAppetite * 18, 2)
     },
     4: {
-      min: round(6 + appetite * 4.5 + edgeAppetite * 1.5, 2),
-      max: round(24 + appetite * 42 + edgeAppetite * 24, 2)
+      min: round(6 + survivalProgress * 4 + edgeAppetite * 2, 2),
+      max: round(24 + survivalProgress * 32 + edgeAppetite * 34, 2)
     },
     5: {
-      min: round(8 + appetite * 7 + edgeAppetite * 2, 2),
-      max: round(38 + appetite * 64 + edgeAppetite * 36, 2)
+      min: round(8 + survivalProgress * 6 + edgeAppetite * 3, 2),
+      max: round(38 + survivalProgress * 48 + edgeAppetite * 52, 2)
     },
     6: {
-      min: round(11 + appetite * 9 + edgeAppetite * 3, 2),
-      max: round(58 + appetite * 92 + edgeAppetite * 50, 2)
+      min: round(11 + survivalProgress * 8 + edgeAppetite * 4, 2),
+      max: round(58 + survivalProgress * 68 + edgeAppetite * 74, 2)
     },
     8: {
-      min: round(20 + appetite * 18 + edgeAppetite * 6, 2),
-      max: round(105 + appetite * 160 + edgeAppetite * 85, 2)
+      min: round(20 + survivalProgress * 15 + edgeAppetite * 9, 2),
+      max: round(105 + survivalProgress * 115 + edgeAppetite * 130, 2)
     }
   };
 
@@ -584,35 +678,36 @@ export function buildRiskPolicy(basePolicy, riskValue) {
       mode: describeRisk(risk).key,
       sliderRisk: risk,
       survivabilityFirst: true,
+      survivalProgress: round(survivalProgress, 3),
       edgeBlend: round(edgeAppetite, 3),
-      minLegEdge: round(0.03 - appetite * 0.022, 4),
-      minIndependentEdge: round(0.018 - appetite * 0.012, 4),
-      minLegConfidence: round(0.72 - appetite * 0.1, 4),
-      minIntelligenceConfidence: round(0.64 - appetite * 0.12, 4),
-      minNonMarketSignals: appetite < 0.35 ? 3 : 2,
-      minLongshotModelProbability: round(0.24 - appetite * 0.035, 4),
-      minLongshotSignals: appetite >= 0.72 ? 2 : 3,
-      minLongshotResultEdgeForce: round(60 - appetite * 10, 2),
-      maxResultLongshotDecimalOdds: round(5.5 + appetite * 1.5 + edgeAppetite * 1, 2),
-      minDrawModelProbability: round(0.25 - appetite * 0.02, 4),
-      maxDrawIndependentResultEdge: round(42 + appetite * 12, 2),
-      minBttsYesRawProbability: round(0.51 - appetite * 0.025, 4),
-      minBttsLowerTeamExpectedGoals: round(0.88 - appetite * 0.06, 4),
-      maxMarketOnlySurvivalGap: round(0.16 + appetite * 0.08, 4),
-      maxNegativeIndependentEdge: round(0.035 + appetite * 0.035, 4),
-      allowFirstGoalscorerBets: appetite >= 0.82,
-      allowAnytimeAssistBets: appetite >= 0.72,
-      maxLongSlipScorerLegs: appetite >= 0.82 ? 2 : 1,
+      minLegEdge: round(0.03 - survivalProgress * 0.012 - edgeAppetite * 0.01, 4),
+      minIndependentEdge: round(0.018 - survivalProgress * 0.006 - edgeAppetite * 0.006, 4),
+      minLegConfidence: round(0.74 - survivalProgress * 0.06 - edgeAppetite * 0.04, 4),
+      minIntelligenceConfidence: round(0.66 - survivalProgress * 0.06 - edgeAppetite * 0.06, 4),
+      minNonMarketSignals: survivalProgress < 0.55 ? 3 : 2,
+      minLongshotModelProbability: round(0.24 - edgeAppetite * 0.035, 4),
+      minLongshotSignals: edgeAppetite >= 0.6 ? 2 : 3,
+      minLongshotResultEdgeForce: round(60 - edgeAppetite * 10, 2),
+      maxResultLongshotDecimalOdds: round(5.5 + survivalProgress * 0.7 + edgeAppetite * 1.8, 2),
+      minDrawModelProbability: round(0.25 - edgeAppetite * 0.02, 4),
+      maxDrawIndependentResultEdge: round(42 + survivalProgress * 5 + edgeAppetite * 12, 2),
+      minBttsYesRawProbability: round(0.51 - survivalProgress * 0.012 - edgeAppetite * 0.013, 4),
+      minBttsLowerTeamExpectedGoals: round(0.88 - survivalProgress * 0.03 - edgeAppetite * 0.03, 4),
+      maxMarketOnlySurvivalGap: round(0.16 + survivalProgress * 0.035 + edgeAppetite * 0.045, 4),
+      maxNegativeIndependentEdge: round(0.035 + survivalProgress * 0.012 + edgeAppetite * 0.023, 4),
+      allowFirstGoalscorerBets: edgeAppetite >= 0.1,
+      allowAnytimeAssistBets: risk >= 80,
+      maxLongSlipScorerLegs: edgeAppetite >= 0.1 ? 2 : 1,
       maxLongSlipFirstScorers: appetite >= 0.95 ? 1 : 0,
-      maxFavoriteImpliedProbability: round(0.82 - appetite * 0.12, 4),
-      minDecimalOddsForRiskLeg: round(1.62 + appetite * 0.58 + edgeAppetite * 0.35, 2),
-      minBookmakerCount: appetite < 0.22 ? 2 : 1,
-      marketConfirmationWeight: round(0.34 - appetite * 0.08, 4),
-      valueHuntingWeight: round(0.1 + appetite * 0.16 + edgeAppetite * 0.12, 4),
-      contrarianWeight: round(0.015 + appetite * 0.08 + edgeAppetite * 0.1, 4),
-      minRiskLegsForTrixie: appetite >= 0.82 ? 1 : 0,
+      maxFavoriteImpliedProbability: round(0.82 - survivalProgress * 0.07 - edgeAppetite * 0.05, 4),
+      minDecimalOddsForRiskLeg: round(1.62 + survivalProgress * 0.35 + edgeAppetite * 0.58, 2),
+      minBookmakerCount: survivalProgress < 0.3 ? 2 : 1,
+      marketConfirmationWeight: round(0.34 - survivalProgress * 0.05 - edgeAppetite * 0.03, 4),
+      valueHuntingWeight: round(0.1 + survivalProgress * 0.08 + edgeAppetite * 0.2, 4),
+      contrarianWeight: round(0.015 + survivalProgress * 0.025 + edgeAppetite * 0.155, 4),
+      minRiskLegsForTrixie: edgeAppetite >= 0.1 ? 1 : 0,
       maxLegs: 8,
-      maxCombinedOdds: round(32 + appetite * 165 + edgeAppetite * 60, 2),
+      maxCombinedOdds: round(32 + survivalProgress * 88 + edgeAppetite * 137, 2),
       preferredCombinedOdds: {
         double: {
           min: round(preferredDoubleMin, 2),
@@ -747,43 +842,51 @@ export function selectBetslip({ recommendations, stake, risk }) {
   const stakePerBet = round(totalStake, 2);
 
   return selected.map(({ category, combo }, index) => {
-    const potentialReturn = calculatePotentialReturn(combo, stakePerBet);
-    const selection = selectionBrainMetadata(combo, { risk, category });
+    const truthfulCombo = comboWithTruthfulOdds(combo);
+    const potentialReturn = truthfulCombo.directlyPlaceable ? calculatePotentialReturn(truthfulCombo, stakePerBet) : null;
+    const selection = selectionBrainMetadata(truthfulCombo, { risk, category });
 
     return {
-      id: combo.id,
+      id: truthfulCombo.id,
       rank: index + 1,
       category: category.key,
       label: category.label,
-      type: combo.type,
-      score: combo.score,
-      legCount: combo.legCount,
-      combinedDecimalOdds: combo.combinedDecimalOdds,
-      uncappedCombinedDecimalOdds: combo.uncappedCombinedDecimalOdds,
-      fallbackCombinedOddsCap: combo.fallbackCombinedOddsCap,
+      type: truthfulCombo.type,
+      score: truthfulCombo.score,
+      legCount: truthfulCombo.legCount,
+      combinedDecimalOdds: truthfulCombo.combinedDecimalOdds,
       stake: stakePerBet,
       potentialReturn,
-      potentialProfit: round(Math.max(0, potentialReturn - stakePerBet), 2),
-      combinedProbability: combo.combinedProbability,
-      expectedValue: combo.expectedValue,
-      averageConfidence: combo.averageConfidence,
-      averageIndependentEdge: combo.averageIndependentEdge,
-      survivalCombinedProbability: combo.survivalCombinedProbability,
-      averageSurvivalProbability: combo.averageSurvivalProbability,
-      averageNonMarketSignalCount: combo.averageNonMarketSignalCount,
-      displayRating: combo.displayRating,
-      riskLegCount: combo.riskLegCount,
-      bttsLegCount: combo.bttsLegCount,
-      scorerLegCount: combo.scorerLegCount,
-      firstScorerLegCount: combo.firstScorerLegCount,
-      fragileLegCount: combo.fragileLegCount,
-      correlationPenalty: combo.correlationPenalty,
-      correlationReasons: combo.correlationReasons,
-      marketFamilyMix: combo.marketFamilyMix,
-      repeatedTeamCount: combo.repeatedTeamCount,
-      sameDateCluster: combo.sameDateCluster,
-      shortWindowFallback: combo.shortWindowFallback,
-      reusedSignalCount: combo.reusedSignalCount,
+      potentialProfit: potentialReturn === null ? null : round(Math.max(0, potentialReturn - stakePerBet), 2),
+      returnStatus: truthfulCombo.directlyPlaceable ? "executable" : "research_only",
+      combinedProbability: truthfulCombo.combinedProbability,
+      expectedValue: truthfulCombo.expectedValue,
+      averageConfidence: truthfulCombo.averageConfidence,
+      averageIndependentEdge: truthfulCombo.averageIndependentEdge,
+      survivalCombinedProbability: truthfulCombo.survivalCombinedProbability,
+      averageSurvivalProbability: truthfulCombo.averageSurvivalProbability,
+      averageNonMarketSignalCount: truthfulCombo.averageNonMarketSignalCount,
+      displayRating: truthfulCombo.displayRating,
+      riskLegCount: truthfulCombo.riskLegCount,
+      bttsLegCount: truthfulCombo.bttsLegCount,
+      scorerLegCount: truthfulCombo.scorerLegCount,
+      firstScorerLegCount: truthfulCombo.firstScorerLegCount,
+      fragileLegCount: truthfulCombo.fragileLegCount,
+      correlationPenalty: truthfulCombo.correlationPenalty,
+      correlationReasons: truthfulCombo.correlationReasons,
+      marketFamilyMix: truthfulCombo.marketFamilyMix,
+      repeatedTeamCount: truthfulCombo.repeatedTeamCount,
+      sameDateCluster: truthfulCombo.sameDateCluster,
+      shortWindowFallback: truthfulCombo.shortWindowFallback,
+      bestAvailableFallback: truthfulCombo.bestAvailableFallback,
+      reusedSignalCount: truthfulCombo.reusedSignalCount,
+      placeabilityStatus: truthfulCombo.placeabilityStatus,
+      directlyPlaceable: truthfulCombo.directlyPlaceable,
+      placeableBookmaker: truthfulCombo.placeableBookmaker,
+      bookmakerKey: truthfulCombo.bookmakerKey,
+      sourceBookmakers: truthfulCombo.sourceBookmakers,
+      sourcePublishers: truthfulCombo.sourcePublishers,
+      placeabilityReason: truthfulCombo.placeabilityReason,
       selectionIntent: selection.selectionIntent,
       recommendedUse: selection.recommendedUse,
       selectionQuality: selection.selectionQuality,
@@ -794,8 +897,8 @@ export function selectBetslip({ recommendations, stake, risk }) {
       freeBetConversion: selection.freeBetConversion,
       probabilityRange: selection.probabilityRange,
       portfolioWarnings: selection.portfolioWarnings,
-      legs: combo.legs,
-      thesis: combo.thesis
+      legs: truthfulCombo.legs,
+      thesis: truthfulCombo.thesis
     };
   });
 }
@@ -804,16 +907,18 @@ function selectMostLikelyBetslip({ picks, stake }) {
   const stakePerBet = round(clampNumber(stake, 1, 100000), 2);
 
   return (picks || []).map((combo, index) => {
-    const potentialReturn = calculatePotentialReturn(combo, stakePerBet);
-    const category = categoryForCombo(combo);
-    const selection = selectionBrainMetadata(combo, { risk: 0, category });
+    const truthfulCombo = comboWithTruthfulOdds(combo);
+    const potentialReturn = truthfulCombo.directlyPlaceable ? calculatePotentialReturn(truthfulCombo, stakePerBet) : null;
+    const category = categoryForCombo(truthfulCombo);
+    const selection = selectionBrainMetadata(truthfulCombo, { risk: 0, category });
 
     return {
-      ...combo,
+      ...truthfulCombo,
       rank: index + 1,
       stake: stakePerBet,
       potentialReturn,
-      potentialProfit: round(Math.max(0, potentialReturn - stakePerBet), 2),
+      potentialProfit: potentialReturn === null ? null : round(Math.max(0, potentialReturn - stakePerBet), 2),
+      returnStatus: truthfulCombo.directlyPlaceable ? "executable" : "research_only",
       selectionIntent: selection.selectionIntent,
       recommendedUse: selection.recommendedUse,
       selectionQuality: selection.selectionQuality,
@@ -884,8 +989,10 @@ function bestSingleForRisk(combos, risk, category = {}) {
     return bestCombo(combos, 0, category);
   }
 
-  const targetOdds = 1.48 + appetite * 2.35;
-  const targetRisk = appetite * 3;
+  const survivalProgress = clampNumber(risk / 80, 0, 1);
+  const edgeBlend = clampNumber((risk - 80) / 20, 0, 1);
+  const targetOdds = 1.45 + survivalProgress * 1.1 + edgeBlend * 1.25;
+  const targetRisk = survivalProgress * 1.5 + edgeBlend * 1.5;
 
   return [...combos].sort((left, right) => {
     return singleRiskFit(right, targetOdds, targetRisk, appetite, risk, category) - singleRiskFit(left, targetOdds, targetRisk, appetite, risk, category);
@@ -901,15 +1008,16 @@ function singleRiskFit(combo, targetOdds, targetRisk, appetite, risk, category =
   const oddsFit = Math.max(0, 1 - Math.abs(Math.log(Math.max(1.01, odds) / targetOdds)) / 0.78);
   const tagFit = Math.max(0, 1 - Math.abs(riskTagLevel(leg.riskTag) - targetRisk) / 3);
   const lowRiskStability = appetite < 0.38 && ["steady_edge", "value_favourite", "market_confirmed_edge"].includes(leg.riskTag) ? 9 : 0;
-  const edgeBlend = clampNumber((appetite - 0.8) / 0.2, 0, 1);
+  const survivalProgress = clampNumber(risk / 80, 0, 1);
+  const edgeBlend = clampNumber((risk - 80) / 20, 0, 1);
   const highRiskPrice = edgeBlend > 0 && ["calculated_risk", "longshot_value", "contrarian_value"].includes(leg.riskTag) ? 4 * edgeBlend : 0;
 
   const baseFit = (Number(combo.score || 0) * 0.1)
-    + oddsFit * (34 - edgeBlend * 10)
-    + tagFit * 14
-    + comboSurvivalFit(combo, appetite) * 0.62
-    + confidence * (28 - appetite * 4)
-    + edge * (14 + edgeBlend * 24)
+    + oddsFit * (18 + survivalProgress * 12 + edgeBlend * 8)
+    + tagFit * (8 + survivalProgress * 5)
+    + comboSurvivalFit(combo) * (0.84 - survivalProgress * 0.14 - edgeBlend * 0.16)
+    + confidence * (24 - survivalProgress * 3)
+    + edge * edgeBlend * 38
     + Math.min(8, Math.max(-4, expectedValue * 6)) * edgeBlend
     + lowRiskStability
     + highRiskPrice;
@@ -946,46 +1054,50 @@ function bestCombo(combos, risk = 50, category = {}) {
 }
 
 function comboSelectionFit(combo, appetite, risk, category = {}) {
-  return comboFit(combo, appetite) * 0.72
-    + selectionBrainFit(combo, { risk, category }) * 0.28;
+  const survivalProgress = clampNumber(risk / 80, 0, 1);
+  const edgeBlend = clampNumber((risk - 80) / 20, 0, 1);
+  return comboFit(combo, appetite, risk) * (0.78 - survivalProgress * 0.16 - edgeBlend * 0.14)
+    + selectionBrainFit(combo, { risk, category }) * (0.22 + survivalProgress * 0.16 + edgeBlend * 0.14);
 }
 
-function comboFit(combo, appetite) {
-  const edgeBlend = clampNumber((appetite - 0.8) / 0.2, 0, 1);
-  const survivalFit = comboSurvivalFit(combo, appetite);
+function comboFit(combo, appetite, risk = appetite * 100) {
+  const survivalProgress = clampNumber(risk / 80, 0, 1);
+  const edgeBlend = clampNumber((risk - 80) / 20, 0, 1);
+  const survivalFit = comboSurvivalFit(combo);
   const expectedValue = Number(combo.expectedValue || 0);
   const independentEdge = Number(combo.averageIndependentEdge ?? combo.averageEdge ?? combo.legs?.[0]?.independentEdge ?? combo.legs?.[0]?.edge ?? 0);
   const odds = Number(combo.combinedDecimalOdds || 1);
   const legCount = Number(combo.legCount || combo.legs?.length || 1);
-  const longOddsPenalty = legCount === 1
-    ? Math.max(0, odds - (2.15 + appetite * 0.75 + edgeBlend * 0.45)) * (7 - edgeBlend * 2)
-    : Math.max(0, Math.log(Math.max(1, odds)) - (1.2 + legCount * 0.38 + appetite * 0.35)) * (5 - edgeBlend * 1.5);
+  const targetPerLegOdds = 1.42 + survivalProgress * 0.42 + edgeBlend * 0.5;
+  const targetOdds = legCount === 1 ? targetPerLegOdds : Math.pow(targetPerLegOdds, legCount);
+  const progressiveOddsFit = clampNumber(1 - Math.abs(Math.log(Math.max(1.01, odds) / targetOdds)) / 1.15, 0, 1);
+  const longOddsPenalty = Math.max(0, Math.log(Math.max(1, odds / targetOdds))) * (7 - edgeBlend * 2);
 
-  return survivalFit
-    + Number(combo.score || 0) * (0.18 - edgeBlend * 0.06)
-    + independentEdge * (18 + edgeBlend * 28)
+  return survivalFit * (0.9 - survivalProgress * 0.12 - edgeBlend * 0.16)
+    + progressiveOddsFit * (8 + survivalProgress * 14 + edgeBlend * 10)
+    + Number(combo.score || 0) * (0.14 - edgeBlend * 0.03)
+    + independentEdge * edgeBlend * 46
     + Math.max(-4, Math.min(8, expectedValue * 5)) * edgeBlend
     - longOddsPenalty;
 }
 
-function comboSurvivalFit(combo, appetite) {
+function comboSurvivalFit(combo) {
   const survival = Number(combo.survivalCombinedProbability || combo.combinedProbability || 0);
   const averageSurvival = Number(combo.averageSurvivalProbability || combo.combinedProbability || 0);
   const confidence = Number(combo.averageConfidence || combo.legs?.[0]?.confidence || 0);
   const displayRating = Number(combo.displayRating || 0);
   const probability = Number(combo.combinedProbability || 0);
-  const edgeBlend = clampNumber((appetite - 0.8) / 0.2, 0, 1);
 
-  return survival * (110 - edgeBlend * 22)
-    + averageSurvival * (34 - edgeBlend * 7)
-    + probability * (24 - edgeBlend * 6)
+  return survival * 110
+    + averageSurvival * 34
+    + probability * 24
     + confidence * 22
     + displayRating * 18;
 }
 
 function calculatePotentialReturn(combo, stake) {
   if (combo.type !== "trixie" || combo.legs.length !== 3) {
-    return round(stake * Number(combo.combinedDecimalOdds || 0), 2);
+    return round(stake * product(combo.legs.map((leg) => Number(leg.decimalOdds))), 2);
   }
 
   const odds = combo.legs.map((leg) => Number(leg.decimalOdds || 1));
@@ -993,6 +1105,19 @@ function calculatePotentialReturn(combo, stake) {
   const doubleReturns = (odds[0] * odds[1]) + (odds[0] * odds[2]) + (odds[1] * odds[2]);
   const trebleReturn = odds[0] * odds[1] * odds[2];
   return round(unit * (doubleReturns + trebleReturn), 2);
+}
+
+function comboWithTruthfulOdds(combo = {}) {
+  const legs = combo.legs || [];
+  const combinedDecimalOdds = round(product(legs.map((leg) => Number(leg.decimalOdds))), 6);
+  const combinedProbability = Number(combo.combinedProbability || 0);
+  const { uncappedCombinedDecimalOdds: _uncapped, fallbackCombinedOddsCap: _cap, ...rest } = combo;
+
+  return {
+    ...rest,
+    combinedDecimalOdds,
+    expectedValue: round(combinedProbability * combinedDecimalOdds - 1, 4)
+  };
 }
 
 function isPublicFixture(fixture) {

@@ -3,6 +3,7 @@ import { SURVIVABILITY_MARKET_KEYS } from "../survivability-market-coverage.mjs"
 import { makeId, normalizeName } from "../utils.mjs";
 import {
   escapeRegExp,
+  extractHtmlTables,
   extractJsonLd,
   fetchPublicText,
   htmlToText,
@@ -11,6 +12,7 @@ import {
   toDecimalOdds,
   uniqueBy
 } from "./public-source.mjs";
+import { filterOddsIntegrity } from "./odds-integrity.mjs";
 
 export async function fetchOddsSnapshot({ fixtures, providerConfig, now = new Date() }) {
   const result = await fetchOddsSnapshotWithDiagnostics({ fixtures, providerConfig, now });
@@ -44,7 +46,12 @@ export async function fetchOddsSnapshotWithDiagnostics({ fixtures, providerConfi
           continue;
         }
 
-        const fixtureSource = { ...source, url, name: `${source.name}: ${fixture.homeTeam} v ${fixture.awayTeam}` };
+        const fixtureSource = {
+          ...source,
+          url,
+          publisher: source.publisher || source.name,
+          name: `${source.name}: ${fixture.homeTeam} v ${fixture.awayTeam}`
+        };
 
         try {
           const html = await fetchPublicText(url, providerConfig);
@@ -109,10 +116,33 @@ export async function fetchOddsSnapshotWithDiagnostics({ fixtures, providerConfi
     }
   }
 
+  const integrity = filterOddsIntegrity(records);
+  diagnostics.push({
+    ...sourceDiagnostic({
+      kind: "odds-integrity",
+      source: { name: "Odds integrity gate" },
+      status: integrity.quarantined.length ? "warning" : "ok",
+      records: integrity.accepted.length,
+      reason: integrity.quarantined.length
+        ? `Quarantined ${integrity.quarantined.length} record(s): ${formatReasonCounts(integrity.reasonCounts)}.`
+        : "All extracted odds passed integrity checks.",
+      now
+    }),
+    quarantinedRecords: integrity.quarantined.length,
+    quarantineReasons: integrity.reasonCounts
+  });
+
   return {
-    records: uniqueBy(records, (record) => `${record.capturedAt}|${record.bookmaker}|${record.fixtureId}|${record.market}|${record.outcome}|${record.line || ""}|${record.side || ""}`),
+    records: integrity.accepted,
     diagnostics
   };
+}
+
+function formatReasonCounts(reasonCounts) {
+  return Object.entries(reasonCounts)
+    .sort(([left], [right]) => left.localeCompare(right))
+    .map(([reason, count]) => `${reason}=${count}`)
+    .join(", ");
 }
 
 async function loadSources(providerConfig) {
@@ -149,12 +179,17 @@ function extractOddsFromPage({ html, fixtures, source, now }) {
 
   const text = htmlToText(html);
   const records = [];
+  const tables = extractHtmlTables(html);
 
   for (const fixture of fixtures) {
     const blocks = fixtureBlocks(text, fixture, source);
 
     for (const block of blocks) {
       records.push(...extractFixtureOdds({ block, fixture, source, now }));
+    }
+
+    for (const table of tables) {
+      records.push(...extractTotalGoalTableOdds({ table, fixture, source, now }));
     }
   }
 
@@ -189,7 +224,7 @@ function extractJsonLdOdds({ html, fixtures, source, now }) {
       records.push(toOddsRecord({
         fixture,
         source,
-        bookmaker: offer.offeredBy?.name || source.bookmaker || source.name,
+        bookmaker: offer.offeredBy?.name || source.bookmaker || null,
         capturedAt,
         market: mapped.market,
         outcome: mapped.outcome,
@@ -206,7 +241,7 @@ function extractJsonLdOdds({ html, fixtures, source, now }) {
     }
   }
 
-  return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}|${record.line || ""}|${record.side || ""}`);
+  return records;
 }
 
 function matchFixtureFromJsonLd(fixtures, item) {
@@ -309,7 +344,7 @@ function fixtureBlocks(text, fixture, source = {}) {
   const raw = String(text || "");
 
   if (source.fullPageFixtureBlock && normalized.includes(home) && normalized.includes(away)) {
-    blocks.push(raw.slice(0, Number(source.maxFixtureBlockChars || 45000)));
+    return [raw.slice(0, Number(source.maxFixtureBlockChars || 45000))];
   }
 
   const patterns = [
@@ -338,7 +373,7 @@ function fixtureBlocks(text, fixture, source = {}) {
 function extractFixtureOdds({ block, fixture, source, now }) {
   const records = [];
   const capturedAt = now.toISOString();
-  const bookmaker = source.bookmaker || source.name;
+  const bookmaker = source.bookmaker || null;
 
   records.push(...extractNamedOutcomeOdds({
     block,
@@ -361,56 +396,6 @@ function extractFixtureOdds({ block, fixture, source, now }) {
     source,
     bookmaker,
     capturedAt
-  }));
-  records.push(...extractMarketPairOdds({
-    block,
-    fixture,
-    source,
-    bookmaker,
-    capturedAt,
-    market: "over_1_5_goals",
-    outcome: "Over",
-    labelPattern: /(?:over|o)\s*1\.?5/i
-  }));
-  records.push(...extractMarketPairOdds({
-    block,
-    fixture,
-    source,
-    bookmaker,
-    capturedAt,
-    market: "over_2_5_goals",
-    outcome: "Over",
-    labelPattern: /(?:over|o)\s*2\.?5/i
-  }));
-  records.push(...extractMarketPairOdds({
-    block,
-    fixture,
-    source,
-    bookmaker,
-    capturedAt,
-    market: "under_2_5_goals",
-    outcome: "Under",
-    labelPattern: /(?:under|u)\s*2\.?5/i
-  }));
-  records.push(...extractMarketPairOdds({
-    block,
-    fixture,
-    source,
-    bookmaker,
-    capturedAt,
-    market: "under_3_5_goals",
-    outcome: "Under",
-    labelPattern: /(?:under|u)\s*3\.?5/i
-  }));
-  records.push(...extractMarketPairOdds({
-    block,
-    fixture,
-    source,
-    bookmaker,
-    capturedAt,
-    market: "under_4_5_goals",
-    outcome: "Under",
-    labelPattern: /(?:under|u)\s*4\.?5/i
   }));
   records.push(...extractMarketPairOdds({
     block,
@@ -454,7 +439,7 @@ function extractFixtureOdds({ block, fixture, source, now }) {
     capturedAt
   }));
 
-  return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}|${record.line || ""}|${record.side || ""}`);
+  return records;
 }
 
 function extractNamedOutcomeOdds({ block, fixture, source, bookmaker, capturedAt, now }) {
@@ -596,63 +581,130 @@ function extractTotalGoalLineOdds({ block, fixture, source, bookmaker, capturedA
   }
 
   const records = [];
-  const price = oddsPricePattern();
-  const lines = [
-    { line: "1.5", overMarket: "over_1_5_goals" },
-    { line: "2.5", overMarket: "over_2_5_goals", underMarket: "under_2_5_goals" },
-    { line: "3.5", underMarket: "under_3_5_goals" },
-    { line: "4.5", underMarket: "under_4_5_goals" }
-  ];
+  let columnOrder = null;
 
-  for (const item of lines) {
-    const linePattern = item.line.replace(".", "\\.?");
-    const rowPattern = new RegExp(`\\b${linePattern}\\b[\\s\\S]{0,24}?(${price})[\\s\\S]{0,24}?(${price})`, "i");
-    const row = rowPattern.exec(section);
-
-    if (!row) {
-      continue;
+  for (const row of String(section).split(/\r?\n/).map((value) => value.trim()).filter(Boolean)) {
+    const headerOrder = totalColumnOrder(row);
+    if (headerOrder) {
+      columnOrder = headerOrder;
     }
 
-    const beforeLine = section.slice(Math.max(0, row.index - 14), row.index).toLowerCase();
-
-    if (/[a-z]\s*$/.test(beforeLine)) {
-      continue;
-    }
-
-    if (item.overMarket) {
-      const decimalOdds = toDecimalOdds(row[1]);
-
-      if (decimalOdds) {
-        records.push(toOddsRecord({
-          fixture,
-          source,
-          bookmaker,
-          capturedAt,
-          market: item.overMarket,
-          outcome: "Over",
-          decimalOdds
-        }));
+    for (const line of ["1.5", "2.5", "3.5", "4.5"]) {
+      const explicit = explicitTotalPrices(row, line);
+      if (explicit.overPrice || explicit.underPrice) {
+        addStandardTotalRecords(records, { fixture, source, bookmaker, capturedAt, line, ...explicit });
+        continue;
       }
-    }
 
-    if (item.underMarket) {
-      const decimalOdds = toDecimalOdds(row[2]);
-
-      if (decimalOdds) {
-        records.push(toOddsRecord({
-          fixture,
-          source,
-          bookmaker,
-          capturedAt,
-          market: item.underMarket,
-          outcome: "Under",
-          decimalOdds
-        }));
+      const paired = pairedTotalPrices(row, line, columnOrder);
+      if (paired) {
+        addStandardTotalRecords(records, { fixture, source, bookmaker, capturedAt, line, ...paired });
       }
     }
   }
 
   return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}`);
+}
+
+function extractTotalGoalTableOdds({ table, fixture, source, now }) {
+  const headerIndex = table.findIndex((row) => row.some((cell) => /^over$/i.test(cell)) && row.some((cell) => /^under$/i.test(cell)));
+  if (headerIndex < 0) {
+    return [];
+  }
+
+  const header = table[headerIndex].map((cell) => String(cell).trim().toLowerCase());
+  const overIndex = header.indexOf("over");
+  const underIndex = header.indexOf("under");
+  const lineIndex = header.findIndex((cell) => /^(?:line|goals?|total goals?)$/.test(cell));
+  const records = [];
+  const capturedAt = now.toISOString();
+  const bookmaker = source.bookmaker || null;
+
+  for (const row of table.slice(headerIndex + 1)) {
+    const lineCellIndex = lineIndex >= 0 ? lineIndex : row.findIndex((cell) => /^(?:[1-4][.,]?5)$/.test(String(cell).trim()));
+    const line = String(row[lineCellIndex] || "").replace(",", ".").match(/\b(1\.5|2\.5|3\.5|4\.5)\b/)?.[1];
+    if (!line) {
+      continue;
+    }
+
+    addStandardTotalRecords(records, {
+      fixture,
+      source,
+      bookmaker,
+      capturedAt,
+      line,
+      overPrice: toDecimalOdds(row[overIndex]),
+      underPrice: toDecimalOdds(row[underIndex])
+    });
+  }
+
+  return records;
+}
+
+function explicitTotalPrices(row, line) {
+  const price = oddsPricePattern();
+  const escapedLine = line.replace(".", "\\.");
+  const result = {};
+
+  for (const side of ["Over", "Under"]) {
+    const patterns = [
+      new RegExp(`\\b${side}\\s*(?:goals?\\s*)?${escapedLine}\\b[^\\d+-]{0,18}(${price})`, "i"),
+      new RegExp(`\\b${escapedLine}\\s*(?:goals?\\s*)?${side}\\b[^\\d+-]{0,18}(${price})`, "i")
+    ];
+    const match = patterns.map((pattern) => pattern.exec(row)).find(Boolean);
+    const decimalOdds = match ? toDecimalOdds(match[1]) : null;
+    if (decimalOdds) {
+      result[side === "Over" ? "overPrice" : "underPrice"] = decimalOdds;
+    }
+  }
+
+  return result;
+}
+
+function pairedTotalPrices(row, line, inheritedOrder) {
+  const price = oddsPricePattern();
+  const escapedLine = line.replace(".", "\\.");
+  const match = new RegExp(`\\b${escapedLine}\\b\\s*(?:goals?\\s*)?(${price})\\s+(${price})`, "i").exec(row);
+  if (!match) {
+    return null;
+  }
+
+  const localOrder = totalColumnOrder(row.slice(0, match.index)) || inheritedOrder;
+  if (!localOrder) {
+    return null;
+  }
+
+  const first = toDecimalOdds(match[1]);
+  const second = toDecimalOdds(match[2]);
+  return localOrder[0] === "Over"
+    ? { overPrice: first, underPrice: second }
+    : { underPrice: first, overPrice: second };
+}
+
+function totalColumnOrder(value) {
+  const text = String(value || "").replace(/[|:]/g, " ").replace(/\s+/g, " ").trim();
+  const over = text.search(/\bover\b/i);
+  const under = text.search(/\bunder\b/i);
+  if (over < 0 || under < 0) {
+    return null;
+  }
+  return over < under ? ["Over", "Under"] : ["Under", "Over"];
+}
+
+function addStandardTotalRecords(records, { fixture, source, bookmaker, capturedAt, line, overPrice, underPrice }) {
+  const markets = {
+    "1.5": { over: "over_1_5_goals" },
+    "2.5": { over: "over_2_5_goals", under: "under_2_5_goals" },
+    "3.5": { under: "under_3_5_goals" },
+    "4.5": { under: "under_4_5_goals" }
+  }[line];
+
+  if (markets?.over && overPrice) {
+    records.push(toOddsRecord({ fixture, source, bookmaker, capturedAt, market: markets.over, outcome: "Over", decimalOdds: overPrice }));
+  }
+  if (markets?.under && underPrice) {
+    records.push(toOddsRecord({ fixture, source, bookmaker, capturedAt, market: markets.under, outcome: "Under", decimalOdds: underPrice }));
+  }
 }
 
 function doubleChanceSection(block) {
@@ -1114,7 +1166,7 @@ function extractEventMarketOdds({ block, fixture, source, bookmaker, capturedAt 
     ...extractPlayerCardOdds({ block, fixture, source, bookmaker, capturedAt })
   ];
 
-  return uniqueBy(records, (record) => `${record.fixtureId}|${record.market}|${record.outcome}|${record.bookmaker}|${record.line || ""}|${record.side || ""}`);
+  return records;
 }
 
 function extractBinaryEventMarketOdds({ block, fixture, source, bookmaker, capturedAt, market, startPattern, stopPattern }) {
@@ -2255,13 +2307,20 @@ function toOddsRecord({
   dataOnly
 }) {
   const collectOnly = dataOnly ?? SURVIVABILITY_MARKET_KEYS.includes(market);
+  const provenance = oddsProvenance(source, bookmaker);
   const record = {
-    id: makeId("odds", [capturedAt, bookmaker, fixture.id, market, outcome, line, side, decimalOdds]),
+    id: makeId("odds", [capturedAt, provenance.pricePublisher, bookmaker, fixture.id, market, outcome, line, side, decimalOdds]),
     capturedAt,
     provider: "public-web",
     source: source.name,
     sourceUrl: source.url,
-    bookmaker,
+    pricePublisher: provenance.pricePublisher,
+    publisherType: provenance.publisherType,
+    bookmaker: provenance.bookmaker,
+    bookmakerKey: provenance.bookmakerKey,
+    bookmakerVerified: provenance.bookmakerVerified,
+    bookmakerAttributionSource: provenance.bookmakerAttributionSource,
+    priceProvenance: provenance.priceProvenance,
     fixtureId: fixture.id,
     fixtureDate: fixture.date,
     homeTeam: fixture.homeTeam,
@@ -2284,4 +2343,30 @@ function toOddsRecord({
   }
 
   return record;
+}
+
+function oddsProvenance(source, attributedBookmaker) {
+  const pricePublisher = source.publisher || source.name || "Unknown publisher";
+  const bookmaker = attributedBookmaker || null;
+  const verifiedBookmakers = Array.isArray(source.verifiedBookmakers) ? source.verifiedBookmakers : [];
+  const bookmakerVerified = Boolean(bookmaker) && (
+    (source.bookmakerVerified === true && normalizeName(source.bookmaker || "") === normalizeName(bookmaker))
+    || verifiedBookmakers.some((name) => normalizeName(name) === normalizeName(bookmaker))
+  );
+  const publisherType = source.publisherType
+    || (bookmakerVerified && normalizeName(pricePublisher) === normalizeName(bookmaker) ? "verified-bookmaker" : "publisher-or-comparison");
+
+  return {
+    pricePublisher,
+    publisherType,
+    bookmaker,
+    bookmakerKey: bookmaker ? normalizeName(bookmaker).replace(/\s+/g, "-") : null,
+    bookmakerVerified,
+    bookmakerAttributionSource: bookmaker ? (source.bookmaker ? "source-config" : "page-metadata") : null,
+    priceProvenance: bookmakerVerified
+      ? "verified-bookmaker"
+      : bookmaker
+        ? "publisher-attributed-bookmaker"
+        : "publisher-only"
+  };
 }

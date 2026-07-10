@@ -7,7 +7,7 @@ import { loadEngineState, readJson } from "../src/db.mjs";
 import { buildLikelyEventsByDate } from "../src/event-markets.mjs";
 import { buildTeamStatsWithIntelligence, loadIntelligenceState, loadOutcomeLearning } from "../src/intelligence-memory.mjs";
 import { buildMobilePayload } from "../src/mobile-web-data.mjs";
-import { buildBetRecommendations, buildMostLikelyPicks } from "../src/portfolio-builder.mjs";
+import { buildBetRecommendations, buildMostLikelyPicks, prepareBestAvailableLegs } from "../src/portfolio-builder.mjs";
 import { persistPredictionLedger } from "../src/prediction-ledger.mjs";
 import { buildLegCandidates } from "../src/scoring.mjs";
 import { selectionBrainMetadata } from "../src/selection-brain.mjs";
@@ -20,7 +20,7 @@ const tournamentEndDate = "2026-07-19";
 const tournamentDaysAhead = daysAheadUntil(tournamentEndDate, now);
 const riskBuckets = Array.from({ length: 21 }, (_, index) => index * 5);
 const dayBuckets = Array.from({ length: Math.max(15, tournamentDaysAhead + 1) }, (_, index) => index);
-const automaticRunMinutesUtc = [(1 * 60) + 17];
+const automaticRunMinutesUtc = [(1 * 60) + 17, (2 * 60) + 17, (3 * 60) + 17];
 const maxDaysAhead = Math.max(...dayBuckets);
 
 await mkdir(outputDir, { recursive: true });
@@ -111,8 +111,10 @@ for (const risk of riskBuckets) {
 
   riskProfiles[risk] = policy.riskProfile;
   fullLegCandidatesByRisk[risk] = legCandidates;
-  legCandidatesByRisk[risk] = legCandidates
-    .filter((leg) => !leg.hardBlocks?.length)
+  legCandidatesByRisk[risk] = mergeCandidatePools([
+    ...legCandidates.filter((leg) => !leg.hardBlocks?.length),
+    ...prepareBestAvailableLegs(legCandidates)
+  ], prepareBestAvailableLegs(mostLikelyRangeLegCandidates))
     .map(summarizeLegCandidate);
 }
 
@@ -135,6 +137,7 @@ for (const daysAhead of dayBuckets) {
     dataQuality: centralScan.dataQuality,
     fixtureCount: scanFixtures.length,
     eligibleLegCount: mostLikelyLegCandidates.filter((leg) => !leg.hardBlocks?.length).length,
+    bestAvailableLegCount: prepareBestAvailableLegs(mostLikelyLegCandidates).length,
     betslip: mostLikelyPicks.map((bet) => summarizeBet(bet, { risk: 0 }))
   };
 
@@ -152,12 +155,15 @@ for (const daysAhead of dayBuckets) {
         dataQuality: centralScan.dataQuality,
         fixtureCount: scanFixtures.length,
         eligibleLegCount: mostLikelyLegCandidates.filter((leg) => !leg.hardBlocks?.length).length,
+        bestAvailableLegCount: prepareBestAvailableLegs(mostLikelyLegCandidates).length,
         betslip: mostLikelyPicks.map((bet) => summarizeBet(bet, { risk: 0 }))
       };
       continue;
     }
 
-    const recommendationLegCandidates = trimRecommendationLegPool(legCandidates, scanFixtures);
+    const mostLikelyFallbackLegs = filterLegCandidatesForFixtures(prepareBestAvailableLegs(mostLikelyRangeLegCandidates), scanFixtures);
+    const recommendationPool = mergeCandidatePools(legCandidates, mostLikelyFallbackLegs);
+    const recommendationLegCandidates = trimRecommendationLegPool(recommendationPool, scanFixtures);
     const recommendations = buildBetRecommendations(recommendationLegCandidates, policy);
     const betslip = selectBetslip({ recommendations, stake: 10, risk });
 
@@ -169,6 +175,7 @@ for (const daysAhead of dayBuckets) {
       dataQuality: centralScan.dataQuality,
       fixtureCount: scanFixtures.length,
       eligibleLegCount: legCandidates.filter((leg) => !leg.hardBlocks?.length).length,
+      bestAvailableLegCount: recommendationPool.filter((leg) => leg.bestAvailableFallback).length,
       betslip: betslip.map((bet) => summarizeBet(bet, { risk }))
     };
   }
@@ -210,6 +217,7 @@ const payload = {
   legCandidatesByRisk,
   mostLikelyLegCandidates: mostLikelyRangeLegCandidates
     .filter((leg) => !leg.hardBlocks?.length)
+    .concat(prepareBestAvailableLegs(mostLikelyRangeLegCandidates))
     .map(summarizeLegCandidate),
   dashboard: summarizeDashboard(dashboard),
   survivabilityMarketCoverage,
@@ -232,6 +240,8 @@ const payload = {
   profiles
 };
 const mobilePayload = buildMobilePayload(payload);
+payload.likelyScorersByDate = mobilePayload.likelyScorersByDate;
+payload.likelyAssistsByDate = mobilePayload.likelyAssistsByDate;
 
 await persistPredictionLedger(playerCardLedgerLegsFromMobilePayload(mobilePayload, now));
 await writeFile(join(outputDir, "latest.json"), `${JSON.stringify(payload, null, 2)}\n`, "utf8");
@@ -354,8 +364,13 @@ function trimRecommendationLegPool(legCandidates, fixtures) {
   const maxPerFixture = fixtureCount <= 4 ? 5 : 3;
   const byId = new Map();
   const fixtureCounts = new Map();
+  const rankedCandidates = [...(legCandidates || [])].sort((left, right) => {
+    const leftBlocked = left.hardBlocks?.length ? 1 : 0;
+    const rightBlocked = right.hardBlocks?.length ? 1 : 0;
+    return leftBlocked - rightBlocked || Number(right.score || 0) - Number(left.score || 0);
+  });
 
-  for (const leg of legCandidates || []) {
+  for (const leg of rankedCandidates) {
     if (byId.size >= fixtureTarget) {
       break;
     }
@@ -370,7 +385,7 @@ function trimRecommendationLegPool(legCandidates, fixtures) {
     fixtureCounts.set(leg.fixtureId, currentFixtureCount + 1);
   }
 
-  for (const leg of legCandidates || []) {
+  for (const leg of rankedCandidates) {
     if (byId.size >= fixtureTarget) {
       break;
     }
@@ -380,6 +395,17 @@ function trimRecommendationLegPool(legCandidates, fixtures) {
 
   return [...byId.values()]
     .sort((left, right) => Number(right.score || 0) - Number(left.score || 0));
+}
+
+function mergeCandidatePools(primary = [], fallback = []) {
+  const byId = new Map(primary.map((leg) => [leg.id, leg]));
+  for (const leg of fallback) {
+    const existing = byId.get(leg.id);
+    if (!existing || (existing.hardBlocks?.length && !leg.hardBlocks?.length)) {
+      byId.set(leg.id, leg);
+    }
+  }
+  return [...byId.values()];
 }
 
 function summarizeDateRange(fixtures, now) {
@@ -501,6 +527,8 @@ function summarizeBet(bet, { risk = 50 } = {}) {
     combinedProbability: bet.combinedProbability,
     stake: bet.stake,
     potentialReturn: bet.potentialReturn,
+    potentialProfit: bet.potentialProfit,
+    returnStatus: bet.returnStatus,
     expectedValue: bet.expectedValue,
     averageConfidence: bet.averageConfidence,
     averageIndependentEdge: bet.averageIndependentEdge,
@@ -519,7 +547,15 @@ function summarizeBet(bet, { risk = 50 } = {}) {
     repeatedTeamCount: bet.repeatedTeamCount,
     sameDateCluster: bet.sameDateCluster,
     shortWindowFallback: bet.shortWindowFallback,
+    bestAvailableFallback: bet.bestAvailableFallback,
     reusedSignalCount: bet.reusedSignalCount,
+    placeabilityStatus: bet.placeabilityStatus,
+    directlyPlaceable: bet.directlyPlaceable,
+    placeableBookmaker: bet.placeableBookmaker,
+    bookmakerKey: bet.bookmakerKey,
+    sourceBookmakers: bet.sourceBookmakers,
+    sourcePublishers: bet.sourcePublishers,
+    placeabilityReason: bet.placeabilityReason,
     selectionIntent: selection.selectionIntent,
     recommendedUse: selection.recommendedUse,
     selectionQuality: selection.selectionQuality,
@@ -557,6 +593,11 @@ function summarizeLeg(leg) {
     playerName: leg.playerName,
     playerTeam: leg.playerTeam,
     bookmaker: leg.bookmaker,
+    pricePublisher: leg.pricePublisher,
+    bookmakerKey: leg.bookmakerKey,
+    bookmakerVerified: leg.bookmakerVerified,
+    betBuilderCompatible: leg.betBuilderCompatible,
+    betBuilderGroup: leg.betBuilderGroup,
     oddsCapturedAt: leg.oddsCapturedAt,
     decimalOdds: leg.decimalOdds,
     likelyProbability: leg.likelyProbability,
@@ -568,8 +609,14 @@ function summarizeLeg(leg) {
     edge: leg.edge,
     confidence: leg.confidence,
     riskTag: leg.riskTag,
+    bestAvailableFallback: Boolean(leg.bestAvailableFallback),
+    fallbackReasons: leg.fallbackReasons,
     components: {
       intelligenceConfidence: leg.components?.intelligenceConfidence,
+      bookmakerKey: leg.components?.bookmakerKey,
+      bookmakerVerified: leg.components?.bookmakerVerified,
+      betBuilderCompatible: leg.components?.betBuilderCompatible,
+      betBuilderGroup: leg.components?.betBuilderGroup,
       eventMetricQuality: leg.components?.eventMetricQuality,
       estimatedMetricPenalty: leg.components?.estimatedMetricPenalty,
       homeRealMetricMatchCount: leg.components?.homeRealMetricMatchCount,
@@ -674,6 +721,11 @@ function summarizeLegCandidate(leg) {
     playerTeam: leg.playerTeam,
     selectionLabel: leg.selectionLabel,
     bookmaker: leg.bookmaker,
+    pricePublisher: leg.pricePublisher,
+    bookmakerKey: leg.bookmakerKey,
+    bookmakerVerified: leg.bookmakerVerified,
+    betBuilderCompatible: leg.betBuilderCompatible,
+    betBuilderGroup: leg.betBuilderGroup,
     oddsCapturedAt: leg.oddsCapturedAt,
     decimalOdds: leg.decimalOdds,
     likelyProbability: leg.likelyProbability,
@@ -686,6 +738,8 @@ function summarizeLegCandidate(leg) {
     confidence: leg.confidence,
     score: leg.score,
     riskTag: leg.riskTag,
+    bestAvailableFallback: Boolean(leg.bestAvailableFallback),
+    fallbackReasons: leg.fallbackReasons,
     components: {
       intelligenceConfidence: leg.components?.intelligenceConfidence,
       eventMetricQuality: leg.components?.eventMetricQuality,

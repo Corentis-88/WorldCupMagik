@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { dirname } from "node:path";
 
 const rootDir = dirname(dirname(fileURLToPath(import.meta.url)));
-const maxFileBytes = Number(process.env.WORLDCUPMAGIC_MAX_DATA_FILE_BYTES || 85 * 1024 * 1024);
+const maxFileBytes = Number(process.env.WORLDCUPMAGIC_MAX_DATA_FILE_BYTES || 70 * 1024 * 1024);
 const scannedRoots = ["data", join("web", "data")];
 const files = [];
 

@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { buildRiskPolicy, selectBetslip, selectFixturesForWindow } from "../src/app-service.mjs";
-import { buildBetRecommendations, buildMostLikelyPicks } from "../src/portfolio-builder.mjs";
+import { buildBetRecommendations, buildMostLikelyPicks, prepareBestAvailableLegs } from "../src/portfolio-builder.mjs";
 import policy from "../config/engine-policy.json" with { type: "json" };
 
 const fixtures = [
@@ -61,7 +61,8 @@ test("betslip selection returns the fixed category set it can support", () => {
   assert.equal(betslip.length, 5);
   assert.deepEqual(betslip.map((bet) => bet.label), ["Single", "Double", "Trixie", "3-leg accumulator", "4-leg accumulator"]);
   assert.equal(betslip[0].stake, 40);
-  assert.ok(betslip[0].potentialReturn > 10);
+  assert.equal(betslip[0].potentialReturn, null);
+  assert.equal(betslip[0].returnStatus, "research_only");
 });
 
 test("risk-zero single selection starts from the most likely survival pick", () => {
@@ -133,7 +134,7 @@ test("high risk still rejects thin survival when only price edge is better", () 
   assert.equal(selectBetslip({ recommendations, stake: 10, risk: 100 })[0].legs[0].selectionLabel, "Mexico vs South Africa: Over 1.5 goals");
 });
 
-test("short date windows still populate long risk slips from real legs", () => {
+test("short date windows only build slips from distinct fixtures without verified bet-builder evidence", () => {
   const baseLegs = [
     likelyLeg("f1", "Fixture 1: favourite to win", 0.66, 82, 1.62),
     likelyLeg("f2", "Fixture 2: favourite to win", 0.64, 81, 1.7),
@@ -149,16 +150,33 @@ test("short date windows still populate long risk slips from real legs", () => {
   const recommendations = buildBetRecommendations([...baseLegs, ...extraLegs], buildRiskPolicy(policy, 100));
   const betslip = selectBetslip({ recommendations, stake: 10, risk: 100 });
   const categories = betslip.map((bet) => bet.category);
-  const eightLeg = betslip.find((bet) => bet.category === "accumulator_8");
-
-  assert.deepEqual(categories, ["single", "double", "trixie", "accumulator_3", "accumulator_4", "accumulator_5", "accumulator_6", "accumulator_8"]);
-  assert.equal(eightLeg.legs.length, 8);
-  assert.equal(new Set(eightLeg.legs.map((leg) => leg.id)).size, 8);
-  assert.ok(new Set(eightLeg.legs.map((leg) => leg.fixtureId)).size < eightLeg.legs.length);
-  assert.match(eightLeg.thesis, /Short-window fallback active/);
+  assert.deepEqual(categories, ["single", "double", "trixie", "accumulator_3", "accumulator_4"]);
+  assert.ok(betslip.every((bet) => new Set(bet.legs.map((leg) => leg.fixtureId)).size === bet.legs.length));
+  assert.ok(!betslip.some((bet) => ["accumulator_5", "accumulator_6", "accumulator_8"].includes(bet.category)));
 });
 
-test("short date fallback caps extreme accumulator returns", () => {
+test("best-available mode only relaxes threshold misses and preserves structural safety blocks", () => {
+  const thresholdMiss = likelyLeg("soft", "Soft threshold miss", 0.58, 62, 1.9, {
+    confidence: 0.57
+  });
+  thresholdMiss.hardBlocks = ["confidence_below_policy_minimum", "intelligence_memory_below_risk_profile_minimum"];
+  const unsafe = likelyLeg("unsafe", "Unsafe market disagreement", 0.7, 90, 4.5);
+  unsafe.hardBlocks = ["market_only_probability_without_model_agreement"];
+
+  const fallback = prepareBestAvailableLegs([thresholdMiss, unsafe]);
+
+  assert.deepEqual(fallback.map((leg) => leg.id), [thresholdMiss.id]);
+  assert.equal(fallback[0].bestAvailableFallback, true);
+  assert.deepEqual(fallback[0].fallbackReasons, thresholdMiss.hardBlocks);
+  assert.deepEqual(fallback[0].hardBlocks, []);
+
+  const recommendations = buildBetRecommendations([thresholdMiss, unsafe], buildRiskPolicy(policy, 10));
+  assert.equal(recommendations.singles[0].legs[0].id, thresholdMiss.id);
+  assert.equal(recommendations.singles[0].bestAvailableFallback, true);
+  assert.ok(!recommendations.singles.some((bet) => bet.legs.some((leg) => leg.id === unsafe.id)));
+});
+
+test("short date fallback never fabricates capped accumulator odds or executable returns", () => {
   const legs = [
     likelyLeg("f1", "Fixture 1: under 2.5 goals", 0.57, 96, 4, { market: "under_2_5_goals", outcome: "Under" }),
     likelyLeg("f1-btts-no", "Fixture 1: BTTS No", 0.49, 94, 3.8, { fixtureId: "f1", market: "both_teams_to_score", outcome: "No" }),
@@ -179,16 +197,16 @@ test("short date fallback caps extreme accumulator returns", () => {
   ];
   const recommendations = buildBetRecommendations(legs, buildRiskPolicy(policy, 75));
   const betslip = selectBetslip({ recommendations, stake: 10, risk: 75 });
-  const eightLeg = betslip.find((bet) => bet.category === "accumulator_8");
 
-  assert.ok(eightLeg);
-  assert.ok(eightLeg.shortWindowFallback);
-  assert.equal(new Set(eightLeg.legs.map((leg) => leg.id)).size, 8);
-  assert.ok(Number(eightLeg.uncappedCombinedDecimalOdds) > Number(eightLeg.combinedDecimalOdds));
-  assert.ok(eightLeg.combinedDecimalOdds < 600, `combined odds were ${eightLeg.combinedDecimalOdds}`);
-  assert.ok(eightLeg.potentialReturn < 6000, `return was ${eightLeg.potentialReturn}`);
-  assert.ok(!eightLeg.legs.some((leg) => Number(leg.decimalOdds) >= 10));
-  assert.match(eightLeg.thesis, /Displayed fallback odds are capped/);
+  assert.ok(!betslip.some((bet) => bet.category === "accumulator_8"));
+  for (const bet of betslip) {
+    const actualProduct = bet.legs.reduce((value, leg) => value * Number(leg.decimalOdds), 1);
+    assert.ok(Math.abs(Number(bet.combinedDecimalOdds) - actualProduct) < 0.00001);
+    assert.equal(bet.directlyPlaceable, false);
+    assert.equal(bet.potentialReturn, null);
+    assert.equal(bet.returnStatus, "research_only");
+    assert.equal("fallbackCombinedOddsCap" in bet, false);
+  }
 });
 
 test("most likely picks ignore risk score and choose highest model probability legs", () => {

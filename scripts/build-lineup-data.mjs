@@ -113,7 +113,11 @@ function isExpired(record, currentTime) {
     return true;
   }
 
-  return fixtureTime < currentTime.getTime() - (8 * 60 * 60000)
+  const retentionMs = record.status === "confirmed" || record.status === "partial_confirmed"
+    ? 60 * 24 * 60 * 60000
+    : 48 * 60 * 60000;
+
+  return fixtureTime < currentTime.getTime() - retentionMs
     || fixtureTime > currentTime.getTime() + (48 * 60 * 60000);
 }
 

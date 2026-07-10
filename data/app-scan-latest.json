@@ -1,6 +1,6 @@
 {
-  "id": "app_scan_fa852f28",
-  "createdAt": "2026-07-10T05:07:44.357Z",
+  "id": "app_scan_6dddeddf",
+  "createdAt": "2026-07-10T06:51:33.475Z",
   "scheduled": true,
   "settings": {
     "stake": 10,
@@ -19,8 +19,8 @@
   },
   "collected": {
     "fixtures": 52,
-    "oddsRecords": 124,
-    "survivabilityOddsRecords": 31,
+    "oddsRecords": 117,
+    "survivabilityOddsRecords": 26,
     "scorerOddsRecords": 80,
     "heatRecords": 3,
     "squadDepthRecords": 6,
@@ -30,26 +30,26 @@
     "matchHistoryRecords": 119,
     "postMatchStatsCollected": 17,
     "postMatchStatsRecords": 73,
-    "outcomeRecordsSettled": 68,
-    "predictionReflectionsSettled": 69,
+    "outcomeRecordsSettled": 0,
+    "predictionReflectionsSettled": 0,
     "intelligenceObservations": 6,
-    "sourceDiagnostics": 53
+    "sourceDiagnostics": 54
   },
   "dataQuality": {
-    "readiness": "ready",
+    "readiness": "partial",
     "sourceOk": 33,
     "sourceEmpty": 17,
     "sourceErrors": 3,
     "fixtureCount": 3,
-    "freshOddsRecords": 124,
-    "freshSurvivabilityOddsRecords": 31,
+    "freshOddsRecords": 117,
+    "freshSurvivabilityOddsRecords": 26,
     "freshScorerOddsRecords": 80,
     "freshHeatRecords": 3,
     "freshSquadDepthRecords": 6,
-    "oddsHistoryRecords": 50000,
-    "survivabilityOddsHistoryRecords": 257,
-    "scorerOddsHistoryRecords": 15356,
-    "heatHistoryRecords": 5159,
+    "oddsHistoryRecords": 48072,
+    "survivabilityOddsHistoryRecords": 353,
+    "scorerOddsHistoryRecords": 15676,
+    "heatHistoryRecords": 5174,
     "squadDepthHistoryRecords": 51,
     "playerStatsRecords": 813,
     "playerShotCoverage": 0,
@@ -58,6 +58,45 @@
     "teamStatsCount": 6,
     "postMatchStatsRecords": 73,
     "realPostMatchTeamCoverage": 1,
+    "usefulRealMetricTeamCoverage": 1,
+    "teamRealMetricCoverage": [
+      {
+        "team": "Argentina",
+        "realMatches": 4,
+        "matchCount": 20,
+        "coverage": 0.2
+      },
+      {
+        "team": "Belgium",
+        "realMatches": 4,
+        "matchCount": 20,
+        "coverage": 0.2
+      },
+      {
+        "team": "England",
+        "realMatches": 4,
+        "matchCount": 20,
+        "coverage": 0.2
+      },
+      {
+        "team": "Norway",
+        "realMatches": 4,
+        "matchCount": 20,
+        "coverage": 0.2
+      },
+      {
+        "team": "Spain",
+        "realMatches": 4,
+        "matchCount": 20,
+        "coverage": 0.2
+      },
+      {
+        "team": "Switzerland",
+        "realMatches": 5,
+        "matchCount": 20,
+        "coverage": 0.25
+      }
+    ],
     "selectedPostMatchFixtureCoverage": 0,
     "averageEventMetricQuality": 0.403,
     "estimatedMetricOnlyTeams": [],
@@ -75,10 +114,17 @@
     "missingClimateProfileTeams": [],
     "missingHeatMemoryTeams": [],
     "fixtureNewsCoverage": 1,
-    "message": "Real public-web data was gathered and scored, including post-match event actuals where available."
+    "sourceFailureRate": 0.37,
+    "marketReadiness": {
+      "coreResultsAndGoals": "partial",
+      "scorers": "collecting",
+      "assists": "collecting",
+      "playerShots": "collecting"
+    },
+    "message": "Some fixtures have usable public evidence, but the selected range does not yet have complete fresh odds and event-quality coverage."
   },
   "survivabilityMarketCoverage": {
-    "createdAt": "2026-07-10T05:07:44.357Z",
+    "createdAt": "2026-07-10T06:51:33.475Z",
     "gateVersion": "survivability-public-web-v1",
     "enabled": true,
     "status": "collecting",
@@ -99,8 +145,8 @@
       "marketCount": 14,
       "satisfiedMarketCount": 0,
       "satisfiedMarkets": [],
-      "totalRecords": 43,
-      "freshRecordCount": 43,
+      "totalRecords": 139,
+      "freshRecordCount": 139,
       "message": "Survivability markets are being gathered and audited before betting logic can use them."
     },
     "markets": {
@@ -420,8 +466,8 @@
           "needs 3 more covered fixtures",
           "needs deeper bookmaker coverage per fixture"
         ],
-        "recordCount": 34,
-        "freshRecordCount": 34,
+        "recordCount": 138,
+        "freshRecordCount": 138,
         "fixtureCount": 2,
         "totalFixtureCount": 3,
         "fixtureCoverage": 0.667,
@@ -429,87 +475,87 @@
         "averageBookmakersPerFixture": 1,
         "lineCount": 24,
         "outcomeCount": 24,
-        "latestCapturedAt": "2026-07-10T05:07:44.357Z",
+        "latestCapturedAt": "2026-07-10T06:51:33.475Z",
         "sampleOutcomes": [
           {
             "fixtureId": "fixture_eb65f44a",
             "fixture": "Spain v Belgium",
-            "bookmaker": "SportsGambler public prop pages: Spain v Belgium",
+            "bookmaker": null,
             "outcome": "Over 10.5",
             "line": "10.5",
             "team": "",
             "decimalOdds": 2.02,
-            "capturedAt": "2026-07-10T05:07:44.357Z"
+            "capturedAt": "2026-07-10T06:51:33.475Z"
           },
           {
             "fixtureId": "fixture_eb65f44a",
             "fixture": "Spain v Belgium",
-            "bookmaker": "SportsGambler public prop pages: Spain v Belgium",
+            "bookmaker": null,
             "outcome": "Under 10.5",
             "line": "10.5",
             "team": "",
             "decimalOdds": 1.71,
-            "capturedAt": "2026-07-10T05:07:44.357Z"
+            "capturedAt": "2026-07-10T06:51:33.475Z"
           },
           {
             "fixtureId": "fixture_eb65f44a",
             "fixture": "Spain v Belgium",
-            "bookmaker": "SportsGambler public prop pages: Spain v Belgium",
+            "bookmaker": null,
             "outcome": "Over 6.5",
             "line": "6.5",
             "team": "",
             "decimalOdds": 1.89,
-            "capturedAt": "2026-07-10T05:07:44.357Z"
+            "capturedAt": "2026-07-10T06:51:33.475Z"
           },
           {
             "fixtureId": "fixture_eb65f44a",
             "fixture": "Spain v Belgium",
-            "bookmaker": "SportsGambler public prop pages: Spain v Belgium",
+            "bookmaker": null,
             "outcome": "Under 6.5",
             "line": "6.5",
             "team": "",
             "decimalOdds": 1.79,
-            "capturedAt": "2026-07-10T05:07:44.357Z"
+            "capturedAt": "2026-07-10T06:51:33.475Z"
           },
           {
             "fixtureId": "fixture_eb65f44a",
             "fixture": "Spain v Belgium",
-            "bookmaker": "SportsGambler public prop pages: Spain v Belgium",
+            "bookmaker": null,
             "outcome": "Over 3.5",
             "line": "3.5",
             "team": "",
             "decimalOdds": 2.02,
-            "capturedAt": "2026-07-10T05:07:44.357Z"
+            "capturedAt": "2026-07-10T06:51:33.475Z"
           },
           {
             "fixtureId": "fixture_eb65f44a",
             "fixture": "Spain v Belgium",
-            "bookmaker": "SportsGambler public prop pages: Spain v Belgium",
+            "bookmaker": null,
             "outcome": "Under 3.5",
             "line": "3.5",
             "team": "",
             "decimalOdds": 1.68,
-            "capturedAt": "2026-07-10T05:07:44.357Z"
+            "capturedAt": "2026-07-10T06:51:33.475Z"
           },
           {
             "fixtureId": "fixture_eb65f44a",
             "fixture": "Spain v Belgium",
-            "bookmaker": "SportsGambler public prop pages: Spain v Belgium",
+            "bookmaker": null,
             "outcome": "Over 1",
             "line": "1",
             "team": "",
             "decimalOdds": 1.29,
-            "capturedAt": "2026-07-10T05:07:44.357Z"
+            "capturedAt": "2026-07-10T06:51:33.475Z"
           },
           {
             "fixtureId": "fixture_eb65f44a",
             "fixture": "Spain v Belgium",
-            "bookmaker": "SportsGambler public prop pages: Spain v Belgium",
+            "bookmaker": null,
             "outcome": "Under 1",
             "line": "1",
             "team": "",
             "decimalOdds": 8.5,
-            "capturedAt": "2026-07-10T05:07:44.357Z"
+            "capturedAt": "2026-07-10T06:51:33.475Z"
           }
         ]
       },
@@ -530,63 +576,24 @@
           "maxRecordAgeHours": 72
         },
         "missing": [
-          "needs 10 more fresh records",
-          "needs 4 more covered fixtures",
-          "needs 1 more bookmaker source(s)",
-          "needs deeper bookmaker coverage per fixture"
+          "needs 18 more fresh records",
+          "needs 5 more covered fixtures",
+          "needs 1 more fixtures for coverage",
+          "needs 2 more bookmaker source(s)",
+          "needs deeper bookmaker coverage per fixture",
+          "needs 2 more distinct line(s)"
         ],
-        "recordCount": 8,
-        "freshRecordCount": 8,
-        "fixtureCount": 1,
+        "recordCount": 0,
+        "freshRecordCount": 0,
+        "fixtureCount": 0,
         "totalFixtureCount": 3,
-        "fixtureCoverage": 0.333,
-        "bookmakerCount": 1,
-        "averageBookmakersPerFixture": 1,
-        "lineCount": 4,
-        "outcomeCount": 4,
-        "latestCapturedAt": "2026-07-10T05:07:44.357Z",
-        "sampleOutcomes": [
-          {
-            "fixtureId": "fixture_eb65f44a",
-            "fixture": "Spain v Belgium",
-            "bookmaker": "SportsGambler public prop pages: Spain v Belgium",
-            "outcome": "Spain Over 9.7",
-            "line": "9.7",
-            "team": "Spain",
-            "decimalOdds": 7.6,
-            "capturedAt": "2026-07-10T05:07:44.357Z"
-          },
-          {
-            "fixtureId": "fixture_eb65f44a",
-            "fixture": "Spain v Belgium",
-            "bookmaker": "SportsGambler public prop pages: Spain v Belgium",
-            "outcome": "Spain Under 9.7",
-            "line": "9.7",
-            "team": "Spain",
-            "decimalOdds": 2.1,
-            "capturedAt": "2026-07-10T05:07:44.357Z"
-          },
-          {
-            "fixtureId": "fixture_eb65f44a",
-            "fixture": "Spain v Belgium",
-            "bookmaker": "SportsGambler public prop pages: Spain v Belgium",
-            "outcome": "Belgium Over 11.2",
-            "line": "11.2",
-            "team": "Belgium",
-            "decimalOdds": 7.9,
-            "capturedAt": "2026-07-10T05:07:44.357Z"
-          },
-          {
-            "fixtureId": "fixture_eb65f44a",
-            "fixture": "Spain v Belgium",
-            "bookmaker": "SportsGambler public prop pages: Spain v Belgium",
-            "outcome": "Belgium Under 11.2",
-            "line": "11.2",
-            "team": "Belgium",
-            "decimalOdds": 3.3,
-            "capturedAt": "2026-07-10T05:07:44.357Z"
-          }
-        ]
+        "fixtureCoverage": 0,
+        "bookmakerCount": 0,
+        "averageBookmakersPerFixture": 0,
+        "lineCount": 0,
+        "outcomeCount": 0,
+        "latestCapturedAt": null,
+        "sampleOutcomes": []
       },
       "total_cards": {
         "key": "total_cards",
@@ -780,7 +787,14 @@
         "ok": 2,
         "empty": 1,
         "error": 3,
-        "records": 534
+        "records": 127
+      },
+      "odds-integrity": {
+        "ok": 0,
+        "empty": 0,
+        "error": 0,
+        "records": 117,
+        "warning": 1
       },
       "weather": {
         "ok": 3,
@@ -797,8 +811,8 @@
     },
     "failures": [
       {
-        "id": "source_a8082cef",
-        "createdAt": "2026-07-10T05:07:44.357Z",
+        "id": "source_c4f3d5a6",
+        "createdAt": "2026-07-10T06:51:33.475Z",
         "kind": "player_stats",
         "source": "Spain PlayerStats assists",
         "url": "https://playerstats.football/world-cup/spain/goals-assists",
@@ -807,8 +821,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Spain."
       },
       {
-        "id": "source_327bc553",
-        "createdAt": "2026-07-10T05:07:44.357Z",
+        "id": "source_4f676e0a",
+        "createdAt": "2026-07-10T06:51:33.475Z",
         "kind": "player_stats",
         "source": "Spain PlayerStats shots",
         "url": "https://playerstats.football/world-cup/spain/total-shots",
@@ -817,8 +831,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Spain."
       },
       {
-        "id": "source_1999d5fc",
-        "createdAt": "2026-07-10T05:07:44.357Z",
+        "id": "source_36857eb3",
+        "createdAt": "2026-07-10T06:51:33.475Z",
         "kind": "player_stats",
         "source": "Spain PlayerStats shots on target",
         "url": "https://playerstats.football/world-cup/spain/shots-on-target",
@@ -827,8 +841,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Spain."
       },
       {
-        "id": "source_a6c8204d",
-        "createdAt": "2026-07-10T05:07:44.357Z",
+        "id": "source_c3b3c904",
+        "createdAt": "2026-07-10T06:51:33.475Z",
         "kind": "player_stats",
         "source": "Belgium PlayerStats shots",
         "url": "https://playerstats.football/world-cup/belgium/total-shots",
@@ -837,8 +851,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Belgium."
       },
       {
-        "id": "source_746b97b6",
-        "createdAt": "2026-07-10T05:07:44.357Z",
+        "id": "source_9157406d",
+        "createdAt": "2026-07-10T06:51:33.475Z",
         "kind": "player_stats",
         "source": "Belgium PlayerStats shots on target",
         "url": "https://playerstats.football/world-cup/belgium/shots-on-target",
@@ -847,8 +861,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Belgium."
       },
       {
-        "id": "source_d1515398",
-        "createdAt": "2026-07-10T05:07:44.357Z",
+        "id": "source_ee3cfc4f",
+        "createdAt": "2026-07-10T06:51:33.475Z",
         "kind": "player_stats",
         "source": "Norway PlayerStats assists",
         "url": "https://playerstats.football/world-cup/norway/goals-assists",
@@ -857,8 +871,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Norway."
       },
       {
-        "id": "source_ee3b9436",
-        "createdAt": "2026-07-10T05:07:44.357Z",
+        "id": "source_b273ced",
+        "createdAt": "2026-07-10T06:51:33.475Z",
         "kind": "player_stats",
         "source": "Norway PlayerStats shots",
         "url": "https://playerstats.football/world-cup/norway/total-shots",
@@ -867,8 +881,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Norway."
       },
       {
-        "id": "source_fe485789",
-        "createdAt": "2026-07-10T05:07:44.357Z",
+        "id": "source_1b340040",
+        "createdAt": "2026-07-10T06:51:33.475Z",
         "kind": "player_stats",
         "source": "Norway PlayerStats shots on target",
         "url": "https://playerstats.football/world-cup/norway/shots-on-target",
@@ -877,8 +891,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Norway."
       },
       {
-        "id": "source_72b11e53",
-        "createdAt": "2026-07-10T05:07:44.357Z",
+        "id": "source_8f9cc70a",
+        "createdAt": "2026-07-10T06:51:33.475Z",
         "kind": "player_stats",
         "source": "England PlayerStats shots",
         "url": "https://playerstats.football/world-cup/england/total-shots",
@@ -887,8 +901,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for England."
       },
       {
-        "id": "source_9f27c53c",
-        "createdAt": "2026-07-10T05:07:44.357Z",
+        "id": "source_bc136df3",
+        "createdAt": "2026-07-10T06:51:33.475Z",
         "kind": "player_stats",
         "source": "England PlayerStats shots on target",
         "url": "https://playerstats.football/world-cup/england/shots-on-target",
@@ -897,8 +911,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for England."
       },
       {
-        "id": "source_3ed91031",
-        "createdAt": "2026-07-10T05:07:44.357Z",
+        "id": "source_5bc4b8e8",
+        "createdAt": "2026-07-10T06:51:33.475Z",
         "kind": "player_stats",
         "source": "Argentina PlayerStats shots",
         "url": "https://playerstats.football/world-cup/argentina/total-shots",
@@ -907,8 +921,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Argentina."
       },
       {
-        "id": "source_2ac5fada",
-        "createdAt": "2026-07-10T05:07:44.357Z",
+        "id": "source_47b1a391",
+        "createdAt": "2026-07-10T06:51:33.475Z",
         "kind": "player_stats",
         "source": "Argentina PlayerStats shots on target",
         "url": "https://playerstats.football/world-cup/argentina/shots-on-target",
@@ -917,8 +931,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Argentina."
       },
       {
-        "id": "source_3d2309c9",
-        "createdAt": "2026-07-10T05:07:44.357Z",
+        "id": "source_5a0eb280",
+        "createdAt": "2026-07-10T06:51:33.475Z",
         "kind": "player_stats",
         "source": "Switzerland PlayerStats assists",
         "url": "https://playerstats.football/world-cup/switzerland/goals-assists",
@@ -927,8 +941,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Switzerland."
       },
       {
-        "id": "source_da9787ed",
-        "createdAt": "2026-07-10T05:07:44.357Z",
+        "id": "source_f78330a4",
+        "createdAt": "2026-07-10T06:51:33.475Z",
         "kind": "player_stats",
         "source": "Switzerland PlayerStats shots",
         "url": "https://playerstats.football/world-cup/switzerland/total-shots",
@@ -937,8 +951,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Switzerland."
       },
       {
-        "id": "source_4b4d03d6",
-        "createdAt": "2026-07-10T05:07:44.357Z",
+        "id": "source_6838ac8d",
+        "createdAt": "2026-07-10T06:51:33.475Z",
         "kind": "player_stats",
         "source": "Switzerland PlayerStats shots on target",
         "url": "https://playerstats.football/world-cup/switzerland/shots-on-target",
@@ -947,8 +961,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Switzerland."
       },
       {
-        "id": "source_a8ca8d46",
-        "createdAt": "2026-07-10T05:07:44.357Z",
+        "id": "source_c5b635fd",
+        "createdAt": "2026-07-10T06:51:33.475Z",
         "kind": "news",
         "source": "FIFA World Cup Articles",
         "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
@@ -957,8 +971,8 @@
         "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
       },
       {
-        "id": "source_1d31c7ef",
-        "createdAt": "2026-07-10T05:07:44.357Z",
+        "id": "source_3a1d70a6",
+        "createdAt": "2026-07-10T06:51:33.475Z",
         "kind": "odds",
         "source": "OnlyOdds match pages: Spain v Belgium",
         "url": "https://worldcup.onlyodds.co.uk/match/spain-v-belgium",
@@ -967,8 +981,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_a2e95503",
-        "createdAt": "2026-07-10T05:07:44.357Z",
+        "id": "source_bfd4fdba",
+        "createdAt": "2026-07-10T06:51:33.475Z",
         "kind": "odds",
         "source": "OnlyOdds match pages: Norway v England",
         "url": "https://worldcup.onlyodds.co.uk/match/norway-v-england",
@@ -977,8 +991,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_21318973",
-        "createdAt": "2026-07-10T05:07:44.357Z",
+        "id": "source_3e1d322a",
+        "createdAt": "2026-07-10T06:51:33.475Z",
         "kind": "odds",
         "source": "OnlyOdds match pages: Argentina v Switzerland",
         "url": "https://worldcup.onlyodds.co.uk/match/argentina-v-switzerland",
@@ -987,8 +1001,8 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_60b76e99",
-        "createdAt": "2026-07-10T05:07:44.357Z",
+        "id": "source_7da31750",
+        "createdAt": "2026-07-10T06:51:33.475Z",
         "kind": "odds",
         "source": "SportsGambler public prop pages: Argentina v Switzerland",
         "url": "https://www.sportsgambler.com/betting-tips/football/argentina-vs-switzerland-prediction-lineups-odds-2026-07-12/",
@@ -1014,16 +1028,6 @@
         "brierScore": 0.0865
       },
       "probabilityBand": {
-        "80-99": {
-          "count": 2,
-          "wins": 1,
-          "losses": 1,
-          "winRate": 0.5,
-          "averageModelProbability": 0.8308,
-          "averageImpliedProbability": 0.5668,
-          "calibrationError": -0.3308,
-          "brierScore": 0.3749
-        },
         "70-79": {
           "count": 7,
           "wins": 3,
@@ -1034,16 +1038,6 @@
           "calibrationError": -0.3243,
           "brierScore": 0.3428
         },
-        "50-59": {
-          "count": 101,
-          "wins": 45,
-          "losses": 56,
-          "winRate": 0.4455,
-          "averageModelProbability": 0.5545,
-          "averageImpliedProbability": 0.5486,
-          "calibrationError": -0.1089,
-          "brierScore": 0.2558
-        },
         "00-39": {
           "count": 2382,
           "wins": 171,
@@ -1053,6 +1047,16 @@
           "averageImpliedProbability": 0.093,
           "calibrationError": -0.0804,
           "brierScore": 0.0696
+        },
+        "50-59": {
+          "count": 101,
+          "wins": 45,
+          "losses": 56,
+          "winRate": 0.4455,
+          "averageModelProbability": 0.5545,
+          "averageImpliedProbability": 0.5486,
+          "calibrationError": -0.1089,
+          "brierScore": 0.2558
         },
         "40-49": {
           "count": 110,
@@ -1073,19 +1077,19 @@
           "averageImpliedProbability": 0.5403,
           "calibrationError": 0.0038,
           "brierScore": 0.242
+        },
+        "80-99": {
+          "count": 2,
+          "wins": 1,
+          "losses": 1,
+          "winRate": 0.5,
+          "averageModelProbability": 0.8308,
+          "averageImpliedProbability": 0.5668,
+          "calibrationError": -0.3308,
+          "brierScore": 0.3749
         }
       },
       "market": {
-        "over_1_5_goals": {
-          "count": 6,
-          "wins": 3,
-          "losses": 3,
-          "winRate": 0.5,
-          "averageModelProbability": 0.774,
-          "averageImpliedProbability": 0.5977,
-          "calibrationError": -0.274,
-          "brierScore": 0.3329
-        },
         "under_4_5_goals": {
           "count": 1,
           "wins": 1,
@@ -1095,6 +1099,26 @@
           "averageImpliedProbability": 0.4587,
           "calibrationError": 0.2022,
           "brierScore": 0.0409
+        },
+        "match_winner": {
+          "count": 191,
+          "wins": 65,
+          "losses": 126,
+          "winRate": 0.3403,
+          "averageModelProbability": 0.3369,
+          "averageImpliedProbability": 0.5211,
+          "calibrationError": 0.0034,
+          "brierScore": 0.1897
+        },
+        "over_1_5_goals": {
+          "count": 6,
+          "wins": 3,
+          "losses": 3,
+          "winRate": 0.5,
+          "averageModelProbability": 0.774,
+          "averageImpliedProbability": 0.5977,
+          "calibrationError": -0.274,
+          "brierScore": 0.3329
         },
         "both_teams_to_score": {
           "count": 81,
@@ -1136,16 +1160,6 @@
           "calibrationError": -0.065,
           "brierScore": 0.0267
         },
-        "match_winner": {
-          "count": 191,
-          "wins": 65,
-          "losses": 126,
-          "winRate": 0.3403,
-          "averageModelProbability": 0.3369,
-          "averageImpliedProbability": 0.5211,
-          "calibrationError": 0.0034,
-          "brierScore": 0.1897
-        },
         "under_2_5_goals": {
           "count": 35,
           "wins": 18,
@@ -1178,16 +1192,6 @@
         }
       },
       "riskTag": {
-        "steady_edge": {
-          "count": 811,
-          "wins": 149,
-          "losses": 662,
-          "winRate": 0.1837,
-          "averageModelProbability": 0.2221,
-          "averageImpliedProbability": 0.3114,
-          "calibrationError": -0.0384,
-          "brierScore": 0.1104
-        },
         "calculated_risk": {
           "count": 309,
           "wins": 33,
@@ -1207,6 +1211,16 @@
           "averageImpliedProbability": 0.1483,
           "calibrationError": -0.1418,
           "brierScore": 0.1085
+        },
+        "steady_edge": {
+          "count": 811,
+          "wins": 149,
+          "losses": 662,
+          "winRate": 0.1837,
+          "averageModelProbability": 0.2221,
+          "averageImpliedProbability": 0.3114,
+          "calibrationError": -0.0384,
+          "brierScore": 0.1104
         },
         "daily_player_card": {
           "count": 1240,
@@ -1238,60 +1252,550 @@
           "calibrationError": -0.119,
           "brierScore": 0.0144
         }
+      },
+      "marketProbabilityBand": {
+        "under_4_5_goals": {
+          "70-79": {
+            "count": 1,
+            "wins": 1,
+            "losses": 0,
+            "winRate": 1,
+            "averageModelProbability": 0.7978,
+            "averageImpliedProbability": 0.4587,
+            "calibrationError": 0.2022,
+            "brierScore": 0.0409
+          }
+        },
+        "match_winner": {
+          "00-39": {
+            "count": 136,
+            "wins": 31,
+            "losses": 105,
+            "winRate": 0.2279,
+            "averageModelProbability": 0.271,
+            "averageImpliedProbability": 0.4918,
+            "calibrationError": -0.0431,
+            "brierScore": 0.1712
+          },
+          "50-59": {
+            "count": 24,
+            "wins": 15,
+            "losses": 9,
+            "winRate": 0.625,
+            "averageModelProbability": 0.5523,
+            "averageImpliedProbability": 0.6056,
+            "calibrationError": 0.0727,
+            "brierScore": 0.2274
+          },
+          "40-49": {
+            "count": 28,
+            "wins": 16,
+            "losses": 12,
+            "winRate": 0.5714,
+            "averageModelProbability": 0.4441,
+            "averageImpliedProbability": 0.5701,
+            "calibrationError": 0.1273,
+            "brierScore": 0.2507
+          },
+          "60-69": {
+            "count": 3,
+            "wins": 3,
+            "losses": 0,
+            "winRate": 1,
+            "averageModelProbability": 0.6022,
+            "averageImpliedProbability": 0.715,
+            "calibrationError": 0.3978,
+            "brierScore": 0.1583
+          }
+        },
+        "over_1_5_goals": {
+          "80-99": {
+            "count": 2,
+            "wins": 1,
+            "losses": 1,
+            "winRate": 0.5,
+            "averageModelProbability": 0.8308,
+            "averageImpliedProbability": 0.5668,
+            "calibrationError": -0.3308,
+            "brierScore": 0.3749
+          },
+          "70-79": {
+            "count": 4,
+            "wins": 2,
+            "losses": 2,
+            "winRate": 0.5,
+            "averageModelProbability": 0.7456,
+            "averageImpliedProbability": 0.6131,
+            "calibrationError": -0.2456,
+            "brierScore": 0.3119
+          }
+        },
+        "both_teams_to_score": {
+          "50-59": {
+            "count": 40,
+            "wins": 16,
+            "losses": 24,
+            "winRate": 0.4,
+            "averageModelProbability": 0.5544,
+            "averageImpliedProbability": 0.5401,
+            "calibrationError": -0.1544,
+            "brierScore": 0.2641
+          },
+          "40-49": {
+            "count": 28,
+            "wins": 18,
+            "losses": 10,
+            "winRate": 0.6429,
+            "averageModelProbability": 0.4485,
+            "averageImpliedProbability": 0.5173,
+            "calibrationError": 0.1943,
+            "brierScore": 0.2717
+          },
+          "60-69": {
+            "count": 7,
+            "wins": 4,
+            "losses": 3,
+            "winRate": 0.5714,
+            "averageModelProbability": 0.6178,
+            "averageImpliedProbability": 0.4652,
+            "calibrationError": -0.0464,
+            "brierScore": 0.2491
+          },
+          "00-39": {
+            "count": 5,
+            "wins": 2,
+            "losses": 3,
+            "winRate": 0.4,
+            "averageModelProbability": 0.3809,
+            "averageImpliedProbability": 0.5203,
+            "calibrationError": 0.0191,
+            "brierScore": 0.2424
+          },
+          "70-79": {
+            "count": 1,
+            "wins": 0,
+            "losses": 1,
+            "winRate": 0,
+            "averageModelProbability": 0.72,
+            "averageImpliedProbability": 0.5217,
+            "calibrationError": -0.72,
+            "brierScore": 0.5184
+          }
+        },
+        "over_2_5_goals": {
+          "50-59": {
+            "count": 17,
+            "wins": 4,
+            "losses": 13,
+            "winRate": 0.2353,
+            "averageModelProbability": 0.5645,
+            "averageImpliedProbability": 0.5033,
+            "calibrationError": -0.3293,
+            "brierScore": 0.294
+          },
+          "40-49": {
+            "count": 13,
+            "wins": 7,
+            "losses": 6,
+            "winRate": 0.5385,
+            "averageModelProbability": 0.4506,
+            "averageImpliedProbability": 0.544,
+            "calibrationError": 0.0879,
+            "brierScore": 0.246
+          },
+          "60-69": {
+            "count": 4,
+            "wins": 3,
+            "losses": 1,
+            "winRate": 0.75,
+            "averageModelProbability": 0.6283,
+            "averageImpliedProbability": 0.5182,
+            "calibrationError": 0.1217,
+            "brierScore": 0.2036
+          },
+          "00-39": {
+            "count": 2,
+            "wins": 2,
+            "losses": 0,
+            "winRate": 1,
+            "averageModelProbability": 0.3524,
+            "averageImpliedProbability": 0.5,
+            "calibrationError": 0.6477,
+            "brierScore": 0.4197
+          }
+        },
+        "anytime_scorer": {
+          "00-39": {
+            "count": 1180,
+            "wins": 91,
+            "losses": 1089,
+            "winRate": 0.0771,
+            "averageModelProbability": 0.1771,
+            "averageImpliedProbability": 0.0975,
+            "calibrationError": -0.1,
+            "brierScore": 0.0799
+          },
+          "40-49": {
+            "count": 28,
+            "wins": 10,
+            "losses": 18,
+            "winRate": 0.3571,
+            "averageModelProbability": 0.4385,
+            "averageImpliedProbability": 0.1991,
+            "calibrationError": -0.0814,
+            "brierScore": 0.2282
+          },
+          "50-59": {
+            "count": 2,
+            "wins": 1,
+            "losses": 1,
+            "winRate": 0.5,
+            "averageModelProbability": 0.5056,
+            "averageImpliedProbability": 0.719,
+            "calibrationError": -0.0056,
+            "brierScore": 0.2516
+          }
+        },
+        "first_goalscorer": {
+          "00-39": {
+            "count": 350,
+            "wins": 9,
+            "losses": 341,
+            "winRate": 0.0257,
+            "averageModelProbability": 0.0908,
+            "averageImpliedProbability": 0.0982,
+            "calibrationError": -0.065,
+            "brierScore": 0.0267
+          }
+        },
+        "under_2_5_goals": {
+          "40-49": {
+            "count": 13,
+            "wins": 9,
+            "losses": 4,
+            "winRate": 0.6923,
+            "averageModelProbability": 0.4426,
+            "averageImpliedProbability": 0.5722,
+            "calibrationError": 0.2497,
+            "brierScore": 0.2825
+          },
+          "50-59": {
+            "count": 17,
+            "wins": 8,
+            "losses": 9,
+            "winRate": 0.4706,
+            "averageModelProbability": 0.5522,
+            "averageImpliedProbability": 0.5171,
+            "calibrationError": -0.0816,
+            "brierScore": 0.243
+          },
+          "00-39": {
+            "count": 3,
+            "wins": 1,
+            "losses": 2,
+            "winRate": 0.3333,
+            "averageModelProbability": 0.3712,
+            "averageImpliedProbability": 0.5648,
+            "calibrationError": -0.0378,
+            "brierScore": 0.2251
+          },
+          "60-69": {
+            "count": 2,
+            "wins": 0,
+            "losses": 2,
+            "winRate": 0,
+            "averageModelProbability": 0.6477,
+            "averageImpliedProbability": 0.5859,
+            "calibrationError": -0.6477,
+            "brierScore": 0.4197
+          }
+        },
+        "anytime_assist": {
+          "00-39": {
+            "count": 706,
+            "wins": 35,
+            "losses": 671,
+            "winRate": 0.0496,
+            "averageModelProbability": 0.1149,
+            "averageImpliedProbability": 0,
+            "calibrationError": -0.0653,
+            "brierScore": 0.0511
+          }
+        },
+        "under_3_5_goals": {
+          "50-59": {
+            "count": 1,
+            "wins": 1,
+            "losses": 0,
+            "winRate": 1,
+            "averageModelProbability": 0.5719,
+            "averageImpliedProbability": 0.4831,
+            "calibrationError": 0.4281,
+            "brierScore": 0.1833
+          },
+          "70-79": {
+            "count": 1,
+            "wins": 0,
+            "losses": 1,
+            "winRate": 0,
+            "averageModelProbability": 0.7697,
+            "averageImpliedProbability": 0.5208,
+            "calibrationError": -0.7697,
+            "brierScore": 0.5924
+          }
+        }
+      },
+      "riskTagProbabilityBand": {
+        "calculated_risk": {
+          "70-79": {
+            "count": 2,
+            "wins": 1,
+            "losses": 1,
+            "winRate": 0.5,
+            "averageModelProbability": 0.7837,
+            "averageImpliedProbability": 0.4898,
+            "calibrationError": -0.2837,
+            "brierScore": 0.3167
+          },
+          "50-59": {
+            "count": 43,
+            "wins": 15,
+            "losses": 28,
+            "winRate": 0.3488,
+            "averageModelProbability": 0.567,
+            "averageImpliedProbability": 0.4799,
+            "calibrationError": -0.2181,
+            "brierScore": 0.2742
+          },
+          "40-49": {
+            "count": 12,
+            "wins": 2,
+            "losses": 10,
+            "winRate": 0.1667,
+            "averageModelProbability": 0.4603,
+            "averageImpliedProbability": 0.3887,
+            "calibrationError": -0.2936,
+            "brierScore": 0.2221
+          },
+          "00-39": {
+            "count": 242,
+            "wins": 10,
+            "losses": 232,
+            "winRate": 0.0413,
+            "averageModelProbability": 0.1353,
+            "averageImpliedProbability": 0.0937,
+            "calibrationError": -0.094,
+            "brierScore": 0.0459
+          },
+          "60-69": {
+            "count": 10,
+            "wins": 5,
+            "losses": 5,
+            "winRate": 0.5,
+            "averageModelProbability": 0.6234,
+            "averageImpliedProbability": 0.4711,
+            "calibrationError": -0.1234,
+            "brierScore": 0.2666
+          }
+        },
+        "longshot_value": {
+          "00-39": {
+            "count": 174,
+            "wins": 17,
+            "losses": 157,
+            "winRate": 0.0977,
+            "averageModelProbability": 0.238,
+            "averageImpliedProbability": 0.1464,
+            "calibrationError": -0.1403,
+            "brierScore": 0.1006
+          },
+          "40-49": {
+            "count": 6,
+            "wins": 2,
+            "losses": 4,
+            "winRate": 0.3333,
+            "averageModelProbability": 0.432,
+            "averageImpliedProbability": 0.1963,
+            "calibrationError": -0.0987,
+            "brierScore": 0.2314
+          },
+          "50-59": {
+            "count": 4,
+            "wins": 1,
+            "losses": 3,
+            "winRate": 0.25,
+            "averageModelProbability": 0.5238,
+            "averageImpliedProbability": 0.1589,
+            "calibrationError": -0.2738,
+            "brierScore": 0.2667
+          }
+        },
+        "steady_edge": {
+          "50-59": {
+            "count": 54,
+            "wins": 29,
+            "losses": 25,
+            "winRate": 0.537,
+            "averageModelProbability": 0.5468,
+            "averageImpliedProbability": 0.6322,
+            "calibrationError": -0.0097,
+            "brierScore": 0.2404
+          },
+          "00-39": {
+            "count": 670,
+            "wins": 59,
+            "losses": 611,
+            "winRate": 0.0881,
+            "averageModelProbability": 0.162,
+            "averageImpliedProbability": 0.2473,
+            "calibrationError": -0.0739,
+            "brierScore": 0.0787
+          },
+          "60-69": {
+            "count": 6,
+            "wins": 5,
+            "losses": 1,
+            "winRate": 0.8333,
+            "averageModelProbability": 0.6176,
+            "averageImpliedProbability": 0.6559,
+            "calibrationError": 0.2157,
+            "brierScore": 0.2011
+          },
+          "40-49": {
+            "count": 74,
+            "wins": 53,
+            "losses": 21,
+            "winRate": 0.7162,
+            "averageModelProbability": 0.4456,
+            "averageImpliedProbability": 0.6039,
+            "calibrationError": 0.2706,
+            "brierScore": 0.2718
+          },
+          "80-99": {
+            "count": 2,
+            "wins": 1,
+            "losses": 1,
+            "winRate": 0.5,
+            "averageModelProbability": 0.8308,
+            "averageImpliedProbability": 0.5668,
+            "calibrationError": -0.3308,
+            "brierScore": 0.3749
+          },
+          "70-79": {
+            "count": 5,
+            "wins": 2,
+            "losses": 3,
+            "winRate": 0.4,
+            "averageModelProbability": 0.7405,
+            "averageImpliedProbability": 0.5948,
+            "calibrationError": -0.3405,
+            "brierScore": 0.3532
+          }
+        },
+        "daily_player_card": {
+          "40-49": {
+            "count": 18,
+            "wins": 3,
+            "losses": 15,
+            "winRate": 0.1667,
+            "averageModelProbability": 0.4332,
+            "averageImpliedProbability": 0,
+            "calibrationError": -0.2665,
+            "brierScore": 0.2068
+          },
+          "00-39": {
+            "count": 1222,
+            "wins": 82,
+            "losses": 1140,
+            "winRate": 0.0671,
+            "averageModelProbability": 0.1384,
+            "averageImpliedProbability": 0,
+            "calibrationError": -0.0713,
+            "brierScore": 0.066
+          }
+        },
+        "contrarian_value": {
+          "00-39": {
+            "count": 71,
+            "wins": 3,
+            "losses": 68,
+            "winRate": 0.0423,
+            "averageModelProbability": 0.1438,
+            "averageImpliedProbability": 0.1048,
+            "calibrationError": -0.1016,
+            "brierScore": 0.0515
+          }
+        },
+        "market_confirmed_edge": {
+          "00-39": {
+            "count": 3,
+            "wins": 0,
+            "losses": 3,
+            "winRate": 0,
+            "averageModelProbability": 0.119,
+            "averageImpliedProbability": 0.1122,
+            "calibrationError": -0.119,
+            "brierScore": 0.0144
+          }
+        }
       }
     },
-    "predictionReflectionCount": 2774,
+    "predictionReflectionCount": 2699,
     "predictionReflection": {
-      "count": 2774,
+      "count": 2699,
+      "environmentCount": 85,
+      "environment": {
+        "count": 85,
+        "overall": {
+          "count": 85,
+          "wins": 35,
+          "losses": 50,
+          "winRate": 0.4118,
+          "averageModelProbability": 0.4782,
+          "probabilityError": -0.059,
+          "averageGoalTotalError": 0.1224,
+          "averageXgTotalError": 0.0801,
+          "averageShotTotalError": 2.3727,
+          "brierScore": 0.2357,
+          "averageMetricQuality": 0.9341,
+          "weatherSignals": {
+            "heat_drag_overstated": 8,
+            "heat_drag_understated": 11,
+            "heat_effect_reasonable": 4
+          }
+        }
+      },
       "overall": {
-        "count": 2774,
-        "wins": 334,
-        "losses": 2440,
-        "winRate": 0.1204,
-        "averageModelProbability": 0.1995,
-        "probabilityError": -0.0785,
-        "averageGoalTotalError": 1.2883,
-        "averageXgTotalError": 1.2699,
-        "averageShotTotalError": 12.5055,
-        "brierScore": 0.0935,
-        "averageMetricQuality": 0.947,
+        "count": 2699,
+        "wins": 326,
+        "losses": 2373,
+        "winRate": 0.1208,
+        "averageModelProbability": 0.1975,
+        "probabilityError": -0.0759,
+        "averageGoalTotalError": 1.262,
+        "averageXgTotalError": 1.235,
+        "averageShotTotalError": 12.2299,
+        "brierScore": 0.0929,
+        "averageMetricQuality": 0.9472,
         "weatherSignals": {
-          "heat_drag_understated": 275,
-          "heat_drag_overstated": 155,
+          "heat_drag_understated": 274,
+          "heat_drag_overstated": 154,
           "heat_effect_reasonable": 62
         }
       },
       "market": {
-        "over_2_5_goals": {
-          "count": 48,
-          "wins": 21,
-          "losses": 27,
-          "winRate": 0.4375,
-          "averageModelProbability": 0.5468,
-          "probabilityError": -0.121,
-          "averageGoalTotalError": -0.5751,
-          "averageXgTotalError": -0.2507,
-          "averageShotTotalError": -0.0589,
-          "brierScore": 0.2772,
-          "averageMetricQuality": 0.9064,
-          "weatherSignals": {
-            "heat_drag_understated": 5,
-            "heat_drag_overstated": 6,
-            "heat_effect_reasonable": 2
-          }
-        },
         "anytime_scorer": {
-          "count": 1285,
-          "wins": 113,
-          "losses": 1172,
-          "winRate": 0.0879,
-          "averageModelProbability": 0.1911,
-          "probabilityError": -0.1019,
-          "averageGoalTotalError": 1.4158,
-          "averageXgTotalError": 1.398,
-          "averageShotTotalError": 12.8621,
-          "brierScore": 0.0878,
-          "averageMetricQuality": 0.9403,
+          "count": 1213,
+          "wins": 106,
+          "losses": 1107,
+          "winRate": 0.0874,
+          "averageModelProbability": 0.1866,
+          "probabilityError": -0.0978,
+          "averageGoalTotalError": 1.3577,
+          "averageXgTotalError": 1.3226,
+          "averageShotTotalError": 12.2205,
+          "brierScore": 0.0865,
+          "averageMetricQuality": 0.9404,
           "weatherSignals": {
             "heat_drag_overstated": 79,
             "heat_drag_understated": 123,
@@ -1316,21 +1820,39 @@
             "heat_effect_reasonable": 4
           }
         },
-        "match_winner": {
-          "count": 214,
-          "wins": 72,
-          "losses": 142,
-          "winRate": 0.3364,
-          "averageModelProbability": 0.3632,
-          "probabilityError": -0.0128,
-          "averageGoalTotalError": -0.1051,
-          "averageXgTotalError": -0.1517,
-          "averageShotTotalError": 0.2948,
-          "brierScore": 0.19,
-          "averageMetricQuality": 0.9354,
+        "over_2_5_goals": {
+          "count": 48,
+          "wins": 21,
+          "losses": 27,
+          "winRate": 0.4375,
+          "averageModelProbability": 0.5468,
+          "probabilityError": -0.121,
+          "averageGoalTotalError": -0.5751,
+          "averageXgTotalError": -0.2507,
+          "averageShotTotalError": -0.0589,
+          "brierScore": 0.2772,
+          "averageMetricQuality": 0.9064,
           "weatherSignals": {
-            "heat_drag_understated": 34,
-            "heat_drag_overstated": 21,
+            "heat_drag_understated": 5,
+            "heat_drag_overstated": 6,
+            "heat_effect_reasonable": 2
+          }
+        },
+        "match_winner": {
+          "count": 211,
+          "wins": 71,
+          "losses": 140,
+          "winRate": 0.3365,
+          "averageModelProbability": 0.3615,
+          "probabilityError": -0.0103,
+          "averageGoalTotalError": -0.089,
+          "averageXgTotalError": -0.1472,
+          "averageShotTotalError": 0.3581,
+          "brierScore": 0.1898,
+          "averageMetricQuality": 0.9353,
+          "weatherSignals": {
+            "heat_drag_understated": 33,
+            "heat_drag_overstated": 20,
             "heat_effect_reasonable": 10
           }
         },
@@ -1437,58 +1959,22 @@
         }
       },
       "riskTag": {
-        "calculated_risk": {
-          "count": 367,
-          "wins": 53,
-          "losses": 314,
-          "winRate": 0.1444,
-          "averageModelProbability": 0.2926,
-          "probabilityError": -0.1385,
-          "averageGoalTotalError": -0.3349,
-          "averageXgTotalError": -0.0765,
-          "averageShotTotalError": -0.5838,
-          "brierScore": 0.127,
-          "averageMetricQuality": 0.9099,
-          "weatherSignals": {
-            "heat_drag_understated": 59,
-            "heat_drag_overstated": 43,
-            "heat_effect_reasonable": 19
-          }
-        },
         "longshot_value": {
-          "count": 176,
+          "count": 175,
           "wins": 22,
-          "losses": 154,
-          "winRate": 0.125,
-          "averageModelProbability": 0.2652,
-          "probabilityError": -0.1507,
-          "averageGoalTotalError": -0.4374,
-          "averageXgTotalError": -0.0937,
-          "averageShotTotalError": 0.2704,
-          "brierScore": 0.1163,
-          "averageMetricQuality": 0.9492,
+          "losses": 153,
+          "winRate": 0.1257,
+          "averageModelProbability": 0.2654,
+          "probabilityError": -0.15,
+          "averageGoalTotalError": -0.4342,
+          "averageXgTotalError": -0.0942,
+          "averageShotTotalError": 0.295,
+          "brierScore": 0.1168,
+          "averageMetricQuality": 0.9488,
           "weatherSignals": {
             "heat_drag_understated": 28,
             "heat_drag_overstated": 18,
             "heat_effect_reasonable": 3
-          }
-        },
-        "steady_edge": {
-          "count": 843,
-          "wins": 164,
-          "losses": 679,
-          "winRate": 0.1945,
-          "averageModelProbability": 0.2504,
-          "probabilityError": -0.0348,
-          "averageGoalTotalError": -0.4193,
-          "averageXgTotalError": -0.3365,
-          "averageShotTotalError": -1.3901,
-          "brierScore": 0.1223,
-          "averageMetricQuality": 0.9477,
-          "weatherSignals": {
-            "heat_drag_understated": 172,
-            "heat_drag_overstated": 87,
-            "heat_effect_reasonable": 40
           }
         },
         "contrarian_value": {
@@ -1508,18 +1994,54 @@
             "heat_drag_overstated": 7
           }
         },
+        "calculated_risk": {
+          "count": 367,
+          "wins": 53,
+          "losses": 314,
+          "winRate": 0.1444,
+          "averageModelProbability": 0.2926,
+          "probabilityError": -0.1385,
+          "averageGoalTotalError": -0.3349,
+          "averageXgTotalError": -0.0765,
+          "averageShotTotalError": -0.5838,
+          "brierScore": 0.127,
+          "averageMetricQuality": 0.9099,
+          "weatherSignals": {
+            "heat_drag_overstated": 43,
+            "heat_effect_reasonable": 19,
+            "heat_drag_understated": 59
+          }
+        },
+        "steady_edge": {
+          "count": 841,
+          "wins": 163,
+          "losses": 678,
+          "winRate": 0.1938,
+          "averageModelProbability": 0.2494,
+          "probabilityError": -0.0345,
+          "averageGoalTotalError": -0.4166,
+          "averageXgTotalError": -0.3361,
+          "averageShotTotalError": -1.3881,
+          "brierScore": 0.1218,
+          "averageMetricQuality": 0.9478,
+          "weatherSignals": {
+            "heat_drag_understated": 171,
+            "heat_drag_overstated": 86,
+            "heat_effect_reasonable": 40
+          }
+        },
         "daily_player_card": {
-          "count": 1312,
-          "wins": 92,
-          "losses": 1220,
-          "winRate": 0.0701,
-          "averageModelProbability": 0.1478,
-          "probabilityError": -0.0757,
-          "averageGoalTotalError": 2.7491,
-          "averageXgTotalError": 2.5871,
-          "averageShotTotalError": 24.14,
-          "brierScore": 0.0709,
-          "averageMetricQuality": 0.9548,
+          "count": 1240,
+          "wins": 85,
+          "losses": 1155,
+          "winRate": 0.0685,
+          "averageModelProbability": 0.1417,
+          "probabilityError": -0.0709,
+          "averageGoalTotalError": 2.7693,
+          "averageXgTotalError": 2.5854,
+          "averageShotTotalError": 24.1909,
+          "brierScore": 0.0688,
+          "averageMetricQuality": 0.9556,
           "weatherSignals": {}
         },
         "market_confirmed_edge": {
@@ -1539,161 +2061,113 @@
       },
       "heat": {
         "low_heat": {
-          "count": 2282,
-          "wins": 255,
-          "losses": 2027,
-          "winRate": 0.1117,
-          "averageModelProbability": 0.1874,
-          "probabilityError": -0.0758,
-          "averageGoalTotalError": 1.6121,
-          "averageXgTotalError": 1.5308,
-          "averageShotTotalError": 14.7149,
-          "brierScore": 0.0874,
-          "averageMetricQuality": 0.9451,
+          "count": 62,
+          "wins": 27,
+          "losses": 35,
+          "winRate": 0.4355,
+          "averageModelProbability": 0.4733,
+          "probabilityError": -0.0262,
+          "averageGoalTotalError": 0.1724,
+          "averageXgTotalError": 0.0875,
+          "averageShotTotalError": 2.8719,
+          "brierScore": 0.2219,
+          "averageMetricQuality": 0.9294,
           "weatherSignals": {}
         },
-        "high_heat": {
-          "count": 311,
-          "wins": 54,
-          "losses": 257,
-          "winRate": 0.1736,
-          "averageModelProbability": 0.2705,
-          "probabilityError": -0.0846,
-          "averageGoalTotalError": 0.0465,
-          "averageXgTotalError": 0.0788,
-          "averageShotTotalError": 2.8225,
-          "brierScore": 0.1371,
-          "averageMetricQuality": 0.964,
+        "moderate_heat": {
+          "count": 9,
+          "wins": 4,
+          "losses": 5,
+          "winRate": 0.4444,
+          "averageModelProbability": 0.3918,
+          "probabilityError": 0.0454,
+          "averageGoalTotalError": 0.1175,
+          "averageXgTotalError": 0.1623,
+          "averageShotTotalError": -0.0158,
+          "brierScore": 0.2314,
+          "averageMetricQuality": 0.9173,
           "weatherSignals": {
-            "heat_drag_understated": 120,
-            "heat_drag_overstated": 133,
-            "heat_effect_reasonable": 58
+            "heat_drag_overstated": 3,
+            "heat_drag_understated": 5,
+            "heat_effect_reasonable": 1
           }
         },
-        "moderate_heat": {
-          "count": 181,
-          "wins": 25,
-          "losses": 156,
-          "winRate": 0.1381,
-          "averageModelProbability": 0.2521,
-          "probabilityError": -0.1058,
-          "averageGoalTotalError": -1.1848,
-          "averageXgTotalError": -0.4069,
-          "averageShotTotalError": -2.1463,
-          "brierScore": 0.1054,
-          "averageMetricQuality": 0.9442,
+        "high_heat": {
+          "count": 14,
+          "wins": 4,
+          "losses": 10,
+          "winRate": 0.2857,
+          "averageModelProbability": 0.5456,
+          "probabilityError": -0.2498,
+          "averageGoalTotalError": -0.0781,
+          "averageXgTotalError": 0.0043,
+          "averageShotTotalError": 1.6929,
+          "brierScore": 0.2942,
+          "averageMetricQuality": 0.9623,
           "weatherSignals": {
-            "heat_drag_understated": 155,
-            "heat_drag_overstated": 22,
-            "heat_effect_reasonable": 4
+            "heat_drag_overstated": 5,
+            "heat_drag_understated": 6,
+            "heat_effect_reasonable": 3
           }
         }
       },
       "lineup": {
         "lineup_unknown": {
-          "count": 2769,
-          "wins": 332,
-          "losses": 2437,
-          "winRate": 0.1199,
-          "averageModelProbability": 0.1988,
-          "probabilityError": -0.0784,
-          "averageGoalTotalError": 1.2972,
-          "averageXgTotalError": 1.2734,
-          "averageShotTotalError": 12.503,
-          "brierScore": 0.0932,
-          "averageMetricQuality": 0.9469,
+          "count": 2699,
+          "wins": 326,
+          "losses": 2373,
+          "winRate": 0.1208,
+          "averageModelProbability": 0.1975,
+          "probabilityError": -0.0759,
+          "averageGoalTotalError": 1.262,
+          "averageXgTotalError": 1.235,
+          "averageShotTotalError": 12.2299,
+          "brierScore": 0.0929,
+          "averageMetricQuality": 0.9472,
           "weatherSignals": {
-            "heat_drag_understated": 275,
-            "heat_drag_overstated": 155,
-            "heat_effect_reasonable": 61
-          }
-        },
-        "both_xi_confirmed": {
-          "count": 4,
-          "wins": 2,
-          "losses": 2,
-          "winRate": 0.5,
-          "averageModelProbability": 0.5712,
-          "probabilityError": -0.0786,
-          "averageGoalTotalError": -2.8297,
-          "averageXgTotalError": -0.3797,
-          "averageShotTotalError": 16.0352,
-          "brierScore": 0.2529,
-          "averageMetricQuality": 1,
-          "weatherSignals": {}
-        },
-        "scorer_confirmed_starter": {
-          "count": 1,
-          "wins": 0,
-          "losses": 1,
-          "winRate": 0,
-          "averageModelProbability": 0.2642,
-          "probabilityError": -0.2642,
-          "averageGoalTotalError": -2.73,
-          "averageXgTotalError": -0.28,
-          "averageShotTotalError": 6.77,
-          "brierScore": 0.0698,
-          "averageMetricQuality": 1,
-          "weatherSignals": {
-            "heat_effect_reasonable": 1
+            "heat_drag_understated": 274,
+            "heat_drag_overstated": 154,
+            "heat_effect_reasonable": 62
           }
         }
       },
       "tournamentPhase": {
         "opening_group_game": {
-          "count": 1030,
-          "wins": 183,
-          "losses": 847,
-          "winRate": 0.1777,
-          "averageModelProbability": 0.2592,
-          "probabilityError": -0.0676,
-          "averageGoalTotalError": 0.1184,
-          "averageXgTotalError": 0.1753,
-          "averageShotTotalError": 0.7185,
-          "brierScore": 0.1183,
-          "averageMetricQuality": 0.9013,
+          "count": 59,
+          "wins": 25,
+          "losses": 34,
+          "winRate": 0.4237,
+          "averageModelProbability": 0.4601,
+          "probabilityError": -0.0302,
+          "averageGoalTotalError": 0.0602,
+          "averageXgTotalError": 0.1243,
+          "averageShotTotalError": 1.2368,
+          "brierScore": 0.2233,
+          "averageMetricQuality": 0.9096,
           "weatherSignals": {
-            "heat_drag_understated": 176,
-            "heat_drag_overstated": 98,
-            "heat_effect_reasonable": 3
+            "heat_drag_overstated": 7,
+            "heat_drag_understated": 7,
+            "heat_effect_reasonable": 1
           }
         },
         "unknown": {
-          "count": 812,
-          "wins": 64,
-          "losses": 748,
-          "winRate": 0.0788,
-          "averageModelProbability": 0.1482,
-          "probabilityError": -0.0674,
-          "averageGoalTotalError": 2.7644,
-          "averageXgTotalError": 2.4431,
-          "averageShotTotalError": 23.6273,
-          "brierScore": 0.0779,
-          "averageMetricQuality": 0.9848,
+          "count": 5,
+          "wins": 0,
+          "losses": 5,
+          "winRate": 0,
+          "averageModelProbability": 0.4271,
+          "probabilityError": -0.4271,
+          "averageGoalTotalError": 3.0323,
+          "averageXgTotalError": 2.256,
+          "averageShotTotalError": 28.3956,
+          "brierScore": 0.2114,
+          "averageMetricQuality": 0.9627,
           "weatherSignals": {}
         },
-        "middle_group_game": {
-          "count": 444,
-          "wins": 37,
-          "losses": 407,
-          "winRate": 0.0833,
-          "averageModelProbability": 0.1717,
-          "probabilityError": -0.087,
-          "averageGoalTotalError": 2.4187,
-          "averageXgTotalError": 2.3688,
-          "averageShotTotalError": 21.9266,
-          "brierScore": 0.0786,
-          "averageMetricQuality": 0.9079,
-          "weatherSignals": {
-            "heat_drag_understated": 4,
-            "heat_effect_reasonable": 8,
-            "heat_drag_overstated": 1
-          }
-        },
         "mixed_opening_group_game": {
-          "count": 2,
+          "count": 1,
           "wins": 0,
-          "losses": 2,
+          "losses": 1,
           "winRate": 0,
           "averageModelProbability": 0.5844,
           "probabilityError": -0.5844,
@@ -1704,61 +2178,64 @@
           "averageMetricQuality": 0.81,
           "weatherSignals": {}
         },
-        "final_group_game": {
-          "count": 42,
-          "wins": 1,
-          "losses": 41,
-          "winRate": 0.0238,
-          "averageModelProbability": 0.1618,
-          "probabilityError": -0.1374,
-          "averageGoalTotalError": 1.6401,
-          "averageXgTotalError": 3.1306,
-          "averageShotTotalError": 35.1732,
-          "brierScore": 0.0419,
-          "averageMetricQuality": 1,
-          "weatherSignals": {}
-        },
-        "non_group_game": {
-          "count": 444,
-          "wins": 49,
-          "losses": 395,
-          "winRate": 0.1104,
-          "averageModelProbability": 0.2212,
-          "probabilityError": -0.1088,
-          "averageGoalTotalError": -0.8664,
-          "averageXgTotalError": -0.5099,
-          "averageShotTotalError": -1.2817,
-          "brierScore": 0.097,
+        "middle_group_game": {
+          "count": 8,
+          "wins": 5,
+          "losses": 3,
+          "winRate": 0.625,
+          "averageModelProbability": 0.4839,
+          "probabilityError": 0.1462,
+          "averageGoalTotalError": 0.364,
+          "averageXgTotalError": -0.7715,
+          "averageShotTotalError": 0.3233,
+          "brierScore": 0.2499,
           "averageMetricQuality": 1,
           "weatherSignals": {
-            "heat_drag_understated": 95,
-            "heat_effect_reasonable": 51,
-            "heat_drag_overstated": 56
+            "heat_effect_reasonable": 1,
+            "heat_drag_understated": 1
+          }
+        },
+        "non_group_game": {
+          "count": 12,
+          "wins": 5,
+          "losses": 7,
+          "winRate": 0.4167,
+          "averageModelProbability": 0.5724,
+          "probabilityError": -0.1536,
+          "averageGoalTotalError": -0.7692,
+          "averageXgTotalError": -0.2957,
+          "averageShotTotalError": -0.6912,
+          "brierScore": 0.2856,
+          "averageMetricQuality": 1,
+          "weatherSignals": {
+            "heat_drag_understated": 3,
+            "heat_effect_reasonable": 2,
+            "heat_drag_overstated": 1
           }
         }
       }
     },
     "lastOutcomeSettlement": {
-      "examinedLegCount": 3223,
-      "insertedCount": 68,
+      "examinedLegCount": 3408,
+      "insertedCount": 0,
       "skipped": {
         "noRecommendations": 0,
-        "noMatch": 214,
+        "noMatch": 411,
         "unknownMarket": 305,
-        "latePrediction": 1,
-        "alreadySettled": 2635
+        "latePrediction": 0,
+        "alreadySettled": 2692
       }
     },
     "lastPredictionReflection": {
-      "examinedPredictionCount": 11545,
-      "insertedCount": 69,
-      "updatedCount": 2671,
-      "upsertedCount": 2740
+      "examinedPredictionCount": 10016,
+      "insertedCount": 0,
+      "updatedCount": 2646,
+      "upsertedCount": 2646
     },
     "topTeams": [
       {
         "team": "Switzerland",
-        "learnedEdge": 0.1718,
+        "learnedEdge": 0.1732,
         "confidence": 0.598,
         "reasons": [
           "20-match form 1.85 PPG, xG 1.933-1.15",
@@ -1770,54 +2247,54 @@
       },
       {
         "team": "England",
-        "learnedEdge": 0.1491,
-        "confidence": 0.6092,
+        "learnedEdge": 0.1283,
+        "confidence": 0.6138,
         "reasons": [
           "20-match form 2.3 PPG, xG 1.843-0.879",
           "recent form improving",
-          "324 news item(s), news impact 0.0824",
+          "326 news item(s), news impact 0.0825",
           "market intelligence 0% movement, consensus 10.1 across 1 bookie(s)",
           "17 scorer record(s), top scorer signal 0.099",
           "memory currently leans positive"
         ]
       },
       {
+        "team": "Spain",
+        "learnedEdge": 0.0983,
+        "confidence": 0.5832,
+        "reasons": [
+          "20-match form 2.6 PPG, xG 2.204-0.847",
+          "recent form improving",
+          "70 news item(s), news impact 0.0463",
+          "31 scorer record(s), top scorer signal 0.063",
+          "memory currently leans positive"
+        ]
+      },
+      {
+        "team": "Belgium",
+        "learnedEdge": 0.0835,
+        "confidence": 0.5835,
+        "reasons": [
+          "20-match form 1.9 PPG, xG 2.364-1.261",
+          "43 news item(s), news impact 0.0624",
+          "22 scorer record(s), top scorer signal 0.09",
+          "memory currently leans positive"
+        ]
+      },
+      {
         "team": "Norway",
-        "learnedEdge": 0.0645,
-        "confidence": 0.6089,
+        "learnedEdge": 0.0678,
+        "confidence": 0.6137,
         "reasons": [
           "20-match form 1.85 PPG, xG 1.83-1.288",
-          "44 news item(s), news impact 0.0331",
+          "46 news item(s), news impact 0.0354",
           "market intelligence 0% movement, consensus 1.9 across 1 bookie(s)",
           "14 scorer record(s), top scorer signal 0.0945"
         ]
       },
       {
-        "team": "Spain",
-        "learnedEdge": 0.0372,
-        "confidence": 0.6128,
-        "reasons": [
-          "20-match form 2.6 PPG, xG 2.204-0.847",
-          "recent form improving",
-          "70 news item(s), news impact 0.0463",
-          "market intelligence 506.25% movement, consensus 9.7 across 1 bookie(s)",
-          "31 scorer record(s), top scorer signal 0.063"
-        ]
-      },
-      {
-        "team": "Belgium",
-        "learnedEdge": 0.0219,
-        "confidence": 0.613,
-        "reasons": [
-          "20-match form 1.9 PPG, xG 2.364-1.261",
-          "43 news item(s), news impact 0.0624",
-          "market intelligence 600% movement, consensus 11.2 across 1 bookie(s)",
-          "22 scorer record(s), top scorer signal 0.09"
-        ]
-      },
-      {
         "team": "Argentina",
-        "learnedEdge": -0.0046,
+        "learnedEdge": -0.0051,
         "confidence": 0.584,
         "reasons": [
           "20-match form 2.9 PPG, xG 2.51-0.596",
@@ -1828,31 +2305,32 @@
       }
     ]
   },
-  "eligibleLegCount": 2,
+  "eligibleLegCount": 0,
   "betslip": [
     {
-      "id": "single_leg_a58a7706",
+      "id": "single_leg_c61323d0",
       "rank": 1,
       "category": "single",
       "label": "Single",
       "type": "single",
-      "score": 100,
+      "score": 39.11,
       "legCount": 1,
-      "combinedDecimalOdds": 1.98,
+      "combinedDecimalOdds": 2.35,
       "stake": 10,
-      "potentialReturn": 19.8,
-      "potentialProfit": 9.8,
-      "combinedProbability": 0.8349,
-      "expectedValue": 0.6531,
-      "averageConfidence": 0.714,
-      "averageIndependentEdge": 0.3298,
-      "survivalCombinedProbability": 0.714,
-      "averageSurvivalProbability": 0.714,
-      "averageNonMarketSignalCount": 7,
-      "displayRating": 0.864,
-      "riskLegCount": 1,
+      "potentialReturn": null,
+      "potentialProfit": null,
+      "returnStatus": "research_only",
+      "combinedProbability": 0.3257,
+      "expectedValue": -0.2346,
+      "averageConfidence": 0.6073,
+      "averageIndependentEdge": -0.0601,
+      "survivalCombinedProbability": 0.3824,
+      "averageSurvivalProbability": 0.3824,
+      "averageNonMarketSignalCount": 5,
+      "displayRating": 0.6196,
+      "riskLegCount": 0,
       "bttsLegCount": 0,
-      "scorerLegCount": 0,
+      "scorerLegCount": 1,
       "firstScorerLegCount": 0,
       "fragileLegCount": 0,
       "correlationPenalty": 0,
@@ -1861,63 +2339,379 @@
       "repeatedTeamCount": 0,
       "sameDateCluster": 0,
       "shortWindowFallback": false,
+      "bestAvailableFallback": true,
       "reusedSignalCount": 0,
+      "placeabilityStatus": "research_only",
+      "directlyPlaceable": false,
+      "placeableBookmaker": null,
+      "bookmakerKey": null,
+      "sourceBookmakers": [],
+      "sourcePublishers": [
+        "SportsGambler public prop pages"
+      ],
+      "placeabilityReason": "Research-only price combination from SportsGambler public prop pages; a single verified bookmaker could not be established, so it is not claimed as directly placeable and has no executable return.",
       "selectionIntent": "balanced_survival",
-      "recommendedUse": "balanced",
-      "selectionQuality": "sound",
-      "selectionBrainScore": 100,
-      "cashScore": 100,
-      "freeBetScore": 92.6,
-      "longshotScore": 87.34,
-      "freeBetConversion": 0.6997,
+      "recommendedUse": "weak_best_available",
+      "selectionQuality": "weak_best_available",
+      "selectionBrainScore": 47.938,
+      "cashScore": 69.85,
+      "freeBetScore": 0,
+      "longshotScore": 0,
+      "freeBetConversion": 0.5162,
       "probabilityRange": {
-        "low": 0.662,
-        "mid": 0.714,
-        "high": 0.766,
-        "width": 0.104,
+        "low": 0.3014,
+        "mid": 0.3824,
+        "high": 0.4634,
+        "width": 0.162,
         "label": "tight",
-        "reasons": []
+        "reasons": [
+          "lower confidence inputs",
+          "player-prop variance"
+        ]
       },
-      "portfolioWarnings": [],
+      "portfolioWarnings": [
+        "low_model_confidence"
+      ],
       "legs": [
         {
-          "id": "leg_a58a7706",
-          "fixtureId": "fixture_eb65f44a",
-          "fixtureDate": "2026-07-10T19:00:00.000Z",
-          "homeTeam": "Spain",
-          "awayTeam": "Belgium",
-          "market": "over_1_5_goals",
-          "selectionLabel": "Spain vs Belgium: Over 1.5 goals",
-          "bookmaker": "SportsGambler public prop pages: Spain v Belgium",
-          "decimalOdds": 1.98,
-          "modelProbability": 0.8349,
-          "rawModelProbability": 0.8349,
-          "impliedProbability": 0.5051,
-          "marketImpliedProbability": 0.5051,
-          "independentEdge": 0.3298,
-          "edge": 0.3298,
-          "confidence": 0.714,
-          "riskTag": "calculated_risk",
+          "id": "leg_c61323d0",
+          "fixtureId": "fixture_c2e307c7",
+          "fixtureDate": "2026-07-11T21:00:00.000Z",
+          "homeTeam": "Norway",
+          "awayTeam": "England",
+          "market": "anytime_scorer",
+          "playerName": "Erling Haaland",
+          "selectionLabel": "Norway vs England: Erling Haaland anytime scorer",
+          "bookmaker": null,
+          "bookmakerVerified": false,
+          "bookmakerKey": "",
+          "pricePublisher": "SportsGambler public prop pages",
+          "source": "SportsGambler public prop pages: Norway v England",
+          "decimalOdds": 2.35,
+          "modelProbability": 0.3257,
+          "rawModelProbability": 0.3999,
+          "impliedProbability": 0.4255,
+          "marketImpliedProbability": 0.4255,
+          "independentEdge": -0.0601,
+          "edge": -0.0768,
+          "confidence": 0.6073,
+          "riskTag": "steady_edge",
+          "bestAvailableFallback": true,
+          "fallbackReasons": [
+            "edge_below_policy_minimum",
+            "independent_edge_below_policy_minimum",
+            "confidence_below_policy_minimum",
+            "intelligence_memory_below_risk_profile_minimum"
+          ],
           "shortWindowFallback": false,
           "reusedSignal": false,
           "components": {
-            "intelligenceConfidence": 0.613,
+            "intelligenceConfidence": 0.614,
+            "nonMarketSignalCount": 5,
+            "nonMarketSignals": [
+              "20-match team sample",
+              "team goals environment is live",
+              "scorer raw probability clears floor",
+              "starter/minutes projection is healthy",
+              "20-match scorer memory"
+            ],
+            "independentEvidenceStrength": 0.804,
+            "marketBlendLift": -0.001,
+            "oddsMovement": 0,
+            "oddsShortening": false,
+            "oddsDrifting": false,
+            "marketAverageOdds": 2.35,
+            "heatStress": 1,
+            "heatConfidence": 0.7055,
+            "heatClimateBand": "hotHumid",
+            "heatExpectedGoalsAdjustment": -0.102,
+            "heatEdge": -2.1,
+            "heatLocation": "Miami",
+            "homeSquadDepth": 0.5527,
+            "awaySquadDepth": 0.7112,
+            "squadDepthConfidence": 0.649,
+            "homeHistoricalHeatMemory": -0.03,
+            "awayHistoricalHeatMemory": -0.02,
+            "combinedHeatDifferential": -0.0646,
+            "expectedGoals": 2.89,
+            "homeExpectedGoals": 1.15,
+            "awayExpectedGoals": 1.74,
+            "projectedShotTotal": 25.65,
+            "homeProjectedShots": 11.39,
+            "awayProjectedShots": 14.26,
+            "projectedShotsOnTargetTotal": 9.28,
+            "homeLongMatchCount": 20,
+            "awayLongMatchCount": 20,
+            "homeBttsRate": 0.7,
+            "awayBttsRate": 0.25,
+            "homeOver25Rate": 0.7,
+            "awayOver25Rate": 0.4,
+            "tournamentPhase": "non_group_game",
+            "homeGroupGameNumber": null,
+            "awayGroupGameNumber": null,
+            "bothOpeningGroupGame": false,
+            "oneOpeningGroupGame": false,
+            "openingGameCaution": 0,
+            "tournamentExpectedGoalsAdjustment": 0,
+            "tournamentBttsAdjustment": 0,
+            "tournamentDrawLift": 0,
+            "tournamentContextNote": "Tournament pressure layer inactive outside group-stage fixtures.",
+            "confidenceReasons": [
+              "event stats mostly score-derived estimates",
+              "fresh odds snapshot",
+              "many non-market signals agree",
+              "settled-outcome learning active",
+              "post-match xG/shot reflection active",
+              "settled money/CLV performance active"
+            ],
+            "scorerMarketType": "anytime_scorer",
+            "teamGoalLikelihood": 0.7032,
+            "teamFirstGoalShare": 0.4482,
+            "starterLikelihood": 0.9,
+            "projectedMinutes": 85.6,
+            "scorerGoalsPerTwentyTeamMatches": 12,
+            "scorerConfidence": 0.78,
+            "predictionReflectionAdjustment": -0.0271,
+            "predictionReflectionConfidence": 0.8167,
+            "predictionReflectionReasons": [
+              "anytime_scorer post-match reflection 8.7% actual vs 18.7% projected over 1213",
+              "non group game reflection environment covers 12 unique fixture(s)"
+            ],
+            "survivalPenalty": 0
+          },
+          "thesis": "Norway vs England: Erling Haaland anytime scorer is priced at 2.35; raw AI probability 40%, pre-learning market-adjusted probability 39.9%, final learned probability 32.6%, market view 42.6%. Independent edge -6.01%, final value edge -7.68%, backed by 5 non-market signal(s): 20-match team sample, team goals environment is live, scorer raw probability clears floor, starter/minutes projection is healthy, 20-match scorer memory. Fixture model: expected goals 2.89 (1.15-1.74), rating edge -68.2, style edge -9.28, memory edge -5.32. Odds intelligence is capped: market result edge 0, consensus probability n/a where available. News impact is 0.043 for Norway and 0.087 for England. Tactical memory: Norway 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs England 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.41. Scorer memory: Norway top recent scorers Haaland, E. Haaland, Sørloth; England top recent scorers Kane, H. Kane, J. Bellingham. Heat layer: Miami hotHumid stress 100%, xG adjustment -0.102, result edge -2.1; climate/history/depth differential -0.0646. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goals environment is live at 2.89 expected goals. Outcome learning: anytime_scorer descriptive strike rate 8.4% over 1210; steady_edge descriptive strike rate 18.4% over 811; anytime_scorer 00-39% band calibration 7.7% actual vs 17.7% projected; steady_edge 00-39% band calibration 8.8% actual vs 16.2% projected; anytime_scorer calibration 8.4% actual vs 18.4% projected; steady_edge calibration 18.4% actual vs 22.2% projected. Post-match reflection: anytime_scorer post-match reflection 8.7% actual vs 18.7% projected over 1213; non group game reflection environment covers 12 unique fixture(s). Betting performance: anytime_scorer is being downgraded by settled bet performance; steady_edge is being downgraded by settled bet performance. Market average moved from 2.35 to 2.35; best price is 0% over average. Confidence 60.7% after odds freshness and data completeness checks."
+        }
+      ],
+      "thesis": "single at combined odds 2.35 with estimated slip chance 38.24% and average leg survival 38.2%. The displayed odds are the product of the listed leg prices. Research-only price combination from SportsGambler public prop pages; a single verified bookmaker could not be established, so it is not claimed as directly placeable and has no executable return. Expected value is -23.46%, independent edge averages -6.01%, and the model has 5 non-market signals per leg. Best-available fallback active: every leg still passed price, probability, confidence, and hard-block integrity checks. Short-slip controls keep model chance ahead of price hunting.  No calculated-risk leg; this should only survive if the edge is exceptional. No high-implied-probability favourite crowding. Heat layer active on 1 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: Norway vs England: Erling Haaland anytime scorer."
+    },
+    {
+      "id": "double_leg_b29ced2c_leg_92da802a",
+      "rank": 2,
+      "category": "double",
+      "label": "Double",
+      "type": "double",
+      "score": 22.67,
+      "legCount": 2,
+      "combinedDecimalOdds": 15.54,
+      "stake": 10,
+      "potentialReturn": null,
+      "potentialProfit": null,
+      "returnStatus": "research_only",
+      "combinedProbability": 0.0411,
+      "expectedValue": -0.3613,
+      "averageConfidence": 0.5646,
+      "averageIndependentEdge": -0.0113,
+      "survivalCombinedProbability": 0.069,
+      "averageSurvivalProbability": 0.2628,
+      "averageNonMarketSignalCount": 6,
+      "displayRating": 0.5487,
+      "riskLegCount": 0,
+      "bttsLegCount": 0,
+      "scorerLegCount": 2,
+      "firstScorerLegCount": 0,
+      "fragileLegCount": 0,
+      "correlationPenalty": 0,
+      "correlationReasons": [],
+      "marketFamilyMix": {},
+      "repeatedTeamCount": 0,
+      "sameDateCluster": 0,
+      "shortWindowFallback": true,
+      "bestAvailableFallback": true,
+      "reusedSignalCount": 0,
+      "placeabilityStatus": "research_only",
+      "directlyPlaceable": false,
+      "placeableBookmaker": null,
+      "bookmakerKey": null,
+      "sourceBookmakers": [],
+      "sourcePublishers": [
+        "SportsGambler public prop pages"
+      ],
+      "placeabilityReason": "Research-only price combination from SportsGambler public prop pages; a single verified bookmaker could not be established, so it is not claimed as directly placeable and has no executable return.",
+      "selectionIntent": "balanced_survival",
+      "recommendedUse": "weak_best_available",
+      "selectionQuality": "weak_best_available",
+      "selectionBrainScore": 15.23,
+      "cashScore": 22.19,
+      "freeBetScore": 0,
+      "longshotScore": 0,
+      "freeBetConversion": 1.0033,
+      "probabilityRange": {
+        "low": 0.005,
+        "mid": 0.069,
+        "high": 0.2009,
+        "width": 0.1959,
+        "label": "normal",
+        "reasons": [
+          "lower confidence inputs",
+          "player-prop variance",
+          "short-window fallback"
+        ]
+      },
+      "portfolioWarnings": [
+        "low_model_confidence",
+        "player_prop_variance",
+        "short_window_fallback"
+      ],
+      "legs": [
+        {
+          "id": "leg_b29ced2c",
+          "fixtureId": "fixture_c2e307c7",
+          "fixtureDate": "2026-07-11T21:00:00.000Z",
+          "homeTeam": "Norway",
+          "awayTeam": "England",
+          "market": "anytime_scorer",
+          "playerName": "Alexander Sørloth",
+          "selectionLabel": "Norway vs England: Alexander Sørloth anytime scorer",
+          "bookmaker": null,
+          "bookmakerVerified": false,
+          "bookmakerKey": "",
+          "pricePublisher": "SportsGambler public prop pages",
+          "source": "SportsGambler public prop pages: Norway v England",
+          "decimalOdds": 4.2,
+          "modelProbability": 0.1951,
+          "rawModelProbability": 0.2798,
+          "impliedProbability": 0.2381,
+          "marketImpliedProbability": 0.2381,
+          "independentEdge": 0.0072,
+          "edge": -0.0139,
+          "confidence": 0.5689,
+          "riskTag": "steady_edge",
+          "bestAvailableFallback": true,
+          "fallbackReasons": [
+            "edge_below_policy_minimum",
+            "independent_edge_below_policy_minimum",
+            "confidence_below_policy_minimum",
+            "intelligence_memory_below_risk_profile_minimum"
+          ],
+          "shortWindowFallback": false,
+          "reusedSignal": false,
+          "components": {
+            "intelligenceConfidence": 0.614,
             "nonMarketSignalCount": 7,
             "nonMarketSignals": [
               "raw AI probability beats market",
               "20-match team sample",
-              "raw over-1.5 model clears survival line",
-              "expected-goals base supports two goals",
-              "20-match goals history is not dead",
-              "second goal can arrive from either match shape",
-              "opening caution still leaves a two-goal route"
+              "raw scorer probability beats market",
+              "team goals environment is live",
+              "scorer raw probability clears floor",
+              "starter/minutes projection is healthy",
+              "20-match scorer memory"
             ],
-            "independentEvidenceStrength": 0.7239,
-            "marketBlendLift": 0,
+            "independentEvidenceStrength": 0.5987,
+            "marketBlendLift": -0.0115,
             "oddsMovement": 0,
             "oddsShortening": false,
             "oddsDrifting": false,
-            "marketAverageOdds": 1.98,
+            "marketAverageOdds": 4.2,
+            "heatStress": 1,
+            "heatConfidence": 0.7055,
+            "heatClimateBand": "hotHumid",
+            "heatExpectedGoalsAdjustment": -0.102,
+            "heatEdge": -2.1,
+            "heatLocation": "Miami",
+            "homeSquadDepth": 0.5527,
+            "awaySquadDepth": 0.7112,
+            "squadDepthConfidence": 0.649,
+            "homeHistoricalHeatMemory": -0.03,
+            "awayHistoricalHeatMemory": -0.02,
+            "combinedHeatDifferential": -0.0646,
+            "expectedGoals": 2.89,
+            "homeExpectedGoals": 1.15,
+            "awayExpectedGoals": 1.74,
+            "projectedShotTotal": 25.65,
+            "homeProjectedShots": 11.39,
+            "awayProjectedShots": 14.26,
+            "projectedShotsOnTargetTotal": 9.28,
+            "homeLongMatchCount": 20,
+            "awayLongMatchCount": 20,
+            "homeBttsRate": 0.7,
+            "awayBttsRate": 0.25,
+            "homeOver25Rate": 0.7,
+            "awayOver25Rate": 0.4,
+            "tournamentPhase": "non_group_game",
+            "homeGroupGameNumber": null,
+            "awayGroupGameNumber": null,
+            "bothOpeningGroupGame": false,
+            "oneOpeningGroupGame": false,
+            "openingGameCaution": 0,
+            "tournamentExpectedGoalsAdjustment": 0,
+            "tournamentBttsAdjustment": 0,
+            "tournamentDrawLift": 0,
+            "tournamentContextNote": "Tournament pressure layer inactive outside group-stage fixtures.",
+            "confidenceReasons": [
+              "thin confidence, use cautiously",
+              "event stats mostly score-derived estimates",
+              "fresh odds snapshot",
+              "many non-market signals agree",
+              "settled-outcome learning active",
+              "post-match xG/shot reflection active",
+              "settled money/CLV performance active"
+            ],
+            "scorerMarketType": "anytime_scorer",
+            "teamGoalLikelihood": 0.7032,
+            "teamFirstGoalShare": 0.4482,
+            "starterLikelihood": 0.6285,
+            "projectedMinutes": 68.2,
+            "scorerGoalsPerTwentyTeamMatches": 4,
+            "scorerConfidence": 0.78,
+            "predictionReflectionAdjustment": -0.0271,
+            "predictionReflectionConfidence": 0.8167,
+            "predictionReflectionReasons": [
+              "anytime_scorer post-match reflection 8.7% actual vs 18.7% projected over 1213",
+              "non group game reflection environment covers 12 unique fixture(s)"
+            ],
+            "survivalPenalty": 0
+          },
+          "thesis": "Norway vs England: Alexander Sørloth anytime scorer is priced at 4.2; raw AI probability 28%, pre-learning market-adjusted probability 26.8%, final learned probability 19.5%, market view 23.8%. Independent edge 0.72%, final value edge -1.39%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw scorer probability beats market, team goals environment is live, scorer raw probability clears floor, starter/minutes projection is healthy, 20-match scorer memory. Fixture model: expected goals 2.89 (1.15-1.74), rating edge -68.2, style edge -9.28, memory edge -5.32. Odds intelligence is capped: market result edge 0, consensus probability n/a where available. News impact is 0.043 for Norway and 0.087 for England. Tactical memory: Norway 4-2-3-1 / 4-3-3 (balanced mid-block with mixed build-up) vs England 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.41. Scorer memory: Norway top recent scorers Haaland, E. Haaland, Sørloth; England top recent scorers Kane, H. Kane, J. Bellingham. Heat layer: Miami hotHumid stress 100%, xG adjustment -0.102, result edge -2.1; climate/history/depth differential -0.0646. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goals environment is live at 2.89 expected goals. Outcome learning: anytime_scorer descriptive strike rate 8.4% over 1210; steady_edge descriptive strike rate 18.4% over 811; anytime_scorer 00-39% band calibration 7.7% actual vs 17.7% projected; steady_edge 00-39% band calibration 8.8% actual vs 16.2% projected; anytime_scorer calibration 8.4% actual vs 18.4% projected; steady_edge calibration 18.4% actual vs 22.2% projected. Post-match reflection: anytime_scorer post-match reflection 8.7% actual vs 18.7% projected over 1213; non group game reflection environment covers 12 unique fixture(s). Betting performance: anytime_scorer is being downgraded by settled bet performance; steady_edge is being downgraded by settled bet performance. Market average moved from 4.2 to 4.2; best price is 0% over average. Confidence 56.9% after odds freshness and data completeness checks."
+        },
+        {
+          "id": "leg_92da802a",
+          "fixtureId": "fixture_eb65f44a",
+          "fixtureDate": "2026-07-10T19:00:00.000Z",
+          "homeTeam": "Spain",
+          "awayTeam": "Belgium",
+          "market": "anytime_scorer",
+          "playerName": "Romelu Lukaku",
+          "selectionLabel": "Spain vs Belgium: Romelu Lukaku anytime scorer",
+          "bookmaker": null,
+          "bookmakerVerified": false,
+          "bookmakerKey": "",
+          "pricePublisher": "SportsGambler public prop pages",
+          "source": "SportsGambler public prop pages: Spain v Belgium",
+          "decimalOdds": 3.7,
+          "modelProbability": 0.2105,
+          "rawModelProbability": 0.275,
+          "impliedProbability": 0.2703,
+          "marketImpliedProbability": 0.2703,
+          "independentEdge": -0.0298,
+          "edge": -0.0424,
+          "confidence": 0.5603,
+          "riskTag": "steady_edge",
+          "bestAvailableFallback": true,
+          "fallbackReasons": [
+            "edge_below_policy_minimum",
+            "independent_edge_below_policy_minimum",
+            "confidence_below_policy_minimum",
+            "intelligence_memory_below_risk_profile_minimum"
+          ],
+          "shortWindowFallback": false,
+          "reusedSignal": false,
+          "components": {
+            "intelligenceConfidence": 0.583,
+            "nonMarketSignalCount": 5,
+            "nonMarketSignals": [
+              "20-match team sample",
+              "team goals environment is live",
+              "scorer raw probability clears floor",
+              "starter/minutes projection is healthy",
+              "20-match scorer memory"
+            ],
+            "independentEvidenceStrength": 0.5694,
+            "marketBlendLift": 0.0087,
+            "oddsMovement": 0,
+            "oddsShortening": false,
+            "oddsDrifting": false,
+            "marketAverageOdds": 3.7,
             "heatStress": 0.2955,
             "heatConfidence": 0.7055,
             "heatClimateBand": "hotMixed",
@@ -1954,518 +2748,35 @@
             "tournamentDrawLift": 0,
             "tournamentContextNote": "Tournament pressure layer inactive outside group-stage fixtures.",
             "confidenceReasons": [
+              "thin confidence, use cautiously",
               "event stats mostly score-derived estimates",
+              "fresh odds snapshot",
               "many non-market signals agree",
               "settled-outcome learning active",
               "post-match xG/shot reflection active",
-              "settled money/CLV performance active",
-              "market type fits the football evidence"
+              "settled money/CLV performance active"
             ],
-            "predictionReflectionAdjustment": -0.045,
-            "predictionReflectionConfidence": 0.8917,
+            "scorerMarketType": "anytime_scorer",
+            "teamGoalLikelihood": 0.7603,
+            "teamFirstGoalShare": 0.5008,
+            "starterLikelihood": 0.6473,
+            "projectedMinutes": 69.4,
+            "scorerGoalsPerTwentyTeamMatches": 3,
+            "scorerConfidence": 0.78,
+            "predictionReflectionAdjustment": -0.0271,
+            "predictionReflectionConfidence": 0.775,
             "predictionReflectionReasons": [
-              "over_1_5_goals post-match reflection 45.5% actual vs 77.9% projected over 11",
-              "xG environment ran cooler than model by 0.87",
-              "actual goals finished 1.48 below expected goal shape",
-              "moderate heat matches undershot expected xG",
-              "non group game reflection 11% actual over 444"
+              "anytime_scorer post-match reflection 8.7% actual vs 18.7% projected over 1213",
+              "non group game reflection environment covers 12 unique fixture(s)"
             ],
             "survivalPenalty": 0
           },
-          "thesis": "Spain vs Belgium: Over 1.5 goals is priced at 1.98; raw AI probability 83.5%, market-adjusted probability 83.5%, market view 50.5%. Independent edge 32.98%, final value edge 32.98%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-1.5 model clears survival line, expected-goals base supports two goals, 20-match goals history is not dead, second goal can arrive from either match shape, opening caution still leaves a two-goal route. Fixture model: expected goals 3.25 (1.62-1.62), rating edge 24.1, style edge -0.26, memory edge 1.35. Odds intelligence is capped: market result edge 0, consensus probability 0.301 where available. News impact is 0.08 for Spain and 0.112 for Belgium. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.44. Scorer memory: Spain top recent scorers Morata, Oyarzabal, Sarabia; Belgium top recent scorers De Bruyne, Tielemans, De Ketelaere. Heat layer: Los Angeles hotMixed stress 29.6%, xG adjustment -0.03, result edge 1.48; climate/history/depth differential 0.1545. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: safer two-goal line has 3.25 expected-goals support; edge is strong enough to justify focus. Outcome learning: over_1_5_goals historical strike 50% over 6; calculated_risk historical strike 10.7% over 309; over_1_5_goals calibration 50% actual vs 77.4% projected; calculated_risk calibration 10.7% actual vs 22.8% projected. Post-match reflection: over_1_5_goals post-match reflection 45.5% actual vs 77.9% projected over 11; xG environment ran cooler than model by 0.87; actual goals finished 1.48 below expected goal shape; moderate heat matches undershot expected xG; non group game reflection 11% actual over 444. Betting performance: calculated_risk is being downgraded by settled bet performance. Market average moved from 1.98 to 1.98; best price is 0% over average. Confidence 71.4% after odds freshness and data completeness checks."
+          "thesis": "Spain vs Belgium: Romelu Lukaku anytime scorer is priced at 3.7; raw AI probability 27.5%, pre-learning market-adjusted probability 28.4%, final learned probability 21%, market view 27%. Independent edge -2.98%, final value edge -4.24%, backed by 5 non-market signal(s): 20-match team sample, team goals environment is live, scorer raw probability clears floor, starter/minutes projection is healthy, 20-match scorer memory. Fixture model: expected goals 3.25 (1.62-1.62), rating edge 24.1, style edge -0.26, memory edge 1.3. Odds intelligence is capped: market result edge 0, consensus probability n/a where available. News impact is 0.08 for Spain and 0.112 for Belgium. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.44. Scorer memory: Spain top recent scorers Morata, Oyarzabal, Sarabia; Belgium top recent scorers De Bruyne, Tielemans, De Ketelaere. Heat layer: Los Angeles hotMixed stress 29.6%, xG adjustment -0.03, result edge 1.48; climate/history/depth differential 0.1545. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goals environment is live at 3.25 expected goals; scorer price gives the betslip a higher-upside angle. Outcome learning: anytime_scorer descriptive strike rate 8.4% over 1210; steady_edge descriptive strike rate 18.4% over 811; anytime_scorer 00-39% band calibration 7.7% actual vs 17.7% projected; steady_edge 00-39% band calibration 8.8% actual vs 16.2% projected; anytime_scorer calibration 8.4% actual vs 18.4% projected; steady_edge calibration 18.4% actual vs 22.2% projected. Post-match reflection: anytime_scorer post-match reflection 8.7% actual vs 18.7% projected over 1213; non group game reflection environment covers 12 unique fixture(s). Betting performance: anytime_scorer is being downgraded by settled bet performance; steady_edge is being downgraded by settled bet performance. Market average moved from 3.7 to 3.7; best price is 0% over average. Confidence 56% after odds freshness and data completeness checks."
         }
       ],
-      "thesis": "single at combined odds 1.98 with estimated slip chance 71.4% and average leg survival 71.4%. Expected value is 65.31%, independent edge averages 32.98%, and the model has 7 non-market signals per leg.  Short-slip controls keep model chance ahead of price hunting.  1 calculated-risk/value leg(s) stop this from being a favourite-only single. No high-implied-probability favourite crowding. Heat layer active on 1 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: Spain vs Belgium: Over 1.5 goals."
+      "thesis": "double at combined odds 15.54 with estimated slip chance 6.9% and average leg survival 26.3%. The displayed odds are the product of the listed leg prices. Research-only price combination from SportsGambler public prop pages; a single verified bookmaker could not be established, so it is not claimed as directly placeable and has no executable return. Expected value is -36.18%, independent edge averages -1.13%, and the model has 6 non-market signals per leg. Short-window fallback active: the selected date range offers 2 distinct fixture(s) for 2 leg(s). Exact legs are never repeated and same-game legs require explicit shared bet-builder evidence. Short-slip controls keep model chance ahead of price hunting.  No calculated-risk leg; this should only survive if the edge is exceptional. No high-implied-probability favourite crowding. Heat layer active on 2 leg(s), capped as a small xG/result adjustment using weather, climate memory, and squad depth. Legs: Norway vs England: Alexander Sørloth anytime scorer | Spain vs Belgium: Romelu Lukaku anytime scorer."
     }
   ],
   "offerRanking": [],
-  "strongestLegs": [
-    {
-      "id": "leg_a58a7706",
-      "createdAt": "2026-07-10T05:07:44.357Z",
-      "fixtureId": "fixture_eb65f44a",
-      "fixtureDate": "2026-07-10T19:00:00.000Z",
-      "homeTeam": "Spain",
-      "awayTeam": "Belgium",
-      "market": "over_1_5_goals",
-      "outcome": "Over",
-      "selectionLabel": "Spain vs Belgium: Over 1.5 goals",
-      "bookmaker": "SportsGambler public prop pages: Spain v Belgium",
-      "oddsCapturedAt": "2026-07-09T18:21:47.767Z",
-      "decimalOdds": 1.98,
-      "modelProbability": 0.8349,
-      "rawModelProbability": 0.8349,
-      "impliedProbability": 0.5051,
-      "marketImpliedProbability": 0.5051,
-      "independentEdge": 0.3298,
-      "edge": 0.3298,
-      "priceEdge": 0.3298,
-      "marketEdge": 0.3298,
-      "confidence": 0.714,
-      "score": 99.15,
-      "riskTag": "calculated_risk",
-      "hardBlocks": [],
-      "components": {
-        "ratingEdge": 24.1,
-        "formEdge": 29.9,
-        "xgEdge": -22.92,
-        "rawXgEdge": -30.72,
-        "styleEdge": -0.26,
-        "eventMetricQuality": 0.3955,
-        "estimatedMetricPenalty": 0.6045,
-        "homeEventMetricQuality": 0.3945,
-        "awayEventMetricQuality": 0.3965,
-        "homeRealMetricMatchCount": 4,
-        "awayRealMetricMatchCount": 4,
-        "squadDepthEdge": 4.69,
-        "buildUpEdge": 0.44,
-        "pressBuildEdge": -0.42,
-        "homeManager": "Luis de la Fuente",
-        "awayManager": "Rudi Garcia",
-        "homeLikelyFormation": "4-3-3 / 4-2-3-1",
-        "awayLikelyFormation": "4-3-3 / 4-2-3-1",
-        "homeStyleOfPlay": "front-foot pressing and fast regains",
-        "awayStyleOfPlay": "front-foot pressing and fast regains",
-        "homeStyleTags": [
-          "pressing",
-          "front-foot",
-          "regains",
-          "set-piece threat",
-          "positive xG balance"
-        ],
-        "awayStyleTags": [
-          "pressing",
-          "front-foot",
-          "regains",
-          "set-piece threat",
-          "positive xG balance"
-        ],
-        "homePassCompletion": 0.784,
-        "awayPassCompletion": 0.774,
-        "homePassesAttempted": 648.4,
-        "awayPassesAttempted": 649,
-        "homeTopScorers": [
-          "Morata",
-          "Oyarzabal",
-          "Sarabia",
-          "Fabián",
-          "M. Oyarzabal"
-        ],
-        "awayTopScorers": [
-          "De Bruyne",
-          "Tielemans",
-          "De Ketelaere",
-          "Doku",
-          "Lukébakio"
-        ],
-        "newsEdge": -3.05,
-        "memoryEdge": 1.35,
-        "independentResultEdge": 35.29,
-        "marketMemoryEdge": 0.09,
-        "marketResultEdge": 0,
-        "marketConfidence": 0.66,
-        "marketHomeWinProbability": 0.301,
-        "marketDrawProbability": 0.398,
-        "marketAwayWinProbability": 0.301,
-        "marketBttsYesProbability": 0.5,
-        "marketOver25Probability": 0.544,
-        "heatEdge": 1.48,
-        "tournamentPhase": "non_group_game",
-        "homeGroupGameNumber": null,
-        "awayGroupGameNumber": null,
-        "bothOpeningGroupGame": false,
-        "oneOpeningGroupGame": false,
-        "openingGameCaution": 0,
-        "tournamentExpectedGoalsAdjustment": 0,
-        "tournamentBttsAdjustment": 0,
-        "tournamentDrawLift": 0,
-        "openingOver25Adjustment": 0,
-        "marketDominancePressure": 0,
-        "marketDominantTeam": "",
-        "marketUnderdogTeam": "",
-        "homeMarketDominanceGoalAdjustment": 0,
-        "awayMarketDominanceGoalAdjustment": 0,
-        "tournamentContextNote": "Tournament pressure layer inactive outside group-stage fixtures.",
-        "qualityGapEdge": 21.96,
-        "qualityGapPressure": 0,
-        "homeQualityGoalAdjustment": 0,
-        "awayQualityGoalAdjustment": 0,
-        "expectedGoals": 3.25,
-        "homeExpectedGoals": 1.62,
-        "awayExpectedGoals": 1.62,
-        "projectedShotTotal": 27.09,
-        "homeProjectedShots": 13.51,
-        "awayProjectedShots": 13.58,
-        "projectedShotsOnTargetTotal": 9.65,
-        "homeProjectedShotsOnTarget": 4.73,
-        "awayProjectedShotsOnTarget": 4.92,
-        "bttsShapeProbability": 0.6256,
-        "over15ShapeProbability": 0.8349,
-        "preOpeningOver25ShapeProbability": 0.6299,
-        "over25ShapeProbability": 0.622,
-        "under35ShapeProbability": 0.592,
-        "under45ShapeProbability": 0.7721,
-        "rawHomeWinProbability": 0.4,
-        "rawDrawProbability": 0.2618,
-        "rawAwayWinProbability": 0.3382,
-        "rawBttsShapeProbability": 0.6394,
-        "rawOver15ShapeProbability": 0.8349,
-        "rawOver25ShapeProbability": 0.6299,
-        "rawUnder35ShapeProbability": 0.592,
-        "rawUnder45ShapeProbability": 0.7721,
-        "homeLongMatchCount": 20,
-        "awayLongMatchCount": 20,
-        "homeBttsRate": 0.35,
-        "awayBttsRate": 0.55,
-        "homeOver25Rate": 0.55,
-        "awayOver25Rate": 0.55,
-        "homeCleanSheetRate": 0.65,
-        "awayCleanSheetRate": 0.35,
-        "homeNewsImpact": 0.08,
-        "awayNewsImpact": 0.112,
-        "heatStress": 0.2955,
-        "heatConfidence": 0.7055,
-        "heatClimateBand": "hotMixed",
-        "heatExpectedGoalsAdjustment": -0.03,
-        "heatBttsAdjustment": -0.0051,
-        "heatLocation": "Los Angeles",
-        "heatNotes": "Heat stress 29.6% (hotMixed) with 70.6% weather confidence; climate/history/depth edge favours home side. Components: climate 0.131, history 0.01, depth 0.",
-        "homeClimateAdaptation": 0.55,
-        "awayClimateAdaptation": 0.35,
-        "homeHistoricalHeatMemory": 0.014,
-        "awayHistoricalHeatMemory": -0.002,
-        "homeSquadDepth": 0.7112,
-        "awaySquadDepth": 0.6022,
-        "squadDepthConfidence": 0.6722,
-        "heatHistoryDifferential": 0.0098,
-        "heatSquadDepthDifferential": 0.0733,
-        "combinedHeatDifferential": 0.1545,
-        "homeLearnedEdge": 0.0372,
-        "awayLearnedEdge": 0.0219,
-        "intelligenceConfidence": 0.613,
-        "dataCompleteness": 0.648,
-        "oddsAgeHours": 10.77,
-        "oddsFreshness": 0.641,
-        "bookmakerCoverage": 1,
-        "marketAverageOdds": 1.98,
-        "oddsMovement": 0,
-        "oddsShortening": false,
-        "oddsDrifting": false,
-        "bestOverAverage": 0,
-        "independentEdge": 0.3298,
-        "marketBlendLift": 0,
-        "nonMarketSignalCount": 7,
-        "nonMarketSignals": [
-          "raw AI probability beats market",
-          "20-match team sample",
-          "raw over-1.5 model clears survival line",
-          "expected-goals base supports two goals",
-          "20-match goals history is not dead",
-          "second goal can arrive from either match shape",
-          "opening caution still leaves a two-goal route"
-        ],
-        "independentEvidenceStrength": 0.7239,
-        "oddsMovementBonus": 0,
-        "intelligenceBonus": 2.04,
-        "marketFocusBonus": 9,
-        "evidenceBonus": 11,
-        "marketBlendPenalty": 0,
-        "marketFocusReasons": [
-          "safer two-goal line has 3.25 expected-goals support",
-          "edge is strong enough to justify focus"
-        ],
-        "outcomeLearningAdjustment": -0.0424,
-        "outcomeLearningConfidence": 0.7669,
-        "outcomeLearningReasons": [
-          "over_1_5_goals historical strike 50% over 6",
-          "calculated_risk historical strike 10.7% over 309",
-          "over_1_5_goals calibration 50% actual vs 77.4% projected",
-          "calculated_risk calibration 10.7% actual vs 22.8% projected"
-        ],
-        "outcomeLearningBaseAdjustment": -0.0196,
-        "predictionReflectionAdjustment": -0.045,
-        "predictionReflectionConfidence": 0.8917,
-        "predictionReflectionReasons": [
-          "over_1_5_goals post-match reflection 45.5% actual vs 77.9% projected over 11",
-          "xG environment ran cooler than model by 0.87",
-          "actual goals finished 1.48 below expected goal shape",
-          "moderate heat matches undershot expected xG",
-          "non group game reflection 11% actual over 444"
-        ],
-        "bettingPerformanceAdjustment": -0.043,
-        "bettingPerformanceConfidence": 0.4208,
-        "bettingPerformanceScorePenalty": 5.47,
-        "bettingPerformanceScoreBonus": 0,
-        "bettingPerformanceMarketAction": "monitor",
-        "bettingPerformanceMarketRoi": -0.16,
-        "bettingPerformanceMarketClv": 0.001,
-        "bettingPerformanceMarketSample": 6,
-        "bettingPerformanceReasons": [
-          "calculated_risk is being downgraded by settled bet performance"
-        ],
-        "priceGone": false,
-        "livePriceDiscipline": {
-          "priceGone": false,
-          "thinPrice": false,
-          "severity": 0,
-          "confidence": 0.35,
-          "reason": ""
-        },
-        "highCertaintySurvivalFavorite": false,
-        "confidenceReasons": [
-          "event stats mostly score-derived estimates",
-          "many non-market signals agree",
-          "settled-outcome learning active",
-          "post-match xG/shot reflection active",
-          "settled money/CLV performance active",
-          "market type fits the football evidence"
-        ],
-        "favoriteCrowdingPenalty": 0,
-        "valueOddsBonus": 3.5
-      },
-      "thesis": "Spain vs Belgium: Over 1.5 goals is priced at 1.98; raw AI probability 83.5%, market-adjusted probability 83.5%, market view 50.5%. Independent edge 32.98%, final value edge 32.98%, backed by 7 non-market signal(s): raw AI probability beats market, 20-match team sample, raw over-1.5 model clears survival line, expected-goals base supports two goals, 20-match goals history is not dead, second goal can arrive from either match shape, opening caution still leaves a two-goal route. Fixture model: expected goals 3.25 (1.62-1.62), rating edge 24.1, style edge -0.26, memory edge 1.35. Odds intelligence is capped: market result edge 0, consensus probability 0.301 where available. News impact is 0.08 for Spain and 0.112 for Belgium. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.44. Scorer memory: Spain top recent scorers Morata, Oyarzabal, Sarabia; Belgium top recent scorers De Bruyne, Tielemans, De Ketelaere. Heat layer: Los Angeles hotMixed stress 29.6%, xG adjustment -0.03, result edge 1.48; climate/history/depth differential 0.1545. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: safer two-goal line has 3.25 expected-goals support; edge is strong enough to justify focus. Outcome learning: over_1_5_goals historical strike 50% over 6; calculated_risk historical strike 10.7% over 309; over_1_5_goals calibration 50% actual vs 77.4% projected; calculated_risk calibration 10.7% actual vs 22.8% projected. Post-match reflection: over_1_5_goals post-match reflection 45.5% actual vs 77.9% projected over 11; xG environment ran cooler than model by 0.87; actual goals finished 1.48 below expected goal shape; moderate heat matches undershot expected xG; non group game reflection 11% actual over 444. Betting performance: calculated_risk is being downgraded by settled bet performance. Market average moved from 1.98 to 1.98; best price is 0% over average. Confidence 71.4% after odds freshness and data completeness checks.",
-      "rank": 1
-    },
-    {
-      "id": "leg_3b0c2ab3",
-      "createdAt": "2026-07-10T05:07:44.357Z",
-      "fixtureId": "fixture_eb65f44a",
-      "fixtureDate": "2026-07-10T19:00:00.000Z",
-      "homeTeam": "Spain",
-      "awayTeam": "Belgium",
-      "market": "under_4_5_goals",
-      "outcome": "Under",
-      "selectionLabel": "Spain vs Belgium: Under 4.5 goals",
-      "bookmaker": "SportsGambler public prop pages: Spain v Belgium",
-      "oddsCapturedAt": "2026-07-09T18:21:47.767Z",
-      "decimalOdds": 2.08,
-      "modelProbability": 0.7721,
-      "rawModelProbability": 0.7721,
-      "impliedProbability": 0.4808,
-      "marketImpliedProbability": 0.4808,
-      "independentEdge": 0.2913,
-      "edge": 0.2913,
-      "priceEdge": 0.2913,
-      "marketEdge": 0.2913,
-      "confidence": 0.6939,
-      "score": 98.66,
-      "riskTag": "calculated_risk",
-      "hardBlocks": [],
-      "components": {
-        "ratingEdge": 24.1,
-        "formEdge": 29.9,
-        "xgEdge": -22.92,
-        "rawXgEdge": -30.72,
-        "styleEdge": -0.26,
-        "eventMetricQuality": 0.3955,
-        "estimatedMetricPenalty": 0.6045,
-        "homeEventMetricQuality": 0.3945,
-        "awayEventMetricQuality": 0.3965,
-        "homeRealMetricMatchCount": 4,
-        "awayRealMetricMatchCount": 4,
-        "squadDepthEdge": 4.69,
-        "buildUpEdge": 0.44,
-        "pressBuildEdge": -0.42,
-        "homeManager": "Luis de la Fuente",
-        "awayManager": "Rudi Garcia",
-        "homeLikelyFormation": "4-3-3 / 4-2-3-1",
-        "awayLikelyFormation": "4-3-3 / 4-2-3-1",
-        "homeStyleOfPlay": "front-foot pressing and fast regains",
-        "awayStyleOfPlay": "front-foot pressing and fast regains",
-        "homeStyleTags": [
-          "pressing",
-          "front-foot",
-          "regains",
-          "set-piece threat",
-          "positive xG balance"
-        ],
-        "awayStyleTags": [
-          "pressing",
-          "front-foot",
-          "regains",
-          "set-piece threat",
-          "positive xG balance"
-        ],
-        "homePassCompletion": 0.784,
-        "awayPassCompletion": 0.774,
-        "homePassesAttempted": 648.4,
-        "awayPassesAttempted": 649,
-        "homeTopScorers": [
-          "Morata",
-          "Oyarzabal",
-          "Sarabia",
-          "Fabián",
-          "M. Oyarzabal"
-        ],
-        "awayTopScorers": [
-          "De Bruyne",
-          "Tielemans",
-          "De Ketelaere",
-          "Doku",
-          "Lukébakio"
-        ],
-        "newsEdge": -3.05,
-        "memoryEdge": 1.35,
-        "independentResultEdge": 35.29,
-        "marketMemoryEdge": 0.09,
-        "marketResultEdge": 0,
-        "marketConfidence": 0.66,
-        "marketHomeWinProbability": 0.301,
-        "marketDrawProbability": 0.398,
-        "marketAwayWinProbability": 0.301,
-        "marketBttsYesProbability": 0.5,
-        "marketOver25Probability": 0.544,
-        "heatEdge": 1.48,
-        "tournamentPhase": "non_group_game",
-        "homeGroupGameNumber": null,
-        "awayGroupGameNumber": null,
-        "bothOpeningGroupGame": false,
-        "oneOpeningGroupGame": false,
-        "openingGameCaution": 0,
-        "tournamentExpectedGoalsAdjustment": 0,
-        "tournamentBttsAdjustment": 0,
-        "tournamentDrawLift": 0,
-        "openingOver25Adjustment": 0,
-        "marketDominancePressure": 0,
-        "marketDominantTeam": "",
-        "marketUnderdogTeam": "",
-        "homeMarketDominanceGoalAdjustment": 0,
-        "awayMarketDominanceGoalAdjustment": 0,
-        "tournamentContextNote": "Tournament pressure layer inactive outside group-stage fixtures.",
-        "qualityGapEdge": 21.96,
-        "qualityGapPressure": 0,
-        "homeQualityGoalAdjustment": 0,
-        "awayQualityGoalAdjustment": 0,
-        "expectedGoals": 3.25,
-        "homeExpectedGoals": 1.62,
-        "awayExpectedGoals": 1.62,
-        "projectedShotTotal": 27.09,
-        "homeProjectedShots": 13.51,
-        "awayProjectedShots": 13.58,
-        "projectedShotsOnTargetTotal": 9.65,
-        "homeProjectedShotsOnTarget": 4.73,
-        "awayProjectedShotsOnTarget": 4.92,
-        "bttsShapeProbability": 0.6256,
-        "over15ShapeProbability": 0.8349,
-        "preOpeningOver25ShapeProbability": 0.6299,
-        "over25ShapeProbability": 0.622,
-        "under35ShapeProbability": 0.592,
-        "under45ShapeProbability": 0.7721,
-        "rawHomeWinProbability": 0.4,
-        "rawDrawProbability": 0.2618,
-        "rawAwayWinProbability": 0.3382,
-        "rawBttsShapeProbability": 0.6394,
-        "rawOver15ShapeProbability": 0.8349,
-        "rawOver25ShapeProbability": 0.6299,
-        "rawUnder35ShapeProbability": 0.592,
-        "rawUnder45ShapeProbability": 0.7721,
-        "homeLongMatchCount": 20,
-        "awayLongMatchCount": 20,
-        "homeBttsRate": 0.35,
-        "awayBttsRate": 0.55,
-        "homeOver25Rate": 0.55,
-        "awayOver25Rate": 0.55,
-        "homeCleanSheetRate": 0.65,
-        "awayCleanSheetRate": 0.35,
-        "homeNewsImpact": 0.08,
-        "awayNewsImpact": 0.112,
-        "heatStress": 0.2955,
-        "heatConfidence": 0.7055,
-        "heatClimateBand": "hotMixed",
-        "heatExpectedGoalsAdjustment": -0.03,
-        "heatBttsAdjustment": -0.0051,
-        "heatLocation": "Los Angeles",
-        "heatNotes": "Heat stress 29.6% (hotMixed) with 70.6% weather confidence; climate/history/depth edge favours home side. Components: climate 0.131, history 0.01, depth 0.",
-        "homeClimateAdaptation": 0.55,
-        "awayClimateAdaptation": 0.35,
-        "homeHistoricalHeatMemory": 0.014,
-        "awayHistoricalHeatMemory": -0.002,
-        "homeSquadDepth": 0.7112,
-        "awaySquadDepth": 0.6022,
-        "squadDepthConfidence": 0.6722,
-        "heatHistoryDifferential": 0.0098,
-        "heatSquadDepthDifferential": 0.0733,
-        "combinedHeatDifferential": 0.1545,
-        "homeLearnedEdge": 0.0372,
-        "awayLearnedEdge": 0.0219,
-        "intelligenceConfidence": 0.613,
-        "dataCompleteness": 0.648,
-        "oddsAgeHours": 10.77,
-        "oddsFreshness": 0.641,
-        "bookmakerCoverage": 1,
-        "marketAverageOdds": 2.08,
-        "oddsMovement": 0,
-        "oddsShortening": false,
-        "oddsDrifting": false,
-        "bestOverAverage": 0,
-        "independentEdge": 0.2913,
-        "marketBlendLift": 0,
-        "nonMarketSignalCount": 5,
-        "nonMarketSignals": [
-          "raw AI probability beats market",
-          "20-match team sample",
-          "expected-goals model stays below under-4.5 danger zone",
-          "20-match goal history is survivable for the line",
-          "heat layer trims goal tempo"
-        ],
-        "independentEvidenceStrength": 0.5962,
-        "oddsMovementBonus": 0,
-        "intelligenceBonus": 2.04,
-        "marketFocusBonus": 8,
-        "evidenceBonus": 11,
-        "marketBlendPenalty": 0,
-        "marketFocusReasons": [
-          "goal model keeps under-4.5 below its danger zone at 3.25 expected goals",
-          "edge is strong enough to justify focus"
-        ],
-        "outcomeLearningAdjustment": -0.0404,
-        "outcomeLearningConfidence": 0.86,
-        "outcomeLearningReasons": [
-          "under_4_5_goals historical strike 100% over 1",
-          "calculated_risk historical strike 10.7% over 309",
-          "calculated_risk calibration 10.7% actual vs 22.8% projected"
-        ],
-        "outcomeLearningBaseAdjustment": -0.017,
-        "predictionReflectionAdjustment": -0.0449,
-        "predictionReflectionConfidence": 1,
-        "predictionReflectionReasons": [
-          "actual goals finished 1.1 below expected goal shape",
-          "moderate heat matches undershot expected xG",
-          "non group game reflection 11% actual over 444"
-        ],
-        "bettingPerformanceAdjustment": -0.0373,
-        "bettingPerformanceConfidence": 0.3514,
-        "bettingPerformanceScorePenalty": 4.75,
-        "bettingPerformanceScoreBonus": 0,
-        "bettingPerformanceMarketAction": "monitor",
-        "bettingPerformanceMarketRoi": 1.2,
-        "bettingPerformanceMarketClv": 0.0092,
-        "bettingPerformanceMarketSample": 1,
-        "bettingPerformanceReasons": [
-          "calculated_risk is being downgraded by settled bet performance"
-        ],
-        "priceGone": false,
-        "livePriceDiscipline": {
-          "priceGone": false,
-          "thinPrice": false,
-          "severity": 0,
-          "confidence": 0.35,
-          "reason": ""
-        },
-        "highCertaintySurvivalFavorite": false,
-        "confidenceReasons": [
-          "event stats mostly score-derived estimates",
-          "many non-market signals agree",
-          "settled-outcome learning active",
-          "post-match xG/shot reflection active",
-          "settled money/CLV performance active",
-          "market type fits the football evidence"
-        ],
-        "favoriteCrowdingPenalty": 0,
-        "valueOddsBonus": 3.5
-      },
-      "thesis": "Spain vs Belgium: Under 4.5 goals is priced at 2.08; raw AI probability 77.2%, market-adjusted probability 77.2%, market view 48.1%. Independent edge 29.13%, final value edge 29.13%, backed by 5 non-market signal(s): raw AI probability beats market, 20-match team sample, expected-goals model stays below under-4.5 danger zone, 20-match goal history is survivable for the line, heat layer trims goal tempo. Fixture model: expected goals 3.25 (1.62-1.62), rating edge 24.1, style edge -0.26, memory edge 1.35. Odds intelligence is capped: market result edge 0, consensus probability 0.301 where available. News impact is 0.08 for Spain and 0.112 for Belgium. Tactical memory: Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Belgium 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.44. Scorer memory: Spain top recent scorers Morata, Oyarzabal, Sarabia; Belgium top recent scorers De Bruyne, Tielemans, De Ketelaere. Heat layer: Los Angeles hotMixed stress 29.6%, xG adjustment -0.03, result edge 1.48; climate/history/depth differential 0.1545. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goal model keeps under-4.5 below its danger zone at 3.25 expected goals; edge is strong enough to justify focus. Outcome learning: under_4_5_goals historical strike 100% over 1; calculated_risk historical strike 10.7% over 309; calculated_risk calibration 10.7% actual vs 22.8% projected. Post-match reflection: actual goals finished 1.1 below expected goal shape; moderate heat matches undershot expected xG; non group game reflection 11% actual over 444. Betting performance: calculated_risk is being downgraded by settled bet performance. Market average moved from 2.08 to 2.08; best price is 0% over average. Confidence 69.4% after odds freshness and data completeness checks.",
-      "rank": 2
-    }
-  ]
+  "strongestLegs": []
 }

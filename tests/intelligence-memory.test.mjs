@@ -278,6 +278,7 @@ test("outcome learning waits for sample size then adjusts market/risk patterns",
   const adjustment = outcomeLearningAdjustment({
     market: "both_teams_to_score",
     riskTag: "market_confirmed_edge",
+    modelProbability: 0.58,
     outcomeLearning: learning
   });
 
@@ -310,6 +311,68 @@ test("outcome learning builds calibration buckets from settled probabilities", (
   assert.equal(learning.calibration.probabilityBand["60-69"].count, 10);
   assert.equal(learning.calibration.probabilityBand["60-69"].winRate, 0.6);
   assert.ok(Number.isFinite(learning.calibration.overall.brierScore));
+});
+
+test("outcome learning calibrates against the forecast band instead of a universal fifty-percent baseline", () => {
+  const lowForecast = Array.from({ length: 10 }, (_, index) => ({
+    fixtureId: `low-${index}`,
+    status: index < 7 ? "won" : "lost",
+    market: "anytime_scorer",
+    riskTag: "calculated_risk",
+    playerName: `Player ${index}`,
+    modelProbability: 0.22
+  }));
+  const highForecast = Array.from({ length: 10 }, (_, index) => ({
+    fixtureId: `high-${index}`,
+    status: index < 7 ? "won" : "lost",
+    market: "anytime_scorer",
+    riskTag: "calculated_risk",
+    playerName: `Player ${index}`,
+    modelProbability: 0.82
+  }));
+  const lowLearning = buildOutcomeLearning(lowForecast);
+  const highLearning = buildOutcomeLearning(highForecast);
+  const lowAdjustment = outcomeLearningAdjustment({
+    market: "anytime_scorer",
+    riskTag: "calculated_risk",
+    modelProbability: 0.22,
+    outcomeLearning: lowLearning
+  });
+  const highAdjustment = outcomeLearningAdjustment({
+    market: "anytime_scorer",
+    riskTag: "calculated_risk",
+    modelProbability: 0.82,
+    outcomeLearning: highLearning
+  });
+
+  assert.equal(lowLearning.market.anytime_scorer.winRate, 0.7);
+  assert.equal(highLearning.market.anytime_scorer.winRate, 0.7);
+  assert.ok(lowAdjustment.adjustment > 0);
+  assert.ok(highAdjustment.adjustment < 0);
+  assert.equal(lowLearning.calibration.marketProbabilityBand.anytime_scorer["00-39"].count, 10);
+  assert.equal(highLearning.calibration.riskTagProbabilityBand.calculated_risk["80-99"].count, 10);
+});
+
+test("settled outcomes without a recorded forecast remain descriptive and do not enter calibration", () => {
+  const outcomes = Array.from({ length: 8 }, (_item, index) => ({
+    fixtureId: `unforecast-${index}`,
+    status: index < 5 ? "won" : "lost",
+    market: "match_winner",
+    riskTag: "steady_edge",
+    outcome: `Team ${index}`
+  }));
+  const learning = buildOutcomeLearning(outcomes);
+  const adjustment = outcomeLearningAdjustment({
+    market: "match_winner",
+    riskTag: "steady_edge",
+    modelProbability: 0.64,
+    outcomeLearning: learning
+  });
+
+  assert.equal(learning.outcomeCount, 8);
+  assert.equal(learning.market.match_winner.winRate, 0.625);
+  assert.equal(learning.calibration.overall.count, 0);
+  assert.equal(adjustment.adjustment, 0);
 });
 
 test("outcome learning deduplicates repeated bookmaker snapshots for the same settled selection", () => {
@@ -633,6 +696,45 @@ test("prediction reflection learning ignores older score-derived duplicates", ()
 
   assert.equal(learning.count, 1);
   assert.equal(learning.market.over_2_5_goals.averageMetricQuality, 1);
+});
+
+test("fixture environment learning is not multiplied by bookmaker or player selections", () => {
+  const reflections = Array.from({ length: 4 }, (_item, fixtureIndex) => {
+    const common = {
+      fixtureId: `fixture-${fixtureIndex}`,
+      fixtureDate: `2026-06-${String(fixtureIndex + 10).padStart(2, "0")}T19:00:00.000Z`,
+      status: "lost",
+      market: "anytime_scorer",
+      riskTag: "calculated_risk",
+      modelProbability: 0.28,
+      probabilityError: -0.28,
+      brierError: 0.0784,
+      errors: { goalTotal: -0.8, xgTotal: -0.4, shotTotal: -5 },
+      heatBucket: "high_heat",
+      lineupBucket: "both_xi_confirmed",
+      tournamentPhase: "opening_group_game",
+      metricQuality: 0.9,
+      learningWeight: 0.9,
+      actual: {
+        metricSource: "fox-sports-boxscore",
+        capturedMetricFields: ["xg", "shots", "shotsOnTarget"]
+      }
+    };
+
+    return [
+      { ...common, playerName: "Player One", outcome: "Player One", bookmaker: "Book A" },
+      { ...common, playerName: "Player One", outcome: "Player One", bookmaker: "Book B" },
+      { ...common, playerName: "Player Two", outcome: "Player Two", bookmaker: "Book A" }
+    ];
+  }).flat();
+  const learning = buildPredictionReflectionLearning(reflections);
+
+  assert.equal(learning.count, 8, "selection calibration keeps two unique players per fixture");
+  assert.equal(learning.market.anytime_scorer.count, 8);
+  assert.equal(learning.environmentCount, 4);
+  assert.equal(learning.environment.overall.count, 4);
+  assert.equal(learning.heat.high_heat.count, 4);
+  assert.equal(learning.tournamentPhase.opening_group_game.count, 4);
 });
 
 function odds(capturedAt, decimalOdds, bookmaker) {

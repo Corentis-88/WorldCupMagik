@@ -143,18 +143,25 @@ export function buildPredictionReflections({ appScans = [], legCandidates = [], 
 }
 
 export function buildPredictionReflectionLearning(reflections = []) {
-  const settled = dedupeReflectionLearningRecords(reflections.filter((record) => record.status === "won" || record.status === "lost"));
+  const eligible = reflections.filter((record) => record.status === "won" || record.status === "lost");
+  const settled = dedupeReflectionLearningRecords(eligible);
+  const environmentRecords = dedupeFixtureEnvironmentRecords(eligible);
   const buckets = {
     overall: finalizeReflectionBucket(buildReflectionBucket(settled)),
     market: bucketBy(settled, (record) => record.market || "unknown"),
     riskTag: bucketBy(settled, (record) => record.riskTag || "unknown"),
-    heat: bucketBy(settled, (record) => record.heatBucket || "unknown"),
+    heat: bucketBy(environmentRecords, (record) => record.heatBucket || "unknown"),
     lineup: bucketBy(settled, (record) => record.lineupBucket || "unknown"),
-    tournamentPhase: bucketBy(settled, (record) => record.tournamentPhase || "unknown")
+    tournamentPhase: bucketBy(environmentRecords, (record) => record.tournamentPhase || "unknown")
   };
 
   return {
     count: settled.length,
+    environmentCount: environmentRecords.length,
+    environment: {
+      count: environmentRecords.length,
+      overall: finalizeReflectionBucket(buildReflectionBucket(environmentRecords))
+    },
     ...buckets
   };
 }
@@ -176,18 +183,22 @@ export function predictionReflectionAdjustment({ market, riskTag, model = null, 
   const tournamentPhase = tournamentPhaseForModel(components);
   const marketBucket = reflection.market?.[market];
   const riskBucket = reflection.riskTag?.[riskTag];
+  const environmentBucket = reflection.environment?.overall;
   const heatLearning = heatBucket ? reflection.heat?.[heatBucket] : null;
   const lineupLearning = lineupBucket ? reflection.lineup?.[lineupBucket] : null;
   const phaseLearning = tournamentPhase ? reflection.tournamentPhase?.[tournamentPhase] : null;
-  const weighted = [
-    [marketBucket, 0.42],
-    [riskBucket, 0.18],
-    [heatLearning, 0.14],
-    [lineupLearning, 0.08],
-    [phaseLearning, 0.18]
+  const calibrationWeighted = [
+    [marketBucket, 0.62],
+    [riskBucket, 0.25],
+    [lineupLearning, 0.13]
+  ].filter(([bucket]) => bucket && bucket.count >= 3);
+  const environmentWeighted = [
+    [environmentBucket, 0.44],
+    [heatLearning, 0.28],
+    [phaseLearning, 0.28]
   ].filter(([bucket]) => bucket && bucket.count >= 3);
 
-  if (!weighted.length) {
+  if (!calibrationWeighted.length && !environmentWeighted.length) {
     return {
       adjustment: 0,
       confidence: 0,
@@ -195,16 +206,20 @@ export function predictionReflectionAdjustment({ market, riskTag, model = null, 
     };
   }
 
-  const totalWeight = weighted.reduce((total, [, weight]) => total + weight, 0);
-  const sampleConfidence = clamp(mean(weighted.map(([bucket]) => Math.min(1, bucket.count / 24))), 0, 1);
-  const probabilityBias = weighted.reduce((total, [bucket, weight]) => total + Number(bucket.probabilityError || 0) * weight, 0) / totalWeight;
-  const goalShapeBias = GOAL_ENVIRONMENT_MARKETS.has(market)
-    ? weighted.reduce((total, [bucket, weight]) => {
+  const calibrationWeight = calibrationWeighted.reduce((total, [, weight]) => total + weight, 0);
+  const environmentWeight = environmentWeighted.reduce((total, [, weight]) => total + weight, 0);
+  const allBuckets = [...calibrationWeighted, ...environmentWeighted];
+  const sampleConfidence = clamp(mean(allBuckets.map(([bucket]) => Math.min(1, bucket.count / 24))), 0, 1);
+  const probabilityBias = calibrationWeight
+    ? calibrationWeighted.reduce((total, [bucket, weight]) => total + Number(bucket.probabilityError || 0) * weight, 0) / calibrationWeight
+    : 0;
+  const goalShapeBias = GOAL_ENVIRONMENT_MARKETS.has(market) && environmentWeight
+    ? environmentWeighted.reduce((total, [bucket, weight]) => {
       const goalConversionBias = Number(bucket.averageGoalTotalError || 0) * 0.018;
       const xgBias = Number(bucket.averageXgTotalError || 0) * 0.01;
       const shotBias = Number(bucket.averageShotTotalError || 0) * 0.0012;
       return total + clamp(goalConversionBias + xgBias + shotBias, -0.045, 0.045) * weight;
-    }, 0) / totalWeight
+    }, 0) / environmentWeight
     : 0;
   const adjustment = clamp(probabilityBias * 0.34 + goalShapeBias * 0.66, -0.045, 0.045);
   const reasons = [];
@@ -213,12 +228,12 @@ export function predictionReflectionAdjustment({ market, riskTag, model = null, 
     reasons.push(`${market} post-match reflection ${round(marketBucket.winRate * 100, 1)}% actual vs ${round(marketBucket.averageModelProbability * 100, 1)}% projected over ${marketBucket.count}`);
   }
 
-  if (GOAL_ENVIRONMENT_MARKETS.has(market) && marketBucket && Math.abs(Number(marketBucket.averageXgTotalError || 0)) >= 0.18) {
-    reasons.push(`xG environment ${marketBucket.averageXgTotalError > 0 ? "ran hotter" : "ran cooler"} than model by ${round(Math.abs(marketBucket.averageXgTotalError), 2)}`);
+  if (GOAL_ENVIRONMENT_MARKETS.has(market) && environmentBucket && Math.abs(Number(environmentBucket.averageXgTotalError || 0)) >= 0.18) {
+    reasons.push(`xG environment ${environmentBucket.averageXgTotalError > 0 ? "ran hotter" : "ran cooler"} than model by ${round(Math.abs(environmentBucket.averageXgTotalError), 2)} across ${environmentBucket.count} fixture(s)`);
   }
 
-  if (GOAL_ENVIRONMENT_MARKETS.has(market) && marketBucket && Number(marketBucket.averageGoalTotalError || 0) <= -0.18) {
-    reasons.push(`actual goals finished ${round(Math.abs(marketBucket.averageGoalTotalError), 2)} below expected goal shape`);
+  if (GOAL_ENVIRONMENT_MARKETS.has(market) && environmentBucket && Number(environmentBucket.averageGoalTotalError || 0) <= -0.18) {
+    reasons.push(`actual goals finished ${round(Math.abs(environmentBucket.averageGoalTotalError), 2)} below expected goal shape across ${environmentBucket.count} fixture(s)`);
   }
 
   if (heatLearning && heatLearning.count >= 3 && heatBucket !== "low_heat" && Math.abs(Number(heatLearning.averageXgTotalError || 0)) >= 0.18) {
@@ -230,7 +245,7 @@ export function predictionReflectionAdjustment({ market, riskTag, model = null, 
   }
 
   if (phaseLearning && phaseLearning.count >= 3 && tournamentPhase !== "unknown") {
-    reasons.push(`${tournamentPhase.replace(/_/g, " ")} reflection ${round(phaseLearning.winRate * 100, 1)}% actual over ${phaseLearning.count}`);
+    reasons.push(`${tournamentPhase.replace(/_/g, " ")} reflection environment covers ${phaseLearning.count} unique fixture(s)`);
   }
 
   return {
@@ -434,9 +449,27 @@ function reflectionLearningKey(record = {}) {
     record.fixtureId || [record.fixtureDate || record.matchDate || "", normalizeName(record.homeTeam), normalizeName(record.awayTeam)].join("|"),
     record.market || "",
     normalizeName(record.outcome || record.selectionLabel || ""),
-    normalizeName(record.playerName || ""),
-    normalizeName(record.bookmaker || "")
+    normalizeName(record.playerName || "")
   ].join("|");
+}
+
+function dedupeFixtureEnvironmentRecords(records = []) {
+  const byFixture = new Map();
+
+  for (const record of records) {
+    const key = record.fixtureId || [
+      record.fixtureDate || record.matchDate || "",
+      normalizeName(record.homeTeam),
+      normalizeName(record.awayTeam)
+    ].join("|");
+    const existing = byFixture.get(key);
+
+    if (!existing || reflectionLearningRank(record) > reflectionLearningRank(existing)) {
+      byFixture.set(key, record);
+    }
+  }
+
+  return [...byFixture.values()];
 }
 
 function reflectionLearningRank(record = {}) {

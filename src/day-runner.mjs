@@ -1,6 +1,7 @@
 import { appendJsonRecords, loadEngineState, readJson, upsertJsonRecords, writeJson, writeText } from "./db.mjs";
 import { fetchNewsArticles } from "./providers/news-provider.mjs";
 import { fetchOddsSnapshot } from "./providers/odds-provider.mjs";
+import { filterOddsIntegrity } from "./providers/odds-integrity.mjs";
 import { fetchSquadDepth } from "./providers/squad-provider.mjs";
 import { fetchTeamStatsWithDiagnostics } from "./providers/stats-provider.mjs";
 import { fetchHeatSnapshots } from "./providers/weather-provider.mjs";
@@ -15,6 +16,7 @@ import { buildLegCandidates } from "./scoring.mjs";
 import { loadBettingPerformance } from "./betting-performance.mjs";
 import { buildSurvivabilityMarketCoverage, isSurvivabilityMarketRecord } from "./survivability-market-coverage.mjs";
 import { isoDate, makeId, normalizeName } from "./utils.mjs";
+import { mergeTeamStatsRecords } from "./team-stats-store.mjs";
 
 export async function runDailyCycle({ now = new Date(), forceSnapshot = false } = {}) {
   const state = await loadEngineState();
@@ -69,8 +71,10 @@ export async function runSnapshotCycle({ state, now = new Date(), forceSnapshot 
     : [];
 
   if (oddsRecords.length) {
-    await appendJsonRecords(["data", "odds-snapshots.json"], oddsRecords, 50000);
-    await appendJsonRecords(["data", "snapshots", `odds-${isoDate(now)}.json`], oddsRecords, 50000);
+    const existingOdds = await readJson(["data", "odds-snapshots.json"], []);
+    await writeJson(["data", "odds-snapshots.json"], filterOddsIntegrity([...oddsRecords, ...existingOdds]).accepted.slice(0, 50000));
+    const existingDailyOdds = await readJson(["data", "snapshots", `odds-${isoDate(now)}.json`], []);
+    await writeJson(["data", "snapshots", `odds-${isoDate(now)}.json`], filterOddsIntegrity([...oddsRecords, ...existingDailyOdds]).accepted.slice(0, 50000));
   }
 
   if (newsArticles.length) {
@@ -86,11 +90,12 @@ export async function runSnapshotCycle({ state, now = new Date(), forceSnapshot 
   }
 
   if (teamStats.length) {
-    await writeJson(["data", "team-stats.json"], teamStats);
+    const mergedTeamStats = mergeTeamStatsRecords(engineState.teamStats, teamStats, { now });
+    await writeJson(["data", "team-stats.json"], mergedTeamStats);
     await writeJson(["data", "team-stats-latest.json"], {
       createdAt: now.toISOString(),
       providerMode: engineState.providers.stats?.mode || "self-gather",
-      teams: teamStats
+      teams: mergedTeamStats
     });
   }
 

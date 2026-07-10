@@ -9,8 +9,8 @@ on:
       - main
   pull_request:
   schedule:
-    # 02:17 UK time during the tournament's summer schedule. Accuracy is preferred over speed.
-    - cron: "17 1 * * *"
+    # Three off-peak attempts during the UK night. Later successful runs refresh the same compact database.
+    - cron: "17 1,2,3 * * *"
   workflow_dispatch:
 
 permissions:
@@ -42,7 +42,16 @@ jobs:
           cache-dependency-path: package-lock.json
       - run: npm ci
       - run: npm test
-      - run: npm run web:build-data
+      - name: Build data with bounded retries
+        run: |
+          for attempt in 1 2 3; do
+            npm run web:build-data && break
+            if [ "$attempt" = "3" ]; then
+              echo "Full public-web build failed after 3 attempts."
+              exit 1
+            fi
+            sleep 30
+          done
       - name: Preserve current published lineup feed
         run: |
           mkdir -p web/data
@@ -68,6 +77,7 @@ jobs:
           }
           NODE
           fi
+      - run: npm run engine:guard
       - uses: actions/configure-pages@v5
         with:
           enablement: true

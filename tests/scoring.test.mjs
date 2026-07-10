@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { buildMostLikelyPolicy, buildRiskPolicy, selectBetslip } from "../src/app-service.mjs";
 import { buildBetRecommendations } from "../src/portfolio-builder.mjs";
+import { buildOutcomeLearning } from "../src/intelligence-memory.mjs";
 import { bestLatestOddsByOutcome, buildLegCandidates, buildTournamentContextByFixture, fixtureModel } from "../src/scoring.mjs";
 import basePolicy from "../config/engine-policy.json" with { type: "json" };
 
@@ -29,6 +30,57 @@ test("scores positive-edge legs with calculated risk tags", () => {
   assert.ok(legs.some((leg) => leg.market === "anytime_scorer"));
   assert.ok(eligible.length > 0);
   assert.ok(eligible.some((leg) => ["calculated_risk", "longshot_value", "contrarian_value"].includes(leg.riskTag)));
+});
+
+test("calibration learning propagates into returned probability and recomputed edges", () => {
+  const now = new Date("2026-06-07T09:00:00.000Z");
+  const fixtureRecord = fixture("learned-edge", "Mexico", "South Africa", "2026-06-11T19:00:00.000Z");
+  const policy = buildRiskPolicy(basePolicy, 62);
+  const inputs = {
+    fixtures: [fixtureRecord],
+    oddsSnapshots: sampleOdds([fixtureRecord], now).map((item) => ({
+      ...item,
+      pricePublisher: "Public Odds Publisher",
+      source: "publisher-page",
+      bookmakerVerified: true,
+      bookmakerKey: "public-test-book"
+    })),
+    newsArticles: sampleNews(now),
+    teamStats: sampleTeamStats(),
+    policy,
+    now
+  };
+  const baseline = buildLegCandidates(inputs).find((leg) => leg.market === "over_2_5_goals");
+  assert.ok(baseline);
+
+  const outcomes = Array.from({ length: 12 }, (_item, index) => ({
+    fixtureId: `settled-${index}`,
+    status: "won",
+    market: baseline.market,
+    riskTag: baseline.riskTag,
+    outcome: "Over",
+    modelProbability: baseline.modelProbability,
+    impliedProbability: baseline.marketImpliedProbability
+  }));
+  const outcomeLearning = buildOutcomeLearning(outcomes);
+  const learned = buildLegCandidates({ ...inputs, outcomeLearning })
+    .find((leg) => leg.market === "over_2_5_goals");
+
+  assert.ok(learned);
+  assert.equal(learned.preLearningModelProbability, baseline.modelProbability);
+  assert.equal(learned.rawModelProbability, baseline.rawModelProbability);
+  assert.ok(learned.modelProbability > learned.preLearningModelProbability);
+  assert.ok(learned.edge > learned.components.preLearningEdge);
+  assert.equal(learned.pricePublisher, "Public Odds Publisher");
+  assert.equal(learned.source, "publisher-page");
+  assert.equal(learned.bookmakerVerified, true);
+  assert.equal(learned.bookmakerKey, "public-test-book");
+  assert.equal(learned.components.bookmakerVerified, true);
+  assert.equal(
+    learned.independentEdge,
+    Number((learned.learnedIndependentProbability - learned.marketImpliedProbability).toFixed(4))
+  );
+  assert.match(learned.thesis, /final learned probability/);
 });
 
 test("builds fixed-category combinations without same-fixture legs", () => {

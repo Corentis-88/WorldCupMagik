@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { fetchOddsSnapshot } from "../src/providers/odds-provider.mjs";
+import { fetchOddsSnapshot, fetchOddsSnapshotWithDiagnostics } from "../src/providers/odds-provider.mjs";
 
 test("public-web odds parser maps match winner, totals, and BTTS offers", async () => {
   const originalFetch = globalThis.fetch;
@@ -109,6 +109,65 @@ test("public-web odds parser maps match winner, totals, and BTTS offers", async 
     assert.equal(records.find((record) => record.market === "team_corners")?.team, "Mexico");
     assert.equal(records.find((record) => record.market === "clean_sheet")?.dataOnly, true);
     assert.equal(records.find((record) => record.market === "player_card")?.dataOnly, true);
+    assert.equal(records[0].pricePublisher, "OnlyOdds test");
+    assert.equal(records[0].publisherType, "publisher-or-comparison");
+    assert.equal(records[0].bookmaker, "Coral");
+    assert.equal(records[0].bookmakerKey, "coral");
+    assert.equal(records[0].bookmakerVerified, false);
+    assert.equal(records[0].priceProvenance, "publisher-attributed-bookmaker");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("public-web odds parser respects reversed Under/Over table columns", async () => {
+  const originalFetch = globalThis.fetch;
+  const html = `
+    <main>
+      <h1>Mexico v South Africa odds</h1>
+      <h2>Total Goals</h2>
+      <table>
+        <tr><th>Goals</th><th>Under</th><th>Over</th></tr>
+        <tr><td>1.5</td><td>3.10</td><td>1.30</td></tr>
+        <tr><td>2.5</td><td>2.00</td><td>1.90</td></tr>
+        <tr><td>3.5</td><td>1.40</td><td>2.80</td></tr>
+        <tr><td>4.5</td><td>1.15</td><td>5.00</td></tr>
+      </table>
+    </main>
+  `;
+
+  globalThis.fetch = async () => ({ ok: true, text: async () => html });
+
+  try {
+    const result = await fetchOddsSnapshotWithDiagnostics({
+      fixtures: [{
+        id: "mex-rsa",
+        date: "2026-06-11T19:00:00.000Z",
+        homeTeam: "Mexico",
+        awayTeam: "South Africa"
+      }],
+      providerConfig: {
+        mode: "self-gather",
+        sources: [{
+          name: "Comparison publisher",
+          fixtureUrlFromFixtures: true,
+          fullPageFixtureBlock: true,
+          urlTemplate: "https://example.test/{homeSlug}-v-{awaySlug}"
+        }]
+      },
+      now: new Date("2026-06-11T10:00:00.000Z")
+    });
+    const byMarket = new Map(result.records.map((record) => [record.market, record]));
+
+    assert.equal(byMarket.get("over_1_5_goals")?.decimalOdds, 1.3);
+    assert.equal(byMarket.get("over_2_5_goals")?.decimalOdds, 1.9);
+    assert.equal(byMarket.get("under_2_5_goals")?.decimalOdds, 2);
+    assert.equal(byMarket.get("under_3_5_goals")?.decimalOdds, 1.4);
+    assert.equal(byMarket.get("under_4_5_goals")?.decimalOdds, 1.15);
+    assert.equal(byMarket.get("over_1_5_goals")?.bookmaker, null);
+    assert.equal(byMarket.get("over_1_5_goals")?.bookmakerKey, null);
+    assert.equal(byMarket.get("over_1_5_goals")?.priceProvenance, "publisher-only");
+    assert.equal(result.diagnostics.at(-1).quarantinedRecords, 0);
   } finally {
     globalThis.fetch = originalFetch;
   }

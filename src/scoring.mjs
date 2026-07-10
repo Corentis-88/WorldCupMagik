@@ -1083,10 +1083,10 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
   const independentModelProbability = clamp(Number(rawModelProbability ?? modelProbability ?? 0), 0.03, 0.92);
   const impliedProbability = decimalToImpliedProbability(odds.decimalOdds);
   const marketImpliedProbability = movement?.marketImpliedProbability || impliedProbability;
-  const priceEdge = adjustedModelProbability - impliedProbability;
-  const marketEdge = adjustedModelProbability - marketImpliedProbability;
-  const independentEdge = independentModelProbability - marketImpliedProbability;
-  const edge = independentEdge * 0.58 + priceEdge * 0.28 + marketEdge * 0.14;
+  const preLearningPriceEdge = adjustedModelProbability - impliedProbability;
+  const preLearningMarketEdge = adjustedModelProbability - marketImpliedProbability;
+  const preLearningIndependentEdge = independentModelProbability - marketImpliedProbability;
+  const preLearningEdge = preLearningIndependentEdge * 0.58 + preLearningPriceEdge * 0.28 + preLearningMarketEdge * 0.14;
   const marketBlendLift = adjustedModelProbability - independentModelProbability;
   const oddsAgeHours = hoursBetween(odds.capturedAt, now);
   const oddsFreshness = clamp(1 - oddsAgeHours / (policy.sourceRequirements?.maxOddsAgeHours || 30), 0, 1);
@@ -1094,8 +1094,7 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
   const intelligenceConfidence = legModel.components.intelligenceConfidence;
   const eventMetricQuality = Number(legModel.components.eventMetricQuality || 0.34);
   const bookmakerCoverage = movement?.bookmakerCount || 1;
-  const marketConfirmation = movement?.shortening && edge > 0 ? 1 : 0;
-  const contrarianValue = movement?.drifting && edge > 0 && Number(odds.decimalOdds) >= policy.riskProfile.minDecimalOddsForRiskLeg ? 1 : 0;
+  const preliminaryContrarianValue = movement?.drifting && preLearningEdge > 0 && Number(odds.decimalOdds) >= policy.riskProfile.minDecimalOddsForRiskLeg ? 1 : 0;
   const oddsDisagreement = Math.max(0, Number(movement?.bestOverAverage || 0));
   const independentEvidence = evaluateIndependentEvidence({
     fixture,
@@ -1105,48 +1104,92 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     modelProbability: adjustedModelProbability,
     rawModelProbability: independentModelProbability,
     marketImpliedProbability,
-    independentEdge
+    independentEdge: preLearningIndependentEdge
   });
   const preliminaryRiskTag = classifyRiskTag({
     decimalOdds: odds.decimalOdds,
     impliedProbability,
-    edge,
-    independentEdge,
+    edge: preLearningEdge,
+    independentEdge: preLearningIndependentEdge,
     rawModelProbability: independentModelProbability,
     modelProbability: adjustedModelProbability,
     movement,
+    contrarianValue: preliminaryContrarianValue
+  });
+  let riskTag = preliminaryRiskTag;
+  let learning;
+  let performance;
+  let learnedModelProbability;
+  let learnedIndependentProbability;
+
+  const applyLearnedAdjustments = () => {
+    learning = outcomeLearningAdjustment({
+      market,
+      riskTag,
+      outcomeLearning,
+      model: legModel,
+      modelProbability: adjustedModelProbability
+    });
+    performance = bettingPerformanceAdjustment({
+      market,
+      riskTag,
+      bookmaker: odds.bookmaker,
+      decimalOdds: odds.decimalOdds,
+      movement,
+      bettingPerformance,
+      risk: Number(policy.riskProfile?.sliderRisk ?? policy.riskProfile?.risk ?? 0)
+    });
+    learnedModelProbability = clamp(
+      adjustedModelProbability
+        + learning.adjustment * learning.confidence
+        + performance.probabilityAdjustment * performance.confidence,
+      0.03,
+      0.92
+    );
+    learnedIndependentProbability = clamp(
+      independentModelProbability
+        + learning.adjustment * learning.confidence * 0.55
+        + performance.probabilityAdjustment * performance.confidence * 0.42,
+      0.03,
+      0.92
+    );
+  };
+
+  applyLearnedAdjustments();
+
+  let priceEdge = learnedModelProbability - impliedProbability;
+  let marketEdge = learnedModelProbability - marketImpliedProbability;
+  let independentEdge = learnedIndependentProbability - marketImpliedProbability;
+  let edge = independentEdge * 0.58 + priceEdge * 0.28 + marketEdge * 0.14;
+  let contrarianValue = movement?.drifting && edge > 0 && Number(odds.decimalOdds) >= policy.riskProfile.minDecimalOddsForRiskLeg ? 1 : 0;
+  const learnedRiskTag = classifyRiskTag({
+    decimalOdds: odds.decimalOdds,
+    impliedProbability,
+    edge,
+    independentEdge,
+    rawModelProbability: learnedIndependentProbability,
+    modelProbability: learnedModelProbability,
+    movement,
     contrarianValue
   });
-  const learning = outcomeLearningAdjustment({ market, riskTag: preliminaryRiskTag, outcomeLearning, model: legModel });
-  const performance = bettingPerformanceAdjustment({
-    market,
-    riskTag: preliminaryRiskTag,
-    bookmaker: odds.bookmaker,
-    decimalOdds: odds.decimalOdds,
-    movement,
-    bettingPerformance,
-    risk: Number(policy.riskProfile?.sliderRisk ?? policy.riskProfile?.risk ?? 0)
-  });
-  const marketFocus = evaluateMarketFocus({ market, outcome, model: legModel, modelProbability: adjustedModelProbability, edge, odds, policy });
-  const learnedModelProbability = clamp(
-    adjustedModelProbability
-      + learning.adjustment * learning.confidence
-      + performance.probabilityAdjustment * performance.confidence,
-    0.03,
-    0.92
-  );
-  const learnedIndependentProbability = clamp(
-    independentModelProbability
-      + learning.adjustment * learning.confidence * 0.55
-      + performance.probabilityAdjustment * performance.confidence * 0.42,
-    0.03,
-    0.92
-  );
-  const learnedEdge = learnedModelProbability - impliedProbability;
-  const learnedIndependentEdge = learnedIndependentProbability - marketImpliedProbability;
+
+  if (learnedRiskTag !== riskTag) {
+    riskTag = learnedRiskTag;
+    applyLearnedAdjustments();
+    priceEdge = learnedModelProbability - impliedProbability;
+    marketEdge = learnedModelProbability - marketImpliedProbability;
+    independentEdge = learnedIndependentProbability - marketImpliedProbability;
+    edge = independentEdge * 0.58 + priceEdge * 0.28 + marketEdge * 0.14;
+    contrarianValue = movement?.drifting && edge > 0 && Number(odds.decimalOdds) >= policy.riskProfile.minDecimalOddsForRiskLeg ? 1 : 0;
+  }
+
+  const marketConfirmation = movement?.shortening && edge > 0 ? 1 : 0;
+  const marketFocus = evaluateMarketFocus({ market, outcome, model: legModel, modelProbability: learnedModelProbability, edge, odds, policy });
+  const learnedEdge = priceEdge;
+  const learnedIndependentEdge = independentEdge;
   const evidenceConfidence = clamp(Number(independentEvidence.count || 0) / 4, 0, 1);
   const confidence = clamp(
-    (independentModelProbability * 0.32)
+    (learnedIndependentProbability * 0.32)
     + (dataCompleteness * 0.17)
     + (intelligenceConfidence * 0.16)
     + (eventMetricQuality * 0.08)
@@ -1161,13 +1204,13 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     market,
     outcome,
     odds,
-    modelProbability: adjustedModelProbability,
-    rawModelProbability: independentModelProbability,
+    modelProbability: learnedModelProbability,
+    rawModelProbability: learnedIndependentProbability,
     marketImpliedProbability,
     confidence,
     policy
   });
-  const marketOnlyGap = marketImpliedProbability - independentModelProbability;
+  const marketOnlyGap = marketImpliedProbability - learnedIndependentProbability;
   const maxMarketOnlySurvivalGap = Number(policy.riskProfile.maxMarketOnlySurvivalGap ?? 0.22);
   const maxNegativeIndependentEdge = Number(policy.riskProfile.maxNegativeIndependentEdge ?? 0.06);
   const favoriteCrowdingPenalty = impliedProbability > policy.riskProfile.maxFavoriteImpliedProbability ? (impliedProbability - policy.riskProfile.maxFavoriteImpliedProbability) * 42 : 0;
@@ -1228,7 +1271,7 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
   }
 
   if (market === "match_winner" && outcome === "Draw") {
-    if (independentModelProbability < Number(policy.riskProfile.minDrawModelProbability || 0.22)) {
+    if (learnedIndependentProbability < Number(policy.riskProfile.minDrawModelProbability || 0.22)) {
       hardBlocks.push("draw_probability_below_model_floor");
     }
 
@@ -1237,12 +1280,12 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     }
   }
 
-  if (Number(odds.decimalOdds) >= 4 || preliminaryRiskTag === "longshot_value") {
+  if (Number(odds.decimalOdds) >= 4 || riskTag === "longshot_value") {
     const scorerLongshotFloor = market === "first_goalscorer" ? 0.07 : market === "anytime_scorer" ? 0.14 : market === "anytime_assist" ? 0.11 : null;
     const longshotModelFloor = scorerLongshotFloor ?? Number(policy.riskProfile.minLongshotModelProbability || 0.18);
     const longshotSignalFloor = isScorerMarket(market) ? 3 : Number(policy.riskProfile.minLongshotSignals || 3);
 
-    if (independentModelProbability < longshotModelFloor) {
+    if (learnedIndependentProbability < longshotModelFloor) {
       hardBlocks.push("longshot_probability_below_model_floor");
     }
 
@@ -1275,7 +1318,7 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     const scorerGoalsPerTwenty = Number(legModel.components.scorerGoalsPerTwentyTeamMatches || 0);
     const scorerConfidence = Number(legModel.components.scorerConfidence || 0);
     const scorerLiftCap = Number(legModel.components.scorerMarketLiftCap || (market === "first_goalscorer" ? 0.07 : 0.11));
-    const scorerMarketGap = adjustedModelProbability - marketImpliedProbability;
+    const scorerMarketGap = learnedModelProbability - marketImpliedProbability;
     const decimalOdds = Number(odds.decimalOdds || 99);
 
     if (market === "first_goalscorer" && !policy.riskProfile.allowFirstGoalscorerBets) {
@@ -1289,7 +1332,7 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
       const creativeRoleScore = Number(legModel.components.creativeRoleScore || 0);
       const playerDataCoverage = Number(legModel.components.playerDataCoverage || 0);
       const assistLiftCap = Number(legModel.components.assistMarketLiftCap || 0.08);
-      const assistMarketGap = adjustedModelProbability - marketImpliedProbability;
+      const assistMarketGap = learnedModelProbability - marketImpliedProbability;
 
       if (!policy.riskProfile.allowAnytimeAssistBets) {
         hardBlocks.push("anytime_assist_reserved_for_bold_mode");
@@ -1372,7 +1415,7 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     const lowerTeamExpectedGoals = Math.min(Number(legModel.components.homeExpectedGoals || 0), Number(legModel.components.awayExpectedGoals || 0));
     const marketDominancePressure = Number(legModel.components.marketDominancePressure || 0);
 
-    if (independentModelProbability < Number(policy.riskProfile.minBttsYesRawProbability || 0.46)) {
+    if (learnedIndependentProbability < Number(policy.riskProfile.minBttsYesRawProbability || 0.46)) {
       hardBlocks.push("btts_yes_raw_probability_below_floor");
     }
 
@@ -1387,7 +1430,7 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     if (
       (marketDominancePressure >= 0.4 || Number(legModel.components.qualityGapPressure || 0) >= 0.45)
       && lowerTeamExpectedGoals < 0.98
-      && independentModelProbability < 0.54
+      && learnedIndependentProbability < 0.54
     ) {
       hardBlocks.push("btts_yes_weak_side_goal_threat_under_pressure");
     }
@@ -1451,10 +1494,17 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     playerTeam: odds.playerTeam,
     selectionLabel: selectionLabel({ fixture, market, outcome }),
     bookmaker: odds.bookmaker,
+    bookmakerKey: odds.bookmakerKey || "",
+    bookmakerVerified: Boolean(odds.bookmakerVerified),
+    pricePublisher: odds.pricePublisher || odds.source || "",
+    source: odds.source || odds.provider || "",
     oddsCapturedAt: odds.capturedAt,
     decimalOdds: Number(odds.decimalOdds),
-    modelProbability: round(adjustedModelProbability, 4),
+    modelProbability: round(learnedModelProbability, 4),
     rawModelProbability: round(independentModelProbability, 4),
+    preLearningModelProbability: round(adjustedModelProbability, 4),
+    preLearningIndependentProbability: round(independentModelProbability, 4),
+    learnedIndependentProbability: round(learnedIndependentProbability, 4),
     impliedProbability: round(impliedProbability, 4),
     marketImpliedProbability: round(marketImpliedProbability, 4),
     independentEdge: round(independentEdge, 4),
@@ -1463,19 +1513,30 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
     marketEdge: round(marketEdge, 4),
     confidence: round(confidence, 4),
     score: round(score, 2),
-    riskTag: preliminaryRiskTag,
+    riskTag,
     hardBlocks,
     components: {
       ...legModel.components,
       oddsAgeHours: round(oddsAgeHours, 2),
       oddsFreshness: round(oddsFreshness, 3),
       bookmakerCoverage,
+      bookmakerKey: odds.bookmakerKey || "",
+      bookmakerVerified: Boolean(odds.bookmakerVerified),
+      pricePublisher: odds.pricePublisher || odds.source || "",
+      oddsSource: odds.source || odds.provider || "",
       marketAverageOdds: movement?.averageDecimalOdds || Number(odds.decimalOdds),
       oddsMovement: round(Number(movement?.movement || 0), 4),
       oddsShortening: movement?.shortening || false,
       oddsDrifting: movement?.drifting || false,
       bestOverAverage: round(oddsDisagreement, 4),
       independentEdge: round(independentEdge, 4),
+      preLearningModelProbability: round(adjustedModelProbability, 4),
+      preLearningIndependentProbability: round(independentModelProbability, 4),
+      preLearningPriceEdge: round(preLearningPriceEdge, 4),
+      preLearningMarketEdge: round(preLearningMarketEdge, 4),
+      preLearningIndependentEdge: round(preLearningIndependentEdge, 4),
+      preLearningEdge: round(preLearningEdge, 4),
+      learnedIndependentProbability: round(learnedIndependentProbability, 4),
       marketBlendLift: round(marketBlendLift, 4),
       nonMarketSignalCount: independentEvidence.count,
       nonMarketSignals: independentEvidence.signals,
@@ -1529,7 +1590,8 @@ function scoreLeg({ fixture, market, outcome, modelProbability, rawModelProbabil
       edge,
       independentEdge,
       rawModelProbability: independentModelProbability,
-      modelProbability: adjustedModelProbability,
+      preLearningModelProbability: adjustedModelProbability,
+      modelProbability: learnedModelProbability,
       marketImpliedProbability,
       odds,
       movement,
@@ -2232,7 +2294,7 @@ function classifyRiskTag({ decimalOdds, impliedProbability, edge, independentEdg
   return "steady_edge";
 }
 
-function buildLegThesis({ fixture, market, outcome, edge, independentEdge, rawModelProbability, modelProbability, marketImpliedProbability, odds, movement, model, confidence, independentEvidence, marketFocus, learning, performance }) {
+function buildLegThesis({ fixture, market, outcome, edge, independentEdge, rawModelProbability, preLearningModelProbability, modelProbability, marketImpliedProbability, odds, movement, model, confidence, independentEvidence, marketFocus, learning, performance }) {
   const movementText = movement?.previousAverageDecimalOdds
     ? `Market average moved from ${movement.previousAverageDecimalOdds} to ${movement.averageDecimalOdds}; best price is ${round(Number(movement.bestOverAverage || 0) * 100, 2)}% over average.`
     : `No prior market movement yet; this scan becomes part of the local memory.`;
@@ -2255,7 +2317,7 @@ function buildLegThesis({ fixture, market, outcome, edge, independentEdge, rawMo
     ? `Betting performance: ${performance.reasons.join("; ")}.`
     : "";
   const notes = [
-    `${selectionLabel({ fixture, market, outcome })} is priced at ${odds.decimalOdds}; raw AI probability ${round(rawModelProbability * 100, 1)}%, market-adjusted probability ${round(modelProbability * 100, 1)}%, market view ${round(marketImpliedProbability * 100, 1)}%.`,
+    `${selectionLabel({ fixture, market, outcome })} is priced at ${odds.decimalOdds}; raw AI probability ${round(rawModelProbability * 100, 1)}%, pre-learning market-adjusted probability ${round(preLearningModelProbability * 100, 1)}%, final learned probability ${round(modelProbability * 100, 1)}%, market view ${round(marketImpliedProbability * 100, 1)}%.`,
     `Independent edge ${round(independentEdge * 100, 2)}%, final value edge ${round(edge * 100, 2)}%, backed by ${independentEvidence.count} non-market signal(s): ${independentEvidence.signals.join(", ") || "none yet"}.`,
     `Fixture model: expected goals ${model.components.expectedGoals} (${model.components.homeExpectedGoals}-${model.components.awayExpectedGoals}), rating edge ${model.components.ratingEdge}, style edge ${model.components.styleEdge}, memory edge ${model.components.memoryEdge}.`,
     `Odds intelligence is capped: market result edge ${model.components.marketResultEdge}, consensus probability ${model.components.marketHomeWinProbability ?? model.components.marketAwayWinProbability ?? "n/a"} where available.`,

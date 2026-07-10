@@ -6,6 +6,7 @@ const state = {
   profileCache: new Map(),
   pickProfileCache: new Map()
 };
+const selectionCore = window.WorldCupMagikSelectionCore;
 
 const standardSlip = [
   ["single", "Single"],
@@ -103,6 +104,7 @@ async function loadData() {
 
     state.data = database;
     state.lineups = lineups;
+    state.lineupGateKey = currentLineupGateKey();
     initialiseDateInputs();
     render();
     startLineupRefresh();
@@ -145,13 +147,25 @@ async function refreshLineupAdjustments() {
   }
 
   const lineups = await fetchOptionalJson("./data/lineups-latest.json");
+  const nextGateKey = currentLineupGateKey();
 
-  if (!lineups || lineupFeedKey(lineups) === lineupFeedKey(state.lineups)) {
+  if (!lineups || (lineupFeedKey(lineups) === lineupFeedKey(state.lineups) && nextGateKey === state.lineupGateKey)) {
     return;
   }
 
   state.lineups = lineups;
+  state.lineupGateKey = nextGateKey;
+  state.profileCache.clear();
+  state.pickProfileCache.clear();
   scheduleRender();
+}
+
+function currentLineupGateKey(now = new Date()) {
+  return (state.data?.fixtures || [])
+    .filter((fixture) => selectionCore.isLineupRequired(fixture, now, scorerLineupGate.maxMinutesBeforeKickoff))
+    .map((fixture) => fixture.id)
+    .sort()
+    .join("|");
 }
 
 function lineupFeedKey(lineups) {
@@ -210,7 +224,9 @@ function render() {
   el.fixtureCount.textContent = `${profile?.fixtureCount || 0}`;
   el.edgeCount.textContent = `${profile?.eligibleLegCount || 0}`;
   el.memoryCount.textContent = `${state.data.summary?.memoryTeamCount || 0}`;
-  el.returnTotal.textContent = money(slip.reduce((total, bet) => total + Number(bet.potentialReturn || 0), 0));
+  el.returnTotal.textContent = slip.some((bet) => bet.directlyPlaceable === true)
+    ? money(slip.reduce((total, bet) => total + Number(bet.potentialReturn || 0), 0))
+    : "Not quoted";
   el.marketLine.textContent = marketLine(state.data);
 
   renderSlip(slip, profile);
@@ -294,7 +310,7 @@ function buildRangeProfile({ data, riskBucket, dateRange }) {
   }
 
   if (Number(riskBucket || 0) <= 0) {
-    const pickProfile = buildPickOfDayRangeProfile({ data, dateRange, slipTypes: standardSlip });
+    const pickProfile = buildPickOfDayRangeProfile({ data, dateRange });
     return rememberCache(state.profileCache, cacheKey, {
       ...pickProfile,
       risk: riskBucket,
@@ -303,17 +319,18 @@ function buildRangeProfile({ data, riskBucket, dateRange }) {
   }
 
   if (!data.legCandidatesByRisk || !data.riskProfiles) {
-    return rememberCache(state.profileCache, cacheKey, prebuiltRangeProfile(data, riskBucket) || null);
+    return rememberCache(state.profileCache, cacheKey, gatePrebuiltProfile(prebuiltRangeProfile(data, riskBucket) || null, data));
   }
 
   const fixtures = fixturesInRange(data.fixtures || [], dateRange);
   const fixtureIds = new Set(fixtures.map((fixture) => fixture.id));
-  const candidates = (data.legCandidatesByRisk[riskBucket] || [])
+  const rawCandidates = (data.legCandidatesByRisk[riskBucket] || [])
     .filter((leg) => fixtureIds.has(leg.fixtureId));
-  const betslip = buildMobileRiskBetslip({
-    candidates,
+  const prepared = prepareSlipCandidates(rawCandidates, fixtures);
+  const betslip = selectionCore.buildBetslip({
+    candidates: prepared.eligible,
     risk: Number(riskBucket || 0),
-    profile: data.riskProfiles?.[riskBucket] || {}
+    slipTypes: standardSlip
   });
 
   return rememberCache(state.profileCache, cacheKey, {
@@ -322,7 +339,8 @@ function buildRangeProfile({ data, riskBucket, dateRange }) {
     risk: riskBucket,
     dataQuality: data.collection?.dataQuality,
     fixtureCount: fixtures.length,
-    eligibleLegCount: candidates.filter((leg) => !leg.hardBlocks?.length).length,
+    eligibleLegCount: prepared.eligible.filter((leg) => !leg.hardBlocks?.length).length,
+    lineupGate: prepared.summary,
     betslip
   });
 }
@@ -335,13 +353,14 @@ function buildPickOfDayRangeProfile({ data, dateRange, slipTypes = pickOfDaySlip
   }
 
   if (!data.mostLikelyLegCandidates) {
-    return rememberCache(state.pickProfileCache, cacheKey, prebuiltPickProfile(data) || null);
+    return rememberCache(state.pickProfileCache, cacheKey, gatePrebuiltProfile(prebuiltPickProfile(data) || null, data));
   }
 
   const fixtures = fixturesInRange(data.fixtures || [], dateRange);
   const fixtureIds = new Set(fixtures.map((fixture) => fixture.id));
-  const candidates = (data.mostLikelyLegCandidates || [])
+  const rawCandidates = (data.mostLikelyLegCandidates || [])
     .filter((leg) => fixtureIds.has(leg.fixtureId));
+  const prepared = prepareSlipCandidates(rawCandidates, fixtures);
 
   return rememberCache(state.pickProfileCache, cacheKey, {
     dateFrom: dateRange.from,
@@ -349,10 +368,13 @@ function buildPickOfDayRangeProfile({ data, dateRange, slipTypes = pickOfDaySlip
     mode: "most_likely",
     dataQuality: data.collection?.dataQuality,
     fixtureCount: fixtures.length,
-    eligibleLegCount: candidates.length,
-    betslip: buildMobileMostLikelyPicks(candidates, {
-      fixtureCount: fixtures.length,
-      slipTypes
+    eligibleLegCount: prepared.eligible.filter((leg) => !leg.hardBlocks?.length).length,
+    lineupGate: prepared.summary,
+    betslip: selectionCore.buildBetslip({
+      candidates: prepared.eligible,
+      risk: 0,
+      slipTypes,
+      likely: true
     })
   });
 }
@@ -370,6 +392,7 @@ function prebuiltPickProfile(data) {
 function rangeCacheKey(data, bucket, dateRange) {
   return [
     data?.generatedAt || "database",
+    state.lineups?.generatedAt || "",
     bucket,
     dateRange.from,
     dateRange.to
@@ -793,6 +816,42 @@ function mobileLegScore(leg, legCount, appetite) {
     - mobileMarketOnlySurvivalPenalty(leg) * 72
     - mobilePortfolioLegPenalty(leg, legCount, appetite) * 55
     - performancePenalty;
+}
+
+function prepareSlipCandidates(candidates, fixtures) {
+  return selectionCore.prepareCandidates({
+    candidates,
+    fixtures,
+    lineups: state.lineups,
+    cutoffMinutes: scorerLineupGate.maxMinutesBeforeKickoff
+  });
+}
+
+function gatePrebuiltProfile(profile, data) {
+  if (!profile) {
+    return null;
+  }
+
+  const fixtures = data?.fixtures || [];
+  let provisionalCount = 0;
+  let excludedNonStarterCount = 0;
+  const betslip = (profile.betslip || []).flatMap((bet) => {
+    const prepared = prepareSlipCandidates(bet.legs || [], fixtures);
+    provisionalCount += prepared.summary.provisionalCount;
+    excludedNonStarterCount += prepared.summary.excludedNonStarterCount;
+    return prepared.eligible.length === (bet.legs || []).length
+      ? [{ ...bet, legs: prepared.eligible }]
+      : [];
+  });
+
+  return {
+    ...profile,
+    betslip,
+    lineupGate: {
+      provisionalCount,
+      excludedNonStarterCount
+    }
+  };
 }
 
 function mobileMostLikelyLegScore(leg, legCount) {
@@ -1257,7 +1316,7 @@ function recalculateSlip(slip, stake) {
   return slip.map((bet) => ({
     ...bet,
     stake,
-    potentialReturn: recalculateReturn(bet, stake)
+    potentialReturn: bet.directlyPlaceable === true ? recalculateReturn(bet, stake) : null
   }));
 }
 
@@ -1311,7 +1370,7 @@ function betCard(bet, { pick = false } = {}) {
       <div class="bet-meta">
         <div><span>Odds</span><strong>${Number(bet.combinedDecimalOdds || 0).toFixed(2)}</strong></div>
         <div><span>Stake</span><strong>${money(bet.stake)}</strong></div>
-        <div><span>Return</span><strong>${money(bet.potentialReturn)}</strong></div>
+        <div><span>Return</span><strong>${returnDisplay(bet)}</strong></div>
       </div>
     </article>
   `;
@@ -2044,6 +2103,12 @@ function recalculateReturn(bet, stake) {
   const odds = bet.legs.map((leg) => Number(leg.decimalOdds || 1));
   const unit = stake / 4;
   return round(unit * ((odds[0] * odds[1]) + (odds[0] * odds[2]) + (odds[1] * odds[2]) + (odds[0] * odds[1] * odds[2])), 2);
+}
+
+function returnDisplay(bet) {
+  return bet.directlyPlaceable === true && Number.isFinite(Number(bet.potentialReturn))
+    ? money(bet.potentialReturn)
+    : "Research only";
 }
 
 function nearest(values, value) {

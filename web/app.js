@@ -13,6 +13,7 @@ const state = {
   assistCache: new Map(),
   eventCache: new Map()
 };
+const selectionCore = window.WorldCupMagikSelectionCore;
 const standardSlip = [
   ["single", "Single"],
   ["double", "Double"],
@@ -108,6 +109,7 @@ async function loadData() {
 
     state.data = database;
     state.data.lineupAdjustments = lineups;
+    state.lineupGateKey = currentLineupGateKey(state.data);
     clearRenderCaches();
     initialiseDateInputs();
     render();
@@ -163,12 +165,14 @@ async function refreshLineupAdjustments() {
 
   const previousKey = lineupFeedKey(state.data.lineupAdjustments);
   const nextKey = lineupFeedKey(lineups);
+  const nextGateKey = currentLineupGateKey(state.data);
 
-  if (nextKey === previousKey) {
+  if (nextKey === previousKey && nextGateKey === state.lineupGateKey) {
     return;
   }
 
   state.data.lineupAdjustments = lineups;
+  state.lineupGateKey = nextGateKey;
   clearRenderCaches();
   render();
 }
@@ -281,6 +285,14 @@ function clearRenderCaches() {
   state.eventCache.clear();
 }
 
+function currentLineupGateKey(data, now = new Date()) {
+  return (data?.fixtures || [])
+    .filter((fixture) => selectionCore.isLineupRequired(fixture, now, scorerLineupGate.maxMinutesBeforeKickoff))
+    .map((fixture) => fixture.id)
+    .sort()
+    .join("|");
+}
+
 function render() {
   if (!state.data) {
     return;
@@ -296,13 +308,13 @@ function render() {
   const slip = (profile?.betslip || []).map((bet) => ({
     ...bet,
     stake: stakePerBet,
-    potentialReturn: recalculateReturn(bet, stakePerBet)
+    potentialReturn: bet.directlyPlaceable === true ? recalculateReturn(bet, stakePerBet) : null
   }));
   const pickProfile = buildPickOfDayRangeProfile({ data: state.data, dateRange }) || null;
   const pickSlip = (pickProfile?.betslip || []).map((bet) => ({
     ...bet,
     stake: stakePerBet,
-    potentialReturn: recalculateReturn(bet, stakePerBet)
+    potentialReturn: bet.directlyPlaceable === true ? recalculateReturn(bet, stakePerBet) : null
   }));
 
   el.riskValue.textContent = risk;
@@ -313,7 +325,9 @@ function render() {
   el.fixtureCount.textContent = `${profile?.fixtureCount || 0} games`;
   el.edgeCount.textContent = `${profile?.eligibleLegCount || 0}`;
   el.memoryCount.textContent = `${state.data.intelligence?.teamCount || 0}`;
-  el.returnTotal.textContent = money(slip.reduce((total, bet) => total + Number(bet.potentialReturn || 0), 0));
+  el.returnTotal.textContent = slip.some((bet) => bet.directlyPlaceable === true)
+    ? money(slip.reduce((total, bet) => total + Number(bet.potentialReturn || 0), 0))
+    : "Not quoted";
   if (el.marketLine) {
     el.marketLine.textContent = marketLine(state.data);
   }
@@ -417,15 +431,15 @@ function buildRangeProfile({ data, riskBucket, dateRange }) {
   if (!data.legCandidatesByRisk) {
     const fallbackRisk = nearest(data.riskBuckets || [riskBucket], riskBucket);
     const fallbackDay = nearest(data.dayBuckets || [14], 14);
-    return rememberCache(state.profileCache, cacheKey, data.profiles?.[`d${fallbackDay}_r${fallbackRisk}`] || Object.values(data.profiles || {})[0] || null);
+    const fallbackProfile = data.profiles?.[`d${fallbackDay}_r${fallbackRisk}`] || Object.values(data.profiles || {})[0] || null;
+    return rememberCache(state.profileCache, cacheKey, gatePrebuiltProfile(fallbackProfile, data));
   }
 
   const fixtures = fixturesInRange(data.fixtures || [], dateRange);
   const fixtureIds = new Set(fixtures.map((fixture) => fixture.id));
-  const candidates = (data.legCandidatesByRisk[riskBucket] || [])
+  const rawCandidates = (data.legCandidatesByRisk[riskBucket] || [])
     .filter((leg) => fixtureIds.has(leg.fixtureId));
-  const policy = { riskProfile: data.riskProfiles?.[riskBucket] || {} };
-  const recommendations = buildBetRecommendations(candidates, policy);
+  const prepared = prepareSlipCandidates(data, rawCandidates, fixtures);
 
   return rememberCache(state.profileCache, cacheKey, {
     dateFrom: dateRange.from,
@@ -433,8 +447,13 @@ function buildRangeProfile({ data, riskBucket, dateRange }) {
     risk: riskBucket,
     dataQuality: data.collection?.dataQuality,
     fixtureCount: fixtures.length,
-    eligibleLegCount: recommendations.eligibleLegCount,
-    betslip: selectRangeBetslip({ recommendations, risk: riskBucket })
+    eligibleLegCount: prepared.eligible.filter((leg) => !leg.hardBlocks?.length).length,
+    lineupGate: prepared.summary,
+    betslip: selectionCore.buildBetslip({
+      candidates: prepared.eligible,
+      risk: Number(riskBucket || 0),
+      slipTypes: standardSlip
+    })
   });
 }
 
@@ -447,8 +466,9 @@ function buildPickOfDayRangeProfile({ data, dateRange }) {
 
   const fixtures = fixturesInRange(data.fixtures || [], dateRange);
   const fixtureIds = new Set(fixtures.map((fixture) => fixture.id));
-  const candidates = (data.mostLikelyLegCandidates || [])
+  const rawCandidates = (data.mostLikelyLegCandidates || [])
     .filter((leg) => fixtureIds.has(leg.fixtureId));
+  const prepared = prepareSlipCandidates(data, rawCandidates, fixtures);
 
   return rememberCache(state.pickProfileCache, cacheKey, {
     dateFrom: dateRange.from,
@@ -456,8 +476,14 @@ function buildPickOfDayRangeProfile({ data, dateRange }) {
     mode: "most_likely",
     dataQuality: data.collection?.dataQuality,
     fixtureCount: fixtures.length,
-    eligibleLegCount: candidates.length,
-    betslip: buildMostLikelyPicks(candidates, { fixtureCount: fixtures.length })
+    eligibleLegCount: prepared.eligible.filter((leg) => !leg.hardBlocks?.length).length,
+    lineupGate: prepared.summary,
+    betslip: selectionCore.buildBetslip({
+      candidates: prepared.eligible,
+      risk: 0,
+      slipTypes: pickOfDaySlip,
+      likely: true
+    })
   });
 }
 
@@ -517,7 +543,7 @@ function renderSlip(slip, profile) {
       <div class="bet-meta">
         <div><span>Odds</span><strong>${Number(bet.combinedDecimalOdds || 0).toFixed(2)}</strong></div>
         <div><span>Stake</span><strong>${money(bet.stake)}</strong></div>
-        <div><span>Return</span><strong>${money(bet.potentialReturn)}</strong></div>
+        <div><span>Return</span><strong>${returnDisplay(bet)}</strong></div>
       </div>
     </article>
   `).concat(missingCards).join("");
@@ -559,7 +585,7 @@ function renderPickOfDay(slip, profile) {
       <div class="bet-meta">
         <div><span>Odds</span><strong>${Number(bet.combinedDecimalOdds || 0).toFixed(2)}</strong></div>
         <div><span>Stake</span><strong>${money(bet.stake)}</strong></div>
-        <div><span>Return</span><strong>${money(bet.potentialReturn)}</strong></div>
+        <div><span>Return</span><strong>${returnDisplay(bet)}</strong></div>
       </div>
     </article>
   `).concat(missingCards).join("");
@@ -665,6 +691,42 @@ function renderLikelyAssists(groups) {
       </article>
     `;
   }).join("");
+}
+
+function prepareSlipCandidates(data, candidates, fixtures) {
+  return selectionCore.prepareCandidates({
+    candidates,
+    fixtures,
+    lineups: data?.lineupAdjustments,
+    cutoffMinutes: scorerLineupGate.maxMinutesBeforeKickoff
+  });
+}
+
+function gatePrebuiltProfile(profile, data) {
+  if (!profile) {
+    return null;
+  }
+
+  const fixtures = data?.fixtures || [];
+  let provisionalCount = 0;
+  let excludedNonStarterCount = 0;
+  const betslip = (profile.betslip || []).flatMap((bet) => {
+    const prepared = prepareSlipCandidates(data, bet.legs || [], fixtures);
+    provisionalCount += prepared.summary.provisionalCount;
+    excludedNonStarterCount += prepared.summary.excludedNonStarterCount;
+    return prepared.eligible.length === (bet.legs || []).length
+      ? [{ ...bet, legs: prepared.eligible }]
+      : [];
+  });
+
+  return {
+    ...profile,
+    betslip,
+    lineupGate: {
+      provisionalCount,
+      excludedNonStarterCount
+    }
+  };
 }
 
 function renderLikelyPlayerEvents(container, groups, emptyMessage) {
@@ -774,6 +836,18 @@ function buildLikelyGoalscorersToday(data, today = localDateKey(new Date())) {
     return state.scorerCache.get(cacheKey);
   }
 
+  const publishedGroups = data?.likelyScorersByDate?.[today];
+  if (Array.isArray(publishedGroups)) {
+    return rememberCache(state.scorerCache, cacheKey, publishedGroups.map((group) => {
+      const players = applyLineupAdjustments(group.players || [], data, group.fixture).slice(0, 4);
+      return {
+        ...group,
+        players,
+        lineupNotice: scorerLineupNotice(data, group.fixture, players)
+      };
+    }));
+  }
+
   const fixtures = (data?.fixtures || [])
     .filter((fixture) => (fixture.dateKey || dateKey(fixture.date)) === today)
     .sort((left, right) => new Date(left.date) - new Date(right.date));
@@ -795,6 +869,18 @@ function buildLikelyAssistsToday(data, today = localDateKey(new Date())) {
 
   if (state.assistCache.has(cacheKey)) {
     return state.assistCache.get(cacheKey);
+  }
+
+  const publishedGroups = data?.likelyAssistsByDate?.[today];
+  if (Array.isArray(publishedGroups)) {
+    return rememberCache(state.assistCache, cacheKey, publishedGroups.map((group) => {
+      const players = applyLineupAdjustments(group.players || [], data, group.fixture).slice(0, 5);
+      return {
+        ...group,
+        players,
+        lineupNotice: assistLineupNotice(data, group.fixture, players)
+      };
+    }));
   }
 
   const fixtures = (data?.fixtures || [])
@@ -4000,6 +4086,12 @@ function recalculateReturn(bet, stake) {
   const odds = bet.legs.map((leg) => Number(leg.decimalOdds || 1));
   const unit = stake / 4;
   return round(unit * ((odds[0] * odds[1]) + (odds[0] * odds[2]) + (odds[1] * odds[2]) + (odds[0] * odds[1] * odds[2])), 2);
+}
+
+function returnDisplay(bet) {
+  return bet.directlyPlaceable === true && Number.isFinite(Number(bet.potentialReturn))
+    ? money(bet.potentialReturn)
+    : "Research only";
 }
 
 function registerServiceWorker() {
