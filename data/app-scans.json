@@ -1,5 +1,372 @@
 [
   {
+    "id": "app_scan_18baddba",
+    "createdAt": "2026-07-11T04:30:59.898Z",
+    "scheduled": true,
+    "settings": {
+      "stake": 10,
+      "risk": 58,
+      "daysAhead": 14
+    },
+    "riskProfile": {
+      "key": "calculated",
+      "label": "Calculated Risk",
+      "description": "Uses public odds, team form, news, and value signals without just following favourites."
+    },
+    "fixtureWindow": {
+      "daysAhead": 14,
+      "selectedFixtures": 2,
+      "usedFallbackNextFixtures": false
+    },
+    "collected": {
+      "fixtures": 52,
+      "oddsRecords": 62,
+      "survivabilityOddsRecords": 18,
+      "scorerOddsRecords": 38,
+      "heatRecords": 2,
+      "squadDepthRecords": 4,
+      "playerStats": 813,
+      "newsArticles": 36,
+      "teamStats": 4,
+      "matchHistoryRecords": 79,
+      "postMatchStatsCollected": 18,
+      "postMatchStatsRecords": 74,
+      "outcomeRecordsSettled": 110,
+      "predictionReflectionsSettled": 111,
+      "intelligenceObservations": 4,
+      "sourceDiagnostics": 39
+    },
+    "dataQuality": {
+      "readiness": "partial",
+      "sourceOk": 25,
+      "sourceEmpty": 11,
+      "sourceErrors": 2,
+      "fixtureCount": 2,
+      "freshOddsRecords": 62,
+      "freshSurvivabilityOddsRecords": 18,
+      "freshScorerOddsRecords": 38,
+      "freshHeatRecords": 2,
+      "freshSquadDepthRecords": 4,
+      "oddsHistoryRecords": 48134,
+      "survivabilityOddsHistoryRecords": 371,
+      "scorerOddsHistoryRecords": 15714,
+      "heatHistoryRecords": 5176,
+      "squadDepthHistoryRecords": 51,
+      "playerStatsRecords": 813,
+      "playerShotCoverage": 0,
+      "playerAssistCoverage": 0.023,
+      "newsArticleCount": 36,
+      "teamStatsCount": 4,
+      "postMatchStatsRecords": 74,
+      "realPostMatchTeamCoverage": 1,
+      "usefulRealMetricTeamCoverage": 1,
+      "teamRealMetricCoverage": [
+        {
+          "team": "Argentina",
+          "realMatches": 4,
+          "matchCount": 20,
+          "coverage": 0.2
+        },
+        {
+          "team": "England",
+          "realMatches": 4,
+          "matchCount": 20,
+          "coverage": 0.2
+        },
+        {
+          "team": "Norway",
+          "realMatches": 4,
+          "matchCount": 20,
+          "coverage": 0.2
+        },
+        {
+          "team": "Switzerland",
+          "realMatches": 5,
+          "matchCount": 20,
+          "coverage": 0.25
+        }
+      ],
+      "selectedPostMatchFixtureCoverage": 0,
+      "averageEventMetricQuality": 0.407,
+      "estimatedMetricOnlyTeams": [],
+      "teamsWithRecentMatches": 4,
+      "requiredTeamCount": 4,
+      "teamsWithTwentyMatchSamples": 4,
+      "teamTwentyMatchCoverage": 1,
+      "minimumTeamMatchSample": 20,
+      "missingTwentyMatchTeams": [],
+      "fixtureOddsCoverage": 0.5,
+      "fixtureHeatCoverage": 1,
+      "squadDepthCoverage": 1,
+      "climateProfileCoverage": 1,
+      "heatMemoryCoverage": 1,
+      "missingClimateProfileTeams": [],
+      "missingHeatMemoryTeams": [],
+      "fixtureNewsCoverage": 1,
+      "sourceFailureRate": 0.333,
+      "marketReadiness": {
+        "coreResultsAndGoals": "partial",
+        "scorers": "collecting",
+        "assists": "collecting",
+        "playerShots": "collecting"
+      },
+      "message": "Some fixtures have usable public evidence, but the selected range does not yet have complete fresh odds and event-quality coverage."
+    },
+    "sourceHealth": {
+      "byKind": {
+        "fixtures": {
+          "ok": 2,
+          "empty": 0,
+          "error": 0,
+          "records": 52
+        },
+        "stats": {
+          "ok": 4,
+          "empty": 0,
+          "error": 0,
+          "records": 276
+        },
+        "player_stats": {
+          "ok": 2,
+          "empty": 10,
+          "error": 0,
+          "records": 5
+        },
+        "team_profile": {
+          "ok": 4,
+          "empty": 0,
+          "error": 0,
+          "records": 4
+        },
+        "post_match_stats_schedule": {
+          "ok": 1,
+          "empty": 0,
+          "error": 0,
+          "records": 24
+        },
+        "post_match_stats_boxscores": {
+          "ok": 1,
+          "empty": 0,
+          "error": 0,
+          "records": 18
+        },
+        "news": {
+          "ok": 2,
+          "empty": 1,
+          "error": 0,
+          "records": 36
+        },
+        "odds": {
+          "ok": 2,
+          "empty": 0,
+          "error": 2,
+          "records": 65
+        },
+        "odds-integrity": {
+          "ok": 0,
+          "empty": 0,
+          "error": 0,
+          "records": 62,
+          "warning": 1
+        },
+        "weather": {
+          "ok": 2,
+          "empty": 0,
+          "error": 0,
+          "records": 2
+        },
+        "squad_depth": {
+          "ok": 5,
+          "empty": 0,
+          "error": 0,
+          "records": 8
+        }
+      },
+      "failures": [
+        {
+          "id": "source_2fe92e2a",
+          "createdAt": "2026-07-11T04:30:59.898Z",
+          "kind": "player_stats",
+          "source": "Norway PlayerStats assists",
+          "url": "https://playerstats.football/world-cup/norway/goals-assists",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for Norway."
+        },
+        {
+          "id": "source_4cd36ec8",
+          "createdAt": "2026-07-11T04:30:59.898Z",
+          "kind": "player_stats",
+          "source": "Norway PlayerStats shots",
+          "url": "https://playerstats.football/world-cup/norway/total-shots",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for Norway."
+        },
+        {
+          "id": "source_5ce0321b",
+          "createdAt": "2026-07-11T04:30:59.898Z",
+          "kind": "player_stats",
+          "source": "Norway PlayerStats shots on target",
+          "url": "https://playerstats.football/world-cup/norway/shots-on-target",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for Norway."
+        },
+        {
+          "id": "source_d148f8e5",
+          "createdAt": "2026-07-11T04:30:59.898Z",
+          "kind": "player_stats",
+          "source": "England PlayerStats shots",
+          "url": "https://playerstats.football/world-cup/england/total-shots",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for England."
+        },
+        {
+          "id": "source_fdbf9fce",
+          "createdAt": "2026-07-11T04:30:59.898Z",
+          "kind": "player_stats",
+          "source": "England PlayerStats shots on target",
+          "url": "https://playerstats.football/world-cup/england/shots-on-target",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for England."
+        },
+        {
+          "id": "source_9d70eac3",
+          "createdAt": "2026-07-11T04:30:59.898Z",
+          "kind": "player_stats",
+          "source": "Argentina PlayerStats shots",
+          "url": "https://playerstats.football/world-cup/argentina/total-shots",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for Argentina."
+        },
+        {
+          "id": "source_895dd56c",
+          "createdAt": "2026-07-11T04:30:59.898Z",
+          "kind": "player_stats",
+          "source": "Argentina PlayerStats shots on target",
+          "url": "https://playerstats.football/world-cup/argentina/shots-on-target",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for Argentina."
+        },
+        {
+          "id": "source_9bbae45b",
+          "createdAt": "2026-07-11T04:30:59.898Z",
+          "kind": "player_stats",
+          "source": "Switzerland PlayerStats assists",
+          "url": "https://playerstats.football/world-cup/switzerland/goals-assists",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for Switzerland."
+        },
+        {
+          "id": "source_392f627f",
+          "createdAt": "2026-07-11T04:30:59.898Z",
+          "kind": "player_stats",
+          "source": "Switzerland PlayerStats shots",
+          "url": "https://playerstats.football/world-cup/switzerland/total-shots",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for Switzerland."
+        },
+        {
+          "id": "source_a9e4de68",
+          "createdAt": "2026-07-11T04:30:59.898Z",
+          "kind": "player_stats",
+          "source": "Switzerland PlayerStats shots on target",
+          "url": "https://playerstats.football/world-cup/switzerland/shots-on-target",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for Switzerland."
+        },
+        {
+          "id": "source_76267d8",
+          "createdAt": "2026-07-11T04:30:59.898Z",
+          "kind": "news",
+          "source": "FIFA World Cup Articles",
+          "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
+        },
+        {
+          "id": "source_1812f95",
+          "createdAt": "2026-07-11T04:30:59.898Z",
+          "kind": "odds",
+          "source": "OnlyOdds match pages: Norway v England",
+          "url": "https://worldcup.onlyodds.co.uk/match/norway-v-england",
+          "status": "error",
+          "records": 0,
+          "reason": "404 Not Found"
+        },
+        {
+          "id": "source_7fc96405",
+          "createdAt": "2026-07-11T04:30:59.898Z",
+          "kind": "odds",
+          "source": "OnlyOdds match pages: Argentina v Switzerland",
+          "url": "https://worldcup.onlyodds.co.uk/match/argentina-v-switzerland",
+          "status": "error",
+          "records": 0,
+          "reason": "404 Not Found"
+        }
+      ]
+    },
+    "intelligence": {
+      "teamCount": 4,
+      "observationCount": 4,
+      "outcomeLearningCount": 2692,
+      "predictionReflectionCount": 2774,
+      "lastOutcomeSettlement": {
+        "examinedLegCount": 3408,
+        "insertedCount": 110,
+        "skipped": {
+          "noRecommendations": 0,
+          "noMatch": 301,
+          "unknownMarket": 305,
+          "latePrediction": 0,
+          "alreadySettled": 2692
+        }
+      },
+      "lastPredictionReflection": {
+        "examinedPredictionCount": 10129,
+        "insertedCount": 111,
+        "updatedCount": 2646,
+        "upsertedCount": 2757
+      }
+    },
+    "eligibleLegCount": 0,
+    "betslip": [
+      {
+        "id": "single_leg_c61323d0",
+        "category": "single",
+        "type": "single",
+        "legCount": 1,
+        "combinedDecimalOdds": 2.35,
+        "combinedProbability": 0.3466,
+        "survivalCombinedProbability": 0.388,
+        "score": 38.95,
+        "legs": [
+          {
+            "id": "leg_c61323d0",
+            "fixtureId": "fixture_c2e307c7",
+            "fixtureDate": "2026-07-11T21:00:00.000Z",
+            "market": "anytime_scorer",
+            "playerName": "Erling Haaland",
+            "bookmaker": null,
+            "decimalOdds": 2.35,
+            "modelProbability": 0.3466,
+            "confidence": 0.5251,
+            "riskTag": "steady_edge"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "app_scan_6dddeddf",
     "createdAt": "2026-07-10T06:51:33.475Z",
     "scheduled": true,

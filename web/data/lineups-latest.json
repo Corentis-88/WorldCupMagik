@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-10T06:55:07.710Z",
+  "generatedAt": "2026-07-11T04:16:43.356Z",
   "edition": "github-pages-lineup-quick-check",
   "source": "GitHub Actions lightweight public-web lineup scanner",
   "targetWindow": {
@@ -11,6 +11,84 @@
   "finalPrekickoffMode": false,
   "targetFixtureCount": 0,
   "targetFixtures": [],
-  "lineups": [],
+  "lineups": [
+    {
+      "id": "lineup_403d78c3",
+      "fixtureId": "fixture_eb65f44a",
+      "fixtureDate": "2026-07-10T19:00:00.000Z",
+      "fixtureDateKey": "2026-07-10",
+      "homeTeam": "Spain",
+      "awayTeam": "Belgium",
+      "capturedAt": "2026-07-10T18:52:49.526Z",
+      "provider": "public-web",
+      "source": "SportsGambler public lineup pages: Spain v Belgium",
+      "sourceUrl": "https://www.sportsgambler.com/betting-tips/football/spain-vs-belgium-prediction-lineups-odds-2026-07-10/",
+      "status": "confirmed",
+      "teams": {
+        "Spain": {
+          "status": "confirmed",
+          "formation": "4-2-3-1",
+          "starters": [
+            "Unai Simon",
+            "Pedro Porro",
+            "Pau Cubarsi",
+            "Aymeric Laporte",
+            "Marc Cucurella",
+            "Rodri",
+            "Fabian Ruiz",
+            "Lamine Yamal",
+            "Dani Olmo",
+            "Alejandro Baena",
+            "Mikel Oyarzabal"
+          ],
+          "normalizedStarters": [
+            "unai simon",
+            "pedro porro",
+            "pau cubarsi",
+            "aymeric laporte",
+            "marc cucurella",
+            "rodri",
+            "fabian ruiz",
+            "lamine yamal",
+            "dani olmo",
+            "alejandro baena",
+            "mikel oyarzabal"
+          ],
+          "sourceText": "Spain confirmed lineup (4-2-3-1): Unai Simon (GK), Pedro Porro, Pau Cubarsi, Aymeric Laporte, Marc Cucurella, Rodri, Fabian Ruiz, Lamine Yamal, Dani Olmo, Alejandro Baena, Mikel Oyarzabal."
+        },
+        "Belgium": {
+          "status": "confirmed",
+          "formation": "4-2-3-1",
+          "starters": [
+            "Thibaut Courtois",
+            "Timothy Castagne",
+            "Nathan Ngoy",
+            "Brandon Mechele",
+            "Maxim De Cuyper",
+            "Nicolas Raskin",
+            "Youri Tielemans",
+            "Jeremy Doku",
+            "Kevin De Bruyne",
+            "Leandro Trossard",
+            "Charles De Ketelaere"
+          ],
+          "normalizedStarters": [
+            "thibaut courtois",
+            "timothy castagne",
+            "nathan ngoy",
+            "brandon mechele",
+            "maxim de cuyper",
+            "nicolas raskin",
+            "youri tielemans",
+            "jeremy doku",
+            "kevin de bruyne",
+            "leandro trossard",
+            "charles de ketelaere"
+          ],
+          "sourceText": "Belgium confirmed lineup (4-2-3-1): Thibaut Courtois (GK), Timothy Castagne, Nathan Ngoy, Brandon Mechele, Maxim De Cuyper, Nicolas Raskin, Youri Tielemans, Jeremy Doku, Kevin De Bruyne, Leandro Trossard, Charles De Ketelaere."
+        }
+      }
+    }
+  ],
   "diagnostics": []
 }

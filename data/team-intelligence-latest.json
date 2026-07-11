@@ -1,2072 +1,9 @@
 [
   {
-    "team": "Spain",
-    "updatedAt": "2026-07-10T06:51:33.475Z",
-    "learnedEdge": 0.0983,
-    "dataConfidence": 0.5832,
-    "form": {
-      "matchCount": 20,
-      "pointsPerGame": 2.6,
-      "goalsFor": 2.25,
-      "goalsAgainst": 0.4,
-      "xgFor": 2.204,
-      "xgAgainst": 0.847,
-      "shotsFor": 16.05,
-      "shotsAgainst": 8.94,
-      "shotsOnTargetFor": 5.84,
-      "shotsOnTargetAgainst": 2.77,
-      "possession": 55.4,
-      "passesAttempted": 639.4,
-      "completedPasses": 498.1,
-      "passCompletion": 0.798,
-      "topScorers": [
-        {
-          "playerName": "Morata",
-          "goals": 3,
-          "scoringMatches": 3,
-          "goalsPerTwentyTeamMatches": 3
-        },
-        {
-          "playerName": "Oyarzabal",
-          "goals": 3,
-          "scoringMatches": 3,
-          "goalsPerTwentyTeamMatches": 3
-        },
-        {
-          "playerName": "Sarabia",
-          "goals": 3,
-          "scoringMatches": 3,
-          "goalsPerTwentyTeamMatches": 3
-        },
-        {
-          "playerName": "Fabián",
-          "goals": 2,
-          "scoringMatches": 2,
-          "goalsPerTwentyTeamMatches": 2
-        },
-        {
-          "playerName": "M. Oyarzabal",
-          "goals": 2,
-          "scoringMatches": 2,
-          "goalsPerTwentyTeamMatches": 2
-        },
-        {
-          "playerName": "Olmo",
-          "goals": 2,
-          "scoringMatches": 2,
-          "goalsPerTwentyTeamMatches": 2
-        },
-        {
-          "playerName": "Pedri",
-          "goals": 2,
-          "scoringMatches": 2,
-          "goalsPerTwentyTeamMatches": 2
-        },
-        {
-          "playerName": "Yamal",
-          "goals": 2,
-          "scoringMatches": 2,
-          "goalsPerTwentyTeamMatches": 2
-        }
-      ],
-      "formMomentum": 0.1385,
-      "confidence": 0.826,
-      "eventMetricQuality": 0.3945,
-      "estimatedMetricRate": 0.8,
-      "realMetricMatchCount": 4,
-      "shortForm": {
-        "matchCount": 6,
-        "pointsPerGame": 3,
-        "goalsFor": 2,
-        "goalsAgainst": 0.333,
-        "xgFor": 1.845,
-        "xgAgainst": 0.852,
-        "shotsFor": 14.62,
-        "shotsAgainst": 8.53,
-        "shotsOnTargetFor": 5.62,
-        "shotsOnTargetAgainst": 2.5,
-        "possession": 58.6,
-        "passesAttempted": 610.3,
-        "completedPasses": 478.3,
-        "passCompletion": 0.846,
-        "cleanSheetRate": 0.667,
-        "failedToScoreRate": 0,
-        "bttsRate": 0.333,
-        "over25Rate": 0.5,
-        "scoringGameRate": 1,
-        "concedeGameRate": 0.333
-      },
-      "longForm": {
-        "matchCount": 20,
-        "pointsPerGame": 2.6,
-        "goalsFor": 2.25,
-        "goalsAgainst": 0.4,
-        "xgFor": 2.204,
-        "xgAgainst": 0.847,
-        "shotsFor": 16.05,
-        "shotsAgainst": 8.94,
-        "shotsOnTargetFor": 5.84,
-        "shotsOnTargetAgainst": 2.77,
-        "possession": 55.4,
-        "passesAttempted": 639.4,
-        "completedPasses": 498.1,
-        "passCompletion": 0.798,
-        "cleanSheetRate": 0.65,
-        "failedToScoreRate": 0.1,
-        "bttsRate": 0.35,
-        "over25Rate": 0.55,
-        "scoringGameRate": 0.9,
-        "concedeGameRate": 0.35
-      },
-      "marketAngles": {
-        "cleanSheetRate": 0.65,
-        "failedToScoreRate": 0.1,
-        "bttsRate": 0.35,
-        "over25Rate": 0.55,
-        "scoringGameRate": 0.9,
-        "concedeGameRate": 0.35
-      },
-      "recentMatches": [
-        {
-          "points": 3,
-          "goalsFor": 2,
-          "goalsAgainst": 1,
-          "xgFor": 1.99,
-          "xgAgainst": 1.27,
-          "shotsFor": 14.2,
-          "shotsOnTargetFor": 5.1,
-          "possession": 52.5,
-          "passesAttempted": 652,
-          "completedPasses": 509,
-          "passCompletion": 0.78,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Yamal",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Olmo",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 1,
-          "goalsAgainst": 0,
-          "xgFor": 1.6,
-          "xgAgainst": 1.1,
-          "shotsFor": 15,
-          "shotsOnTargetFor": 6,
-          "possession": 56,
-          "passesAttempted": 636,
-          "completedPasses": 496,
-          "passCompletion": 0.91,
-          "metricSource": "fox-sports-boxscore",
-          "capturedMetricFields": [
-            "score",
-            "xg",
-            "shots",
-            "shotsOnTarget",
-            "possession",
-            "passCompletion",
-            "corners",
-            "fouls",
-            "keeperSaves",
-            "scorers",
-            "assists"
-          ],
-          "scorers": [
-            {
-              "name": "M. Merino",
-              "minute": 90,
-              "minutes": [
-                90
-              ],
-              "goals": 1,
-              "order": 1,
-              "assists": [
-                "F. Torres"
-              ]
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 3,
-          "goalsAgainst": 0,
-          "xgFor": 2.25,
-          "xgAgainst": 0.45,
-          "shotsFor": 22,
-          "shotsOnTargetFor": 10,
-          "possession": 65,
-          "passesAttempted": 420,
-          "completedPasses": 342,
-          "passCompletion": 0.91,
-          "metricSource": "fox-sports-boxscore-play-by-play",
-          "capturedMetricFields": [
-            "score",
-            "xg",
-            "shots",
-            "shotsOnTarget",
-            "possession",
-            "passCompletion",
-            "chancesCreated",
-            "corners",
-            "offsides",
-            "fouls",
-            "tackles",
-            "interceptions",
-            "blocks",
-            "clearances",
-            "keeperSaves",
-            "cards",
-            "scorers",
-            "assists"
-          ],
-          "scorers": [
-            {
-              "name": "M. Oyarzabal",
-              "minute": 36,
-              "goals": 1,
-              "order": 1,
-              "assists": [
-                "M. Cucurella"
-              ]
-            },
-            {
-              "name": "P. Porro",
-              "minute": 66,
-              "goals": 1,
-              "order": 2,
-              "assists": [
-                "A. Baena"
-              ]
-            },
-            {
-              "name": "M. Oyarzabal",
-              "minute": 89,
-              "goals": 1,
-              "order": 3,
-              "assists": [
-                "M. Cucurella"
-              ]
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 4,
-          "goalsAgainst": 1,
-          "xgFor": 3.43,
-          "xgAgainst": 1.27,
-          "shotsFor": 20.4,
-          "shotsOnTargetFor": 7.8,
-          "possession": 57.5,
-          "passesAttempted": 682,
-          "completedPasses": 531,
-          "passCompletion": 0.778,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Rodri",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Fabián",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Williams",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Olmo",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 1,
-          "goalsAgainst": 0,
-          "xgFor": 0.53,
-          "xgAgainst": 0.47,
-          "shotsFor": 5,
-          "shotsOnTargetFor": 1,
-          "possession": 68,
-          "passesAttempted": 636,
-          "completedPasses": 496,
-          "passCompletion": 0.92,
-          "metricSource": "fox-sports-boxscore-play-by-play",
-          "capturedMetricFields": [
-            "score",
-            "xg",
-            "shots",
-            "shotsOnTarget",
-            "possession",
-            "passCompletion",
-            "chancesCreated",
-            "corners",
-            "offsides",
-            "fouls",
-            "tackles",
-            "interceptions",
-            "blocks",
-            "clearances",
-            "keeperSaves",
-            "cards",
-            "scorers",
-            "assists"
-          ],
-          "scorers": [
-            {
-              "name": "A. Baena",
-              "minute": 42,
-              "goals": 1,
-              "order": 1,
-              "assists": [
-                "M. Llorente"
-              ]
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 1,
-          "goalsAgainst": 0,
-          "xgFor": 1.27,
-          "xgAgainst": 0.55,
-          "shotsFor": 11.1,
-          "shotsOnTargetFor": 3.8,
-          "possession": 52.5,
-          "passesAttempted": 636,
-          "completedPasses": 496,
-          "passCompletion": 0.78,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Torres",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 5,
-          "goalsAgainst": 0,
-          "xgFor": 4.15,
-          "xgAgainst": 0.55,
-          "shotsFor": 23.5,
-          "shotsOnTargetFor": 9.2,
-          "possession": 58,
-          "passesAttempted": 665,
-          "completedPasses": 511,
-          "passCompletion": 0.768,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Dúbravka",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Busquets",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Sarabia",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Alba",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "F. Torres",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Kucka",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 4,
-          "goalsAgainst": 0,
-          "xgFor": 3.43,
-          "xgAgainst": 0.55,
-          "shotsFor": 20.4,
-          "shotsOnTargetFor": 7.8,
-          "possession": 58,
-          "passesAttempted": 667,
-          "completedPasses": 520,
-          "passCompletion": 0.78,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Yamal",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Oyarzabal",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Al-Tambakti",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 1,
-          "goalsAgainst": 0,
-          "xgFor": 1.27,
-          "xgAgainst": 0.55,
-          "shotsFor": 11.1,
-          "shotsOnTargetFor": 3.8,
-          "possession": 52.5,
-          "passesAttempted": 636,
-          "completedPasses": 496,
-          "passCompletion": 0.78,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Calafiori",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 1,
-          "goalsFor": 1,
-          "goalsAgainst": 1,
-          "xgFor": 1.27,
-          "xgAgainst": 1.27,
-          "shotsFor": 11.1,
-          "shotsOnTargetFor": 3.8,
-          "possession": 50,
-          "passesAttempted": 638,
-          "completedPasses": 491,
-          "passCompletion": 0.77,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Morata",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "P. Torres",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 1,
-          "goalsFor": 0,
-          "goalsAgainst": 0,
-          "xgFor": 2.1,
-          "xgAgainst": 0.35,
-          "shotsFor": 27,
-          "shotsOnTargetFor": 7,
-          "possession": 50,
-          "passesAttempted": 622,
-          "completedPasses": 479,
-          "passCompletion": 0.77,
-          "metricSource": "public-report-plus-derived-estimates",
-          "capturedMetricFields": [
-            "score",
-            "xg",
-            "shots",
-            "shotsOnTarget"
-          ],
-          "scorers": []
-        },
-        {
-          "points": 3,
-          "goalsFor": 2,
-          "goalsAgainst": 1,
-          "xgFor": 1.99,
-          "xgAgainst": 1.27,
-          "shotsFor": 14.2,
-          "shotsOnTargetFor": 5.1,
-          "possession": 52.5,
-          "passesAttempted": 652,
-          "completedPasses": 509,
-          "passCompletion": 0.78,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Pino",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Joselu",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 3,
-          "goalsAgainst": 0,
-          "xgFor": 2.71,
-          "xgAgainst": 0.55,
-          "shotsFor": 17.3,
-          "shotsOnTargetFor": 6.5,
-          "possession": 57.5,
-          "passesAttempted": 665,
-          "completedPasses": 526,
-          "passCompletion": 0.791,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Morata",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Ruiz",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 1,
-          "goalsFor": 0,
-          "goalsAgainst": 0,
-          "xgFor": 0.55,
-          "xgAgainst": 0.55,
-          "shotsFor": 8,
-          "shotsOnTargetFor": 2.4,
-          "possession": 50,
-          "passesAttempted": 622,
-          "completedPasses": 479,
-          "passCompletion": 0.77,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": []
-        },
-        {
-          "points": 3,
-          "goalsFor": 2,
-          "goalsAgainst": 0,
-          "xgFor": 1.99,
-          "xgAgainst": 0.55,
-          "shotsFor": 14.2,
-          "shotsOnTargetFor": 5.1,
-          "possession": 55,
-          "passesAttempted": 651,
-          "completedPasses": 514,
-          "passCompletion": 0.79,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Soler",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Sarabia",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 1,
-          "goalsAgainst": 0,
-          "xgFor": 1.27,
-          "xgAgainst": 0.55,
-          "shotsFor": 11.1,
-          "shotsOnTargetFor": 3.8,
-          "possession": 52.5,
-          "passesAttempted": 636,
-          "completedPasses": 496,
-          "passCompletion": 0.78,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Sarabia",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 4,
-          "goalsAgainst": 0,
-          "xgFor": 3.43,
-          "xgAgainst": 0.55,
-          "shotsFor": 20.4,
-          "shotsOnTargetFor": 7.8,
-          "possession": 58,
-          "passesAttempted": 667,
-          "completedPasses": 520,
-          "passCompletion": 0.78,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Guillamón",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Brahim",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Miranda",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Puado",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 5,
-          "goalsAgainst": 1,
-          "xgFor": 4.15,
-          "xgAgainst": 1.27,
-          "shotsFor": 23.5,
-          "shotsOnTargetFor": 9.2,
-          "possession": 58,
-          "passesAttempted": 683,
-          "completedPasses": 525,
-          "passCompletion": 0.768,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Pedri",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Morata",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Fabián",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Oyarzabal",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 3,
-          "goalsAgainst": 1,
-          "xgFor": 2.71,
-          "xgAgainst": 1.27,
-          "shotsFor": 17.3,
-          "shotsOnTargetFor": 6.5,
-          "possession": 55,
-          "passesAttempted": 667,
-          "completedPasses": 521,
-          "passCompletion": 0.781,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Oyarzabal",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Pedri",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Gallese",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 1,
-          "goalsFor": 2,
-          "goalsAgainst": 2,
-          "xgFor": 1.99,
-          "xgAgainst": 1.99,
-          "shotsFor": 14.2,
-          "shotsOnTargetFor": 5.1,
-          "possession": 50,
-          "passesAttempted": 654,
-          "completedPasses": 504,
-          "passCompletion": 0.77,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Martínez",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        }
-      ]
-    },
-    "news": {
-      "articleCount": 70,
-      "contextArticleCount": 59,
-      "rejectedArticleCount": 0,
-      "relevance": 0.972,
-      "sourceDiversity": 2,
-      "sentiment": -0.0527,
-      "injury": 0.0858,
-      "tacticalFit": 0.4899,
-      "lineupClarity": 0.4777,
-      "rotationRisk": 0.2148,
-      "impact": 0.0463,
-      "confidence": 0.8029,
-      "topSignals": [
-        "availability risk",
-        "positive availability",
-        "style clue"
-      ]
-    },
-    "market": {
-      "pressure": 0,
-      "confidence": 0.28,
-      "consensusOdds": null,
-      "movement": 0,
-      "bookmakerCount": 0
-    },
-    "scorer": {
-      "trackedPlayers": 31,
-      "topScorers": [
-        {
-          "playerName": "Oyarzabal",
-          "goals": 4,
-          "matchesSampled": 20
-        },
-        {
-          "playerName": "Morata",
-          "goals": 3,
-          "matchesSampled": 20
-        },
-        {
-          "playerName": "Sarabia",
-          "goals": 3,
-          "matchesSampled": 20
-        },
-        {
-          "playerName": "Fabián",
-          "goals": 2,
-          "matchesSampled": 20
-        },
-        {
-          "playerName": "Olmo",
-          "goals": 2,
-          "matchesSampled": 20
-        }
-      ],
-      "threat": 0.063,
-      "confidence": 0.78
-    },
-    "manager": "Luis de la Fuente",
-    "tacticalProfile": {
-      "likelyFormation": "4-3-3 / 4-2-3-1",
-      "styleOfPlay": "front-foot pressing and fast regains",
-      "styleTags": [
-        "pressing",
-        "front-foot",
-        "regains",
-        "set-piece threat",
-        "positive xG balance"
-      ],
-      "possessionTier": "medium",
-      "pressingTier": "high",
-      "transitionTier": "high",
-      "source": "derived from 20-match public result sample and score-derived event estimates"
-    },
-    "topScorers": [
-      {
-        "playerName": "Morata",
-        "goals": 3,
-        "scoringMatches": 3,
-        "goalsPerTwentyTeamMatches": 3
-      },
-      {
-        "playerName": "Oyarzabal",
-        "goals": 3,
-        "scoringMatches": 3,
-        "goalsPerTwentyTeamMatches": 3
-      },
-      {
-        "playerName": "Sarabia",
-        "goals": 3,
-        "scoringMatches": 3,
-        "goalsPerTwentyTeamMatches": 3
-      },
-      {
-        "playerName": "Fabián",
-        "goals": 2,
-        "scoringMatches": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "M. Oyarzabal",
-        "goals": 2,
-        "scoringMatches": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Olmo",
-        "goals": 2,
-        "scoringMatches": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Pedri",
-        "goals": 2,
-        "scoringMatches": 2,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "Yamal",
-        "goals": 2,
-        "scoringMatches": 2,
-        "goalsPerTwentyTeamMatches": 2
-      }
-    ],
-    "passing": {
-      "attempted": 648.4,
-      "completed": 505.9,
-      "completion": 0.784,
-      "source": "score-and-possession-derived estimate"
-    },
-    "intelligenceCoverage": {
-      "matchWindowTarget": 20,
-      "matchWindowAvailable": 20,
-      "hasFullTwentyMatchWindow": true,
-      "managerKnown": true,
-      "profileConfidence": 0.72,
-      "eventDataMode": "score-derived-estimates",
-      "equalSchemaForAllTeams": true,
-      "topScorerCount": 8,
-      "eventMetricQuality": 0.3945,
-      "estimatedMetricRate": 0.8,
-      "realMetricMatchCount": 4
-    },
-    "reasons": [
-      "20-match form 2.6 PPG, xG 2.204-0.847",
-      "recent form improving",
-      "70 news item(s), news impact 0.0463",
-      "31 scorer record(s), top scorer signal 0.063",
-      "memory currently leans positive"
-    ]
-  },
-  {
-    "team": "Belgium",
-    "updatedAt": "2026-07-10T06:51:33.475Z",
-    "learnedEdge": 0.0835,
-    "dataConfidence": 0.5835,
-    "form": {
-      "matchCount": 20,
-      "pointsPerGame": 1.9,
-      "goalsFor": 2.85,
-      "goalsAgainst": 1.05,
-      "xgFor": 2.364,
-      "xgAgainst": 1.261,
-      "shotsFor": 16.93,
-      "shotsAgainst": 11.03,
-      "shotsOnTargetFor": 6.28,
-      "shotsOnTargetAgainst": 3.71,
-      "possession": 52.3,
-      "passesAttempted": 637.6,
-      "completedPasses": 490.8,
-      "passCompletion": 0.783,
-      "topScorers": [
-        {
-          "playerName": "De Bruyne",
-          "goals": 5,
-          "scoringMatches": 5,
-          "goalsPerTwentyTeamMatches": 5
-        },
-        {
-          "playerName": "Tielemans",
-          "goals": 4,
-          "scoringMatches": 4,
-          "goalsPerTwentyTeamMatches": 4
-        },
-        {
-          "playerName": "De Ketelaere",
-          "goals": 3,
-          "scoringMatches": 3,
-          "goalsPerTwentyTeamMatches": 3
-        },
-        {
-          "playerName": "Doku",
-          "goals": 3,
-          "scoringMatches": 3,
-          "goalsPerTwentyTeamMatches": 3
-        },
-        {
-          "playerName": "Lukébakio",
-          "goals": 3,
-          "scoringMatches": 3,
-          "goalsPerTwentyTeamMatches": 3
-        },
-        {
-          "playerName": "R. Lukaku",
-          "goals": 3,
-          "scoringMatches": 3,
-          "goalsPerTwentyTeamMatches": 3
-        },
-        {
-          "playerName": "C. De Ketelaere",
-          "goals": 2,
-          "scoringMatches": 1,
-          "goalsPerTwentyTeamMatches": 2
-        },
-        {
-          "playerName": "De Cuyper",
-          "goals": 2,
-          "scoringMatches": 2,
-          "goalsPerTwentyTeamMatches": 2
-        }
-      ],
-      "formMomentum": 0.069,
-      "confidence": 0.827,
-      "eventMetricQuality": 0.3965,
-      "estimatedMetricRate": 0.8,
-      "realMetricMatchCount": 4,
-      "shortForm": {
-        "matchCount": 6,
-        "pointsPerGame": 2,
-        "goalsFor": 2.833,
-        "goalsAgainst": 0.833,
-        "xgFor": 2.252,
-        "xgAgainst": 0.998,
-        "shotsFor": 18.92,
-        "shotsAgainst": 9.83,
-        "shotsOnTargetFor": 6.27,
-        "shotsOnTargetAgainst": 3.13,
-        "possession": 51.5,
-        "passesAttempted": 618.3,
-        "completedPasses": 479.8,
-        "passCompletion": 0.82,
-        "cleanSheetRate": 0.333,
-        "failedToScoreRate": 0.167,
-        "bttsRate": 0.667,
-        "over25Rate": 0.667,
-        "scoringGameRate": 0.833,
-        "concedeGameRate": 0.667
-      },
-      "longForm": {
-        "matchCount": 20,
-        "pointsPerGame": 1.9,
-        "goalsFor": 2.85,
-        "goalsAgainst": 1.05,
-        "xgFor": 2.364,
-        "xgAgainst": 1.261,
-        "shotsFor": 16.93,
-        "shotsAgainst": 11.03,
-        "shotsOnTargetFor": 6.28,
-        "shotsOnTargetAgainst": 3.71,
-        "possession": 52.3,
-        "passesAttempted": 637.6,
-        "completedPasses": 490.8,
-        "passCompletion": 0.783,
-        "cleanSheetRate": 0.35,
-        "failedToScoreRate": 0.15,
-        "bttsRate": 0.6,
-        "over25Rate": 0.6,
-        "scoringGameRate": 0.85,
-        "concedeGameRate": 0.65
-      },
-      "marketAngles": {
-        "cleanSheetRate": 0.35,
-        "failedToScoreRate": 0.15,
-        "bttsRate": 0.6,
-        "over25Rate": 0.6,
-        "scoringGameRate": 0.85,
-        "concedeGameRate": 0.65
-      },
-      "recentMatches": [
-        {
-          "points": 3,
-          "goalsFor": 4,
-          "goalsAgainst": 1,
-          "xgFor": 1.97,
-          "xgAgainst": 0.54,
-          "shotsFor": 15,
-          "shotsOnTargetFor": 7,
-          "possession": 43,
-          "passesAttempted": 682,
-          "completedPasses": 531,
-          "passCompletion": 0.83,
-          "metricSource": "fox-sports-boxscore",
-          "capturedMetricFields": [
-            "score",
-            "xg",
-            "shots",
-            "shotsOnTarget",
-            "possession",
-            "passCompletion",
-            "corners",
-            "fouls",
-            "keeperSaves",
-            "scorers",
-            "assists"
-          ],
-          "scorers": [
-            {
-              "name": "R. Lukaku",
-              "minute": 92,
-              "minutes": [
-                92
-              ],
-              "goals": 1,
-              "order": 1,
-              "assists": [
-                "H. Vanaken"
-              ]
-            },
-            {
-              "name": "H. Vanaken",
-              "minute": 57,
-              "minutes": [
-                57
-              ],
-              "goals": 1,
-              "order": 2,
-              "assists": [
-                "C. De Ketelaere"
-              ]
-            },
-            {
-              "name": "C. De Ketelaere",
-              "minute": 33,
-              "minutes": [
-                33,
-                9
-              ],
-              "goals": 2,
-              "order": 3,
-              "assists": [
-                "L. Trossard",
-                "N. Raskin"
-              ]
-            }
-          ]
-        },
-        {
-          "points": 1,
-          "goalsFor": 2,
-          "goalsAgainst": 2,
-          "xgFor": 2.02,
-          "xgAgainst": 2.51,
-          "shotsFor": 21,
-          "shotsOnTargetFor": 5,
-          "possession": 53,
-          "passesAttempted": 420,
-          "completedPasses": 342,
-          "passCompletion": 0.89,
-          "metricSource": "fox-sports-boxscore-play-by-play",
-          "capturedMetricFields": [
-            "score",
-            "xg",
-            "shots",
-            "shotsOnTarget",
-            "possession",
-            "passCompletion",
-            "chancesCreated",
-            "corners",
-            "offsides",
-            "fouls",
-            "tackles",
-            "interceptions",
-            "blocks",
-            "clearances",
-            "keeperSaves",
-            "cards",
-            "scorers",
-            "assists"
-          ],
-          "scorers": [
-            {
-              "name": "R. Lukaku",
-              "minute": 86,
-              "goals": 1,
-              "order": 3,
-              "assists": [
-                "T. Meunier"
-              ]
-            },
-            {
-              "name": "Y. Tielemans",
-              "minute": 89,
-              "goals": 1,
-              "order": 4,
-              "assists": [
-                "L. Trossard"
-              ]
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 5,
-          "goalsAgainst": 1,
-          "xgFor": 3.57,
-          "xgAgainst": 0.64,
-          "shotsFor": 33,
-          "shotsOnTargetFor": 10,
-          "possession": 55,
-          "passesAttempted": 683,
-          "completedPasses": 525,
-          "passCompletion": 0.89,
-          "metricSource": "fox-sports-boxscore-play-by-play",
-          "capturedMetricFields": [
-            "score",
-            "xg",
-            "shots",
-            "shotsOnTarget",
-            "possession",
-            "passCompletion",
-            "chancesCreated",
-            "corners",
-            "offsides",
-            "fouls",
-            "tackles",
-            "interceptions",
-            "blocks",
-            "clearances",
-            "keeperSaves",
-            "cards",
-            "scorers",
-            "assists"
-          ],
-          "scorers": [
-            {
-              "name": "L. Trossard",
-              "minute": 28,
-              "goals": 1,
-              "order": 1
-            },
-            {
-              "name": "L. Trossard",
-              "minute": 50,
-              "goals": 1,
-              "order": 2,
-              "assists": [
-                "H. Vanaken"
-              ]
-            },
-            {
-              "name": "K. De Bruyne",
-              "minute": 66,
-              "goals": 1,
-              "order": 3,
-              "assists": [
-                "L. Trossard"
-              ]
-            },
-            {
-              "name": "R. Lukaku",
-              "minute": 86,
-              "goals": 1,
-              "order": 5,
-              "assists": [
-                "N. Raskin"
-              ]
-            },
-            {
-              "name": "A. Saelemaekers",
-              "minute": "90+4",
-              "goals": 1,
-              "order": 6,
-              "assists": [
-                "R. Lukaku"
-              ]
-            }
-          ]
-        },
-        {
-          "points": 1,
-          "goalsFor": 0,
-          "goalsAgainst": 0,
-          "xgFor": 0.55,
-          "xgAgainst": 0.55,
-          "shotsFor": 8,
-          "shotsOnTargetFor": 2.4,
-          "possession": 50,
-          "passesAttempted": 622,
-          "completedPasses": 479,
-          "passCompletion": 0.77,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Ngoy",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 1,
-          "goalsFor": 1,
-          "goalsAgainst": 1,
-          "xgFor": 1.25,
-          "xgAgainst": 1.2,
-          "shotsFor": 13,
-          "shotsOnTargetFor": 4,
-          "possession": 50,
-          "passesAttempted": 638,
-          "completedPasses": 491,
-          "passCompletion": 0.77,
-          "metricSource": "public-report-plus-derived-estimates",
-          "capturedMetricFields": [
-            "score",
-            "scorers",
-            "xg",
-            "shots",
-            "shotsOnTarget"
-          ],
-          "scorers": [
-            {
-              "name": "Mohamed Hany",
-              "minute": 66,
-              "goals": 1,
-              "order": 2,
-              "ownGoal": true
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 5,
-          "goalsAgainst": 0,
-          "xgFor": 4.15,
-          "xgAgainst": 0.55,
-          "shotsFor": 23.5,
-          "shotsOnTargetFor": 9.2,
-          "possession": 58,
-          "passesAttempted": 665,
-          "completedPasses": 511,
-          "passCompletion": 0.768,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Trossard",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "De Ketelaere",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "De Bruyne",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Lukébakio",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Raskin",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 2,
-          "goalsAgainst": 0,
-          "xgFor": 1.99,
-          "xgAgainst": 0.55,
-          "shotsFor": 14.2,
-          "shotsOnTargetFor": 5.1,
-          "possession": 55,
-          "passesAttempted": 651,
-          "completedPasses": 514,
-          "passCompletion": 0.79,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Tielemans",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 1,
-          "goalsFor": 1,
-          "goalsAgainst": 1,
-          "xgFor": 1.27,
-          "xgAgainst": 1.27,
-          "shotsFor": 11.1,
-          "shotsOnTargetFor": 3.8,
-          "possession": 50,
-          "passesAttempted": 638,
-          "completedPasses": 491,
-          "passCompletion": 0.77,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Lukébakio",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 5,
-          "goalsAgainst": 2,
-          "xgFor": 4.15,
-          "xgAgainst": 1.99,
-          "shotsFor": 23.5,
-          "shotsOnTargetFor": 9.2,
-          "possession": 57.5,
-          "passesAttempted": 690,
-          "completedPasses": 529,
-          "passCompletion": 0.766,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Debast",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Onana",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "De Ketelaere",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Lukébakio",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 1,
-          "goalsFor": 2,
-          "goalsAgainst": 2,
-          "xgFor": 1.99,
-          "xgAgainst": 1.99,
-          "shotsFor": 14.2,
-          "shotsOnTargetFor": 5.1,
-          "possession": 50,
-          "passesAttempted": 654,
-          "completedPasses": 504,
-          "passCompletion": 0.77,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Tielemans",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 7,
-          "goalsAgainst": 0,
-          "xgFor": 4.2,
-          "xgAgainst": 0.55,
-          "shotsFor": 24,
-          "shotsOnTargetFor": 11.9,
-          "possession": 58,
-          "passesAttempted": 632,
-          "completedPasses": 484,
-          "passCompletion": 0.766,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Vanaken",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Doku",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Mechele",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Saelemaekers",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "De Ketelaere",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 1,
-          "goalsFor": 1,
-          "goalsAgainst": 1,
-          "xgFor": 1.27,
-          "xgAgainst": 1.27,
-          "shotsFor": 11.1,
-          "shotsOnTargetFor": 3.8,
-          "possession": 50,
-          "passesAttempted": 638,
-          "completedPasses": 491,
-          "passCompletion": 0.77,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Vanaken",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 4,
-          "goalsAgainst": 2,
-          "xgFor": 3.43,
-          "xgAgainst": 1.99,
-          "shotsFor": 20.4,
-          "shotsOnTargetFor": 7.8,
-          "possession": 55,
-          "passesAttempted": 683,
-          "completedPasses": 525,
-          "passCompletion": 0.768,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "De Bruyne",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Meunier",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Trossard",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 1,
-          "goalsFor": 0,
-          "goalsAgainst": 0,
-          "xgFor": 0.55,
-          "xgAgainst": 0.55,
-          "shotsFor": 8,
-          "shotsOnTargetFor": 2.4,
-          "possession": 50,
-          "passesAttempted": 622,
-          "completedPasses": 479,
-          "passCompletion": 0.77,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": []
-        },
-        {
-          "points": 3,
-          "goalsFor": 6,
-          "goalsAgainst": 0,
-          "xgFor": 4.2,
-          "xgAgainst": 0.55,
-          "shotsFor": 24,
-          "shotsOnTargetFor": 10.5,
-          "possession": 58,
-          "passesAttempted": 650,
-          "completedPasses": 498,
-          "passCompletion": 0.766,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "De Bruyne",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Doku",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Raskin",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Meunier",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 6,
-          "goalsAgainst": 0,
-          "xgFor": 4.2,
-          "xgAgainst": 0.55,
-          "shotsFor": 24,
-          "shotsOnTargetFor": 10.5,
-          "possession": 58,
-          "passesAttempted": 650,
-          "completedPasses": 498,
-          "passCompletion": 0.766,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "De Cuyper",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Tielemans",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Theate",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "De Bruyne",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 4,
-          "goalsAgainst": 3,
-          "xgFor": 3.43,
-          "xgAgainst": 2.71,
-          "shotsFor": 20.4,
-          "shotsOnTargetFor": 7.8,
-          "possession": 52.5,
-          "passesAttempted": 685,
-          "completedPasses": 519,
-          "passCompletion": 0.758,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Lukaku",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Tielemans",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Doku",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "De Bruyne",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 1,
-          "goalsFor": 1,
-          "goalsAgainst": 1,
-          "xgFor": 1.27,
-          "xgAgainst": 1.27,
-          "shotsFor": 11.1,
-          "shotsOnTargetFor": 3.8,
-          "possession": 50,
-          "passesAttempted": 638,
-          "completedPasses": 491,
-          "passCompletion": 0.77,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "De Cuyper",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 0,
-          "goalsFor": 1,
-          "goalsAgainst": 3,
-          "xgFor": 1.27,
-          "xgAgainst": 2.71,
-          "shotsFor": 11.1,
-          "shotsOnTargetFor": 3.8,
-          "possession": 45,
-          "passesAttempted": 605,
-          "completedPasses": 454,
-          "passCompletion": 0.75,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": [
-            {
-              "name": "Lukaku",
-              "goals": 1,
-              "assists": []
-            }
-          ]
-        },
-        {
-          "points": 0,
-          "goalsFor": 0,
-          "goalsAgainst": 1,
-          "xgFor": 0.55,
-          "xgAgainst": 1.27,
-          "shotsFor": 8,
-          "shotsOnTargetFor": 2.4,
-          "possession": 47.5,
-          "passesAttempted": 605,
-          "completedPasses": 460,
-          "passCompletion": 0.76,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": []
-        }
-      ]
-    },
-    "news": {
-      "articleCount": 43,
-      "contextArticleCount": 37,
-      "rejectedArticleCount": 0,
-      "relevance": 0.9609,
-      "sourceDiversity": 2,
-      "sentiment": -0.0239,
-      "injury": 0.0699,
-      "tacticalFit": 0.4902,
-      "lineupClarity": 0.474,
-      "rotationRisk": 0.2403,
-      "impact": 0.0624,
-      "confidence": 0.7994,
-      "topSignals": [
-        "availability risk",
-        "positive availability",
-        "style clue"
-      ]
-    },
-    "market": {
-      "pressure": 0,
-      "confidence": 0.28,
-      "consensusOdds": null,
-      "movement": 0,
-      "bookmakerCount": 0
-    },
-    "scorer": {
-      "trackedPlayers": 22,
-      "topScorers": [
-        {
-          "playerName": "De Bruyne",
-          "goals": 6,
-          "matchesSampled": 20
-        },
-        {
-          "playerName": "De Ketelaere",
-          "goals": 4,
-          "matchesSampled": 20
-        },
-        {
-          "playerName": "Tielemans",
-          "goals": 4,
-          "matchesSampled": 20
-        },
-        {
-          "playerName": "Doku",
-          "goals": 3,
-          "matchesSampled": 20
-        },
-        {
-          "playerName": "Lukaku",
-          "goals": 3,
-          "matchesSampled": 20
-        }
-      ],
-      "threat": 0.09,
-      "confidence": 0.78
-    },
-    "manager": "Rudi Garcia",
-    "tacticalProfile": {
-      "likelyFormation": "4-3-3 / 4-2-3-1",
-      "styleOfPlay": "front-foot pressing and fast regains",
-      "styleTags": [
-        "pressing",
-        "front-foot",
-        "regains",
-        "set-piece threat",
-        "positive xG balance"
-      ],
-      "possessionTier": "medium",
-      "pressingTier": "high",
-      "transitionTier": "high",
-      "source": "derived from 20-match public result sample and score-derived event estimates"
-    },
-    "topScorers": [
-      {
-        "playerName": "De Bruyne",
-        "goals": 5,
-        "scoringMatches": 5,
-        "goalsPerTwentyTeamMatches": 5
-      },
-      {
-        "playerName": "Tielemans",
-        "goals": 4,
-        "scoringMatches": 4,
-        "goalsPerTwentyTeamMatches": 4
-      },
-      {
-        "playerName": "De Ketelaere",
-        "goals": 3,
-        "scoringMatches": 3,
-        "goalsPerTwentyTeamMatches": 3
-      },
-      {
-        "playerName": "Doku",
-        "goals": 3,
-        "scoringMatches": 3,
-        "goalsPerTwentyTeamMatches": 3
-      },
-      {
-        "playerName": "Lukébakio",
-        "goals": 3,
-        "scoringMatches": 3,
-        "goalsPerTwentyTeamMatches": 3
-      },
-      {
-        "playerName": "R. Lukaku",
-        "goals": 3,
-        "scoringMatches": 3,
-        "goalsPerTwentyTeamMatches": 3
-      },
-      {
-        "playerName": "C. De Ketelaere",
-        "goals": 2,
-        "scoringMatches": 1,
-        "goalsPerTwentyTeamMatches": 2
-      },
-      {
-        "playerName": "De Cuyper",
-        "goals": 2,
-        "scoringMatches": 2,
-        "goalsPerTwentyTeamMatches": 2
-      }
-    ],
-    "passing": {
-      "attempted": 649,
-      "completed": 500.6,
-      "completion": 0.774,
-      "source": "score-and-possession-derived estimate"
-    },
-    "intelligenceCoverage": {
-      "matchWindowTarget": 20,
-      "matchWindowAvailable": 20,
-      "hasFullTwentyMatchWindow": true,
-      "managerKnown": true,
-      "profileConfidence": 0.72,
-      "eventDataMode": "score-derived-estimates",
-      "equalSchemaForAllTeams": true,
-      "topScorerCount": 8,
-      "eventMetricQuality": 0.3965,
-      "estimatedMetricRate": 0.8,
-      "realMetricMatchCount": 4
-    },
-    "reasons": [
-      "20-match form 1.9 PPG, xG 2.364-1.261",
-      "43 news item(s), news impact 0.0624",
-      "22 scorer record(s), top scorer signal 0.09",
-      "memory currently leans positive"
-    ]
-  },
-  {
     "team": "Norway",
-    "updatedAt": "2026-07-10T06:51:33.475Z",
-    "learnedEdge": 0.0678,
-    "dataConfidence": 0.6137,
+    "updatedAt": "2026-07-11T04:30:59.898Z",
+    "learnedEdge": 0.0686,
+    "dataConfidence": 0.6139,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 1.85,
@@ -2880,18 +817,18 @@
       ]
     },
     "news": {
-      "articleCount": 46,
-      "contextArticleCount": 33,
+      "articleCount": 53,
+      "contextArticleCount": 40,
       "rejectedArticleCount": 0,
-      "relevance": 0.9635,
+      "relevance": 0.9683,
       "sourceDiversity": 2,
-      "sentiment": -0.0611,
-      "injury": 0.0963,
-      "tacticalFit": 0.486,
-      "lineupClarity": 0.4736,
-      "rotationRisk": 0.2338,
-      "impact": 0.0354,
-      "confidence": 0.8002,
+      "sentiment": -0.059,
+      "injury": 0.0972,
+      "tacticalFit": 0.4881,
+      "lineupClarity": 0.4774,
+      "rotationRisk": 0.2304,
+      "impact": 0.0374,
+      "confidence": 0.8017,
       "topSignals": [
         "availability risk",
         "positive availability",
@@ -3023,37 +960,37 @@
     },
     "reasons": [
       "20-match form 1.85 PPG, xG 1.83-1.288",
-      "46 news item(s), news impact 0.0354",
+      "53 news item(s), news impact 0.0374",
       "market intelligence 0% movement, consensus 1.9 across 1 bookie(s)",
       "14 scorer record(s), top scorer signal 0.0945"
     ]
   },
   {
     "team": "England",
-    "updatedAt": "2026-07-10T06:51:33.475Z",
-    "learnedEdge": 0.1283,
+    "updatedAt": "2026-07-11T04:30:59.898Z",
+    "learnedEdge": 0.1589,
     "dataConfidence": 0.6138,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 2.3,
-      "goalsFor": 1.85,
-      "goalsAgainst": 0.45,
-      "xgFor": 1.843,
-      "xgAgainst": 0.879,
-      "shotsFor": 13.82,
-      "shotsAgainst": 9.54,
-      "shotsOnTargetFor": 5.03,
-      "shotsOnTargetAgainst": 2.9,
+      "goalsFor": 1.9,
+      "goalsAgainst": 0.5,
+      "xgFor": 1.879,
+      "xgAgainst": 0.915,
+      "shotsFor": 13.98,
+      "shotsAgainst": 9.69,
+      "shotsOnTargetFor": 5.1,
+      "shotsOnTargetAgainst": 2.97,
       "possession": 54.3,
-      "passesAttempted": 629.9,
-      "completedPasses": 489.1,
+      "passesAttempted": 630.7,
+      "completedPasses": 489.8,
       "passCompletion": 0.8,
       "topScorers": [
         {
           "playerName": "Kane",
-          "goals": 8,
-          "scoringMatches": 8,
-          "goalsPerTwentyTeamMatches": 8
+          "goals": 9,
+          "scoringMatches": 9,
+          "goalsPerTwentyTeamMatches": 9
         },
         {
           "playerName": "H. Kane",
@@ -3086,76 +1023,109 @@
           "goalsPerTwentyTeamMatches": 2
         },
         {
-          "playerName": "Alexander-Arnold",
-          "goals": 1,
-          "scoringMatches": 1,
-          "goalsPerTwentyTeamMatches": 1
+          "playerName": "Watkins",
+          "goals": 2,
+          "scoringMatches": 2,
+          "goalsPerTwentyTeamMatches": 2
         },
         {
-          "playerName": "Apap",
+          "playerName": "Alexander-Arnold",
           "goals": 1,
           "scoringMatches": 1,
           "goalsPerTwentyTeamMatches": 1
         }
       ],
-      "formMomentum": 0.1902,
+      "formMomentum": 0.366,
       "confidence": 0.827,
       "eventMetricQuality": 0.398,
       "estimatedMetricRate": 0.8,
       "realMetricMatchCount": 4,
       "shortForm": {
         "matchCount": 6,
-        "pointsPerGame": 2.667,
-        "goalsFor": 2,
-        "goalsAgainst": 0.333,
-        "xgFor": 1.97,
-        "xgAgainst": 0.897,
-        "shotsFor": 13.6,
-        "shotsAgainst": 10.5,
-        "shotsOnTargetFor": 5.22,
-        "shotsOnTargetAgainst": 2.7,
-        "possession": 54.2,
-        "passesAttempted": 613.2,
-        "completedPasses": 480.7,
-        "passCompletion": 0.833,
-        "cleanSheetRate": 0.667,
-        "failedToScoreRate": 0.167,
-        "bttsRate": 0.333,
-        "over25Rate": 0.5,
-        "scoringGameRate": 0.833,
-        "concedeGameRate": 0.333
+        "pointsPerGame": 3,
+        "goalsFor": 2.333,
+        "goalsAgainst": 0.5,
+        "xgFor": 2.21,
+        "xgAgainst": 1.017,
+        "shotsFor": 14.63,
+        "shotsAgainst": 11.02,
+        "shotsOnTargetFor": 5.67,
+        "shotsOnTargetAgainst": 2.93,
+        "possession": 54.6,
+        "passesAttempted": 618.2,
+        "completedPasses": 485.7,
+        "passCompletion": 0.835,
+        "cleanSheetRate": 0.5,
+        "failedToScoreRate": 0,
+        "bttsRate": 0.5,
+        "over25Rate": 0.667,
+        "scoringGameRate": 1,
+        "concedeGameRate": 0.5
       },
       "longForm": {
         "matchCount": 20,
         "pointsPerGame": 2.3,
-        "goalsFor": 1.85,
-        "goalsAgainst": 0.45,
-        "xgFor": 1.843,
-        "xgAgainst": 0.879,
-        "shotsFor": 13.82,
-        "shotsAgainst": 9.54,
-        "shotsOnTargetFor": 5.03,
-        "shotsOnTargetAgainst": 2.9,
+        "goalsFor": 1.9,
+        "goalsAgainst": 0.5,
+        "xgFor": 1.879,
+        "xgAgainst": 0.915,
+        "shotsFor": 13.98,
+        "shotsAgainst": 9.69,
+        "shotsOnTargetFor": 5.1,
+        "shotsOnTargetAgainst": 2.97,
         "possession": 54.3,
-        "passesAttempted": 629.9,
-        "completedPasses": 489.1,
+        "passesAttempted": 630.7,
+        "completedPasses": 489.8,
         "passCompletion": 0.8,
-        "cleanSheetRate": 0.7,
+        "cleanSheetRate": 0.65,
         "failedToScoreRate": 0.2,
-        "bttsRate": 0.25,
-        "over25Rate": 0.4,
+        "bttsRate": 0.3,
+        "over25Rate": 0.45,
         "scoringGameRate": 0.8,
-        "concedeGameRate": 0.3
+        "concedeGameRate": 0.35
       },
       "marketAngles": {
-        "cleanSheetRate": 0.7,
+        "cleanSheetRate": 0.65,
         "failedToScoreRate": 0.2,
-        "bttsRate": 0.25,
-        "over25Rate": 0.4,
+        "bttsRate": 0.3,
+        "over25Rate": 0.45,
         "scoringGameRate": 0.8,
-        "concedeGameRate": 0.3
+        "concedeGameRate": 0.35
       },
       "recentMatches": [
+        {
+          "points": 3,
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "xgFor": 1.99,
+          "xgAgainst": 1.27,
+          "shotsFor": 14.2,
+          "shotsOnTargetFor": 5.1,
+          "possession": 52.5,
+          "passesAttempted": 652,
+          "completedPasses": 509,
+          "passCompletion": 0.78,
+          "metricSource": "score-derived-estimates",
+          "capturedMetricFields": [
+            "date",
+            "homeTeam",
+            "awayTeam",
+            "homeGoals",
+            "awayGoals"
+          ],
+          "scorers": [
+            {
+              "name": "Kane",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Watkins",
+              "goals": 1,
+              "assists": []
+            }
+          ]
+        },
         {
           "points": 3,
           "goalsFor": 2,
@@ -3808,44 +1778,22 @@
               "assists": []
             }
           ]
-        },
-        {
-          "points": 3,
-          "goalsFor": 1,
-          "goalsAgainst": 0,
-          "xgFor": 1.27,
-          "xgAgainst": 0.55,
-          "shotsFor": 11.1,
-          "shotsOnTargetFor": 3.8,
-          "possession": 52.5,
-          "passesAttempted": 636,
-          "completedPasses": 496,
-          "passCompletion": 0.78,
-          "metricSource": "score-derived-estimates",
-          "capturedMetricFields": [
-            "date",
-            "homeTeam",
-            "awayTeam",
-            "homeGoals",
-            "awayGoals"
-          ],
-          "scorers": []
         }
       ]
     },
     "news": {
-      "articleCount": 326,
-      "contextArticleCount": 81,
+      "articleCount": 337,
+      "contextArticleCount": 83,
       "rejectedArticleCount": 0,
-      "relevance": 0.9639,
+      "relevance": 0.9651,
       "sourceDiversity": 2,
-      "sentiment": 0.0009,
-      "injury": 0.0505,
-      "tacticalFit": 0.4867,
-      "lineupClarity": 0.4791,
-      "rotationRisk": 0.2281,
-      "impact": 0.0825,
-      "confidence": 0.8004,
+      "sentiment": -0.0003,
+      "injury": 0.0516,
+      "tacticalFit": 0.4871,
+      "lineupClarity": 0.4796,
+      "rotationRisk": 0.2273,
+      "impact": 0.0818,
+      "confidence": 0.8007,
       "topSignals": [
         "availability risk",
         "lineup/tactical clue",
@@ -3866,7 +1814,7 @@
       "topScorers": [
         {
           "playerName": "Kane",
-          "goals": 11,
+          "goals": 12,
           "matchesSampled": 20
         },
         {
@@ -3875,22 +1823,22 @@
           "matchesSampled": 20
         },
         {
-          "playerName": "Rashford",
-          "goals": 3,
-          "matchesSampled": 20
-        },
-        {
           "playerName": "Sterling",
           "goals": 3,
           "matchesSampled": 20
         },
         {
-          "playerName": "Alexander-Arnold",
-          "goals": 1,
+          "playerName": "Rashford",
+          "goals": 2,
+          "matchesSampled": 20
+        },
+        {
+          "playerName": "Watkins",
+          "goals": 2,
           "matchesSampled": 20
         }
       ],
-      "threat": 0.099,
+      "threat": 0.1035,
       "confidence": 0.78
     },
     "manager": "Thomas Tuchel",
@@ -3912,9 +1860,9 @@
     "topScorers": [
       {
         "playerName": "Kane",
-        "goals": 8,
-        "scoringMatches": 8,
-        "goalsPerTwentyTeamMatches": 8
+        "goals": 9,
+        "scoringMatches": 9,
+        "goalsPerTwentyTeamMatches": 9
       },
       {
         "playerName": "H. Kane",
@@ -3947,22 +1895,22 @@
         "goalsPerTwentyTeamMatches": 2
       },
       {
-        "playerName": "Alexander-Arnold",
-        "goals": 1,
-        "scoringMatches": 1,
-        "goalsPerTwentyTeamMatches": 1
+        "playerName": "Watkins",
+        "goals": 2,
+        "scoringMatches": 2,
+        "goalsPerTwentyTeamMatches": 2
       },
       {
-        "playerName": "Apap",
+        "playerName": "Alexander-Arnold",
         "goals": 1,
         "scoringMatches": 1,
         "goalsPerTwentyTeamMatches": 1
       }
     ],
     "passing": {
-      "attempted": 643.7,
-      "completed": 500.8,
-      "completion": 0.783,
+      "attempted": 646.6,
+      "completed": 503.6,
+      "completion": 0.784,
       "source": "score-and-possession-derived estimate"
     },
     "intelligenceCoverage": {
@@ -3979,18 +1927,18 @@
       "realMetricMatchCount": 4
     },
     "reasons": [
-      "20-match form 2.3 PPG, xG 1.843-0.879",
+      "20-match form 2.3 PPG, xG 1.879-0.915",
       "recent form improving",
-      "326 news item(s), news impact 0.0825",
+      "337 news item(s), news impact 0.0818",
       "market intelligence 0% movement, consensus 10.1 across 1 bookie(s)",
-      "17 scorer record(s), top scorer signal 0.099",
+      "17 scorer record(s), top scorer signal 0.1035",
       "memory currently leans positive"
     ]
   },
   {
     "team": "Argentina",
-    "updatedAt": "2026-07-10T06:51:33.475Z",
-    "learnedEdge": -0.0051,
+    "updatedAt": "2026-07-11T04:30:59.898Z",
+    "learnedEdge": -0.0048,
     "dataConfidence": 0.584,
     "form": {
       "matchCount": 20,
@@ -4893,18 +2841,18 @@
       ]
     },
     "news": {
-      "articleCount": 75,
-      "contextArticleCount": 83,
+      "articleCount": 77,
+      "contextArticleCount": 84,
       "rejectedArticleCount": 0,
-      "relevance": 0.9589,
+      "relevance": 0.96,
       "sourceDiversity": 2,
-      "sentiment": -0.0493,
-      "injury": 0.0667,
+      "sentiment": -0.0479,
+      "injury": 0.0649,
       "tacticalFit": 0.4965,
-      "lineupClarity": 0.4648,
-      "rotationRisk": 0.2081,
-      "impact": 0.0544,
-      "confidence": 0.7988,
+      "lineupClarity": 0.4644,
+      "rotationRisk": 0.2073,
+      "impact": 0.0556,
+      "confidence": 0.7991,
       "topSignals": [
         "availability risk",
         "lineup/tactical clue",
@@ -5039,15 +2987,15 @@
     "reasons": [
       "20-match form 2.9 PPG, xG 2.51-0.596",
       "recent form cooling",
-      "75 news item(s), news impact 0.0544",
+      "77 news item(s), news impact 0.0556",
       "20 scorer record(s), top scorer signal 0.108"
     ]
   },
   {
     "team": "Switzerland",
-    "updatedAt": "2026-07-10T06:51:33.475Z",
-    "learnedEdge": 0.1732,
-    "dataConfidence": 0.598,
+    "updatedAt": "2026-07-11T04:30:59.898Z",
+    "learnedEdge": 0.174,
+    "dataConfidence": 0.5981,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 1.85,
@@ -5861,18 +3809,18 @@
       ]
     },
     "news": {
-      "articleCount": 27,
+      "articleCount": 28,
       "contextArticleCount": 21,
       "rejectedArticleCount": 0,
-      "relevance": 0.9793,
+      "relevance": 0.98,
       "sourceDiversity": 2,
-      "sentiment": -0.0575,
-      "injury": 0.0681,
-      "tacticalFit": 0.4967,
-      "lineupClarity": 0.4394,
-      "rotationRisk": 0.2594,
-      "impact": 0.0406,
-      "confidence": 0.8051,
+      "sentiment": -0.0554,
+      "injury": 0.0656,
+      "tacticalFit": 0.4983,
+      "lineupClarity": 0.4398,
+      "rotationRisk": 0.2565,
+      "impact": 0.0431,
+      "confidence": 0.8054,
       "topSignals": [
         "availability risk",
         "lineup/tactical clue",
@@ -5921,16 +3869,17 @@
     },
     "manager": "Murat Yakin",
     "tacticalProfile": {
-      "likelyFormation": "4-2-3-1 / 4-3-3",
-      "styleOfPlay": "balanced mid-block with mixed build-up",
+      "likelyFormation": "4-3-3 / 4-2-3-1",
+      "styleOfPlay": "front-foot pressing and fast regains",
       "styleTags": [
-        "balanced",
-        "mixed build-up",
+        "pressing",
+        "front-foot",
+        "regains",
         "set-piece threat",
         "positive xG balance"
       ],
       "possessionTier": "medium",
-      "pressingTier": "medium",
+      "pressingTier": "high",
       "transitionTier": "high",
       "source": "derived from 20-match public result sample and score-derived event estimates"
     },
@@ -5985,9 +3934,9 @@
       }
     ],
     "passing": {
-      "attempted": 641.8,
-      "completed": 497.6,
-      "completion": 0.78,
+      "attempted": 648.5,
+      "completed": 503.8,
+      "completion": 0.781,
       "source": "score-and-possession-derived estimate"
     },
     "intelligenceCoverage": {
@@ -6006,7 +3955,7 @@
     "reasons": [
       "20-match form 1.85 PPG, xG 1.933-1.15",
       "recent form improving",
-      "27 news item(s), news impact 0.0406",
+      "28 news item(s), news impact 0.0431",
       "15 scorer record(s), top scorer signal 0.1215",
       "memory currently leans positive"
     ]
