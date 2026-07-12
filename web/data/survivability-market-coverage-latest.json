@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-07-11T04:30:59.898Z",
+  "createdAt": "2026-07-12T04:42:39.797Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -9,18 +9,17 @@
     "reason": "Collecting public-web odds until the coverage gate is satisfied."
   },
   "fixtureWindow": {
-    "fixtureCount": 2,
+    "fixtureCount": 1,
     "fixtureIds": [
-      "fixture_c2e307c7",
-      "fixture_cb478d1"
+      "fixture_774ccc2a"
     ]
   },
   "summary": {
     "marketCount": 14,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 109,
-    "freshRecordCount": 109,
+    "totalRecords": 0,
+    "freshRecordCount": 0,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -41,34 +40,24 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 17 more fresh records",
-        "needs 4 more covered fixtures",
-        "needs 1 more bookmaker source(s)",
+        "needs 18 more fresh records",
+        "needs 5 more covered fixtures",
+        "needs 1 more fixtures for coverage",
+        "needs 2 more bookmaker source(s)",
         "needs deeper bookmaker coverage per fixture",
-        "needs 1 more distinct line(s)"
+        "needs 2 more distinct line(s)"
       ],
-      "recordCount": 1,
-      "freshRecordCount": 1,
-      "fixtureCount": 1,
-      "totalFixtureCount": 2,
-      "fixtureCoverage": 0.5,
-      "bookmakerCount": 1,
-      "averageBookmakersPerFixture": 1,
-      "lineCount": 1,
-      "outcomeCount": 1,
-      "latestCapturedAt": "2026-07-10T05:07:44.357Z",
-      "sampleOutcomes": [
-        {
-          "fixtureId": "fixture_c2e307c7",
-          "fixture": "Norway v England",
-          "bookmaker": "SportsGambler public prop pages: Norway v England",
-          "outcome": "Norway +0.5",
-          "line": "+0.5",
-          "team": "Norway",
-          "decimalOdds": 1.96,
-          "capturedAt": "2026-07-10T05:07:44.357Z"
-        }
-      ]
+      "recordCount": 0,
+      "freshRecordCount": 0,
+      "fixtureCount": 0,
+      "totalFixtureCount": 1,
+      "fixtureCoverage": 0,
+      "bookmakerCount": 0,
+      "averageBookmakersPerFixture": 0,
+      "lineCount": 0,
+      "outcomeCount": 0,
+      "latestCapturedAt": null,
+      "sampleOutcomes": []
     },
     "asian_total_goals": {
       "key": "asian_total_goals",
@@ -97,7 +86,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 2,
+      "totalFixtureCount": 1,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -133,7 +122,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 2,
+      "totalFixtureCount": 1,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -169,7 +158,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 2,
+      "totalFixtureCount": 1,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -204,7 +193,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 2,
+      "totalFixtureCount": 1,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -239,7 +228,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 2,
+      "totalFixtureCount": 1,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -275,7 +264,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 2,
+      "totalFixtureCount": 1,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -311,7 +300,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 2,
+      "totalFixtureCount": 1,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -337,102 +326,24 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 4 more covered fixtures",
-        "needs 1 more bookmaker source(s)",
-        "needs deeper bookmaker coverage per fixture"
+        "needs 18 more fresh records",
+        "needs 5 more covered fixtures",
+        "needs 1 more fixtures for coverage",
+        "needs 2 more bookmaker source(s)",
+        "needs deeper bookmaker coverage per fixture",
+        "needs 2 more distinct line(s)"
       ],
-      "recordCount": 108,
-      "freshRecordCount": 108,
-      "fixtureCount": 1,
-      "totalFixtureCount": 2,
-      "fixtureCoverage": 0.5,
-      "bookmakerCount": 1,
-      "averageBookmakersPerFixture": 1,
-      "lineCount": 20,
-      "outcomeCount": 20,
-      "latestCapturedAt": "2026-07-11T04:30:59.898Z",
-      "sampleOutcomes": [
-        {
-          "fixtureId": "fixture_c2e307c7",
-          "fixture": "Norway v England",
-          "bookmaker": null,
-          "outcome": "Over 9.5",
-          "line": "9.5",
-          "team": "",
-          "decimalOdds": 1.8,
-          "capturedAt": "2026-07-11T04:30:59.898Z"
-        },
-        {
-          "fixtureId": "fixture_c2e307c7",
-          "fixture": "Norway v England",
-          "bookmaker": null,
-          "outcome": "Under 9.5",
-          "line": "9.5",
-          "team": "",
-          "decimalOdds": 1.91,
-          "capturedAt": "2026-07-11T04:30:59.898Z"
-        },
-        {
-          "fixtureId": "fixture_c2e307c7",
-          "fixture": "Norway v England",
-          "bookmaker": null,
-          "outcome": "Over 4.5",
-          "line": "4.5",
-          "team": "",
-          "decimalOdds": 2.07,
-          "capturedAt": "2026-07-11T04:30:59.898Z"
-        },
-        {
-          "fixtureId": "fixture_c2e307c7",
-          "fixture": "Norway v England",
-          "bookmaker": null,
-          "outcome": "Under 4.5",
-          "line": "4.5",
-          "team": "",
-          "decimalOdds": 1.66,
-          "capturedAt": "2026-07-11T04:30:59.898Z"
-        },
-        {
-          "fixtureId": "fixture_c2e307c7",
-          "fixture": "Norway v England",
-          "bookmaker": null,
-          "outcome": "Over 5.5",
-          "line": "5.5",
-          "team": "",
-          "decimalOdds": 2.1,
-          "capturedAt": "2026-07-11T04:30:59.898Z"
-        },
-        {
-          "fixtureId": "fixture_c2e307c7",
-          "fixture": "Norway v England",
-          "bookmaker": null,
-          "outcome": "Under 5.5",
-          "line": "5.5",
-          "team": "",
-          "decimalOdds": 1.64,
-          "capturedAt": "2026-07-11T04:30:59.898Z"
-        },
-        {
-          "fixtureId": "fixture_c2e307c7",
-          "fixture": "Norway v England",
-          "bookmaker": null,
-          "outcome": "Over 8.3",
-          "line": "8.3",
-          "team": "",
-          "decimalOdds": 4.3,
-          "capturedAt": "2026-07-11T04:30:59.898Z"
-        },
-        {
-          "fixtureId": "fixture_c2e307c7",
-          "fixture": "Norway v England",
-          "bookmaker": null,
-          "outcome": "Under 8.3",
-          "line": "8.3",
-          "team": "",
-          "decimalOdds": 4,
-          "capturedAt": "2026-07-11T04:30:59.898Z"
-        }
-      ]
+      "recordCount": 0,
+      "freshRecordCount": 0,
+      "fixtureCount": 0,
+      "totalFixtureCount": 1,
+      "fixtureCoverage": 0,
+      "bookmakerCount": 0,
+      "averageBookmakersPerFixture": 0,
+      "lineCount": 0,
+      "outcomeCount": 0,
+      "latestCapturedAt": null,
+      "sampleOutcomes": []
     },
     "team_corners": {
       "key": "team_corners",
@@ -461,7 +372,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 2,
+      "totalFixtureCount": 1,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -497,7 +408,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 2,
+      "totalFixtureCount": 1,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -533,7 +444,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 2,
+      "totalFixtureCount": 1,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -568,7 +479,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 2,
+      "totalFixtureCount": 1,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -603,7 +514,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 2,
+      "totalFixtureCount": 1,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,

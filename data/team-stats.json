@@ -2634,6 +2634,902 @@
     ]
   },
   {
+    "team": "France",
+    "updatedAt": "2026-07-12T04:42:39.797Z",
+    "provider": "public-web",
+    "recentPointsPerGame": 2.416,
+    "xgFor": 2.252,
+    "xgAgainst": 1.076,
+    "shotsFor": 15.33,
+    "shotsAgainst": 10.26,
+    "shotsOnTargetFor": 5.62,
+    "shotsOnTargetAgainst": 3.4,
+    "possession": 54.2,
+    "passesAttempted": 653.2,
+    "completedPasses": 509.7,
+    "passCompletion": 0.78,
+    "highPressIndex": 61.9,
+    "setPieceThreat": 63.7,
+    "transitionThreat": 70.7,
+    "keeperForm": 48.6,
+    "rating": 1793.8,
+    "statsCompleteness": 0.72,
+    "sourceMatchCount": 20,
+    "sourceMatchTarget": 20,
+    "sourceReliability": 0.75,
+    "manager": "Didier Deschamps",
+    "captain": "",
+    "profileSource": "France public profile 1",
+    "profileSourceUrl": "https://en.wikipedia.org/wiki/France_national_football_team",
+    "profileConfidence": 0.72,
+    "metricSource": "score-derived-estimates",
+    "eventMetricQuality": 0.34,
+    "estimatedMetricRate": 1,
+    "realMetricMatchCount": 0,
+    "capturedMetricFields": [
+      "date",
+      "homeTeam",
+      "awayTeam",
+      "homeGoals",
+      "awayGoals"
+    ],
+    "derivedMetricFields": [
+      "xgFor",
+      "xgAgainst",
+      "shotsFor",
+      "shotsAgainst",
+      "shotsOnTargetFor",
+      "shotsOnTargetAgainst",
+      "possession",
+      "passesAttempted",
+      "completedPasses",
+      "passCompletion",
+      "formation",
+      "styleOfPlay"
+    ],
+    "tacticalProfile": {
+      "likelyFormation": "4-3-3 / 4-2-3-1",
+      "styleOfPlay": "front-foot pressing and fast regains",
+      "styleTags": [
+        "pressing",
+        "front-foot",
+        "regains",
+        "set-piece threat",
+        "positive xG balance"
+      ],
+      "possessionTier": "medium",
+      "pressingTier": "high",
+      "transitionTier": "high",
+      "source": "derived from 20-match public result sample and score-derived event estimates"
+    },
+    "passing": {
+      "attempted": 653.2,
+      "completed": 509.7,
+      "completion": 0.78,
+      "source": "score-and-possession-derived estimate"
+    },
+    "recentForm": {
+      "matchCount": 6,
+      "pointsPerGame": 2.5,
+      "goalsFor": 2.333,
+      "goalsAgainst": 0.5,
+      "goalDifference": 1.833,
+      "xgFor": 2.23,
+      "xgAgainst": 0.91,
+      "xgDifference": 1.32,
+      "shotsFor": 15.23,
+      "shotsAgainst": 9.55,
+      "shotsOnTargetFor": 5.58,
+      "shotsOnTargetAgainst": 3.08,
+      "possession": 54.6,
+      "passesAttempted": 653.3,
+      "completedPasses": 510.8,
+      "passCompletion": 0.782,
+      "cleanSheetRate": 0.667,
+      "failedToScoreRate": 0,
+      "bttsRate": 0.333,
+      "over25Rate": 0.667,
+      "scoringGameRate": 1,
+      "concedeGameRate": 0.333,
+      "window": 6
+    },
+    "longForm": {
+      "matchCount": 20,
+      "pointsPerGame": 2.3,
+      "goalsFor": 2.4,
+      "goalsAgainst": 1,
+      "goalDifference": 1.4,
+      "xgFor": 2.278,
+      "xgAgainst": 1.27,
+      "xgDifference": 1.008,
+      "shotsFor": 15.44,
+      "shotsAgainst": 11.1,
+      "shotsOnTargetFor": 5.66,
+      "shotsOnTargetAgainst": 3.77,
+      "possession": 53.4,
+      "passesAttempted": 653,
+      "completedPasses": 507.7,
+      "passCompletion": 0.777,
+      "cleanSheetRate": 0.4,
+      "failedToScoreRate": 0.05,
+      "bttsRate": 0.55,
+      "over25Rate": 0.75,
+      "scoringGameRate": 0.95,
+      "concedeGameRate": 0.6,
+      "window": 20
+    },
+    "formTrend": 0.0597,
+    "marketAngles": {
+      "cleanSheetRate": 0.4,
+      "failedToScoreRate": 0.05,
+      "bttsRate": 0.55,
+      "over25Rate": 0.75,
+      "scoringGameRate": 0.95,
+      "concedeGameRate": 0.6
+    },
+    "scorerSummary": [
+      {
+        "playerName": "Mbappé",
+        "goals": 11,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 11,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Barcola",
+        "goals": 3,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 3,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Dembélé",
+        "goals": 3,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 3,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Olise",
+        "goals": 3,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 3,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Cherki",
+        "goals": 2,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 2,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Ekitike",
+        "goals": 2,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 2,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Mateta",
+        "goals": 2,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 2,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Rabiot",
+        "goals": 2,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 2,
+        "assistsPerTwentyTeamMatches": 0
+      }
+    ],
+    "topScorers": [
+      {
+        "playerName": "Mbappé",
+        "goals": 11,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 11,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Barcola",
+        "goals": 3,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 3,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Dembélé",
+        "goals": 3,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 3,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Olise",
+        "goals": 3,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 3,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Cherki",
+        "goals": 2,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 2,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Ekitike",
+        "goals": 2,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 2,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Mateta",
+        "goals": 2,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 2,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
+        "playerName": "Rabiot",
+        "goals": 2,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 2,
+        "assistsPerTwentyTeamMatches": 0
+      }
+    ],
+    "intelligenceCoverage": {
+      "matchWindowTarget": 20,
+      "matchWindowAvailable": 20,
+      "hasFullTwentyMatchWindow": true,
+      "managerKnown": true,
+      "profileConfidence": 0.72,
+      "eventDataMode": "score-derived-estimates",
+      "equalSchemaForAllTeams": true
+    },
+    "recentMatches": [
+      {
+        "date": "2026-07-09T12:00:00.000Z",
+        "homeTeam": "France",
+        "awayTeam": "Morocco",
+        "score": "2-0",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 55,
+        "passesAttempted": 651,
+        "completedPasses": 514,
+        "passCompletion": 0.79,
+        "homeScorers": [
+          {
+            "name": "Mbappé",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Dembélé",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "France public results 1"
+      },
+      {
+        "date": "2026-07-09T12:00:00.000Z",
+        "homeTeam": "Spain",
+        "awayTeam": "France",
+        "score": "2-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 47.5,
+        "passesAttempted": 621,
+        "completedPasses": 472,
+        "passCompletion": 0.76,
+        "homeScorers": [
+          {
+            "name": "Yamal",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Olmo",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Muani",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Spain public results 1"
+      },
+      {
+        "date": "2026-07-04T12:00:00.000Z",
+        "homeTeam": "Paraguay",
+        "awayTeam": "France",
+        "score": "0-1",
+        "teamPerspective": "away",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 52.5,
+        "passesAttempted": 636,
+        "completedPasses": 496,
+        "passCompletion": 0.78,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Mbappé",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "France public results 1"
+      },
+      {
+        "date": "2026-06-30T12:00:00.000Z",
+        "homeTeam": "France",
+        "awayTeam": "Sweden",
+        "score": "3-0",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 57.5,
+        "passesAttempted": 665,
+        "completedPasses": 526,
+        "passCompletion": 0.791,
+        "homeScorers": [
+          {
+            "name": "Mbappé",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Barcola",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "France public results 1"
+      },
+      {
+        "date": "2026-06-26T12:00:00.000Z",
+        "homeTeam": "Norway",
+        "awayTeam": "France",
+        "score": "1-4",
+        "teamPerspective": "away",
+        "shotsFor": 20.4,
+        "shotsOnTargetFor": 7.8,
+        "possession": 57.5,
+        "passesAttempted": 682,
+        "completedPasses": 531,
+        "passCompletion": 0.778,
+        "homeScorers": [
+          {
+            "name": "Aasgaard",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Dembélé",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "France public results 1"
+      },
+      {
+        "date": "2026-06-22T12:00:00.000Z",
+        "homeTeam": "France",
+        "awayTeam": "Iraq",
+        "score": "3-0",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 57.5,
+        "passesAttempted": 665,
+        "completedPasses": 526,
+        "passCompletion": 0.791,
+        "homeScorers": [
+          {
+            "name": "Mbappé",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Dembélé",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "France public results 1"
+      },
+      {
+        "date": "2026-06-16T12:00:00.000Z",
+        "homeTeam": "France",
+        "awayTeam": "Senegal",
+        "score": "3-1",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 55,
+        "passesAttempted": 667,
+        "completedPasses": 521,
+        "passCompletion": 0.781,
+        "homeScorers": [
+          {
+            "name": "Mbappé",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Barcola",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "France public results 1"
+      },
+      {
+        "date": "2026-06-04T12:00:00.000Z",
+        "homeTeam": "France",
+        "awayTeam": "Ivory Coast",
+        "score": "1-2",
+        "teamPerspective": "home",
+        "shotsFor": 11.1,
+        "shotsOnTargetFor": 3.8,
+        "possession": 47.5,
+        "passesAttempted": 621,
+        "completedPasses": 472,
+        "passCompletion": 0.76,
+        "homeScorers": [
+          {
+            "name": "Cherki",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "G. Doué",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "A. Diallo",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "France public results 1"
+      },
+      {
+        "date": "2026-03-29T12:00:00.000Z",
+        "homeTeam": "Colombia",
+        "awayTeam": "France",
+        "score": "1-3",
+        "teamPerspective": "away",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 55,
+        "passesAttempted": 667,
+        "completedPasses": 521,
+        "passCompletion": 0.781,
+        "homeScorers": [
+          {
+            "name": "Campaz",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Doué",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Thuram",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "France public results 1"
+      },
+      {
+        "date": "2026-03-26T12:00:00.000Z",
+        "homeTeam": "Brazil",
+        "awayTeam": "France",
+        "score": "1-2",
+        "teamPerspective": "away",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 52.5,
+        "passesAttempted": 652,
+        "completedPasses": 509,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Bremer",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Mbappé",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Ekitike",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "France public results 1"
+      },
+      {
+        "date": "2025-11-16T12:00:00.000Z",
+        "homeTeam": "Azerbaijan",
+        "awayTeam": "France",
+        "score": "1-3",
+        "teamPerspective": "away",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 55,
+        "passesAttempted": 667,
+        "completedPasses": 521,
+        "passCompletion": 0.781,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Mateta",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Akliouche",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Magomedaliyev",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "France public results 1"
+      },
+      {
+        "date": "2025-11-13T12:00:00.000Z",
+        "homeTeam": "France",
+        "awayTeam": "Ukraine",
+        "score": "4-0",
+        "teamPerspective": "home",
+        "shotsFor": 20.4,
+        "shotsOnTargetFor": 7.8,
+        "possession": 58,
+        "passesAttempted": 667,
+        "completedPasses": 520,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Mbappé",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Olise",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Ekitike",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "France public results 1"
+      },
+      {
+        "date": "2025-10-13T12:00:00.000Z",
+        "homeTeam": "Iceland",
+        "awayTeam": "France",
+        "score": "2-2",
+        "teamPerspective": "away",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 50,
+        "passesAttempted": 654,
+        "completedPasses": 504,
+        "passCompletion": 0.77,
+        "homeScorers": [
+          {
+            "name": "Pálsson",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Hlynsson",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Nkunku",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Mateta",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "France public results 1"
+      },
+      {
+        "date": "2025-10-10T12:00:00.000Z",
+        "homeTeam": "France",
+        "awayTeam": "Azerbaijan",
+        "score": "3-0",
+        "teamPerspective": "home",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 57.5,
+        "passesAttempted": 665,
+        "completedPasses": 526,
+        "passCompletion": 0.791,
+        "homeScorers": [
+          {
+            "name": "Rabiot",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Thauvin",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "France public results 1"
+      },
+      {
+        "date": "2025-09-09T12:00:00.000Z",
+        "homeTeam": "France",
+        "awayTeam": "Iceland",
+        "score": "2-1",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 52.5,
+        "passesAttempted": 652,
+        "completedPasses": 509,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Mbappé",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Barcola",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "A. Guðjohnsen",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "France public results 1"
+      },
+      {
+        "date": "2025-09-05T12:00:00.000Z",
+        "homeTeam": "Ukraine",
+        "awayTeam": "France",
+        "score": "0-2",
+        "teamPerspective": "away",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 55,
+        "passesAttempted": 651,
+        "completedPasses": 514,
+        "passCompletion": 0.79,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Olise",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Mbappé",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "France public results 1"
+      },
+      {
+        "date": "2025-06-08T12:00:00.000Z",
+        "homeTeam": "Germany",
+        "awayTeam": "France",
+        "score": "0-2",
+        "teamPerspective": "away",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 55,
+        "passesAttempted": 651,
+        "completedPasses": 514,
+        "passCompletion": 0.79,
+        "homeScorers": [],
+        "awayScorers": [
+          {
+            "name": "Mbappé",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Olise",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "France public results 1"
+      },
+      {
+        "date": "2025-06-05T12:00:00.000Z",
+        "homeTeam": "Spain",
+        "awayTeam": "France",
+        "score": "5-4",
+        "teamPerspective": "away",
+        "shotsFor": 20.4,
+        "shotsOnTargetFor": 7.8,
+        "possession": 47.5,
+        "passesAttempted": 670,
+        "completedPasses": 494,
+        "passCompletion": 0.738,
+        "homeScorers": [
+          {
+            "name": "Williams",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Merino",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Yamal",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Pedri",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Mbappé",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Cherki",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Vivian",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "France public results 1"
+      },
+      {
+        "date": "2025-03-20T12:00:00.000Z",
+        "homeTeam": "Croatia",
+        "awayTeam": "France",
+        "score": "2-0",
+        "teamPerspective": "away",
+        "shotsFor": 8,
+        "shotsOnTargetFor": 2.4,
+        "possession": 45,
+        "passesAttempted": 589,
+        "completedPasses": 442,
+        "passCompletion": 0.75,
+        "homeScorers": [
+          {
+            "name": "Budimir",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [],
+        "metricSource": "score-derived-estimates",
+        "source": "France public results 1"
+      },
+      {
+        "date": "2024-11-17T12:00:00.000Z",
+        "homeTeam": "Italy",
+        "awayTeam": "France",
+        "score": "1-3",
+        "teamPerspective": "away",
+        "shotsFor": 17.3,
+        "shotsOnTargetFor": 6.5,
+        "possession": 55,
+        "passesAttempted": 667,
+        "completedPasses": 521,
+        "passCompletion": 0.781,
+        "homeScorers": [
+          {
+            "name": "Cambiaso",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "Rabiot",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Vicario",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "France public results 1"
+      }
+    ]
+  },
+  {
     "team": "Norway",
     "updatedAt": "2026-07-11T04:30:59.898Z",
     "provider": "public-web",
@@ -3506,24 +4402,24 @@
   },
   {
     "team": "Spain",
-    "updatedAt": "2026-07-10T06:51:33.475Z",
+    "updatedAt": "2026-07-12T04:42:39.797Z",
     "provider": "public-web",
-    "recentPointsPerGame": 2.832,
-    "xgFor": 2.073,
-    "xgAgainst": 0.812,
-    "shotsFor": 14.56,
-    "shotsAgainst": 9.13,
-    "shotsOnTargetFor": 5.29,
-    "shotsOnTargetAgainst": 2.91,
+    "recentPointsPerGame": 2.874,
+    "xgFor": 2.138,
+    "xgAgainst": 0.86,
+    "shotsFor": 14.84,
+    "shotsAgainst": 9.33,
+    "shotsOnTargetFor": 5.4,
+    "shotsOnTargetAgainst": 3,
     "possession": 54.2,
-    "passesAttempted": 651.3,
-    "completedPasses": 508.4,
+    "passesAttempted": 653,
+    "completedPasses": 509.9,
     "passCompletion": 0.781,
-    "highPressIndex": 62.7,
-    "setPieceThreat": 62.4,
-    "transitionThreat": 72.4,
-    "keeperForm": 53,
-    "rating": 1818,
+    "highPressIndex": 62.9,
+    "setPieceThreat": 62.7,
+    "transitionThreat": 72.7,
+    "keeperForm": 52.9,
+    "rating": 1817.7,
     "statsCompleteness": 0.72,
     "sourceMatchCount": 20,
     "sourceMatchTarget": 20,
@@ -3574,53 +4470,53 @@
       "source": "derived from 20-match public result sample and score-derived event estimates"
     },
     "passing": {
-      "attempted": 651.3,
-      "completed": 508.4,
+      "attempted": 653,
+      "completed": 509.9,
       "completion": 0.781,
       "source": "score-and-possession-derived estimate"
     },
     "recentForm": {
       "matchCount": 6,
       "pointsPerGame": 3,
-      "goalsFor": 2,
-      "goalsAgainst": 0.333,
+      "goalsFor": 2.167,
+      "goalsAgainst": 0.5,
       "goalDifference": 1.667,
-      "xgFor": 1.99,
-      "xgAgainst": 0.79,
+      "xgFor": 2.11,
+      "xgAgainst": 0.91,
       "xgDifference": 1.2,
-      "shotsFor": 14.2,
-      "shotsAgainst": 9.03,
-      "shotsOnTargetFor": 5.13,
-      "shotsOnTargetAgainst": 2.87,
+      "shotsFor": 14.72,
+      "shotsAgainst": 9.55,
+      "shotsOnTargetFor": 5.35,
+      "shotsOnTargetAgainst": 3.1,
       "possession": 54.2,
-      "passesAttempted": 651.2,
-      "completedPasses": 509,
+      "passesAttempted": 653.8,
+      "completedPasses": 511.2,
       "passCompletion": 0.782,
-      "cleanSheetRate": 0.667,
+      "cleanSheetRate": 0.5,
       "failedToScoreRate": 0,
-      "bttsRate": 0.333,
-      "over25Rate": 0.5,
+      "bttsRate": 0.5,
+      "over25Rate": 0.667,
       "scoringGameRate": 1,
-      "concedeGameRate": 0.333,
+      "concedeGameRate": 0.5,
       "window": 6
     },
     "longForm": {
       "matchCount": 20,
-      "pointsPerGame": 2.6,
+      "pointsPerGame": 2.7,
       "goalsFor": 2.25,
-      "goalsAgainst": 0.4,
-      "goalDifference": 1.85,
+      "goalsAgainst": 0.35,
+      "goalDifference": 1.9,
       "xgFor": 2.17,
-      "xgAgainst": 0.838,
-      "xgDifference": 1.332,
-      "shotsFor": 14.98,
-      "shotsAgainst": 9.24,
-      "shotsOnTargetFor": 5.47,
-      "shotsOnTargetAgainst": 2.95,
-      "possession": 54.1,
-      "passesAttempted": 651.6,
-      "completedPasses": 507.3,
-      "passCompletion": 0.778,
+      "xgAgainst": 0.802,
+      "xgDifference": 1.368,
+      "shotsFor": 14.97,
+      "shotsAgainst": 9.08,
+      "shotsOnTargetFor": 5.46,
+      "shotsOnTargetAgainst": 2.89,
+      "possession": 54.2,
+      "passesAttempted": 651.5,
+      "completedPasses": 507.5,
+      "passCompletion": 0.779,
       "cleanSheetRate": 0.65,
       "failedToScoreRate": 0.1,
       "bttsRate": 0.35,
@@ -3629,7 +4525,7 @@
       "concedeGameRate": 0.35,
       "window": 20
     },
-    "formTrend": 0.2428,
+    "formTrend": 0.1487,
     "marketAngles": {
       "cleanSheetRate": 0.65,
       "failedToScoreRate": 0.1,
@@ -3647,6 +4543,13 @@
         "assistsPerTwentyTeamMatches": 0
       },
       {
+        "playerName": "Fabián",
+        "goals": 3,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 3,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
         "playerName": "Morata",
         "goals": 3,
         "assists": 0,
@@ -3658,13 +4561,6 @@
         "goals": 3,
         "assists": 0,
         "goalsPerTwentyTeamMatches": 3,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Fabián",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
         "assistsPerTwentyTeamMatches": 0
       },
       {
@@ -3705,6 +4601,13 @@
         "assistsPerTwentyTeamMatches": 0
       },
       {
+        "playerName": "Fabián",
+        "goals": 3,
+        "assists": 0,
+        "goalsPerTwentyTeamMatches": 3,
+        "assistsPerTwentyTeamMatches": 0
+      },
+      {
         "playerName": "Morata",
         "goals": 3,
         "assists": 0,
@@ -3716,13 +4619,6 @@
         "goals": 3,
         "assists": 0,
         "goalsPerTwentyTeamMatches": 3,
-        "assistsPerTwentyTeamMatches": 0
-      },
-      {
-        "playerName": "Fabián",
-        "goals": 2,
-        "assists": 0,
-        "goalsPerTwentyTeamMatches": 2,
         "assistsPerTwentyTeamMatches": 0
       },
       {
@@ -3764,6 +4660,40 @@
       "equalSchemaForAllTeams": true
     },
     "recentMatches": [
+      {
+        "date": "2026-07-10T12:00:00.000Z",
+        "homeTeam": "Spain",
+        "awayTeam": "Belgium",
+        "score": "2-1",
+        "teamPerspective": "home",
+        "shotsFor": 14.2,
+        "shotsOnTargetFor": 5.1,
+        "possession": 52.5,
+        "passesAttempted": 652,
+        "completedPasses": 509,
+        "passCompletion": 0.78,
+        "homeScorers": [
+          {
+            "name": "Fabián",
+            "goals": 1,
+            "assists": []
+          },
+          {
+            "name": "Merino",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "awayScorers": [
+          {
+            "name": "De Ketelaere",
+            "goals": 1,
+            "assists": []
+          }
+        ],
+        "metricSource": "score-derived-estimates",
+        "source": "Spain public results 1"
+      },
       {
         "date": "2026-07-09T12:00:00.000Z",
         "homeTeam": "Spain",
@@ -4354,35 +5284,6 @@
           },
           {
             "name": "Gallese",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "metricSource": "score-derived-estimates",
-        "source": "Spain public results 1"
-      },
-      {
-        "date": "2026-06-05T12:00:00.000Z",
-        "homeTeam": "Czech Republic",
-        "awayTeam": "Spain",
-        "score": "2-2",
-        "teamPerspective": "away",
-        "shotsFor": 14.2,
-        "shotsOnTargetFor": 5.1,
-        "possession": 50,
-        "passesAttempted": 654,
-        "completedPasses": 504,
-        "passCompletion": 0.77,
-        "homeScorers": [
-          {
-            "name": "Kuchta",
-            "goals": 1,
-            "assists": []
-          }
-        ],
-        "awayScorers": [
-          {
-            "name": "Martínez",
             "goals": 1,
             "assists": []
           }
