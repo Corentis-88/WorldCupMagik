@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-07-12T04:42:39.797Z",
+  "createdAt": "2026-07-13T04:49:22.843Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -9,17 +9,18 @@
     "reason": "Collecting public-web odds until the coverage gate is satisfied."
   },
   "fixtureWindow": {
-    "fixtureCount": 1,
+    "fixtureCount": 2,
     "fixtureIds": [
-      "fixture_774ccc2a"
+      "fixture_774ccc2a",
+      "fixture_67d89ff3"
     ]
   },
   "summary": {
     "marketCount": 14,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 0,
-    "freshRecordCount": 0,
+    "totalRecords": 8,
+    "freshRecordCount": 8,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -50,7 +51,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 1,
+      "totalFixtureCount": 2,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -86,7 +87,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 1,
+      "totalFixtureCount": 2,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -122,7 +123,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 1,
+      "totalFixtureCount": 2,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -158,7 +159,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 1,
+      "totalFixtureCount": 2,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -193,7 +194,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 1,
+      "totalFixtureCount": 2,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -228,7 +229,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 1,
+      "totalFixtureCount": 2,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -264,7 +265,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 1,
+      "totalFixtureCount": 2,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -300,7 +301,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 1,
+      "totalFixtureCount": 2,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -326,24 +327,83 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 18 more fresh records",
-        "needs 5 more covered fixtures",
-        "needs 1 more fixtures for coverage",
+        "needs 12 more fresh records",
+        "needs 4 more covered fixtures",
         "needs 2 more bookmaker source(s)",
-        "needs deeper bookmaker coverage per fixture",
-        "needs 2 more distinct line(s)"
+        "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 0,
-      "freshRecordCount": 0,
-      "fixtureCount": 0,
-      "totalFixtureCount": 1,
-      "fixtureCoverage": 0,
+      "recordCount": 6,
+      "freshRecordCount": 6,
+      "fixtureCount": 1,
+      "totalFixtureCount": 2,
+      "fixtureCoverage": 0.5,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
-      "lineCount": 0,
-      "outcomeCount": 0,
-      "latestCapturedAt": null,
-      "sampleOutcomes": []
+      "lineCount": 6,
+      "outcomeCount": 6,
+      "latestCapturedAt": "2026-07-13T04:49:22.843Z",
+      "sampleOutcomes": [
+        {
+          "fixtureId": "fixture_774ccc2a",
+          "fixture": "France v Spain",
+          "bookmaker": null,
+          "outcome": "Over 9.5",
+          "line": "9.5",
+          "team": "",
+          "decimalOdds": 1.98,
+          "capturedAt": "2026-07-13T04:49:22.843Z"
+        },
+        {
+          "fixtureId": "fixture_774ccc2a",
+          "fixture": "France v Spain",
+          "bookmaker": null,
+          "outcome": "Under 9.5",
+          "line": "9.5",
+          "team": "",
+          "decimalOdds": 1.74,
+          "capturedAt": "2026-07-13T04:49:22.843Z"
+        },
+        {
+          "fixtureId": "fixture_774ccc2a",
+          "fixture": "France v Spain",
+          "bookmaker": null,
+          "outcome": "Over 4.5",
+          "line": "4.5",
+          "team": "",
+          "decimalOdds": 1.89,
+          "capturedAt": "2026-07-13T04:49:22.843Z"
+        },
+        {
+          "fixtureId": "fixture_774ccc2a",
+          "fixture": "France v Spain",
+          "bookmaker": null,
+          "outcome": "Under 4.5",
+          "line": "4.5",
+          "team": "",
+          "decimalOdds": 1.8,
+          "capturedAt": "2026-07-13T04:49:22.843Z"
+        },
+        {
+          "fixtureId": "fixture_774ccc2a",
+          "fixture": "France v Spain",
+          "bookmaker": null,
+          "outcome": "Over 1",
+          "line": "1",
+          "team": "",
+          "decimalOdds": 1.98,
+          "capturedAt": "2026-07-13T04:49:22.843Z"
+        },
+        {
+          "fixtureId": "fixture_774ccc2a",
+          "fixture": "France v Spain",
+          "bookmaker": null,
+          "outcome": "Under 1",
+          "line": "1",
+          "team": "",
+          "decimalOdds": 7,
+          "capturedAt": "2026-07-13T04:49:22.843Z"
+        }
+      ]
     },
     "team_corners": {
       "key": "team_corners",
@@ -362,24 +422,43 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 18 more fresh records",
-        "needs 5 more covered fixtures",
-        "needs 1 more fixtures for coverage",
+        "needs 16 more fresh records",
+        "needs 4 more covered fixtures",
         "needs 2 more bookmaker source(s)",
-        "needs deeper bookmaker coverage per fixture",
-        "needs 2 more distinct line(s)"
+        "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 0,
-      "freshRecordCount": 0,
-      "fixtureCount": 0,
-      "totalFixtureCount": 1,
-      "fixtureCoverage": 0,
+      "recordCount": 2,
+      "freshRecordCount": 2,
+      "fixtureCount": 1,
+      "totalFixtureCount": 2,
+      "fixtureCoverage": 0.5,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
-      "lineCount": 0,
-      "outcomeCount": 0,
-      "latestCapturedAt": null,
-      "sampleOutcomes": []
+      "lineCount": 2,
+      "outcomeCount": 2,
+      "latestCapturedAt": "2026-07-13T04:49:22.843Z",
+      "sampleOutcomes": [
+        {
+          "fixtureId": "fixture_774ccc2a",
+          "fixture": "France v Spain",
+          "bookmaker": null,
+          "outcome": "Spain Over 9.1",
+          "line": "9.1",
+          "team": "Spain",
+          "decimalOdds": 7.7,
+          "capturedAt": "2026-07-13T04:49:22.843Z"
+        },
+        {
+          "fixtureId": "fixture_774ccc2a",
+          "fixture": "France v Spain",
+          "bookmaker": null,
+          "outcome": "Spain Under 9.1",
+          "line": "9.1",
+          "team": "Spain",
+          "decimalOdds": 1.4,
+          "capturedAt": "2026-07-13T04:49:22.843Z"
+        }
+      ]
     },
     "total_cards": {
       "key": "total_cards",
@@ -408,7 +487,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 1,
+      "totalFixtureCount": 2,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -444,7 +523,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 1,
+      "totalFixtureCount": 2,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -479,7 +558,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 1,
+      "totalFixtureCount": 2,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
@@ -514,7 +593,7 @@
       "recordCount": 0,
       "freshRecordCount": 0,
       "fixtureCount": 0,
-      "totalFixtureCount": 1,
+      "totalFixtureCount": 2,
       "fixtureCoverage": 0,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,

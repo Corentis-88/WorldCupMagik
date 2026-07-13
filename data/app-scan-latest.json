@@ -1,6 +1,6 @@
 {
-  "id": "app_scan_7234a01c",
-  "createdAt": "2026-07-12T04:42:39.797Z",
+  "id": "app_scan_a23604e8",
+  "createdAt": "2026-07-13T04:49:22.843Z",
   "scheduled": true,
   "settings": {
     "stake": 10,
@@ -14,52 +14,64 @@
   },
   "fixtureWindow": {
     "daysAhead": 14,
-    "selectedFixtures": 1,
+    "selectedFixtures": 2,
     "usedFallbackNextFixtures": false
   },
   "collected": {
-    "fixtures": 50,
-    "oddsRecords": 0,
-    "survivabilityOddsRecords": 0,
-    "scorerOddsRecords": 0,
-    "heatRecords": 1,
-    "squadDepthRecords": 2,
-    "playerStats": 813,
+    "fixtures": 51,
+    "oddsRecords": 48,
+    "survivabilityOddsRecords": 8,
+    "scorerOddsRecords": 36,
+    "heatRecords": 2,
+    "squadDepthRecords": 4,
+    "playerStats": 810,
     "newsArticles": 36,
-    "teamStats": 2,
-    "matchHistoryRecords": 40,
+    "teamStats": 4,
+    "matchHistoryRecords": 80,
     "postMatchStatsCollected": 18,
     "postMatchStatsRecords": 76,
-    "outcomeRecordsSettled": 242,
-    "predictionReflectionsSettled": 243,
-    "intelligenceObservations": 2,
-    "sourceDiagnostics": 24
+    "outcomeRecordsSettled": 0,
+    "predictionReflectionsSettled": 0,
+    "intelligenceObservations": 4,
+    "sourceDiagnostics": 39
   },
   "dataQuality": {
-    "readiness": "collecting",
-    "sourceOk": 16,
-    "sourceEmpty": 7,
-    "sourceErrors": 1,
-    "fixtureCount": 1,
-    "freshOddsRecords": 0,
-    "freshSurvivabilityOddsRecords": 0,
-    "freshScorerOddsRecords": 0,
-    "freshHeatRecords": 1,
-    "freshSquadDepthRecords": 2,
-    "oddsHistoryRecords": 48134,
-    "survivabilityOddsHistoryRecords": 371,
-    "scorerOddsHistoryRecords": 15714,
-    "heatHistoryRecords": 5177,
+    "readiness": "partial",
+    "sourceOk": 24,
+    "sourceEmpty": 12,
+    "sourceErrors": 2,
+    "fixtureCount": 2,
+    "freshOddsRecords": 48,
+    "freshSurvivabilityOddsRecords": 8,
+    "freshScorerOddsRecords": 36,
+    "freshHeatRecords": 2,
+    "freshSquadDepthRecords": 4,
+    "oddsHistoryRecords": 48182,
+    "survivabilityOddsHistoryRecords": 379,
+    "scorerOddsHistoryRecords": 15750,
+    "heatHistoryRecords": 5179,
     "squadDepthHistoryRecords": 51,
-    "playerStatsRecords": 813,
+    "playerStatsRecords": 810,
     "playerShotCoverage": 0,
-    "playerAssistCoverage": 0.026,
+    "playerAssistCoverage": 0.022,
     "newsArticleCount": 36,
-    "teamStatsCount": 2,
+    "teamStatsCount": 4,
     "postMatchStatsRecords": 76,
     "realPostMatchTeamCoverage": 1,
     "usefulRealMetricTeamCoverage": 1,
     "teamRealMetricCoverage": [
+      {
+        "team": "Argentina",
+        "realMatches": 5,
+        "matchCount": 20,
+        "coverage": 0.25
+      },
+      {
+        "team": "England",
+        "realMatches": 5,
+        "matchCount": 20,
+        "coverage": 0.25
+      },
       {
         "team": "France",
         "realMatches": 5,
@@ -74,15 +86,15 @@
       }
     ],
     "selectedPostMatchFixtureCoverage": 0,
-    "averageEventMetricQuality": 0.431,
+    "averageEventMetricQuality": 0.432,
     "estimatedMetricOnlyTeams": [],
-    "teamsWithRecentMatches": 2,
-    "requiredTeamCount": 2,
-    "teamsWithTwentyMatchSamples": 2,
+    "teamsWithRecentMatches": 4,
+    "requiredTeamCount": 4,
+    "teamsWithTwentyMatchSamples": 4,
     "teamTwentyMatchCoverage": 1,
     "minimumTeamMatchSample": 20,
     "missingTwentyMatchTeams": [],
-    "fixtureOddsCoverage": 0,
+    "fixtureOddsCoverage": 0.5,
     "fixtureHeatCoverage": 1,
     "squadDepthCoverage": 1,
     "climateProfileCoverage": 1,
@@ -90,17 +102,17 @@
     "missingClimateProfileTeams": [],
     "missingHeatMemoryTeams": [],
     "fixtureNewsCoverage": 1,
-    "sourceFailureRate": 0.333,
+    "sourceFailureRate": 0.359,
     "marketReadiness": {
       "coreResultsAndGoals": "partial",
       "scorers": "collecting",
       "assists": "collecting",
       "playerShots": "collecting"
     },
-    "message": "The database is still collecting real public-web data, including full 20-match team samples. Missing sources are visible in source health."
+    "message": "Some fixtures have usable public evidence, but the selected range does not yet have complete fresh odds and event-quality coverage."
   },
   "survivabilityMarketCoverage": {
-    "createdAt": "2026-07-12T04:42:39.797Z",
+    "createdAt": "2026-07-13T04:49:22.843Z",
     "gateVersion": "survivability-public-web-v1",
     "enabled": true,
     "status": "collecting",
@@ -110,17 +122,18 @@
       "reason": "Collecting public-web odds until the coverage gate is satisfied."
     },
     "fixtureWindow": {
-      "fixtureCount": 1,
+      "fixtureCount": 2,
       "fixtureIds": [
-        "fixture_774ccc2a"
+        "fixture_774ccc2a",
+        "fixture_67d89ff3"
       ]
     },
     "summary": {
       "marketCount": 14,
       "satisfiedMarketCount": 0,
       "satisfiedMarkets": [],
-      "totalRecords": 0,
-      "freshRecordCount": 0,
+      "totalRecords": 8,
+      "freshRecordCount": 8,
       "message": "Survivability markets are being gathered and audited before betting logic can use them."
     },
     "markets": {
@@ -151,7 +164,7 @@
         "recordCount": 0,
         "freshRecordCount": 0,
         "fixtureCount": 0,
-        "totalFixtureCount": 1,
+        "totalFixtureCount": 2,
         "fixtureCoverage": 0,
         "bookmakerCount": 0,
         "averageBookmakersPerFixture": 0,
@@ -187,7 +200,7 @@
         "recordCount": 0,
         "freshRecordCount": 0,
         "fixtureCount": 0,
-        "totalFixtureCount": 1,
+        "totalFixtureCount": 2,
         "fixtureCoverage": 0,
         "bookmakerCount": 0,
         "averageBookmakersPerFixture": 0,
@@ -223,7 +236,7 @@
         "recordCount": 0,
         "freshRecordCount": 0,
         "fixtureCount": 0,
-        "totalFixtureCount": 1,
+        "totalFixtureCount": 2,
         "fixtureCoverage": 0,
         "bookmakerCount": 0,
         "averageBookmakersPerFixture": 0,
@@ -259,7 +272,7 @@
         "recordCount": 0,
         "freshRecordCount": 0,
         "fixtureCount": 0,
-        "totalFixtureCount": 1,
+        "totalFixtureCount": 2,
         "fixtureCoverage": 0,
         "bookmakerCount": 0,
         "averageBookmakersPerFixture": 0,
@@ -294,7 +307,7 @@
         "recordCount": 0,
         "freshRecordCount": 0,
         "fixtureCount": 0,
-        "totalFixtureCount": 1,
+        "totalFixtureCount": 2,
         "fixtureCoverage": 0,
         "bookmakerCount": 0,
         "averageBookmakersPerFixture": 0,
@@ -329,7 +342,7 @@
         "recordCount": 0,
         "freshRecordCount": 0,
         "fixtureCount": 0,
-        "totalFixtureCount": 1,
+        "totalFixtureCount": 2,
         "fixtureCoverage": 0,
         "bookmakerCount": 0,
         "averageBookmakersPerFixture": 0,
@@ -365,7 +378,7 @@
         "recordCount": 0,
         "freshRecordCount": 0,
         "fixtureCount": 0,
-        "totalFixtureCount": 1,
+        "totalFixtureCount": 2,
         "fixtureCoverage": 0,
         "bookmakerCount": 0,
         "averageBookmakersPerFixture": 0,
@@ -401,7 +414,7 @@
         "recordCount": 0,
         "freshRecordCount": 0,
         "fixtureCount": 0,
-        "totalFixtureCount": 1,
+        "totalFixtureCount": 2,
         "fixtureCoverage": 0,
         "bookmakerCount": 0,
         "averageBookmakersPerFixture": 0,
@@ -427,24 +440,83 @@
           "maxRecordAgeHours": 72
         },
         "missing": [
-          "needs 18 more fresh records",
-          "needs 5 more covered fixtures",
-          "needs 1 more fixtures for coverage",
+          "needs 12 more fresh records",
+          "needs 4 more covered fixtures",
           "needs 2 more bookmaker source(s)",
-          "needs deeper bookmaker coverage per fixture",
-          "needs 2 more distinct line(s)"
+          "needs deeper bookmaker coverage per fixture"
         ],
-        "recordCount": 0,
-        "freshRecordCount": 0,
-        "fixtureCount": 0,
-        "totalFixtureCount": 1,
-        "fixtureCoverage": 0,
+        "recordCount": 6,
+        "freshRecordCount": 6,
+        "fixtureCount": 1,
+        "totalFixtureCount": 2,
+        "fixtureCoverage": 0.5,
         "bookmakerCount": 0,
         "averageBookmakersPerFixture": 0,
-        "lineCount": 0,
-        "outcomeCount": 0,
-        "latestCapturedAt": null,
-        "sampleOutcomes": []
+        "lineCount": 6,
+        "outcomeCount": 6,
+        "latestCapturedAt": "2026-07-13T04:49:22.843Z",
+        "sampleOutcomes": [
+          {
+            "fixtureId": "fixture_774ccc2a",
+            "fixture": "France v Spain",
+            "bookmaker": null,
+            "outcome": "Over 9.5",
+            "line": "9.5",
+            "team": "",
+            "decimalOdds": 1.98,
+            "capturedAt": "2026-07-13T04:49:22.843Z"
+          },
+          {
+            "fixtureId": "fixture_774ccc2a",
+            "fixture": "France v Spain",
+            "bookmaker": null,
+            "outcome": "Under 9.5",
+            "line": "9.5",
+            "team": "",
+            "decimalOdds": 1.74,
+            "capturedAt": "2026-07-13T04:49:22.843Z"
+          },
+          {
+            "fixtureId": "fixture_774ccc2a",
+            "fixture": "France v Spain",
+            "bookmaker": null,
+            "outcome": "Over 4.5",
+            "line": "4.5",
+            "team": "",
+            "decimalOdds": 1.89,
+            "capturedAt": "2026-07-13T04:49:22.843Z"
+          },
+          {
+            "fixtureId": "fixture_774ccc2a",
+            "fixture": "France v Spain",
+            "bookmaker": null,
+            "outcome": "Under 4.5",
+            "line": "4.5",
+            "team": "",
+            "decimalOdds": 1.8,
+            "capturedAt": "2026-07-13T04:49:22.843Z"
+          },
+          {
+            "fixtureId": "fixture_774ccc2a",
+            "fixture": "France v Spain",
+            "bookmaker": null,
+            "outcome": "Over 1",
+            "line": "1",
+            "team": "",
+            "decimalOdds": 1.98,
+            "capturedAt": "2026-07-13T04:49:22.843Z"
+          },
+          {
+            "fixtureId": "fixture_774ccc2a",
+            "fixture": "France v Spain",
+            "bookmaker": null,
+            "outcome": "Under 1",
+            "line": "1",
+            "team": "",
+            "decimalOdds": 7,
+            "capturedAt": "2026-07-13T04:49:22.843Z"
+          }
+        ]
       },
       "team_corners": {
         "key": "team_corners",
@@ -463,24 +535,43 @@
           "maxRecordAgeHours": 72
         },
         "missing": [
-          "needs 18 more fresh records",
-          "needs 5 more covered fixtures",
-          "needs 1 more fixtures for coverage",
+          "needs 16 more fresh records",
+          "needs 4 more covered fixtures",
           "needs 2 more bookmaker source(s)",
-          "needs deeper bookmaker coverage per fixture",
-          "needs 2 more distinct line(s)"
+          "needs deeper bookmaker coverage per fixture"
         ],
-        "recordCount": 0,
-        "freshRecordCount": 0,
-        "fixtureCount": 0,
-        "totalFixtureCount": 1,
-        "fixtureCoverage": 0,
+        "recordCount": 2,
+        "freshRecordCount": 2,
+        "fixtureCount": 1,
+        "totalFixtureCount": 2,
+        "fixtureCoverage": 0.5,
         "bookmakerCount": 0,
         "averageBookmakersPerFixture": 0,
-        "lineCount": 0,
-        "outcomeCount": 0,
-        "latestCapturedAt": null,
-        "sampleOutcomes": []
+        "lineCount": 2,
+        "outcomeCount": 2,
+        "latestCapturedAt": "2026-07-13T04:49:22.843Z",
+        "sampleOutcomes": [
+          {
+            "fixtureId": "fixture_774ccc2a",
+            "fixture": "France v Spain",
+            "bookmaker": null,
+            "outcome": "Spain Over 9.1",
+            "line": "9.1",
+            "team": "Spain",
+            "decimalOdds": 7.7,
+            "capturedAt": "2026-07-13T04:49:22.843Z"
+          },
+          {
+            "fixtureId": "fixture_774ccc2a",
+            "fixture": "France v Spain",
+            "bookmaker": null,
+            "outcome": "Spain Under 9.1",
+            "line": "9.1",
+            "team": "Spain",
+            "decimalOdds": 1.4,
+            "capturedAt": "2026-07-13T04:49:22.843Z"
+          }
+        ]
       },
       "total_cards": {
         "key": "total_cards",
@@ -509,7 +600,7 @@
         "recordCount": 0,
         "freshRecordCount": 0,
         "fixtureCount": 0,
-        "totalFixtureCount": 1,
+        "totalFixtureCount": 2,
         "fixtureCoverage": 0,
         "bookmakerCount": 0,
         "averageBookmakersPerFixture": 0,
@@ -545,7 +636,7 @@
         "recordCount": 0,
         "freshRecordCount": 0,
         "fixtureCount": 0,
-        "totalFixtureCount": 1,
+        "totalFixtureCount": 2,
         "fixtureCoverage": 0,
         "bookmakerCount": 0,
         "averageBookmakersPerFixture": 0,
@@ -580,7 +671,7 @@
         "recordCount": 0,
         "freshRecordCount": 0,
         "fixtureCount": 0,
-        "totalFixtureCount": 1,
+        "totalFixtureCount": 2,
         "fixtureCoverage": 0,
         "bookmakerCount": 0,
         "averageBookmakersPerFixture": 0,
@@ -615,7 +706,7 @@
         "recordCount": 0,
         "freshRecordCount": 0,
         "fixtureCount": 0,
-        "totalFixtureCount": 1,
+        "totalFixtureCount": 2,
         "fixtureCoverage": 0,
         "bookmakerCount": 0,
         "averageBookmakersPerFixture": 0,
@@ -632,25 +723,25 @@
         "ok": 2,
         "empty": 0,
         "error": 0,
-        "records": 50
+        "records": 51
       },
       "stats": {
-        "ok": 2,
+        "ok": 4,
         "empty": 0,
         "error": 0,
-        "records": 126
+        "records": 273
       },
       "player_stats": {
-        "ok": 1,
-        "empty": 5,
+        "ok": 2,
+        "empty": 10,
         "error": 0,
-        "records": 2
+        "records": 4
       },
       "team_profile": {
-        "ok": 2,
+        "ok": 4,
         "empty": 0,
         "error": 0,
-        "records": 2
+        "records": 4
       },
       "post_match_stats_schedule": {
         "ok": 1,
@@ -671,34 +762,35 @@
         "records": 36
       },
       "odds": {
-        "ok": 0,
+        "ok": 1,
         "empty": 1,
-        "error": 1,
-        "records": 0
+        "error": 2,
+        "records": 50
       },
       "odds-integrity": {
-        "ok": 1,
+        "ok": 0,
         "empty": 0,
         "error": 0,
-        "records": 0
+        "records": 48,
+        "warning": 1
       },
       "weather": {
-        "ok": 1,
+        "ok": 2,
         "empty": 0,
         "error": 0,
-        "records": 1
+        "records": 2
       },
       "squad_depth": {
-        "ok": 3,
+        "ok": 5,
         "empty": 0,
         "error": 0,
-        "records": 4
+        "records": 8
       }
     },
     "failures": [
       {
-        "id": "source_eb433c0d",
-        "createdAt": "2026-07-12T04:42:39.797Z",
+        "id": "source_1225e8d9",
+        "createdAt": "2026-07-13T04:49:22.843Z",
         "kind": "player_stats",
         "source": "France PlayerStats shots",
         "url": "https://playerstats.football/world-cup/france/total-shots",
@@ -707,8 +799,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for France."
       },
       {
-        "id": "source_ac494a0",
-        "createdAt": "2026-07-12T04:42:39.797Z",
+        "id": "source_31a7416c",
+        "createdAt": "2026-07-13T04:49:22.843Z",
         "kind": "player_stats",
         "source": "France PlayerStats shots on target",
         "url": "https://playerstats.football/world-cup/france/shots-on-target",
@@ -717,8 +809,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for France."
       },
       {
-        "id": "source_1380d5e3",
-        "createdAt": "2026-07-12T04:42:39.797Z",
+        "id": "source_3a6382af",
+        "createdAt": "2026-07-13T04:49:22.843Z",
         "kind": "player_stats",
         "source": "Spain PlayerStats assists",
         "url": "https://playerstats.football/world-cup/spain/goals-assists",
@@ -727,8 +819,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Spain."
       },
       {
-        "id": "source_9df46e47",
-        "createdAt": "2026-07-12T04:42:39.797Z",
+        "id": "source_c4d71b13",
+        "createdAt": "2026-07-13T04:49:22.843Z",
         "kind": "player_stats",
         "source": "Spain PlayerStats shots",
         "url": "https://playerstats.football/world-cup/spain/total-shots",
@@ -737,8 +829,8 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Spain."
       },
       {
-        "id": "source_85127ef0",
-        "createdAt": "2026-07-12T04:42:39.797Z",
+        "id": "source_abf52bbc",
+        "createdAt": "2026-07-13T04:49:22.843Z",
         "kind": "player_stats",
         "source": "Spain PlayerStats shots on target",
         "url": "https://playerstats.football/world-cup/spain/shots-on-target",
@@ -747,8 +839,58 @@
         "reason": "Fetched public player-stat page but found no usable player rows for Spain."
       },
       {
-        "id": "source_1443363a",
-        "createdAt": "2026-07-12T04:42:39.797Z",
+        "id": "source_c9f9a4ef",
+        "createdAt": "2026-07-13T04:49:22.843Z",
+        "kind": "player_stats",
+        "source": "England PlayerStats assists",
+        "url": "https://playerstats.football/world-cup/england/goals-assists",
+        "status": "empty",
+        "records": 0,
+        "reason": "Fetched public player-stat page but found no usable player rows for England."
+      },
+      {
+        "id": "source_50c7413",
+        "createdAt": "2026-07-13T04:49:22.843Z",
+        "kind": "player_stats",
+        "source": "England PlayerStats shots",
+        "url": "https://playerstats.football/world-cup/england/total-shots",
+        "status": "empty",
+        "records": 0,
+        "reason": "Fetched public player-stat page but found no usable player rows for England."
+      },
+      {
+        "id": "source_31831afc",
+        "createdAt": "2026-07-13T04:49:22.843Z",
+        "kind": "player_stats",
+        "source": "England PlayerStats shots on target",
+        "url": "https://playerstats.football/world-cup/england/shots-on-target",
+        "status": "empty",
+        "records": 0,
+        "reason": "Fetched public player-stat page but found no usable player rows for England."
+      },
+      {
+        "id": "source_d13465f1",
+        "createdAt": "2026-07-13T04:49:22.843Z",
+        "kind": "player_stats",
+        "source": "Argentina PlayerStats shots",
+        "url": "https://playerstats.football/world-cup/argentina/total-shots",
+        "status": "empty",
+        "records": 0,
+        "reason": "Fetched public player-stat page but found no usable player rows for Argentina."
+      },
+      {
+        "id": "source_bd21509a",
+        "createdAt": "2026-07-13T04:49:22.843Z",
+        "kind": "player_stats",
+        "source": "Argentina PlayerStats shots on target",
+        "url": "https://playerstats.football/world-cup/argentina/shots-on-target",
+        "status": "empty",
+        "records": 0,
+        "reason": "Fetched public player-stat page but found no usable player rows for Argentina."
+      },
+      {
+        "id": "source_3b25e306",
+        "createdAt": "2026-07-13T04:49:22.843Z",
         "kind": "news",
         "source": "FIFA World Cup Articles",
         "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
@@ -757,8 +899,8 @@
         "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
       },
       {
-        "id": "source_ac1ef517",
-        "createdAt": "2026-07-12T04:42:39.797Z",
+        "id": "source_d301a1e3",
+        "createdAt": "2026-07-13T04:49:22.843Z",
         "kind": "odds",
         "source": "OnlyOdds match pages: France v Spain",
         "url": "https://worldcup.onlyodds.co.uk/match/france-v-spain",
@@ -767,11 +909,21 @@
         "reason": "404 Not Found"
       },
       {
-        "id": "source_48ca1f1b",
-        "createdAt": "2026-07-12T04:42:39.797Z",
+        "id": "source_cec586e7",
+        "createdAt": "2026-07-13T04:49:22.843Z",
         "kind": "odds",
-        "source": "SportsGambler public prop pages: France v Spain",
-        "url": "https://www.sportsgambler.com/betting-tips/football/france-vs-spain-prediction-lineups-odds-2026-07-14/",
+        "source": "OnlyOdds match pages: England v Argentina",
+        "url": "https://worldcup.onlyodds.co.uk/match/england-v-argentina",
+        "status": "error",
+        "records": 0,
+        "reason": "404 Not Found"
+      },
+      {
+        "id": "source_e856fe20",
+        "createdAt": "2026-07-13T04:49:22.843Z",
+        "kind": "odds",
+        "source": "SportsGambler public prop pages: England v Argentina",
+        "url": "https://www.sportsgambler.com/betting-tips/football/england-vs-argentina-prediction-lineups-odds-2026-07-15/",
         "status": "empty",
         "records": 0,
         "reason": "Fetched public match page but found no supported odds offers."
@@ -779,8 +931,8 @@
     ]
   },
   "intelligence": {
-    "teamCount": 2,
-    "observationCount": 2,
+    "teamCount": 4,
+    "observationCount": 4,
     "outcomeLearningCount": 2780,
     "outcomeCalibration": {
       "overall": {
@@ -1890,69 +2042,69 @@
       },
       "lineup": {
         "lineup_unknown": {
-          "count": 2789,
-          "wins": 337,
-          "losses": 2452,
-          "winRate": 0.1208,
-          "averageModelProbability": 0.1956,
-          "probabilityError": -0.0739,
-          "averageGoalTotalError": 1.29,
-          "averageXgTotalError": 1.2377,
-          "averageShotTotalError": 12.4605,
-          "brierScore": 0.0931,
-          "averageMetricQuality": 0.9489,
+          "count": 2701,
+          "wins": 326,
+          "losses": 2375,
+          "winRate": 0.1207,
+          "averageModelProbability": 0.1975,
+          "probabilityError": -0.0761,
+          "averageGoalTotalError": 1.2611,
+          "averageXgTotalError": 1.2337,
+          "averageShotTotalError": 12.221,
+          "brierScore": 0.0929,
+          "averageMetricQuality": 0.9472,
           "weatherSignals": {
-            "heat_drag_understated": 318,
+            "heat_drag_understated": 276,
             "heat_drag_overstated": 154,
             "heat_effect_reasonable": 62
           }
         },
-        "scorer_confirmed_starter": {
-          "count": 43,
-          "wins": 2,
-          "losses": 41,
-          "winRate": 0.0465,
-          "averageModelProbability": 0.1148,
-          "probabilityError": -0.0634,
-          "averageGoalTotalError": 1.0569,
-          "averageXgTotalError": 0.6969,
-          "averageShotTotalError": 6.8036,
-          "brierScore": 0.0526,
+        "scorer_not_confirmed_starter": {
+          "count": 61,
+          "wins": 1,
+          "losses": 60,
+          "winRate": 0.0164,
+          "averageModelProbability": 0.0972,
+          "probabilityError": -0.0868,
+          "averageGoalTotalError": 2.0555,
+          "averageXgTotalError": 1.3664,
+          "averageShotTotalError": 17.5875,
+          "brierScore": 0.0193,
           "averageMetricQuality": 1,
           "weatherSignals": {
-            "heat_drag_understated": 30
+            "heat_drag_understated": 28
+          }
+        },
+        "scorer_confirmed_starter": {
+          "count": 87,
+          "wins": 11,
+          "losses": 76,
+          "winRate": 0.1264,
+          "averageModelProbability": 0.1392,
+          "probabilityError": -0.0004,
+          "averageGoalTotalError": 1.6689,
+          "averageXgTotalError": 1.0842,
+          "averageShotTotalError": 13.8168,
+          "brierScore": 0.1188,
+          "averageMetricQuality": 1,
+          "weatherSignals": {
+            "heat_drag_understated": 52
           }
         },
         "both_xi_confirmed": {
-          "count": 10,
-          "wins": 6,
-          "losses": 4,
-          "winRate": 0.6,
-          "averageModelProbability": 0.532,
-          "probabilityError": 0.1258,
-          "averageGoalTotalError": -0.25,
-          "averageXgTotalError": -0.61,
-          "averageShotTotalError": -4.09,
-          "brierScore": 0.131,
+          "count": 14,
+          "wins": 8,
+          "losses": 6,
+          "winRate": 0.5714,
+          "averageModelProbability": 0.4977,
+          "probabilityError": 0.1309,
+          "averageGoalTotalError": -0.168,
+          "averageXgTotalError": -0.6783,
+          "averageShotTotalError": -2.7424,
+          "brierScore": 0.1501,
           "averageMetricQuality": 1,
           "weatherSignals": {
-            "heat_drag_understated": 10
-          }
-        },
-        "scorer_not_confirmed_starter": {
-          "count": 21,
-          "wins": 1,
-          "losses": 20,
-          "winRate": 0.0476,
-          "averageModelProbability": 0.1122,
-          "probabilityError": -0.0806,
-          "averageGoalTotalError": 1.5102,
-          "averageXgTotalError": 1.1502,
-          "averageShotTotalError": 10.5817,
-          "brierScore": 0.0379,
-          "averageMetricQuality": 1,
-          "weatherSignals": {
-            "heat_drag_understated": 12
+            "heat_drag_understated": 14
           }
         }
       },
@@ -2041,48 +2193,251 @@
       }
     },
     "lastOutcomeSettlement": {
-      "examinedLegCount": 3412,
-      "insertedCount": 242,
+      "examinedLegCount": 3430,
+      "insertedCount": 0,
       "skipped": {
         "noRecommendations": 0,
-        "noMatch": 173,
+        "noMatch": 191,
         "unknownMarket": 305,
         "latePrediction": 0,
-        "alreadySettled": 2692
+        "alreadySettled": 2934
       }
     },
     "lastPredictionReflection": {
-      "examinedPredictionCount": 10329,
-      "insertedCount": 243,
-      "updatedCount": 2646,
-      "upsertedCount": 2889
+      "examinedPredictionCount": 10304,
+      "insertedCount": 0,
+      "updatedCount": 2888,
+      "upsertedCount": 2888
     },
     "topTeams": [
       {
+        "team": "England",
+        "learnedEdge": 0.0941,
+        "confidence": 0.5697,
+        "reasons": [
+          "20-match form 2.3 PPG, xG 1.868-0.94",
+          "recent form improving",
+          "360 news item(s), news impact 0.081",
+          "15 scorer record(s), top scorer signal 0.1035",
+          "memory currently leans positive"
+        ]
+      },
+      {
         "team": "Spain",
-        "learnedEdge": 0.0367,
-        "confidence": 0.5688,
+        "learnedEdge": 0.0431,
+        "confidence": 0.6171,
         "reasons": [
           "20-match form 2.7 PPG, xG 2.213-0.771",
           "recent form improving",
-          "72 news item(s), news impact 0.0451",
+          "77 news item(s), news impact 0.0414",
+          "market intelligence 0% movement, consensus 9.1 across 1 bookie(s)",
           "30 scorer record(s), top scorer signal 0.072"
         ]
       },
       {
         "team": "France",
-        "learnedEdge": 0.0228,
-        "confidence": 0.5693,
+        "learnedEdge": 0.0214,
+        "confidence": 0.6176,
         "reasons": [
           "20-match form 2.25 PPG, xG 2.201-1.118",
-          "92 news item(s), news impact 0.078",
+          "96 news item(s), news impact 0.0768",
+          "market intelligence 0% movement, consensus 9.4 across 1 bookie(s)",
           "19 scorer record(s), top scorer signal 0.099"
+        ]
+      },
+      {
+        "team": "Argentina",
+        "learnedEdge": -0.0046,
+        "confidence": 0.5696,
+        "reasons": [
+          "20-match form 2.9 PPG, xG 2.574-0.613",
+          "recent form cooling",
+          "89 news item(s), news impact 0.0573",
+          "19 scorer record(s), top scorer signal 0.108"
         ]
       }
     ]
   },
   "eligibleLegCount": 0,
-  "betslip": [],
+  "betslip": [
+    {
+      "id": "single_leg_39ec2de4",
+      "rank": 1,
+      "category": "single",
+      "label": "Single",
+      "type": "single",
+      "score": 33.29,
+      "legCount": 1,
+      "combinedDecimalOdds": 2.85,
+      "stake": 10,
+      "potentialReturn": null,
+      "potentialProfit": null,
+      "returnStatus": "research_only",
+      "combinedProbability": 0.2586,
+      "expectedValue": -0.263,
+      "averageConfidence": 0.5823,
+      "averageIndependentEdge": -0.077,
+      "survivalCombinedProbability": 0.3125,
+      "averageSurvivalProbability": 0.3125,
+      "averageNonMarketSignalCount": 5,
+      "displayRating": 0.6042,
+      "riskLegCount": 0,
+      "bttsLegCount": 0,
+      "scorerLegCount": 1,
+      "firstScorerLegCount": 0,
+      "fragileLegCount": 0,
+      "correlationPenalty": 0,
+      "correlationReasons": [],
+      "marketFamilyMix": {},
+      "repeatedTeamCount": 0,
+      "sameDateCluster": 0,
+      "shortWindowFallback": false,
+      "bestAvailableFallback": true,
+      "reusedSignalCount": 0,
+      "placeabilityStatus": "research_only",
+      "directlyPlaceable": false,
+      "placeableBookmaker": null,
+      "bookmakerKey": null,
+      "sourceBookmakers": [],
+      "sourcePublishers": [
+        "SportsGambler public prop pages"
+      ],
+      "placeabilityReason": "Research-only price combination from SportsGambler public prop pages; a single verified bookmaker could not be established, so it is not claimed as directly placeable and has no executable return.",
+      "selectionIntent": "balanced_survival",
+      "recommendedUse": "weak_best_available",
+      "selectionQuality": "weak_best_available",
+      "selectionBrainScore": 40.431,
+      "cashScore": 58.91,
+      "freeBetScore": 0,
+      "longshotScore": 0,
+      "freeBetConversion": 0.5781,
+      "probabilityRange": {
+        "low": 0.2275,
+        "mid": 0.3125,
+        "high": 0.3975,
+        "width": 0.17,
+        "label": "tight",
+        "reasons": [
+          "lower confidence inputs",
+          "player-prop variance"
+        ]
+      },
+      "portfolioWarnings": [
+        "low_model_confidence"
+      ],
+      "legs": [
+        {
+          "id": "leg_39ec2de4",
+          "fixtureId": "fixture_774ccc2a",
+          "fixtureDate": "2026-07-14T19:00:00.000Z",
+          "homeTeam": "France",
+          "awayTeam": "Spain",
+          "market": "anytime_scorer",
+          "playerName": "Mikel Oyarzabal",
+          "selectionLabel": "France vs Spain: Mikel Oyarzabal anytime scorer",
+          "bookmaker": null,
+          "bookmakerVerified": false,
+          "bookmakerKey": "",
+          "pricePublisher": "SportsGambler public prop pages",
+          "source": "SportsGambler public prop pages: France v Spain",
+          "decimalOdds": 2.85,
+          "modelProbability": 0.2586,
+          "rawModelProbability": 0.3076,
+          "impliedProbability": 0.3509,
+          "marketImpliedProbability": 0.3509,
+          "independentEdge": -0.077,
+          "edge": -0.0834,
+          "confidence": 0.5823,
+          "riskTag": "steady_edge",
+          "bestAvailableFallback": true,
+          "fallbackReasons": [
+            "edge_below_policy_minimum",
+            "independent_edge_below_policy_minimum",
+            "confidence_below_policy_minimum"
+          ],
+          "shortWindowFallback": false,
+          "reusedSignal": false,
+          "components": {
+            "intelligenceConfidence": 0.617,
+            "nonMarketSignalCount": 5,
+            "nonMarketSignals": [
+              "20-match team sample",
+              "team goals environment is live",
+              "scorer raw probability clears floor",
+              "starter/minutes projection is healthy",
+              "20-match scorer memory"
+            ],
+            "independentEvidenceStrength": 0.6432,
+            "marketBlendLift": 0.0227,
+            "oddsMovement": 0,
+            "oddsShortening": false,
+            "oddsDrifting": false,
+            "marketAverageOdds": 2.85,
+            "heatStress": 0,
+            "heatConfidence": 0.7055,
+            "heatClimateBand": "climateControlled",
+            "heatExpectedGoalsAdjustment": 0,
+            "heatEdge": 0,
+            "heatLocation": "Dallas",
+            "homeSquadDepth": 0.7236,
+            "awaySquadDepth": 0.7112,
+            "squadDepthConfidence": 0.7186,
+            "homeHistoricalHeatMemory": 0,
+            "awayHistoricalHeatMemory": 0,
+            "combinedHeatDifferential": 0,
+            "expectedGoals": 3.17,
+            "homeExpectedGoals": 1.54,
+            "awayExpectedGoals": 1.63,
+            "projectedShotTotal": 26.55,
+            "homeProjectedShots": 13.01,
+            "awayProjectedShots": 13.54,
+            "projectedShotsOnTargetTotal": 9.4,
+            "homeLongMatchCount": 20,
+            "awayLongMatchCount": 20,
+            "homeBttsRate": 0.55,
+            "awayBttsRate": 0.35,
+            "homeOver25Rate": 0.75,
+            "awayOver25Rate": 0.55,
+            "tournamentPhase": "non_group_game",
+            "homeGroupGameNumber": null,
+            "awayGroupGameNumber": null,
+            "bothOpeningGroupGame": false,
+            "oneOpeningGroupGame": false,
+            "openingGameCaution": 0,
+            "tournamentExpectedGoalsAdjustment": 0,
+            "tournamentBttsAdjustment": 0,
+            "tournamentDrawLift": 0,
+            "tournamentContextNote": "Tournament pressure layer inactive outside group-stage fixtures.",
+            "confidenceReasons": [
+              "thin confidence, use cautiously",
+              "event stats mostly score-derived estimates",
+              "fresh odds snapshot",
+              "many non-market signals agree",
+              "settled-outcome learning active",
+              "post-match xG/shot reflection active",
+              "settled money/CLV performance active"
+            ],
+            "scorerMarketType": "anytime_scorer",
+            "teamGoalLikelihood": 0.7555,
+            "teamFirstGoalShare": 0.515,
+            "starterLikelihood": 0.7435,
+            "projectedMinutes": 75.6,
+            "scorerGoalsPerTwentyTeamMatches": 4,
+            "scorerConfidence": 0.78,
+            "predictionReflectionAdjustment": -0.0261,
+            "predictionReflectionConfidence": 0.9167,
+            "predictionReflectionReasons": [
+              "anytime_scorer post-match reflection 9% actual vs 18.6% projected over 1279",
+              "non group game reflection environment covers 14 unique fixture(s)"
+            ],
+            "survivalPenalty": 0
+          },
+          "thesis": "France vs Spain: Mikel Oyarzabal anytime scorer is priced at 2.85; raw AI probability 30.8%, pre-learning market-adjusted probability 33%, final learned probability 25.9%, market view 35.1%. Independent edge -7.7%, final value edge -8.34%, backed by 5 non-market signal(s): 20-match team sample, team goals environment is live, scorer raw probability clears floor, starter/minutes projection is healthy, 20-match scorer memory. Fixture model: expected goals 3.17 (1.54-1.63), rating edge -27.5, style edge -2.22, memory edge -1.91. Odds intelligence is capped: market result edge 0, consensus probability n/a where available. News impact is 0.081 for France and 0.073 for Spain. Tactical memory: France 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains) vs Spain 4-3-3 / 4-2-3-1 (front-foot pressing and fast regains); build-up edge 0.03. Scorer memory: France top recent scorers Mbappé, K. Mbappe, O. Dembele; Spain top recent scorers Morata, Oyarzabal, Sarabia. Heat layer: Dallas climateControlled stress 0%, xG adjustment 0, result edge 0; climate/history/depth differential 0. Tournament context: Tournament pressure layer inactive outside group-stage fixtures.; group-game numbers ?-?; xG adjustment 0, BTTS adjustment 0, draw lift 0. Market focus: goals environment is live at 3.17 expected goals. Outcome learning: anytime_scorer descriptive strike rate 8.7% over 1274; steady_edge descriptive strike rate 17.7% over 898; anytime_scorer 00-39% band calibration 8.1% actual vs 17.6% projected; steady_edge 00-39% band calibration 8.6% actual vs 15.6% projected; anytime_scorer calibration 8.7% actual vs 18.3% projected; steady_edge calibration 17.7% actual vs 21.3% projected. Post-match reflection: anytime_scorer post-match reflection 9% actual vs 18.6% projected over 1279; non group game reflection environment covers 14 unique fixture(s). Betting performance: anytime_scorer is being downgraded by settled bet performance; steady_edge is being downgraded by settled bet performance. No prior market movement yet; this scan becomes part of the local memory. Confidence 58.2% after odds freshness and data completeness checks."
+        }
+      ],
+      "thesis": "single at combined odds 2.85 with estimated slip chance 31.25% and average leg survival 31.2%. The displayed odds are the product of the listed leg prices. Research-only price combination from SportsGambler public prop pages; a single verified bookmaker could not be established, so it is not claimed as directly placeable and has no executable return. Expected value is -26.3%, independent edge averages -7.7%, and the model has 5 non-market signals per leg. Best-available fallback active: every leg still passed price, probability, confidence, and hard-block integrity checks. Short-slip controls keep model chance ahead of price hunting.  No calculated-risk leg; this should only survive if the edge is exceptional. No high-implied-probability favourite crowding. Heat layer neutral or low impact on this slip. Legs: France vs Spain: Mikel Oyarzabal anytime scorer."
+    }
+  ],
   "offerRanking": [],
   "strongestLegs": []
 }

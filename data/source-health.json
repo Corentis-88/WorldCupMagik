@@ -1,5 +1,399 @@
 [
   {
+    "id": "source_691445ea",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "fixtures",
+    "source": "DCS World Cup public schedule",
+    "url": "https://wc.dcs.pm/",
+    "status": "ok",
+    "records": 2,
+    "reason": ""
+  },
+  {
+    "id": "source_9e8cc2f1",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "fixtures",
+    "source": "OnlyOdds World Cup fixtures",
+    "url": "https://worldcup.onlyodds.co.uk/world-cup",
+    "status": "ok",
+    "records": 49,
+    "reason": ""
+  },
+  {
+    "id": "source_f5c8ba10",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "stats",
+    "source": "France public results 1",
+    "url": "https://en.wikipedia.org/wiki/France_national_football_team_results_(2020%E2%80%93present)",
+    "status": "ok",
+    "records": 80,
+    "reason": ""
+  },
+  {
+    "id": "source_746247a3",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "player_stats",
+    "source": "France PlayerStats assists",
+    "url": "https://playerstats.football/world-cup/france/goals-assists",
+    "status": "ok",
+    "records": 2,
+    "reason": ""
+  },
+  {
+    "id": "source_1225e8d9",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "player_stats",
+    "source": "France PlayerStats shots",
+    "url": "https://playerstats.football/world-cup/france/total-shots",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for France."
+  },
+  {
+    "id": "source_31a7416c",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "player_stats",
+    "source": "France PlayerStats shots on target",
+    "url": "https://playerstats.football/world-cup/france/shots-on-target",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for France."
+  },
+  {
+    "id": "source_170f7180",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "team_profile",
+    "source": "France public profile 1",
+    "url": "https://en.wikipedia.org/wiki/France_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_46b1f0e2",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "stats",
+    "source": "Spain public results 1",
+    "url": "https://en.wikipedia.org/wiki/Spain_national_football_team_results_(2020%E2%80%93present)",
+    "status": "ok",
+    "records": 46,
+    "reason": ""
+  },
+  {
+    "id": "source_3a6382af",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "player_stats",
+    "source": "Spain PlayerStats assists",
+    "url": "https://playerstats.football/world-cup/spain/goals-assists",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Spain."
+  },
+  {
+    "id": "source_c4d71b13",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "player_stats",
+    "source": "Spain PlayerStats shots",
+    "url": "https://playerstats.football/world-cup/spain/total-shots",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Spain."
+  },
+  {
+    "id": "source_abf52bbc",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "player_stats",
+    "source": "Spain PlayerStats shots on target",
+    "url": "https://playerstats.football/world-cup/spain/shots-on-target",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Spain."
+  },
+  {
+    "id": "source_80e369d6",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "team_profile",
+    "source": "Spain public profile 1",
+    "url": "https://en.wikipedia.org/wiki/Spain_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_ecc4f503",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "stats",
+    "source": "England public results 1",
+    "url": "https://en.wikipedia.org/wiki/England_national_football_team_results_(2020%E2%80%93present)",
+    "status": "ok",
+    "records": 67,
+    "reason": ""
+  },
+  {
+    "id": "source_c9f9a4ef",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "player_stats",
+    "source": "England PlayerStats assists",
+    "url": "https://playerstats.football/world-cup/england/goals-assists",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for England."
+  },
+  {
+    "id": "source_50c7413",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "player_stats",
+    "source": "England PlayerStats shots",
+    "url": "https://playerstats.football/world-cup/england/total-shots",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for England."
+  },
+  {
+    "id": "source_31831afc",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "player_stats",
+    "source": "England PlayerStats shots on target",
+    "url": "https://playerstats.football/world-cup/england/shots-on-target",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for England."
+  },
+  {
+    "id": "source_c2913e16",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "team_profile",
+    "source": "England public profile 1",
+    "url": "https://en.wikipedia.org/wiki/England_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_d6f2626c",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "stats",
+    "source": "Argentina public results 1",
+    "url": "https://en.wikipedia.org/wiki/Argentina_national_football_team_results_(2020%E2%80%93present)",
+    "status": "ok",
+    "records": 80,
+    "reason": ""
+  },
+  {
+    "id": "source_28decb77",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "player_stats",
+    "source": "Argentina PlayerStats assists",
+    "url": "https://playerstats.football/world-cup/argentina/goals-assists",
+    "status": "ok",
+    "records": 2,
+    "reason": ""
+  },
+  {
+    "id": "source_d13465f1",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "player_stats",
+    "source": "Argentina PlayerStats shots",
+    "url": "https://playerstats.football/world-cup/argentina/total-shots",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Argentina."
+  },
+  {
+    "id": "source_bd21509a",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "player_stats",
+    "source": "Argentina PlayerStats shots on target",
+    "url": "https://playerstats.football/world-cup/argentina/shots-on-target",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public player-stat page but found no usable player rows for Argentina."
+  },
+  {
+    "id": "source_5b63e496",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "team_profile",
+    "source": "Argentina public profile 1",
+    "url": "https://en.wikipedia.org/wiki/Argentina_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_e4bf9196",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "post_match_stats_schedule",
+    "source": "FOX Sports World Cup boxscores",
+    "url": "https://www.foxsports.com/soccer/fifa-world-cup-men/schedule",
+    "status": "ok",
+    "records": 24,
+    "reason": ""
+  },
+  {
+    "id": "source_49f19df1",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "post_match_stats_boxscores",
+    "source": "FOX Sports World Cup boxscores",
+    "url": "https://www.foxsports.com/soccer/fifa-world-cup-men/schedule",
+    "status": "ok",
+    "records": 18,
+    "reason": "24 page(s) checked; 6 without settled stats"
+  },
+  {
+    "id": "source_3b25e306",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "news",
+    "source": "FIFA World Cup Articles",
+    "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
+  },
+  {
+    "id": "source_2caef8ac",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "news",
+    "source": "BBC Sport Football RSS",
+    "url": "https://feeds.bbci.co.uk/sport/football/rss.xml",
+    "status": "ok",
+    "records": 18,
+    "reason": ""
+  },
+  {
+    "id": "source_7c2a8bd6",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "news",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/rss",
+    "status": "ok",
+    "records": 18,
+    "reason": ""
+  },
+  {
+    "id": "source_d301a1e3",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "odds",
+    "source": "OnlyOdds match pages: France v Spain",
+    "url": "https://worldcup.onlyodds.co.uk/match/france-v-spain",
+    "status": "error",
+    "records": 0,
+    "reason": "404 Not Found"
+  },
+  {
+    "id": "source_cec586e7",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "odds",
+    "source": "OnlyOdds match pages: England v Argentina",
+    "url": "https://worldcup.onlyodds.co.uk/match/england-v-argentina",
+    "status": "error",
+    "records": 0,
+    "reason": "404 Not Found"
+  },
+  {
+    "id": "source_c430bfe6",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "odds",
+    "source": "SportsGambler public prop pages: France v Spain",
+    "url": "https://www.sportsgambler.com/betting-tips/football/france-vs-spain-prediction-lineups-odds-2026-07-14/",
+    "status": "ok",
+    "records": 50,
+    "reason": ""
+  },
+  {
+    "id": "source_e856fe20",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "odds",
+    "source": "SportsGambler public prop pages: England v Argentina",
+    "url": "https://www.sportsgambler.com/betting-tips/football/england-vs-argentina-prediction-lineups-odds-2026-07-15/",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public match page but found no supported odds offers."
+  },
+  {
+    "id": "source_83234204",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "odds-integrity",
+    "source": "Odds integrity gate",
+    "url": "",
+    "status": "warning",
+    "records": 48,
+    "reason": "Quarantined 2 record(s): implausible_two_way_implied_sum=2.",
+    "quarantinedRecords": 2,
+    "quarantineReasons": {
+      "implausible_two_way_implied_sum": 2
+    }
+  },
+  {
+    "id": "source_8859bce1",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "weather",
+    "source": "Dallas weather forecast",
+    "url": "https://www.weather-forecast.com/locations/Dallas/forecasts/latest",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_71fac997",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "weather",
+    "source": "Atlanta weather forecast",
+    "url": "https://www.weather-forecast.com/locations/Atlanta/forecasts/latest",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_559a7fc1",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia 2026 FIFA World Cup squads",
+    "url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
+    "status": "ok",
+    "records": 4,
+    "reason": ""
+  },
+  {
+    "id": "source_50fe9348",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia national team squad pages: Argentina",
+    "url": "https://en.wikipedia.org/wiki/Argentina_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_e3ffa484",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia national team squad pages: England",
+    "url": "https://en.wikipedia.org/wiki/England_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_5dd3f0d0",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia national team squad pages: France",
+    "url": "https://en.wikipedia.org/wiki/France_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
+    "id": "source_671a7b04",
+    "createdAt": "2026-07-13T04:49:22.843Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia national team squad pages: Spain",
+    "url": "https://en.wikipedia.org/wiki/Spain_national_football_team",
+    "status": "ok",
+    "records": 1,
+    "reason": ""
+  },
+  {
     "id": "source_405845ff",
     "createdAt": "2026-07-12T04:42:39.797Z",
     "kind": "fixtures",
@@ -199639,395 +200033,5 @@
     "status": "empty",
     "records": 0,
     "reason": "Fetched public team page but found no manager/profile fields for Australia."
-  },
-  {
-    "id": "source_74cd0639",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "team_profile",
-    "source": "Australia public profile 3",
-    "url": "https://en.wikipedia.org/wiki/Australia_men%27s_national_soccer_team",
-    "status": "ok",
-    "records": 1,
-    "reason": ""
-  },
-  {
-    "id": "source_bc9d3505",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "stats",
-    "source": "Scotland public results 1",
-    "url": "https://en.wikipedia.org/wiki/Scotland_national_football_team_results_(2020%E2%80%93present)",
-    "status": "ok",
-    "records": 71,
-    "reason": ""
-  },
-  {
-    "id": "source_b4302d57",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "team_profile",
-    "source": "Scotland public profile 1",
-    "url": "https://en.wikipedia.org/wiki/Scotland_national_football_team",
-    "status": "ok",
-    "records": 1,
-    "reason": ""
-  },
-  {
-    "id": "source_f2371e2a",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "stats",
-    "source": "Morocco public results 1",
-    "url": "https://en.wikipedia.org/wiki/Morocco_national_football_team_results_(2020%E2%80%93present)",
-    "status": "ok",
-    "records": 94,
-    "reason": ""
-  },
-  {
-    "id": "source_fb13ae57",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "team_profile",
-    "source": "Morocco public profile 1",
-    "url": "https://en.wikipedia.org/wiki/Morocco_national_football_team",
-    "status": "ok",
-    "records": 1,
-    "reason": ""
-  },
-  {
-    "id": "source_ee066614",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "stats",
-    "source": "Brazil public results 1",
-    "url": "https://en.wikipedia.org/wiki/Brazil_national_football_team_results_(2020%E2%80%93present)",
-    "status": "ok",
-    "records": 214,
-    "reason": ""
-  },
-  {
-    "id": "source_a5db1b3f",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "team_profile",
-    "source": "Brazil public profile 1",
-    "url": "https://en.wikipedia.org/wiki/Brazil_national_football_team",
-    "status": "ok",
-    "records": 1,
-    "reason": ""
-  },
-  {
-    "id": "source_58a201ac",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "stats",
-    "source": "Haiti public results 1",
-    "url": "https://en.wikipedia.org/wiki/Haiti_national_football_team_results_(2020%E2%80%93present)",
-    "status": "error",
-    "records": 0,
-    "reason": "404 Not Found"
-  },
-  {
-    "id": "source_9fe4ddcf",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "stats",
-    "source": "Haiti public results 2",
-    "url": "https://en.wikipedia.org/wiki/Haiti_national_soccer_team_results_(2020%E2%80%93present)",
-    "status": "error",
-    "records": 0,
-    "reason": "404 Not Found"
-  },
-  {
-    "id": "source_6306104e",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "stats",
-    "source": "Haiti public results 3",
-    "url": "https://en.wikipedia.org/wiki/Haiti_men%27s_national_soccer_team_results_(2020%E2%80%93present)",
-    "status": "error",
-    "records": 0,
-    "reason": "404 Not Found"
-  },
-  {
-    "id": "source_26d5becf",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "stats",
-    "source": "Haiti National Football Teams 1",
-    "url": "https://www.national-football-teams.com/country/81/2026/Haiti.html",
-    "status": "ok",
-    "records": 4,
-    "reason": ""
-  },
-  {
-    "id": "source_d28a7f0c",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "stats",
-    "source": "Haiti National Football Teams 2",
-    "url": "https://www.national-football-teams.com/country/81/2025/Haiti.html",
-    "status": "ok",
-    "records": 12,
-    "reason": ""
-  },
-  {
-    "id": "source_afa88c6a",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "stats",
-    "source": "Haiti National Football Teams 3",
-    "url": "https://www.national-football-teams.com/country/81/2024/Haiti.html",
-    "status": "ok",
-    "records": 9,
-    "reason": ""
-  },
-  {
-    "id": "source_542b1cb7",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "team_profile",
-    "source": "Haiti public profile 1",
-    "url": "https://en.wikipedia.org/wiki/Haiti_national_football_team",
-    "status": "ok",
-    "records": 1,
-    "reason": ""
-  },
-  {
-    "id": "source_7afcff77",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "stats",
-    "source": "Turkiye public results 1",
-    "url": "https://en.wikipedia.org/wiki/Turkey_national_football_team_results_(2020%E2%80%93present)",
-    "status": "ok",
-    "records": 70,
-    "reason": ""
-  },
-  {
-    "id": "source_96283a58",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "team_profile",
-    "source": "Turkiye public profile 1",
-    "url": "https://en.wikipedia.org/wiki/Turkey_national_football_team",
-    "status": "ok",
-    "records": 1,
-    "reason": ""
-  },
-  {
-    "id": "source_7d4ac836",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "stats",
-    "source": "Paraguay public results 1",
-    "url": "https://en.wikipedia.org/wiki/Paraguay_national_football_team_results_(2020%E2%80%93present)",
-    "status": "ok",
-    "records": 63,
-    "reason": ""
-  },
-  {
-    "id": "source_693ffb0b",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "team_profile",
-    "source": "Paraguay public profile 1",
-    "url": "https://en.wikipedia.org/wiki/Paraguay_national_football_team",
-    "status": "ok",
-    "records": 1,
-    "reason": ""
-  },
-  {
-    "id": "source_6cfab367",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "news",
-    "source": "FIFA World Cup Articles",
-    "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
-  },
-  {
-    "id": "source_5e83c90d",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "news",
-    "source": "BBC Sport Football RSS",
-    "url": "https://feeds.bbci.co.uk/sport/football/rss.xml",
-    "status": "ok",
-    "records": 18,
-    "reason": ""
-  },
-  {
-    "id": "source_adff5c37",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "news",
-    "source": "The Guardian Football RSS",
-    "url": "https://www.theguardian.com/football/rss",
-    "status": "ok",
-    "records": 18,
-    "reason": ""
-  },
-  {
-    "id": "source_6b7ccdbb",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Germany v Curaçao",
-    "url": "https://worldcup.onlyodds.co.uk/match/germany-v-curacao",
-    "status": "ok",
-    "records": 40,
-    "reason": ""
-  },
-  {
-    "id": "source_b1790017",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Netherlands v Japan",
-    "url": "https://worldcup.onlyodds.co.uk/match/netherlands-v-japan",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_eba6e38",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Ivory Coast v Ecuador",
-    "url": "https://worldcup.onlyodds.co.uk/match/ivory-coast-v-ecuador",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_595da53f",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Sweden v Tunisia",
-    "url": "https://worldcup.onlyodds.co.uk/match/sweden-v-tunisia",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_9e781d32",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Spain v Cape Verde",
-    "url": "https://worldcup.onlyodds.co.uk/match/spain-v-cape-verde",
-    "status": "ok",
-    "records": 37,
-    "reason": ""
-  },
-  {
-    "id": "source_8d955d87",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Belgium v Egypt",
-    "url": "https://worldcup.onlyodds.co.uk/match/belgium-v-egypt",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_4891a8d2",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Saudi Arabia v Uruguay",
-    "url": "https://worldcup.onlyodds.co.uk/match/saudi-arabia-v-uruguay",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_aaf9cd2c",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Iran v New Zealand",
-    "url": "https://worldcup.onlyodds.co.uk/match/iran-v-new-zealand",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_f323975f",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: France v Senegal",
-    "url": "https://worldcup.onlyodds.co.uk/match/france-v-senegal",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_f097ecd8",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Iraq v Norway",
-    "url": "https://worldcup.onlyodds.co.uk/match/iraq-v-norway",
-    "status": "ok",
-    "records": 36,
-    "reason": ""
-  },
-  {
-    "id": "source_bedd3b33",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Argentina v Algeria",
-    "url": "https://worldcup.onlyodds.co.uk/match/argentina-v-algeria",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_3ee5b48b",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Austria v Jordan",
-    "url": "https://worldcup.onlyodds.co.uk/match/austria-v-jordan",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_a38c7efd",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Portugal v DR Congo",
-    "url": "https://worldcup.onlyodds.co.uk/match/portugal-v-dr-congo",
-    "status": "ok",
-    "records": 34,
-    "reason": ""
-  },
-  {
-    "id": "source_b9c328db",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: England v Croatia",
-    "url": "https://worldcup.onlyodds.co.uk/match/england-v-croatia",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_8fc58e8b",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Ghana v Panama",
-    "url": "https://worldcup.onlyodds.co.uk/match/ghana-v-panama",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_9f35da57",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Uzbekistan v Colombia",
-    "url": "https://worldcup.onlyodds.co.uk/match/uzbekistan-v-colombia",
-    "status": "ok",
-    "records": 42,
-    "reason": ""
-  },
-  {
-    "id": "source_7be1ed76",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Czechia v South Africa",
-    "url": "https://worldcup.onlyodds.co.uk/match/czechia-v-south-africa",
-    "status": "ok",
-    "records": 17,
-    "reason": ""
-  },
-  {
-    "id": "source_869f7bca",
-    "createdAt": "2026-06-14T16:16:34.567Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Switzerland v Bosnia and Herzegovina",
-    "url": "https://worldcup.onlyodds.co.uk/match/switzerland-v-bosnia-and-herzegovina",
-    "status": "error",
-    "records": 0,
-    "reason": "404 Not Found"
   }
 ]
