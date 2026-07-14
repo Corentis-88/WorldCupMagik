@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-07-13T04:49:22.843Z",
+  "createdAt": "2026-07-14T04:18:53.151Z",
   "gateVersion": "survivability-public-web-v1",
   "enabled": true,
   "status": "collecting",
@@ -19,8 +19,8 @@
     "marketCount": 14,
     "satisfiedMarketCount": 0,
     "satisfiedMarkets": [],
-    "totalRecords": 8,
-    "freshRecordCount": 8,
+    "totalRecords": 24,
+    "freshRecordCount": 24,
     "message": "Survivability markets are being gathered and audited before betting logic can use them."
   },
   "markets": {
@@ -327,21 +327,20 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 12 more fresh records",
-        "needs 4 more covered fixtures",
+        "needs 3 more covered fixtures",
         "needs 2 more bookmaker source(s)",
         "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 6,
-      "freshRecordCount": 6,
-      "fixtureCount": 1,
+      "recordCount": 20,
+      "freshRecordCount": 20,
+      "fixtureCount": 2,
       "totalFixtureCount": 2,
-      "fixtureCoverage": 0.5,
+      "fixtureCoverage": 1,
       "bookmakerCount": 0,
       "averageBookmakersPerFixture": 0,
-      "lineCount": 6,
-      "outcomeCount": 6,
-      "latestCapturedAt": "2026-07-13T04:49:22.843Z",
+      "lineCount": 10,
+      "outcomeCount": 10,
+      "latestCapturedAt": "2026-07-14T04:18:53.151Z",
       "sampleOutcomes": [
         {
           "fixtureId": "fixture_774ccc2a",
@@ -350,8 +349,8 @@
           "outcome": "Over 9.5",
           "line": "9.5",
           "team": "",
-          "decimalOdds": 1.98,
-          "capturedAt": "2026-07-13T04:49:22.843Z"
+          "decimalOdds": 1.81,
+          "capturedAt": "2026-07-14T04:18:53.151Z"
         },
         {
           "fixtureId": "fixture_774ccc2a",
@@ -360,8 +359,8 @@
           "outcome": "Under 9.5",
           "line": "9.5",
           "team": "",
-          "decimalOdds": 1.74,
-          "capturedAt": "2026-07-13T04:49:22.843Z"
+          "decimalOdds": 1.9,
+          "capturedAt": "2026-07-14T04:18:53.151Z"
         },
         {
           "fixtureId": "fixture_774ccc2a",
@@ -370,8 +369,8 @@
           "outcome": "Over 4.5",
           "line": "4.5",
           "team": "",
-          "decimalOdds": 1.89,
-          "capturedAt": "2026-07-13T04:49:22.843Z"
+          "decimalOdds": 1.75,
+          "capturedAt": "2026-07-14T04:18:53.151Z"
         },
         {
           "fixtureId": "fixture_774ccc2a",
@@ -380,8 +379,8 @@
           "outcome": "Under 4.5",
           "line": "4.5",
           "team": "",
-          "decimalOdds": 1.8,
-          "capturedAt": "2026-07-13T04:49:22.843Z"
+          "decimalOdds": 1.93,
+          "capturedAt": "2026-07-14T04:18:53.151Z"
         },
         {
           "fixtureId": "fixture_774ccc2a",
@@ -390,8 +389,8 @@
           "outcome": "Over 1",
           "line": "1",
           "team": "",
-          "decimalOdds": 1.98,
-          "capturedAt": "2026-07-13T04:49:22.843Z"
+          "decimalOdds": 1.93,
+          "capturedAt": "2026-07-14T04:18:53.151Z"
         },
         {
           "fixtureId": "fixture_774ccc2a",
@@ -401,7 +400,27 @@
           "line": "1",
           "team": "",
           "decimalOdds": 7,
-          "capturedAt": "2026-07-13T04:49:22.843Z"
+          "capturedAt": "2026-07-14T04:18:53.151Z"
+        },
+        {
+          "fixtureId": "fixture_67d89ff3",
+          "fixture": "England v Argentina",
+          "bookmaker": null,
+          "outcome": "Over 8.5",
+          "line": "8.5",
+          "team": "",
+          "decimalOdds": 1.92,
+          "capturedAt": "2026-07-14T04:18:53.151Z"
+        },
+        {
+          "fixtureId": "fixture_67d89ff3",
+          "fixture": "England v Argentina",
+          "bookmaker": null,
+          "outcome": "Under 8.5",
+          "line": "8.5",
+          "team": "",
+          "decimalOdds": 1.79,
+          "capturedAt": "2026-07-14T04:18:53.151Z"
         }
       ]
     },
@@ -422,13 +441,13 @@
         "maxRecordAgeHours": 72
       },
       "missing": [
-        "needs 16 more fresh records",
+        "needs 14 more fresh records",
         "needs 4 more covered fixtures",
         "needs 2 more bookmaker source(s)",
         "needs deeper bookmaker coverage per fixture"
       ],
-      "recordCount": 2,
-      "freshRecordCount": 2,
+      "recordCount": 4,
+      "freshRecordCount": 4,
       "fixtureCount": 1,
       "totalFixtureCount": 2,
       "fixtureCoverage": 0.5,
@@ -436,7 +455,7 @@
       "averageBookmakersPerFixture": 0,
       "lineCount": 2,
       "outcomeCount": 2,
-      "latestCapturedAt": "2026-07-13T04:49:22.843Z",
+      "latestCapturedAt": "2026-07-14T04:18:53.151Z",
       "sampleOutcomes": [
         {
           "fixtureId": "fixture_774ccc2a",
@@ -446,7 +465,7 @@
           "line": "9.1",
           "team": "Spain",
           "decimalOdds": 7.7,
-          "capturedAt": "2026-07-13T04:49:22.843Z"
+          "capturedAt": "2026-07-14T04:18:53.151Z"
         },
         {
           "fixtureId": "fixture_774ccc2a",
@@ -456,7 +475,7 @@
           "line": "9.1",
           "team": "Spain",
           "decimalOdds": 1.4,
-          "capturedAt": "2026-07-13T04:49:22.843Z"
+          "capturedAt": "2026-07-14T04:18:53.151Z"
         }
       ]
     },
