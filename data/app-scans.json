@@ -1,5 +1,300 @@
 [
   {
+    "id": "app_scan_2a96feae",
+    "createdAt": "2026-07-15T04:18:37.287Z",
+    "scheduled": true,
+    "settings": {
+      "stake": 10,
+      "risk": 58,
+      "daysAhead": 14
+    },
+    "riskProfile": {
+      "key": "calculated",
+      "label": "Calculated Risk",
+      "description": "Uses public odds, team form, news, and value signals without just following favourites."
+    },
+    "fixtureWindow": {
+      "daysAhead": 14,
+      "selectedFixtures": 1,
+      "usedFallbackNextFixtures": false
+    },
+    "collected": {
+      "fixtures": 50,
+      "oddsRecords": 42,
+      "survivabilityOddsRecords": 8,
+      "scorerOddsRecords": 28,
+      "heatRecords": 1,
+      "squadDepthRecords": 2,
+      "playerStats": 811,
+      "newsArticles": 36,
+      "teamStats": 2,
+      "matchHistoryRecords": 40,
+      "postMatchStatsCollected": 17,
+      "postMatchStatsRecords": 77,
+      "outcomeRecordsSettled": 75,
+      "predictionReflectionsSettled": 76,
+      "intelligenceObservations": 2,
+      "sourceDiagnostics": 24
+    },
+    "dataQuality": {
+      "readiness": "estimated-event-data",
+      "sourceOk": 16,
+      "sourceEmpty": 6,
+      "sourceErrors": 1,
+      "fixtureCount": 1,
+      "freshOddsRecords": 42,
+      "freshSurvivabilityOddsRecords": 8,
+      "freshScorerOddsRecords": 28,
+      "freshHeatRecords": 1,
+      "freshSquadDepthRecords": 2,
+      "oddsHistoryRecords": 48318,
+      "survivabilityOddsHistoryRecords": 403,
+      "scorerOddsHistoryRecords": 15846,
+      "heatHistoryRecords": 5182,
+      "squadDepthHistoryRecords": 51,
+      "playerStatsRecords": 811,
+      "playerShotCoverage": 0,
+      "playerAssistCoverage": 0.022,
+      "newsArticleCount": 36,
+      "teamStatsCount": 2,
+      "postMatchStatsRecords": 77,
+      "realPostMatchTeamCoverage": 1,
+      "usefulRealMetricTeamCoverage": 1,
+      "teamRealMetricCoverage": [
+        {
+          "team": "Argentina",
+          "realMatches": 5,
+          "matchCount": 20,
+          "coverage": 0.25
+        },
+        {
+          "team": "England",
+          "realMatches": 5,
+          "matchCount": 20,
+          "coverage": 0.25
+        }
+      ],
+      "selectedPostMatchFixtureCoverage": 0,
+      "averageEventMetricQuality": 0.433,
+      "estimatedMetricOnlyTeams": [],
+      "teamsWithRecentMatches": 2,
+      "requiredTeamCount": 2,
+      "teamsWithTwentyMatchSamples": 2,
+      "teamTwentyMatchCoverage": 1,
+      "minimumTeamMatchSample": 20,
+      "missingTwentyMatchTeams": [],
+      "fixtureOddsCoverage": 1,
+      "fixtureHeatCoverage": 1,
+      "squadDepthCoverage": 1,
+      "climateProfileCoverage": 1,
+      "heatMemoryCoverage": 1,
+      "missingClimateProfileTeams": [],
+      "missingHeatMemoryTeams": [],
+      "fixtureNewsCoverage": 1,
+      "sourceFailureRate": 0.292,
+      "marketReadiness": {
+        "coreResultsAndGoals": "estimated-event-data",
+        "scorers": "partial",
+        "assists": "collecting",
+        "playerShots": "collecting"
+      },
+      "message": "Fixture, odds, and 20-match team samples are present, but some xG/shot inputs are still score-derived estimates and are discounted in scoring."
+    },
+    "sourceHealth": {
+      "byKind": {
+        "fixtures": {
+          "ok": 2,
+          "empty": 0,
+          "error": 0,
+          "records": 50
+        },
+        "stats": {
+          "ok": 2,
+          "empty": 0,
+          "error": 0,
+          "records": 148
+        },
+        "player_stats": {
+          "ok": 1,
+          "empty": 5,
+          "error": 0,
+          "records": 2
+        },
+        "team_profile": {
+          "ok": 2,
+          "empty": 0,
+          "error": 0,
+          "records": 2
+        },
+        "post_match_stats_schedule": {
+          "ok": 1,
+          "empty": 0,
+          "error": 0,
+          "records": 22
+        },
+        "post_match_stats_boxscores": {
+          "ok": 1,
+          "empty": 0,
+          "error": 0,
+          "records": 17
+        },
+        "news": {
+          "ok": 2,
+          "empty": 1,
+          "error": 0,
+          "records": 36
+        },
+        "odds": {
+          "ok": 1,
+          "empty": 0,
+          "error": 1,
+          "records": 46
+        },
+        "odds-integrity": {
+          "ok": 0,
+          "empty": 0,
+          "error": 0,
+          "records": 42,
+          "warning": 1
+        },
+        "weather": {
+          "ok": 1,
+          "empty": 0,
+          "error": 0,
+          "records": 1
+        },
+        "squad_depth": {
+          "ok": 3,
+          "empty": 0,
+          "error": 0,
+          "records": 4
+        }
+      },
+      "failures": [
+        {
+          "id": "source_49fb82b5",
+          "createdAt": "2026-07-15T04:18:37.287Z",
+          "kind": "player_stats",
+          "source": "England PlayerStats assists",
+          "url": "https://playerstats.football/world-cup/england/goals-assists",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for England."
+        },
+        {
+          "id": "source_850e51d9",
+          "createdAt": "2026-07-15T04:18:37.287Z",
+          "kind": "player_stats",
+          "source": "England PlayerStats shots",
+          "url": "https://playerstats.football/world-cup/england/total-shots",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for England."
+        },
+        {
+          "id": "source_b184f8c2",
+          "createdAt": "2026-07-15T04:18:37.287Z",
+          "kind": "player_stats",
+          "source": "England PlayerStats shots on target",
+          "url": "https://playerstats.football/world-cup/england/shots-on-target",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for England."
+        },
+        {
+          "id": "source_513643b7",
+          "createdAt": "2026-07-15T04:18:37.287Z",
+          "kind": "player_stats",
+          "source": "Argentina PlayerStats shots",
+          "url": "https://playerstats.football/world-cup/argentina/total-shots",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for Argentina."
+        },
+        {
+          "id": "source_3d232e60",
+          "createdAt": "2026-07-15T04:18:37.287Z",
+          "kind": "player_stats",
+          "source": "Argentina PlayerStats shots on target",
+          "url": "https://playerstats.football/world-cup/argentina/shots-on-target",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for Argentina."
+        },
+        {
+          "id": "source_bb27c0cc",
+          "createdAt": "2026-07-15T04:18:37.287Z",
+          "kind": "news",
+          "source": "FIFA World Cup Articles",
+          "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
+        },
+        {
+          "id": "source_4ec764ad",
+          "createdAt": "2026-07-15T04:18:37.287Z",
+          "kind": "odds",
+          "source": "OnlyOdds match pages: England v Argentina",
+          "url": "https://worldcup.onlyodds.co.uk/match/england-v-argentina",
+          "status": "error",
+          "records": 0,
+          "reason": "404 Not Found"
+        }
+      ]
+    },
+    "intelligence": {
+      "teamCount": 2,
+      "observationCount": 2,
+      "outcomeLearningCount": 2845,
+      "predictionReflectionCount": 2929,
+      "lastOutcomeSettlement": {
+        "examinedLegCount": 3543,
+        "insertedCount": 75,
+        "skipped": {
+          "noRecommendations": 0,
+          "noMatch": 229,
+          "unknownMarket": 305,
+          "latePrediction": 0,
+          "alreadySettled": 2934
+        }
+      },
+      "lastPredictionReflection": {
+        "examinedPredictionCount": 10571,
+        "insertedCount": 76,
+        "updatedCount": 2888,
+        "upsertedCount": 2964
+      }
+    },
+    "eligibleLegCount": 1,
+    "betslip": [
+      {
+        "id": "single_leg_6254aec5",
+        "category": "single",
+        "type": "single",
+        "legCount": 1,
+        "combinedDecimalOdds": 4,
+        "combinedProbability": 0.2644,
+        "survivalCombinedProbability": 0.349,
+        "score": 69.73,
+        "legs": [
+          {
+            "id": "leg_6254aec5",
+            "fixtureId": "fixture_67d89ff3",
+            "fixtureDate": "2026-07-15T19:00:00.000Z",
+            "market": "anytime_scorer",
+            "playerName": "Lautaro Martínez",
+            "bookmaker": null,
+            "decimalOdds": 4,
+            "modelProbability": 0.2644,
+            "confidence": 0.817,
+            "riskTag": "longshot_value"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "app_scan_7ece5217",
     "createdAt": "2026-07-14T04:18:53.151Z",
     "scheduled": true,
