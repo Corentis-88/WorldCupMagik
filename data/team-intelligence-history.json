@@ -1,5 +1,69 @@
 [
   {
+    "id": "intel_run_da4a2bbb",
+    "createdAt": "2026-07-16T04:27:54.322Z",
+    "teamCount": 4,
+    "observationCount": 4,
+    "marketMovementCount": 2281,
+    "averageDataConfidence": 0.5968,
+    "averageAbsoluteLearnedEdge": 0.039,
+    "highConfidenceTeamCount": 0,
+    "lowCoverageTeamCount": 0,
+    "estimatedEventOnlyTeamCount": 0,
+    "topPositiveEdges": [
+      {
+        "team": "England",
+        "learnedEdge": 0.0725,
+        "dataConfidence": 0.6131,
+        "matchWindowAvailable": 20,
+        "eventMetricQuality": 0.467,
+        "reasons": [
+          "20-match form 2.15 PPG, xG 1.8-1.01",
+          "recent form cooling",
+          "412 news item(s), news impact 0.0775"
+        ]
+      },
+      {
+        "team": "Spain",
+        "learnedEdge": 0.039,
+        "dataConfidence": 0.5801,
+        "matchWindowAvailable": 20,
+        "eventMetricQuality": 0.4635,
+        "reasons": [
+          "20-match form 2.7 PPG, xG 2.059-0.76",
+          "recent form improving",
+          "88 news item(s), news impact 0.053"
+        ]
+      }
+    ],
+    "topNegativeEdges": [
+      {
+        "team": "Argentina",
+        "learnedEdge": -0.0295,
+        "dataConfidence": 0.6133,
+        "matchWindowAvailable": 20,
+        "eventMetricQuality": 0.467,
+        "reasons": [
+          "20-match form 2.9 PPG, xG 2.572-0.617",
+          "recent form cooling",
+          "129 news item(s), news impact 0.0575"
+        ]
+      },
+      {
+        "team": "France",
+        "learnedEdge": -0.015,
+        "dataConfidence": 0.5807,
+        "matchWindowAvailable": 20,
+        "eventMetricQuality": 0.467,
+        "reasons": [
+          "20-match form 2.1 PPG, xG 2.153-1.18",
+          "recent form cooling",
+          "108 news item(s), news impact 0.0807"
+        ]
+      }
+    ]
+  },
+  {
     "id": "intel_run_248ffdf7",
     "createdAt": "2026-07-15T04:18:37.287Z",
     "teamCount": 2,

@@ -1,5 +1,386 @@
 [
   {
+    "id": "app_scan_6a1b68f0",
+    "createdAt": "2026-07-16T04:27:54.322Z",
+    "scheduled": true,
+    "settings": {
+      "stake": 10,
+      "risk": 58,
+      "daysAhead": 14
+    },
+    "riskProfile": {
+      "key": "calculated",
+      "label": "Calculated Risk",
+      "description": "Uses public odds, team form, news, and value signals without just following favourites."
+    },
+    "fixtureWindow": {
+      "daysAhead": 14,
+      "selectedFixtures": 2,
+      "usedFallbackNextFixtures": false
+    },
+    "collected": {
+      "fixtures": 51,
+      "oddsRecords": 0,
+      "survivabilityOddsRecords": 0,
+      "scorerOddsRecords": 0,
+      "heatRecords": 2,
+      "squadDepthRecords": 4,
+      "playerStats": 807,
+      "newsArticles": 36,
+      "teamStats": 4,
+      "matchHistoryRecords": 78,
+      "postMatchStatsCollected": 16,
+      "postMatchStatsRecords": 78,
+      "outcomeRecordsSettled": 56,
+      "predictionReflectionsSettled": 57,
+      "intelligenceObservations": 4,
+      "sourceDiagnostics": 39
+    },
+    "dataQuality": {
+      "readiness": "collecting",
+      "sourceOk": 22,
+      "sourceEmpty": 15,
+      "sourceErrors": 2,
+      "fixtureCount": 2,
+      "freshOddsRecords": 0,
+      "freshSurvivabilityOddsRecords": 0,
+      "freshScorerOddsRecords": 0,
+      "freshHeatRecords": 2,
+      "freshSquadDepthRecords": 4,
+      "oddsHistoryRecords": 48318,
+      "survivabilityOddsHistoryRecords": 403,
+      "scorerOddsHistoryRecords": 15846,
+      "heatHistoryRecords": 5184,
+      "squadDepthHistoryRecords": 51,
+      "playerStatsRecords": 807,
+      "playerShotCoverage": 0,
+      "playerAssistCoverage": 0.017,
+      "newsArticleCount": 36,
+      "teamStatsCount": 4,
+      "postMatchStatsRecords": 78,
+      "realPostMatchTeamCoverage": 1,
+      "usefulRealMetricTeamCoverage": 1,
+      "teamRealMetricCoverage": [
+        {
+          "team": "Argentina",
+          "realMatches": 6,
+          "matchCount": 20,
+          "coverage": 0.3
+        },
+        {
+          "team": "England",
+          "realMatches": 6,
+          "matchCount": 20,
+          "coverage": 0.3
+        },
+        {
+          "team": "France",
+          "realMatches": 6,
+          "matchCount": 20,
+          "coverage": 0.3
+        },
+        {
+          "team": "Spain",
+          "realMatches": 6,
+          "matchCount": 20,
+          "coverage": 0.3
+        }
+      ],
+      "selectedPostMatchFixtureCoverage": 0,
+      "averageEventMetricQuality": 0.466,
+      "estimatedMetricOnlyTeams": [],
+      "teamsWithRecentMatches": 4,
+      "requiredTeamCount": 4,
+      "teamsWithTwentyMatchSamples": 4,
+      "teamTwentyMatchCoverage": 1,
+      "minimumTeamMatchSample": 20,
+      "missingTwentyMatchTeams": [],
+      "fixtureOddsCoverage": 0,
+      "fixtureHeatCoverage": 1,
+      "squadDepthCoverage": 1,
+      "climateProfileCoverage": 1,
+      "heatMemoryCoverage": 1,
+      "missingClimateProfileTeams": [],
+      "missingHeatMemoryTeams": [],
+      "fixtureNewsCoverage": 1,
+      "sourceFailureRate": 0.436,
+      "marketReadiness": {
+        "coreResultsAndGoals": "partial",
+        "scorers": "collecting",
+        "assists": "collecting",
+        "playerShots": "collecting"
+      },
+      "message": "The database is still collecting real public-web data, including full 20-match team samples. Missing sources are visible in source health."
+    },
+    "sourceHealth": {
+      "byKind": {
+        "fixtures": {
+          "ok": 2,
+          "empty": 0,
+          "error": 0,
+          "records": 51
+        },
+        "stats": {
+          "ok": 4,
+          "empty": 0,
+          "error": 0,
+          "records": 280
+        },
+        "player_stats": {
+          "ok": 0,
+          "empty": 12,
+          "error": 0,
+          "records": 0
+        },
+        "team_profile": {
+          "ok": 4,
+          "empty": 0,
+          "error": 0,
+          "records": 4
+        },
+        "post_match_stats_schedule": {
+          "ok": 1,
+          "empty": 0,
+          "error": 0,
+          "records": 22
+        },
+        "post_match_stats_boxscores": {
+          "ok": 1,
+          "empty": 0,
+          "error": 0,
+          "records": 16
+        },
+        "news": {
+          "ok": 2,
+          "empty": 1,
+          "error": 0,
+          "records": 36
+        },
+        "odds": {
+          "ok": 0,
+          "empty": 2,
+          "error": 2,
+          "records": 0
+        },
+        "odds-integrity": {
+          "ok": 1,
+          "empty": 0,
+          "error": 0,
+          "records": 0
+        },
+        "weather": {
+          "ok": 2,
+          "empty": 0,
+          "error": 0,
+          "records": 2
+        },
+        "squad_depth": {
+          "ok": 5,
+          "empty": 0,
+          "error": 0,
+          "records": 8
+        }
+      },
+      "failures": [
+        {
+          "id": "source_88eb3e03",
+          "createdAt": "2026-07-16T04:27:54.322Z",
+          "kind": "player_stats",
+          "source": "France PlayerStats assists",
+          "url": "https://playerstats.football/world-cup/france/goals-assists",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for France."
+        },
+        {
+          "id": "source_b0b67ce1",
+          "createdAt": "2026-07-16T04:27:54.322Z",
+          "kind": "player_stats",
+          "source": "France PlayerStats shots",
+          "url": "https://playerstats.football/world-cup/france/total-shots",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for France."
+        },
+        {
+          "id": "source_d037d574",
+          "createdAt": "2026-07-16T04:27:54.322Z",
+          "kind": "player_stats",
+          "source": "France PlayerStats shots on target",
+          "url": "https://playerstats.football/world-cup/france/shots-on-target",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for France."
+        },
+        {
+          "id": "source_688a38f7",
+          "createdAt": "2026-07-16T04:27:54.322Z",
+          "kind": "player_stats",
+          "source": "England PlayerStats assists",
+          "url": "https://playerstats.football/world-cup/england/goals-assists",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for England."
+        },
+        {
+          "id": "source_a39d081b",
+          "createdAt": "2026-07-16T04:27:54.322Z",
+          "kind": "player_stats",
+          "source": "England PlayerStats shots",
+          "url": "https://playerstats.football/world-cup/england/total-shots",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for England."
+        },
+        {
+          "id": "source_d013af04",
+          "createdAt": "2026-07-16T04:27:54.322Z",
+          "kind": "player_stats",
+          "source": "England PlayerStats shots on target",
+          "url": "https://playerstats.football/world-cup/england/shots-on-target",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for England."
+        },
+        {
+          "id": "source_d8f416b7",
+          "createdAt": "2026-07-16T04:27:54.322Z",
+          "kind": "player_stats",
+          "source": "Spain PlayerStats assists",
+          "url": "https://playerstats.football/world-cup/spain/goals-assists",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for Spain."
+        },
+        {
+          "id": "source_6367af1b",
+          "createdAt": "2026-07-16T04:27:54.322Z",
+          "kind": "player_stats",
+          "source": "Spain PlayerStats shots",
+          "url": "https://playerstats.football/world-cup/spain/total-shots",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for Spain."
+        },
+        {
+          "id": "source_4a85bfc4",
+          "createdAt": "2026-07-16T04:27:54.322Z",
+          "kind": "player_stats",
+          "source": "Spain PlayerStats shots on target",
+          "url": "https://playerstats.football/world-cup/spain/shots-on-target",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for Spain."
+        },
+        {
+          "id": "source_41e6f395",
+          "createdAt": "2026-07-16T04:27:54.322Z",
+          "kind": "player_stats",
+          "source": "Argentina PlayerStats assists",
+          "url": "https://playerstats.football/world-cup/argentina/goals-assists",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for Argentina."
+        },
+        {
+          "id": "source_6fc4f9f9",
+          "createdAt": "2026-07-16T04:27:54.322Z",
+          "kind": "player_stats",
+          "source": "Argentina PlayerStats shots",
+          "url": "https://playerstats.football/world-cup/argentina/total-shots",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for Argentina."
+        },
+        {
+          "id": "source_5bb1e4a2",
+          "createdAt": "2026-07-16T04:27:54.322Z",
+          "kind": "player_stats",
+          "source": "Argentina PlayerStats shots on target",
+          "url": "https://playerstats.football/world-cup/argentina/shots-on-target",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public player-stat page but found no usable player rows for Argentina."
+        },
+        {
+          "id": "source_d9b6770e",
+          "createdAt": "2026-07-16T04:27:54.322Z",
+          "kind": "news",
+          "source": "FIFA World Cup Articles",
+          "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
+        },
+        {
+          "id": "source_dcfbbf6b",
+          "createdAt": "2026-07-16T04:27:54.322Z",
+          "kind": "odds",
+          "source": "OnlyOdds match pages: France v England",
+          "url": "https://worldcup.onlyodds.co.uk/match/france-v-england",
+          "status": "error",
+          "records": 0,
+          "reason": "404 Not Found"
+        },
+        {
+          "id": "source_b97adaef",
+          "createdAt": "2026-07-16T04:27:54.322Z",
+          "kind": "odds",
+          "source": "OnlyOdds match pages: Spain v Argentina",
+          "url": "https://worldcup.onlyodds.co.uk/match/spain-v-argentina",
+          "status": "error",
+          "records": 0,
+          "reason": "404 Not Found"
+        },
+        {
+          "id": "source_b06d4b3",
+          "createdAt": "2026-07-16T04:27:54.322Z",
+          "kind": "odds",
+          "source": "SportsGambler public prop pages: France v England",
+          "url": "https://www.sportsgambler.com/betting-tips/football/france-vs-england-prediction-lineups-odds-2026-07-18/",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public match page but found no supported odds offers."
+        },
+        {
+          "id": "source_6247622c",
+          "createdAt": "2026-07-16T04:27:54.322Z",
+          "kind": "odds",
+          "source": "SportsGambler public prop pages: Spain v Argentina",
+          "url": "https://www.sportsgambler.com/betting-tips/football/spain-vs-argentina-prediction-lineups-odds-2026-07-19/",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public match page but found no supported odds offers."
+        }
+      ]
+    },
+    "intelligence": {
+      "teamCount": 4,
+      "observationCount": 4,
+      "outcomeLearningCount": 2900,
+      "predictionReflectionCount": 2985,
+      "lastOutcomeSettlement": {
+        "examinedLegCount": 3546,
+        "insertedCount": 56,
+        "skipped": {
+          "noRecommendations": 0,
+          "noMatch": 176,
+          "unknownMarket": 305,
+          "latePrediction": 0,
+          "alreadySettled": 3009
+        }
+      },
+      "lastPredictionReflection": {
+        "examinedPredictionCount": 10585,
+        "insertedCount": 57,
+        "updatedCount": 2963,
+        "upsertedCount": 3020
+      }
+    },
+    "eligibleLegCount": 0,
+    "betslip": []
+  },
+  {
     "id": "app_scan_2a96feae",
     "createdAt": "2026-07-15T04:18:37.287Z",
     "scheduled": true,
