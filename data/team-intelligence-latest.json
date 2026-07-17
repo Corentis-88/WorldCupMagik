@@ -1,9 +1,9 @@
 [
   {
     "team": "France",
-    "updatedAt": "2026-07-16T04:27:54.322Z",
-    "learnedEdge": -0.015,
-    "dataConfidence": 0.5807,
+    "updatedAt": "2026-07-17T04:27:23.309Z",
+    "learnedEdge": -0.0386,
+    "dataConfidence": 0.6307,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 2.1,
@@ -16,8 +16,8 @@
       "shotsOnTargetFor": 6.04,
       "shotsOnTargetAgainst": 3.33,
       "possession": 54.4,
-      "passesAttempted": 643.1,
-      "completedPasses": 500.9,
+      "passesAttempted": 651.6,
+      "completedPasses": 505.9,
       "passCompletion": 0.814,
       "topScorers": [
         {
@@ -86,8 +86,8 @@
         "shotsOnTargetFor": 6.63,
         "shotsOnTargetAgainst": 2.68,
         "possession": 56.4,
-        "passesAttempted": 612.5,
-        "completedPasses": 480.2,
+        "passesAttempted": 640.7,
+        "completedPasses": 496.8,
         "passCompletion": 0.88,
         "cleanSheetRate": 0.5,
         "failedToScoreRate": 0.333,
@@ -108,8 +108,8 @@
         "shotsOnTargetFor": 6.04,
         "shotsOnTargetAgainst": 3.33,
         "possession": 54.4,
-        "passesAttempted": 643.1,
-        "completedPasses": 500.9,
+        "passesAttempted": 651.6,
+        "completedPasses": 505.9,
         "passCompletion": 0.814,
         "cleanSheetRate": 0.45,
         "failedToScoreRate": 0.15,
@@ -136,8 +136,8 @@
           "shotsFor": 14,
           "shotsOnTargetFor": 4,
           "possession": 49,
-          "passesAttempted": 420,
-          "completedPasses": 342,
+          "passesAttempted": 589,
+          "completedPasses": 442,
           "passCompletion": 0.88,
           "metricSource": "fox-sports-boxscore",
           "capturedMetricFields": [
@@ -875,7 +875,7 @@
     },
     "news": {
       "articleCount": 108,
-      "contextArticleCount": 49,
+      "contextArticleCount": 52,
       "rejectedArticleCount": 0,
       "relevance": 0.9637,
       "sourceDiversity": 2,
@@ -894,11 +894,12 @@
       ]
     },
     "market": {
-      "pressure": 0,
-      "confidence": 0.28,
-      "consensusOdds": null,
+      "pressure": -0.061,
+      "confidence": 0.48,
+      "consensusOdds": 9.2,
+      "consensusImpliedProbability": 0.1087,
       "movement": 0,
-      "bookmakerCount": 0
+      "bookmakerCount": 1
     },
     "scorer": {
       "trackedPlayers": 17,
@@ -998,8 +999,8 @@
       }
     ],
     "passing": {
-      "attempted": 643.6,
-      "completed": 499.7,
+      "attempted": 645.6,
+      "completed": 500.9,
       "completion": 0.784,
       "source": "score-and-possession-derived estimate"
     },
@@ -1020,14 +1021,15 @@
       "20-match form 2.1 PPG, xG 2.153-1.18",
       "recent form cooling",
       "108 news item(s), news impact 0.0807",
+      "market intelligence 0% movement, consensus 9.2 across 1 bookie(s)",
       "17 scorer record(s), top scorer signal 0.099"
     ]
   },
   {
     "team": "England",
-    "updatedAt": "2026-07-16T04:27:54.322Z",
-    "learnedEdge": 0.0725,
-    "dataConfidence": 0.6131,
+    "updatedAt": "2026-07-17T04:27:23.309Z",
+    "learnedEdge": 0.0318,
+    "dataConfidence": 0.6361,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 2.15,
@@ -1863,18 +1865,18 @@
       ]
     },
     "news": {
-      "articleCount": 412,
-      "contextArticleCount": 94,
+      "articleCount": 425,
+      "contextArticleCount": 98,
       "rejectedArticleCount": 0,
-      "relevance": 0.9715,
+      "relevance": 0.9723,
       "sourceDiversity": 2,
-      "sentiment": -0.0077,
-      "injury": 0.0523,
-      "tacticalFit": 0.4865,
-      "lineupClarity": 0.4754,
+      "sentiment": -0.0102,
+      "injury": 0.0541,
+      "tacticalFit": 0.4862,
+      "lineupClarity": 0.4753,
       "rotationRisk": 0.2253,
-      "impact": 0.0775,
-      "confidence": 0.8027,
+      "impact": 0.0757,
+      "confidence": 0.803,
       "topSignals": [
         "availability risk",
         "lineup/tactical clue",
@@ -1883,11 +1885,12 @@
       ]
     },
     "market": {
-      "pressure": 0,
-      "confidence": 0.28,
-      "consensusOdds": null,
+      "pressure": -0.0637,
+      "confidence": 0.48,
+      "consensusOdds": 10.3,
+      "consensusImpliedProbability": 0.0971,
       "movement": 0,
-      "bookmakerCount": 0
+      "bookmakerCount": 1
     },
     "scorer": {
       "trackedPlayers": 16,
@@ -2008,15 +2011,16 @@
     "reasons": [
       "20-match form 2.15 PPG, xG 1.8-1.01",
       "recent form cooling",
-      "412 news item(s), news impact 0.0775",
+      "425 news item(s), news impact 0.0757",
+      "market intelligence 0% movement, consensus 10.3 across 1 bookie(s)",
       "16 scorer record(s), top scorer signal 0.1035"
     ]
   },
   {
     "team": "Spain",
-    "updatedAt": "2026-07-16T04:27:54.322Z",
-    "learnedEdge": 0.039,
-    "dataConfidence": 0.5801,
+    "updatedAt": "2026-07-17T04:27:23.309Z",
+    "learnedEdge": 0.0627,
+    "dataConfidence": 0.6051,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 2.7,
@@ -2029,8 +2033,8 @@
       "shotsOnTargetFor": 5.55,
       "shotsOnTargetAgainst": 2.63,
       "possession": 55.9,
-      "passesAttempted": 625.4,
-      "completedPasses": 488.6,
+      "passesAttempted": 636.9,
+      "completedPasses": 497.2,
       "passCompletion": 0.81,
       "topScorers": [
         {
@@ -2099,8 +2103,8 @@
         "shotsOnTargetFor": 6.03,
         "shotsOnTargetAgainst": 2.77,
         "possession": 57.5,
-        "passesAttempted": 572,
-        "completedPasses": 451.2,
+        "passesAttempted": 610.5,
+        "completedPasses": 479.8,
         "passCompletion": 0.862,
         "cleanSheetRate": 0.5,
         "failedToScoreRate": 0,
@@ -2121,8 +2125,8 @@
         "shotsOnTargetFor": 5.55,
         "shotsOnTargetAgainst": 2.63,
         "possession": 55.9,
-        "passesAttempted": 625.4,
-        "completedPasses": 488.6,
+        "passesAttempted": 636.9,
+        "completedPasses": 497.2,
         "passCompletion": 0.81,
         "cleanSheetRate": 0.7,
         "failedToScoreRate": 0.1,
@@ -2149,8 +2153,8 @@
           "shotsFor": 10,
           "shotsOnTargetFor": 2,
           "possession": 51,
-          "passesAttempted": 420,
-          "completedPasses": 342,
+          "passesAttempted": 651,
+          "completedPasses": 514,
           "passCompletion": 0.87,
           "metricSource": "fox-sports-boxscore",
           "capturedMetricFields": [
@@ -2884,18 +2888,18 @@
       ]
     },
     "news": {
-      "articleCount": 88,
-      "contextArticleCount": 69,
+      "articleCount": 90,
+      "contextArticleCount": 73,
       "rejectedArticleCount": 0,
-      "relevance": 0.9777,
+      "relevance": 0.9782,
       "sourceDiversity": 2,
-      "sentiment": -0.0435,
-      "injury": 0.0762,
-      "tacticalFit": 0.4931,
-      "lineupClarity": 0.4728,
-      "rotationRisk": 0.2214,
-      "impact": 0.053,
-      "confidence": 0.8047,
+      "sentiment": -0.0425,
+      "injury": 0.0745,
+      "tacticalFit": 0.4921,
+      "lineupClarity": 0.4723,
+      "rotationRisk": 0.2205,
+      "impact": 0.054,
+      "confidence": 0.8048,
       "topSignals": [
         "availability risk",
         "lineup/tactical clue",
@@ -3009,8 +3013,8 @@
       }
     ],
     "passing": {
-      "attempted": 644.5,
-      "completed": 504.1,
+      "attempted": 647.2,
+      "completed": 506.2,
       "completion": 0.788,
       "source": "score-and-possession-derived estimate"
     },
@@ -3030,15 +3034,15 @@
     "reasons": [
       "20-match form 2.7 PPG, xG 2.059-0.76",
       "recent form improving",
-      "88 news item(s), news impact 0.053",
+      "90 news item(s), news impact 0.054",
       "29 scorer record(s), top scorer signal 0.0675"
     ]
   },
   {
     "team": "Argentina",
-    "updatedAt": "2026-07-16T04:27:54.322Z",
-    "learnedEdge": -0.0295,
-    "dataConfidence": 0.6133,
+    "updatedAt": "2026-07-17T04:27:23.309Z",
+    "learnedEdge": -0.0287,
+    "dataConfidence": 0.6114,
     "form": {
       "matchCount": 20,
       "pointsPerGame": 2.9,
@@ -3051,8 +3055,8 @@
       "shotsOnTargetFor": 6.4,
       "shotsOnTargetAgainst": 2.45,
       "possession": 57.9,
-      "passesAttempted": 641.5,
-      "completedPasses": 500.7,
+      "passesAttempted": 653.9,
+      "completedPasses": 509.6,
       "passCompletion": 0.823,
       "topScorers": [
         {
@@ -3121,8 +3125,8 @@
         "shotsOnTargetFor": 5.33,
         "shotsOnTargetAgainst": 2.33,
         "possession": 61.5,
-        "passesAttempted": 605.5,
-        "completedPasses": 468.7,
+        "passesAttempted": 646.7,
+        "completedPasses": 498.5,
         "passCompletion": 0.917,
         "cleanSheetRate": 0.167,
         "failedToScoreRate": 0,
@@ -3143,8 +3147,8 @@
         "shotsOnTargetFor": 6.4,
         "shotsOnTargetAgainst": 2.45,
         "possession": 57.9,
-        "passesAttempted": 641.5,
-        "completedPasses": 500.7,
+        "passesAttempted": 653.9,
+        "completedPasses": 509.6,
         "passCompletion": 0.823,
         "cleanSheetRate": 0.7,
         "failedToScoreRate": 0,
@@ -3224,8 +3228,8 @@
           "shotsFor": 23,
           "shotsOnTargetFor": 7,
           "possession": 59,
-          "passesAttempted": 420,
-          "completedPasses": 342,
+          "passesAttempted": 667,
+          "completedPasses": 521,
           "passCompletion": 0.88,
           "metricSource": "fox-sports-boxscore",
           "capturedMetricFields": [
@@ -4000,18 +4004,18 @@
       ]
     },
     "news": {
-      "articleCount": 129,
-      "contextArticleCount": 101,
+      "articleCount": 141,
+      "contextArticleCount": 108,
       "rejectedArticleCount": 0,
-      "relevance": 0.9761,
+      "relevance": 0.9782,
       "sourceDiversity": 2,
-      "sentiment": -0.0434,
-      "injury": 0.061,
-      "tacticalFit": 0.4887,
+      "sentiment": -0.046,
+      "injury": 0.0635,
+      "tacticalFit": 0.4873,
       "lineupClarity": 0.4629,
-      "rotationRisk": 0.2103,
-      "impact": 0.0575,
-      "confidence": 0.8042,
+      "rotationRisk": 0.2113,
+      "impact": 0.0551,
+      "confidence": 0.8048,
       "topSignals": [
         "availability risk",
         "lineup/tactical clue",
@@ -4027,7 +4031,7 @@
       "bookmakerCount": 0
     },
     "scorer": {
-      "trackedPlayers": 18,
+      "trackedPlayers": 17,
       "topScorers": [
         {
           "playerName": "Messi",
@@ -4036,7 +4040,7 @@
         },
         {
           "playerName": "La. Martínez",
-          "goals": 5,
+          "goals": 6,
           "matchesSampled": 20
         },
         {
@@ -4055,7 +4059,7 @@
           "matchesSampled": 20
         }
       ],
-      "threat": 0.1125,
+      "threat": 0.117,
       "confidence": 0.78
     },
     "manager": "Lionel Scaloni",
@@ -4125,8 +4129,8 @@
       }
     ],
     "passing": {
-      "attempted": 655.1,
-      "completed": 510.2,
+      "attempted": 658.1,
+      "completed": 512.3,
       "completion": 0.787,
       "source": "score-and-possession-derived estimate"
     },
@@ -4146,8 +4150,8 @@
     "reasons": [
       "20-match form 2.9 PPG, xG 2.572-0.617",
       "recent form cooling",
-      "129 news item(s), news impact 0.0575",
-      "18 scorer record(s), top scorer signal 0.1125"
+      "141 news item(s), news impact 0.0551",
+      "17 scorer record(s), top scorer signal 0.117"
     ]
   }
 ]
