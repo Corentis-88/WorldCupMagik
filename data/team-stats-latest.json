@@ -1,27 +1,27 @@
 {
-  "createdAt": "2026-07-18T04:16:48.261Z",
+  "createdAt": "2026-07-19T04:38:20.205Z",
   "providerMode": "self-gather",
   "teams": [
     {
       "team": "Argentina",
-      "updatedAt": "2026-07-18T04:16:48.261Z",
+      "updatedAt": "2026-07-19T04:38:20.205Z",
       "provider": "public-web",
       "recentPointsPerGame": 2.895,
-      "xgFor": 2.416,
-      "xgAgainst": 1.267,
-      "shotsFor": 16.04,
-      "shotsAgainst": 11.09,
-      "shotsOnTargetFor": 5.96,
-      "shotsOnTargetAgainst": 3.77,
-      "possession": 53.7,
-      "passesAttempted": 659.4,
-      "completedPasses": 513.2,
-      "passCompletion": 0.778,
-      "highPressIndex": 61.6,
-      "setPieceThreat": 64.8,
-      "transitionThreat": 70.7,
-      "keeperForm": 49.3,
-      "rating": 1804.8,
+      "xgFor": 2.4,
+      "xgAgainst": 1.186,
+      "shotsFor": 15.97,
+      "shotsAgainst": 10.74,
+      "shotsOnTargetFor": 5.92,
+      "shotsOnTargetAgainst": 3.61,
+      "possession": 54,
+      "passesAttempted": 659.1,
+      "completedPasses": 513.5,
+      "passCompletion": 0.779,
+      "highPressIndex": 62.2,
+      "setPieceThreat": 64.6,
+      "transitionThreat": 71.8,
+      "keeperForm": 49.9,
+      "rating": 1808.6,
       "statsCompleteness": 0.72,
       "sourceMatchCount": 20,
       "sourceMatchTarget": 20,
@@ -72,69 +72,69 @@
         "source": "derived from 20-match public result sample and score-derived event estimates"
       },
       "passing": {
-        "attempted": 659.4,
-        "completed": 513.2,
-        "completion": 0.778,
+        "attempted": 659.1,
+        "completed": 513.5,
+        "completion": 0.779,
         "source": "score-and-possession-derived estimate"
       },
       "recentForm": {
         "matchCount": 6,
         "pointsPerGame": 3,
         "goalsFor": 2.667,
-        "goalsAgainst": 1.333,
-        "goalDifference": 1.333,
+        "goalsAgainst": 1.167,
+        "goalDifference": 1.5,
         "xgFor": 2.47,
-        "xgAgainst": 1.51,
-        "xgDifference": 0.96,
+        "xgAgainst": 1.39,
+        "xgDifference": 1.08,
         "shotsFor": 16.27,
-        "shotsAgainst": 12.13,
+        "shotsAgainst": 11.62,
         "shotsOnTargetFor": 6.03,
-        "shotsOnTargetAgainst": 4.23,
-        "possession": 53.3,
-        "passesAttempted": 662.3,
-        "completedPasses": 515,
-        "passCompletion": 0.777,
-        "cleanSheetRate": 0,
+        "shotsOnTargetAgainst": 4,
+        "possession": 53.8,
+        "passesAttempted": 662.2,
+        "completedPasses": 515.8,
+        "passCompletion": 0.779,
+        "cleanSheetRate": 0.167,
         "failedToScoreRate": 0,
-        "bttsRate": 1,
-        "over25Rate": 1,
+        "bttsRate": 0.833,
+        "over25Rate": 0.833,
         "scoringGameRate": 1,
-        "concedeGameRate": 1,
+        "concedeGameRate": 0.833,
         "window": 6
       },
       "longForm": {
         "matchCount": 20,
         "pointsPerGame": 2.75,
-        "goalsFor": 2.55,
-        "goalsAgainst": 0.6,
+        "goalsFor": 2.5,
+        "goalsAgainst": 0.55,
         "goalDifference": 1.95,
-        "xgFor": 2.353,
-        "xgAgainst": 0.982,
-        "xgDifference": 1.37,
-        "shotsFor": 15.78,
-        "shotsAgainst": 9.86,
-        "shotsOnTargetFor": 5.87,
-        "shotsOnTargetAgainst": 3.23,
+        "xgFor": 2.317,
+        "xgAgainst": 0.946,
+        "xgDifference": 1.371,
+        "shotsFor": 15.62,
+        "shotsAgainst": 9.7,
+        "shotsOnTargetFor": 5.8,
+        "shotsOnTargetAgainst": 3.16,
         "possession": 54.3,
-        "passesAttempted": 654.3,
-        "completedPasses": 510.1,
+        "passesAttempted": 653.5,
+        "completedPasses": 509.5,
         "passCompletion": 0.779,
-        "cleanSheetRate": 0.5,
+        "cleanSheetRate": 0.55,
         "failedToScoreRate": 0.05,
-        "bttsRate": 0.45,
-        "over25Rate": 0.65,
+        "bttsRate": 0.4,
+        "over25Rate": 0.6,
         "scoringGameRate": 0.95,
-        "concedeGameRate": 0.5,
+        "concedeGameRate": 0.45,
         "window": 20
       },
-      "formTrend": -0.1339,
+      "formTrend": -0.1087,
       "marketAngles": {
-        "cleanSheetRate": 0.5,
+        "cleanSheetRate": 0.55,
         "failedToScoreRate": 0.05,
-        "bttsRate": 0.45,
-        "over25Rate": 0.65,
+        "bttsRate": 0.4,
+        "over25Rate": 0.6,
         "scoringGameRate": 0.95,
-        "concedeGameRate": 0.5
+        "concedeGameRate": 0.45
       },
       "scorerSummary": [
         {
@@ -159,10 +159,17 @@
           "assistsPerTwentyTeamMatches": 0
         },
         {
-          "playerName": "Fernández",
-          "goals": 4,
+          "playerName": "Almada",
+          "goals": 3,
           "assists": 0,
-          "goalsPerTwentyTeamMatches": 4,
+          "goalsPerTwentyTeamMatches": 3,
+          "assistsPerTwentyTeamMatches": 0
+        },
+        {
+          "playerName": "Fernández",
+          "goals": 3,
+          "assists": 0,
+          "goalsPerTwentyTeamMatches": 3,
           "assistsPerTwentyTeamMatches": 0
         },
         {
@@ -170,13 +177,6 @@
           "goals": 3,
           "assists": 0,
           "goalsPerTwentyTeamMatches": 3,
-          "assistsPerTwentyTeamMatches": 0
-        },
-        {
-          "playerName": "Almada",
-          "goals": 2,
-          "assists": 0,
-          "goalsPerTwentyTeamMatches": 2,
           "assistsPerTwentyTeamMatches": 0
         },
         {
@@ -217,10 +217,17 @@
           "assistsPerTwentyTeamMatches": 0
         },
         {
-          "playerName": "Fernández",
-          "goals": 4,
+          "playerName": "Almada",
+          "goals": 3,
           "assists": 0,
-          "goalsPerTwentyTeamMatches": 4,
+          "goalsPerTwentyTeamMatches": 3,
+          "assistsPerTwentyTeamMatches": 0
+        },
+        {
+          "playerName": "Fernández",
+          "goals": 3,
+          "assists": 0,
+          "goalsPerTwentyTeamMatches": 3,
           "assistsPerTwentyTeamMatches": 0
         },
         {
@@ -228,13 +235,6 @@
           "goals": 3,
           "assists": 0,
           "goalsPerTwentyTeamMatches": 3,
-          "assistsPerTwentyTeamMatches": 0
-        },
-        {
-          "playerName": "Almada",
-          "goals": 2,
-          "assists": 0,
-          "goalsPerTwentyTeamMatches": 2,
           "assistsPerTwentyTeamMatches": 0
         },
         {
@@ -262,35 +262,6 @@
         "equalSchemaForAllTeams": true
       },
       "recentMatches": [
-        {
-          "date": "2026-07-15T12:00:00.000Z",
-          "homeTeam": "England",
-          "awayTeam": "Argentina",
-          "score": "1-2",
-          "teamPerspective": "away",
-          "shotsFor": 14.2,
-          "shotsOnTargetFor": 5.1,
-          "possession": 52.5,
-          "passesAttempted": 652,
-          "completedPasses": 509,
-          "passCompletion": 0.78,
-          "homeScorers": [
-            {
-              "name": "Gordon",
-              "goals": 1,
-              "assists": []
-            }
-          ],
-          "awayScorers": [
-            {
-              "name": "Fernández",
-              "goals": 1,
-              "assists": []
-            }
-          ],
-          "metricSource": "score-derived-estimates",
-          "source": "England public results 1"
-        },
         {
           "date": "2026-07-15T00:00:00.000Z",
           "homeTeam": "Argentina",
@@ -889,6 +860,29 @@
           "awayScorers": [
             {
               "name": "Cunha",
+              "goals": 1,
+              "assists": []
+            }
+          ],
+          "metricSource": "score-derived-estimates",
+          "source": "Argentina public results 1"
+        },
+        {
+          "date": "2025-03-21T00:00:00.000Z",
+          "homeTeam": "Uruguay",
+          "awayTeam": "Argentina",
+          "score": "0-1",
+          "teamPerspective": "away",
+          "shotsFor": 11.1,
+          "shotsOnTargetFor": 3.8,
+          "possession": 52.5,
+          "passesAttempted": 636,
+          "completedPasses": 496,
+          "passCompletion": 0.78,
+          "homeScorers": [],
+          "awayScorers": [
+            {
+              "name": "Almada",
               "goals": 1,
               "assists": []
             }
@@ -4449,7 +4443,7 @@
     },
     {
       "team": "Spain",
-      "updatedAt": "2026-07-18T04:16:48.261Z",
+      "updatedAt": "2026-07-19T04:38:20.205Z",
       "provider": "public-web",
       "recentPointsPerGame": 2.874,
       "xgFor": 2.007,
@@ -4709,34 +4703,6 @@
       "recentMatches": [
         {
           "date": "2026-07-14T12:00:00.000Z",
-          "homeTeam": "France",
-          "awayTeam": "Spain",
-          "score": "0-2",
-          "teamPerspective": "away",
-          "shotsFor": 14.2,
-          "shotsOnTargetFor": 5.1,
-          "possession": 55,
-          "passesAttempted": 651,
-          "completedPasses": 514,
-          "passCompletion": 0.79,
-          "homeScorers": [],
-          "awayScorers": [
-            {
-              "name": "Oyarzabal",
-              "goals": 1,
-              "assists": []
-            },
-            {
-              "name": "Porro",
-              "goals": 1,
-              "assists": []
-            }
-          ],
-          "metricSource": "score-derived-estimates",
-          "source": "France public results 1"
-        },
-        {
-          "date": "2026-07-14T12:00:00.000Z",
           "homeTeam": "Spain",
           "awayTeam": "England",
           "score": "2-1",
@@ -4767,7 +4733,35 @@
             }
           ],
           "metricSource": "score-derived-estimates",
-          "source": "England public results 1"
+          "source": "Spain public results 1"
+        },
+        {
+          "date": "2026-07-14T12:00:00.000Z",
+          "homeTeam": "France",
+          "awayTeam": "Spain",
+          "score": "0-2",
+          "teamPerspective": "away",
+          "shotsFor": 14.2,
+          "shotsOnTargetFor": 5.1,
+          "possession": 55,
+          "passesAttempted": 651,
+          "completedPasses": 514,
+          "passCompletion": 0.79,
+          "homeScorers": [],
+          "awayScorers": [
+            {
+              "name": "Oyarzabal",
+              "goals": 1,
+              "assists": []
+            },
+            {
+              "name": "Porro",
+              "goals": 1,
+              "assists": []
+            }
+          ],
+          "metricSource": "score-derived-estimates",
+          "source": "Spain public results 1"
         },
         {
           "date": "2026-07-10T12:00:00.000Z",
