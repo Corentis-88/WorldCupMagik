@@ -1,6 +1,6 @@
 {
-  "id": "app_scan_be6d5dff",
-  "createdAt": "2026-07-20T04:54:54.216Z",
+  "id": "app_scan_fe8d8305",
+  "createdAt": "2026-07-21T04:34:34.321Z",
   "scheduled": true,
   "settings": {
     "stake": 10,
@@ -18,27 +18,27 @@
     "usedFallbackNextFixtures": false
   },
   "collected": {
-    "fixtures": 50,
+    "fixtures": 49,
     "oddsRecords": 0,
     "survivabilityOddsRecords": 0,
     "scorerOddsRecords": 0,
     "heatRecords": 0,
     "squadDepthRecords": 0,
     "playerStats": 805,
-    "newsArticles": 35,
+    "newsArticles": 36,
     "teamStats": 0,
     "matchHistoryRecords": 0,
     "postMatchStatsCollected": 17,
     "postMatchStatsRecords": 80,
     "outcomeRecordsSettled": 62,
-    "predictionReflectionsSettled": 63,
+    "predictionReflectionsSettled": 62,
     "intelligenceObservations": 0,
     "sourceDiagnostics": 9
   },
   "dataQuality": {
     "readiness": "collecting",
-    "sourceOk": 7,
-    "sourceEmpty": 2,
+    "sourceOk": 6,
+    "sourceEmpty": 3,
     "sourceErrors": 0,
     "fixtureCount": 0,
     "freshOddsRecords": 0,
@@ -54,7 +54,7 @@
     "playerStatsRecords": 805,
     "playerShotCoverage": 0,
     "playerAssistCoverage": 0.017,
-    "newsArticleCount": 35,
+    "newsArticleCount": 36,
     "teamStatsCount": 0,
     "postMatchStatsRecords": 80,
     "realPostMatchTeamCoverage": 0,
@@ -77,7 +77,7 @@
     "missingClimateProfileTeams": [],
     "missingHeatMemoryTeams": [],
     "fixtureNewsCoverage": 0,
-    "sourceFailureRate": 0.222,
+    "sourceFailureRate": 0.333,
     "marketReadiness": {
       "coreResultsAndGoals": "partial",
       "scorers": "collecting",
@@ -87,7 +87,7 @@
     "message": "The database is still collecting real public-web data, including full 20-match team samples. Missing sources are visible in source health."
   },
   "survivabilityMarketCoverage": {
-    "createdAt": "2026-07-20T04:54:54.216Z",
+    "createdAt": "2026-07-21T04:34:34.321Z",
     "gateVersion": "survivability-public-web-v1",
     "enabled": true,
     "status": "collecting",
@@ -105,7 +105,7 @@
       "satisfiedMarketCount": 0,
       "satisfiedMarkets": [],
       "totalRecords": 435,
-      "freshRecordCount": 24,
+      "freshRecordCount": 8,
       "message": "Survivability markets are being gathered and audited before betting logic can use them."
     },
     "markets": {
@@ -412,20 +412,21 @@
           "maxRecordAgeHours": 72
         },
         "missing": [
-          "needs 3 more covered fixtures",
-          "needs -1 more fixtures for coverage",
+          "needs 10 more fresh records",
+          "needs 4 more covered fixtures",
+          "needs 0 more fixtures for coverage",
           "needs 2 more bookmaker source(s)",
           "needs deeper bookmaker coverage per fixture"
         ],
         "recordCount": 216,
-        "freshRecordCount": 24,
-        "fixtureCount": 2,
+        "freshRecordCount": 8,
+        "fixtureCount": 1,
         "totalFixtureCount": 0,
         "fixtureCoverage": 0,
         "bookmakerCount": 0,
         "averageBookmakersPerFixture": 0,
-        "lineCount": 12,
-        "outcomeCount": 12,
+        "lineCount": 8,
+        "outcomeCount": 8,
         "latestCapturedAt": "2026-07-19T04:38:20.205Z",
         "sampleOutcomes": [
           {
@@ -693,10 +694,10 @@
   "sourceHealth": {
     "byKind": {
       "fixtures": {
-        "ok": 2,
-        "empty": 0,
+        "ok": 1,
+        "empty": 1,
         "error": 0,
-        "records": 50
+        "records": 49
       },
       "post_match_stats_schedule": {
         "ok": 1,
@@ -731,8 +732,18 @@
     },
     "failures": [
       {
-        "id": "source_c032661d",
-        "createdAt": "2026-07-20T04:54:54.216Z",
+        "id": "source_b3e3234f",
+        "createdAt": "2026-07-21T04:34:34.321Z",
+        "kind": "fixtures",
+        "source": "DCS World Cup public schedule",
+        "url": "https://wc.dcs.pm/",
+        "status": "empty",
+        "records": 0,
+        "reason": "Fetched public page but found no fixture rows matching team-v-team patterns."
+      },
+      {
+        "id": "source_c7aeef23",
+        "createdAt": "2026-07-21T04:34:34.321Z",
         "kind": "news",
         "source": "FIFA World Cup Articles",
         "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
@@ -741,8 +752,8 @@
         "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
       },
       {
-        "id": "source_bb1adca9",
-        "createdAt": "2026-07-20T04:54:54.216Z",
+        "id": "source_c29765af",
+        "createdAt": "2026-07-21T04:34:34.321Z",
         "kind": "squad_depth",
         "source": "Wikipedia 2026 FIFA World Cup squads",
         "url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
@@ -1864,71 +1875,71 @@
       },
       "lineup": {
         "lineup_unknown": {
-          "count": 2765,
-          "wins": 328,
-          "losses": 2437,
-          "winRate": 0.1186,
-          "averageModelProbability": 0.196,
-          "probabilityError": -0.0766,
-          "averageGoalTotalError": 1.2259,
-          "averageXgTotalError": 1.2289,
-          "averageShotTotalError": 12.1589,
-          "brierScore": 0.0917,
-          "averageMetricQuality": 0.9484,
+          "count": 2706,
+          "wins": 327,
+          "losses": 2379,
+          "winRate": 0.1208,
+          "averageModelProbability": 0.1976,
+          "probabilityError": -0.0759,
+          "averageGoalTotalError": 1.2612,
+          "averageXgTotalError": 1.2322,
+          "averageShotTotalError": 12.1865,
+          "brierScore": 0.0931,
+          "averageMetricQuality": 0.9473,
           "weatherSignals": {
-            "heat_drag_understated": 310,
+            "heat_drag_understated": 277,
             "heat_drag_overstated": 156,
             "heat_effect_reasonable": 62
           }
         },
         "scorer_not_confirmed_starter": {
-          "count": 145,
+          "count": 159,
           "wins": 7,
-          "losses": 138,
-          "winRate": 0.0483,
-          "averageModelProbability": 0.099,
-          "probabilityError": -0.0499,
-          "averageGoalTotalError": 3.2519,
-          "averageXgTotalError": 2.1415,
-          "averageShotTotalError": 11.7499,
-          "brierScore": 0.0459,
+          "losses": 152,
+          "winRate": 0.044,
+          "averageModelProbability": 0.0981,
+          "probabilityError": -0.0536,
+          "averageGoalTotalError": 2.9692,
+          "averageXgTotalError": 2.1037,
+          "averageShotTotalError": 12.1912,
+          "brierScore": 0.0425,
           "averageMetricQuality": 1,
           "weatherSignals": {
-            "heat_drag_understated": 28,
+            "heat_drag_understated": 33,
             "heat_drag_overstated": 28
           }
         },
         "scorer_confirmed_starter": {
-          "count": 197,
+          "count": 240,
           "wins": 25,
-          "losses": 172,
-          "winRate": 0.1269,
-          "averageModelProbability": 0.1325,
-          "probabilityError": 0.0048,
-          "averageGoalTotalError": 1.9519,
-          "averageXgTotalError": 1.2789,
-          "averageShotTotalError": 9.3285,
-          "brierScore": 0.1139,
+          "losses": 215,
+          "winRate": 0.1042,
+          "averageModelProbability": 0.1309,
+          "probabilityError": -0.0185,
+          "averageGoalTotalError": 1.4881,
+          "averageXgTotalError": 1.2113,
+          "averageShotTotalError": 9.3547,
+          "brierScore": 0.0971,
           "averageMetricQuality": 1,
           "weatherSignals": {
-            "heat_drag_understated": 52,
+            "heat_drag_understated": 78,
             "heat_drag_overstated": 26
           }
         },
         "both_xi_confirmed": {
-          "count": 20,
-          "wins": 11,
-          "losses": 9,
-          "winRate": 0.55,
-          "averageModelProbability": 0.4496,
-          "probabilityError": 0.1421,
-          "averageGoalTotalError": 0.208,
-          "averageXgTotalError": -0.4034,
-          "averageShotTotalError": -3.7303,
-          "brierScore": 0.1833,
+          "count": 22,
+          "wins": 12,
+          "losses": 10,
+          "winRate": 0.5455,
+          "averageModelProbability": 0.4387,
+          "probabilityError": 0.1404,
+          "averageGoalTotalError": 0.0157,
+          "averageXgTotalError": -0.4205,
+          "averageShotTotalError": -3.6964,
+          "brierScore": 0.1893,
           "averageMetricQuality": 1,
           "weatherSignals": {
-            "heat_drag_understated": 14,
+            "heat_drag_understated": 16,
             "heat_drag_overstated": 2
           }
         }
@@ -2018,21 +2029,21 @@
       }
     },
     "lastOutcomeSettlement": {
-      "examinedLegCount": 3694,
+      "examinedLegCount": 3695,
       "insertedCount": 62,
       "skipped": {
         "noRecommendations": 0,
-        "noMatch": 180,
+        "noMatch": 181,
         "unknownMarket": 305,
         "latePrediction": 0,
         "alreadySettled": 3147
       }
     },
     "lastPredictionReflection": {
-      "examinedPredictionCount": 10880,
-      "insertedCount": 63,
+      "examinedPredictionCount": 10908,
+      "insertedCount": 62,
       "updatedCount": 3101,
-      "upsertedCount": 3164
+      "upsertedCount": 3163
     },
     "topTeams": []
   },

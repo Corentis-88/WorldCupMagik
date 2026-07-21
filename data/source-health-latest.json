@@ -1,19 +1,19 @@
 {
-  "createdAt": "2026-07-20T04:54:54.216Z",
+  "createdAt": "2026-07-21T04:34:34.321Z",
   "diagnostics": [
     {
-      "id": "source_ec4775e2",
-      "createdAt": "2026-07-20T04:54:54.216Z",
+      "id": "source_b3e3234f",
+      "createdAt": "2026-07-21T04:34:34.321Z",
       "kind": "fixtures",
       "source": "DCS World Cup public schedule",
       "url": "https://wc.dcs.pm/",
-      "status": "ok",
-      "records": 1,
-      "reason": ""
+      "status": "empty",
+      "records": 0,
+      "reason": "Fetched public page but found no fixture rows matching team-v-team patterns."
     },
     {
-      "id": "source_23994608",
-      "createdAt": "2026-07-20T04:54:54.216Z",
+      "id": "source_2b15cf0e",
+      "createdAt": "2026-07-21T04:34:34.321Z",
       "kind": "fixtures",
       "source": "OnlyOdds World Cup fixtures",
       "url": "https://worldcup.onlyodds.co.uk/world-cup",
@@ -22,8 +22,8 @@
       "reason": ""
     },
     {
-      "id": "source_64401b50",
-      "createdAt": "2026-07-20T04:54:54.216Z",
+      "id": "source_6bbca456",
+      "createdAt": "2026-07-21T04:34:34.321Z",
       "kind": "post_match_stats_schedule",
       "source": "FOX Sports World Cup boxscores",
       "url": "https://www.foxsports.com/soccer/fifa-world-cup-men/schedule",
@@ -32,8 +32,8 @@
       "reason": ""
     },
     {
-      "id": "source_8f440968",
-      "createdAt": "2026-07-20T04:54:54.216Z",
+      "id": "source_96c0926e",
+      "createdAt": "2026-07-21T04:34:34.321Z",
       "kind": "post_match_stats_boxscores",
       "source": "FOX Sports World Cup boxscores",
       "url": "https://www.foxsports.com/soccer/fifa-world-cup-men/schedule",
@@ -42,8 +42,8 @@
       "reason": "21 page(s) checked; 4 without settled stats"
     },
     {
-      "id": "source_c032661d",
-      "createdAt": "2026-07-20T04:54:54.216Z",
+      "id": "source_c7aeef23",
+      "createdAt": "2026-07-21T04:34:34.321Z",
       "kind": "news",
       "source": "FIFA World Cup Articles",
       "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
@@ -52,8 +52,8 @@
       "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
     },
     {
-      "id": "source_b1bb7bc3",
-      "createdAt": "2026-07-20T04:54:54.216Z",
+      "id": "source_b93804c9",
+      "createdAt": "2026-07-21T04:34:34.321Z",
       "kind": "news",
       "source": "BBC Sport Football RSS",
       "url": "https://feeds.bbci.co.uk/sport/football/rss.xml",
@@ -62,8 +62,8 @@
       "reason": ""
     },
     {
-      "id": "source_1370eed",
-      "createdAt": "2026-07-20T04:54:54.216Z",
+      "id": "source_8b397f3",
+      "createdAt": "2026-07-21T04:34:34.321Z",
       "kind": "news",
       "source": "The Guardian Football RSS",
       "url": "https://www.theguardian.com/football/rss",
@@ -72,8 +72,8 @@
       "reason": ""
     },
     {
-      "id": "source_55c2dd57",
-      "createdAt": "2026-07-20T04:54:54.216Z",
+      "id": "source_5d3f665d",
+      "createdAt": "2026-07-21T04:34:34.321Z",
       "kind": "odds-integrity",
       "source": "Odds integrity gate",
       "url": "",
@@ -84,8 +84,8 @@
       "quarantineReasons": {}
     },
     {
-      "id": "source_bb1adca9",
-      "createdAt": "2026-07-20T04:54:54.216Z",
+      "id": "source_c29765af",
+      "createdAt": "2026-07-21T04:34:34.321Z",
       "kind": "squad_depth",
       "source": "Wikipedia 2026 FIFA World Cup squads",
       "url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
