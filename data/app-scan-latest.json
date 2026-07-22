@@ -1,6 +1,6 @@
 {
-  "id": "app_scan_fe8d8305",
-  "createdAt": "2026-07-21T04:34:34.321Z",
+  "id": "app_scan_bd6afa46",
+  "createdAt": "2026-07-22T04:36:03.013Z",
   "scheduled": true,
   "settings": {
     "stake": 10,
@@ -30,8 +30,8 @@
     "matchHistoryRecords": 0,
     "postMatchStatsCollected": 17,
     "postMatchStatsRecords": 80,
-    "outcomeRecordsSettled": 62,
-    "predictionReflectionsSettled": 62,
+    "outcomeRecordsSettled": 0,
+    "predictionReflectionsSettled": 0,
     "intelligenceObservations": 0,
     "sourceDiagnostics": 9
   },
@@ -87,7 +87,7 @@
     "message": "The database is still collecting real public-web data, including full 20-match team samples. Missing sources are visible in source health."
   },
   "survivabilityMarketCoverage": {
-    "createdAt": "2026-07-21T04:34:34.321Z",
+    "createdAt": "2026-07-22T04:36:03.013Z",
     "gateVersion": "survivability-public-web-v1",
     "enabled": true,
     "status": "collecting",
@@ -732,8 +732,8 @@
     },
     "failures": [
       {
-        "id": "source_b3e3234f",
-        "createdAt": "2026-07-21T04:34:34.321Z",
+        "id": "source_95de8090",
+        "createdAt": "2026-07-22T04:36:03.013Z",
         "kind": "fixtures",
         "source": "DCS World Cup public schedule",
         "url": "https://wc.dcs.pm/",
@@ -742,8 +742,8 @@
         "reason": "Fetched public page but found no fixture rows matching team-v-team patterns."
       },
       {
-        "id": "source_c7aeef23",
-        "createdAt": "2026-07-21T04:34:34.321Z",
+        "id": "source_a9aa4c64",
+        "createdAt": "2026-07-22T04:36:03.013Z",
         "kind": "news",
         "source": "FIFA World Cup Articles",
         "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
@@ -752,8 +752,8 @@
         "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
       },
       {
-        "id": "source_c29765af",
-        "createdAt": "2026-07-21T04:34:34.321Z",
+        "id": "source_a492c2f0",
+        "createdAt": "2026-07-22T04:36:03.013Z",
         "kind": "squad_depth",
         "source": "Wikipedia 2026 FIFA World Cup squads",
         "url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
@@ -2030,19 +2030,19 @@
     },
     "lastOutcomeSettlement": {
       "examinedLegCount": 3695,
-      "insertedCount": 62,
+      "insertedCount": 0,
       "skipped": {
         "noRecommendations": 0,
         "noMatch": 181,
         "unknownMarket": 305,
         "latePrediction": 0,
-        "alreadySettled": 3147
+        "alreadySettled": 3209
       }
     },
     "lastPredictionReflection": {
       "examinedPredictionCount": 10908,
-      "insertedCount": 62,
-      "updatedCount": 3101,
+      "insertedCount": 0,
+      "updatedCount": 3163,
       "upsertedCount": 3163
     },
     "topTeams": []
