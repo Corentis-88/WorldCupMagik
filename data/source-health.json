@@ -1,5 +1,97 @@
 [
   {
+    "id": "source_440ad9ca",
+    "createdAt": "2026-08-01T04:37:28.138Z",
+    "kind": "fixtures",
+    "source": "DCS World Cup public schedule",
+    "url": "https://wc.dcs.pm/",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public page but found no fixture rows matching team-v-team patterns."
+  },
+  {
+    "id": "source_bb3d8589",
+    "createdAt": "2026-08-01T04:37:28.138Z",
+    "kind": "fixtures",
+    "source": "OnlyOdds World Cup fixtures",
+    "url": "https://worldcup.onlyodds.co.uk/world-cup",
+    "status": "ok",
+    "records": 49,
+    "reason": ""
+  },
+  {
+    "id": "source_fbe45ad1",
+    "createdAt": "2026-08-01T04:37:28.138Z",
+    "kind": "post_match_stats_schedule",
+    "source": "FOX Sports World Cup boxscores",
+    "url": "https://www.foxsports.com/soccer/fifa-world-cup-men/schedule",
+    "status": "ok",
+    "records": 21,
+    "reason": ""
+  },
+  {
+    "id": "source_26e848e9",
+    "createdAt": "2026-08-01T04:37:28.138Z",
+    "kind": "post_match_stats_boxscores",
+    "source": "FOX Sports World Cup boxscores",
+    "url": "https://www.foxsports.com/soccer/fifa-world-cup-men/schedule",
+    "status": "ok",
+    "records": 17,
+    "reason": "21 page(s) checked; 4 without settled stats"
+  },
+  {
+    "id": "source_57d6a59e",
+    "createdAt": "2026-08-01T04:37:28.138Z",
+    "kind": "news",
+    "source": "FIFA World Cup Articles",
+    "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
+  },
+  {
+    "id": "source_495fbb44",
+    "createdAt": "2026-08-01T04:37:28.138Z",
+    "kind": "news",
+    "source": "BBC Sport Football RSS",
+    "url": "https://feeds.bbci.co.uk/sport/football/rss.xml",
+    "status": "ok",
+    "records": 18,
+    "reason": ""
+  },
+  {
+    "id": "source_98db4e6e",
+    "createdAt": "2026-08-01T04:37:28.138Z",
+    "kind": "news",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/rss",
+    "status": "ok",
+    "records": 18,
+    "reason": ""
+  },
+  {
+    "id": "source_ed671cd8",
+    "createdAt": "2026-08-01T04:37:28.138Z",
+    "kind": "odds-integrity",
+    "source": "Odds integrity gate",
+    "url": "",
+    "status": "ok",
+    "records": 0,
+    "reason": "All extracted odds passed integrity checks.",
+    "quarantinedRecords": 0,
+    "quarantineReasons": {}
+  },
+  {
+    "id": "source_52bf1c2a",
+    "createdAt": "2026-08-01T04:37:28.138Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia 2026 FIFA World Cup squads",
+    "url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched shared squad page but found no usable team squad sections."
+  },
+  {
     "id": "source_5d5ff684",
     "createdAt": "2026-07-31T04:44:29.203Z",
     "kind": "fixtures",
@@ -199989,95 +200081,5 @@
     "status": "ok",
     "records": 1,
     "reason": ""
-  },
-  {
-    "id": "source_cafebecb",
-    "createdAt": "2026-06-14T18:46:22.330Z",
-    "kind": "stats",
-    "source": "South Korea public results 1",
-    "url": "https://en.wikipedia.org/wiki/South_Korea_national_football_team_results_(2020%E2%80%93present)",
-    "status": "ok",
-    "records": 50,
-    "reason": ""
-  },
-  {
-    "id": "source_4fe313f8",
-    "createdAt": "2026-06-14T18:46:22.330Z",
-    "kind": "team_profile",
-    "source": "South Korea public profile 1",
-    "url": "https://en.wikipedia.org/wiki/South_Korea_national_football_team",
-    "status": "ok",
-    "records": 1,
-    "reason": ""
-  },
-  {
-    "id": "source_5b41c2b0",
-    "createdAt": "2026-06-14T18:46:22.330Z",
-    "kind": "stats",
-    "source": "USA public results 1",
-    "url": "https://en.wikipedia.org/wiki/United_States_men's_national_football_team_results_(2020%E2%80%93present)",
-    "status": "error",
-    "records": 0,
-    "reason": "404 Not Found"
-  },
-  {
-    "id": "source_900dfe48",
-    "createdAt": "2026-06-14T18:46:22.330Z",
-    "kind": "stats",
-    "source": "USA public results 2",
-    "url": "https://en.wikipedia.org/wiki/United_States_men's_national_soccer_team_results_(2020%E2%80%93present)",
-    "status": "ok",
-    "records": 37,
-    "reason": ""
-  },
-  {
-    "id": "source_24f8ec2b",
-    "createdAt": "2026-06-14T18:46:22.330Z",
-    "kind": "team_profile",
-    "source": "USA public profile 1",
-    "url": "https://en.wikipedia.org/wiki/United_States_men's_national_football_team",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public team page but found no manager/profile fields for USA."
-  },
-  {
-    "id": "source_a8097b5e",
-    "createdAt": "2026-06-14T18:46:22.330Z",
-    "kind": "team_profile",
-    "source": "USA public profile 2",
-    "url": "https://en.wikipedia.org/wiki/United_States_men's_national_soccer_team",
-    "status": "ok",
-    "records": 1,
-    "reason": ""
-  },
-  {
-    "id": "source_2816a70e",
-    "createdAt": "2026-06-14T18:46:22.330Z",
-    "kind": "stats",
-    "source": "Australia public results 1",
-    "url": "https://en.wikipedia.org/wiki/Australia_national_football_team_results_(2020%E2%80%93present)",
-    "status": "error",
-    "records": 0,
-    "reason": "404 Not Found"
-  },
-  {
-    "id": "source_e38a1c85",
-    "createdAt": "2026-06-14T18:46:22.330Z",
-    "kind": "stats",
-    "source": "Australia public results 2",
-    "url": "https://en.wikipedia.org/wiki/Australia_national_soccer_team_results_(2020%E2%80%93present)",
-    "status": "ok",
-    "records": 38,
-    "reason": ""
-  },
-  {
-    "id": "source_8bd8748a",
-    "createdAt": "2026-06-14T18:46:22.330Z",
-    "kind": "team_profile",
-    "source": "Australia public profile 1",
-    "url": "https://en.wikipedia.org/wiki/Australia_national_football_team",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public team page but found no manager/profile fields for Australia."
   }
 ]

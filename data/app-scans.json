@@ -1,5 +1,191 @@
 [
   {
+    "id": "app_scan_9f4e3780",
+    "createdAt": "2026-08-01T04:37:28.138Z",
+    "scheduled": true,
+    "settings": {
+      "stake": 10,
+      "risk": 58,
+      "daysAhead": 14
+    },
+    "riskProfile": {
+      "key": "calculated",
+      "label": "Calculated Risk",
+      "description": "Uses public odds, team form, news, and value signals without just following favourites."
+    },
+    "fixtureWindow": {
+      "daysAhead": 14,
+      "selectedFixtures": 0,
+      "usedFallbackNextFixtures": false
+    },
+    "collected": {
+      "fixtures": 49,
+      "oddsRecords": 0,
+      "survivabilityOddsRecords": 0,
+      "scorerOddsRecords": 0,
+      "heatRecords": 0,
+      "squadDepthRecords": 0,
+      "playerStats": 805,
+      "newsArticles": 36,
+      "teamStats": 0,
+      "matchHistoryRecords": 0,
+      "postMatchStatsCollected": 17,
+      "postMatchStatsRecords": 80,
+      "outcomeRecordsSettled": 0,
+      "predictionReflectionsSettled": 0,
+      "intelligenceObservations": 0,
+      "sourceDiagnostics": 9
+    },
+    "dataQuality": {
+      "readiness": "collecting",
+      "sourceOk": 6,
+      "sourceEmpty": 3,
+      "sourceErrors": 0,
+      "fixtureCount": 0,
+      "freshOddsRecords": 0,
+      "freshSurvivabilityOddsRecords": 0,
+      "freshScorerOddsRecords": 0,
+      "freshHeatRecords": 0,
+      "freshSquadDepthRecords": 0,
+      "oddsHistoryRecords": 48536,
+      "survivabilityOddsHistoryRecords": 435,
+      "scorerOddsHistoryRecords": 16008,
+      "heatHistoryRecords": 5189,
+      "squadDepthHistoryRecords": 51,
+      "playerStatsRecords": 805,
+      "playerShotCoverage": 0,
+      "playerAssistCoverage": 0.017,
+      "newsArticleCount": 36,
+      "teamStatsCount": 0,
+      "postMatchStatsRecords": 80,
+      "realPostMatchTeamCoverage": 0,
+      "usefulRealMetricTeamCoverage": 0,
+      "teamRealMetricCoverage": [],
+      "selectedPostMatchFixtureCoverage": 0,
+      "averageEventMetricQuality": 0,
+      "estimatedMetricOnlyTeams": [],
+      "teamsWithRecentMatches": 0,
+      "requiredTeamCount": 0,
+      "teamsWithTwentyMatchSamples": 0,
+      "teamTwentyMatchCoverage": 0,
+      "minimumTeamMatchSample": 0,
+      "missingTwentyMatchTeams": [],
+      "fixtureOddsCoverage": 0,
+      "fixtureHeatCoverage": 0,
+      "squadDepthCoverage": 0,
+      "climateProfileCoverage": 0,
+      "heatMemoryCoverage": 0,
+      "missingClimateProfileTeams": [],
+      "missingHeatMemoryTeams": [],
+      "fixtureNewsCoverage": 0,
+      "sourceFailureRate": 0.333,
+      "marketReadiness": {
+        "coreResultsAndGoals": "partial",
+        "scorers": "collecting",
+        "assists": "collecting",
+        "playerShots": "collecting"
+      },
+      "message": "The database is still collecting real public-web data, including full 20-match team samples. Missing sources are visible in source health."
+    },
+    "sourceHealth": {
+      "byKind": {
+        "fixtures": {
+          "ok": 1,
+          "empty": 1,
+          "error": 0,
+          "records": 49
+        },
+        "post_match_stats_schedule": {
+          "ok": 1,
+          "empty": 0,
+          "error": 0,
+          "records": 21
+        },
+        "post_match_stats_boxscores": {
+          "ok": 1,
+          "empty": 0,
+          "error": 0,
+          "records": 17
+        },
+        "news": {
+          "ok": 2,
+          "empty": 1,
+          "error": 0,
+          "records": 36
+        },
+        "odds-integrity": {
+          "ok": 1,
+          "empty": 0,
+          "error": 0,
+          "records": 0
+        },
+        "squad_depth": {
+          "ok": 0,
+          "empty": 1,
+          "error": 0,
+          "records": 0
+        }
+      },
+      "failures": [
+        {
+          "id": "source_440ad9ca",
+          "createdAt": "2026-08-01T04:37:28.138Z",
+          "kind": "fixtures",
+          "source": "DCS World Cup public schedule",
+          "url": "https://wc.dcs.pm/",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public page but found no fixture rows matching team-v-team patterns."
+        },
+        {
+          "id": "source_57d6a59e",
+          "createdAt": "2026-08-01T04:37:28.138Z",
+          "kind": "news",
+          "source": "FIFA World Cup Articles",
+          "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
+        },
+        {
+          "id": "source_52bf1c2a",
+          "createdAt": "2026-08-01T04:37:28.138Z",
+          "kind": "squad_depth",
+          "source": "Wikipedia 2026 FIFA World Cup squads",
+          "url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched shared squad page but found no usable team squad sections."
+        }
+      ]
+    },
+    "intelligence": {
+      "teamCount": 0,
+      "observationCount": 0,
+      "outcomeLearningCount": 3039,
+      "predictionReflectionCount": 3127,
+      "lastOutcomeSettlement": {
+        "examinedLegCount": 3695,
+        "insertedCount": 0,
+        "skipped": {
+          "noRecommendations": 0,
+          "noMatch": 181,
+          "unknownMarket": 305,
+          "latePrediction": 0,
+          "alreadySettled": 3209
+        }
+      },
+      "lastPredictionReflection": {
+        "examinedPredictionCount": 10908,
+        "insertedCount": 0,
+        "updatedCount": 3163,
+        "upsertedCount": 3163
+      }
+    },
+    "eligibleLegCount": 0,
+    "betslip": []
+  },
+  {
     "id": "app_scan_9175383a",
     "createdAt": "2026-07-31T04:44:29.203Z",
     "scheduled": true,
