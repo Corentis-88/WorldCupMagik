@@ -1,5 +1,97 @@
 [
   {
+    "id": "source_42438a9e",
+    "createdAt": "2026-09-06T05:59:42.360Z",
+    "kind": "fixtures",
+    "source": "DCS World Cup public schedule",
+    "url": "https://wc.dcs.pm/",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public page but found no fixture rows matching team-v-team patterns."
+  },
+  {
+    "id": "source_b976365d",
+    "createdAt": "2026-09-06T05:59:42.360Z",
+    "kind": "fixtures",
+    "source": "OnlyOdds World Cup fixtures",
+    "url": "https://worldcup.onlyodds.co.uk/world-cup",
+    "status": "ok",
+    "records": 49,
+    "reason": ""
+  },
+  {
+    "id": "source_fa1d0ba5",
+    "createdAt": "2026-09-06T05:59:42.360Z",
+    "kind": "post_match_stats_schedule",
+    "source": "FOX Sports World Cup boxscores",
+    "url": "https://www.foxsports.com/soccer/fifa-world-cup-men/schedule",
+    "status": "ok",
+    "records": 21,
+    "reason": ""
+  },
+  {
+    "id": "source_2520f9bd",
+    "createdAt": "2026-09-06T05:59:42.360Z",
+    "kind": "post_match_stats_boxscores",
+    "source": "FOX Sports World Cup boxscores",
+    "url": "https://www.foxsports.com/soccer/fifa-world-cup-men/schedule",
+    "status": "ok",
+    "records": 17,
+    "reason": "21 page(s) checked; 4 without settled stats"
+  },
+  {
+    "id": "source_560f5672",
+    "createdAt": "2026-09-06T05:59:42.360Z",
+    "kind": "news",
+    "source": "FIFA World Cup Articles",
+    "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
+  },
+  {
+    "id": "source_47986c18",
+    "createdAt": "2026-09-06T05:59:42.360Z",
+    "kind": "news",
+    "source": "BBC Sport Football RSS",
+    "url": "https://feeds.bbci.co.uk/sport/football/rss.xml",
+    "status": "ok",
+    "records": 18,
+    "reason": ""
+  },
+  {
+    "id": "source_9713ff42",
+    "createdAt": "2026-09-06T05:59:42.360Z",
+    "kind": "news",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/rss",
+    "status": "ok",
+    "records": 18,
+    "reason": ""
+  },
+  {
+    "id": "source_eb9fcdac",
+    "createdAt": "2026-09-06T05:59:42.360Z",
+    "kind": "odds-integrity",
+    "source": "Odds integrity gate",
+    "url": "",
+    "status": "ok",
+    "records": 0,
+    "reason": "All extracted odds passed integrity checks.",
+    "quarantinedRecords": 0,
+    "quarantineReasons": {}
+  },
+  {
+    "id": "source_50f7ccfe",
+    "createdAt": "2026-09-06T05:59:42.360Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia 2026 FIFA World Cup squads",
+    "url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched shared squad page but found no usable team squad sections."
+  },
+  {
     "id": "source_1ffeaa6b",
     "createdAt": "2026-08-06T04:32:28.335Z",
     "kind": "fixtures",
@@ -200000,96 +200092,6 @@
     "url": "https://en.wikipedia.org/wiki/Uruguay_national_football_team_results_(2020%E2%80%93present)",
     "status": "ok",
     "records": 65,
-    "reason": ""
-  },
-  {
-    "id": "source_d25ca2d9",
-    "createdAt": "2026-06-14T18:46:22.330Z",
-    "kind": "team_profile",
-    "source": "Uruguay public profile 1",
-    "url": "https://en.wikipedia.org/wiki/Uruguay_national_football_team",
-    "status": "ok",
-    "records": 1,
-    "reason": ""
-  },
-  {
-    "id": "source_d14e2f12",
-    "createdAt": "2026-06-14T18:46:22.330Z",
-    "kind": "stats",
-    "source": "Iran public results 1",
-    "url": "https://en.wikipedia.org/wiki/Iran_national_football_team_results_(2020%E2%80%93present)",
-    "status": "ok",
-    "records": 69,
-    "reason": ""
-  },
-  {
-    "id": "source_5847c8ad",
-    "createdAt": "2026-06-14T18:46:22.330Z",
-    "kind": "team_profile",
-    "source": "Iran public profile 1",
-    "url": "https://en.wikipedia.org/wiki/Iran_national_football_team",
-    "status": "ok",
-    "records": 1,
-    "reason": ""
-  },
-  {
-    "id": "source_8a958582",
-    "createdAt": "2026-06-14T18:46:22.330Z",
-    "kind": "stats",
-    "source": "New Zealand public results 1",
-    "url": "https://en.wikipedia.org/wiki/New_Zealand_national_football_team_results_(2020%E2%80%93present)",
-    "status": "ok",
-    "records": 48,
-    "reason": ""
-  },
-  {
-    "id": "source_fec59e6c",
-    "createdAt": "2026-06-14T18:46:22.330Z",
-    "kind": "team_profile",
-    "source": "New Zealand public profile 1",
-    "url": "https://en.wikipedia.org/wiki/New_Zealand_national_football_team",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public team page but found no manager/profile fields for New Zealand."
-  },
-  {
-    "id": "source_10d1559b",
-    "createdAt": "2026-06-14T18:46:22.330Z",
-    "kind": "team_profile",
-    "source": "New Zealand public profile 2",
-    "url": "https://en.wikipedia.org/wiki/New_Zealand_national_soccer_team",
-    "status": "ok",
-    "records": 1,
-    "reason": ""
-  },
-  {
-    "id": "source_a9a082ee",
-    "createdAt": "2026-06-14T18:46:22.330Z",
-    "kind": "stats",
-    "source": "France public results 1",
-    "url": "https://en.wikipedia.org/wiki/France_national_football_team_results_(2020%E2%80%93present)",
-    "status": "ok",
-    "records": 74,
-    "reason": ""
-  },
-  {
-    "id": "source_fcd2fea3",
-    "createdAt": "2026-06-14T18:46:22.330Z",
-    "kind": "team_profile",
-    "source": "France public profile 1",
-    "url": "https://en.wikipedia.org/wiki/France_national_football_team",
-    "status": "ok",
-    "records": 1,
-    "reason": ""
-  },
-  {
-    "id": "source_df160727",
-    "createdAt": "2026-06-14T18:46:22.330Z",
-    "kind": "stats",
-    "source": "Senegal public results 1",
-    "url": "https://en.wikipedia.org/wiki/Senegal_national_football_team_results_(2020%E2%80%93present)",
-    "status": "ok",
-    "records": 55,
     "reason": ""
   }
 ]
