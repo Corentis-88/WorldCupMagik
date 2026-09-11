@@ -1,6 +1,6 @@
 {
-  "id": "app_scan_e934181b",
-  "createdAt": "2026-09-10T06:00:37.125Z",
+  "id": "app_scan_2c487c18",
+  "createdAt": "2026-09-11T06:02:59.747Z",
   "scheduled": true,
   "settings": {
     "stake": 10,
@@ -87,7 +87,7 @@
     "message": "The database is still collecting real public-web data, including full 20-match team samples. Missing sources are visible in source health."
   },
   "survivabilityMarketCoverage": {
-    "createdAt": "2026-09-10T06:00:37.125Z",
+    "createdAt": "2026-09-11T06:02:59.747Z",
     "gateVersion": "survivability-public-web-v1",
     "enabled": true,
     "status": "collecting",
@@ -635,7 +635,7 @@
         "ok": 2,
         "empty": 1,
         "error": 0,
-        "records": 34
+        "records": 36
       },
       "odds-integrity": {
         "ok": 1,
@@ -652,8 +652,8 @@
     },
     "failures": [
       {
-        "id": "source_e82c7c65",
-        "createdAt": "2026-09-10T06:00:37.125Z",
+        "id": "source_d7c9ae62",
+        "createdAt": "2026-09-11T06:02:59.747Z",
         "kind": "fixtures",
         "source": "DCS World Cup public schedule",
         "url": "https://wc.dcs.pm/",
@@ -662,8 +662,8 @@
         "reason": "Fetched public page but found no fixture rows matching team-v-team patterns."
       },
       {
-        "id": "source_fbf84839",
-        "createdAt": "2026-09-10T06:00:37.125Z",
+        "id": "source_eb957a36",
+        "createdAt": "2026-09-11T06:02:59.747Z",
         "kind": "news",
         "source": "FIFA World Cup Articles",
         "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
@@ -672,8 +672,8 @@
         "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
       },
       {
-        "id": "source_f6e0bec5",
-        "createdAt": "2026-09-10T06:00:37.125Z",
+        "id": "source_e67df0c2",
+        "createdAt": "2026-09-11T06:02:59.747Z",
         "kind": "squad_depth",
         "source": "Wikipedia 2026 FIFA World Cup squads",
         "url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
@@ -1795,72 +1795,72 @@
       },
       "lineup": {
         "lineup_unknown": {
-          "count": 2780,
-          "wins": 336,
-          "losses": 2444,
-          "winRate": 0.1209,
-          "averageModelProbability": 0.197,
-          "probabilityError": -0.0751,
-          "averageGoalTotalError": 1.2552,
-          "averageXgTotalError": 1.218,
-          "averageShotTotalError": 12.044,
-          "brierScore": 0.0922,
-          "averageMetricQuality": 0.9486,
+          "count": 2868,
+          "wins": 347,
+          "losses": 2521,
+          "winRate": 0.121,
+          "averageModelProbability": 0.1952,
+          "probabilityError": -0.0731,
+          "averageGoalTotalError": 1.2835,
+          "averageXgTotalError": 1.2224,
+          "averageShotTotalError": 12.2828,
+          "brierScore": 0.0925,
+          "averageMetricQuality": 0.9502,
           "weatherSignals": {
-            "heat_drag_understated": 329,
+            "heat_drag_understated": 371,
             "heat_drag_overstated": 156,
             "heat_effect_reasonable": 62
           }
         },
-        "scorer_not_confirmed_starter": {
-          "count": 138,
-          "wins": 6,
-          "losses": 132,
-          "winRate": 0.0435,
-          "averageModelProbability": 0.096,
-          "probabilityError": -0.0496,
-          "averageGoalTotalError": 3.1853,
-          "averageXgTotalError": 2.2449,
-          "averageShotTotalError": 12.4296,
-          "brierScore": 0.0432,
+        "both_xi_confirmed": {
+          "count": 8,
+          "wins": 4,
+          "losses": 4,
+          "winRate": 0.5,
+          "averageModelProbability": 0.3319,
+          "probabilityError": 0.1577,
+          "averageGoalTotalError": 0.3478,
+          "averageXgTotalError": 0.046,
+          "averageShotTotalError": -5.4218,
+          "brierScore": 0.2602,
           "averageMetricQuality": 1,
           "weatherSignals": {
-            "heat_drag_understated": 21,
-            "heat_drag_overstated": 28
+            "heat_drag_overstated": 2,
+            "heat_drag_understated": 2
+          }
+        },
+        "scorer_not_confirmed_starter": {
+          "count": 98,
+          "wins": 6,
+          "losses": 92,
+          "winRate": 0.0612,
+          "averageModelProbability": 0.0987,
+          "probabilityError": -0.032,
+          "averageGoalTotalError": 3.561,
+          "averageXgTotalError": 2.5812,
+          "averageShotTotalError": 8.6962,
+          "brierScore": 0.0575,
+          "averageMetricQuality": 1,
+          "weatherSignals": {
+            "heat_drag_overstated": 28,
+            "heat_drag_understated": 5
           }
         },
         "scorer_confirmed_starter": {
-          "count": 197,
-          "wins": 23,
-          "losses": 174,
-          "winRate": 0.1168,
-          "averageModelProbability": 0.1342,
-          "probabilityError": -0.0093,
-          "averageGoalTotalError": 1.5768,
-          "averageXgTotalError": 1.3171,
-          "averageShotTotalError": 9.8795,
-          "brierScore": 0.1063,
+          "count": 153,
+          "wins": 14,
+          "losses": 139,
+          "winRate": 0.0915,
+          "averageModelProbability": 0.1262,
+          "probabilityError": -0.0287,
+          "averageGoalTotalError": 1.3863,
+          "averageXgTotalError": 1.2828,
+          "averageShotTotalError": 6.8422,
+          "brierScore": 0.085,
           "averageMetricQuality": 1,
           "weatherSignals": {
-            "heat_drag_understated": 48,
-            "heat_drag_overstated": 26
-          }
-        },
-        "both_xi_confirmed": {
-          "count": 12,
-          "wins": 6,
-          "losses": 6,
-          "winRate": 0.5,
-          "averageModelProbability": 0.3567,
-          "probabilityError": 0.1533,
-          "averageGoalTotalError": 0.2493,
-          "averageXgTotalError": -0.2538,
-          "averageShotTotalError": -3.3502,
-          "brierScore": 0.2406,
-          "averageMetricQuality": 1,
-          "weatherSignals": {
-            "heat_drag_understated": 6,
-            "heat_drag_overstated": 2
+            "heat_drag_overstated": 26,
+            "heat_drag_understated": 26
           }
         }
       },
