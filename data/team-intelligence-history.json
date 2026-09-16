@@ -1,5 +1,19 @@
 [
   {
+    "id": "intel_run_e5ec7522",
+    "createdAt": "2026-09-16T06:05:01.691Z",
+    "teamCount": 0,
+    "observationCount": 0,
+    "marketMovementCount": 2396,
+    "averageDataConfidence": 0,
+    "averageAbsoluteLearnedEdge": 0,
+    "highConfidenceTeamCount": 0,
+    "lowCoverageTeamCount": 0,
+    "estimatedEventOnlyTeamCount": 0,
+    "topPositiveEdges": [],
+    "topNegativeEdges": []
+  },
+  {
     "id": "intel_run_c1d60258",
     "createdAt": "2026-09-15T06:12:00.158Z",
     "teamCount": 0,
@@ -26031,214 +26045,6 @@
       {
         "team": "Paraguay",
         "learnedEdge": -0.092,
-        "dataConfidence": 0.7514,
-        "matchWindowAvailable": 20,
-        "eventMetricQuality": 0.34,
-        "reasons": [
-          "20-match form 1.4 PPG, xG 1.486-1.558",
-          "recent form cooling",
-          "market intelligence 0% movement, consensus 3.365 across 8 bookie(s)"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "intel_run_fc4edfc7",
-    "createdAt": "2026-06-10T01:34:29.032Z",
-    "teamCount": 48,
-    "observationCount": 0,
-    "marketMovementCount": 0,
-    "averageDataConfidence": 0.8276,
-    "averageAbsoluteLearnedEdge": 0.1647,
-    "highConfidenceTeamCount": 46,
-    "lowCoverageTeamCount": 1,
-    "estimatedEventOnlyTeamCount": 48,
-    "topPositiveEdges": [
-      {
-        "team": "Sweden",
-        "learnedEdge": 0.3909,
-        "dataConfidence": 0.8395,
-        "matchWindowAvailable": 20,
-        "eventMetricQuality": 0.34,
-        "reasons": [
-          "20-match form 1.4 PPG, xG 1.702-1.846",
-          "recent form improving",
-          "1 news item(s), news impact 0.2024"
-        ]
-      },
-      {
-        "team": "Spain",
-        "learnedEdge": 0.387,
-        "dataConfidence": 0.8611,
-        "matchWindowAvailable": 20,
-        "eventMetricQuality": 0.34,
-        "reasons": [
-          "20-match form 2 PPG, xG 2.278-1.198",
-          "recent form improving",
-          "9 news item(s), news impact 0.0868"
-        ]
-      },
-      {
-        "team": "Colombia",
-        "learnedEdge": 0.3726,
-        "dataConfidence": 0.8394,
-        "matchWindowAvailable": 20,
-        "eventMetricQuality": 0.34,
-        "reasons": [
-          "20-match form 1.6 PPG, xG 1.99-1.558",
-          "recent form improving",
-          "2 news item(s), news impact 0.1143"
-        ]
-      },
-      {
-        "team": "Mexico",
-        "learnedEdge": 0.3484,
-        "dataConfidence": 0.8611,
-        "matchWindowAvailable": 20,
-        "eventMetricQuality": 0.34,
-        "reasons": [
-          "20-match form 1.9 PPG, xG 1.666-0.91",
-          "recent form improving",
-          "32 news item(s), news impact 0.0822"
-        ]
-      },
-      {
-        "team": "Brazil",
-        "learnedEdge": 0.3428,
-        "dataConfidence": 0.8611,
-        "matchWindowAvailable": 20,
-        "eventMetricQuality": 0.34,
-        "reasons": [
-          "20-match form 2.1 PPG, xG 2.612-1.63",
-          "recent form improving",
-          "22 news item(s), news impact 0.0392"
-        ]
-      },
-      {
-        "team": "Scotland",
-        "learnedEdge": 0.2961,
-        "dataConfidence": 0.8611,
-        "matchWindowAvailable": 20,
-        "eventMetricQuality": 0.34,
-        "reasons": [
-          "20-match form 1.3 PPG, xG 1.846-1.63",
-          "recent form improving",
-          "28 news item(s), news impact 0.0612"
-        ]
-      },
-      {
-        "team": "Netherlands",
-        "learnedEdge": 0.289,
-        "dataConfidence": 0.8611,
-        "matchWindowAvailable": 20,
-        "eventMetricQuality": 0.34,
-        "reasons": [
-          "20-match form 1.9 PPG, xG 1.882-1.09",
-          "recent form improving",
-          "6 news item(s), news impact 0.0028"
-        ]
-      },
-      {
-        "team": "South Korea",
-        "learnedEdge": 0.2882,
-        "dataConfidence": 0.8353,
-        "matchWindowAvailable": 20,
-        "eventMetricQuality": 0.34,
-        "reasons": [
-          "20-match form 1.8 PPG, xG 1.995-1.414",
-          "recent form improving",
-          "4 news item(s), news impact 0.0556"
-        ]
-      }
-    ],
-    "topNegativeEdges": [
-      {
-        "team": "Tunisia",
-        "learnedEdge": -0.4011,
-        "dataConfidence": 0.8397,
-        "matchWindowAvailable": 20,
-        "eventMetricQuality": 0.34,
-        "reasons": [
-          "20-match form 1.7 PPG, xG 0.982-1.126",
-          "recent form cooling",
-          "1 news item(s), news impact -0.2066"
-        ]
-      },
-      {
-        "team": "Uzbekistan",
-        "learnedEdge": -0.194,
-        "dataConfidence": 0.8394,
-        "matchWindowAvailable": 20,
-        "eventMetricQuality": 0.34,
-        "reasons": [
-          "20-match form 1.9 PPG, xG 1.702-1.09",
-          "recent form cooling",
-          "2 news item(s), news impact 0.1143"
-        ]
-      },
-      {
-        "team": "Croatia",
-        "learnedEdge": -0.1657,
-        "dataConfidence": 0.8611,
-        "matchWindowAvailable": 20,
-        "eventMetricQuality": 0.34,
-        "reasons": [
-          "20-match form 1.9 PPG, xG 1.918-1.486",
-          "recent form cooling",
-          "11 news item(s), news impact 0.1164"
-        ]
-      },
-      {
-        "team": "Senegal",
-        "learnedEdge": -0.1261,
-        "dataConfidence": 0.8397,
-        "matchWindowAvailable": 20,
-        "eventMetricQuality": 0.34,
-        "reasons": [
-          "20-match form 2.1 PPG, xG 1.558-0.91",
-          "recent form cooling",
-          "2 news item(s), news impact 0.0199"
-        ]
-      },
-      {
-        "team": "Ivory Coast",
-        "learnedEdge": -0.1197,
-        "dataConfidence": 0.7514,
-        "matchWindowAvailable": 20,
-        "eventMetricQuality": 0.34,
-        "reasons": [
-          "20-match form 2.4 PPG, xG 1.846-1.126",
-          "recent form cooling",
-          "market intelligence 0% movement, consensus 4.422 across 8 bookie(s)"
-        ]
-      },
-      {
-        "team": "France",
-        "learnedEdge": -0.113,
-        "dataConfidence": 0.8611,
-        "matchWindowAvailable": 20,
-        "eventMetricQuality": 0.34,
-        "reasons": [
-          "20-match form 2.2 PPG, xG 2.566-1.558",
-          "recent form cooling",
-          "20 news item(s), news impact 0.0868"
-        ]
-      },
-      {
-        "team": "Algeria",
-        "learnedEdge": -0.0948,
-        "dataConfidence": 0.8397,
-        "matchWindowAvailable": 20,
-        "eventMetricQuality": 0.34,
-        "reasons": [
-          "20-match form 2.5 PPG, xG 2.499-0.838",
-          "recent form cooling",
-          "2 news item(s), news impact 0.1395"
-        ]
-      },
-      {
-        "team": "Paraguay",
-        "learnedEdge": -0.0911,
         "dataConfidence": 0.7514,
         "matchWindowAvailable": 20,
         "eventMetricQuality": 0.34,
