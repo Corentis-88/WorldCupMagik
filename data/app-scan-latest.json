@@ -1,6 +1,6 @@
 {
-  "id": "app_scan_77d564ed",
-  "createdAt": "2026-09-18T05:57:56.473Z",
+  "id": "app_scan_424d12cb",
+  "createdAt": "2026-09-19T05:56:15.681Z",
   "scheduled": true,
   "settings": {
     "stake": 10,
@@ -87,7 +87,7 @@
     "message": "The database is still collecting real public-web data, including full 20-match team samples. Missing sources are visible in source health."
   },
   "survivabilityMarketCoverage": {
-    "createdAt": "2026-09-18T05:57:56.473Z",
+    "createdAt": "2026-09-19T05:56:15.681Z",
     "gateVersion": "survivability-public-web-v1",
     "enabled": true,
     "status": "collecting",
@@ -652,8 +652,8 @@
     },
     "failures": [
       {
-        "id": "source_eabd7537",
-        "createdAt": "2026-09-18T05:57:56.473Z",
+        "id": "source_db079715",
+        "createdAt": "2026-09-19T05:56:15.681Z",
         "kind": "fixtures",
         "source": "DCS World Cup public schedule",
         "url": "https://wc.dcs.pm/",
@@ -662,8 +662,8 @@
         "reason": "Fetched public page but found no fixture rows matching team-v-team patterns."
       },
       {
-        "id": "source_fe89410b",
-        "createdAt": "2026-09-18T05:57:56.473Z",
+        "id": "source_eed362e9",
+        "createdAt": "2026-09-19T05:56:15.681Z",
         "kind": "news",
         "source": "FIFA World Cup Articles",
         "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
@@ -672,8 +672,8 @@
         "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
       },
       {
-        "id": "source_f971b797",
-        "createdAt": "2026-09-18T05:57:56.473Z",
+        "id": "source_e9bbd975",
+        "createdAt": "2026-09-19T05:56:15.681Z",
         "kind": "squad_depth",
         "source": "Wikipedia 2026 FIFA World Cup squads",
         "url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
@@ -1795,69 +1795,21 @@
       },
       "lineup": {
         "lineup_unknown": {
-          "count": 3068,
-          "wins": 370,
-          "losses": 2698,
-          "winRate": 0.1206,
-          "averageModelProbability": 0.1906,
-          "probabilityError": -0.0685,
-          "averageGoalTotalError": 1.3888,
-          "averageXgTotalError": 1.2672,
-          "averageShotTotalError": 11.8948,
-          "brierScore": 0.0927,
-          "averageMetricQuality": 0.9533,
+          "count": 3127,
+          "wins": 371,
+          "losses": 2756,
+          "winRate": 0.1186,
+          "averageModelProbability": 0.1893,
+          "probabilityError": -0.0692,
+          "averageGoalTotalError": 1.355,
+          "averageXgTotalError": 1.2636,
+          "averageShotTotalError": 11.8757,
+          "brierScore": 0.0915,
+          "averageMetricQuality": 0.9541,
           "weatherSignals": {
-            "heat_drag_understated": 371,
+            "heat_drag_understated": 404,
             "heat_drag_overstated": 212,
             "heat_effect_reasonable": 62
-          }
-        },
-        "both_xi_confirmed": {
-          "count": 2,
-          "wins": 1,
-          "losses": 1,
-          "winRate": 0.5,
-          "averageModelProbability": 0.3171,
-          "probabilityError": 0.1218,
-          "averageGoalTotalError": -2.12,
-          "averageXgTotalError": -0.61,
-          "averageShotTotalError": -3.32,
-          "brierScore": 0.2561,
-          "averageMetricQuality": 1,
-          "weatherSignals": {
-            "heat_drag_understated": 2
-          }
-        },
-        "scorer_confirmed_starter": {
-          "count": 43,
-          "wins": 0,
-          "losses": 43,
-          "winRate": 0,
-          "averageModelProbability": 0.1234,
-          "probabilityError": -0.1234,
-          "averageGoalTotalError": -0.6035,
-          "averageXgTotalError": 0.9065,
-          "averageShotTotalError": 9.4727,
-          "brierScore": 0.0218,
-          "averageMetricQuality": 1,
-          "weatherSignals": {
-            "heat_drag_understated": 26
-          }
-        },
-        "scorer_not_confirmed_starter": {
-          "count": 14,
-          "wins": 0,
-          "losses": 14,
-          "winRate": 0,
-          "averageModelProbability": 0.0894,
-          "probabilityError": -0.0894,
-          "averageGoalTotalError": 0.2263,
-          "averageXgTotalError": 1.7363,
-          "averageShotTotalError": 16.4731,
-          "brierScore": 0.0096,
-          "averageMetricQuality": 1,
-          "weatherSignals": {
-            "heat_drag_understated": 5
           }
         }
       },

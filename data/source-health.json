@@ -1,5 +1,97 @@
 [
   {
+    "id": "source_db079715",
+    "createdAt": "2026-09-19T05:56:15.681Z",
+    "kind": "fixtures",
+    "source": "DCS World Cup public schedule",
+    "url": "https://wc.dcs.pm/",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public page but found no fixture rows matching team-v-team patterns."
+  },
+  {
+    "id": "source_523a42d4",
+    "createdAt": "2026-09-19T05:56:15.681Z",
+    "kind": "fixtures",
+    "source": "OnlyOdds World Cup fixtures",
+    "url": "https://worldcup.onlyodds.co.uk/world-cup",
+    "status": "ok",
+    "records": 49,
+    "reason": ""
+  },
+  {
+    "id": "source_92e1181c",
+    "createdAt": "2026-09-19T05:56:15.681Z",
+    "kind": "post_match_stats_schedule",
+    "source": "FOX Sports World Cup boxscores",
+    "url": "https://www.foxsports.com/soccer/fifa-world-cup-men/schedule",
+    "status": "ok",
+    "records": 21,
+    "reason": ""
+  },
+  {
+    "id": "source_bde50634",
+    "createdAt": "2026-09-19T05:56:15.681Z",
+    "kind": "post_match_stats_boxscores",
+    "source": "FOX Sports World Cup boxscores",
+    "url": "https://www.foxsports.com/soccer/fifa-world-cup-men/schedule",
+    "status": "ok",
+    "records": 17,
+    "reason": "21 page(s) checked; 4 without settled stats"
+  },
+  {
+    "id": "source_eed362e9",
+    "createdAt": "2026-09-19T05:56:15.681Z",
+    "kind": "news",
+    "source": "FIFA World Cup Articles",
+    "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
+  },
+  {
+    "id": "source_e05c788f",
+    "createdAt": "2026-09-19T05:56:15.681Z",
+    "kind": "news",
+    "source": "BBC Sport Football RSS",
+    "url": "https://feeds.bbci.co.uk/sport/football/rss.xml",
+    "status": "ok",
+    "records": 18,
+    "reason": ""
+  },
+  {
+    "id": "source_2fd80bb9",
+    "createdAt": "2026-09-19T05:56:15.681Z",
+    "kind": "news",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/rss",
+    "status": "ok",
+    "records": 18,
+    "reason": ""
+  },
+  {
+    "id": "source_8463da23",
+    "createdAt": "2026-09-19T05:56:15.681Z",
+    "kind": "odds-integrity",
+    "source": "Odds integrity gate",
+    "url": "",
+    "status": "ok",
+    "records": 0,
+    "reason": "All extracted odds passed integrity checks.",
+    "quarantinedRecords": 0,
+    "quarantineReasons": {}
+  },
+  {
+    "id": "source_e9bbd975",
+    "createdAt": "2026-09-19T05:56:15.681Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia 2026 FIFA World Cup squads",
+    "url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched shared squad page but found no usable team squad sections."
+  },
+  {
     "id": "source_eabd7537",
     "createdAt": "2026-09-18T05:57:56.473Z",
     "kind": "fixtures",
@@ -200024,96 +200116,6 @@
     "kind": "odds",
     "source": "SportsGambler public prop pages: Panama v Croatia",
     "url": "https://www.sportsgambler.com/betting-tips/football/panama-vs-croatia-prediction-lineups-odds-2026-06-23/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_c5de2287",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Colombia v DR Congo",
-    "url": "https://www.sportsgambler.com/betting-tips/football/colombia-vs-dr-congo-prediction-lineups-odds-2026-06-24/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_c50026ba",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Switzerland v Canada",
-    "url": "https://www.sportsgambler.com/betting-tips/football/switzerland-vs-canada-prediction-lineups-odds-2026-06-24/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_ef7d2cac",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Bosnia and Herzegovina v Qatar",
-    "url": "https://www.sportsgambler.com/betting-tips/football/bosnia-and-herzegovina-vs-qatar-prediction-lineups-odds-2026-06-24/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_6928a32",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Scotland v Brazil",
-    "url": "https://www.sportsgambler.com/betting-tips/football/scotland-vs-brazil-prediction-lineups-odds-2026-06-24/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_ba8c784",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Morocco v Haiti",
-    "url": "https://www.sportsgambler.com/betting-tips/football/morocco-vs-haiti-prediction-lineups-odds-2026-06-24/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_94be29ad",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Czechia v Mexico",
-    "url": "https://www.sportsgambler.com/betting-tips/football/czechia-vs-mexico-prediction-lineups-odds-2026-06-25/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_d492477d",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: South Africa v South Korea",
-    "url": "https://www.sportsgambler.com/betting-tips/football/south-africa-vs-south-korea-prediction-lineups-odds-2026-06-25/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_265f74b6",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Curaçao v Ivory Coast",
-    "url": "https://www.sportsgambler.com/betting-tips/football/curacao-vs-ivory-coast-prediction-lineups-odds-2026-06-25/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_7a582a5f",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Ecuador v Germany",
-    "url": "https://www.sportsgambler.com/betting-tips/football/ecuador-vs-germany-prediction-lineups-odds-2026-06-25/",
     "status": "empty",
     "records": 0,
     "reason": "Fetched public match page but found no supported odds offers."
