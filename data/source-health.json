@@ -1,5 +1,97 @@
 [
   {
+    "id": "source_7dc77af3",
+    "createdAt": "2026-09-24T06:12:44.493Z",
+    "kind": "fixtures",
+    "source": "DCS World Cup public schedule",
+    "url": "https://wc.dcs.pm/",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public page but found no fixture rows matching team-v-team patterns."
+  },
+  {
+    "id": "source_f4fa26b2",
+    "createdAt": "2026-09-24T06:12:44.493Z",
+    "kind": "fixtures",
+    "source": "OnlyOdds World Cup fixtures",
+    "url": "https://worldcup.onlyodds.co.uk/world-cup",
+    "status": "ok",
+    "records": 49,
+    "reason": ""
+  },
+  {
+    "id": "source_35a0fbfa",
+    "createdAt": "2026-09-24T06:12:44.493Z",
+    "kind": "post_match_stats_schedule",
+    "source": "FOX Sports World Cup boxscores",
+    "url": "https://www.foxsports.com/soccer/fifa-world-cup-men/schedule",
+    "status": "ok",
+    "records": 21,
+    "reason": ""
+  },
+  {
+    "id": "source_60a4ea12",
+    "createdAt": "2026-09-24T06:12:44.493Z",
+    "kind": "post_match_stats_boxscores",
+    "source": "FOX Sports World Cup boxscores",
+    "url": "https://www.foxsports.com/soccer/fifa-world-cup-men/schedule",
+    "status": "ok",
+    "records": 17,
+    "reason": "21 page(s) checked; 4 without settled stats"
+  },
+  {
+    "id": "source_919346c7",
+    "createdAt": "2026-09-24T06:12:44.493Z",
+    "kind": "news",
+    "source": "FIFA World Cup Articles",
+    "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
+  },
+  {
+    "id": "source_831c5c6d",
+    "createdAt": "2026-09-24T06:12:44.493Z",
+    "kind": "news",
+    "source": "BBC Sport Football RSS",
+    "url": "https://feeds.bbci.co.uk/sport/football/rss.xml",
+    "status": "ok",
+    "records": 18,
+    "reason": ""
+  },
+  {
+    "id": "source_d297ef97",
+    "createdAt": "2026-09-24T06:12:44.493Z",
+    "kind": "news",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/rss",
+    "status": "ok",
+    "records": 18,
+    "reason": ""
+  },
+  {
+    "id": "source_2723be01",
+    "createdAt": "2026-09-24T06:12:44.493Z",
+    "kind": "odds-integrity",
+    "source": "Odds integrity gate",
+    "url": "",
+    "status": "ok",
+    "records": 0,
+    "reason": "All extracted odds passed integrity checks.",
+    "quarantinedRecords": 0,
+    "quarantineReasons": {}
+  },
+  {
+    "id": "source_8c7bbd53",
+    "createdAt": "2026-09-24T06:12:44.493Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia 2026 FIFA World Cup squads",
+    "url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched shared squad page but found no usable team squad sections."
+  },
+  {
     "id": "source_14b3ee",
     "createdAt": "2026-09-23T06:01:16.371Z",
     "kind": "fixtures",
@@ -200037,95 +200129,5 @@
     "status": "empty",
     "records": 0,
     "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_926a5a05",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Egypt v Iran",
-    "url": "https://worldcup.onlyodds.co.uk/match/egypt-v-iran",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_a5189a2",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: New Zealand v Belgium",
-    "url": "https://worldcup.onlyodds.co.uk/match/new-zealand-v-belgium",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_545e0df9",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Panama v England",
-    "url": "https://worldcup.onlyodds.co.uk/match/panama-v-england",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_baa10c1",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Croatia v Ghana",
-    "url": "https://worldcup.onlyodds.co.uk/match/croatia-v-ghana",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_a4be4016",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Colombia v Portugal",
-    "url": "https://worldcup.onlyodds.co.uk/match/colombia-v-portugal",
-    "status": "ok",
-    "records": 12,
-    "reason": ""
-  },
-  {
-    "id": "source_3c1995fc",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: DR Congo v Uzbekistan",
-    "url": "https://worldcup.onlyodds.co.uk/match/dr-congo-v-uzbekistan",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_84fdcbd1",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Algeria v Austria",
-    "url": "https://worldcup.onlyodds.co.uk/match/algeria-v-austria",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_ecf374f9",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "odds",
-    "source": "OnlyOdds match pages: Jordan v Argentina",
-    "url": "https://worldcup.onlyodds.co.uk/match/jordan-v-argentina",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_6f00f314",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Ivory Coast v Ecuador",
-    "url": "https://www.sportsgambler.com/betting-tips/football/ivory-coast-vs-ecuador-prediction-lineups-odds-2026-06-14/",
-    "status": "ok",
-    "records": 239,
-    "reason": ""
   }
 ]
