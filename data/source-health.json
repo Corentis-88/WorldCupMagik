@@ -1,5 +1,97 @@
 [
   {
+    "id": "source_62b3c6f2",
+    "createdAt": "2026-10-01T07:12:33.997Z",
+    "kind": "fixtures",
+    "source": "DCS World Cup public schedule",
+    "url": "https://wc.dcs.pm/",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public page but found no fixture rows matching team-v-team patterns."
+  },
+  {
+    "id": "source_d9e672b1",
+    "createdAt": "2026-10-01T07:12:33.997Z",
+    "kind": "fixtures",
+    "source": "OnlyOdds World Cup fixtures",
+    "url": "https://worldcup.onlyodds.co.uk/world-cup",
+    "status": "ok",
+    "records": 49,
+    "reason": ""
+  },
+  {
+    "id": "source_1a8d47f9",
+    "createdAt": "2026-10-01T07:12:33.997Z",
+    "kind": "post_match_stats_schedule",
+    "source": "FOX Sports World Cup boxscores",
+    "url": "https://www.foxsports.com/soccer/fifa-world-cup-men/schedule",
+    "status": "ok",
+    "records": 21,
+    "reason": ""
+  },
+  {
+    "id": "source_45913611",
+    "createdAt": "2026-10-01T07:12:33.997Z",
+    "kind": "post_match_stats_boxscores",
+    "source": "FOX Sports World Cup boxscores",
+    "url": "https://www.foxsports.com/soccer/fifa-world-cup-men/schedule",
+    "status": "ok",
+    "records": 17,
+    "reason": "21 page(s) checked; 4 without settled stats"
+  },
+  {
+    "id": "source_767f92c6",
+    "createdAt": "2026-10-01T07:12:33.997Z",
+    "kind": "news",
+    "source": "FIFA World Cup Articles",
+    "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
+  },
+  {
+    "id": "source_6808a86c",
+    "createdAt": "2026-10-01T07:12:33.997Z",
+    "kind": "news",
+    "source": "BBC Sport Football RSS",
+    "url": "https://feeds.bbci.co.uk/sport/football/rss.xml",
+    "status": "ok",
+    "records": 18,
+    "reason": ""
+  },
+  {
+    "id": "source_b7843b96",
+    "createdAt": "2026-10-01T07:12:33.997Z",
+    "kind": "news",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/rss",
+    "status": "ok",
+    "records": 18,
+    "reason": ""
+  },
+  {
+    "id": "source_c100a00",
+    "createdAt": "2026-10-01T07:12:33.997Z",
+    "kind": "odds-integrity",
+    "source": "Odds integrity gate",
+    "url": "",
+    "status": "ok",
+    "records": 0,
+    "reason": "All extracted odds passed integrity checks.",
+    "quarantinedRecords": 0,
+    "quarantineReasons": {}
+  },
+  {
+    "id": "source_71680952",
+    "createdAt": "2026-10-01T07:12:33.997Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia 2026 FIFA World Cup squads",
+    "url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched shared squad page but found no usable team squad sections."
+  },
+  {
     "id": "source_8725348d",
     "createdAt": "2026-09-30T06:46:14.074Z",
     "kind": "fixtures",
@@ -200050,96 +200142,6 @@
     "url": "https://en.wikipedia.org/wiki/Netherlands_national_football_team",
     "status": "ok",
     "records": 1,
-    "reason": ""
-  },
-  {
-    "id": "source_283ee7dd",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "stats",
-    "source": "Germany public results 1",
-    "url": "https://en.wikipedia.org/wiki/Germany_national_football_team_results_(2020%E2%80%93present)",
-    "status": "ok",
-    "records": 75,
-    "reason": ""
-  },
-  {
-    "id": "source_b099c66d",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "team_profile",
-    "source": "Germany public profile 1",
-    "url": "https://en.wikipedia.org/wiki/Germany_national_football_team",
-    "status": "ok",
-    "records": 1,
-    "reason": ""
-  },
-  {
-    "id": "source_efdf72e6",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "stats",
-    "source": "Curaçao public results 1",
-    "url": "https://en.wikipedia.org/wiki/Cura%C3%A7ao_national_football_team_results_(2020%E2%80%93present)",
-    "status": "ok",
-    "records": 33,
-    "reason": ""
-  },
-  {
-    "id": "source_4c22432e",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "team_profile",
-    "source": "Curaçao public profile 1",
-    "url": "https://en.wikipedia.org/wiki/Cura%C3%A7ao_national_football_team",
-    "status": "ok",
-    "records": 1,
-    "reason": ""
-  },
-  {
-    "id": "source_84a3a8fd",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "stats",
-    "source": "Japan public results 1",
-    "url": "https://en.wikipedia.org/wiki/Japan_national_football_team_results_(2020%E2%80%93present)",
-    "status": "ok",
-    "records": 75,
-    "reason": ""
-  },
-  {
-    "id": "source_2552c2cd",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "team_profile",
-    "source": "Japan public profile 1",
-    "url": "https://en.wikipedia.org/wiki/Japan_national_football_team",
-    "status": "ok",
-    "records": 1,
-    "reason": ""
-  },
-  {
-    "id": "source_473e541d",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "news",
-    "source": "FIFA World Cup Articles",
-    "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
-  },
-  {
-    "id": "source_38c769c3",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "news",
-    "source": "BBC Sport Football RSS",
-    "url": "https://feeds.bbci.co.uk/sport/football/rss.xml",
-    "status": "ok",
-    "records": 18,
-    "reason": ""
-  },
-  {
-    "id": "source_8842fced",
-    "createdAt": "2026-06-14T21:44:02.929Z",
-    "kind": "news",
-    "source": "The Guardian Football RSS",
-    "url": "https://www.theguardian.com/football/rss",
-    "status": "ok",
-    "records": 18,
     "reason": ""
   }
 ]
