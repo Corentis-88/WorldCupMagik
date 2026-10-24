@@ -1,5 +1,97 @@
 [
   {
+    "id": "source_796b377b",
+    "createdAt": "2026-10-24T05:56:42.069Z",
+    "kind": "fixtures",
+    "source": "DCS World Cup public schedule",
+    "url": "https://wc.dcs.pm/",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public page but found no fixture rows matching team-v-team patterns."
+  },
+  {
+    "id": "source_f09de33a",
+    "createdAt": "2026-10-24T05:56:42.069Z",
+    "kind": "fixtures",
+    "source": "OnlyOdds World Cup fixtures",
+    "url": "https://worldcup.onlyodds.co.uk/world-cup",
+    "status": "ok",
+    "records": 49,
+    "reason": ""
+  },
+  {
+    "id": "source_3144b882",
+    "createdAt": "2026-10-24T05:56:42.069Z",
+    "kind": "post_match_stats_schedule",
+    "source": "FOX Sports World Cup boxscores",
+    "url": "https://www.foxsports.com/soccer/fifa-world-cup-men/schedule",
+    "status": "ok",
+    "records": 21,
+    "reason": ""
+  },
+  {
+    "id": "source_5c48a69a",
+    "createdAt": "2026-10-24T05:56:42.069Z",
+    "kind": "post_match_stats_boxscores",
+    "source": "FOX Sports World Cup boxscores",
+    "url": "https://www.foxsports.com/soccer/fifa-world-cup-men/schedule",
+    "status": "ok",
+    "records": 17,
+    "reason": "21 page(s) checked; 4 without settled stats"
+  },
+  {
+    "id": "source_8d37034f",
+    "createdAt": "2026-10-24T05:56:42.069Z",
+    "kind": "news",
+    "source": "FIFA World Cup Articles",
+    "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
+  },
+  {
+    "id": "source_7ec018f5",
+    "createdAt": "2026-10-24T05:56:42.069Z",
+    "kind": "news",
+    "source": "BBC Sport Football RSS",
+    "url": "https://feeds.bbci.co.uk/sport/football/rss.xml",
+    "status": "ok",
+    "records": 18,
+    "reason": ""
+  },
+  {
+    "id": "source_ce3bac1f",
+    "createdAt": "2026-10-24T05:56:42.069Z",
+    "kind": "news",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/rss",
+    "status": "ok",
+    "records": 18,
+    "reason": ""
+  },
+  {
+    "id": "source_22c77a89",
+    "createdAt": "2026-10-24T05:56:42.069Z",
+    "kind": "odds-integrity",
+    "source": "Odds integrity gate",
+    "url": "",
+    "status": "ok",
+    "records": 0,
+    "reason": "All extracted odds passed integrity checks.",
+    "quarantinedRecords": 0,
+    "quarantineReasons": {}
+  },
+  {
+    "id": "source_881f79db",
+    "createdAt": "2026-10-24T05:56:42.069Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia 2026 FIFA World Cup squads",
+    "url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched shared squad page but found no usable team squad sections."
+  },
+  {
     "id": "source_e0c0569b",
     "createdAt": "2026-10-23T06:03:56.440Z",
     "kind": "fixtures",
@@ -200097,95 +200189,5 @@
     "status": "ok",
     "records": 3,
     "reason": ""
-  },
-  {
-    "id": "source_25cbfbf2",
-    "createdAt": "2026-06-15T01:42:13.652Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Belgium v Iran",
-    "url": "https://www.sportsgambler.com/betting-tips/football/belgium-vs-iran-prediction-lineups-odds-2026-06-21/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_41a53c47",
-    "createdAt": "2026-06-15T01:42:13.652Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Uruguay v Cape Verde",
-    "url": "https://www.sportsgambler.com/betting-tips/football/uruguay-vs-cape-verde-prediction-lineups-odds-2026-06-21/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_facca9c2",
-    "createdAt": "2026-06-15T01:42:13.652Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: New Zealand v Egypt",
-    "url": "https://www.sportsgambler.com/betting-tips/football/new-zealand-vs-egypt-prediction-lineups-odds-2026-06-22/",
-    "status": "ok",
-    "records": 3,
-    "reason": ""
-  },
-  {
-    "id": "source_5f338fda",
-    "createdAt": "2026-06-15T01:42:13.652Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Argentina v Austria",
-    "url": "https://www.sportsgambler.com/betting-tips/football/argentina-vs-austria-prediction-lineups-odds-2026-06-22/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_c12c6384",
-    "createdAt": "2026-06-15T01:42:13.652Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: France v Iraq",
-    "url": "https://www.sportsgambler.com/betting-tips/football/france-vs-iraq-prediction-lineups-odds-2026-06-22/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_720004c7",
-    "createdAt": "2026-06-15T01:42:13.652Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Norway v Senegal",
-    "url": "https://www.sportsgambler.com/betting-tips/football/norway-vs-senegal-prediction-lineups-odds-2026-06-23/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_7fbac597",
-    "createdAt": "2026-06-15T01:42:13.652Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Jordan v Algeria",
-    "url": "https://www.sportsgambler.com/betting-tips/football/jordan-vs-algeria-prediction-lineups-odds-2026-06-23/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_7126129f",
-    "createdAt": "2026-06-15T01:42:13.652Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: Portugal v Uzbekistan",
-    "url": "https://www.sportsgambler.com/betting-tips/football/portugal-vs-uzbekistan-prediction-lineups-odds-2026-06-23/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
-  },
-  {
-    "id": "source_69d18adf",
-    "createdAt": "2026-06-15T01:42:13.652Z",
-    "kind": "odds",
-    "source": "SportsGambler public prop pages: England v Ghana",
-    "url": "https://www.sportsgambler.com/betting-tips/football/england-vs-ghana-prediction-lineups-odds-2026-06-23/",
-    "status": "empty",
-    "records": 0,
-    "reason": "Fetched public match page but found no supported odds offers."
   }
 ]
