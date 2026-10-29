@@ -1,6 +1,6 @@
 {
-  "id": "app_scan_474e8bdd",
-  "createdAt": "2026-10-28T06:53:09.914Z",
+  "id": "app_scan_2d8a1df3",
+  "createdAt": "2026-10-29T07:09:12.834Z",
   "scheduled": true,
   "settings": {
     "stake": 10,
@@ -25,7 +25,7 @@
     "heatRecords": 0,
     "squadDepthRecords": 0,
     "playerStats": 805,
-    "newsArticles": 34,
+    "newsArticles": 35,
     "teamStats": 0,
     "matchHistoryRecords": 0,
     "postMatchStatsCollected": 17,
@@ -54,7 +54,7 @@
     "playerStatsRecords": 805,
     "playerShotCoverage": 0,
     "playerAssistCoverage": 0.017,
-    "newsArticleCount": 34,
+    "newsArticleCount": 35,
     "teamStatsCount": 0,
     "postMatchStatsRecords": 80,
     "realPostMatchTeamCoverage": 0,
@@ -87,7 +87,7 @@
     "message": "The database is still collecting real public-web data, including full 20-match team samples. Missing sources are visible in source health."
   },
   "survivabilityMarketCoverage": {
-    "createdAt": "2026-10-28T06:53:09.914Z",
+    "createdAt": "2026-10-29T07:09:12.834Z",
     "gateVersion": "survivability-public-web-v1",
     "enabled": true,
     "status": "collecting",
@@ -635,7 +635,7 @@
         "ok": 2,
         "empty": 1,
         "error": 0,
-        "records": 36
+        "records": 35
       },
       "odds-integrity": {
         "ok": 1,
@@ -652,8 +652,8 @@
     },
     "failures": [
       {
-        "id": "source_641a3c27",
-        "createdAt": "2026-10-28T06:53:09.914Z",
+        "id": "source_a2c6923d",
+        "createdAt": "2026-10-29T07:09:12.834Z",
         "kind": "fixtures",
         "source": "DCS World Cup public schedule",
         "url": "https://wc.dcs.pm/",
@@ -662,8 +662,8 @@
         "reason": "Fetched public page but found no fixture rows matching team-v-team patterns."
       },
       {
-        "id": "source_77e607fb",
-        "createdAt": "2026-10-28T06:53:09.914Z",
+        "id": "source_b6925e11",
+        "createdAt": "2026-10-29T07:09:12.834Z",
         "kind": "news",
         "source": "FIFA World Cup Articles",
         "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
@@ -672,8 +672,8 @@
         "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
       },
       {
-        "id": "source_72ce7e87",
-        "createdAt": "2026-10-28T06:53:09.914Z",
+        "id": "source_b17ad49d",
+        "createdAt": "2026-10-29T07:09:12.834Z",
         "kind": "squad_depth",
         "source": "Wikipedia 2026 FIFA World Cup squads",
         "url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
@@ -1909,7 +1909,7 @@
       }
     },
     "lastPredictionReflection": {
-      "examinedPredictionCount": 10716,
+      "examinedPredictionCount": 10692,
       "insertedCount": 0,
       "updatedCount": 3163,
       "upsertedCount": 3163
