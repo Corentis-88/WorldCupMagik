@@ -1,5 +1,191 @@
 [
   {
+    "id": "app_scan_db060e0f",
+    "createdAt": "2026-11-09T08:00:40.449Z",
+    "scheduled": true,
+    "settings": {
+      "stake": 10,
+      "risk": 58,
+      "daysAhead": 14
+    },
+    "riskProfile": {
+      "key": "calculated",
+      "label": "Calculated Risk",
+      "description": "Uses public odds, team form, news, and value signals without just following favourites."
+    },
+    "fixtureWindow": {
+      "daysAhead": 14,
+      "selectedFixtures": 0,
+      "usedFallbackNextFixtures": false
+    },
+    "collected": {
+      "fixtures": 49,
+      "oddsRecords": 0,
+      "survivabilityOddsRecords": 0,
+      "scorerOddsRecords": 0,
+      "heatRecords": 0,
+      "squadDepthRecords": 0,
+      "playerStats": 805,
+      "newsArticles": 32,
+      "teamStats": 0,
+      "matchHistoryRecords": 0,
+      "postMatchStatsCollected": 17,
+      "postMatchStatsRecords": 80,
+      "outcomeRecordsSettled": 0,
+      "predictionReflectionsSettled": 0,
+      "intelligenceObservations": 0,
+      "sourceDiagnostics": 9
+    },
+    "dataQuality": {
+      "readiness": "collecting",
+      "sourceOk": 6,
+      "sourceEmpty": 3,
+      "sourceErrors": 0,
+      "fixtureCount": 0,
+      "freshOddsRecords": 0,
+      "freshSurvivabilityOddsRecords": 0,
+      "freshScorerOddsRecords": 0,
+      "freshHeatRecords": 0,
+      "freshSquadDepthRecords": 0,
+      "oddsHistoryRecords": 48536,
+      "survivabilityOddsHistoryRecords": 435,
+      "scorerOddsHistoryRecords": 16008,
+      "heatHistoryRecords": 5189,
+      "squadDepthHistoryRecords": 51,
+      "playerStatsRecords": 805,
+      "playerShotCoverage": 0,
+      "playerAssistCoverage": 0.017,
+      "newsArticleCount": 32,
+      "teamStatsCount": 0,
+      "postMatchStatsRecords": 80,
+      "realPostMatchTeamCoverage": 0,
+      "usefulRealMetricTeamCoverage": 0,
+      "teamRealMetricCoverage": [],
+      "selectedPostMatchFixtureCoverage": 0,
+      "averageEventMetricQuality": 0,
+      "estimatedMetricOnlyTeams": [],
+      "teamsWithRecentMatches": 0,
+      "requiredTeamCount": 0,
+      "teamsWithTwentyMatchSamples": 0,
+      "teamTwentyMatchCoverage": 0,
+      "minimumTeamMatchSample": 0,
+      "missingTwentyMatchTeams": [],
+      "fixtureOddsCoverage": 0,
+      "fixtureHeatCoverage": 0,
+      "squadDepthCoverage": 0,
+      "climateProfileCoverage": 0,
+      "heatMemoryCoverage": 0,
+      "missingClimateProfileTeams": [],
+      "missingHeatMemoryTeams": [],
+      "fixtureNewsCoverage": 0,
+      "sourceFailureRate": 0.333,
+      "marketReadiness": {
+        "coreResultsAndGoals": "partial",
+        "scorers": "collecting",
+        "assists": "collecting",
+        "playerShots": "collecting"
+      },
+      "message": "The database is still collecting real public-web data, including full 20-match team samples. Missing sources are visible in source health."
+    },
+    "sourceHealth": {
+      "byKind": {
+        "fixtures": {
+          "ok": 1,
+          "empty": 1,
+          "error": 0,
+          "records": 49
+        },
+        "post_match_stats_schedule": {
+          "ok": 1,
+          "empty": 0,
+          "error": 0,
+          "records": 21
+        },
+        "post_match_stats_boxscores": {
+          "ok": 1,
+          "empty": 0,
+          "error": 0,
+          "records": 17
+        },
+        "news": {
+          "ok": 2,
+          "empty": 1,
+          "error": 0,
+          "records": 32
+        },
+        "odds-integrity": {
+          "ok": 1,
+          "empty": 0,
+          "error": 0,
+          "records": 0
+        },
+        "squad_depth": {
+          "ok": 0,
+          "empty": 1,
+          "error": 0,
+          "records": 0
+        }
+      },
+      "failures": [
+        {
+          "id": "source_10c5aa59",
+          "createdAt": "2026-11-09T08:00:40.449Z",
+          "kind": "fixtures",
+          "source": "DCS World Cup public schedule",
+          "url": "https://wc.dcs.pm/",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public page but found no fixture rows matching team-v-team patterns."
+        },
+        {
+          "id": "source_2491762d",
+          "createdAt": "2026-11-09T08:00:40.449Z",
+          "kind": "news",
+          "source": "FIFA World Cup Articles",
+          "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
+        },
+        {
+          "id": "source_1f79ecb9",
+          "createdAt": "2026-11-09T08:00:40.449Z",
+          "kind": "squad_depth",
+          "source": "Wikipedia 2026 FIFA World Cup squads",
+          "url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
+          "status": "empty",
+          "records": 0,
+          "reason": "Fetched shared squad page but found no usable team squad sections."
+        }
+      ]
+    },
+    "intelligence": {
+      "teamCount": 0,
+      "observationCount": 0,
+      "outcomeLearningCount": 3039,
+      "predictionReflectionCount": 3127,
+      "lastOutcomeSettlement": {
+        "examinedLegCount": 3662,
+        "insertedCount": 0,
+        "skipped": {
+          "noRecommendations": 0,
+          "noMatch": 148,
+          "unknownMarket": 305,
+          "latePrediction": 0,
+          "alreadySettled": 3209
+        }
+      },
+      "lastPredictionReflection": {
+        "examinedPredictionCount": 10428,
+        "insertedCount": 0,
+        "updatedCount": 3163,
+        "upsertedCount": 3163
+      }
+    },
+    "eligibleLegCount": 0,
+    "betslip": []
+  },
+  {
     "id": "app_scan_e97edcd1",
     "createdAt": "2026-11-08T07:25:20.107Z",
     "scheduled": true,
@@ -110889,630 +111075,6 @@
             "decimalOdds": 2.1,
             "modelProbability": 0.6569,
             "confidence": 0.7515,
-            "riskTag": "calculated_risk"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "app_scan_a04c92ca",
-    "createdAt": "2026-06-09T01:26:06.889Z",
-    "scheduled": true,
-    "settings": {
-      "stake": 10,
-      "risk": 58,
-      "daysAhead": 14
-    },
-    "riskProfile": {
-      "key": "calculated",
-      "label": "Calculated Risk",
-      "description": "Uses public odds, team form, news, and value signals without just following favourites."
-    },
-    "fixtureWindow": {
-      "daysAhead": 14,
-      "selectedFixtures": 51,
-      "usedFallbackNextFixtures": false
-    },
-    "collected": {
-      "fixtures": 76,
-      "oddsRecords": 1369,
-      "scorerOddsRecords": 0,
-      "heatRecords": 20,
-      "squadDepthRecords": 48,
-      "playerStats": 717,
-      "newsArticles": 36,
-      "teamStats": 48,
-      "matchHistoryRecords": 717,
-      "intelligenceObservations": 48,
-      "sourceDiagnostics": 193
-    },
-    "dataQuality": {
-      "readiness": "ready",
-      "sourceOk": 147,
-      "sourceEmpty": 14,
-      "sourceErrors": 32,
-      "fixtureCount": 51,
-      "freshOddsRecords": 1369,
-      "freshScorerOddsRecords": 0,
-      "freshHeatRecords": 20,
-      "freshSquadDepthRecords": 48,
-      "oddsHistoryRecords": 25664,
-      "scorerOddsHistoryRecords": 0,
-      "heatHistoryRecords": 241,
-      "squadDepthHistoryRecords": 48,
-      "playerStatsRecords": 717,
-      "newsArticleCount": 36,
-      "teamStatsCount": 48,
-      "teamsWithRecentMatches": 48,
-      "fixtureOddsCoverage": 0.961,
-      "fixtureHeatCoverage": 0.51,
-      "squadDepthCoverage": 1,
-      "fixtureNewsCoverage": 0.521,
-      "message": "Real public-web data was gathered and scored. Source misses are recorded instead of filled with made-up data."
-    },
-    "sourceHealth": {
-      "byKind": {
-        "fixtures": {
-          "ok": 2,
-          "empty": 0,
-          "error": 0,
-          "records": 121
-        },
-        "stats": {
-          "ok": 39,
-          "empty": 8,
-          "error": 21,
-          "records": 2362
-        },
-        "news": {
-          "ok": 2,
-          "empty": 1,
-          "error": 0,
-          "records": 36
-        },
-        "odds": {
-          "ok": 49,
-          "empty": 0,
-          "error": 2,
-          "records": 1369
-        },
-        "weather": {
-          "ok": 7,
-          "empty": 4,
-          "error": 9,
-          "records": 20
-        },
-        "squad_depth": {
-          "ok": 48,
-          "empty": 1,
-          "error": 0,
-          "records": 93
-        }
-      },
-      "failures": [
-        {
-          "id": "source_cb10cf6f",
-          "createdAt": "2026-06-09T01:26:06.889Z",
-          "kind": "stats",
-          "source": "USA public results 1",
-          "url": "https://en.wikipedia.org/wiki/United_States_men's_national_football_team_results_(2020%E2%80%93present)",
-          "status": "error",
-          "records": 0,
-          "reason": "404 Not Found"
-        },
-        {
-          "id": "source_900b56af",
-          "createdAt": "2026-06-09T01:26:06.889Z",
-          "kind": "stats",
-          "source": "Paraguay public results 1",
-          "url": "https://en.wikipedia.org/wiki/Paraguay_national_football_team_results_(2020%E2%80%93present)",
-          "status": "empty",
-          "records": 0,
-          "reason": "Fetched public team page but found no completed result rows for Paraguay."
-        },
-        {
-          "id": "source_84a11500",
-          "createdAt": "2026-06-09T01:26:06.889Z",
-          "kind": "stats",
-          "source": "Paraguay public results 2",
-          "url": "https://en.wikipedia.org/wiki/Paraguay_national_soccer_team_results_(2020%E2%80%93present)",
-          "status": "error",
-          "records": 0,
-          "reason": "404 Not Found"
-        },
-        {
-          "id": "source_44b58be1",
-          "createdAt": "2026-06-09T01:26:06.889Z",
-          "kind": "stats",
-          "source": "Paraguay public results 3",
-          "url": "https://en.wikipedia.org/wiki/Paraguay_men%27s_national_soccer_team_results_(2020%E2%80%93present)",
-          "status": "error",
-          "records": 0,
-          "reason": "404 Not Found"
-        },
-        {
-          "id": "source_97e5b3cd",
-          "createdAt": "2026-06-09T01:26:06.889Z",
-          "kind": "stats",
-          "source": "Australia public results 1",
-          "url": "https://en.wikipedia.org/wiki/Australia_national_football_team_results_(2020%E2%80%93present)",
-          "status": "error",
-          "records": 0,
-          "reason": "404 Not Found"
-        },
-        {
-          "id": "source_9a15dc09",
-          "createdAt": "2026-06-09T01:26:06.889Z",
-          "kind": "stats",
-          "source": "Brazil public results 1",
-          "url": "https://en.wikipedia.org/wiki/Brazil_national_football_team_results_(2020%E2%80%93present)",
-          "status": "empty",
-          "records": 0,
-          "reason": "Fetched public team page but found no completed result rows for Brazil."
-        },
-        {
-          "id": "source_1083ceb4",
-          "createdAt": "2026-06-09T01:26:06.889Z",
-          "kind": "stats",
-          "source": "Brazil public results 2",
-          "url": "https://en.wikipedia.org/wiki/Brazil_national_soccer_team_results_(2020%E2%80%93present)",
-          "status": "error",
-          "records": 0,
-          "reason": "404 Not Found"
-        },
-        {
-          "id": "source_d71addd5",
-          "createdAt": "2026-06-09T01:26:06.889Z",
-          "kind": "stats",
-          "source": "Brazil public results 3",
-          "url": "https://en.wikipedia.org/wiki/Brazil_men%27s_national_soccer_team_results_(2020%E2%80%93present)",
-          "status": "error",
-          "records": 0,
-          "reason": "404 Not Found"
-        },
-        {
-          "id": "source_7c5fcb2d",
-          "createdAt": "2026-06-09T01:26:06.889Z",
-          "kind": "stats",
-          "source": "Haiti public results 1",
-          "url": "https://en.wikipedia.org/wiki/Haiti_national_football_team_results_(2020%E2%80%93present)",
-          "status": "error",
-          "records": 0,
-          "reason": "404 Not Found"
-        },
-        {
-          "id": "source_c3a2a750",
-          "createdAt": "2026-06-09T01:26:06.889Z",
-          "kind": "stats",
-          "source": "Haiti public results 2",
-          "url": "https://en.wikipedia.org/wiki/Haiti_national_soccer_team_results_(2020%E2%80%93present)",
-          "status": "error",
-          "records": 0,
-          "reason": "404 Not Found"
-        },
-        {
-          "id": "source_86c3d9cf",
-          "createdAt": "2026-06-09T01:26:06.889Z",
-          "kind": "stats",
-          "source": "Haiti public results 3",
-          "url": "https://en.wikipedia.org/wiki/Haiti_men%27s_national_soccer_team_results_(2020%E2%80%93present)",
-          "status": "error",
-          "records": 0,
-          "reason": "404 Not Found"
-        },
-        {
-          "id": "source_14a6eb95",
-          "createdAt": "2026-06-09T01:26:06.889Z",
-          "kind": "stats",
-          "source": "Scotland public results 1",
-          "url": "https://en.wikipedia.org/wiki/Scotland_national_football_team_results_(2020%E2%80%93present)",
-          "status": "empty",
-          "records": 0,
-          "reason": "Fetched public team page but found no completed result rows for Scotland."
-        },
-        {
-          "id": "source_7548054c",
-          "createdAt": "2026-06-09T01:26:06.889Z",
-          "kind": "stats",
-          "source": "Scotland public results 2",
-          "url": "https://en.wikipedia.org/wiki/Scotland_national_soccer_team_results_(2020%E2%80%93present)",
-          "status": "error",
-          "records": 0,
-          "reason": "404 Not Found"
-        },
-        {
-          "id": "source_5bbd702d",
-          "createdAt": "2026-06-09T01:26:06.889Z",
-          "kind": "stats",
-          "source": "Scotland public results 3",
-          "url": "https://en.wikipedia.org/wiki/Scotland_men%27s_national_soccer_team_results_(2020%E2%80%93present)",
-          "status": "error",
-          "records": 0,
-          "reason": "404 Not Found"
-        },
-        {
-          "id": "source_25515e18",
-          "createdAt": "2026-06-09T01:26:06.889Z",
-          "kind": "stats",
-          "source": "Ecuador public results 1",
-          "url": "https://en.wikipedia.org/wiki/Ecuador_national_football_team_results_(2020%E2%80%93present)",
-          "status": "empty",
-          "records": 0,
-          "reason": "Fetched public team page but found no completed result rows for Ecuador."
-        },
-        {
-          "id": "source_8b730f10",
-          "createdAt": "2026-06-09T01:26:06.889Z",
-          "kind": "stats",
-          "source": "Ecuador public results 2",
-          "url": "https://en.wikipedia.org/wiki/Ecuador_national_soccer_team_results_(2020%E2%80%93present)",
-          "status": "error",
-          "records": 0,
-          "reason": "404 Not Found"
-        },
-        {
-          "id": "source_d4c095cf",
-          "createdAt": "2026-06-09T01:26:06.889Z",
-          "kind": "stats",
-          "source": "Ecuador public results 3",
-          "url": "https://en.wikipedia.org/wiki/Ecuador_men%27s_national_soccer_team_results_(2020%E2%80%93present)",
-          "status": "error",
-          "records": 0,
-          "reason": "404 Not Found"
-        },
-        {
-          "id": "source_a8a20a9f",
-          "createdAt": "2026-06-09T01:26:06.889Z",
-          "kind": "stats",
-          "source": "Iran public results 1",
-          "url": "https://en.wikipedia.org/wiki/Iran_national_football_team_results_(2020%E2%80%93present)",
-          "status": "empty",
-          "records": 0,
-          "reason": "Fetched public team page but found no completed result rows for Iran."
-        },
-        {
-          "id": "source_a32764e0",
-          "createdAt": "2026-06-09T01:26:06.889Z",
-          "kind": "stats",
-          "source": "Iran public results 2",
-          "url": "https://en.wikipedia.org/wiki/Iran_national_soccer_team_results_(2020%E2%80%93present)",
-          "status": "error",
-          "records": 0,
-          "reason": "404 Not Found"
-        },
-        {
-          "id": "source_1a2f2441",
-          "createdAt": "2026-06-09T01:26:06.889Z",
-          "kind": "stats",
-          "source": "Iran public results 3",
-          "url": "https://en.wikipedia.org/wiki/Iran_men%27s_national_soccer_team_results_(2020%E2%80%93present)",
-          "status": "error",
-          "records": 0,
-          "reason": "404 Not Found"
-        }
-      ]
-    },
-    "intelligence": {
-      "teamCount": 48,
-      "observationCount": 48,
-      "outcomeLearningCount": 0
-    },
-    "eligibleLegCount": 104,
-    "betslip": [
-      {
-        "id": "single_leg_44305b0c",
-        "category": "single",
-        "type": "single",
-        "legCount": 1,
-        "combinedDecimalOdds": 2.75,
-        "combinedProbability": 0.6079,
-        "score": 100,
-        "legs": [
-          {
-            "id": "leg_44305b0c",
-            "fixtureId": "fixture_f3ee58df",
-            "market": "both_teams_to_score",
-            "bookmaker": "Pub",
-            "decimalOdds": 2.75,
-            "modelProbability": 0.6079,
-            "confidence": 0.7939,
-            "riskTag": "calculated_risk"
-          }
-        ]
-      },
-      {
-        "id": "double_leg_b8790b0c_leg_41d4a4a7",
-        "category": "double",
-        "type": "double",
-        "legCount": 2,
-        "combinedDecimalOdds": 7.48,
-        "combinedProbability": 0.4095,
-        "score": 100,
-        "legs": [
-          {
-            "id": "leg_b8790b0c",
-            "fixtureId": "fixture_a89ee8da",
-            "market": "both_teams_to_score",
-            "bookmaker": "William Hill",
-            "decimalOdds": 2.2,
-            "modelProbability": 0.6418,
-            "confidence": 0.8179,
-            "riskTag": "calculated_risk"
-          },
-          {
-            "id": "leg_41d4a4a7",
-            "fixtureId": "fixture_cd0e426c",
-            "market": "both_teams_to_score",
-            "bookmaker": "All British Casino",
-            "decimalOdds": 3.4,
-            "modelProbability": 0.6381,
-            "confidence": 0.8221,
-            "riskTag": "calculated_risk"
-          }
-        ]
-      },
-      {
-        "id": "trixie_leg_b8790b0c_leg_41d4a4a7_leg_da675468",
-        "category": "trixie",
-        "type": "trixie",
-        "legCount": 3,
-        "combinedDecimalOdds": 28.05,
-        "combinedProbability": 0.2365,
-        "score": 100,
-        "legs": [
-          {
-            "id": "leg_b8790b0c",
-            "fixtureId": "fixture_a89ee8da",
-            "market": "both_teams_to_score",
-            "bookmaker": "William Hill",
-            "decimalOdds": 2.2,
-            "modelProbability": 0.6418,
-            "confidence": 0.8179,
-            "riskTag": "calculated_risk"
-          },
-          {
-            "id": "leg_41d4a4a7",
-            "fixtureId": "fixture_cd0e426c",
-            "market": "both_teams_to_score",
-            "bookmaker": "All British Casino",
-            "decimalOdds": 3.4,
-            "modelProbability": 0.6381,
-            "confidence": 0.8221,
-            "riskTag": "calculated_risk"
-          },
-          {
-            "id": "leg_da675468",
-            "fixtureId": "fixture_faed6778",
-            "market": "match_winner",
-            "bookmaker": "Betfred",
-            "decimalOdds": 3.75,
-            "modelProbability": 0.5776,
-            "confidence": 0.7337,
-            "riskTag": "calculated_risk"
-          }
-        ]
-      },
-      {
-        "id": "accumulator_leg_b8790b0c_leg_41d4a4a7_leg_da675468",
-        "category": "accumulator_3",
-        "type": "accumulator",
-        "legCount": 3,
-        "combinedDecimalOdds": 28.05,
-        "combinedProbability": 0.2365,
-        "score": 100,
-        "legs": [
-          {
-            "id": "leg_b8790b0c",
-            "fixtureId": "fixture_a89ee8da",
-            "market": "both_teams_to_score",
-            "bookmaker": "William Hill",
-            "decimalOdds": 2.2,
-            "modelProbability": 0.6418,
-            "confidence": 0.8179,
-            "riskTag": "calculated_risk"
-          },
-          {
-            "id": "leg_41d4a4a7",
-            "fixtureId": "fixture_cd0e426c",
-            "market": "both_teams_to_score",
-            "bookmaker": "All British Casino",
-            "decimalOdds": 3.4,
-            "modelProbability": 0.6381,
-            "confidence": 0.8221,
-            "riskTag": "calculated_risk"
-          },
-          {
-            "id": "leg_da675468",
-            "fixtureId": "fixture_faed6778",
-            "market": "match_winner",
-            "bookmaker": "Betfred",
-            "decimalOdds": 3.75,
-            "modelProbability": 0.5776,
-            "confidence": 0.7337,
-            "riskTag": "calculated_risk"
-          }
-        ]
-      },
-      {
-        "id": "accumulator_leg_b8790b0c_leg_41d4a4a7_leg_db174b93_leg_da675",
-        "category": "accumulator_4",
-        "type": "accumulator",
-        "legCount": 4,
-        "combinedDecimalOdds": 75.74,
-        "combinedProbability": 0.1431,
-        "score": 100,
-        "legs": [
-          {
-            "id": "leg_b8790b0c",
-            "fixtureId": "fixture_a89ee8da",
-            "market": "both_teams_to_score",
-            "bookmaker": "William Hill",
-            "decimalOdds": 2.2,
-            "modelProbability": 0.6418,
-            "confidence": 0.8179,
-            "riskTag": "calculated_risk"
-          },
-          {
-            "id": "leg_41d4a4a7",
-            "fixtureId": "fixture_cd0e426c",
-            "market": "both_teams_to_score",
-            "bookmaker": "All British Casino",
-            "decimalOdds": 3.4,
-            "modelProbability": 0.6381,
-            "confidence": 0.8221,
-            "riskTag": "calculated_risk"
-          },
-          {
-            "id": "leg_db174b93",
-            "fixtureId": "fixture_ae576b27",
-            "market": "both_teams_to_score",
-            "bookmaker": "Coral",
-            "decimalOdds": 2.7,
-            "modelProbability": 0.6048,
-            "confidence": 0.8127,
-            "riskTag": "calculated_risk"
-          },
-          {
-            "id": "leg_da675468",
-            "fixtureId": "fixture_faed6778",
-            "market": "match_winner",
-            "bookmaker": "Betfred",
-            "decimalOdds": 3.75,
-            "modelProbability": 0.5776,
-            "confidence": 0.7337,
-            "riskTag": "calculated_risk"
-          }
-        ]
-      },
-      {
-        "id": "accumulator_leg_b8790b0c_leg_41d4a4a7_leg_db174b93_leg_85eab",
-        "category": "accumulator_5",
-        "type": "accumulator",
-        "legCount": 5,
-        "combinedDecimalOdds": 80.82,
-        "combinedProbability": 0.1105,
-        "score": 100,
-        "legs": [
-          {
-            "id": "leg_b8790b0c",
-            "fixtureId": "fixture_a89ee8da",
-            "market": "both_teams_to_score",
-            "bookmaker": "William Hill",
-            "decimalOdds": 2.2,
-            "modelProbability": 0.6418,
-            "confidence": 0.8179,
-            "riskTag": "calculated_risk"
-          },
-          {
-            "id": "leg_41d4a4a7",
-            "fixtureId": "fixture_cd0e426c",
-            "market": "both_teams_to_score",
-            "bookmaker": "All British Casino",
-            "decimalOdds": 3.4,
-            "modelProbability": 0.6381,
-            "confidence": 0.8221,
-            "riskTag": "calculated_risk"
-          },
-          {
-            "id": "leg_db174b93",
-            "fixtureId": "fixture_ae576b27",
-            "market": "both_teams_to_score",
-            "bookmaker": "Coral",
-            "decimalOdds": 2.7,
-            "modelProbability": 0.6048,
-            "confidence": 0.8127,
-            "riskTag": "calculated_risk"
-          },
-          {
-            "id": "leg_85eab17d",
-            "fixtureId": "fixture_c68ca6e3",
-            "market": "both_teams_to_score",
-            "bookmaker": "Pub",
-            "decimalOdds": 2.14,
-            "modelProbability": 0.6542,
-            "confidence": 0.7812,
-            "riskTag": "calculated_risk"
-          },
-          {
-            "id": "leg_a0b4d6b5",
-            "fixtureId": "fixture_b5106f3a",
-            "market": "over_2_5_goals",
-            "bookmaker": "QuickBet",
-            "decimalOdds": 1.87,
-            "modelProbability": 0.6819,
-            "confidence": 0.8182,
-            "riskTag": "calculated_risk"
-          }
-        ]
-      },
-      {
-        "id": "accumulator_leg_b8790b0c_leg_41d4a4a7_leg_db174b93_leg_85eab",
-        "category": "accumulator_6",
-        "type": "accumulator",
-        "legCount": 6,
-        "combinedDecimalOdds": 195.14,
-        "combinedProbability": 0.0652,
-        "score": 100,
-        "legs": [
-          {
-            "id": "leg_b8790b0c",
-            "fixtureId": "fixture_a89ee8da",
-            "market": "both_teams_to_score",
-            "bookmaker": "William Hill",
-            "decimalOdds": 2.2,
-            "modelProbability": 0.6418,
-            "confidence": 0.8179,
-            "riskTag": "calculated_risk"
-          },
-          {
-            "id": "leg_41d4a4a7",
-            "fixtureId": "fixture_cd0e426c",
-            "market": "both_teams_to_score",
-            "bookmaker": "All British Casino",
-            "decimalOdds": 3.4,
-            "modelProbability": 0.6381,
-            "confidence": 0.8221,
-            "riskTag": "calculated_risk"
-          },
-          {
-            "id": "leg_db174b93",
-            "fixtureId": "fixture_ae576b27",
-            "market": "both_teams_to_score",
-            "bookmaker": "Coral",
-            "decimalOdds": 2.7,
-            "modelProbability": 0.6048,
-            "confidence": 0.8127,
-            "riskTag": "calculated_risk"
-          },
-          {
-            "id": "leg_85eab17d",
-            "fixtureId": "fixture_c68ca6e3",
-            "market": "both_teams_to_score",
-            "bookmaker": "Pub",
-            "decimalOdds": 2.14,
-            "modelProbability": 0.6542,
-            "confidence": 0.7812,
-            "riskTag": "calculated_risk"
-          },
-          {
-            "id": "leg_a55362cf",
-            "fixtureId": "fixture_9081a649",
-            "market": "over_2_5_goals",
-            "bookmaker": "QuickBet",
-            "decimalOdds": 2.15,
-            "modelProbability": 0.6401,
-            "confidence": 0.7496,
-            "riskTag": "calculated_risk"
-          },
-          {
-            "id": "leg_1bc30ec1",
-            "fixtureId": "fixture_faed6778",
-            "market": "over_2_5_goals",
-            "bookmaker": "QuickBet",
-            "decimalOdds": 2.1,
-            "modelProbability": 0.6291,
-            "confidence": 0.7417,
             "riskTag": "calculated_risk"
           }
         ]
