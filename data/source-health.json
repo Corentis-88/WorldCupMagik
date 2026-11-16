@@ -1,5 +1,97 @@
 [
   {
+    "id": "source_44254af0",
+    "createdAt": "2026-11-16T08:01:30.839Z",
+    "kind": "fixtures",
+    "source": "DCS World Cup public schedule",
+    "url": "https://wc.dcs.pm/",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public page but found no fixture rows matching team-v-team patterns."
+  },
+  {
+    "id": "source_bb57f6af",
+    "createdAt": "2026-11-16T08:01:30.839Z",
+    "kind": "fixtures",
+    "source": "OnlyOdds World Cup fixtures",
+    "url": "https://worldcup.onlyodds.co.uk/world-cup",
+    "status": "ok",
+    "records": 49,
+    "reason": ""
+  },
+  {
+    "id": "source_fbfecbf7",
+    "createdAt": "2026-11-16T08:01:30.839Z",
+    "kind": "post_match_stats_schedule",
+    "source": "FOX Sports World Cup boxscores",
+    "url": "https://www.foxsports.com/soccer/fifa-world-cup-men/schedule",
+    "status": "ok",
+    "records": 21,
+    "reason": ""
+  },
+  {
+    "id": "source_2702ba0f",
+    "createdAt": "2026-11-16T08:01:30.839Z",
+    "kind": "post_match_stats_boxscores",
+    "source": "FOX Sports World Cup boxscores",
+    "url": "https://www.foxsports.com/soccer/fifa-world-cup-men/schedule",
+    "status": "ok",
+    "records": 17,
+    "reason": "21 page(s) checked; 4 without settled stats"
+  },
+  {
+    "id": "source_57f116c4",
+    "createdAt": "2026-11-16T08:01:30.839Z",
+    "kind": "news",
+    "source": "FIFA World Cup Articles",
+    "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched public source but found no team/tournament news links for the selected fixture window."
+  },
+  {
+    "id": "source_497a2c6a",
+    "createdAt": "2026-11-16T08:01:30.839Z",
+    "kind": "news",
+    "source": "BBC Sport Football RSS",
+    "url": "https://feeds.bbci.co.uk/sport/football/rss.xml",
+    "status": "ok",
+    "records": 18,
+    "reason": ""
+  },
+  {
+    "id": "source_98f5bf94",
+    "createdAt": "2026-11-16T08:01:30.839Z",
+    "kind": "news",
+    "source": "The Guardian Football RSS",
+    "url": "https://www.theguardian.com/football/rss",
+    "status": "ok",
+    "records": 18,
+    "reason": ""
+  },
+  {
+    "id": "source_ed818dfe",
+    "createdAt": "2026-11-16T08:01:30.839Z",
+    "kind": "odds-integrity",
+    "source": "Odds integrity gate",
+    "url": "",
+    "status": "ok",
+    "records": 0,
+    "reason": "All extracted odds passed integrity checks.",
+    "quarantinedRecords": 0,
+    "quarantineReasons": {}
+  },
+  {
+    "id": "source_52d98d50",
+    "createdAt": "2026-11-16T08:01:30.839Z",
+    "kind": "squad_depth",
+    "source": "Wikipedia 2026 FIFA World Cup squads",
+    "url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads",
+    "status": "empty",
+    "records": 0,
+    "reason": "Fetched shared squad page but found no usable team squad sections."
+  },
+  {
     "id": "source_413027ad",
     "createdAt": "2026-11-15T07:53:54.837Z",
     "kind": "fixtures",
@@ -200141,95 +200233,5 @@
     "status": "error",
     "records": 0,
     "reason": "404 Not Found"
-  },
-  {
-    "id": "source_f75da001",
-    "createdAt": "2026-06-15T01:42:13.652Z",
-    "kind": "team_profile",
-    "source": "Sweden public profile 3",
-    "url": "https://en.wikipedia.org/wiki/Sweden_men%27s_national_soccer_team",
-    "status": "error",
-    "records": 0,
-    "reason": "404 Not Found"
-  },
-  {
-    "id": "source_10807a8a",
-    "createdAt": "2026-06-15T01:42:13.652Z",
-    "kind": "stats",
-    "source": "Tunisia public results 1",
-    "url": "https://en.wikipedia.org/wiki/Tunisia_national_football_team_results_(2020%E2%80%93present)",
-    "status": "ok",
-    "records": 61,
-    "reason": ""
-  },
-  {
-    "id": "source_f02fb657",
-    "createdAt": "2026-06-15T01:42:13.652Z",
-    "kind": "team_profile",
-    "source": "Tunisia public profile 1",
-    "url": "https://en.wikipedia.org/wiki/Tunisia_national_football_team",
-    "status": "ok",
-    "records": 1,
-    "reason": ""
-  },
-  {
-    "id": "source_9cfa4526",
-    "createdAt": "2026-06-15T01:42:13.652Z",
-    "kind": "stats",
-    "source": "Spain public results 1",
-    "url": "https://en.wikipedia.org/wiki/Spain_national_football_team_results_(2020%E2%80%93present)",
-    "status": "ok",
-    "records": 32,
-    "reason": ""
-  },
-  {
-    "id": "source_17e21b57",
-    "createdAt": "2026-06-15T01:42:13.652Z",
-    "kind": "team_profile",
-    "source": "Spain public profile 1",
-    "url": "https://en.wikipedia.org/wiki/Spain_national_football_team",
-    "status": "ok",
-    "records": 1,
-    "reason": ""
-  },
-  {
-    "id": "source_9e91bb95",
-    "createdAt": "2026-06-15T01:42:13.652Z",
-    "kind": "stats",
-    "source": "Cape Verde public results 1",
-    "url": "https://en.wikipedia.org/wiki/Cape_Verde_national_football_team_results_(2020%E2%80%93present)",
-    "status": "ok",
-    "records": 50,
-    "reason": ""
-  },
-  {
-    "id": "source_512207c8",
-    "createdAt": "2026-06-15T01:42:13.652Z",
-    "kind": "team_profile",
-    "source": "Cape Verde public profile 1",
-    "url": "https://en.wikipedia.org/wiki/Cape_Verde_national_football_team",
-    "status": "ok",
-    "records": 1,
-    "reason": ""
-  },
-  {
-    "id": "source_c0213c09",
-    "createdAt": "2026-06-15T01:42:13.652Z",
-    "kind": "stats",
-    "source": "Belgium public results 1",
-    "url": "https://en.wikipedia.org/wiki/Belgium_national_football_team_results_(2020%E2%80%93present)",
-    "status": "ok",
-    "records": 73,
-    "reason": ""
-  },
-  {
-    "id": "source_6596c0d7",
-    "createdAt": "2026-06-15T01:42:13.652Z",
-    "kind": "team_profile",
-    "source": "Belgium public profile 1",
-    "url": "https://en.wikipedia.org/wiki/Belgium_national_football_team",
-    "status": "ok",
-    "records": 1,
-    "reason": ""
   }
 ]
